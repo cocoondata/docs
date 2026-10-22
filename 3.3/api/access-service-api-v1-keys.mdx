@@ -20,7 +20,7 @@ A file object (i.e. [Secure Object](/3.3/api/working-with-files-and-folders-fund
 
 ## Supported roles and conditions <a id="access-service-api-v1-keys-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org)) and conditions:
 
 - [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user will be either [creating their own file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) or [uploading a new version of a file (whose data is encrypted locally)](/3.3/api/content-service-api-v1-objects-objectid-versions).
 - [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user will be either [creating a file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) or [uploading a new version of a file (whose data is encrypted locally)](/3.3/api/content-service-api-v1-objects-objectid-versions), within a folder on which the user has the **Upload File** [permission](/3.3/api/access-service-api-v1-permissions-sets).

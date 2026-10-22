@@ -20,7 +20,7 @@ This page describes how to use Covata's API to:
   - their own items or
   - items within another Covata user's collection.
 
-  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.2/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.2/admin-platform/index).
+  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.2/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.2/admin-platform).
 - The **Supported roles (and conditions)** sections of each API endpoint page (linked to from the procedures below) contain details about the roles and permissions that a Covata user requires for a successful request to the endpoint (along with a valid access token representing this user).
 
 </Note>
@@ -46,7 +46,7 @@ Conceptually, within the scope of Covata's Safe Share applications, a Secure Obj
 
 - A file object in an *Incomplete* state is one that has been [initialized](/3.2/api/creating-files-and-folders#initializing-a-new-incomplete-file-object) (and associated with a [key](/3.2/api/creating-files-and-folders#obtaining-a-cryptographic-key)), although is not yet associated with any encrypted data (which would change the file object's state to *Created*).
 - When using Covata Safe Share applications, an incomplete file object could also result from a failure in either encrypting the file's data or uploading this content to storage.
-- In Organization Administration, a file object's current state can be seen through the **Files** [page](/3.2/admin-org/administering-files). For more information, see the [Organization Administrator's Guide](/3.2/admin-org/index).
+- In Organization Administration, a file object's current state can be seen through the **Files** [page](/3.2/admin-org/administering-files). For more information, see the [Organization Administrator's Guide](/3.2/admin-org).
 
 </Note>
 

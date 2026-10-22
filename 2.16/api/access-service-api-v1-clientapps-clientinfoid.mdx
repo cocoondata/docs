@@ -32,11 +32,11 @@ This API endpoint serves a number of purposes:
   **Tip:** All information returned in the [response](/2.16/api/access-service-api-v1-clientapps-clientinfoid#access-service-api-v1-clientapps-clientinfoid-returns-from-a-GET-or-PUT-request) from a `GET` method call to this API endpoint is also returned in the [response](/2.16/api/access-service-api-v1-clientapps#access-service-api-v1-clientapps-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/clientapps](/2.16/api/access-service-api-v1-clientapps) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the client application's configuration information ID).
 - Modifies the fields of a registered client application, using the client application's configuration information ID. Only certain fields are required/used based on the values specified for the **authorizedGrantTypes** field.
 - Deletes a registered client application from the Covata Platform. A [Covata user](/2.16/admin/administering-users) account with the [System administrator role](/2.16/admin/administering-users#system-administrator-role) would need to [re-register this client application](/2.16/api/access-service-api-v1-clientapps) to allow it access to the Covata Platform's resources again. <br />
-  **Note:** This feature is not available in [Covata Administration](/2.16/admin/index) (i.e. through the ['Client Applications' configuration page](/2.16/admin/configuring-client-applications)).
+  **Note:** This feature is not available in [Covata Administration](/2.16/admin) (i.e. through the ['Client Applications' configuration page](/2.16/admin/configuring-client-applications)).
 
 ## Supported roles <a id="access-service-api-clientapps-clientappid-supported-roles" />
 
-This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin)):
 
 - [System administrator](/2.16/admin/administering-users#system-administrator-role)
 

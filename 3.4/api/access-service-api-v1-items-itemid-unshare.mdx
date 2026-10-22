@@ -30,7 +30,7 @@ If the item's ID is a folder, then *all* collaborators will also be removed from
 
 ## Supported roles and conditions <a id="access-service-api-v1-items-itemid-unshare-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)):
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org)):
 
 - [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the item whose ID is specified by `{itemId}` in the request's URL.
 - **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Share** [permission](/3.4/api/access-service-api-v1-permissions-sets) on the item whose ID is specified by `{itemId}` in the URL.

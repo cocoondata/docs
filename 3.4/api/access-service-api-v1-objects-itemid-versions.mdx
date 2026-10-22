@@ -20,7 +20,7 @@ This API endpoint retrieves a list of information associated with the versions o
 
 ## Supported roles and conditions <a id="access-service-api-v1-objects-itemid-versions-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org)) and conditions:
 
 - [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object whose ID is specified by `{itemId}` in the request's URL.
 - **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Rename** [permission](/3.4/api/access-service-api-v1-permissions-sets) on the file object whose ID is specified by `{itemId}` in the URL. (The **Rename** permission restricts access to collaborators who have been applied either the **Modify** or **Manage** *permission set* on this file object.)

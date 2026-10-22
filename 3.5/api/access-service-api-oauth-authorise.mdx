@@ -46,7 +46,7 @@ If the client application requesting this API endpoint was developed by a third 
 Once the Covata user has successfully authenticated (and if required, has accepted the *application approval* step), the Covata Platform responds by redirecting to your application's URL/URI (i.e. the `redirect_uri` value above), whose following URL parameters depend on the grant type used:
 
 - **code** ( *Authorisation code grant type only* ) - The authorisation code value.
-- **access_token** ( *Implicit grant type only* ) - The access token itself, as a [JSON Web Token (JWT)](https://jwt.io/introduction/) value. The resources (i.e. API endpoints) of the Covata Platform that this access token grants permission to are based on the Covata user whose credentials were used for authentication, this user's [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (explained in more detail in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and if applicable to the API endpoint, the user's:
+- **access_token** ( *Implicit grant type only* ) - The access token itself, as a [JSON Web Token (JWT)](https://jwt.io/introduction/) value. The resources (i.e. API endpoints) of the Covata Platform that this access token grants permission to are based on the Covata user whose credentials were used for authentication, this user's [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (explained in more detail in the [Organisation Administrator's Guide](/3.5/admin-org)) and if applicable to the API endpoint, the user's:
 
   - membership of organisations and
   - ownership or collaborator status on files or folders.

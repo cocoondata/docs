@@ -12,7 +12,7 @@ The **Internationalization** (aka I18n) page allows Covata Platform administrato
   - Covata notification email messages.
 - Allows a built in or custom language bundle to be [exported, translated](/3.5/admin/managing-internationalization#exporting-a-language-bundle) and then [uploaded](/3.5/admin/managing-internationalization#uploading-a-custom-external-language-bundle) (as a custom/external language bundle) to the Covata Platform, thereby providing a Covata Platform instance with greater i18n support for more languages.
 
-<sup>&#42;</sup> Modifying the **System Default** text language affects only the default language setting for the Safe Share web application. A [Covata user](/3.5/admin/administering-users) can override this setting by choosing their own language preference through the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user/index).
+<sup>&#42;</sup> Modifying the **System Default** text language affects only the default language setting for the Safe Share web application. A [Covata user](/3.5/admin/administering-users) can override this setting by choosing their own language preference through the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user).
 
 ![Internationalization page](/images/88ba912a4d28-i18n-page.png)
 **Available Bundles** on the **Internationalization** page (above) is an important column that indicates:
@@ -76,7 +76,7 @@ Once an [exported](/3.5/admin/managing-internationalization#exporting-a-language
    - The Covata Platform now supports the target language, which:
 
      - A Covata Platform administrator can be set as the [System Default](/3.5/admin/managing-internationalization#changing-the-system-default-language) language.
-     - Becomes available as a **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user/index), which a [Covata user](/3.5/admin/administering-users) can then choose to override the **System Default** language setting.
+     - Becomes available as a **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user), which a [Covata user](/3.5/admin/administering-users) can then choose to override the **System Default** language setting.
    - If the target language was **Built In**, then the translations in the uploaded custom/external language bundle override those in the **Built In** language bundle.
    - Regardless of whether the target language is either **Built In** or not **Built In** to the Covata Platform, the label in the **Available Bundles** column now displays **Custom** to indicate that the custom/external language bundle is now being used (for that target language).
 
@@ -96,10 +96,10 @@ Once a custom/external language bundle has been [uploaded](/3.5/admin/managing-i
    - **Delete** link to delete the custom/external language bundle for a non-**Built In** language. <br />
      **Notes:**
 
-     - This action removes this language as a selectable **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user/index).
+     - This action removes this language as a selectable **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user).
      - Any Covata users who had selected this language as their **Default Language** preference (through the Safe Share web application's **My Account** feature) will automatically be switched over to the [System Default](/3.5/admin/managing-internationalization#changing-the-system-default-language) language.
    - **Reset** link to delete the overriding custom/external language bundle and reset this language back to its **Built In** default translations. <br />
-     **Note:** Although this action does not remove this language as a selectable **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user/index), any Covata users who had selected this language as their **Default Language** preference will automatically be switched over to this language's **Built In** default translations.
+     **Note:** Although this action does not remove this language as a selectable **Default Language** option from the [My Account](/3.5/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.5/user), any Covata users who had selected this language as their **Default Language** preference will automatically be switched over to this language's **Built In** default translations.
 
 <Note>
 

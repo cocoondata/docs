@@ -65,7 +65,7 @@ Once you are signed in, any Covata-secured files and folders associated with you
 
        taskbar notification area icon and choose **Open Safe Share Web** from the pop-up menu.
    3. Once the sign-in page for the Safe Share web application has opened, click the **Forgot your password** button and follow the instructions in your email notification to reset your password. <br />
-      **Note:** If your Safe Share for Windows installation has been configured to use the application's own embedded web browser (see [Accessing the web application](/2.16/windows/starting-the-application-and-signing-in#accessing-the-web-application) for more information about this feature), then Safe Share for Windows' own sign-in page is shown (which does not provide this password resetting functionality). If this is the case, access the [Safe Share web application](/2.16/user/index) (independently through your web browser), click the **Forgot your password** button and follow the instructions in your email notification to reset your password. If you do not know the URL of the Safe Share web application, it is the same as the Covata Platform URL, which you may have configured after installing Safe Share for Windows. You can obtain this URL by following the [Modifying the Covata Platform URL](/2.16/windows/installing-and-upgrading-the-application#modifying-the-server-url) procedure (without actually modifying the registry key's value). Otherwise, contact your administrator for this information.
+      **Note:** If your Safe Share for Windows installation has been configured to use the application's own embedded web browser (see [Accessing the web application](/2.16/windows/starting-the-application-and-signing-in#accessing-the-web-application) for more information about this feature), then Safe Share for Windows' own sign-in page is shown (which does not provide this password resetting functionality). If this is the case, access the [Safe Share web application](/2.16/user) (independently through your web browser), click the **Forgot your password** button and follow the instructions in your email notification to reset your password. If you do not know the URL of the Safe Share web application, it is the same as the Covata Platform URL, which you may have configured after installing Safe Share for Windows. You can obtain this URL by following the [Modifying the Covata Platform URL](/2.16/windows/installing-and-upgrading-the-application#modifying-the-server-url) procedure (without actually modifying the registry key's value). Otherwise, contact your administrator for this information.
 4. Click the **Sign in** button (or type 'Enter'/'Return').
 
    - If the **Sign in to Safe Share** dialog box requests you to enter your **Authentication code**, then your Covata Platform administrator has configured your Covata user account with two-factor authentication (2FA).
@@ -94,7 +94,7 @@ Once you are signed in, any Covata-secured files and folders associated with you
   - `Shared With Me`
 - If the `My Secured Files` folder does not appear, then your account does not have the **Originator** role. This role can be granted to your account by your Covata Platform administrator.
 - Each time you sign in to Safe Share for Windows as a different Covata user (on the same computer), the `My Secured Files` and `Shared With Me` folders of the previous Covata user are moved to the Recycle Bin and the contents of the newly recreated `My Secured Files` and `Shared With Me` folders are updated to reflect the items in remote storage of this different Covata user.
-- Once you are signed in, Safe Share for Windows immediately begins synchronizing any files and folders in remote storage (associated with your Covata user account and accessible through the [Safe Share web application](/2.16/user/index)), with those in the `My Secured Files` and `Shared With Me` folders. If the *Covata-secured files* within these folders appear with a size of 1 KB (or less) and have the extension `.covl` as opposed to `.cov`, then the file's content has not been cached. For more information about this file caching feature, see [Managing cache policy settings](/2.16/windows/managing-cache-policy-settings).
+- Once you are signed in, Safe Share for Windows immediately begins synchronizing any files and folders in remote storage (associated with your Covata user account and accessible through the [Safe Share web application](/2.16/user)), with those in the `My Secured Files` and `Shared With Me` folders. If the *Covata-secured files* within these folders appear with a size of 1 KB (or less) and have the extension `.covl` as opposed to `.cov`, then the file's content has not been cached. For more information about this file caching feature, see [Managing cache policy settings](/2.16/windows/managing-cache-policy-settings).
 - A shortcut to the `My Secured Files` subfolder (above) as well as a shortcut to start the Safe Share for Windows application itself (called *Covata Safe Share*) are automatically created on your desktop. Be aware that if you initially signed in as a Covata user without the **Originator** role, then the `My Secured Files` shortcut is not created.
 
 </Note>
@@ -113,7 +113,7 @@ This authenticator application (aka authenticator app) that runs on your mobile 
 
 ## Accessing the web application
 
-Safe Share for Windows provides easy access to the [Safe Share web application](/2.16/user/index) for better integration between these two products.
+Safe Share for Windows provides easy access to the [Safe Share web application](/2.16/user) for better integration between these two products.
 
 **To access the Safe Share web application:**
 
@@ -136,15 +136,15 @@ Safe Share for Windows provides easy access to the [Safe Share web application](
 
 **Notes about using this feature:**
 
-- The [Safe Share web application](/2.16/user/index) is a complementary product to Safe Share for Windows. For example:
+- The [Safe Share web application](/2.16/user) is a complementary product to Safe Share for Windows. For example:
 
   - The Safe Share web application allows you to [manage your Covata user account](/2.16/windows/managing-your-account) through Safe Share for Windows and access some file/folder information features of this web application which are not accessible through Windows Explorer.
   - Microsoft imposes a file and path size limit of 260 characters. Hence, if you need to work with secure content in a heavily-nested folder hierarchy, the Safe Share web application can be used to provide access to this content.
 - If you are not signed in before accessing this feature, then the Safe Share Sign-in page is displayed. Be aware, however, that signing in through this page does not sign you in to Safe Share for Windows.
-- It is possible that your Covata Platform instance may have been configured to support older web browsers such as Internet Explorer 9. If this is the case, then accessing the Safe Share web application (through this Safe Share for Windows feature) will instead open the *Safe Share compatibility mode web application*. For more information about using this limited version of the web application, see the [Safe Share compatibility mode web application User's Guide](/2.16/compatweb/index).
+- It is possible that your Covata Platform instance may have been configured to support older web browsers such as Internet Explorer 9. If this is the case, then accessing the Safe Share web application (through this Safe Share for Windows feature) will instead open the *Safe Share compatibility mode web application*. For more information about using this limited version of the web application, see the [Safe Share compatibility mode web application User's Guide](/2.16/compatweb).
 - Your Safe Share for Windows installation may have been configured (typically by a systems administrator) to open the *Safe Share Web window*, which is an embedded web browser that provides access to a feature-restricted version of the Safe Share web application. For example:
 
-  - The **Download** feature in the Safe Share Web window is not supported. This feature is only supported natively (i.e. with a compatible web browser) through either the [Safe Share web application](/2.16/user/index) or the [compatibility mode web application](/2.16/compatweb/index).
+  - The **Download** feature in the Safe Share Web window is not supported. This feature is only supported natively (i.e. with a compatible web browser) through either the [Safe Share web application](/2.16/user) or the [compatibility mode web application](/2.16/compatweb).
   - When using the Safe Share Web window, it is not possible to navigate back and forward through pages. You can only navigate using the Safe Share web application's own navigation features.
 
 </Note>

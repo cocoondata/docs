@@ -21,12 +21,12 @@ This API endpoint serves a number of purposes:
   **Notes:**
 
   - A contact can be created for any person who does not have a registered Covata user account. However, if the Covata user successfully shares an item with this contact, then a new Covata user account is automatically created for this contact (with the [Ad hoc role](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role)).
-  - A contact can also be created through the [Contacts](/3.4/user/managing-your-account#managing-your-contacts) feature of [Safe Share for Web](/3.4/user/index).
+  - A contact can also be created through the [Contacts](/3.4/user/managing-your-account#managing-your-contacts) feature of [Safe Share for Web](/3.4/user).
 - Retrieves a list of information for all contacts of a Covata user (whose access token is submitted in the request to this endpoint). The list of contacts returned in the [response](/3.4/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-returns) can be filtered according to contacts whose email address, first name or last name contains the string specified in the request.
 
 ## Supported roles <a id="access-service-api-v1-users-me-contacts-supported-roles" />
 
-This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org)) and conditions:
 
 - [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role)
 - [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role)

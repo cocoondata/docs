@@ -32,7 +32,7 @@ This API endpoint serves a number of purposes, all of which are managed by the C
 
 ## Supported roles and conditions <a id="content-service-api-v1-objects-objectid-view-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org)) and conditions:
 
 - [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) - using the `GET` and `PUT` methods when this user owns the file object whose ID is specified by `{objectId}` in the request's URL.
 - **Originator**, [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role) - using the `GET` method when this user is a collaborator with the **View** [permission](/3.5/api/access-service-api-v1-permissions-sets) on the file object whose ID is specified by `{objectId}` in the URL.

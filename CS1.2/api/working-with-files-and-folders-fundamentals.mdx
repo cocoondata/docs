@@ -19,7 +19,7 @@ This page describes how to use the Cocoon Data API to:
   - their own items, or
   - items owned by or located within another Cocoon Data user's folder.
 
-  For more information about authenticating and authorizing Cocoon Data users to the Cocoon Data Platform, see [Initiating authentication and authorization](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/CS1.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/CS1.2/admin-platform/configuring-client-applications) page of the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index).
+  For more information about authenticating and authorizing Cocoon Data users to the Cocoon Data Platform, see [Initiating authentication and authorization](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/CS1.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/CS1.2/admin-platform/configuring-client-applications) page of the [SafeShare Administrator's Guide](/CS1.2/admin-platform).
 - The **Supported roles (and conditions)** section of each API endpoint page (accessible from the relevant procedures throughout this Developer's Guide) contains details about the roles a Cocoon Data user requires and the conditions they must meet, for requests to these endpoints (which would include a valid access token representing the user's authenticated session) to succeed.
 
 </Note>
@@ -41,7 +41,7 @@ Conceptually, within the scope of Cocoon Data's SafeShare applications, a Secure
 
 - A file object in an *Incomplete* state is one that has been [initialized](/CS1.2/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) (and associated with a [key](/CS1.2/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)), although is not yet associated with any encrypted data (which would change the file object's state to *Created*).
 - When using Cocoon Data SafeShare applications, an incomplete file object could also result from a failure in either encrypting the file's data or uploading this content to storage.
-- In Organisation Administration, a file object's current state can be seen through the **Files** [page](/CS1.2/admin-org/administering-files). For more information, see the [Organisation Administrator's Guide](/CS1.2/admin-org/index).
+- In Organisation Administration, a file object's current state can be seen through the **Files** [page](/CS1.2/admin-org/administering-files). For more information, see the [Organisation Administrator's Guide](/CS1.2/admin-org).
 
 </Note>
 

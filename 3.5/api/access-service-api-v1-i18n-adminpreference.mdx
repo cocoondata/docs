@@ -18,13 +18,13 @@ This API endpoint sets a supported locale as the SafeShare administrator's defau
 
 The SafeShare administrator's default locale serves a number of purposes:
 
-- This locale (and language) is the default used for the Covata Sign-in page, Covata email notifications and the [SafeShare Administration](/3.5/admin-platform/index), [Organisation Administration](/3.5/admin-org/index) and [SafeShare for Web](/3.5/user/index) user interfaces.
+- This locale (and language) is the default used for the Covata Sign-in page, Covata email notifications and the [SafeShare Administration](/3.5/admin-platform), [Organisation Administration](/3.5/admin-org) and [SafeShare for Web](/3.5/user) user interfaces.
 - This is the initial locale used for all newly created Covata users.
 - When a custom locale *without* an existing internationalisation (i18n) bundle is [deleted](/3.5/api/access-service-api-v1-i18n-bundles-localecode-delete), any Covata users utilising this locale (which they would have chosen through SafeShare) will automatically be reverted to use this SafeShare administrator's default locale.
 
 ## Supported roles <a id="access-service-api-v1-i18n-adminpreference-supported-roles" />
 
-This API endpoint supports the following Covata user [roles](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/3.5/admin-platform/index)):
+This API endpoint supports the following Covata user [roles](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/3.5/admin-platform)):
 
 - [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
 

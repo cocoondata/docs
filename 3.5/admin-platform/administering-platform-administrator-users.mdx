@@ -4,7 +4,7 @@ title: "Administering SafeShare administrator users"
 
 All features of Covata technologies are accessed through a *Covata user* account. The core of these features include the ability to:
 
-- Administer the Covata Platform (through [SafeShare Administration](/3.5/admin-platform/index#platform-administration) and/or [SafeShare Organisation Administration](/3.5/admin-platform/organisation-administration)), as well as to
+- Administer the Covata Platform (through [SafeShare Administration](/3.5/admin-platform#platform-administration) and/or [SafeShare Organisation Administration](/3.5/admin-platform/organisation-administration)), as well as to
 - Create encrypted files (i.e. file objects / Secure Objects <sup>(1)</sup> ) within an organisation,
 - Access and decrypt an encrypted file's data and
 - Utilise Covata SafeShare applications.
@@ -32,7 +32,7 @@ Unless stated in the following table, these fields and their values are visible 
 | Last Name <sup>(2)</sup> | A user's last name (e.g. a surname or family name). This field is only editable through the user's own **My Account** feature. | No |
 | Other Name <sup>(2)</sup> | A user's middle name (e.g. one or more other given names). This field is only visible and editable through the user's own **My Account** feature. | No |
 | Mobile Number <sup>(2)</sup> | The mobile number of a user. This field is only visible and editable through the user's own **My Account** feature. <br />**Note:** This number must include the country calling code and plus (+) sign prefix. <br />  (e.g. +1 234 567 8910 for a US-based number.)  | No |
-| Default Language <sup>(2)</sup> | The language preference/settings for a user. Any changes to this field apply immediately to the user interfaces of SafeShare Administration, [SafeShare for Web](/3.5/user/index) and [Organisation Administration](/3.5/admin-platform/organisation-administration) (if the user has access to these features). <br />  This field is only visible and editable through the user's own **My Account** feature. <br />**Note:** This setting overrides the **System Default** language (defined through the **Internationalisation** [page](/3.5/admin-platform/managing-internationalisation)).  | No |
+| Default Language <sup>(2)</sup> | The language preference/settings for a user. Any changes to this field apply immediately to the user interfaces of SafeShare Administration, [SafeShare for Web](/3.5/user) and [Organisation Administration](/3.5/admin-platform/organisation-administration) (if the user has access to these features). <br />  This field is only visible and editable through the user's own **My Account** feature. <br />**Note:** This setting overrides the **System Default** language (defined through the **Internationalisation** [page](/3.5/admin-platform/managing-internationalisation)).  | No |
 | Locked | This field indicates 'Yes' if a Covata user account has been locked as a result of the user mistyping their password more than the maximum number of times configured by a SafeShare administrator. The user themselves will need to unlock this account by following the instructions in their '*account lockout*' notification (or by resetting their password via any of the options on the Covata Sign-in page). <br />  If a user account is not locked, this field indicates nothing. The values of this non-editable field are only visible on the **Administrators** and/or [Users](/3.5/admin-platform/administering-users-within-an-organisation) page. | Not applicable |
 | 2FA Enabled <sup>(2)</sup> and<br /> Re-seed 2FA | The **2FA Enabled** field's check box for a SafeShare administrator's account is selected if that user has two-factor authentication (2FA) [enabled](/3.5/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator) on their account. (This field is also editable through the user's own **My Account** feature.) <br />  If this check box is selected for a SafeShare administrator's account, then the **Re-seed** button becomes available for that account in the **Re-seed 2FA** column/field. <br />  If a SafeShare administrator account does not have 2FA enabled, this field's check box is cleared for their account. The state of 2FA being enabled or disabled for SafeShare administrator accounts other than your own is only visible on the **Administrators** page. | No |
 
@@ -133,7 +133,7 @@ This procedure describes how to edit the [fields](/3.5/admin-platform/administer
 
 ## Changing your SafeShare administrator account password <a id="changing-your-platform-administrator-account-password" />
 
-Only a Covata user with the **Local** [Account Type](/3.5/admin-platform/administering-users-within-an-organisation#account-type) who has signed in to either [SafeShare for Web](/3.5/user/index) or SafeShare Administration can change their own password.
+Only a Covata user with the **Local** [Account Type](/3.5/admin-platform/administering-users-within-an-organisation#account-type) who has signed in to either [SafeShare for Web](/3.5/user) or SafeShare Administration can change their own password.
 
 <Note>
 
@@ -160,7 +160,7 @@ This feature is useful if your SafeShare administrator account is at risk of bei
 1. Ensure you are [signed in](/3.5/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration.
 2. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
 3. In the **Security** section of the subsequent page, click the **Terminate** button. <br />
-    Your current SafeShare Administration session with the Covata Platform is terminated immediately, which also results in you being signed out from your current session. You will need to sign in again to gain access to [SafeShare for Web](/3.5/user/index), as well as your Covata Platform's resources. <br />
+    Your current SafeShare Administration session with the Covata Platform is terminated immediately, which also results in you being signed out from your current session. You will need to sign in again to gain access to [SafeShare for Web](/3.5/user), as well as your Covata Platform's resources. <br />
    **Note:** Every other SafeShare application with which you have an active session (including any other client applications using the Covata Platform's resources with access tokens obtained through your account), will be terminated once these sessions' access tokens expire.
 
 ## Enabling or disabling 2FA for a SafeShare administrator <a id="enabling-or-disabling-2fa-for-a-platform-administrator" />

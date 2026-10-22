@@ -25,7 +25,7 @@ This API endpoint retrieves information about the active version of a file objec
 
 ## Supported roles and conditions <a id="access-service-api-v1-objects-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org)) and conditions:
 
 - [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object.
 - **Originator**, [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator on the file object. <br />
@@ -78,7 +78,7 @@ For successful requests only, a JSON-formatted response containing the following
     - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
 
     <sup>&#42;</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.3/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
-    **Note:** For more information about account types, see the description for [Account Type](/3.3/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.3/admin-org/index).
+    **Note:** For more information about account types, see the description for [Account Type](/3.3/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.3/admin-org).
 - **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage. <br />
   **Notes:**
 

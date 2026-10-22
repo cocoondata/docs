@@ -16,7 +16,7 @@ https://access-service.xy-company.com/api/v1/items/delta
 
 This API endpoint retrieves lists of file objects and folders (i.e. items), upon which a specifiable range of consecutive changes/activities have been conducted by the Cocoon Data user (whose access token is submitted in the request to this endpoint).
 
-This endpoint is useful for client applications (such as [SafeShare for Windows](/CS1.2/windows/index)) that need to scan for item changes between those recorded on the Cocoon Data Platform and those conducted locally on the client application's file system (for a given Cocoon Data user). This scanning process is required to allow the client application to selectively synchronize items with any changes between those in remote storage and those locally on the file system (e.g. inside SafeShare for Windows' `SafeShare` folders).
+This endpoint is useful for client applications (such as [SafeShare for Windows](/CS1.2/windows)) that need to scan for item changes between those recorded on the Cocoon Data Platform and those conducted locally on the client application's file system (for a given Cocoon Data user). This scanning process is required to allow the client application to selectively synchronize items with any changes between those in remote storage and those locally on the file system (e.g. inside SafeShare for Windows' `SafeShare` folders).
 
 Using this endpoint, client applications can avoid the need to scan every item (accessible to a user) on the Cocoon Data Platform to identify such differences, by only retrieving items that have changed across a limited (time) range of consecutive item-based changes/activities.
 
@@ -44,7 +44,7 @@ Items returned by this endpoint are grouped according the types of activities co
 
 ## Supported roles and conditions <a id="access-service-api-v1-items-delta-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role)
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user has this role only, then only disabling and re-enabling activities on file objects are reflected in responses to this endpoint.

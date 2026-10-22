@@ -19,7 +19,7 @@ This page describes how to use the Covata API to:
   - their own items, or
   - items owned by or located within another Covata user's folder.
 
-  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.3/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.3/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.3/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.3/admin-platform/index).
+  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.3/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.3/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.3/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.3/admin-platform).
 - The **Supported roles (and conditions)** section of each API endpoint page (accessible from the relevant procedures throughout this Developer's Guide) contains details about the roles a Covata user requires and the conditions they must meet, for requests to these endpoints (which would include a valid access token representing the user's authenticated session) to succeed.
 
 </Note>
@@ -41,7 +41,7 @@ Conceptually, within the scope of Covata's Safe Share applications, a Secure Obj
 
 - A file object in an *Incomplete* state is one that has been [initialized](/3.3/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) (and associated with a [key](/3.3/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)), although is not yet associated with any encrypted data (which would change the file object's state to *Created*).
 - When using Covata Safe Share applications, an incomplete file object could also result from a failure in either encrypting the file's data or uploading this content to storage.
-- In Organization Administration, a file object's current state can be seen through the **Files** [page](/3.3/admin-org/administering-files). For more information, see the [Organization Administrator's Guide](/3.3/admin-org/index).
+- In Organization Administration, a file object's current state can be seen through the **Files** [page](/3.3/admin-org/administering-files). For more information, see the [Organization Administrator's Guide](/3.3/admin-org).
 
 </Note>
 

@@ -25,7 +25,7 @@ This API endpoint serves a number of purposes:
 
 - Retrieves information about the Covata user whose access token is submitted in the request to this endpoint.
 - Modifies the account details of the Covata user whose access token is submitted in the request to this endpoint. <br />
-  **Note:** These account details can also be modified through the [My Account](/3.4/user/managing-your-account#updating-your-account-details) feature of [Safe Share for Web](/3.4/user/index).
+  **Note:** These account details can also be modified through the [My Account](/3.4/user/managing-your-account#updating-your-account-details) feature of [Safe Share for Web](/3.4/user).
 
 ## Supported roles <a id="access-service-api-v1-users-me-supported-roles" />
 
@@ -113,7 +113,7 @@ For successful requests only, a JSON-formatted response containing the following
   - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
 
   <sup>2</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.4/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.4/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
-  **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org/index). <br />
+  **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org). <br />
   **Example (response):**
 
   ```json

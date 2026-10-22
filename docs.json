@@ -2677,15 +2677,15 @@
     },
     {
       "source": "/CS1.2/admin-org/index.html",
-      "destination": "/CS1.2/admin-org/index"
+      "destination": "/CS1.2/admin-org"
     },
     {
       "source": "/latest/admin-org/index.html",
-      "destination": "/CS1.2/admin-org/index"
+      "destination": "/CS1.2/admin-org"
     },
     {
       "source": "/latest/admin-org/index",
-      "destination": "/CS1.2/admin-org/index"
+      "destination": "/CS1.2/admin-org"
     },
     {
       "source": "/CS1.2/admin-org/managing-classifications.html",
@@ -2808,12 +2808,8 @@
       "destination": "/CS1.2/admin-org/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/CS1.2/admin-org",
-      "destination": "/CS1.2/admin-org/index"
-    },
-    {
       "source": "/latest/admin-org",
-      "destination": "/CS1.2/admin-org/index"
+      "destination": "/CS1.2/admin-org"
     },
     {
       "source": "/CS1.2/admin-platform/accessing-organisation-administration.html",
@@ -2997,15 +2993,15 @@
     },
     {
       "source": "/CS1.2/admin-platform/index.html",
-      "destination": "/CS1.2/admin-platform/index"
+      "destination": "/CS1.2/admin-platform"
     },
     {
       "source": "/latest/admin-platform/index.html",
-      "destination": "/CS1.2/admin-platform/index"
+      "destination": "/CS1.2/admin-platform"
     },
     {
       "source": "/latest/admin-platform/index",
-      "destination": "/CS1.2/admin-platform/index"
+      "destination": "/CS1.2/admin-platform"
     },
     {
       "source": "/CS1.2/admin-platform/managing-classifications.html",
@@ -3140,12 +3136,8 @@
       "destination": "/CS1.2/admin-platform/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/CS1.2/admin-platform",
-      "destination": "/CS1.2/admin-platform/index"
-    },
-    {
       "source": "/latest/admin-platform",
-      "destination": "/CS1.2/admin-platform/index"
+      "destination": "/CS1.2/admin-platform"
     },
     {
       "source": "/CS1.2/api/access-service-api-oauth-authorize.html",
@@ -4721,15 +4713,15 @@
     },
     {
       "source": "/CS1.2/api/index.html",
-      "destination": "/CS1.2/api/index"
+      "destination": "/CS1.2/api"
     },
     {
       "source": "/latest/api/index.html",
-      "destination": "/CS1.2/api/index"
+      "destination": "/CS1.2/api"
     },
     {
       "source": "/latest/api/index",
-      "destination": "/CS1.2/api/index"
+      "destination": "/CS1.2/api"
     },
     {
       "source": "/CS1.2/api/item-handling-endpoints.html",
@@ -4924,12 +4916,8 @@
       "destination": "/CS1.2/api/working-with-files-and-folders-fundamentals"
     },
     {
-      "source": "/CS1.2/api",
-      "destination": "/CS1.2/api/index"
-    },
-    {
       "source": "/latest/api",
-      "destination": "/CS1.2/api/index"
+      "destination": "/CS1.2/api"
     },
     {
       "source": "/CS1.2/ms-addins/getting-support.html",
@@ -4957,15 +4945,15 @@
     },
     {
       "source": "/CS1.2/ms-addins/index.html",
-      "destination": "/CS1.2/ms-addins/index"
+      "destination": "/CS1.2/ms-addins"
     },
     {
       "source": "/latest/ms-addins/index.html",
-      "destination": "/CS1.2/ms-addins/index"
+      "destination": "/CS1.2/ms-addins"
     },
     {
       "source": "/latest/ms-addins/index",
-      "destination": "/CS1.2/ms-addins/index"
+      "destination": "/CS1.2/ms-addins"
     },
     {
       "source": "/CS1.2/ms-addins/microsoft-add-ins-overview.html",
@@ -5028,12 +5016,8 @@
       "destination": "/CS1.2/ms-addins/using-the-ms-outlook-addin"
     },
     {
-      "source": "/CS1.2/ms-addins",
-      "destination": "/CS1.2/ms-addins/index"
-    },
-    {
       "source": "/latest/ms-addins",
-      "destination": "/CS1.2/ms-addins/index"
+      "destination": "/CS1.2/ms-addins"
     },
     {
       "source": "/CS1.2/user/accessing-secure-content.html",
@@ -5085,15 +5069,15 @@
     },
     {
       "source": "/CS1.2/user/index.html",
-      "destination": "/CS1.2/user/index"
+      "destination": "/CS1.2/user"
     },
     {
       "source": "/latest/user/index.html",
-      "destination": "/CS1.2/user/index"
+      "destination": "/CS1.2/user"
     },
     {
       "source": "/latest/user/index",
-      "destination": "/CS1.2/user/index"
+      "destination": "/CS1.2/user"
     },
     {
       "source": "/CS1.2/user/managing-file-versions.html",
@@ -5180,12 +5164,8 @@
       "destination": "/CS1.2/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/CS1.2/user",
-      "destination": "/CS1.2/user/index"
-    },
-    {
       "source": "/latest/user",
-      "destination": "/CS1.2/user/index"
+      "destination": "/CS1.2/user"
     },
     {
       "source": "/CS1.2/windows/accessing-secure-content.html",
@@ -5225,15 +5205,15 @@
     },
     {
       "source": "/CS1.2/windows/index.html",
-      "destination": "/CS1.2/windows/index"
+      "destination": "/CS1.2/windows"
     },
     {
       "source": "/latest/windows/index.html",
-      "destination": "/CS1.2/windows/index"
+      "destination": "/CS1.2/windows"
     },
     {
       "source": "/latest/windows/index",
-      "destination": "/CS1.2/windows/index"
+      "destination": "/CS1.2/windows"
     },
     {
       "source": "/CS1.2/windows/installing-and-upgrading-the-application.html",
@@ -5308,12 +5288,8 @@
       "destination": "/CS1.2/windows/uploading-storing-and-sharing-content-securely"
     },
     {
-      "source": "/CS1.2/windows",
-      "destination": "/CS1.2/windows/index"
-    },
-    {
       "source": "/latest/windows",
-      "destination": "/CS1.2/windows/index"
+      "destination": "/CS1.2/windows"
     },
     {
       "source": "/CS1.0/admin-org/accessing-organisation-administration.html",
@@ -5353,7 +5329,7 @@
     },
     {
       "source": "/CS1.0/admin-org/index.html",
-      "destination": "/CS1.0/admin-org/index"
+      "destination": "/CS1.0/admin-org"
     },
     {
       "source": "/CS1.0/admin-org/managing-classifications.html",
@@ -5386,10 +5362,6 @@
     {
       "source": "/CS1.0/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/CS1.0/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/CS1.0/admin-org",
-      "destination": "/CS1.0/admin-org/index"
     },
     {
       "source": "/CS1.0/admin-platform/accessing-organisation-administration.html",
@@ -5453,7 +5425,7 @@
     },
     {
       "source": "/CS1.0/admin-platform/index.html",
-      "destination": "/CS1.0/admin-platform/index"
+      "destination": "/CS1.0/admin-platform"
     },
     {
       "source": "/CS1.0/admin-platform/managing-classifications.html",
@@ -5496,10 +5468,6 @@
       "destination": "/CS1.0/admin-platform/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/CS1.0/admin-platform",
-      "destination": "/CS1.0/admin-platform/index"
-    },
-    {
       "source": "/CS1.0/user/accessing-secure-content.html",
       "destination": "/CS1.0/user/accessing-secure-content"
     },
@@ -5517,7 +5485,7 @@
     },
     {
       "source": "/CS1.0/user/index.html",
-      "destination": "/CS1.0/user/index"
+      "destination": "/CS1.0/user"
     },
     {
       "source": "/CS1.0/user/managing-file-versions.html",
@@ -5546,10 +5514,6 @@
     {
       "source": "/CS1.0/user/viewing-activities-on-secure-content.html",
       "destination": "/CS1.0/user/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/CS1.0/user",
-      "destination": "/CS1.0/user/index"
     },
     {
       "source": "/3.5/admin/accessing-administration.html",
@@ -5597,7 +5561,7 @@
     },
     {
       "source": "/3.5/admin/index.html",
-      "destination": "/3.5/admin/index"
+      "destination": "/3.5/admin"
     },
     {
       "source": "/3.5/admin/managing-groups.html",
@@ -5630,10 +5594,6 @@
     {
       "source": "/3.5/admin/transferring-user-ownership.html",
       "destination": "/3.5/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.5/admin",
-      "destination": "/3.5/admin/index"
     },
     {
       "source": "/3.5/admin-org/accessing-organisation-administration.html",
@@ -5669,7 +5629,7 @@
     },
     {
       "source": "/3.5/admin-org/index.html",
-      "destination": "/3.5/admin-org/index"
+      "destination": "/3.5/admin-org"
     },
     {
       "source": "/3.5/admin-org/managing-classifications.html",
@@ -5702,10 +5662,6 @@
     {
       "source": "/3.5/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.5/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.5/admin-org",
-      "destination": "/3.5/admin-org/index"
     },
     {
       "source": "/3.5/admin-platform/accessing-organisation-administration.html",
@@ -5769,7 +5725,7 @@
     },
     {
       "source": "/3.5/admin-platform/index.html",
-      "destination": "/3.5/admin-platform/index"
+      "destination": "/3.5/admin-platform"
     },
     {
       "source": "/3.5/admin-platform/managing-classifications.html",
@@ -5810,10 +5766,6 @@
     {
       "source": "/3.5/admin-platform/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.5/admin-platform/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.5/admin-platform",
-      "destination": "/3.5/admin-platform/index"
     },
     {
       "source": "/3.5/api/access-service-api-oauth-authorise.html",
@@ -6337,7 +6289,7 @@
     },
     {
       "source": "/3.5/api/index.html",
-      "destination": "/3.5/api/index"
+      "destination": "/3.5/api"
     },
     {
       "source": "/3.5/api/item-handling-endpoints.html",
@@ -6404,10 +6356,6 @@
       "destination": "/3.5/api/working-with-files-and-folders-fundamentals"
     },
     {
-      "source": "/3.5/api",
-      "destination": "/3.5/api/index"
-    },
-    {
       "source": "/3.5/compatweb/accessing-secure-content.html",
       "destination": "/3.5/compatweb/accessing-secure-content"
     },
@@ -6421,7 +6369,7 @@
     },
     {
       "source": "/3.5/compatweb/index.html",
-      "destination": "/3.5/compatweb/index"
+      "destination": "/3.5/compatweb"
     },
     {
       "source": "/3.5/compatweb/managing-secure-content.html",
@@ -6448,10 +6396,6 @@
       "destination": "/3.5/compatweb/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.5/compatweb",
-      "destination": "/3.5/compatweb/index"
-    },
-    {
       "source": "/3.5/user/accessing-secure-content.html",
       "destination": "/3.5/user/accessing-secure-content"
     },
@@ -6465,7 +6409,7 @@
     },
     {
       "source": "/3.5/user/index.html",
-      "destination": "/3.5/user/index"
+      "destination": "/3.5/user"
     },
     {
       "source": "/3.5/user/managing-file-versions.html",
@@ -6496,10 +6440,6 @@
       "destination": "/3.5/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.5/user",
-      "destination": "/3.5/user/index"
-    },
-    {
       "source": "/3.5/windows/accessing-secure-content.html",
       "destination": "/3.5/windows/accessing-secure-content"
     },
@@ -6513,7 +6453,7 @@
     },
     {
       "source": "/3.5/windows/index.html",
-      "destination": "/3.5/windows/index"
+      "destination": "/3.5/windows"
     },
     {
       "source": "/3.5/windows/installing-and-upgrading-the-application.html",
@@ -6538,10 +6478,6 @@
     {
       "source": "/3.5/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.5/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.5/windows",
-      "destination": "/3.5/windows/index"
     },
     {
       "source": "/3.4/admin/accessing-administration.html",
@@ -6589,7 +6525,7 @@
     },
     {
       "source": "/3.4/admin/index.html",
-      "destination": "/3.4/admin/index"
+      "destination": "/3.4/admin"
     },
     {
       "source": "/3.4/admin/managing-groups.html",
@@ -6622,10 +6558,6 @@
     {
       "source": "/3.4/admin/transferring-user-ownership.html",
       "destination": "/3.4/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.4/admin",
-      "destination": "/3.4/admin/index"
     },
     {
       "source": "/3.4/admin-org/accessing-organisation-administration.html",
@@ -6661,7 +6593,7 @@
     },
     {
       "source": "/3.4/admin-org/index.html",
-      "destination": "/3.4/admin-org/index"
+      "destination": "/3.4/admin-org"
     },
     {
       "source": "/3.4/admin-org/managing-classifications.html",
@@ -6690,10 +6622,6 @@
     {
       "source": "/3.4/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.4/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.4/admin-org",
-      "destination": "/3.4/admin-org/index"
     },
     {
       "source": "/3.4/admin-platform/accessing-organisation-administration.html",
@@ -6757,7 +6685,7 @@
     },
     {
       "source": "/3.4/admin-platform/index.html",
-      "destination": "/3.4/admin-platform/index"
+      "destination": "/3.4/admin-platform"
     },
     {
       "source": "/3.4/admin-platform/managing-classifications.html",
@@ -6794,10 +6722,6 @@
     {
       "source": "/3.4/admin-platform/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.4/admin-platform/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.4/admin-platform",
-      "destination": "/3.4/admin-platform/index"
     },
     {
       "source": "/3.4/api/access-service-api-oauth-authorize.html",
@@ -7321,7 +7245,7 @@
     },
     {
       "source": "/3.4/api/index.html",
-      "destination": "/3.4/api/index"
+      "destination": "/3.4/api"
     },
     {
       "source": "/3.4/api/item-handling-endpoints.html",
@@ -7388,10 +7312,6 @@
       "destination": "/3.4/api/working-with-files-and-folders-fundamentals"
     },
     {
-      "source": "/3.4/api",
-      "destination": "/3.4/api/index"
-    },
-    {
       "source": "/3.4/compatweb/accessing-secure-content.html",
       "destination": "/3.4/compatweb/accessing-secure-content"
     },
@@ -7405,7 +7325,7 @@
     },
     {
       "source": "/3.4/compatweb/index.html",
-      "destination": "/3.4/compatweb/index"
+      "destination": "/3.4/compatweb"
     },
     {
       "source": "/3.4/compatweb/managing-secure-content.html",
@@ -7430,10 +7350,6 @@
     {
       "source": "/3.4/compatweb/viewing-activities-on-secure-content.html",
       "destination": "/3.4/compatweb/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/3.4/compatweb",
-      "destination": "/3.4/compatweb/index"
     },
     {
       "source": "/3.4/de/admin-org/accessing-organisation-administration.html",
@@ -7469,7 +7385,7 @@
     },
     {
       "source": "/3.4/de/admin-org/index.html",
-      "destination": "/3.4/de/admin-org/index"
+      "destination": "/3.4/de/admin-org"
     },
     {
       "source": "/3.4/de/admin-org/managing-classifications.html",
@@ -7498,10 +7414,6 @@
     {
       "source": "/3.4/de/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.4/de/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.4/de/admin-org",
-      "destination": "/3.4/de/admin-org/index"
     },
     {
       "source": "/3.4/de/admin-platform/accessing-organisation-administration.html",
@@ -7565,7 +7477,7 @@
     },
     {
       "source": "/3.4/de/admin-platform/index.html",
-      "destination": "/3.4/de/admin-platform/index"
+      "destination": "/3.4/de/admin-platform"
     },
     {
       "source": "/3.4/de/admin-platform/managing-classifications.html",
@@ -7604,10 +7516,6 @@
       "destination": "/3.4/de/admin-platform/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/3.4/de/admin-platform",
-      "destination": "/3.4/de/admin-platform/index"
-    },
-    {
       "source": "/3.4/de/user/accessing-secure-content.html",
       "destination": "/3.4/de/user/accessing-secure-content"
     },
@@ -7621,7 +7529,7 @@
     },
     {
       "source": "/3.4/de/user/index.html",
-      "destination": "/3.4/de/user/index"
+      "destination": "/3.4/de/user"
     },
     {
       "source": "/3.4/de/user/managing-file-versions.html",
@@ -7652,10 +7560,6 @@
       "destination": "/3.4/de/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.4/de/user",
-      "destination": "/3.4/de/user/index"
-    },
-    {
       "source": "/3.4/user/accessing-secure-content.html",
       "destination": "/3.4/user/accessing-secure-content"
     },
@@ -7669,7 +7573,7 @@
     },
     {
       "source": "/3.4/user/index.html",
-      "destination": "/3.4/user/index"
+      "destination": "/3.4/user"
     },
     {
       "source": "/3.4/user/managing-file-versions.html",
@@ -7700,10 +7604,6 @@
       "destination": "/3.4/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.4/user",
-      "destination": "/3.4/user/index"
-    },
-    {
       "source": "/3.4/windows/accessing-secure-content.html",
       "destination": "/3.4/windows/accessing-secure-content"
     },
@@ -7717,7 +7617,7 @@
     },
     {
       "source": "/3.4/windows/index.html",
-      "destination": "/3.4/windows/index"
+      "destination": "/3.4/windows"
     },
     {
       "source": "/3.4/windows/installing-and-upgrading-the-application.html",
@@ -7742,10 +7642,6 @@
     {
       "source": "/3.4/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.4/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.4/windows",
-      "destination": "/3.4/windows/index"
     },
     {
       "source": "/3.3/admin/accessing-administration.html",
@@ -7793,7 +7689,7 @@
     },
     {
       "source": "/3.3/admin/index.html",
-      "destination": "/3.3/admin/index"
+      "destination": "/3.3/admin"
     },
     {
       "source": "/3.3/admin/managing-groups.html",
@@ -7826,10 +7722,6 @@
     {
       "source": "/3.3/admin/transferring-user-ownership.html",
       "destination": "/3.3/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.3/admin",
-      "destination": "/3.3/admin/index"
     },
     {
       "source": "/3.3/admin-org/accessing-organisation-administration.html",
@@ -7865,7 +7757,7 @@
     },
     {
       "source": "/3.3/admin-org/index.html",
-      "destination": "/3.3/admin-org/index"
+      "destination": "/3.3/admin-org"
     },
     {
       "source": "/3.3/admin-org/managing-classifications.html",
@@ -7894,10 +7786,6 @@
     {
       "source": "/3.3/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.3/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.3/admin-org",
-      "destination": "/3.3/admin-org/index"
     },
     {
       "source": "/3.3/admin-platform/accessing-organisation-administration.html",
@@ -7961,7 +7849,7 @@
     },
     {
       "source": "/3.3/admin-platform/index.html",
-      "destination": "/3.3/admin-platform/index"
+      "destination": "/3.3/admin-platform"
     },
     {
       "source": "/3.3/admin-platform/managing-classifications.html",
@@ -7998,10 +7886,6 @@
     {
       "source": "/3.3/admin-platform/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.3/admin-platform/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.3/admin-platform",
-      "destination": "/3.3/admin-platform/index"
     },
     {
       "source": "/3.3/api/access-service-api-oauth-authorize.html",
@@ -8513,7 +8397,7 @@
     },
     {
       "source": "/3.3/api/index.html",
-      "destination": "/3.3/api/index"
+      "destination": "/3.3/api"
     },
     {
       "source": "/3.3/api/item-handling-endpoints.html",
@@ -8580,10 +8464,6 @@
       "destination": "/3.3/api/working-with-files-and-folders-fundamentals"
     },
     {
-      "source": "/3.3/api",
-      "destination": "/3.3/api/index"
-    },
-    {
       "source": "/3.3/compatweb/accessing-secure-content.html",
       "destination": "/3.3/compatweb/accessing-secure-content"
     },
@@ -8597,7 +8477,7 @@
     },
     {
       "source": "/3.3/compatweb/index.html",
-      "destination": "/3.3/compatweb/index"
+      "destination": "/3.3/compatweb"
     },
     {
       "source": "/3.3/compatweb/managing-secure-content.html",
@@ -8622,10 +8502,6 @@
     {
       "source": "/3.3/compatweb/viewing-activities-on-secure-content.html",
       "destination": "/3.3/compatweb/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/3.3/compatweb",
-      "destination": "/3.3/compatweb/index"
     },
     {
       "source": "/3.3/de/admin-org/accessing-organisation-administration.html",
@@ -8661,7 +8537,7 @@
     },
     {
       "source": "/3.3/de/admin-org/index.html",
-      "destination": "/3.3/de/admin-org/index"
+      "destination": "/3.3/de/admin-org"
     },
     {
       "source": "/3.3/de/admin-org/managing-classifications.html",
@@ -8690,10 +8566,6 @@
     {
       "source": "/3.3/de/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.3/de/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.3/de/admin-org",
-      "destination": "/3.3/de/admin-org/index"
     },
     {
       "source": "/3.3/de/admin-platform/accessing-organisation-administration.html",
@@ -8757,7 +8629,7 @@
     },
     {
       "source": "/3.3/de/admin-platform/index.html",
-      "destination": "/3.3/de/admin-platform/index"
+      "destination": "/3.3/de/admin-platform"
     },
     {
       "source": "/3.3/de/admin-platform/managing-classifications.html",
@@ -8796,10 +8668,6 @@
       "destination": "/3.3/de/admin-platform/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/3.3/de/admin-platform",
-      "destination": "/3.3/de/admin-platform/index"
-    },
-    {
       "source": "/3.3/de/user/accessing-secure-content.html",
       "destination": "/3.3/de/user/accessing-secure-content"
     },
@@ -8813,7 +8681,7 @@
     },
     {
       "source": "/3.3/de/user/index.html",
-      "destination": "/3.3/de/user/index"
+      "destination": "/3.3/de/user"
     },
     {
       "source": "/3.3/de/user/managing-file-versions.html",
@@ -8844,10 +8712,6 @@
       "destination": "/3.3/de/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.3/de/user",
-      "destination": "/3.3/de/user/index"
-    },
-    {
       "source": "/3.3/de/windows/accessing-secure-content.html",
       "destination": "/3.3/de/windows/accessing-secure-content"
     },
@@ -8861,7 +8725,7 @@
     },
     {
       "source": "/3.3/de/windows/index.html",
-      "destination": "/3.3/de/windows/index"
+      "destination": "/3.3/de/windows"
     },
     {
       "source": "/3.3/de/windows/installing-and-upgrading-the-application.html",
@@ -8888,10 +8752,6 @@
       "destination": "/3.3/de/windows/uploading-storing-and-sharing-content-securely"
     },
     {
-      "source": "/3.3/de/windows",
-      "destination": "/3.3/de/windows/index"
-    },
-    {
       "source": "/3.3/user/accessing-secure-content.html",
       "destination": "/3.3/user/accessing-secure-content"
     },
@@ -8905,7 +8765,7 @@
     },
     {
       "source": "/3.3/user/index.html",
-      "destination": "/3.3/user/index"
+      "destination": "/3.3/user"
     },
     {
       "source": "/3.3/user/managing-file-versions.html",
@@ -8936,10 +8796,6 @@
       "destination": "/3.3/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.3/user",
-      "destination": "/3.3/user/index"
-    },
-    {
       "source": "/3.3/windows/accessing-secure-content.html",
       "destination": "/3.3/windows/accessing-secure-content"
     },
@@ -8953,7 +8809,7 @@
     },
     {
       "source": "/3.3/windows/index.html",
-      "destination": "/3.3/windows/index"
+      "destination": "/3.3/windows"
     },
     {
       "source": "/3.3/windows/installing-and-upgrading-the-application.html",
@@ -8978,10 +8834,6 @@
     {
       "source": "/3.3/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.3/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.3/windows",
-      "destination": "/3.3/windows/index"
     },
     {
       "source": "/3.2/admin/accessing-administration.html",
@@ -9029,7 +8881,7 @@
     },
     {
       "source": "/3.2/admin/index.html",
-      "destination": "/3.2/admin/index"
+      "destination": "/3.2/admin"
     },
     {
       "source": "/3.2/admin/managing-groups.html",
@@ -9062,10 +8914,6 @@
     {
       "source": "/3.2/admin/transferring-user-ownership.html",
       "destination": "/3.2/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.2/admin",
-      "destination": "/3.2/admin/index"
     },
     {
       "source": "/3.2/admin-org/accessing-organisation-administration.html",
@@ -9101,7 +8949,7 @@
     },
     {
       "source": "/3.2/admin-org/index.html",
-      "destination": "/3.2/admin-org/index"
+      "destination": "/3.2/admin-org"
     },
     {
       "source": "/3.2/admin-org/managing-classifications.html",
@@ -9130,10 +8978,6 @@
     {
       "source": "/3.2/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.2/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.2/admin-org",
-      "destination": "/3.2/admin-org/index"
     },
     {
       "source": "/3.2/admin-platform/accessing-organisation-administration.html",
@@ -9197,7 +9041,7 @@
     },
     {
       "source": "/3.2/admin-platform/index.html",
-      "destination": "/3.2/admin-platform/index"
+      "destination": "/3.2/admin-platform"
     },
     {
       "source": "/3.2/admin-platform/managing-classifications.html",
@@ -9234,10 +9078,6 @@
     {
       "source": "/3.2/admin-platform/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.2/admin-platform/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.2/admin-platform",
-      "destination": "/3.2/admin-platform/index"
     },
     {
       "source": "/3.2/api/access-service-api-oauth-authorize.html",
@@ -9713,7 +9553,7 @@
     },
     {
       "source": "/3.2/api/index.html",
-      "destination": "/3.2/api/index"
+      "destination": "/3.2/api"
     },
     {
       "source": "/3.2/api/item-handling-endpoints.html",
@@ -9776,10 +9616,6 @@
       "destination": "/3.2/api/user-whitelist-endpoints"
     },
     {
-      "source": "/3.2/api",
-      "destination": "/3.2/api/index"
-    },
-    {
       "source": "/3.2/compatweb/accessing-secure-content.html",
       "destination": "/3.2/compatweb/accessing-secure-content"
     },
@@ -9793,7 +9629,7 @@
     },
     {
       "source": "/3.2/compatweb/index.html",
-      "destination": "/3.2/compatweb/index"
+      "destination": "/3.2/compatweb"
     },
     {
       "source": "/3.2/compatweb/managing-secure-content.html",
@@ -9818,10 +9654,6 @@
     {
       "source": "/3.2/compatweb/viewing-activities-on-secure-content.html",
       "destination": "/3.2/compatweb/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/3.2/compatweb",
-      "destination": "/3.2/compatweb/index"
     },
     {
       "source": "/3.2/de/admin-org/accessing-organisation-administration.html",
@@ -9857,7 +9689,7 @@
     },
     {
       "source": "/3.2/de/admin-org/index.html",
-      "destination": "/3.2/de/admin-org/index"
+      "destination": "/3.2/de/admin-org"
     },
     {
       "source": "/3.2/de/admin-org/managing-classifications.html",
@@ -9886,10 +9718,6 @@
     {
       "source": "/3.2/de/admin-org/theming-the-applications-web-based-interfaces.html",
       "destination": "/3.2/de/admin-org/theming-the-applications-web-based-interfaces"
-    },
-    {
-      "source": "/3.2/de/admin-org",
-      "destination": "/3.2/de/admin-org/index"
     },
     {
       "source": "/3.2/de/admin-platform/accessing-administration.html",
@@ -9965,7 +9793,7 @@
     },
     {
       "source": "/3.2/de/admin-platform/index.html",
-      "destination": "/3.2/de/admin-platform/index"
+      "destination": "/3.2/de/admin-platform"
     },
     {
       "source": "/3.2/de/admin-platform/managing-classifications.html",
@@ -10008,10 +9836,6 @@
       "destination": "/3.2/de/admin-platform/theming-the-applications-web-based-interfaces"
     },
     {
-      "source": "/3.2/de/admin-platform",
-      "destination": "/3.2/de/admin-platform/index"
-    },
-    {
       "source": "/3.2/de/user/accessing-secure-content.html",
       "destination": "/3.2/de/user/accessing-secure-content"
     },
@@ -10025,7 +9849,7 @@
     },
     {
       "source": "/3.2/de/user/index.html",
-      "destination": "/3.2/de/user/index"
+      "destination": "/3.2/de/user"
     },
     {
       "source": "/3.2/de/user/managing-secure-content.html",
@@ -10052,10 +9876,6 @@
       "destination": "/3.2/de/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.2/de/user",
-      "destination": "/3.2/de/user/index"
-    },
-    {
       "source": "/3.2/de/windows/accessing-secure-content.html",
       "destination": "/3.2/de/windows/accessing-secure-content"
     },
@@ -10069,7 +9889,7 @@
     },
     {
       "source": "/3.2/de/windows/index.html",
-      "destination": "/3.2/de/windows/index"
+      "destination": "/3.2/de/windows"
     },
     {
       "source": "/3.2/de/windows/installing-and-upgrading-the-application.html",
@@ -10100,10 +9920,6 @@
       "destination": "/3.2/de/windows/uploading-storing-and-sharing-content-securely"
     },
     {
-      "source": "/3.2/de/windows",
-      "destination": "/3.2/de/windows/index"
-    },
-    {
       "source": "/3.2/user/accessing-secure-content.html",
       "destination": "/3.2/user/accessing-secure-content"
     },
@@ -10117,7 +9933,7 @@
     },
     {
       "source": "/3.2/user/index.html",
-      "destination": "/3.2/user/index"
+      "destination": "/3.2/user"
     },
     {
       "source": "/3.2/user/managing-secure-content.html",
@@ -10144,10 +9960,6 @@
       "destination": "/3.2/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.2/user",
-      "destination": "/3.2/user/index"
-    },
-    {
       "source": "/3.2/windows/accessing-secure-content.html",
       "destination": "/3.2/windows/accessing-secure-content"
     },
@@ -10161,7 +9973,7 @@
     },
     {
       "source": "/3.2/windows/index.html",
-      "destination": "/3.2/windows/index"
+      "destination": "/3.2/windows"
     },
     {
       "source": "/3.2/windows/installing-and-upgrading-the-application.html",
@@ -10190,10 +10002,6 @@
     {
       "source": "/3.2/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.2/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.2/windows",
-      "destination": "/3.2/windows/index"
     },
     {
       "source": "/3.1/admin/accessing-administration.html",
@@ -10241,7 +10049,7 @@
     },
     {
       "source": "/3.1/admin/index.html",
-      "destination": "/3.1/admin/index"
+      "destination": "/3.1/admin"
     },
     {
       "source": "/3.1/admin/managing-groups.html",
@@ -10274,10 +10082,6 @@
     {
       "source": "/3.1/admin/transferring-user-ownership.html",
       "destination": "/3.1/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.1/admin",
-      "destination": "/3.1/admin/index"
     },
     {
       "source": "/3.1/admin-org/accessing-organisation-administration.html",
@@ -10313,7 +10117,7 @@
     },
     {
       "source": "/3.1/admin-org/index.html",
-      "destination": "/3.1/admin-org/index"
+      "destination": "/3.1/admin-org"
     },
     {
       "source": "/3.1/admin-org/managing-classifications.html",
@@ -10334,10 +10138,6 @@
     {
       "source": "/3.1/admin-org/pages.html",
       "destination": "/3.1/admin-org/pages"
-    },
-    {
-      "source": "/3.1/admin-org",
-      "destination": "/3.1/admin-org/index"
     },
     {
       "source": "/3.1/admin-platform/accessing-organisation-administration.html",
@@ -10401,7 +10201,7 @@
     },
     {
       "source": "/3.1/admin-platform/index.html",
-      "destination": "/3.1/admin-platform/index"
+      "destination": "/3.1/admin-platform"
     },
     {
       "source": "/3.1/admin-platform/managing-classifications.html",
@@ -10434,10 +10234,6 @@
     {
       "source": "/3.1/admin-platform/re-theming-the-application-and-administration.html",
       "destination": "/3.1/admin-platform/re-theming-the-application-and-administration"
-    },
-    {
-      "source": "/3.1/admin-platform",
-      "destination": "/3.1/admin-platform/index"
     },
     {
       "source": "/3.1/api/access-service-api-oauth-token.html",
@@ -10893,7 +10689,7 @@
     },
     {
       "source": "/3.1/api/index.html",
-      "destination": "/3.1/api/index"
+      "destination": "/3.1/api"
     },
     {
       "source": "/3.1/api/pages.html",
@@ -10906,10 +10702,6 @@
     {
       "source": "/3.1/api/sharing-items.html",
       "destination": "/3.1/api/sharing-items"
-    },
-    {
-      "source": "/3.1/api",
-      "destination": "/3.1/api/index"
     },
     {
       "source": "/3.1/compatweb/accessing-secure-content.html",
@@ -10925,7 +10717,7 @@
     },
     {
       "source": "/3.1/compatweb/index.html",
-      "destination": "/3.1/compatweb/index"
+      "destination": "/3.1/compatweb"
     },
     {
       "source": "/3.1/compatweb/managing-secure-content.html",
@@ -10950,10 +10742,6 @@
     {
       "source": "/3.1/compatweb/viewing-activities-on-secure-content.html",
       "destination": "/3.1/compatweb/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/3.1/compatweb",
-      "destination": "/3.1/compatweb/index"
     },
     {
       "source": "/3.1/de/admin-org/accessing-organisation-administration.html",
@@ -10989,7 +10777,7 @@
     },
     {
       "source": "/3.1/de/admin-org/index.html",
-      "destination": "/3.1/de/admin-org/index"
+      "destination": "/3.1/de/admin-org"
     },
     {
       "source": "/3.1/de/admin-org/managing-classifications.html",
@@ -11010,10 +10798,6 @@
     {
       "source": "/3.1/de/admin-org/pages.html",
       "destination": "/3.1/de/admin-org/pages"
-    },
-    {
-      "source": "/3.1/de/admin-org",
-      "destination": "/3.1/de/admin-org/index"
     },
     {
       "source": "/3.1/de/admin-platform/accessing-organisation-administration.html",
@@ -11077,7 +10861,7 @@
     },
     {
       "source": "/3.1/de/admin-platform/index.html",
-      "destination": "/3.1/de/admin-platform/index"
+      "destination": "/3.1/de/admin-platform"
     },
     {
       "source": "/3.1/de/admin-platform/managing-classifications.html",
@@ -11112,10 +10896,6 @@
       "destination": "/3.1/de/admin-platform/re-theming-the-application-and-administration"
     },
     {
-      "source": "/3.1/de/admin-platform",
-      "destination": "/3.1/de/admin-platform/index"
-    },
-    {
       "source": "/3.1/de/user/accessing-secure-content.html",
       "destination": "/3.1/de/user/accessing-secure-content"
     },
@@ -11129,7 +10909,7 @@
     },
     {
       "source": "/3.1/de/user/index.html",
-      "destination": "/3.1/de/user/index"
+      "destination": "/3.1/de/user"
     },
     {
       "source": "/3.1/de/user/managing-secure-content.html",
@@ -11156,10 +10936,6 @@
       "destination": "/3.1/de/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.1/de/user",
-      "destination": "/3.1/de/user/index"
-    },
-    {
       "source": "/3.1/de/windows/accessing-secure-content.html",
       "destination": "/3.1/de/windows/accessing-secure-content"
     },
@@ -11173,7 +10949,7 @@
     },
     {
       "source": "/3.1/de/windows/index.html",
-      "destination": "/3.1/de/windows/index"
+      "destination": "/3.1/de/windows"
     },
     {
       "source": "/3.1/de/windows/installing-and-upgrading-the-application.html",
@@ -11204,10 +10980,6 @@
       "destination": "/3.1/de/windows/uploading-storing-and-sharing-content-securely"
     },
     {
-      "source": "/3.1/de/windows",
-      "destination": "/3.1/de/windows/index"
-    },
-    {
       "source": "/3.1/user/accessing-secure-content.html",
       "destination": "/3.1/user/accessing-secure-content"
     },
@@ -11221,7 +10993,7 @@
     },
     {
       "source": "/3.1/user/index.html",
-      "destination": "/3.1/user/index"
+      "destination": "/3.1/user"
     },
     {
       "source": "/3.1/user/managing-secure-content.html",
@@ -11248,10 +11020,6 @@
       "destination": "/3.1/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.1/user",
-      "destination": "/3.1/user/index"
-    },
-    {
       "source": "/3.1/windows/accessing-secure-content.html",
       "destination": "/3.1/windows/accessing-secure-content"
     },
@@ -11265,7 +11033,7 @@
     },
     {
       "source": "/3.1/windows/index.html",
-      "destination": "/3.1/windows/index"
+      "destination": "/3.1/windows"
     },
     {
       "source": "/3.1/windows/installing-and-upgrading-the-application.html",
@@ -11294,10 +11062,6 @@
     {
       "source": "/3.1/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.1/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.1/windows",
-      "destination": "/3.1/windows/index"
     },
     {
       "source": "/3.0/admin/accessing-administration.html",
@@ -11345,7 +11109,7 @@
     },
     {
       "source": "/3.0/admin/index.html",
-      "destination": "/3.0/admin/index"
+      "destination": "/3.0/admin"
     },
     {
       "source": "/3.0/admin/managing-groups.html",
@@ -11378,10 +11142,6 @@
     {
       "source": "/3.0/admin/transferring-user-ownership.html",
       "destination": "/3.0/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/3.0/admin",
-      "destination": "/3.0/admin/index"
     },
     {
       "source": "/3.0/admin-org/accessing-organisation-administration.html",
@@ -11417,7 +11177,7 @@
     },
     {
       "source": "/3.0/admin-org/index.html",
-      "destination": "/3.0/admin-org/index"
+      "destination": "/3.0/admin-org"
     },
     {
       "source": "/3.0/admin-org/managing-classifications.html",
@@ -11438,10 +11198,6 @@
     {
       "source": "/3.0/admin-org/pages.html",
       "destination": "/3.0/admin-org/pages"
-    },
-    {
-      "source": "/3.0/admin-org",
-      "destination": "/3.0/admin-org/index"
     },
     {
       "source": "/3.0/admin-platform/accessing-organisation-administration.html",
@@ -11505,7 +11261,7 @@
     },
     {
       "source": "/3.0/admin-platform/index.html",
-      "destination": "/3.0/admin-platform/index"
+      "destination": "/3.0/admin-platform"
     },
     {
       "source": "/3.0/admin-platform/managing-classifications.html",
@@ -11538,10 +11294,6 @@
     {
       "source": "/3.0/admin-platform/re-theming-the-application-and-administration.html",
       "destination": "/3.0/admin-platform/re-theming-the-application-and-administration"
-    },
-    {
-      "source": "/3.0/admin-platform",
-      "destination": "/3.0/admin-platform/index"
     },
     {
       "source": "/3.0/api/access-service-api-oauth-token.html",
@@ -11997,7 +11749,7 @@
     },
     {
       "source": "/3.0/api/index.html",
-      "destination": "/3.0/api/index"
+      "destination": "/3.0/api"
     },
     {
       "source": "/3.0/api/pages.html",
@@ -12010,10 +11762,6 @@
     {
       "source": "/3.0/api/sharing-items.html",
       "destination": "/3.0/api/sharing-items"
-    },
-    {
-      "source": "/3.0/api",
-      "destination": "/3.0/api/index"
     },
     {
       "source": "/3.0/compatweb/accessing-secure-content.html",
@@ -12029,7 +11777,7 @@
     },
     {
       "source": "/3.0/compatweb/index.html",
-      "destination": "/3.0/compatweb/index"
+      "destination": "/3.0/compatweb"
     },
     {
       "source": "/3.0/compatweb/managing-secure-content.html",
@@ -12056,10 +11804,6 @@
       "destination": "/3.0/compatweb/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.0/compatweb",
-      "destination": "/3.0/compatweb/index"
-    },
-    {
       "source": "/3.0/user/accessing-secure-content.html",
       "destination": "/3.0/user/accessing-secure-content"
     },
@@ -12073,7 +11817,7 @@
     },
     {
       "source": "/3.0/user/index.html",
-      "destination": "/3.0/user/index"
+      "destination": "/3.0/user"
     },
     {
       "source": "/3.0/user/managing-secure-content.html",
@@ -12100,10 +11844,6 @@
       "destination": "/3.0/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/3.0/user",
-      "destination": "/3.0/user/index"
-    },
-    {
       "source": "/3.0/windows/accessing-secure-content.html",
       "destination": "/3.0/windows/accessing-secure-content"
     },
@@ -12117,7 +11857,7 @@
     },
     {
       "source": "/3.0/windows/index.html",
-      "destination": "/3.0/windows/index"
+      "destination": "/3.0/windows"
     },
     {
       "source": "/3.0/windows/installing-and-upgrading-the-application.html",
@@ -12146,10 +11886,6 @@
     {
       "source": "/3.0/windows/uploading-storing-and-sharing-content-securely.html",
       "destination": "/3.0/windows/uploading-storing-and-sharing-content-securely"
-    },
-    {
-      "source": "/3.0/windows",
-      "destination": "/3.0/windows/index"
     },
     {
       "source": "/2.16/admin/accessing-administration.html",
@@ -12197,7 +11933,7 @@
     },
     {
       "source": "/2.16/admin/index.html",
-      "destination": "/2.16/admin/index"
+      "destination": "/2.16/admin"
     },
     {
       "source": "/2.16/admin/managing-groups.html",
@@ -12230,10 +11966,6 @@
     {
       "source": "/2.16/admin/transferring-user-ownership.html",
       "destination": "/2.16/admin/transferring-user-ownership"
-    },
-    {
-      "source": "/2.16/admin",
-      "destination": "/2.16/admin/index"
     },
     {
       "source": "/2.16/api/access-service-api-oauth-token.html",
@@ -12689,7 +12421,7 @@
     },
     {
       "source": "/2.16/api/index.html",
-      "destination": "/2.16/api/index"
+      "destination": "/2.16/api"
     },
     {
       "source": "/2.16/api/pages.html",
@@ -12702,10 +12434,6 @@
     {
       "source": "/2.16/api/sharing-items.html",
       "destination": "/2.16/api/sharing-items"
-    },
-    {
-      "source": "/2.16/api",
-      "destination": "/2.16/api/index"
     },
     {
       "source": "/2.16/compatweb/accessing-secure-content.html",
@@ -12721,7 +12449,7 @@
     },
     {
       "source": "/2.16/compatweb/index.html",
-      "destination": "/2.16/compatweb/index"
+      "destination": "/2.16/compatweb"
     },
     {
       "source": "/2.16/compatweb/managing-secure-content.html",
@@ -12746,10 +12474,6 @@
     {
       "source": "/2.16/compatweb/viewing-activities-on-secure-content.html",
       "destination": "/2.16/compatweb/viewing-activities-on-secure-content"
-    },
-    {
-      "source": "/2.16/compatweb",
-      "destination": "/2.16/compatweb/index"
     },
     {
       "source": "/2.16/de/admin/accessing-administration.html",
@@ -12797,7 +12521,7 @@
     },
     {
       "source": "/2.16/de/admin/index.html",
-      "destination": "/2.16/de/admin/index"
+      "destination": "/2.16/de/admin"
     },
     {
       "source": "/2.16/de/admin/managing-groups.html",
@@ -12832,10 +12556,6 @@
       "destination": "/2.16/de/admin/transferring-user-ownership"
     },
     {
-      "source": "/2.16/de/admin",
-      "destination": "/2.16/de/admin/index"
-    },
-    {
       "source": "/2.16/de/user/accessing-secure-content.html",
       "destination": "/2.16/de/user/accessing-secure-content"
     },
@@ -12849,7 +12569,7 @@
     },
     {
       "source": "/2.16/de/user/index.html",
-      "destination": "/2.16/de/user/index"
+      "destination": "/2.16/de/user"
     },
     {
       "source": "/2.16/de/user/managing-secure-content.html",
@@ -12880,10 +12600,6 @@
       "destination": "/2.16/de/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/2.16/de/user",
-      "destination": "/2.16/de/user/index"
-    },
-    {
       "source": "/2.16/de/windows/accessing-secure-content.html",
       "destination": "/2.16/de/windows/accessing-secure-content"
     },
@@ -12897,7 +12613,7 @@
     },
     {
       "source": "/2.16/de/windows/index.html",
-      "destination": "/2.16/de/windows/index"
+      "destination": "/2.16/de/windows"
     },
     {
       "source": "/2.16/de/windows/installing-and-upgrading-the-application.html",
@@ -12928,10 +12644,6 @@
       "destination": "/2.16/de/windows/storing-and-sharing-content-securely"
     },
     {
-      "source": "/2.16/de/windows",
-      "destination": "/2.16/de/windows/index"
-    },
-    {
       "source": "/2.16/user/accessing-secure-content.html",
       "destination": "/2.16/user/accessing-secure-content"
     },
@@ -12945,7 +12657,7 @@
     },
     {
       "source": "/2.16/user/index.html",
-      "destination": "/2.16/user/index"
+      "destination": "/2.16/user"
     },
     {
       "source": "/2.16/user/managing-secure-content.html",
@@ -12976,10 +12688,6 @@
       "destination": "/2.16/user/viewing-activities-on-secure-content"
     },
     {
-      "source": "/2.16/user",
-      "destination": "/2.16/user/index"
-    },
-    {
       "source": "/2.16/windows/accessing-secure-content.html",
       "destination": "/2.16/windows/accessing-secure-content"
     },
@@ -12993,7 +12701,7 @@
     },
     {
       "source": "/2.16/windows/index.html",
-      "destination": "/2.16/windows/index"
+      "destination": "/2.16/windows"
     },
     {
       "source": "/2.16/windows/installing-and-upgrading-the-application.html",
@@ -13024,16 +12732,12 @@
       "destination": "/2.16/windows/storing-and-sharing-content-securely"
     },
     {
-      "source": "/2.16/windows",
-      "destination": "/2.16/windows/index"
-    },
-    {
       "source": "/2.16/restapi/:slug*",
       "destination": "/2.16/api/:slug*"
     },
     {
       "source": "/2.16/restapi",
-      "destination": "/2.16/api/index"
+      "destination": "/2.16/api"
     },
     {
       "source": "/3.0/restapi/:slug*",
@@ -13041,7 +12745,7 @@
     },
     {
       "source": "/3.0/restapi",
-      "destination": "/3.0/api/index"
+      "destination": "/3.0/api"
     },
     {
       "source": "/3.1/restapi/:slug*",
@@ -13049,7 +12753,7 @@
     },
     {
       "source": "/3.1/restapi",
-      "destination": "/3.1/api/index"
+      "destination": "/3.1/api"
     },
     {
       "source": "/3.2/restapi/:slug*",
@@ -13057,7 +12761,7 @@
     },
     {
       "source": "/3.2/restapi",
-      "destination": "/3.2/api/index"
+      "destination": "/3.2/api"
     },
     {
       "source": "/3.3/restapi/:slug*",
@@ -13065,7 +12769,7 @@
     },
     {
       "source": "/3.3/restapi",
-      "destination": "/3.3/api/index"
+      "destination": "/3.3/api"
     },
     {
       "source": "/3.4/de/windows/:slug*",
@@ -13073,7 +12777,7 @@
     },
     {
       "source": "/3.4/de/windows",
-      "destination": "/3.4/windows/index"
+      "destination": "/3.4/windows"
     },
     {
       "source": "/3.4/restapi/:slug*",
@@ -13081,7 +12785,7 @@
     },
     {
       "source": "/3.4/restapi",
-      "destination": "/3.4/api/index"
+      "destination": "/3.4/api"
     },
     {
       "source": "/3.5/restapi/:slug*",
@@ -13089,7 +12793,7 @@
     },
     {
       "source": "/3.5/restapi",
-      "destination": "/3.5/api/index"
+      "destination": "/3.5/api"
     },
     {
       "source": "/latest",
