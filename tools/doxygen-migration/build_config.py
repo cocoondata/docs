@@ -6,6 +6,7 @@ Reads nav.json produced by convert.py.
 
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.abspath(sys.argv[1])
@@ -58,7 +59,12 @@ docs = {
     "navbar": {"links": [{"label": "Support", "href": "https://cocoondata.com/support"}]},
     "contextual": {"options": ["copy", "view", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"]},
     "footer": {"socials": {"website": "https://cocoondata.com"}},
-    "redirects": nav["redirects"],
+    # Mintlify serves <folder>/index.mdx at the folder address: point redirects there, and drop folder-to-index loops.
+    "redirects": [
+        {"source": r["source"], "destination": re.sub(r"/index$", "", r["destination"]) or "/"}
+        for r in nav["redirects"]
+        if r["source"] != (re.sub(r"/index$", "", r["destination"]) or "/")
+    ],
 }
 with open(os.path.join(ROOT, "docs.json"), "w") as fh:
     json.dump(docs, fh, indent=2)
@@ -72,7 +78,7 @@ for group in latest["groups"][1:]:
     title, blurb = CARD_TITLES.get(section, (group["group"], "Version " + latest["version"]))
     cards.append(
         '  <Card title="%s" icon="%s" href="/%s">\n    %s\n  </Card>'
-        % (title.replace('"', "&quot;"), ICONS.get(section, "book"), first, blurb)
+        % (title.replace('"', "&quot;"), ICONS.get(section, "book"), re.sub(r"/index$", "", first), blurb)
     )
 
 landing = """---
@@ -87,9 +93,6 @@ Choose a guide below for the latest release (%s). Documentation for earlier rele
 %s
 </CardGroup>
 
-<Note>
-  Older links to `docs.cocoondata.com` (including `/latest/...` and `.html` addresses) redirect to the matching page here.
-</Note>
 """ % (latest["version"], "\n".join(cards))
 with open(os.path.join(ROOT, "index.mdx"), "w") as fh:
     fh.write(landing)
