@@ -39,6 +39,27 @@ latest = nav["versions"][0]
 # The landing page belongs to the default version so it appears in its sidebar.
 latest["groups"].insert(0, {"group": "Overview", "pages": ["index"]})
 
+
+def first_page(group):
+    page = group["pages"][0]
+    return page if isinstance(page, str) else first_page(page)
+
+
+def is_api(group):
+    parts = first_page(group).split("/")
+    return len(parts) > 2 and parts[1] == "api"
+
+
+# Each version gets a Guides tab and, when it has one, an API Reference tab.
+versions = []
+for v in nav["versions"]:
+    tabbed = {k: val for k, val in v.items() if k != "groups"}
+    tabbed["tabs"] = [{"tab": "Guides", "icon": "book-open", "groups": [g for g in v["groups"] if not is_api(g)]}]
+    api = [g for g in v["groups"] if is_api(g)]
+    if api:
+        tabbed["tabs"].append({"tab": "API Reference", "icon": "code", "groups": api})
+    versions.append(tabbed)
+
 docs = {
     "$schema": "https://mintlify.com/docs.json",
     "theme": "mint",
@@ -48,7 +69,7 @@ docs = {
     "logo": {"light": "/logo/light.png", "dark": "/logo/dark.png", "href": "https://cocoondata.com"},
     "fonts": {"family": "Inter"},
     "navigation": {
-        "versions": nav["versions"],
+        "versions": versions,
         "global": {
             "anchors": [
                 {"anchor": "Cocoon Data", "href": "https://cocoondata.com", "icon": "globe"},
