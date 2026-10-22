@@ -1,0 +1,80 @@
+---
+title: "Verwaltung der Speicherkontingente von Benutzern anhand von Plänen"
+---
+
+Über die Seite **Pläne** können Covata-Plattform-Administratoren Speicherkontingente definieren und so den Covata-Benutzer-Accounts verfügbaren (vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen, auf den Benutzer folgendermaßen zugreifen können:
+
+- über Covata Safe Share-Anwendungen oder
+- über andere Client-Anwendungen unter Verwendung der API der Covata-Plattform.
+
+Speicherkontingente werden von einem *Plan* definiert, der wiederum auf einen Covata-Benutzer-Account mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) (über die [Seite](/2.16/de/admin/administering-users) **Benutzer**) angewendet werden kann, wenn der Account [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+
+![Seite Pläne](/images/6ec547d84a38-plans-page.png)
+## Hinzufügen eines neuen Plans <a id="adding-a-new-plan" />
+
+**Hinzufügen eines neuen Plans zur Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Plan-Verwaltung** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neue hinzufügen** Folgendes an:
+
+   - **Name** - der Wert dieses Felds ist der Name des Plans, wie er in der Liste verfügbarer Pläne angezeigt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) über die [Seite](/2.16/de/admin/administering-users) **Benutzer** [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+   - **Beschreibung** - eine längere Beschreibung für mehr Informationen über den Plan, z. B. seinen Zweck oder die beabsichtigte Covata-Benutzer-Zielgruppe. Der Wert dieses Felds ist nur für Covata-Plattform-Administratoren auf dieser Seite **Plan-Verwaltung** sichtbar.
+   - **Kontingent (MB)** - der vom betreffenden Plan definierte Wert des Kontingents (in Megabytes).
+5. ( *Optional* ) Aktivieren Sie das Kontrollkästchen **Standardplan** um zu gewährleisten, dass *dieser* Plan (den Sie eben hinzufügen möchten) standardmäßig ausgewählt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+6. Klicken Sie auf **Speichern**, und der neue Plan erscheint als neue Eintragung auf der Seite **Plan-Verwaltung**. <br />
+   **Hinweis:** Wurde das Kontrollkästchen **Standardplan** aktiviert, wechselt die **Standard**-Anzeige auf der Seite **Plan-Verwaltung** zum von Ihnen eben hinzugefügten Plan.
+
+## Bearbeitung eines bestehenden Plans <a id="editing-an-existing-plan" />
+
+Bei der Bearbeitung eines bestehenden Plans können alle seine Felder geändert werden. Dies ist hilfreich, wenn das Speicherkontingent eines Plans geändert werden muss oder der betreffende Plan zum **Standardplan** gemacht werden soll.
+
+<Note>
+
+Der als **Standardplan** bezeichnete Plan kann nicht bearbeitet werden. Zur Bearbeitung eines Standardplans siehe den **Tipp** unten.
+
+</Note>
+
+**Bearbeitung eines bestehenden Plans:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Plan-Verwaltung** aufzurufen.
+3. Suchen Sie den betreffenden Plan bzw. blättern Sie zu ihm und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Plan bearbeiten** Folgendes wie gewünscht:
+
+   - **Name** - der Wert dieses Felds ist der Name des Plans, wie er in der Liste verfügbarer Pläne angezeigt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) über die [Seite](/2.16/de/admin/administering-users) **Benutzer** [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+   - **Beschreibung** - eine längere Beschreibung für mehr Informationen über den Plan, z. B. seinen Zweck oder die beabsichtigte Covata-Benutzer-Zielgruppe. Der Wert dieses Felds ist nur für Covata-Plattform-Administratoren auf dieser Seite **Plan-Verwaltung** sichtbar.
+   - **Kontingent (MB)** - der vom betreffenden Plan definierte Wert des Kontingents (in Megabytes).
+5. ( *Optional* ) Aktivieren Sie das Kontrollkästchen **Standardplan** um zu gewährleisten, dass *dieser* Plan (den Sie eben bearbeiten) standardmäßig ausgewählt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+6. Klicken Sie auf **Speichern**, und die Felder des Plans werden entsprechend aktualisiert. <br />
+   **Hinweis:** Wurde das Kontrollkästchen **Standardplan** aktiviert, wechselt die **Standard**-Anzeige auf der Seite **Plan-Verwaltung** zum von Ihnen eben bearbeiteten Plan.
+
+<Tip>
+
+Wenn Sie einen als **Standardplan** gekennzeichneten Plan bearbeiten möchten, bearbeiten Sie erst einen anderen Plan und aktivieren Sie dessen Kontrollkästchen **Standardplan**. Klicken Sie dann auf **Speichern**. Damit wird die **Standard**-Anzeige von dem Plan entfernt, den Sie bearbeiten möchten.
+
+</Tip>
+
+## Löschen eines bestehenden Plans <a id="deleting-an-existing-plan" />
+
+Wird ein bestehender Plan gelöscht, kann er nicht mehr ausgewählt werden, wenn ein Covata-Benutzer über die [Seite](/2.16/de/admin/administering-users) **Benutzer** [angelegt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird.
+
+Sobald ein Plan gelöscht wird, werden alle ihm ursprünglich zugewiesenen Benutzer automatisch auf den **Standardplan** übertragen. Beachten Sie hierbei Folgendes: Wenn dieser **Standardplan** ein Kontingent beinhaltet, das geringer ist als der von beliebigen der betreffenden Benutzer beanspruchte, vom Inhaltsdienst verwaltete Speicher, können diese Benutzer über Safe Share keine Daten mehr hochladen, bis ihre Speichernutzung unter das Kontingent des **Standardplans** fällt.
+
+<Note>
+
+Der als **Standardplan** bezeichnete Plan kann nicht gelöscht werden. Wenn Sie einen als **Standardplan** gekennzeichneten Plan löschen möchten, [bearbeiten Sie erst einen anderen Plan](/2.16/de/admin/managing-users-storage-quotas-through-plans#editing-an-existing-plan) und aktivieren Sie dessen Kontrollkästchen **Standardplan**. Klicken Sie dann auf **Speichern**. Damit wird die **Standard**-Anzeige von dem Plan entfernt, den Sie löschen möchten.
+
+</Note>
+
+**Löschung eines bestehenden Plans:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Plan-Verwaltung** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zu ihr und klicken Sie auf den Link **Löschen**.
+4. Klicken Sie in der Meldung **Löschen** auf **Ja**, um den Plan zu löschen.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

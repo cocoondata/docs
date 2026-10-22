@@ -1,0 +1,89 @@
+---
+title: "<access-service>/api/v1/ldap/{ldapconnectionId}"
+---
+
+## URL structure <a id="access-service-api-v1-ldap-ldapconnectionid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldap/{ldapconnectionId}
+```
+
+where `{ldapconnectionId}` is the ID of a LDAP connection.
+
+## Supported methods and overview <a id="access-service-api-v1-ldap-ldapconnectionid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about an existing [LDAP connection](/3.0/admin/configuring-ldap), based on the connection's ID.
+- `PUT` - used to modify the fields of an existing LDAP connection.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-ldap-ldapconnectionid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an existing LDAP connection, using the LDAP connection's ID. An LDAP connection's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/ldap](/3.0/api/access-service-api-v1-ldap) API endpoint, which retrieves a list of field information for all LDAP connections configured on the Covata Platform. <br />
+  **Tip:** All information returned in the [response](/3.0/api/access-service-api-v1-ldap-ldapconnectionid#access-service-api-v1-ldap-ldapconnectionid-returns) from a `GET` method call to this API endpoint is also returned in the [response](/3.0/api/access-service-api-v1-ldap#access-service-api-v1-ldap-returns) from the `GET` method call to the [&lt;access-service&gt;/api/v1/ldap](/3.0/api/access-service-api-v1-ldap) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the LDAP connection's ID).
+- Modifies the fields of an existing LDAP connection, based on the LDAP connection's ID. <br />
+  **Note:** When modifying the fields of an existing LDAP connection, [all LDAP connection parameters must be submitted](/3.0/api/access-service-api-v1-ldap-ldapconnectionid#access-service-api-v1-ldap-ldapconnectionid-required-parameters) with the request, even if most of their values are not being modified. If a parameter's value is not being modified, obtain its existing value using the `GET` method of this API endpoint (or the [&lt;access-service&gt;/api/v1/ldap](/3.0/api/access-service-api-v1-ldap) endpoint) and once the relevant value has been obtained from the response, submit it with the relevant parameter in the `PUT` request to this API endpoint.
+
+## Supported roles <a id="access-service-api-v1-ldap-ldapconnectionid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-ldap-ldapconnectionid#access-service-api-v1-ldap-ldapconnectionid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldap-ldapconnectionid-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-ldap-ldapconnectionid-required-parameters" />
+
+The following required parameters must be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **accountNameField** - .
+- **authFilter** - .
+- **baseDN** - .
+- **domain** - .
+- **emailField** - .
+- **fullnameField** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **serverTimeout** - .
+- **serverUrl** - .
+- **statusDisabledValue** - .
+- **statusField** - .
+- **syncFilter** - .
+- **userPrincipalNameField** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-ldap-ldapconnectionid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **serverUrl** - .
+- **serverTimeout** - .
+- **baseDN** - .
+- **authFilter** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **syncFilter** - .
+- **domain** - .
+- **enabled** - .
+- **accountNameField** - .
+- **emailField** - .
+- **userPrincipalNameField** - .
+- **fullnameField** - .
+- **statusField** - .
+- **statusDisabledValue** - .
+
+  **Example (response from ...):**

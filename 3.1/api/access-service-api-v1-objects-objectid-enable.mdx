@@ -1,0 +1,49 @@
+---
+title: "<access-service>/api/v1/objects/{objectId}/enable"
+---
+
+## URL structure <a id="access-service-api-v1-objects-objectid-enable-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects/{objectId}/enable
+```
+
+where `{objectId}` is the ID of a Secure Object.
+
+## Supported methods and overview <a id="access-service-api-v1-objects-objectid-enable-supported-methods-and-overview" />
+
+- `PUT` - used to [disable or (re-)enable](/3.1/admin/administering-files#disabling-or-re-enabling-secure-objects) a [Secure Object](/3.1/api/creating-secure-objects-and-collections#secure-object), based on its ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-objects-objectid-enable-detailed-description" />
+
+This API endpoint disables or (re-)enables a single Secure Object, using the Secure Object's ID.
+
+Calling this endpoint on a given Secure Object successively toggles between disabling or (re-)enabling this Secure Object.
+
+A Secure Object's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/3.1/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with Secure Objects that can be filtered using various 'search' criteria.
+
+It is also possible to disable or (re-)enable one or more Secure Objects in a single action by calling the [&lt;access-service&gt;/api/v1/objects/bulk](/3.1/api/access-service-api-v1-objects-bulk) API endpoint.
+
+## Supported roles <a id="access-service-api-v1-objects-objectid-enable-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-objects-objectid-enable#access-service-api-v1-objects-objectid-enable-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-objects-objectid-enable-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-objects-objectid-enable-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

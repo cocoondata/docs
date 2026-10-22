@@ -1,0 +1,55 @@
+---
+title: "<access-service>/api/v1/i18n/localedetails"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-localedetails-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/localedetails
+```
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-localedetails-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of field information for all supported locales on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-i18n-localedetails-detailed-description" />
+
+This API endpoint retrieves a list of field information for all supported locales on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-i18n-localedetails-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-i18n-localedetails#access-service-api-v1-i18n-localedetails-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-localedetails-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-i18n-localedetails-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **locale** - .
+
+    - **localeCode** - .
+    - **displayDescription** - .
+  - **hasBuiltinBundle** - .
+  - **hasCustomBundle** - .
+  - **adminDefault** - .
+- **offset** - .
+- **count** - .
+
+  **Example:**

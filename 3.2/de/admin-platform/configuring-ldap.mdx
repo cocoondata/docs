@@ -1,0 +1,129 @@
+---
+title: "LDAP-Konfiguration"
+---
+
+Ein Safe Share-Administrator kann Covata-Benutzer der Instanz der Covata-Plattform über einen LDAP-Server/ein LDAP-Benutzerverzeichnis hinzufügen, indem er über die Safe Share-Verwaltung eine LDAP-Verbindung konfiguriert.
+
+Die Covata-Plattform lässt die Konfiguration mehrerer LDAP-Verbindungen zu, d. h. Benutzer können über mehrere LDAP-Server/-Benutzerverzeichnisse hinzugefügt werden.
+
+<Note>
+
+- Die Covata-Plattform unterstützt die Konfiguration von LDAP-Verbindungen nur auf Instanzen der Covata-Plattform mit *nur einer* [Organisation](/3.2/de/admin-platform/administering-organisations).
+- LDAP-Verbindungen werden nur für Vor-Ort-Installationen der Covata-Plattform empfohlen. Covata unterstützt keine LDAP-Verbindungen für Cloud-basierte Instanzen der Covata-Plattform.
+
+</Note>
+
+Für [LDAP-Benutzer](/3.2/de/admin-platform/administering-users-within-an-organisation#account-type) gelten - im Unterschied zu [lokalen und externen Benutzern](/3.2/de/admin-platform/administering-users-within-an-organisation#account-type) (die im Allgemeinen über die [Safe Share-Organisationsverwaltung](/3.2/de/admin-platform/administering-users-within-an-organisation)) verwaltet werden - die folgenden Eigenschaften:
+
+- Die Authentifizierung eines LDAP-Benutzers auf der Covata-Plattform ist an den betreffenden LDAP-Server delegiert (und wird von diesem gehandhabt). Passwörter für LDAP-Benutzer-Accounts werden daher über den LDAP-Server/das LDAP-Benutzerverzeichnis des betreffenden Accounts geändert oder zurückgesetzt.
+- LDAP-Benutzer-Accounts können über den jeweiligen LDAP-Server/das jeweilige LDAP-Benutzerverzeichnis deaktiviert oder reaktiviert werden. *Wird jedoch* ein LDAP-Benutzer auf diese Weise deaktiviert, wird er auch aus der [Organisation](/3.2/de/admin-platform/administering-organisations) entfernt, und alle Daten in sicheren Objekten <sup>&#42;</sup> des Benutzers innerhalb der betreffenden Organisation werden daher *endgültig gelöscht*. Zur Deaktivierung eines LDAP-Benutzer-Accounts mit Beibehaltung der Daten in sicheren Objekten:
+
+  1. *Bitten Sie zunächst* den [Organisations-Administrator](/3.2/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role), den Account des Covata-Benutzers über die [Safe Share-Organisationsverwaltung](/3.2/de/admin-platform/organisation-administration) zu entfernen und dabei die Option zur Übertragung des Besitzes an den Elementen des Benutzers (d. h. Daten in sicheren Objekten/Inhalte) an einen anderen Covata-Benutzer-Account zu aktivieren.
+  2. *Deaktivieren Sie erst dann* den Account des LDAP-Benutzers über den jeweiligen LDAP-Server/das jeweilige LDAP-Benutzerverzeichnis.
+
+  <sup>&#42;</sup> Weitere Informationen über sichere Objekte finden Sie unter [Verwaltung von Dateien](/3.2/de/admin-platform/administering-files) im Abschnitt [Safe Share-Organisationsverwaltung](/3.2/de/admin-platform/organisation-administration) dieser Anleitung.
+- Änderungen an den Feldern eines bestehenden LDAP-Benutzers auf der Covata-Plattform werden über den LDAP-Server/das LDAP-Benutzerverzeichnis des betreffenden Accounts vorgenommen.
+
+  - Diese Änderungen werden vom LDAP-Server/-Benutzerverzeichnis des Accounts direkt an die Covata-Plattform weitergegeben, wenn die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert. Die LDAP-Synchronisierung findet standardmäßig alle fünf Minuten statt.
+  - Es ist daher nicht möglich, irgendwelche [Felder](/3.2/de/admin-platform/administering-users-within-an-organisation#an-organisation-users-fields) eines LDAP-Benutzer-Accounts über die Covata-Plattform zu bearbeiten, außer rollenrelevante Felder von [Covata-Benutzern innerhalb einer Organisation](/3.2/de/admin-platform/administering-users-within-an-organisation).
+  - Überprüfen Sie, dass die jeweiligen LDAP-Verbindungen der Benutzer-Accounts [aktiviert sind](/3.2/de/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection) um sicherzustellen, dass an den Feldern von LDAP-Benutzer-Accounts vorgenommene Änderungen über die Covata-Plattform weitergegeben werden.
+- Die [Rollen](/3.2/de/admin-platform/administering-users-within-an-organisation#an-organisation-users-roles) eines LDAP-Benutzers innerhalb einer [Organisation](/3.2/de/admin-platform/administering-organisations) werden von einem [Organisations-Administrator](/3.2/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) direkt über die [Safe Share-Organisationsverwaltung](/3.2/de/admin-platform/organisation-administration) geändert. Beachten Sie jedoch, dass die [Rolle des Safe Share-Administrators](/3.2/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) auch einem LDAP-Benutzer zugeteilt und von diesem entfernt werden kann.
+
+<a id="ldap-page" />
+
+![Seite LDAP-Verbindungen](/images/eaa5d88b1a38-ldap-connections-page.png)
+## Konfiguration einer LDAP-Verbindung <a id="configuring-an-ldap-connection" />
+
+Die Seite **LDAP-Verbindungen** der Safe Share-Organisationsverwaltung ([oben](/3.2/de/admin-platform/configuring-ldap#ldap-page)) ermöglicht Folgendes:´
+
+- Hinzufügen neuer [LDAP](/3.2/de/admin-platform/administering-users-within-an-organisation#account-type)-Benutzer zur Covata-Plattform anhand von [neuen Verbindungen zu LDAP-Servern/-Benutzerverzeichnissen](/3.2/de/admin-platform/configuring-ldap#adding-a-new-ldap-connection)
+- [Bearbeitung](/3.2/de/admin-platform/configuring-ldap#editing-an-existing-ldap-connection) sowie [Deaktivierung oder Reaktivierung](/3.2/de/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection) bestehender LDAP-Verbindungen
+
+## Hinzufügen einer neuen LDAP-Verbindung <a id="adding-a-new-ldap-connection" />
+
+<Warning>
+
+Beachten Sie Folgendes, ehe Sie diesen Vorgang fortsetzen:
+
+- Wenn Sie auf Ihrer Instanz der Covata-Plattform [mehr als eine Organisation verwalten](/3.2/de/admin-platform/administering-organisations) möchten, *fügen Sie keine LDAP-Verbindung hinzu*. Wenn eine oder mehrere LDAP-Verbindungen konfiguriert sind, ist die Möglichkeit, Ihrer Instanz der Covata-Plattform [weitere Organisationen hinzuzufügen](/3.2/de/admin-platform/administering-organisations#adding-a-new-organisation), *endgültig deaktiviert*.
+- Eine einmal hinzugefügte LDAP-Verbindung kann aus den folgenden Gründen nicht gelöscht werden:
+
+  - Die Authentifizierung von Covata-Benutzern (die der Covata-Plattform über diese LDAP-Verbindung hinzugefügt wurden) wird über den LDAP-Server abgewickelt.
+  - Diese Verbindung muss daher bestehen bleiben, damit sich die betreffenden LDAP-Benutzer weiterhin anmelden können.
+- Wenn Sie eine Organisation hinzufügen (d. h. es sind auf Ihrer Instanz der Covata-Plattform zwei oder mehr Organisationen vorhanden), wird die LDAP-Funktion deaktiviert, d. h. die Funktion wird deaktiviert, sobald mehr als eine Organisation vorhanden ist. Die LDAP-Funktion kann jedoch reaktiviert werden, indem Sie [alle Organisationen bis auf eine entfernen](/3.2/de/admin-platform/administering-organisations#removing-an-organisation).
+
+</Warning>
+
+**Hinzufügen einer neuen Verbindung zu einem LDAP-Server/-Benutzerverzeichnis auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.2/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die **LDAP**-Option links auf der [Oberfläche Safe Share-Verwaltung](/3.2/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **LDAP-Verbindungen** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **LDAP-Verbindung hinzufügen**.
+4. Füllen Sie im Dialogfeld **LDAP-Verbindung hinzufügen** die in der [Tabelle](/3.2/de/admin-platform/configuring-ldap#ldap-connection-fields) (unten) beschriebenen Felder für die LDAP-Verbindung aus.
+5. ( *Optional* ) Testen Sie die Verbindung, indem Sie die Schaltfläche **Testverbindung** anklicken. <br />
+   **Hinweis:** Eine Meldung zeigt an, ob eine Verbindung zum LDAP-Server erfolgreich aufgebaut werden konnte.
+6. Klicken Sie auf **Speichern**, und die LDAP-Verbindung erscheint als neue Eintragung auf der Seite **LDAP-Verbindungen**. <br />
+   **Hinweis:**
+
+   - Alle Accounts im LDAP-Benutzerverzeichnis erscheinen auf der Covata-Plattform als neue Benutzer-Accounts, sobald die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert.
+   - Alle neuen LDAP-Benutzer-Accounts, die der Covata-Plattform über einen LDAP-Server/ein LDAP-Benutzerverzeichnis hinzugefügt wurden, erhalten automatisch die [Ersteller-Rolle](/3.2/de/admin-platform/administering-users-within-an-organisation#originator-role) und werden automatisch dem **Standard**-[Plan](/3.2/de/admin-platform/administering-users-within-an-organisation#plan) zugewiesen.
+   - Entspricht die E-Mail-Adresse eines bestehenden Benutzer-Accounts auf der Covata-Plattform dem **E-Mail-Feld** eines Benutzers im LDAP-Benutzerverzeichnis, wird für den betreffenden Account (während der Synchronisierung) auf der Covata-Plattform kein neuer Account hinzugefügt.
+
+<a id="ldap-connection-fields" />Die folgende Tabelle beschreibt alle für LDAP relevanten Felder, die die Covata-Plattform benötigt, um eine erfolgreiche Verbindung zu einem LDAP-Server/-Benutzerverzeichnis herzustellen. Alle dieser Felder sind Pflichtfelder.
+
+<Note>
+
+Der Inhalt der [folgenden Tabelle](/3.2/de/admin-platform/configuring-ldap#ldap-connection-fields) erscheint in den Dialogfeldern für **LDAP-Verbindung hinzufügen/bearbeiten**. Diese Informationen sind unten zur Unterstützung von Administratoren von LDAP-Servern/-Benutzerverzeichnissen zusammengefasst, die selbst keine Safe Share-Administratoren oder Organisations-Administratoren sind, aber die Werte dieser Felder ihrem Safe Share-Administrator/Organisations-Administrator zur Verfügung stellen müssen.
+
+</Note>
+
+| Feld | Beschreibung | Maximale Länge <br />  (sofern anwendbar) |
+| --- | --- | --- |
+| Server-URL | Die Adresse des Servers, auf dem [LDAP](http://tools.ietf.org/html/rfc4511) ausgeführt wird. LDAP über [TLS](http://tools.ietf.org/html/rfc5246) wird ebenfalls unterstützt. <br /> **Beispiel:** `ldap://ldap.xy-firma.com` |  |
+| Server-Timeout | Die Wartezeit der Covata-Plattform (in Millisekunden) beim Versuch, mit dem LDAP-Server eine Verbindung aufzubauen oder von ihm Daten zu lesen. |  |
+| Manager-DN | Der definierte Name (DN) des „Manager“-Benutzers, der zur Ausführung der LDAP-Authentifizierung und Synchronisierung sowie zum Durchsuchen des **Basis-DN** befugt ist | 512 |
+| Manager-Passwort | Das Passwort des „Manager“-Benutzers, der zur Ausführung der LDAP-Authentifizierung und Synchronisierung sowie zum Durchsuchen des **Basis-DN** befugt ist. | 128 |
+| Basis-DN | Der Stammknoten in LDAP, von dem die Covata-Plattform Benutzer und Gruppen findet. <br /> **Beispiel:** `ou=users,dc=xy-company,dc=com` | 512 |
+| Synchronisierungsfilter | Der Filter, mit dem die zu synchronisierenden Covata-Benutzer aufgrund ihres LDAP-Pfades und ihrer Attribute angegeben werden. <br /> **Beispiele:**  <br />•  Synchronisierung von Benutzern einer Gruppe: `(memberOf=CN=GruppenName,OU=Benutzer,DC=xy-firma,DC=de)` <br />•  Alle Benutzer: `(&(objectclass=user)(objectcategory=person))` <br />•  Benutzer, deren E-Mail einer bestimmten Domäne entspricht: `(&(&(objectclass=user)(objectcategory=person))(mail=*@xy-firma.de))`  | 512 |
+| Auth-Filter | Das LDAP-Feld, mit dem die Covata-Plattform die E-Mail-Adresse eines Covata-Benutzers bei der Authentifizierung abgleicht. <br /> **Beispiel:** `userPrincipalName={0}` | 512 |
+| Domäne | Die Domäne für das LDAP-Benutzerverzeichnis | 64 |
+| Account-Name | Das zur Angabe eines zusätzlichen/anderen Namens für Covata-Benutzer verwendete LDAP-Feld. <br /> **Beispiel:** `sAMAccountName` <br />**Hinweis:** Dieses Feld wird für die interne Funktionalität der Covata-Plattform benötigt.  | 64 |
+| E-Mail-Feld | Das zur Angabe der E-Mail-Adresse für Covata-Benutzer in der [Safe Share-Verwaltung](/3.2/de/admin-platform/administering-platform-administrator-users#platform-administrator-email) oder [für eine Organisation](/3.2/de/admin-platform/administering-users-within-an-organisation#organisation-user-email) verwendete LDAP-Feld. <br /> **Beispiel:** `mail` <br />**Hinweis:** Jede E-Mail-Adresse aus diesem Feld definiert die Identität eines Covata-Benutzers und bildet Bestandteil seiner Anmeldeinformationen.  | 64 |
+| Benutzerprinzipalname | Das zur Angabe der externen Benutzer-ID für Covata-Benutzer verwendete LDAP-Feld. <br /> **Beispiel:** `userPrincipalName` <br />**Hinweis:** Dieses Feld wird für die interne Funktionalität der Covata-Plattform benötigt.  | 64 |
+| Feld für den vollen Namen | Das zur Angabe des Vornamens für Covata-Benutzer in der [Safe Share-Verwaltung](/3.2/de/admin-platform/administering-platform-administrator-users#platform-administrator-first-name) oder [für eine Organisation](/3.2/de/admin-platform/administering-users-within-an-organisation#organisation-user-first-name) verwendete LDAP-Feld. <br /> **Beispiel:** `Name` | 64 |
+| Statusfeld | Das LDAP-Feld, anhand dessen die Covata-Plattform feststellt, ob ein Benutzer deaktiviert ist oder nicht <br /> **Beispiel:** `userAccountControl` | 64 |
+| Status deaktiviert | Der Wert des **Statusfelds** (im LDAP-Verzeichnis), der angibt, dass ein Benutzer deaktiviert ist | 64 |
+
+## Bearbeitung einer bestehenden LDAP-Verbindung <a id="editing-an-existing-ldap-connection" />
+
+**Bearbeitung einer bestehenden Verbindung zu einem LDAP-Server/-Benutzerverzeichnis auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.2/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die **LDAP**-Option links auf der [Oberfläche Safe Share-Verwaltung](/3.2/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **LDAP-Verbindungen** aufzurufen.
+3. Blättern Sie zur gewünschten LDAP-Verbindung und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **LDAP-Verbindung bearbeiten** die in der [Tabelle](/3.2/de/admin-platform/configuring-ldap#ldap-connection-fields) (siehe oben) beschriebenen Felder für die LDAP-Verbindung.
+5. ( *Optional* ) Testen Sie die Verbindung, indem Sie die Schaltfläche **Testverbindung** anklicken. <br />
+   **Hinweis:** Eine Meldung zeigt an, ob eine Verbindung zum LDAP-Server erfolgreich aufgebaut werden konnte.
+6. Klicken Sie auf **Speichern**, und die LDAP-Verbindung wird aktualisiert. <br />
+   **Hinweise:**
+
+   - Überprüfen Sie, dass die jeweilige LDAP-Verbindung [aktiviert ist](/3.2/de/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection) um sicherzustellen, dass an Benutzer-Accounts im LDAP-Benutzerverzeichnis vorgenommene Änderungen über die Covata-Plattform weitergegeben werden.
+   - Da das **E-Mail**-Adressfeld aller Benutzer-Accounts auf der Covata-Plattform eindeutig ist (da die E-Mail-Adressen der einzelnen Accounts die Identität ihrer Benutzer eindeutig beschreiben und auch für [Prüfzwecke](/3.2/de/admin-platform/generating-reports) verwendet werden), gilt Folgendes:
+
+     1. Wird die E-Mail-Adresse eines LDAP-Accounts über seinen LDAP-Server/sein LDAP-Benutzerverzeichnis geändert, wird für den betreffenden Benutzer bei der nächsten Synchronisierung ein neuer Covata-Benutzer-Account angelegt (und sein ursprünglicher Covata-Benutzer-Account nicht mehr verwendet). Im Gegensatz zur Deaktivierung eines LDAP-Accounts über den LDAP-Server/das LDAP-Benutzerverzeichnis wird jedoch der ursprüngliche (mit dem betreffenden LDAP-Account verknüpfte) Covata-Benutzer-Account nicht entfernt, und die Daten in seinen sicheren Objekten bleiben für die Übertragung des Besitzes an ihnen weiterhin verfügbar.
+     2. Wird die E-Mail-Adresse dieses LDAP-Accounts in die ursprüngliche Adresse zurück geändert, wird für den betreffenden Benutzer bei der nächsten Synchronisierung wieder sein ursprünglicher Covata-Benutzer-Account verwendet (und nicht mehr sein vorheriger Covata-Benutzer-Account).
+
+## Deaktivierung und Reaktivierung einer LDAP-Verbindung <a id="disabling-or-re-enabling-an-ldap-connection" />
+
+Die Deaktivierung einer LDAP-Verbindung beendet die Synchronisierung der Covata-Plattform mit dem Server/Benutzerverzeichnis der betreffenden LDAP-Verbindung. Wenn eine LDAP-Verbindung deaktiviert wurde, können sich die [LDAP](/3.2/de/admin-platform/administering-users-within-an-organisation#account-type)-Benutzer (die vorher über diese LDAP-Verbindung hinzugefügt wurden) anhand einer delegierten Authentifizierung jedoch weiterhin bei der Covata-Plattform anmelden. Dies gilt unter der Annahme, dass die betreffenden Benutzer-Accounts in ihrem LDAP-Benutzerverzeichnis nicht deaktiviert wurden.
+
+Die Deaktivierung einer LDAP-Verbindung ist hilfreich, wenn die Synchronisierung zwischen der Covata-Plattform und dem LDAP-Server den Netzwerkdatenverkehr beeinträchtigt. Die Deaktivierung einer LDAP-Verbindung verhindert jedoch auch, dass sämtliche Aktualisierungen von [LDAP](/3.2/de/admin-platform/administering-users-within-an-organisation#account-type)-Accounts (in ihrem Benutzerverzeichnis) über die Covata-Plattform weitergegeben werden.
+
+**Deaktivierung, Aktivierung und Reaktivierung von LDAP-Verbindungen auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.2/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **LDAP** links auf der [Oberfläche Safe Share-Verwaltung](/3.2/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **LDAP-Verbindungen** aufzurufen, und blättern Sie zur betreffenden LDAP-Verbindung.
+3. Gehen Sie anschließend wie folgt vor:
+
+   - *Zur Deaktivierung der LDAP-Verbindung* - klicken Sie auf die (grüne) Schaltfläche **Aktiviert** der betreffenden LDAP-Verbindung (am linken Seitenrand), um sie auf **Deaktiviert** umzuschalten.
+   - *Zur Aktivierung oder Reaktivierung der LDAP-Verbindung* - klicken Sie auf die (rote) Schaltfläche **Deaktiviert** der betreffenden LDAP-Verbindung (am linken Seitenrand), um sie auf **Aktiviert** umzuschalten.

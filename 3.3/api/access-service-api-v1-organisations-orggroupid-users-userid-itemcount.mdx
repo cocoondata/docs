@@ -1,0 +1,62 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/users/{userId}/itemCount"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/users/{userId}/itemCount
+```
+
+where `{orgGroupId}` is the ID of an organization and `{userId}` is the ID of a Covata user account.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total number of file objects/[Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object)s currently owned by a [Covata user](/3.3/api/authentication-and-authorisation) (specified by `userId`) within an organization (specified by `orgGroupId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-detailed-description" />
+
+This API endpoint retrieves the total number of file objects/Secure Objects currently owned by a Covata user (specified by `userId`) within an organization (specified by `orgGroupId`).
+
+A Covata user's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users](/3.3/api/access-service-api-v1-organisations-orggroupid-users) API endpoint, which retrieves a list of information associated with existing users in an organization (specified by `orgGroupId`), which can be filtered through a variety of 'search' criteria.
+
+This endpoint is useful for determining the number of file objects that a Covata user owns, before [transferring the ownership of these items](/3.3/api/access-service-api-v1-organisations-orgid-items-transfer) over to another user.
+
+<Note>
+
+Although this endpoint indicates [items](/3.3/api/working-with-files-and-folders-fundamentals#item) in its URL, calling it only returns the total number of file objects (i.e. folders/[collections](/3.3/api/working-with-files-and-folders-fundamentals#collection) are not counted). However, when actually transferring the ownership of items from one Covata user to another, all of the user's items (i.e. all their file objects and folders) are transferred.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orggroupid-users-userid-itemcount#access-service-api-v1-organisations-orggroupid-users-userid-itemcount-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-users-userid-itemcount-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **count** - The total number of file objects currently owned by the [Covata user](/3.3/api/authentication-and-authorisation) specified by `userId` in this endpoint's URL. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "count": 16
+  }
+  ```

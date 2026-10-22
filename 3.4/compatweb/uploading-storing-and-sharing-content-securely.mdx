@@ -1,0 +1,177 @@
+---
+title: "Uploading, storing and sharing content securely"
+---
+
+## Uploading and storing personally owned content
+
+<Note>
+
+This feature is only supported when using the Safe Share web application on a desktop/laptop computer. Uploading is not supported through web browsers on tablets, phones or other similar devices. If you use an iOS-based device, however, please note that Covata also releases a dedicated app for this platform ([Safe Share for iOS](https://itunes.apple.com/au/app/safe-share/id874127973)).
+
+</Note>
+
+**To upload and store personally owned content securely:**
+
+1. [Sign in](/3.4/compatweb/signing-in) to the Safe Share web application.
+2. <a id="uploading-a-file" />Click the top-left **Upload** button.
+3. On the **Upload File** dialog box, click **Browse** and then select a file from your computer.
+
+   ![Upload file](/images/9380056a3581-upload-file.png)
+4. Click **Upload** on this dialog box to begin uploading this file. <br />
+   **Tips:**
+
+   - It is also possible to upload a file to an existing folder through the main Safe Share page area by navigating through to that folder before clicking this **Upload** button (above). For more information about creating new folders and navigating through them, see [Organising content with folders](/3.4/compatweb/managing-secure-content#organising-content-with-folders).
+   - To ensure you are only working with your own items in the list of items area, click the **My Files** [filter](/3.4/compatweb/managing-secure-content#filtering-items) on the left of the main Safe Share page.
+
+   **Notes:**
+
+   - If you cannot upload any files, then either:
+
+     - Your account may not have the **Originator** role. To resolve this issue, ask your Covata Platform administrator to grant your user account this role.
+     - You may not have permission to upload to the current location in the file area. See the [Tips](/3.4/compatweb/managing-secure-content#folder-tips) in [Organising content with folders](/3.4/compatweb/managing-secure-content#organising-content-with-folders) for details.
+   - The maximum file size supported is 50 MB. To upload larger files, access Safe Share through a modern web browser.
+
+   Once the uploading is complete, your content is securely stored in Safe Share (in its specified location).
+
+<Tip>
+
+**Tips and notes:** When at least one item appears in the list of items area, the top item is highlighted by default. Whenever an item is highlighted, its **Details** and **History** tabs to the right of the items area are filled with relevant information about that item:
+
+- If you uploaded the highlighted item and [shared it with one or more other people](/3.4/compatweb/uploading-storing-and-sharing-content-securely#sharing-secure-content), then the **Collaborators** field (within the **File/Folder Details** section on the **Details** tab) shows the Covata users that you have currently shared the item with.
+- The **Owner** field (within the **File/Folder Details** section on the **Details** tab) indicates the current owner of the item.
+
+</Tip>
+
+## Sharing secure content
+
+The following procedure explains how to begin sharing personally owned secure content (which you had previously [uploaded](/3.4/compatweb/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content)) with other people, as well as modify the Covata users who can access this content and/or these user's access permissions.
+
+<Note>
+
+- You can only share *content that you own* with other people.
+- Although this procedure describes the process of sharing personally owned content, the procedure can also be used for sharing content which someone else had previously [uploaded to your folder](/3.4/compatweb/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder), where you granted this person either **Upload** or **Manage** permissions on this folder. Granting permissions on your folders is described in more detail [below](/3.4/compatweb/uploading-storing-and-sharing-content-securely#selecting-a-permission-set).
+
+</Note>
+
+**To share your securely stored content with other people (or modify any existing sharing on this content):**
+
+1. [Sign in](/3.4/compatweb/signing-in) to the Safe Share web application. <br />
+   **Tip:** To ensure you are only working with your own items in the list of items area, click the **My Files** [filter](/3.4/compatweb/managing-secure-content#filtering-items) on the left of the main Safe Share page.
+2. [Locate](/3.4/compatweb/managing-secure-content#finding-secure-content) your file or folder to share with one or more other people.
+3. <a id="opening-the-share-page" />*Highlight* the item by clicking on the item's row (to the right of its name if the item is a folder) and in the toolbar above the list of items, click the **Share** button, which opens the item's **Share** page. <br />
+   ![Highlighting an item as an owner](/images/fcd9e1fde5c7-highlighting-an-item-owner.png)
+   <br />
+   **Note:** If the **Owner** (after the item's name) is not your user account, then it is not possible to share the item since you do not own the item; that is, you cannot share items which other Covata users own and have shared with you.
+4. <a id="share-dialog-box" />On the **Share** page, type (or copy and paste) the email address of the person (i.e. 'collaborator') you wish to share your item with, into the **Email** text box. <br />
+   **Note:** If you only need to modify the permissions of an existing collaborator on this item, locate the existing collaborator's email address in the collaborator list (on this page) and skip to the following step on [selecting permissions for a collaborator](/3.4/compatweb/uploading-storing-and-sharing-content-securely#selecting-a-permission-set).
+
+   ![Share page](/images/7c9df7fd8487-share-page.png)
+
+   <br />
+   **Notes:**
+
+   - If you are sharing a folder, then the remainder of this page will be slightly different. (These differences are explained below.)
+   - If your Covata Platform administrator has not configured any labels on their system, then the **Label** section will be absent from the **Share** page. For more information about labels, please refer to the [Covata Platform Administrator's Guide](/3.4/admin/index).
+5. <a id="selecting-a-permission-set" />Select one of the following permissions from the adjacent drop-down to define the extent of access that the collaborator has to this item:
+
+   - **View** - grants permission to view this file (e.g. from Safe Share's read-only [content viewer](/3.4/user/accessing-secure-content#content-viewer) when accessed through a modern web browser) or if the item is a folder, permission to view any files contained within this folder. See [File formats supported by the content viewer](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) (in the main [Safe Share User's Guide for the web application](/3.4/user/index)) for a list of file types that the content viewer supports.
+   - **Download** - grants permission to view, print (also from Safe Share's read-only content viewer when accessed through a modern web browser) and download this file or if the item is a folder, permission to perform these actions on any files contained within this folder.
+   - **Upload** ( *only available when the item is a folder* ) - grants permission to view, print and download existing files, as well as upload new files within this folder.
+   - **Manage** - grants permission to view, print, download, rename and delete this file. If the item is a folder, permission to perform these actions on any files contained within this folder is also granted, including permission to upload new files, create new subfolders and delete existing subfolders (within this folder). <br />
+     **Note:** Granting a collaborator **Manage** permissions on a folder allows that collaborator to delete this folder.
+
+   **Tip:** When sharing a folder:
+
+   - The collaborators and their permissions (to access content within this folder) are *implicitly* propagated (i.e. applied) to all items contained within this folder.
+   - If collaborators and/or their permissions on a subfolder (within this folder) are modified, then these modifications are *explicitly* set on this subfolder, which in turn are *implicitly* propagated down through this subfolder's item hierarchy.
+   - The permissions of a collaborator set *explicitly* on this subfolder override any permissions which this collaborator (on this subfolder) may have inherited *implicitly* from an ancestral folder.
+6. If the collaborator's email address does not appear in the collaborator list (on this page), click the **Add** button (or if selecting the default **Download** permissions, simply type 'Enter'/'Return' after specifying the email address) and the collaborator's email address + their selected permissions are added to the collaborator list:
+
+   ![Added collaborator](/images/ec00410cd471-added-collaborator.png)
+
+   <br />
+    When at least one collaborator has been added on this page, more options relevant to the type of item appear on the page. <br />
+   **Tips:**
+
+   - Repeat from step 4 ([above](/3.4/compatweb/uploading-storing-and-sharing-content-securely#share-dialog-box)) to add more collaborators to this list (or modify the permissions of existing collaborators).
+   - To remove a collaborator from this list, click the **Remove** button associated with the relevant email address (+ permissions).
+   - To share multiple files with a group of people (either in one action and/or in future), [create a folder](/3.4/compatweb/managing-secure-content#organising-content-with-folders) and share it with one or more collaborators using this procedure. Any items that you (or a collaborator with **Manage** permissions on this folder) subsequently upload to this folder are immediately shared with all current collaborators on the folder. If, however, you modify collaborators and their permissions on any subfolder of this folder, then these modifications will *override* the collaborators and permissions which had been set on this (ancestral) folder.
+7. ( *Optional and only utilized when adding at least one new collaborator* ) Write a custom note to include in the email notification sent to new collaborators by specifying the note's content in the **Note** field.
+8. <a id="choosing-a-label" />( *Optional and only available when sharing a file + if your Covata Platform administrator has configured labels* ) In the **Access Controls** section of the page, choose a predefined label from the **Labels** field. Labels behave like 'security classifications' and allow you to restrict the ability to share files to a specific group of Covata users. <br />
+   **Notes:**
+
+   - If your organization's policy requires you to assign a specific label when sharing a file, then choose the appropriate label for the type of content you are sharing. For example, your Covata Platform administrator may have configured the labels: **Confidential**, **Restricted/Protected** and **Unclassified** (as well as the default **No Label** option which does not apply any label when sharing the file).
+   - For more information about labels and groups, please refer to the [Covata Platform Administrator's Guide](/3.4/admin/index).
+9. ( *Optional and also only available when sharing a file* ) Define *when* your file can be accessed, by specifying a date and time in:
+
+   - The **Availability** field, which defines when your collaborators can begin accessing your file. For immediate availability, leave this field blank.
+   - The **Expiration Date** (and time) field, which defines when your collaborators' access to your file ceases. For no expiration date and time, leave this field blank.
+
+   **Tip:** When editing these fields:
+
+   - Click inside the field (or the 'calendar' icon) to specify the date. Any existing time value specified previously will be retained.
+   - Click the 'clock' icon to specify the time. If no date is specified, the current date is assumed.
+   - Click the '**x** sign' icon to clear to contents of the field.
+10. Click the **Save** button to complete sharing your item with your collaborators. An email notification is sent to all *newly added* collaborators on the **Share** dialog box. <br />
+    **Notes:**
+
+    - If you receive the following warning messages, which prevents you from sharing your item:
+
+      - '*The whitelist feature is not permitting you to share this item with the following users: ... Please contact your administrator.*' - Your Covata Platform administrator has enabled the Covata Platform's user whitelist feature, which restricts the people (who have permission to access the Covata Platform) to those whose email addresses (or email address domains) have been added to this whitelist feature. You may need to contact your Covata Platform administrator to clarify which people's email address and domains have been 'whitelisted' to ensure that when sharing an item (above), any non-whitelisted collaborators have either been removed or have not been added to your list of collaborators.
+      - '*The following user/s do/es not have access to LABEL files:*' (where 'LABEL' is the name of the label you selected [above](/3.4/compatweb/uploading-storing-and-sharing-content-securely#choosing-a-label)) - Your Covata Platform administrator has not permitted the users listed in the warning message with access to content shared with the applied LABEL. Either remove these users who are not permitted to access content shared with the applied LABEL, or choose a different label.
+    - For more information about the user whitelist and labels (+ groups), please refer to the [Covata Platform Administrator's Guide](/3.4/admin/index).
+    - It is also possible to 'unshare' your secure content (i.e. remove collaborators from this content). For more information, see [Removing collaborators from content](/3.4/compatweb/managing-secure-content#removing-collaborators-from-content).
+
+<Tip>
+
+You can facilitate communicating or advertising anything about your file or folder by obtaining a direct URL to access the item through the Safe Share web application (which you could email to collaborators you have shared the item with). To obtain this direct URL:
+
+1. Ensure the item has been selected.
+2. Under the **Sharing** section on the **Details** tab, copy the URL from the **Link** text box. <br />
+    For [file formats that Safe Share's content viewer supports](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) (indicated in the main [Safe Share User's Guide for the web application](/3.4/user/index)), this URL opens the item in the [content viewer](/3.4/user/accessing-secure-content#content-viewer) (when using a modern web browser) as opposed to the main Safe Share page listing the item.
+
+</Tip>
+
+## Uploading content to share through another user's folder
+
+If a Covata user who [owns a folder](/3.4/compatweb/managing-secure-content#organising-content-with-folders) has:
+
+- [shared this folder](/3.4/compatweb/uploading-storing-and-sharing-content-securely#sharing-secure-content) with you as a collaborator and
+- granted you either the **Upload** or **Manage** permissions to access this folder,
+
+then you will be able to upload content to share through this other Covata user's folder (as a collaborator on it). Any content you upload to this folder becomes available to other Covata users whose names are listed in the **Collaborators** field (within the **Folder Details** section on the **Details** tab).
+
+<Note>
+
+Like uploading personally owned content ([above](/3.4/compatweb/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content)), this feature is only supported when using the Safe Share web application on a desktop/laptop computer. Uploading is not supported through web browsers on tablets, phones or other similar devices.
+
+</Note>
+
+**To determine if you do have permission to upload content to another user's folder (or manage content within it):**
+
+1. [Sign in](/3.4/compatweb/signing-in) to the Safe Share web application.
+2. Click the **Shared With Me** [filter](/3.4/compatweb/managing-secure-content#filtering-items) on the left of the main Safe Share page to show only items which other Covata users have shared with you in the list of items area.
+3. Select a folder in the list of items area and if the **Collaborators** field (within the **Folder Details** section on the **Details** tab) lists your email address (and possibly others), then that other user (i.e. the folder's owner) has granted you **Upload** permissions to upload content to this folder. If the **Collaborators** field indicates **No collaborators**, then you cannot upload/create any content within this folder. <br />
+   **Note:** If you enter this folder and once inside, the **Create** button appears (i.e. for [creating folders](/3.4/compatweb/managing-secure-content#organising-content-with-folders) within), then the folder's owner has granted you **Manage** permissions on this folder.
+
+**To upload content to share through this other user's folder:**
+
+1. Ensure you are [signed in](/3.4/compatweb/signing-in) to the Safe Share web application and have identified another Covata user's folder which you are a collaborator on and have permission to upload content to.
+2. Click and enter this other user's folder and begin the file upload process by clicking the top-left **Upload** button, similar to [step 2](/3.4/compatweb/uploading-storing-and-sharing-content-securely#uploading-a-file) of [Uploading and storing personally owned content](/3.4/compatweb/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) (above). <br />
+    Once the uploading is complete, the content is securely stored in Safe Share within the other user's folder. <br />
+   **Note:** Be aware that:
+
+   - This uploaded content consumes the storage space allocated to the Covata user who owns the folder you uploaded your content to.
+   - The owner of this folder becomes the owner of the content you uploaded.
+
+<a id="advertising-communicating-about-an-item" />
+
+<Tip>
+
+You can facilitate communicating or advertising anything about an item you have shared through another user's folder (or which someone else has shared with you) by obtaining a direct URL to the item (which you have **Manage / Upload** permissions on) to email other collaborators, allowing them to access the item directly through the Safe Share web application.
+
+1. Ensure the item has been selected.
+2. Under the **Sharing** section on the **Details** tab, copy the URL from the **Link** text box. <br />
+    For [file formats that Safe Share's content viewer supports](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) (indicated in the main [Safe Share User's Guide for the web application](/3.4/user/index)), this URL opens the item in the [content viewer](/3.4/user/accessing-secure-content#content-viewer) (when using a modern web browser) as opposed to the main Safe Share page listing the item.
+
+</Tip>

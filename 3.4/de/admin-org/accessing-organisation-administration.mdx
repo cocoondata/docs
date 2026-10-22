@@ -1,0 +1,105 @@
+---
+title: "Zugriff auf die Safe Share-Organisationsverwaltung"
+---
+
+Die Funktionen der [Safe Share-Organisationsverwaltung](/3.4/de/admin-org/index#organisation-administration) sind nur für Organisations-Administratoren verfügbar. *Organisations-Administratoren* sind alle [Covata-Benutzer](/3.4/de/admin-org/administering-users-within-an-organisation), die für eine oder mehrere Organisation(en)die [Rolle](/3.4/de/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) eines [Organisations-Administrators](/3.4/de/admin-org/administering-users-within-an-organisation#organisation-administrator-role) innehaben.
+
+## Anmeldung bei der Organisationsverwaltung <a id="signing-in-to-organisation-administration" />
+
+Bei der Anmeldung zur Safe Share-Organisationsverwaltung für eine oder mehrere Organisationen muss ein Account eines Covata-Benutzers (für jede über diesen Account verwaltete Organisation die [Rolle eines Organisations-Administrators](/3.4/de/admin-org/administering-users-within-an-organisation#organisation-administrator-role) innehaben, um auf alle Funktionen der Safe Share-Organisationsverwaltung für diese Organisationen zugreifen zu können.
+
+**Anmeldung bei der Safe Share-Organisationsverwaltung:**
+
+1. Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Instanz der Covata-Plattform im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://covata-plattform.xy-firma.com`
+2. Geben Sie auf der Anmeldeseite für Covata die **E-Mail-Adresse** und das **Passwort** für Ihren Covata-Benutzer-Account mit der [Organisations-Administrator-Rolle](/3.4/de/admin-org/administering-users-within-an-organisation#organisation-administrator-role) ein. <br />
+   *Passwort vergessen?* Wenn ja, lassen Sie das Feld **Passwort** leer und klicken Sie stattdessen auf den Link **Passwort vergessen?**. Folgen Sie den Anweisungen auf der aufgerufenen Seite und anschließend in Ihrer E-Mail-Benachrichtigung, um Ihr Passwort zurückzusetzen.
+3. Klicken Sie auf die Schaltfläche **ANMELDEN** (oder drücken Sie die Eingabe-/Return-Taste). Wenn dieser Vorgang erfolgreich war, wird eine der folgenden Seiten angezeigt:
+
+   - Die [Oberfläche Safe Share-Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) (für die einzige Organisation, zu deren Verwaltung Sie berechtigt sind).
+   - Die Seite **Ihre Organisation auswählen** (wenn Sie zur Verwaltung von mehr als einer Organisation berechtigt sind). Wenn diese Seite erscheint:
+
+     - Wählen Sie die zu verwaltende Organisation und klicken Sie auf die Schaltfläche **Auswählen**. Die [Oberfläche Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) für die gewählte Organisation wird angezeigt. <br />
+       **Tipp:** Wenn Sie mehrere Organisationen verwalten, kann es hilfreich sein, für diese URL (gefolgt von `/#/selectOrganisation`) künftig ein Lesezeichen zu setzen, ehe Sie **Auswählen** anklicken, da Sie über diese URL schneller auf die Organisationsverwaltung zugreifen können, als wenn Sie die Basis-URL Ihrer Instanz der Covata-Plattform eingeben <sup>&#42;</sup>.
+   - die Hauptseite für Covata in [Safe Share for Web](/3.4/de/user/index) (weil Ihr Covata-Benutzer-Account auch entweder die [Ersteller-Rolle](/3.4/de/admin-org/administering-users-within-an-organisation#originator-role) oder die [Mitwirkender-Rolle](/3.4/de/admin-org/administering-users-within-an-organisation#collaborator-role)) innehat. Wenn diese Seite erscheint:
+
+     - Klicken Sie auf Ihre E-Mail-Adresse rechts oben und wählen Sie aus dem Dropdown-Menü **Verwaltung**. Anschließend:
+
+       - Wenn die Seite **Ihre Organisation auswählen** angezeigt wird, wählen Sie die zu verwaltende Organisation und klicken Sie auf die Schaltfläche **Auswählen**. Die [Oberfläche Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) für die gewählte Organisation wird angezeigt.
+       - Wenn die Oberfläche Safe Share-Verwaltung erscheint, hat Ihr Account auch die Safe Share-Administrator-Rolle inne. Befolgen Sie die im nächsten Punkt beschriebenen Schritte, um auf die Organisationsverwaltung zuzugreifen.
+   - die [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface) (weil Ihr Covata-Benutzer-Account auch die [Safe Share-Administrator-Rolle](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrator-role)) innehat. Wenn diese Benutzeroberfläche erscheint:
+
+     1. Klicken Sie auf die Option **Organisationen** links auf der Oberfläche Safe Share-Verwaltung, um die **Organisationen** Seite aufzurufen.
+     2. Suchen Sie bei Bedarf die zu verwaltende Organisation.
+     3. Klicken Sie in der Spalte **Verwalten** auf die Schaltfläche **Verwalten** für die betreffende Organisation. Die [Oberfläche Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) für die betreffende Organisation wird angezeigt.
+
+     Weitere Informationen über die Safe Share-Verwaltung finden Sie in der [Safe Share-Administratorenanleitung](/3.4/de/admin-platform/index).
+
+   **Hinweis:** Die E-Mail-Adresse des aktuell angemeldeten Benutzers erscheint in der rechten oberen Ecke der Oberfläche Organisationsverwaltung.
+
+<Info>
+
+<sup>&#42;</sup> **Zusätzlicher Tipp:** Wenn Sie mehrere Organisationen verwalten, aber auf eine bestimmte Organisation gerne *direkt* über eine URL zugreifen möchten, geben Sie die Basis-URL Ihrer Instanz der Covata-Plattform (gefolgt von `/#/orgAdmin/{orgGroupId}/dashboard`) ein bzw. setzen Sie für diese ein Lesezeichen, z. B.:
+
+- `https://covata-plattform-web.xy-firma.com/#/orgAdmin/{orgGroupId}/dashboard` <br />
+   wo `{orgGroupId}` die nummerische ID der relevanten Organisation ist, auf die Sie direkt zugreifen möchten. <br />
+   Diese URL und den ID-Wert finden Sie im URL-Feld Ihres Browsers, nachdem Sie sich auf der [Oberfläche Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) (anhand des oben beschriebenen Verfahrens) erfolgreich [angemeldet haben](/3.4/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration).
+
+Nachdem Sie diese URL in das URL-Feld Ihres Browsers eingegeben und sich angemeldet haben, wird sofort die [Oberfläche Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) für die betreffende Organisation angezeigt.
+
+</Info>
+
+## Die Oberfläche Organisationsverwaltung <a id="the-organisation-administration-interface" />
+
+Die Oberfläche Safe Share-Organisationsverwaltung umfasst eine Reihe von Konfigurationsseiten, die jeweils über die Optionen am linken Seitenrand zugänglich sind (siehe unten).
+
+Die [Seite](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) **Meine Organisation/Dashboard** für die von einem Organisations-Administrator ausgewählte Organisation wird anfänglich angezeigt, nachdem sich der betreffende Covata-Benutzer [bei der Safe Share-Organisationsverwaltung angemeldet hat](/3.4/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) (siehe oben).
+
+<Note>
+
+Wenn Sie von einem Tablet oder Mobiltelefon aus auf die Safe Share-Organisationsverwaltung zugreifen, tippen Sie auf das „Menü“-Symbol in der linken oberen Ecke Ihres Displays, um auf diese Optionen zuzugreifen.
+
+</Note>
+
+![Organisationsverwaltung Seite Dashboard](/images/dee296cbb4d7-organisation-administration-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Seiten der Safe Share-Organisationsverwaltung. Sie erreichen diese durch Anklicken der jeweiligen Option am linken Seitenrand.
+
+| Seite Safe Share-Organisationsverwaltung | Beschreibung |
+| --- | --- |
+| [Meine Organisation/Dashboard](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) | Bietet auf einer Seite eine klare Übersicht über verschiedene Aspekte Ihrer Organisation: aktuelle Status (in Bereichen dargestellt) sowie verschiedene Nutzungsmetriken bezüglich Benutzer-Accounts, Dateien und Speicher (in Kreisdiagrammen dargestellt). |
+| [Konfiguration](/3.4/de/admin-org/configuring-organisation-administration-properties) | Ermöglicht die Änderung von Eigenschaften der Safe Share-Organisationsverwaltung, die bestimmte Funktionsbereiche Ihrer Organisation auf der Covata-Plattform beeinflussen. |
+| [Benutzer](/3.4/de/admin-org/administering-users-within-an-organisation) | Gibt Zugriff auf alle Covata-Benutzer, die Mitglieder Ihrer Organisation sind, und die Konfiguration dieser Covata-Benutzer, einschließlich der Möglichkeit, die Rollen der Benutzer zu ändern, die festlegen, welche Aktionen Benutzer innerhalb Ihrer Organisation mit Covata-Technologien ausführen können. |
+| [Benutzer-Positivliste](/3.4/de/admin-org/managing-user-whitelists) | Ermöglicht die Verwaltung und Konfiguration der Benutzer-Positivliste, die (aufgrund von E-Mail-Adressen oder Domänen) den Kreis von Personen definiert, denen andere Covata-Benutzer innerhalb Ihrer Organisation Elemente freigeben können. Benutzern, deren E-Mail-Adressen den Regeln einer Benutzer-Positivliste nicht entsprechen, können von Anderen keine Dateien oder Ordner freigegeben werden (d. h. sie können nicht als Mitwirkende von Elementen hinzugefügt werden). |
+| [Dateien](/3.4/de/admin-org/administering-files) | Gestattet es, alle mithilfe von Covata-Technologien verschlüsselten Dateien innerhalb Ihrer Organisation zu durchsuchen und filtern. Von dieser gefilterten Liste können einzelne Dateien:  <br />•  deaktiviert bzw. reaktiviert werden (ersteres verhindert allen Zugriff auf ihre unverschlüsselten Daten) und <br />•  hinsichtlich aller ihrer verzeichneten Aktivitäten geprüft werden.  |
+| [Gruppen](/3.4/de/admin-org/managing-groups) | Ermöglicht die Erstellung von Gruppen für Covata-Benutzer, die zusammen mit Klassifikationen eingesetzt werden können, um den Personenkreis einzuschränken, dem Dateien freigegeben werden können. |
+| [Klassifikationen](/3.4/de/admin-org/managing-classifications) | Ermöglicht die Definition von Klassifikationen:  <br />•  die Covata-Benutzer bei der Freigabe von Dateien auswählen können und <br />•  die nach ihrer Anwendung auf Covata-Benutzer-Gruppen <br />die Möglichkeit einschränken, Dateien an Covata-Benutzer freizugeben, die Mitglieder dieser Gruppen sind. |
+| [Pläne](/3.4/de/admin-org/managing-users-storage-quotas-through-plans) | Ermöglicht die Definition von Plänen, die jeweils ein Speicherkontingent festlegen und so den Covata-Benutzer-Accounts verfügbaren (vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen. |
+| [Berichte](/3.4/de/admin-org/generating-reports) | Ermöglicht die Erzeugung von Berichten über innerhalb Ihrer Organisation von Client-Anwendungen an die API der Covata-Plattform gerichtete Anforderungen (d. h. Aktivitäten). Die Berichte können in PDF- oder CSV-Format exportiert werden. Die Aktivitäten für diese Berichte lassen sich nach unterschiedlichen Kriterien filtern. <br />**Hinweis:** In diesem Kontext beinhalten „Client-Anwendungen“ die Safe Share-Verwaltung und Organisationsverwaltung (sowie die entsprechenden Administratoren, die über diese Oberflächen Aktionen ausführen).  |
+
+## Das Dashboard der Organisationsverwaltung <a id="the-organisation-administration-dashboard" />
+
+Die Seite **Meine Organisation/Dashboard** wird nach der erfolgreichen [Anmeldung](/3.4/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) eines Organisations-Administrators bei der Safe Share-Organisationsverwaltung zuerst aufgerufen.
+
+![Organisationsverwaltung Seite Dashboard](/images/dee296cbb4d7-organisation-administration-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Komponenten der Seite **Meine Organisation/Dashboard** von links nach rechts und oben nach unten.
+
+| Komponente der Dashboard-Seite | Beschreibung |
+| --- | --- |
+| Benutzer gesamt | Dieser Bereich zeigt die Gesamtzahl der Covata-Benutzer innerhalb Ihrer Organisation, einschließlich der Zahl dieser Benutzer mit den einzelnen [Rollen](/3.4/de/admin-org/administering-users-within-an-organisation#an-organisation-users-roles), die über die Safe Share-Organisationsverwaltung zugeteilt werden können. Anklicken dieses Bereichs öffnet die [Seite](/3.4/de/admin-org/administering-users-within-an-organisation) **Benutzer**. |
+| Dateien | Dieser Bereich zeigt die Gesamtzahl der verschlüsselten Dateien, die über die Covata-Plattform erstellt wurden, einschließlich der Zahl dieser Dateien, die freigegeben bzw. nicht freigegeben sind. Anklicken dieses Bereichs öffnet die [Seite](/3.4/de/admin-org/administering-files) **Dateien**. |
+| Gesamtkontingent der Organisation | Dieser Bereich zeigt den gesamten Speicherplatz, den ein Safe Share-Administrator für Ihre Instanz der Covata-Plattform Ihrer Organisationzugeteilt hat und den der Inhaltsdienst der Covata-Plattform nutzt, um für alle Covata-Benutzer mit der [Ersteller-Rolle](/3.4/de/admin-org/administering-users-within-an-organisation#originator-role) (d. h. Benutzer mit einem [Plan](/3.4/de/admin-org/managing-users-storage-quotas-through-plans)) innerhalb Ihrer Organisation Inhalte zu speichern. <br />  Dieser Bereich zeigt auch die diesen Benutzern aktuell zugewiesenen Speicherkontingente (d. h. den Gesamtwert ihrer jeweiligen Plan-Kontingente) und den aktuell genutzten Speicherplatz. Anklicken dieses Bereichs öffnet die [Seite](/3.4/de/admin-org/managing-users-storage-quotas-through-plans) **Pläne**. <br />**Hinweis:** Weitere Informationen über die Safe Share-Verwaltung finden Sie in der [Safe Share-Administratorenanleitung](/3.4/de/admin-platform/index).  |
+| Pläne | Dieser Bereich des Dashboards zeigt die einzelnen innerhalb Ihrer Organisation konfigurierten Pläne. Für jeden dieser Pläne werden die folgenden Informationen dargestellt:  <br />•  Name des Plans oben <br />•  Ein Kreisdiagramm aller Covata-Benutzer mit Ersteller-Rolle innerhalb Ihrer Organisation, die dem betreffenden Plan zugeteilt sind, mit Darstellung der prozentualen Anteile der innerhalb bzw. am Rand oder außerhalb ihres Plankontingents liegenden Benutzer. <br />•  Die tatsächliche Zahl aller Covata-Benutzer (mit Ersteller-Rolle) innerhalb Ihrer Organisation, die dem betreffenden Plan zugeteilt sind, und eine Darstellung der prozentualen Anteile aller Covata-Benutzer (mit dieser Rolle) innerhalb Ihrer Organisation, die diesem Plan zugeordnet sind (in Klammern).  |
+| Aufschlüsselung der Dateierweiterungen | Dieser Dashboard-Bereich zeigt ein Kreisdiagramm aller Dateien innerhalb Ihrer Organisation mit Darstellung der prozentualen Anteile der verschiedenen Dateitypen (auf Grundlage der jeweiligen Erweiterungen). |
+
+## Abmeldung von der Organisationsverwaltung <a id="signing-out-of-organisation-administration" />
+
+**Abmeldung von der Safe Share-Organisationsverwaltung:**
+
+- Klicken Sie auf Ihre E-Mail-Adresse rechts oben auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.4/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface) und wählen Sie aus dem Dropdown-Menü **Abmelden**. <br />
+   Die Seite Covata-Anmeldung wird erneut angezeigt.
+
+<Warning>
+
+Vergewissern Sie sich nach der Verwaltung Ihrer Organisation über die Safe Share-Organisationsverwaltung bitte, dass Sie sich wie (oben) beschrieben explizit abmelden. Wenn Sie lediglich das entsprechende Register oder Fenster in Ihrem Browser schließen, in dem Sie Ihre Safe Share-Organisationsverwaltung abgewickelt haben, werden Sie *nicht abgemeldet*, d. h. es besteht das Risiko, dass Ihre Sitzung von einer anderen Person, die Ihren Computer nach Ihnen verwendet, kompromittiert wird.
+
+</Warning>

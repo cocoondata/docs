@@ -1,0 +1,52 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/items/storage"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/items/storage
+```
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a summary of information about the utilization of [Covata users](/3.2/admin-org/administering-users-within-an-organisation)' storage managed by the Covata Platform (based on percentage bands of their utilized [quota](/3.2/admin-org/managing-users-storage-quotas-through-plans)).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-detailed-description" />
+
+This API endpoint retrieves a summary of information about the utilization of Covata users' storage managed by the Covata Platform based on percentage bands of their utilized quota.
+
+Only users with the [Originator role](/3.2/admin-org/administering-users-within-an-organisation#originator-role) are returned in the [response](/3.2/api/access-service-api-v1-organisations-orggroupid-statistics-items-storage#access-service-api-v1-organisations-orggroupid-statistics-items-storage-returns) to this API endpoint, because users with this role have a plan and quota which allows them to utilize the Covata Platform to store their own data.
+
+## Supported roles <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.2/admin-org/index)):
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orggroupid-statistics-items-storage#access-service-api-v1-organisations-orggroupid-statistics-items-storage-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalUsersWithOwnerRole** - .
+- **breakdown** - An array containing information about each percentage band of Covata users' quota utilization. Each element of this array contains information about one of these percentage bands and is represented as an object, containing the following members:
+
+  - **quotaUsage** - .
+  - **userCount** - .
+  - **percentUsers** - .
+
+  **Example (response from ...):**

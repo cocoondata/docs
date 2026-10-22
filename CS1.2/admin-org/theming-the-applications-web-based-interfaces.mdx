@@ -1,0 +1,93 @@
+---
+title: "Theming SafeShare's web-based interfaces"
+---
+
+<Info>
+
+**To be carried out only during the deployment process.**
+
+</Info>
+
+Themes allow the color schemes and logos utilised throughout [SafeShare for Web](/CS1.2/user/index) user interface to be customised for individual [organisations](/CS1.2/user/index#organisations), where each individual organisation is associated with its own theme. (For more information about adding/configuring organisations through [SafeShare Administration](/CS1.2/admin-platform/index#platform-administration), see [Administering organisations](/CS1.2/admin-platform/administering-organisations) in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index).)
+
+In this version of SafeShare and the Cocoon Data Platform, themes are generated using an separate tool (the [Cocoon Data/WebApp Theme Builder](https://www.npmjs.com/package/cocoondata-theme-builder)), which is developed by Cocoon Data and is available as a locally executable [npm package](https://www.npmjs.com/).
+
+These color scheme and logo customisations are also utilised throughout:
+
+- the [Organisation Administration](/CS1.2/admin-org/index#organisation-administration) interface,
+- the [SafeShare Administration](/CS1.2/admin-platform/index#platform-administration) interface, as well as
+- email notifications sent out by the Cocoon Data Platform.
+
+Newly installed instances of SafeShare are pre-packaged with the *Cocoon Data default theme*. This theme is initially used for all organisations' SafeShare for Web and Organisation Administration interfaces, email notifications, as well as the SafeShare Administration interface.
+
+Using the WebApp Theme Builder tool, you can generate different themes - one for each organisation - as well as your own default theme (aka the 'system' theme), which is used for:
+
+- any organisation that does not have a theme defined for it,
+- the SafeShare Administration interface and
+- the [My Account](/CS1.2/user/managing-your-account) feature.
+
+Visit the [cocoondata-theme-builder page](https://www.npmjs.com/package/cocoondata-theme-builder) (on the npm web site) for more information about obtaining and using the WebApp Theme Builder tool, as well as deploying themes to a Cocoon Data Platform instance.
+
+<Note>
+
+Other customisable aspects of SafeShare, such as the Application Name, as well as the Company Name and Copyright Notice that appear in email notifications, are configurable through the [System details properties](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the **Configuration** [page](/CS1.2/admin-platform/configuring-platform-administration-properties) of [SafeShare Administration](/CS1.2/admin-platform/index). However, the Company Name can be customised for each organisation (through the **Configuration** [page](/CS1.2/admin-org/configuring-organisation-administration-properties) of Organisation Administration).
+
+</Note>
+
+## Themable areas of SafeShare for Web <a id="themable-areas-of-the-web-application" />
+
+The following diagrams indicate the *themable components* of SafeShare for Web's user interface that can be customised using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+**The main SafeShare page**
+
+![Themable areas of the main application page](/images/28e3ee75b03a-themable-areas-of-the-main-application-page.jpg)
+
+<Note>
+
+The `primary-color` is also used for 'waiting' / 'processing' animations, which appear for example when a file's view is being downloaded.
+
+</Note>
+
+**Dialog boxes**
+
+![Themable areas of a dialog box](/images/9ff94f840623-themable-areas-of-a-dialog-box.jpg)
+
+## Themable web-based administration areas
+
+The following diagrams indicate the *themable components* of SafeShare's web-based administration pages that can be customised using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+**The Organisation Administration interface**
+
+For a given organisation, any of its organisation-specific components of the main SafeShare page ([illustrated above](/CS1.2/admin-org/theming-the-applications-web-based-interfaces#themable-areas-of-the-web-application)) that have a specific property value, also affects the equivalent component in this organisation's Organisation Administration interface. The following diagram shows additional components, which do not have an equivalent in the main SafeShare page/interface, but are also customised using the WebApp Theme Builder tool.
+
+![Themable areas of the Organisation Administration interface](/images/567eb40a0d38-themable-areas-of-the-org-admin-interface.jpg)
+## Other themable SafeShare areas <a id="other-themable-application-areas" />
+
+The following diagrams indicate the *themable components* of other areas and aspects of SafeShare (i.e. not covered above) that can be customised using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+<Note>
+
+Only the logos/images and property values (of the `theme.properties` file) located inside the system theme's directory are used for the following areas.
+
+</Note>
+
+**The sign-in page**
+
+![Themable areas of the sign-in page](/images/22f1a50ca1ed-themable-areas-of-the-sign-in-page.jpg)
+
+**Email notifications**
+
+![Themable areas of an email notification](/images/47f395496715-themable-areas-of-an-email-notification.jpg)
+
+<Note>
+
+Email notifications are themed according to the SafeShare 'area' to which the notification's content is related. <br />
+ For example, email notifications about activities conducted through:
+
+- SafeShare Administration, such as the addition of a SafeShare administrator user account, use the system theme.
+- Organisation Administration, such as the removal of a Cocoon Data user account from an organisation, use the organisation's theme. <sup>&#42;</sup>
+- Activities conducted through any SafeShare application, such as sharing an item with another person, use the theme of the recipient's home/default organisation. <sup>&#42;</sup> This principle also applies to a person who is not yet registered on the Cocoon Data Platform (i.e. this person's account is created and added to an organisation as a result of them being shared an item by an existing Cocoon Data user in that organisation).
+
+<sup>&#42;</sup> If an organisation's theme were not defined, then such notifications would instead use the system theme.
+
+</Note>

@@ -1,0 +1,53 @@
+---
+title: "<access-service>/api/v1/dashboard/users"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/users
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-users-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a summary of information about the numbers of all [enabled and disabled](/3.1/admin/administering-users#disabling-or-re-enabling-users) [Covata users](/3.1/admin/administering-users) for each [account type](/3.1/admin/administering-users#account-type) on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-users-detailed-description" />
+
+This API endpoint retrieves a summary of information about the numbers of all [enabled and disabled](/3.1/api/access-service-api-v1-users-userid-enable) Covata users for each account type on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-dashboard-users-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-dashboard-users#access-service-api-v1-dashboard-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-dashboard-users-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalUsers** - .
+- **activeUsers** - .
+- **disabledUsers** - .
+- **breakdownByAccountType** - An array containing information about the association of Covata users with each account type on the Covata Platform. Each element of this array contains information about one of these account types and is represented as an object, containing the following members:
+
+  - **accountType** - .
+  - **totalActiveUsers** - .
+  - **totalUsers** - .
+  - **totalDisabledUsers** - .
+
+  **Example (response from ...):**

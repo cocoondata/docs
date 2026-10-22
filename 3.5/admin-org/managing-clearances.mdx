@@ -1,0 +1,125 @@
+---
+title: "Managing clearances"
+---
+
+The **Clearances** page of Organisation Administration ([below](/3.5/admin-org/managing-clearances#clearances-page)) allows the following within an organisation:
+
+- The [addition of new clearances](/3.5/admin-org/managing-clearances#adding-a-new-clearance).
+- Modifying an existing clearance's [users](/3.5/admin-org/managing-clearances#modifying-users-in-an-existing-clearance) and/or [classifications](/3.5/admin-org/managing-clearances#modifying-classifications-on-an-existing-clearance).
+- Existing clearances to be [edited](/3.5/admin-org/managing-clearances#editing-an-existing-clearance) or [removed](/3.5/admin-org/managing-clearances#removing-an-existing-clearance).
+
+Organisation administrators can define a *clearance*, which represents a group of [Covata users](/3.5/admin-org/administering-users-within-an-organisation) with whom a [file](/3.5/admin-org/administering-files) can be [shared](/3.5/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) based on the [classification](/3.5/admin-org/managing-classifications) applied to the file.
+
+The ability to share a file with users who are members of a clearance is granted through the clearance's association with a [classification](/3.5/admin-org/managing-classifications) (defined in the organisation) which in turn is specified when sharing the file.
+
+If a [Covata user](/3.5/admin-org/administering-users-within-an-organisation):
+
+- Belongs to any clearance associated with a [classification](/3.5/admin-org/managing-classifications), then that Covata user can be shared a file when this classification is specified.
+- Is not associated with a classification (by virtue of their account not being a member of any clearance associated with this classification), then that Covata user cannot be shared a file when this classification is specified.
+
+<Note>
+
+It is possible for a clearance to be associated with multiple classifications.
+
+</Note>
+
+<a id="clearances-page" />
+
+![Clearances page](/images/83a03e6348e4-clearances-page.png)
+
+<Note>
+
+Clearances are not exposed in any way to [Covata users](/3.5/admin-org/administering-users-within-an-organisation) who do not have the [Organisation administrator role](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role).
+
+</Note>
+
+## Adding a new clearance
+
+**To add a new clearance group to your organisation on the Covata Platform:**
+
+1. Ensure you are [signed in](/3.5/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to SafeShare Organisation Administration.
+2. Click the **Clearances** option on the left of the [SafeShare Organisation Administration interface](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Clearances** page.
+3. Click the **Add New** button.
+4. In the **Add new clearance** dialog box, specify the:
+
+   - **Name** - A name that best describes the clearance's members (i.e. Covata users) in a short sentence.
+   - **Description ( *Optional* )** - A longer description to provide more information about the clearance. Be aware that the value of this field is only visible when this clearance is subsequently [edited](/3.5/admin-org/managing-clearances#editing-an-existing-clearance) (in the **Edit clearance** dialog box).
+5. Click **Save** and the new clearance is added and will appear as a new entry on the **Clearances** page. <br />
+   **Notes:**
+
+   - To add one or more [Covata users](/3.5/admin-org/administering-users-within-an-organisation) to this clearance, see [Modifying users in an existing clearance](/3.5/admin-org/managing-clearances#modifying-users-in-an-existing-clearance).
+   - To associate this clearance with one or more [classifications](/3.5/admin-org/managing-classifications), which would then allow these classifications to restrict file sharing to any Covata users who are members of this clearance, see [Modifying classifications on an existing clearance](/3.5/admin-org/managing-clearances#modifying-classifications-on-an-existing-clearance).
+
+## Modifying users in an existing clearance
+
+**To modify the membership of Covata users in an existing clearance:**
+
+1. Ensure you are [signed in](/3.5/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to SafeShare Organisation Administration.
+2. Click the **Clearances** option on the left of the [SafeShare Organisation Administration interface](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Clearances** page.
+3. In the **Members** column, click the numbered link associated with the clearance whose existing [Covata users](/3.5/admin-org/administering-users-within-an-organisation) are to be modified, which opens the 'clearance's members' dialog box. <br />
+   **Note:** Alternatively, select the clearance's check box on the left and then click the **Manage** button with the 'person' icon.
+4. In this dialog box, any Covata users whose email addresses appear in the **Clearance members** section on the right are already members of the clearance:
+
+   | To do the following: | Do this: | Which results in this: |
+   | --- | --- | --- |
+   | Add a user to the clearance | Click the email address of that user in the **Available users** section. | Transfers that user to the **Clearance members** section. |
+   | Remove a user from the clearance | Click the email address of that user in the **Clearance members** section. | Transfers that user to the **Available users** section. |
+   | Find specific users by filtering them (making it easier to add or remove them above) | In either the **Available users** or **Clearance members** sections, begin typing (into its respective **Filter** box) a series of characters contained in the Covata users' email addresses. | The list of users (in their respective section/s) being filtered to those whose email address contains the subset of characters entered into its **Filter** box. |
+   | Add all users to the clearance | Click the  ![Add all button](/images/ba0414469515-add-all.png) <br />  (Add all) button in the **Available users** section. | Transfers all remaining users in this section to **Clearance members**. |
+   | Remove all users from the clearance | Click the  ![Remove all button](/images/ceb2b8442518-remove-all.png) <br />  (Remove all) button in the **Clearance members** section. | Transfers all remaining users in this section to **Available users**. |
+5. Click **Save** and the clearance's membership will be modified accordingly. The number in the **Members** column associated with this clearance is updated to reflect the total number of Covata users that were in **Clearance members** section (just before clicking **Save**). <br />
+   **Note:** To associate this clearance (of one or more Covata users) with one or more [classifications](/3.5/admin-org/managing-classifications) (which would then allow these classifications to restrict file sharing to these Covata users), see [Modifying classifications on an existing clearance](/3.5/admin-org/managing-clearances#modifying-classifications-on-an-existing-clearance).
+
+## Modifying classifications on an existing clearance
+
+**To modify the association of classifications with an existing clearance:**
+
+1. Ensure you are [signed in](/3.5/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to SafeShare Organisation Administration.
+2. Click the **Clearances** option on the left of the [SafeShare Organisation Administration interface](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Clearances** page.
+3. In the **Classifications** column, click the numbered link associated with the clearance whose existing [classifications](/3.5/admin-org/managing-classifications) are to be modified, which opens the 'clearance's classifications' dialog box. <br />
+   **Note:** Alternatively, select the clearance's check box on the left and then click the **Manage** button with the 'labels/tags' icon.
+4. In this dialog box, any classifications which appear in the **Clearance classifications** section on the right are already associated with the clearance:
+
+   | To do the following: | Do this: | Which results in this: |
+   | --- | --- | --- |
+   | Add a classification to the clearance | Click the classification in the **Available classifications** section. | Transfers that classification to the **Clearance classifications** section. |
+   | Remove a classification from the clearance | Click the classification in the **Clearance classifications** section. | Transfers that classification to the **Available classifications** section. |
+   | Find specific classifications by filtering them (making it easier to add or remove them above) | In either the **Available classifications** or **Clearance classifications** sections, begin typing (into its respective **Filter** box) a series of characters contained in the classification's name. | The list of classifications (in their respective section/s) being filtered to those whose name contains the subset of characters entered into its **Filter** box. |
+   | Add all classifications to the clearance | Click the  ![Add all button](/images/ba0414469515-add-all.png) <br />  (Add all) button in the **Available classifications** section. | Transfers all remaining classifications in this section to **Clearance classifications**. |
+   | Remove all classifications from the clearance | Click the  ![Remove all button](/images/ceb2b8442518-remove-all.png) <br />  (Remove all) button in the **Clearance classifications** section. | Transfers all remaining classifications in this section to **Available classifications**. |
+5. Click **Save** and the clearance's classifications will be modified accordingly. The number in the **Permissions** column associated with this clearance is updated to reflect the total number of classifications that were in **Clearance classifications** section (just before clicking **Save**). <br />
+   **Note:** To add one or more [Covata users](/3.5/admin-org/administering-users-within-an-organisation) to this clearance, which would then allow these classifications to restrict file sharing to these Covata users (including any others who are members of this clearance), see [Modifying users in an existing clearance](/3.5/admin-org/managing-clearances#modifying-users-in-an-existing-clearance).
+
+## Editing an existing clearance
+
+Editing an existing clearance allows modification of the clearance's **Name** and **Description**. This functionality can also be used to view a clearance's **Description**.
+
+**To edit an existing clearance in your organisation:**
+
+1. Ensure you are [signed in](/3.5/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to SafeShare Organisation Administration.
+2. Click the **Clearance** option on the left of the [SafeShare Organisation Administration interface](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Clearances** page.
+3. Locate/scroll to the relevant clearance and select its check box on the left.
+4. Click the **Edit** button.
+5. In the **Edit clearance** dialog box, modify the:
+
+   - **Name** - A name that best describes its members (i.e. [Covata users](/3.5/admin-org/administering-users-within-an-organisation)) in a short sentence.
+   - **Description ( *Optional* )** - A longer description to provide more information about the clearance. Be aware that this field is only visible from this dialog box.
+6. Click **Save** and the clearance's **Name** and **Description** are updated accordingly. <br />
+   **Note:** Due to a minor bug that will be fixed in a future product release, it is currently not possible to clear the **Description** field once any text has been added.
+
+## Removing an existing clearance
+
+Removing an existing clearance removes any association between the [Covata users who were members](/3.5/admin-org/managing-clearances#modifying-users-in-an-existing-clearance) of this clearance as well as any [classifications that were associated](/3.5/admin-org/managing-clearances#modifying-classifications-on-an-existing-clearance) with the clearance.
+
+Therefore, if a Covata user was shared a file with a classification that is associated with one or more clearances (of which the user is also a member) and the removal of one of these clearances results in the user:
+
+- Still remaining associated with this classification (through the classification's association with other clearances to which the user is also a member), then the user will still have access to this file.
+- Losing their association with this classification (because the user was not a member of any other clearance that had an association with this classification), then the user loses access to this file.
+
+**To remove an existing clearance from your organisation:**
+
+1. Ensure you are [signed in](/3.5/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to SafeShare Organisation Administration.
+2. Click the **Clearance** option on the left of the [SafeShare Organisation Administration interface](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Clearances** page.
+3. Locate/scroll to the relevant clearance and select its check box on the left.
+4. Click the **Remove** button.
+5. On the **Remove clearance** message box, click **Yes** to proceed with the clearance's removal.

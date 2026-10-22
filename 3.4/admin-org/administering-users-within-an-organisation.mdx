@@ -1,0 +1,452 @@
+---
+title: "Administering users within an organization"
+---
+
+All features of Covata technologies are accessed through a *Covata user* account. The core of these features include the ability to:
+
+- Create encrypted files (also known as file objects or Secure Objects <sup>(1)</sup> ) within an organization,
+- Access and decrypt an encrypted file's data and
+- Utilize Covata Safe Share applications, as well as
+- Administer the Covata Platform (through [Safe Share Organization Administration](/3.4/admin-org/index#organisation-administration), as well as [Safe Share Administration](/3.4/admin-platform/index)).
+
+A Covata user:
+
+- Has permission to access these features based on their [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles).
+- Is represented by an account which can be [added to](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account), edited <sup>(2)</sup> within, or [removed from](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) an organization (and [re-added again](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account)) by an Organization administrator through the **Users** page of Safe Share Organization Administration. <br />
+  **Notes:**
+
+  - Users may also be added and updated through an LDAP connection (on its server/user directory). However, the [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) of an [LDAP user account](/3.4/admin-org/administering-users-within-an-organisation#account-type) within an organization are managed through Safe Share Organization Administration.
+  - Both LDAP connections and the [Safe Share administrator role](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role) on Covata user accounts can only be configured/managed through Safe Share Administration. For more information, see to the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+  - <sup>(2)</sup> A Covata user account's editable fields fit into two categories:
+
+    - *non-role-related* fields - edited by the user themselves through, for example, [Safe Share for Web](/3.4/user/managing-your-account#updating-your-account-details) or other Safe Share products with user account editing features and
+    - *role-related* fields (within an organization) - [editable](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) by any user with the [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) for that organization.
+
+<sup>(1)</sup> A file object / Secure Object is defined by the following:
+
+- Covata-encrypted data that has been registered on the Covata Platform. <br />
+  **Note:** Covata-encrypted data is data from a file or stream, which has then been encrypted either:
+
+  - Using Covata technologies (i.e. with a Covata Safe Share product or another client application that utilizes the Covata Platform's API for encryption via the Content Service), or
+  - According to Covata's encryption requirements (i.e. a client application with its own encryption implementation). For more information about Covata's encryption requirements, see the [Requirements for encrypting data locally](/3.4/api/working-with-files-and-folders-fundamentals#requirements-for-encrypting-data-locally) section on the [Working with files and folders (fundamentals)](/3.4/api/working-with-files-and-folders-fundamentals) page of the [Covata API documentation](/3.4/api/index).
+- The properties associated with this encrypted data. Some of these properties can be determined by the creator/owner of the file.
+
+![Users page](/images/1c08b041948d-organisation-administration-users-page.png)
+## An organization user's fields <a id="an-organisation-users-fields" />
+
+Each Covata user's account which is a member of your organization is defined by a set of fields described in the table below, of which only a subset (**Email**, **Role**, **Is Organization Admin?** and **Plan**) requires configuration when an Organization administrator (of your organization):
+
+- [Adds](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) a new user to your organization (thereby making this user and their account a member of the organization) or
+- [Edits](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) any existing user account within your organization (with the exception of their **Email** field).
+
+These subset of fields constitute the 'role-related' fields of a user's account. With the exception of users with the [Ad hoc role](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role), any Covata user can configure the other (i.e. non-role-related) fields (also described in the table below) for their own account when they edit their account through [Safe Share Organization Administration](/3.4/admin-org/administering-users-within-an-organisation#editing-your-organisation-administrator-account), [Safe Share for Web](/3.4/user/managing-your-account#updating-your-account-details), as well as other Safe Share products with user account editing features.
+
+Unless stated in the table below, these fields and their values are visible on the **Users** page of Safe Share Organization Administration.
+
+| Field | Description | Required? |
+| --- | --- | --- |
+| Email | <a id="organisation-user-email" />The email address that forms part of a user's credentials, which the user requires to authenticate to the Covata Platform. This email address:  <br />•  Defines the user's identity and hence, must be unique amongst all user accounts on the Covata Platform. <br />•  Is the email address that the Covata Platform sends notifications to. <br />•  Cannot be edited once the account has been created.  | Yes |
+| First Name <sup>(3)</sup> | <a id="organisation-user-first-name" />A user's first name (e.g. a given name or nickname). This field is only editable through the user's own **My Account** feature. | No |
+| Last Name <sup>(3)</sup> | A user's last name (e.g. a surname or family name). This field is only editable through the user's own **My Account** feature. | No |
+| Other Name <sup>(3)</sup> | A user's middle name (e.g. one or more other given names). This field is only visible and editable through the user's own **My Account** feature. | No |
+| Mobile Number <sup>(3)</sup> | The mobile number of a user. This field is only visible and editable through the user's own **My Account** feature. <br />**Note:** This number must include the country calling code and plus (+) sign prefix. <br />  (e.g. +1 234 567 8910 for a US-based number.)  | No |
+| Default Language <sup>(3)</sup> | The language preference/settings for a user. Any changes to this field apply immediately to the interfaces for Safe Share Organization Administration, [Safe Share for Web](/3.4/user/index) and as well as Safe Share Administration (if the user has access to these features). This field is only visible and editable through the user's own **My Account** feature. <br />**Note:** This setting overrides the **System Default** language (defined through the **Internationalization** page, which is configured through Safe Share Administration).  | No |
+| Account Type | <a id="account-type" />The user's type of account, which reflects a user account's origin. The Covata Platform defines the following account types:  <br />•  **Local:**  <br />•  The user's account was created when an Organization administrator [added the user directly](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) through Safe Share Organization Administration. <br />•  An existing user whose account type was External (below) changes to Local when the user's account (which had the [Ad hoc role](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role)) was upgraded to the [Collaborator role](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) *and then* an Organization administrator changed this user account's role to [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role). <br />•  **External** - The user account was created implicitly by the Covata Platform when a Covata user with the Originator role [shared content](/3.4/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) with a person who did not have a registered Covata user account at the time. These types of user accounts (with either the Ad hoc role or the Collaborator role if the user upgraded their account from Ad hoc) are considered to have been 'external' in origin (e.g. outside any company or domain). <br />•  **LDAP** - The user account was created from an LDAP server/user directory through an LDAP connection. These types of user accounts are created and updated on the Covata Platform during synchronization events with their respective LDAP servers. For more information about configuring LDAP connections, see [Configuring LDAP](/3.4/admin-platform/configuring-ldap) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index). <br />**Note:** The value of this field is automatically determined by the Covata Platform when the user account is created and its value is not editable. | Not applicable |
+| Role | <a id="role" />The roles granted to a user within an organization, each of which define the core features of Covata technologies (described [above](/3.4/admin-org/administering-users-within-an-organisation)) that this user can access. See [An organization user's roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) for more information. <br />  The [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) is granted by selecting the **Is Organization Admin?** [check box](/3.4/admin-org/administering-users-within-an-organisation#is-organisation-admin) below. <br /> **Notes:**  <br />•  This **Role** field is not mandatory when [adding](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) or [editing](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) a Covata user with the [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) only. <br />•  Other than the Organization administrator role, a user's other roles within an organization can only be upgraded - for instance, the [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) role can only be upgraded to either the [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) or [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) role, and the Collaborator role to the Originator role. <br />•  This field's value can be empty (i.e. 'No Role') because a user account may only have the Organization administrator role specified. However, once this **Role** field's value has been specified, it cannot be cleared.  | Yes <br />  (if **Is Organization Admin?** below is not selected) |
+| Plan | <a id="plan" />The plan (defining a storage quota) assigned to a user, which limits the amount of storage space the user can access when uploading data to the Covata Platform's Content Service through a Covata Safe Share product or a client application that utilizes the Covata Platform's API. <br /> **Notes:**  <br />•  This field is only accessible if the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role) is specified ([below](/3.4/admin-org/administering-users-within-an-organisation#role)). <br />•  At least one plan must be added to the organization (i.e. the initial **default** plan) before the Originator role can be applied to any user added to the organization. See [Managing users' storage quotas through plans](/3.4/admin-org/managing-users-storage-quotas-through-plans) for more information. <br />•  When a Covata user with the Originator role is added to an organization, or an existing user's role is upgraded to Originator, the **default** plan is automatically selected (or this plan is set on users' accounts if the accounts were added either [in bulk from a CSV file](/3.4/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) or automatically from an LDAP server/user directory). <br />•  If an existing user's storage space already exceeds the quota defined by a plan, which is then applied to the user's account, then the user will no longer be able to upload any further data to storage until either:  <br />•  The user removes a sufficient amount of their own content to lower their utilized storage space (below their plan's quota). <br />•  A plan defining a larger quota than their currently utilized storage space is applied to the user's account.  | Yes <br />  (for a Covata user with the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role); otherwise, not applicable) |
+| Usage | The amount of storage space that the user's account currently consumes (in your organization). | Not applicable |
+| Org Admin /<br /> Is Organization Admin? | <a id="is-organisation-admin" />On the **Users** page, this field (labeled **Org Admin**) indicates 'Yes' if a user has the [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - otherwise, 'No'. <br />  When [adding](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) a user account to an organization or [editing](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) the account's role-related fields, selecting the check box of this field (labeled **Is Organization Admin?** on the **Add New/Edit User** dialog box) grants the user within an organization the Organization administrator role. <br />**Note:** This option is not available when editing the accounts of the currently logged in user, or users who have an **External** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) or the [Ad hoc role](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role).  | No |
+| Locked | This field indicates 'Yes' if a Covata user account has been locked as a result of the user mistyping their password more than the maximum number of times configured by a Safe Share administrator (of the Covata Platform instance). The user themselves will need to unlock this account by following the instructions in their '*account lockout*' notification (or by resetting their password via any of the options on the Covata Sign-in page). <br />  If a user account is not locked, this field indicates nothing. The values of this non-editable field are only visible on the **Users** page. | Not applicable |
+| 2FA Enabled <sup>(3)</sup> and<br /> Re-seed | The **2FA Enabled** field indicates 'Yes' if a Covata user account has two-factor authentication (2FA) [enabled](/3.4/admin-org/administering-users-within-an-organisation#enabling-or-disabling-2fa-on-organisation-user-accounts). (This field is editable through the user's own **My Account** feature.) <br />  If this field indicates 'Yes', then the **Re-seed** button becomes available in the **Re-seed** column/field. <br />  If a user account does not have 2FA enabled, this field indicates **No**. The values of this non-editable field (for user accounts other than your own) is only visible on the **Users** page. | Not applicable |
+
+<sup>(3)</sup> While an Organization administrator [can modify these fields' values for their Covata user account](/3.4/admin-org/administering-users-within-an-organisation#editing-your-organisation-administrator-account) via the **My Account** feature through Organization Administration, the user can also modify these values via equivalent features in [Safe Share for Web](/3.4/user/managing-your-account#updating-your-account-details), other Safe Share products with user account editing features, as well as Safe Share Administration (if the user has access to these features).
+
+<Note>
+
+Other fields are associated with a Covata user's account. However, these fields are used internally by the Covata Platform and are therefore only exposed to a limited extent through user interfaces (or not exposed at all).
+
+</Note>
+
+## An organization user's roles <a id="an-organisation-users-roles" />
+
+Each Covata user must be assigned a role, which grants the user access to different sets of features available through Covata technologies. A Covata user's roles within an organization can be modified by [editing](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) their user account.
+
+<Note>
+
+Users can have more than one role. Regardless of organization:
+
+- A user with the [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) (and/or Safe Share administrator) role can also be granted either the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) or [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) role.
+- Likewise, a user with either the Originator or Collaborator role can also be granted the Organization administrator role and/or the Safe Share administrator role (of their Covata Platform instance).
+
+</Note>
+
+| Role | Description |
+| --- | --- |
+| Originator | <a id="originator-role" />A Covata user with the Originator role in a given organization can use Covata technologies to do the following (within the scope of their organization):  <br />•  Create *their own* encrypted files and folders (collectively known as 'items') utilizing:  <br />•  Any Covata Safe Share application, or <br />•  Another client application that interacts with the Covata Platform's API. <br />•  Securely store encrypted files in storage managed by the Covata Platform's Content Service. The amount of storage space available to the user depends on their [plan](/3.4/admin-org/administering-users-within-an-organisation#plan). Since storage space is associated with a Covata user (who has the Originator role), then any encrypted files stored within this space become *owned* by this user. <br /> **Note:** Depending on the [formats of these encrypted files](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer), read-only views may also be generated for these files (which consumes a comparatively small amount of storage space) for presentation in Safe Share's [content viewer](/3.4/user/accessing-secure-content#content-viewer). <br />•  Share their secured items with other Covata users who have the Originator, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) or [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) role, including other people who have not yet been registered as a Covata user. Also determine which of these Covata users and other people have permissions to *View*, *Download*, *Upload* (for folders only), *Modify* or *Manage* these items that have been shared with them. <br /> **Notes:**  <br />•  Covata users who have been shared an item are known as *collaborators* on the item. This term should not be confused with Covata users who have the *Collaborator role* (below). <br />•  These processes are conducted through the **(Safe) Share** dialog box of any Covata Safe Share application, or when setting collaborators on a file or folder through a client application utilizing the Covata Platform's API. <br />•  Specify other access controls on their files, such as:  <br />•  The date and time from which collaborators can begin accessing a file's content as well as the date and time when this access ceases. <br />•  A label that defines which groups of Covata users a file can be shared with. <br />These processes are conducted through either the **(Safe) Share** dialog box of any Covata Safe Share application, or when setting collaborators on a file object through a client application utilizing the Covata Platform's API. <br />A Covata user's account can be granted this role by an [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) when this administrator either [adds the user's account](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) to their organization or [edits this account](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) (which could also be their own) within their organization <sup>(4)</sup> . <br />  Users with the Originator role can also use Covata Safe Share applications (or applications that interact with the Covata Platform's API) to:  <br />•  Manage their list of contacts (e.g. Covata users with whom they frequently share secured items), <br />•  View/access/update their account details, <br />•  Manage their email notifications and <br />•  Revoke the right that client applications were initially granted (by the user themselves) to access the Covata Platform's resources through their user account. <br />**Notes:**  <br />•  A Covata user with the Originator role *has access to all features of Covata technologies which are available to a user with the Collaborator role*. <br />•  <sup>(4)</sup> All Covata users which have been added through a connection to an LDAP server automatically have the Originator role. For more information about configuring LDAP connections, see [Configuring LDAP](/3.4/admin-platform/configuring-ldap) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).  |
+| Collaborator | <a id="collaborator-role" />A Covata user with the Collaborator role in a given organization can use Covata technologies to do the following (within the scope of their organization):  <br />•  As a *collaborator* on a file or folder owned by another Covata user (see [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role) description above for more information), access and decrypt the data of an encrypted file (or files within the folder), utilizing:  <br />•  Any Covata Safe Share application, or <br />•  Another client application that interacts with the Covata Platform's API. <br />•  As a *collaborator* with *Upload*, *Modify* or *Manage* permissions on a folder owned by another Covata user, create encrypted files as well as subfolders inside this other user's folder, utilizing:  <br />•  Any Covata Safe Share application, or <br />•  Another client application that interacts with the Covata Platform's API. <br />•  As a *collaborator* with *Manage* permissions on an item owned by another Covata user, share this item (and specify other optional access controls on the item), similar to users with the Originator role on their own items ([above](/3.4/admin-org/administering-users-within-an-organisation#originator-role)), utilizing:  <br />•  Any Covata Safe Share application, or <br />•  Another client application that interacts with the Covata Platform's API. <br />A Covata user's account can be granted this role by an [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) when this administrator either [adds the user's account](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) to their organization or [edits this account](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) (which could also be their own) within their organization <sup>(5)</sup> . <br />  Users with the Collaborator role can also use Covata Safe Share applications (or applications that interact with the Covata Platform's API) to:  <br />•  Manage their list of contacts (e.g. Covata users with whom they frequently share secured items), <br />•  View/access/update their account details, <br />•  Manage their email notifications and <br />•  Revoke the right that client applications were initially granted (by the user themselves) to access the Covata Platform's resources through their user account. <br />**Notes:**  <br />•  If a Covata user (who originally had the [Ad hoc role](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role)) upgraded their account to a full account (which changes their account's role to Collaborator), their [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) still remains **External**. However, once an Organization administrator grants this user's account the Originator role, then the Account Type switches to **Local**. <br />•  <sup>(5)</sup> A Covata user account with the Collaborator role is added to an organization automatically if another user with the Originator role in this organization shares an item with this added user through either a Covata Safe Share application or another client application that interacts with the Covata Platform's API. In such instances, this added user's account would have already been registered on the Covata Platform and if applicable, upgraded from the Ad hoc role. This process is similar to how users with the Ad hoc role are added to an organization.  |
+| Ad hoc | <a id="adhoc-role" />A Covata user with the Ad hoc role (also simply known as an 'Ad hoc user') is an account which is automatically created by the Covata Platform and added to an organization when:  <br />•  A user with the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role) in that organization shares their file or folder with someone (via their email address), through either a Covata Safe Share application or another client application that interacts with the Covata Platform's API <br /> *and* <br />•  This email address does not match that of any existing Covata user account registered on the Covata Platform (e.g. as a member of another organization). <br />Users with this role are typically people outside a company or domain, who (once their account is added) can use Covata technologies to perform the same activities on items as users with the [Collaborator role](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) (mentioned in the first 3 main points of this role description above), within the scope of this organization. <br />  Once an Ad hoc user account is added to an organization, this user's account is subsequently utilized whenever they are shared items by another user (with the Originator role) in that organization. <br />  Ad hoc user accounts do not have a dedicated password. Whenever an Ad hoc user is shared an item by another user, an email notification is sent to this Ad hoc user's email address. The notification instructs the user on how to obtain a one-time access link/password, which allows the user to automatically sign in to [Safe Share for Web](/3.4/user/index) to access items that have been shared with them. <br /> **Notes:**  <br />•  A Covata user with this role can *upgrade their account* to a full account once they are signed in to Safe Share for Web with a one-time access link/password. This requires the user to set their password, which results in the user's role being changed to [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role). Once their account has been upgraded, the user can then utilize Covata Safe Share applications (or applications that interact with the Covata Platform's API) to:  <br />•  Manage their list of contacts (e.g. Covata users with whom they frequently share secured items), <br />•  View/access/update their account details, <br />•  Manage their email notifications and <br />•  Revoke the right that client applications were initially granted (by the user themselves) to access the Covata Platform's resources through their user account. <br />•  The Ad hoc role cannot be specified when an [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) [adds a user](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) to their organization. However, if an Organization administrator [removes a user](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) with the Ad hoc role from their organization (before the user has upgraded their account), then this Covata user's account is re-added to the organization (with the Ad hoc role) automatically if another user with the Originator role in this organization shares an item with this Ad hoc user. <br />•  Ad hoc user accounts will not be created for an organization if the [Restrict sharing to existing members of this organization only](/3.4/admin-org/configuring-organisation-administration-properties#restrict-sharing-to-existing-members-of-this-organization-only) [property](/3.4/admin-org/configuring-organisation-administration-properties) is set to `true` for this organization.  |
+| Organization administrator | <a id="organisation-administrator-role" />A Covata user with the Organization administrator role (also simply known as an 'Organization administrator') can access all administration features of their organization on the Covata Platform made available through the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface). <br /> **Notes:**  <br />•  Other than the ability to administer their organization's access to the the Covata Platform's resources, a Covata user whose account *only* has the Organization administrator role does not have access to features of Covata technologies available to users with the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) or [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role)/[Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) roles. Organization administrators who are likely to use Covata technologies within their organization for purposes other than to administer it should grant themselves the Originator or Collaborator role as required. <br />•  Only Organization administrators within an organization can add the Organization administrator role for their organization to any other Covata user. <br />•  A Covata user whose account *only* has the Organization administrator role for an organization is automatically granted the Collaborator role for this organization if another user with the Originator role in this organization shares an item with this Organization administrator, through either a Covata Safe Share application or another client application that interacts with the Covata Platform's API.  |
+
+If you would like users in your organization to utilize client applications (other than Covata Safe Share applications) that interact with your organization through the Covata Platform's API, request that a Safe Share administrator of your Covata Platform instance configure these client applications for you (since only Safe Share administrators can perform these configurations). For more information about configuring client applications, see [Configuring client applications](/3.4/admin-platform/configuring-client-applications) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+## An organization user's activities <a id="an-organisation-users-activities" />
+
+Upon selecting a Covata user account on the **Users** page, a history of activities performed by this user on their own account (or by an Organization administrator, including a Safe Share administrator if applicable, on the user's account) is shown in reverse chronological order in the **History** panel on the right of the page.
+
+If the administrator is not a member of the organization, then 'An Administrator' is shown instead of the Covata user's name.
+
+The **History** panel on the right can be collapsed and expanded by clicking the respective **&gt;** / **&lt;** icon at the top of this panel. The types of activities recorded on the user's account include the user's own changes to their account's:
+
+- details,
+- password,
+- two-factor authentication settings, or
+- other settings.
+
+Also recorded are changes to the user's account settings by an Organization administrator, as well as the creation of an account (or its addition to an organization) by an administrator. Be aware that sign-in and sign-out activities are not recorded by this feature.
+
+## Adding an organization user account <a id="adding-an-organisation-user-account" />
+
+This procedure describes how to add a Covata user account to your organization on the Covata Platform. A Covata user whose account has been added to an organization is a *member* of that organization.
+
+<Note>
+
+Covata user accounts can also be added to an organization:
+
+- [in bulk](/3.4/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) (in a single action) from a CSV file, or
+- from an LDAP server/user directory. For more information about adding LDAP users, see [Configuring LDAP](/3.4/admin-platform/configuring-ldap) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>
+
+**To add a user to your organization on the Covata Platform:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. Click the **Add New** button.
+4. In the **Add New User** dialog box, complete the required user's fields ([described in detail above](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields)). <br />
+   **Tip:** See [An organization user's roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) for more information about the role(s) to specify for this user.
+5. Click **Save** and the Covata user will appear as a new entry on the **Users** page. <br />
+   **Notes:**
+
+   - If the user's email address has not yet been registered on the Covata Platform, a *new* Covata user account is automatically created for them. The user's:
+
+     - Covata user account will have the **Local** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type), which is indicated on this **Users** page of Safe Share Organization Administration and
+     - email address is sent an '*account created*' notification, with instructions to the user on how to sign in to [Safe Share for Web](/3.4/user/index) (applicable to most users added to your organization whose accounts are created in this manner). The initial sign-in process usually requires the Covata user to reset their password immediately after signing in.
+   - If this user already has a user account on the Covata Platform, their email address is sent an '*account updated*' notification, informing the user that their Covata user account has been added as a member of your organization. The user can then access [Safe Share for Web](/3.4/user/index) (as well as other Safe Share products) for your organization.
+   - If the account added has the [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) only, then the [Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) is displayed as soon as the user of this account signs in.
+   - If the account has any combination of the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) or Safe Share administrator role *in addition to* the Organization administrator role, then the user should refer to [Signing in to Organization Administration](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) for more information about accessing the Organization Administration interface.
+
+## Adding organization user accounts in bulk (from CSV) <a id="adding-organisation-user-accounts-in-bulk-from-csv" />
+
+Covata user accounts can be added to your organization in bulk (in a single action) by importing their details from a [CSV file](http://tools.ietf.org/html/rfc4180).
+
+**CSV file preparation and requirements**
+
+- The Covata Platform's CSV user import feature assumes that each line of the CSV file (except the first mandatory 'header' line) represents field data for a specific user. (The first line will not be imported as a user.)
+- The order of field data for each user in the CSV file (as should be defined by the header line) must be: <br />
+  `Email, Role` <br />
+  **Notes:**
+
+  - White space around each separating comma is not required.
+  - You can actually specify any field names/labels for the header line of your CSV file. However, the order of field data for each user (in subsequent lines of your CSV file) must comply with the order above (i.e. email address followed by role).
+- For a user to be successfully imported from a CSV file, the following conditions must be met:
+
+  1. Values for both of these [fields](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields) are mandatory.
+  2. The `Email` field's value must comply with a valid email format.
+  3. The `Role` field value can only be exactly `Originator` or `Collaborator` (i.e. an initial capital letter followed by lower-case letters). It is not possible to import Covata users with the [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role), [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) or Safe Share administrator roles.
+  4. If a user's email address appears more than once in the CSV file and the conditions above for each of these entries are still met, then only user data from the first of these multiple entries is imported (and the remainder are reported as duplicates).
+
+  If the CSV user import feature encounters a validation problem when parsing a line (due to any of the conditions listed above failing), then that user is not imported. Like duplicate entries, each user for which a validation problem occurred is also reported.
+
+**To add users to your organization in bulk from a CSV file:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. Click the
+   ![Import from CSV button](/images/a0ce42d5abdc-import-from-csv-button.png)
+
+    (Import from CSV) button.
+4. In the **Import from CSV** dialog box, click the **Choose a file** button.
+5. Navigate to and select your CSV file containing the users to be imported to the Covata Platform. <br />
+    The CSV import feature proceeds to import your users. Upon completion, the number of successfully imported Covata users are reported, along with each unique invalid data value (if any were encountered).
+6. Click **Close** to close the **Import from CSV** dialog box. Users imported with the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role) are automatically assigned the **default** [plan](/3.4/admin-org/administering-users-within-an-organisation#plan). <br />
+   **Notes:**
+
+   - If any of these users' email addresses have not yet been registered on the Covata Platform, a *new* Covata user account is automatically created for each of them. For each of these users:
+
+     - their Covata user account will have the **Local** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type), which is indicated on this **Users** page of Safe Share Organization Administration and
+     - their email address is sent an '*account created*' notification, with instructions to the user on how to sign in to [Safe Share for Web](/3.4/user/index). The initial sign-in process usually requires the Covata user to reset their password immediately after signing in.
+   - For any of these users who already have a user account on the Covata Platform, their email address is sent an '*account updated*' notification, informing the user that their Covata user account has been added as a member of your organization. The user can then access [Safe Share for Web](/3.4/user/index) (as well as other Safe Share products) for your organization.
+
+<Note>
+
+- The number of users that can be imported from a single CSV file is restricted by the response timeout of the Covata Platform's load balancer. We found that a response timeout of 60 seconds on our load balancers allowed the import of up to 1000 users from a CSV file. If you have your own on-site deployment of the Covata Platform, you may wish to tweak the response timeout of your load balancers to allow the import of more users from a CSV file.
+- When a new [Local](/3.4/admin-org/administering-users-within-an-organisation#account-type) user account is created, the Covata Platform automatically generates a password which is emailed to that user. To maximize security, the password (once created), is hashed 64,000 times using the PBKDF2 algorithm before being stored by the Covata Platform. Since this process has an overhead of approximately 300 milliseconds and the number of users imported by the CSV user import feature could be extensive, then the auto-generated passwords of CSV-imported Covata users are only hashed 100 times using PBKDF2 (before being stored by the Covata Platform). Hence, if you are concerned about the security of these stored passwords, you may wish to request that a Safe Share administrator for your Covata Platform instance reduces the *Temporary password expiry time in hours* configuration option through Safe Share Administration. For more information, refer to [Configuring Safe Share Administration properties](/3.4/admin-platform/configuring-platform-administration-properties) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>
+
+## Finding user accounts within your organization <a id="finding-user-accounts-within-your-organisation" />
+
+As more Covata users are added to your organization, it can become difficult to locate specific users through the **Users** page of Safe Share Organization Administration. The **Users** page therefore offers features to help you locate specific user accounts within your organization more rapidly.
+
+**To find specific user accounts within your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. Use either of the following features to find a specific user account (or subset of these accounts):
+
+   - *Filter user accounts* - In the **Search By** box (right of the **Users** page), begin typing a series of characters contained in any of the users' **Email**, **First Name**, **Last Name**, **Role** or (Organization) **Admin** [fields](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields), followed by the 'Enter/Return' key. This filters the list of users within your organization to those whose Email, First Name, Last Name, Role or (Organization) Admin (i.e. 'yes' or 'no') contains the subset of characters entered into the **Search By** box. <br />
+      By default, the **Email**, **First Name**, **Last Name**, **Role** or (Organization) **Admin** fields are used for filtering (i.e. **All**), although filtering can be restricted to just one of these fields using the adjacent drop-down.
+   - *Navigate to specific user accounts* - If available, use the page navigation buttons (lower-right of the **Users** page).
+
+<Tip>
+
+You can also sort user accounts on the **Users** page by clicking the linked name (in the column header) of the field by which you would like to sort your users:
+
+- Clicking a linked field name multiple times toggles between sorting the users (according to that field) in ascending and descending order.
+- To revert back to the natural ordering of users in the list, simply refresh the page.
+
+</Tip>
+
+## Editing an organization user account <a id="editing-an-organisation-user-account" />
+
+This procedure describes how to edit the role-related [fields](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields) (i.e. **Role**, **Is Organization Admin?** and **Plan**) of *any* existing Covata user account within your organization.
+
+<Note>
+
+To edit the non-role-related fields of your own Covata user account, see [Editing your Organization administrator account](/3.4/admin-org/administering-users-within-an-organisation#editing-your-organisation-administrator-account) below.
+
+</Note>
+
+**To edit the role-related fields of a user account in your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. [Find](/3.4/admin-org/administering-users-within-an-organisation#finding-user-accounts-within-your-organisation) the user account whose role-related fields are to be edited and select their check box on the left.
+4. Click the
+   ![Edit User button](/images/ef8938545276-edit-user-button.png)
+
+    (Edit User) button which appears at the top.
+5. In the **Edit User** dialog box, update the user's relevant role-related fields ([described in detail above](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields)).
+6. Click **Save** and the user's fields will be updated.
+
+<Note>
+
+The **Email** address of all users on the Covata Platform is unique and since this field may be used for [auditing](/3.4/admin-org/generating-reports) purposes, no Covata user account's email address field can be edited. However:
+
+- To update the email address of a Covata user with the **Local** or **External** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type):
+
+  1. [Add a new user account](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (with the user's new email address but the same role-related field values) to your organization.
+  2. [Remove](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) the user's old account. <br />
+     **Note:** If this user had the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role), then while removing the user's old account, choose the option to transfer ownership of this old account's items (i.e. all file objects and folders, including their content) to the new user account created in the previous step.
+- To update the email address of a Covata user with the **LDAP** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type):
+
+  1. Request that your LDAP server/user directory administrator update and provide you with the user's new email address.
+  2. [Add this user's account](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (with this new email address but the same role-related field values) to your organization.
+  3. [Remove](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) the user's old account. <br />
+     **Note:** If this user had the Originator role, then while removing the user's old account, choose the option to transfer ownership of this old account's items (i.e. all file objects and folders, including their content) to the new user account created by the LDAP server/user directory administrator and you then added to your organization, in the previous steps.
+
+</Note>
+
+## Removing a user account from your organization <a id="removing-a-user-account-from-your-organisation" />
+
+Removing a Covata user account removes the user from your organization, with the option to either:
+
+- transfer all [file objects](/3.4/admin-org/administering-files) and folders (including their content) currently owned by this user to that of another Covata user, or
+- permanently delete all of this user's content.
+
+<Note>
+
+- The Covata Platform's [auditing reports](/3.4/admin-org/generating-reports) and log files still retain a record of activities conducted by Covata users whose accounts have been removed from an organization.
+- An Organization administrator can remove any user account from their organization *except* the user account with which they are currently signed in to Safe Share Organization Administration.
+- Removing a Covata user account from your organization (through Safe Share Organization Administration) *does not delete* this account from the Covata Platform. If a Covata user (previously removed from your organization) is subsequently [added to your organization](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) again or added to another organization, then the same user account is re-utilized. Any fields that the user had previously edited/customized (i.e. through [Organization Administration](/3.4/admin-org/administering-users-within-an-organisation#editing-your-organisation-administrator-account), Safe Share Administration, [Safe Share for Web](/3.4/user/managing-your-account#updating-your-account-details), as well as other Safe Share products with user account editing features) are retained.
+
+</Note>
+
+**To remove a Covata user account from your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. [Find](/3.4/admin-org/administering-users-within-an-organisation#finding-user-accounts-within-your-organisation) the user whose account is to be removed from your organization and select their check box on the left.
+4. Click the
+   ![Remove User button](/images/a90a4ab88674-remove-user-button.png)
+
+    (Remove User) button to open the **Remove User...** dialog box. <br />
+   **Note:** If this Covata user has the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role) and has one or more items (i.e. files and/or folders), then the **Remove User...** dialog box indicates the number of items this user owns and requests whether or not you would like to transfer these items to another user's account (which also with the Originator role).
+
+   - If you wish transfer these items to another user's account:
+
+     1. Select the **Transfer all content to another Originator** check box.
+     2. Select the user (i.e. their email address from the list) to transfer the items to:
+
+        - Only users with the Originator role are listed.
+        - This list can be filtered typing a series of characters contained in the users' email addresses.
+   - If you do not wish to transfer these items and would prefer them to be permanently deleted, then leave the **Transfer all content to another Originator** check box cleared.
+5. After confirming your decision to either transfer or permanently delete the user's items, click **Remove**.
+
+   - If you chose to transfer these items to another user's account, then:
+
+     - the user's account is removed from your organization and
+     - the items that the removed user owned are transferred to a folder at the root level of the recipient user's storage area. The name of this folder is the removed user's email address along with the date the transfer occurred.
+   - If you chose not to transfer these items, then:
+
+     - the user's account is removed from your organization and
+     - the encrypted files and folders that belonged to this user are permanently deleted.
+
+<Note>
+
+If a Covata user account of the **LDAP** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) is removed from your organization (using this procedure [above](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation)), then the user's account is removed from your organization although the account is not disabled on the LDAP server/user directory itself. When the Covata Platform subsequently synchronizes with the LDAP server, the account will not reappear within your organization (amongst the list of current Covata user members) unless an Organization administrator manually [adds this user](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) to your organization again.
+
+</Note>
+
+## Editing your Organization administrator account <a id="editing-your-organisation-administrator-account" />
+
+This procedure describes how to edit the non-role-related [fields](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields) of your (Organization administrator) user account on the Covata Platform.
+
+<Note>
+
+- To edit the role-related fields (i.e. **Role**, **Is Organization Admin?** and **Plan**) of any Covata user account within your organization (including your own), see [Editing an organization user account](/3.4/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) above.
+- The non-role-related fields of [LDAP user accounts](/3.4/admin-org/administering-users-within-an-organisation#account-type) can only be edited through these accounts' respective LDAP server/user directory. These user accounts' fields are updated on the Covata Platform during synchronization events with the LDAP server/s. For more information about adding LDAP users, see [Configuring LDAP](/3.4/admin-platform/configuring-ldap) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>
+
+**To edit the non-role-related fields of your Organization administrator account:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
+3. In the **Account Details** section of the subsequent page, update any of your user account's fields ([described in detail above](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-fields)). <br />
+   **Note:** The **Email** addresses of all Covata user accounts on the Covata Platform are unique and since this field may be used for [auditing](/3.4/admin-org/generating-reports) purposes, no Covata user account's email address field can be edited. However, to update the email address of your user account and/or those of other users within your organization, then for each of these users:
+
+   1. [Add a new Covata user account](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (with their new email address but the same role-related field values) to your organization. For each account whose [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) is **LDAP**, obtain the new email address from your LDAP server/user directory administrator in order to add their account (with this email address) to your organization.
+   2. [Remove](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) the user's old Covata user account. For each Covata user account (with the [Originator role](/3.4/admin-org/administering-users-within-an-organisation#originator-role)), transfer the user's content from their old account to their new user account.
+4. Click **Save** and your user account's fields will be updated. <br />
+   **Notes:** If you cannot edit your user account's fields, then your [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) is likely to be **LDAP**. The fields of LDAP user accounts are edited through their respective LDAP servers' user directories and are updated on the Covata Platform during synchronization events with these user directories.
+
+## Changing your Organization administrator account password <a id="changing-your-organisation-administrator-account-password" />
+
+Only a Covata user with the **Local** [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) who has signed in to either [Safe Share for Web](/3.4/user/index) or Safe Share Organization Administration can change their own password.
+
+<Note>
+
+The authentication of a Covata user on the Covata Platform whose [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) is **LDAP** is delegated to its respective LDAP server. If you have such a Covata user account and wish to change its password, you will need to contact your LDAP administrator for details on how to do this (e.g. through the user account on your LDAP server/user directory). For more information about LDAP user accounts, see [Configuring LDAP](/3.4/admin-platform/configuring-ldap) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>
+
+**To change your Organization administrator account's password:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
+3. In the **Security** section of the subsequent page, click the **Change password** button.
+4. On the **Set your password...** page, specify your current password and then your new password twice (i.e. once more to verify it).
+5. Click the **Change** button and your Covata user account's password is now changed.
+
+## Terminating your Organization administrator account's sessions <a id="terminating-your-organisation-administrator-accounts-sessions" />
+
+Terminating your Organization administrator account's sessions immediately invalidates all of your currently valid refresh tokens. This action immediately signs you out of your current Organization Administration session and then *every other* Safe Share application with which you have an active session (i.e. once these sessions' access tokens expire). This also includes any other client applications using the Covata Platform's resources with access tokens obtained through your account.
+
+This feature is useful if your Organization administrator account is at risk of being compromised - for example, you suspect that you forgot to sign out from a shared computer or you were signed in from a laptop that was either lost or stolen before you signed out.
+
+**To terminate your Organization administrator account's sessions:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
+3. In the **Security** section of the subsequent page, click the **Terminate** button. <br />
+    Your current Organization Administration session with the Covata Platform is terminated immediately, which also results in you being signed out from your current session. You will need to sign in again to gain access to [Safe Share for Web](/3.4/user/index), as well as your Covata Platform's resources. <br />
+   **Note:** Every other Safe Share application with which you have an active session (including any other client applications using the Covata Platform's resources with access tokens obtained through your account), will be terminated once these sessions' access tokens expire.
+
+## Enabling or disabling 2FA on Organization user accounts <a id="enabling-or-disabling-2fa-on-organisation-user-accounts" />
+
+If required, an Organization administrator can configure two-factor authentication (2FA) by enabling this feature on:
+
+- their own Covata user account, or
+- *all* Covata user accounts which are currently members of their organization (if a Safe Share administrator has allowed this on the Covata Platform).
+
+If 2FA has been enabled on a Covata user account, the user is then required to enter both their password (i.e. the 1st authentication factor), as well as an authentication code obtained from an authenticator application (aka authenticator app) running on their mobile device (i.e. the 2nd authentication factor), in order for the user to successfully sign in through this account on the Covata Sign-in page.
+
+The 2FA feature supports the following mobile devices and authenticator apps:
+
+- Android-based devices running the Google Authenticator app,
+- Apple's iPhone, iPad or iPod Touch devices running the Google Authenticator app, or
+- Microsoft Windows-based devices running Microsoft's authenticator app.
+
+<Note>
+
+- Before enabling 2FA on any Covata user account, you may wish to verify if the users of these accounts are in possession of any one of these supported mobile devices (above), or notify these users that they will require access to one of these devices to continue signing in through the Covata Sign-in page.
+- Take caution before deciding to enable 2FA for [all Covata users in your organization](/3.4/admin-org/configuring-organisation-administration-properties#enforce-2fa-for-organisation-members). If any members of your organization (including yourself) are not prepared to configure 2FA on their account, they may be unable to sign in successfully through the Covata Sign-in page, thereby preventing these users' access to:
+
+  - all organizations on the Covata Platform for which these users are members and/or
+  - Safe Share Organization Administration for all organizations of which these users are [Organization administrators](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role).
+- The URLs to download the appropriate authenticator app for a supported device are available to users when they configure 2FA on their accounts (and are themselves configurable by Safe Share administrators). For more information, see [Configuring Safe Share Administration properties](/3.4/admin-platform/configuring-platform-administration-properties) of the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>
+
+**To enable or disable 2FA on your Organization administrator account (or all Covata user accounts in your organization):**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. For your Organization administrator account only:
+
+   - *To enable 2FA on it*:
+
+     1. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
+     2. In the **Security** section of the subsequent page, click the **Enable** button (to the right of 'Two-factor authentication ( disabled )'). <br />
+         Your Organization administrator account's email address is sent a notification informing you that 2FA has been enabled on your account, along with a time-limited link, with step-by-step instructions for configuring 2FA <sup>(6)</sup> .
+   - *To disable 2FA on it*:
+
+     1. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu.
+     2. In the **Security** section of the subsequent page, click the **Disable** button (to the right of 'Two-factor authentication ( enabled )'). <br />
+         Your Organization administrator account's email address is sent a notification informing you that 2FA has been disabled on your account.
+
+   For *all* Covata user accounts in your organization:
+
+   - *To enable 2FA on these accounts*:
+
+     1. Click the **Configuration** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Configuration** page.
+     2. Click the **Edit** link to the right of the property '*Enforce two-factor authentication for organization members.*'
+     3. In the **Edit Config Property** dialog box, *select* the **Property Value** check box. <br />
+        **Tip:** For more information about configuring this and other Safe Share Organization Administration properties, see [Configuring Safe Share Organization Administration properties](/3.4/admin-org/configuring-organisation-administration-properties).
+     4. Click **Save** and all Covata user accounts within your organization (including your own) will have 2FA enabled on their accounts. <br />
+         Each Covata user within your organization is sent an email notification informing them that 2FA has been enabled for their account. This email message contains a time-limited link, with step-by-step instructions for configuring 2FA <sup>(6)</sup> .
+   - *To disable 2FA on these accounts*:
+
+     1. Click the **Configuration** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Configuration** page.
+     2. Click the **Edit** link to the right of the property '*Enforce two-factor authentication for organization members.*'
+     3. In the **Edit Config Property** dialog box, *clear* the **Property Value** check box.
+
+     1. Click **Save** and then only each user themselves can disable 2FA on their own account (once they have signed in).
+
+<sup>(6)</sup> These step-by-step instructions for configuring 2FA guide the user on how to:
+
+1. Configure their mobile device with the appropriate authenticator app.
+2. Configure the authenticator app (once installed) with their Covata user account, so that the authenticator app can generate the appropriate authentication codes (for the 2nd authentication factor).
+
+## Re-configuring 2FA for an organisation user account
+
+While two-factor authentication (2FA) is enabled on a user's account, the user might lose the ability to generate authentication codes for their 2nd authentication factor (explained in more detail [above](/3.4/admin-org/administering-users-within-an-organisation#enabling-or-disabling-2fa-on-organisation-user-accounts)) due to any of the following reasons:
+
+- The user deleted their Covata user account configuration from the authenticator application (app) installed on their mobile device.
+- The time-limited link for configuring 2FA expired before the user had a chance to complete the 2FA configuration process. This is the link contained in the email notification informing the user that 2FA has been enabled on their account.
+- The user lost their mobile device. The user will require a replacement device in order to continue signing in through the Covata Sign-in page with 2FA enabled on their account.
+
+If one of these scenarios occurs, the user will no longer be able to sign in through the Covata Sign-in page. The user may likely send you or any other Organization administrator an email message about one of these scenarios having occurred (via 'contact your administrator' feature on the **Authentication code** request page as they attempt to sign in through the Covata Sign-in page).
+
+Therefore, to resolve this situation, the user requires 2FA to be re-configured (aka re-seeded) for their account.
+
+**To re-configure 2FA on a Covata user account in your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. [Find](/3.4/admin-org/administering-users-within-an-organisation#finding-user-accounts-within-your-organisation) the user/s whose account is to be re-configured for 2FA.
+4. Click the **Re-seed** button (in the **Re-seed** column) of the relevant user/s to re-configure 2FA for their account. <br />
+    Each user with 2FA re-configured in this manner is sent an email notification informing them that 2FA has been enabled for their account, similar to the email notification they received when [2FA was originally enabled on their account](/3.4/admin-org/administering-users-within-an-organisation#enabling-or-disabling-2fa-on-organisation-user-accounts). This email message contains a new time-limited link, leading to step-by-step instructions for the user to:
+
+   1. (Re-)configure their mobile device with the appropriate authenticator app (should the user need to conduct this step again).
+   2. (Re-)configure the authenticator app (once installed) with their Covata user account, which allows the authenticator app to generate the appropriate authentication codes for the 2nd authentication factor.
+
+## Configuring 'Users' page columns for organization users <a id="configuring-users-page-columns-for-organisation-users" />
+
+By default, all columns on the **Users** page are visible. With the exception of the **Email** column (which is always shown), if there are other columns whose visibility is not required when administering users on your organization, then these columns can be selectively hidden from the **Users** page.
+
+**To hide one or more columns from the 'Users' page, or make these columns visible again:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Users** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Users** page.
+3. Click the **Select Columns** drop-down and clear the check boxes next to the column names to be hidden. Conversely, select the check boxes next to the column names to be made visible again.

@@ -1,0 +1,77 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups/{groupId}/labels"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-groupid-labels-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups/{groupId}/labels
+```
+
+where `{orgId}` is the ID of an organization and `{groupId}` is the ID of one of this organization's groups.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-groupid-labels-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of information for all [classifications](/3.4/admin-org/managing-classifications) that are currently associated with a [group](/3.4/admin-org/managing-groups) (specified by `groupId`) in an organization (specified by `orgId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-groupid-labels-detailed-description" />
+
+This API endpoint retrieves a list of information for all classifications that are currently associated with a group (specified by `groupId`) in an organization (specified by `orgId`).
+
+A group's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.4/api/access-service-api-v1-organisations-orgid-groups) API endpoint, which retrieves a list of information for all groups in the organization (specified by `orgId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-groups-groupid-labels-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - if this user is a member of the organization specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-orgid-groups-groupid-labels#access-service-api-v1-organisations-orgid-groups-groupid-labels-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-groupid-labels-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orgid-groups-groupid-labels-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+- **id** - .
+- **name** - .
+- **priority** - .
+- **applyI18n** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "id": "766862496543055872",
+          "name": {
+              "value": "Unclassified"
+          },
+          "priority": "3",
+          "applyI18n": false
+      }, {
+          "id": "766860228984872960",
+          "name": {
+              "value": "Restricted/Protected"
+          },
+          "priority": "2",
+          "applyI18n": false
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

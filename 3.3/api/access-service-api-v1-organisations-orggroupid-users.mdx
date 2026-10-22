@@ -1,0 +1,240 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/users"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/users
+```
+
+where `{orgGroupId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-users-supported-methods-and-overview" />
+
+- `POST` - used to add a [Covata user](/3.3/api/authentication-and-authorisation) account <sup>1</sup> to an organization (specified by `orgGroupId`).
+- `GET` - used to retrieve a list of information associated with existing users within an organization (specified by `orgGroupId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-users-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a Covata user account <sup>1</sup> to an organization (specified by `orgGroupId`). <br />
+  **Note:** Any valid (combination of) [role(s)](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) can be assigned to this user account. The exception to this are Covata user accounts with the [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) role (which are automatically created and added to an organization when a user with the [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) role (in this organization) shares their content with someone whose email address has not yet been registered (i.e. is part of an existing account) on the Covata Platform.
+- Retrieves a list of information associated with existing users in an organization (specified by `orgGroupId`). The list of users returned in the [response](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-returns) can be filtered according to users whose email address, first name or last name contains the string specified in the request.
+
+<sup>1</sup> If a Covata user account is not already registered on the Covata Platform, then making this request automatically creates this user account.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-users-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-orggroupid-users-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, as individual members of a **JSON object**:
+
+- **email** - The email address of the Covata user account to add to the organization specified by `{orgGroupId}` in the request's URL.
+- **roles** - An array of elements, each of which is an enumeration (enum) value representing a role to assign to this user when their account is added to the organization specified by `{orgGroupId}` in the URL. Valid values and combinations of these roles include:
+
+  - `ROLE_ORIGINATOR` - Applies the [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) role to this user account in this organization. <br />
+    **Note:** To apply this role, at least one [plan](/3.3/admin-org/managing-users-storage-quotas-through-plans) must be configured in this organization - see the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/plans](/3.3/api/access-service-api-v1-organisations-orggroupid-plans) API endpoint for more information.
+  - `ROLE_COLLABORATOR` - Applies the [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) role to this user account in this organization. <br />
+    **Note:** This role cannot be specified in the same request with `ROLE_ORIGINATOR` (above).
+  - `ROLE_ORGANISATION_ADMIN` - Applies the [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) role to this user account in this organization. <br />
+    **Note:** This role can be applied in conjunction with `ROLE_ORIGINATOR` and `ROLE_COLLABORATOR` (above).
+- **planId** ( *only required if the **roles** array above contains `ROLE_ORIGINATOR`* ) - The ID of the plan to assign to this user. <br />
+  **Example (POST request - adding a user with the 'Originator' role to the organization specified by \{orgGroupId\} in the URL):**
+
+  ```json
+  {
+      "email": "alex.originator@xy-company.com",
+      "roles": [ "ROLE_ORIGINATOR" ],
+      "planId": "749419742544326656"
+  }
+  ```
+
+   <br />
+  **Example (POST request - adding a user with both the 'Organization administrator' and 'Originator' roles to the organization specified by \{orgGroupId\} in the URL):**
+
+  ```json
+  {
+      "email": "alex.originator@xy-company.com",
+      "roles": [ "ROLE_ORIGINATOR", "ROLE_ORGANISATION_ADMIN" ],
+      "planId": "749419742544326656"
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orggroupid-users-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **searchText** - Any text substring used to filter for *all* Covata users who are currently members of the organization specified by `{orgGroupId}` in the request's URL, where this text substring must match that of the user account's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
+- **searchColumn** - The user's field upon which the text substring (specified in **searchText** above) is used for filtering user accounts returned in the response. The fields available to this text searching include:
+
+  - `email` - the email address associated with the Covata user.
+  - `firstName` - the first name (set by this user),
+  - `lastName` - the last name (set by this user),
+  - `all` - any of these fields above.
+
+  If this parameter is omitted, then no filtering is performed.
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is information about a Covata user in the organization (specified by `{orgGroupId}` in the URL). If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. Covata users in the organization specified by `{orgGroupId}` in the URL) from the Covata Platform returned in the response. Calls to this API endpoint may amount to potentially unmanageable numbers of items being returned. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. Covata users with the Safe Share administrator role) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. Covata users with the Safe Share administrator role) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `email` - the email address associated with the Covata user,
+  - `firstName` - the first name (set by this user),
+  - `lastName` - the last name (set by this user) and
+  - `userId` - the ID of the Covata user account.
+
+  If this parameter is omitted, then its value is `email` by default. <br />
+  **Example (GET request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/users?searchText=originator&searchColumn=email
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-users-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all Covata user accounts in the organization specified by `{orgGroupId}` in the request's URL, which have been filtered by any [parameters](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these user accounts (represented as an object containing the following members unless otherwise stated).
+- **email** - The email address of the Covata user account which as been added to or retrieved from the organization specified by `{orgGroupId}` in the URL.
+- **firstName** - The first name set by this user, which is `null` for newly added Covata user accounts that were not already registered on the Covata Platform. This is the first name that appears on the [Users](/3.3/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and/or the [My Account](/3.3/user/managing-your-account) feature of Covata Safe Share for Web.
+- **lastName** - The last name set by this user, which is `null` for newly added Covata user accounts that were not already registered on the Covata Platform. Like the first name (above), this appears on the **User** page of Organization Administration and/or the **My Account** feature of Safe Share for Web.
+- **otherName** - The other name (e.g. middle) set by this user, which is `null` for newly added Covata user accounts that were not already registered on the Covata Platform. This name appears on the **My Account** feature of Safe Share for Web.
+- **mobileNumber** - The mobile number set by this user, which is `null` for newly added Covata user accounts that were not already registered on the Covata Platform. This number appears on the **My Account** feature of Safe Share for Web.
+- **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has either been set by this user on their own account, or enforced for all members of the organization (by any Organization administrator of this organization).
+- **enabled** - A boolean value that indicates whether (`true`) or not (`false`) this user's account has any role, such as a role assigned [above](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-required-post-request-parameters) when this account was added to this organization (specified by `{orgGroupId}` in the URL). This value should be `true`.
+- **accountNonLocked** - A boolean value that indicates whether (`false`) or not (`true`) this user's account is locked. A Covata user account may become locked as a result of the user mistyping their password more than the maximum number of times configured (by themselves or another Safe Share administrator of their Covata Platform instance). The user themselves will need to unlock this account by following the instructions in their '*account lockout*' notification (or by resetting their password via any of the options on the Covata Sign-in page).
+- **numFailedLogins** - The number of times this user failed to successfully sign in.
+- **organisations** - An array containing of information about each organization this user is a member of. Each element of this array contains information about one of these organizations (represented as an object containing the following members unless otherwise stated).
+
+  - **id** - The ID of this organization.
+  - **name** - The name of this organization, which is configurable by a Safe Share administrator.
+  - **addressBookEnabled** - A boolean value that indicates whether (`true`) or not (`false`) this organization's address book feature has been enabled.
+  - **watermarkingEnabled** - A boolean value that indicates whether (`true`) or not (`false`) the watermarking feature is enabled for all viewable files created within this organization.
+  - **plan** - A member containing information about the plan defined in this organization which has been assigned to this user. This member contains the following sub-members:
+
+    - **id** - The ID of this plan.
+    - **name** - The name of this plan.
+    - **description** - The description of this plan.
+    - **quota** - This plan's current quota (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)/MiB).
+    - **default** - A boolean value that indicates whether (`true`) or not (`false`) this plan is currently set as the **default** plan.
+
+    **Note:** This member's value is `null` if no plan is associated with this user.
+  - **adminEmail** - The contact email address for this organization, typically for an Organization administrator, which is:
+
+    - used in email notifications and
+    - is accessible from the **Need help? ...** link on the **Authentication code** entry page for two-factor authentication (2FA).
+
+    A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **organisationAlias** - .
+  - **userMessage** - The custom message (typically a warning) defined for this organization, which will be shown at the base of the 'Share' dialog box. A value of `null` indicates that a value has not yet been defined for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **supportUrl** - The URL of the company's/organization's support page for this organization, which is accessible from the **Support** link in the footer of Safe Share web application pages. A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **companyName** - The name of the company/organization for this organization, which appears throughout email notifications. A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **legalUrl** - The URL of the company's/organization's legal page, which is accessible from the **Legal** link in the footer of Safe Share web application pages. A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **webappHelpUrl** - The URL of the help documentation for the Covata Safe Share for Web application. A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **orgAdminHelpUrl** - The URL of the help documentation for Safe Share Organization Administration. A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **privacyUrl** - The custom URL of the company's/organization's privacy statement page for this organization, which is accessible from the **Privacy**:
+
+    - link in the footer of Safe Share web application pages,
+    - options in the taskbar notification area pop-up menu and application page of Safe Share for Windows and
+    - link in the sign-in dialog box and **Help &gt; Privacy** option from the Safe Share menu bar of Safe Share for OS X.
+
+    A value of `null` indicates that a value has not yet been set for this property (and that the equivalent property defined in Safe Share Administration is being used).
+  - **securityRoles** - An array containing information about the internationalization (I18N) property key/code <sup>2</sup> for each role assigned to the user [above](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-required-post-request-parameters) in this organization. Each element of this array contains information about one of these roles, including each role's value (i.e. hard-coded in the Covata Platform), represented as an object containing the following members:
+
+    - **i18n** - A member containing the I18N code <sup>2</sup> for the role as sub-members:
+
+      - **code** - The I18N code for the role's value. This I18N code could include the substring `originator`, `collaborator`, `organisationadmin`, `systemadmin` (for Safe Share administrator role) or `adhoccollaborator` (for the Ad hoc role).
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the roles' values contain any variables, this array is always empty.
+    - **value** - The value of **securityRoles** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+  - **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has been enforced for all members of this organization.
+  - **bytesUploaded** - The total number of bytes of data that this user has uploaded through this organization.
+  - **bytesRecycled** - The total number of bytes of data that this user has in their Recycle Bin for this organization.
+- **id** - The ID of this Covata user account.
+- **accountType** - A member containing the internationalization (I18N) property key/code <sup>2</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+  - **i18n** - A member containing the I18N code <sup>2</sup> for the account type as sub-members:
+
+    - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+  - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+  <sup>2</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.3/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+  **Note:** For more information about account types, see the description for [Account Type](/3.3/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.3/admin-org/index).
+- **count** ( *from GET requests only* ) - The total number of items (i.e. Covata users in the organization specified by `{orgGroupId}` in the URL) that can be returned in the response. <br />
+  **Note:** If the **searchText** and **searchColumn** [parameters](/3.3/api/access-service-api-v1-organisations-orggroupid-users#access-service-api-v1-organisations-orggroupid-users-optional-get-request-parameters) were specified in the request, then this value represents the number of items (above) returned in the response.
+- **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this API endpoint. <br />
+  **Example (response from a POST request):**
+
+  ```json
+  {
+      "email": "alex.originator@xy-company.com",
+      "firstName": "Alex",
+      "lastName": "Originator",
+      "otherName": null,
+      "mobileNumber": null,
+      "mfaEnabled": false,
+      "enabled": true,
+      "accountNonLocked": true,
+      "numFailedLogins": 0,
+      "organisations": [{
+          "id": "749418071827214336",
+          "name": "XY Company",
+          "addressBookEnabled": false,
+          "watermarkingEnabled": false,
+          "plan": {
+              "id": "749419742544326656",
+              "name": "Staff Originators",
+              "description": "Staff members with the Originator role.",
+              "quota": 10240,
+              "default": true
+          },
+          "adminEmail": null,
+          "organisationAlias": null,
+          "userMessage": null,
+          "supportUrl": null,
+          "companyName": null,
+          "legalUrl": null,
+          "webappHelpUrl": null,
+          "orgAdminHelpUrl": null,
+          "privacyUrl": null,
+          "securityRoles": [{
+              "i18n": {
+                  "code": "db.securityroles.originator",
+                  "arguments": []
+              },
+              "value": "ROLE_ORIGINATOR"
+          }],
+          "mfaEnabled": false,
+          "bytesUploaded": "0",
+          "bytesRecycled": null
+      }],
+      "id": "749419842687528960",
+      "accountType": {
+          "i18n": {
+              "code": "server.useraccounttype.local",
+              "arguments": []
+          },
+          "value": "LOCAL"
+      }
+  }
+  ```

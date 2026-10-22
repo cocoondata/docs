@@ -1,0 +1,153 @@
+---
+title: "Administering organisations"
+---
+
+The **Organisations** page of SafeShare Administration ([below](/CS1.0/admin-platform/administering-organisations#organisations-page)) allows:
+
+- The [addition of new organisations to the Covata Platform](/CS1.0/admin-platform/administering-organisations#adding-a-new-organisation).
+- Existing organisations to be [located](/CS1.0/admin-platform/administering-organisations#finding-existing-organisations), [edited](/CS1.0/admin-platform/administering-organisations#editing-an-existing-organisation) or [removed](/CS1.0/admin-platform/administering-organisations#removing-an-organisation).
+
+An 'organisation' is a self-contained unit representing an organisation's (or a department's) access to resources on a Covata Platform instance.
+
+- An organisation is a *self-contained unit*, meaning that the creation, sharing and manipulation of files <sup>&#42;</sup> and folders (also known as collections) is handled solely within the scope of the organisation itself. Organisations provide the Covata Platform with *multitenancy* capabilities, whereby each organisation represents an individual 'tenant'.
+- A Covata user within an organisation has access to files / folders based on whether the user either owns these items or is a collaborator on them. For more information about Covata users within an organisation, see [Administering users within an organisation](/CS1.0/admin-platform/administering-users-within-an-organisation) in the [Organisation Administration](/CS1.0/admin-platform/organisation-administration) section of this guide.
+- Any Covata user may be a member of multiple organisations on a Covata Platform instance. In such cases, the Covata user's account is re-used across all these organisations. However, the Covata Platform treats all files and folders within one organisation (and any Covata user's access to these items) *completely independently* of the files and folders within another organisation.
+
+<sup>&#42;</sup> A file (also known as a file object or a Secure Object) is defined as Covata-encrypted data that has been registered on the Covata Platform, along with the properties associated with this encrypted data. For more information about file objects, see [Administering files](/CS1.0/admin-platform/administering-files) in the [Organisation Administration](/CS1.0/admin-platform/organisation-administration) section of this guide.
+
+<a id="organisations-page" />
+
+![Organisations page](/images/cd082bc0fe52-organisations-page.png)
+When first using SafeShare Administration on either a newly-installed Covata Platform instance, one organisation is present:
+
+- On *newly-installed* Covata Platform instances, this organisation:
+
+  - is initially named **Default** without any Covata users or files / folders, and
+  - has no Organisation administrator set.
+- On *upgraded* Covata Platform instances:
+
+  - This organisation is also initially named **Default** but instead has all Covata users and their files / folders from the previous Covata Platform version.
+  - Any Covata users who had the System administrator role in the previous Covata Platform version will have this role replaced by both:
+
+    - the [SafeShare administrator role](/CS1.0/admin-platform/administering-platform-administrator-users#platform-administrator-role) to access the [SafeShare Administration](/CS1.0/admin-platform/index#platform-administration) features of their Covata Platform instance and
+    - the [Organisation administrator role](/CS1.0/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) in this **Default** organisation (to access its [Organisation Administration](/CS1.0/admin-platform/organisation-administration) features).
+  - No contact person is set for the **Default** organisation.
+
+The name of an organisation can be [changed/edited](/CS1.0/admin-platform/administering-organisations#editing-an-existing-organisation) as well as the organisation's initial Organisation administrator/contact person. However, once the Organisation administrator/contact person has been set, it is no longer possible to change this value from within SafeShare Administration.
+
+## Adding a new organisation
+
+**To add a new organisation to the Covata Platform:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration.
+2. Click the **Organisations** option on the left of the [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organisations** page.
+3. Click the **Add New** button.
+4. <a id="add-new-organisation-dialog-box" />In the **Add new organisation** dialog box, specify the:
+
+   - **Organisation Name** - The value of this field is the name of the organisation shown to Covata users in SafeShare applications.
+   - **Quota (GB)** - The value of the quota (in gigabytes) granted to this organisation. <br />
+     **Note:** The total quota for all Covata users in this organisation (who have a quota) is restricted by the value specified here. For more information about Covata user's storage quotas, see [Managing users' storage quotas through plans](/CS1.0/admin-platform/managing-users-storage-quotas-through-plans) in the [Organisation Administration](/CS1.0/admin-platform/organisation-administration) section of this guide.
+   - **Administrator** - The email address of the initial Organisation administrator of this organisation. To make yourself the Organisation administrator of this organisation, specify your SafeShare administrator account's email address here. Once this email address has been set:
+
+     - it cannot be changed by *any* SafeShare administrator (unless they are also an Organisation administrator of this organisation) and
+     - after adding this organisation, upon subsequently [editing](/CS1.0/admin-platform/administering-organisations#editing-an-existing-organisation) it, this field's label indicates **Contact Person** and its value cannot be modified through SafeShare Administration. Only an Organisation administrator of this organisation can later [change this value](/CS1.0/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) through the [properties](/CS1.0/admin-platform/configuring-organisation-administration-properties) page of [Organisation Administration](/CS1.0/admin-platform/organisation-administration).
+5. Click **Save** and the new organisation will appear as a new entry on the **Organisations** page. <br />
+   **Tips:**
+
+   - If you made yourself the Organisation administrator of this organisation, you can access its [Organisation Administration interface](/CS1.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) by clicking the organisation's **Manage** button (in the **Manage** column).
+   - If you have added this organisation by mistake, it can be [removed](/CS1.0/admin-platform/administering-organisations#removing-an-organisation) (below).
+
+## Finding existing organisations
+
+As more organisations are added to the Covata Platform, it can become difficult to locate specific organisations through the **Organisations** page of SafeShare Administration. The **Organisations** page therefore offers features to help you locate specific organisations more rapidly.
+
+**To locate specific organisations on the Covata Platform:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration.
+2. Click the **Organisations** option on the left of the [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organisations** page.
+3. Use either of the following features to find a specific organisation (or subset of these organisations):
+
+   - *Filter organisations* - In the **Search By** box (right of the **Organisations** page), begin typing a series of characters contained in any of the organisations' **Name** or **Contact Person** fields, followed by the 'Enter/Return' key. This filters the list of organisations on the Covata Platform to those whose Name or Contact Person contains the subset of characters entered into the **Search By** box. <br />
+      By default, the **Name** or **Contact Person** fields fields are used for filtering (i.e. **All**), although filtering can be restricted to just one of these fields using the adjacent drop-down.
+   - *Navigate to specific organisations* - If available, use the page navigation buttons (lower-right of the **Organisations** page).
+
+<Tip>
+
+You can also sort organisations on the **Organisations** page by clicking the linked name (in the column header) of the field by which you would like to sort your organisations:
+
+- Clicking a linked field name multiple times toggles between sorting the organisations (according to that field) in ascending and descending order.
+- To revert back to the natural ordering of organisations in the list, simply refresh the page.
+
+</Tip>
+
+## Editing an existing organisation
+
+<Note>
+
+If specifying an Organisation administrator for the initially-named **Default** organisation, follow this procedure whilst signed in with the default administrator user account `admin@default.com`. For more information about this account, see [Accessing SafeShare Administration for the first time](/CS1.0/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time).
+
+</Note>
+
+**To edit an existing organisation:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration. <br />
+   **Note:** Use the account `admin@default.com` if editing the **Default** organisation.
+2. Click the **Organisations** option on the left of the [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organisations** page.
+3. Select the left check box of the organisation to be edited and click the **Edit** button.
+4. In the **Edit organisation** dialog box, modify the:
+
+   - **Organisation Name** - The value of this field is the name of the organisation shown to Covata users in SafeShare (and other client) applications.
+   - **Quota (GB)** - The value of the quota (in gigabytes) granted to this organisation. <br />
+     **Note:** The total quota for all Covata users in this organisation (who have a quota) is restricted by the value specified here. For more information about Covata user's storage quotas, see [Managing users' storage quotas through plans](/CS1.0/admin-platform/managing-users-storage-quotas-through-plans) in the [Organisation Administration](/CS1.0/admin-platform/organisation-administration) section of this guide.
+
+   The last field on this dialog box may differ depending on the organisation you are editing and its current state:
+
+   - If you are editing any organisation whose Organisation administrator has already been specified (i.e. every organisation other than the initially-named **Default** one), then this field (labeled **Contact Person**) indicates a *non-editable* email address, which is either:
+
+     - the Organisation administrator's, specified when a SafeShare administrator initially [added the organisation](/CS1.0/admin-platform/administering-organisations#adding-a-new-organisation), or
+     - that of the contact person, [subsequently specified](/CS1.0/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) by any Organisation administrator of this organisation (through the [properties](/CS1.0/admin-platform/configuring-organisation-administration-properties) page of [Organisation Administration](/CS1.0/admin-platform/organisation-administration)).
+   - If you are editing the **Default** organisation, then this *editable* field is labeled either of the following:
+
+     - **Administrator** on newly-installed Covata Platform instances, where an email address must be specified to save your changes to the other fields (above). Unlike setting the **Administrator** field when [Adding a new organisation](/CS1.0/admin-platform/administering-organisations#adding-a-new-organisation) (see [step 4](/CS1.0/admin-platform/administering-organisations#add-new-organisation-dialog-box) of this procedure above for details), specifying the **Administrator** value for the **Default** organisation only sets [The email address of the organisation's contact person](/CS1.0/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) and [Organisation Admin Email](/CS1.0/admin-platform/configuring-organisation-administration-properties#org-admin-email) property values. To set the Organisation administrator for this organisation, continue this procedure after clicking **Save** ([below](/CS1.0/admin-platform/administering-organisations#editing-the-default-organisation-continuation)).
+     - **Contact Person** on upgraded Covata Platform instances. You must specify the email address of a contact person, for example, that of one of the existing Organisation administrators in the organisation to save your changes to the other fields (above). Be aware that the contact person's email address does not have to be that of an Organisation administrator or any other Covata user in this organisation.
+5. Click **Save** and the organisation's details are updated.
+
+<a id="editing-the-default-organisation-continuation" />If you have been editing the initially-named **Default** organisation, continue on:
+
+1. Click the **Default** organisation's **Manage** button (in the **Manage** column) to access the [Organisation Administration interface](/CS1.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for **Default**.
+2. Follow the [Adding an organisation user account](/CS1.0/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) procedure to add an Organisation administrator user account to the **Default** organisation. <br />
+   **Notes:**
+
+   - You can make yourself the Organisation administrator of the initially-named **Default** organisation by specifying your SafeShare administrator account's email address when adding the Organisation administrator user account.
+   - If you are an Organisation administrator of the **Default** organisation:
+
+     1. [Sign out](/CS1.0/admin-platform/accessing-organisation-administration#signing-out-of-organisation-administration) and [sign in](/CS1.0/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) again with your Organisation administrator / SafeShare administrator user account.
+     2. [Remove](/CS1.0/admin-platform/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) the `admin@default.com` user account (from Organisation Administration).
+   - If you are not an Organisation administrator of the **Default** organisation, contact the relevant person in that organisation to remove the `admin@default.com` user account.
+
+## Removing an organisation
+
+Removing an organisation is a non-reversible action, whose process ideally requires relevant stakeholders to be given sufficient notice and time to agree on the organisation's removal before the organisation (along with all of its data) is permanently removed from the Covata Platform.
+
+To help ensure this notice and time is provided, removing an organisation requires two SafeShare administrators to action - one SafeShare administrator to [initiate the removal request](/CS1.0/admin-platform/administering-organisations#initiating-an-organisations-removal) and another to [approve this request](/CS1.0/admin-platform/administering-organisations#approving-an-organisations-removal).
+
+<a id="initiating-an-organisations-removal" />**To initiate an organisation's removal:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration.
+2. Click the **Organisations** option on the left of the [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organisations** page.
+3. Select the left check box of the organisation whose removal is to be initiated and click the **Remove** button. You are prompted on the **Request to remove organisation** dialog box to confirm this action and upon clicking **Initiate removal**, the organisation removal request is initiated. <br />
+   **Notes:**
+
+   - On the **Request to remove organisation** dialog box, if the **Send notification to contact person** check box was:
+
+     - *selected* (i.e. default behavior) before clicking **Initiate removal**, then an email notification is sent to the organisation's contact person, informing them that their organisation's removal may be actioned in the number of days specified by the [Days to action organisation removal](/CS1.0/admin-platform/configuring-platform-administration-properties#days-to-action-organisation-removal) property value. The **Removal Status** column on the **Organisations** page then indicates **Action in X days** for this organisation, where X is a daily countdown whose value is initially the **Days to action organisation removal** value minus one.
+     - *cleared* before clicking **Initiate removal** (or this option was not available on this dialog box), then no notification is sent to the organisation's contact person. The **Removal Status** column on the **Organisations** page then indicates **Pending** (for SafeShare administrators who initiated an organisation's removal request) or **Awaiting approval** (if an organisation's removal request was initiated by another SafeShare administrator).
+   - If the **Send notification to contact person** option is not available on this dialog box, then the [Days to action organisation removal](/CS1.0/admin-platform/configuring-platform-administration-properties#days-to-action-organisation-removal) property value has been cleared.
+   - At any time after initiating an organisation's removal, you can subsequently cancel this removal request by selecting the left check box of the relevant organisation (whose **Removal Status** indicates either **Pending** or **Action in X days**) and clicking the **Cancel** button. If the **Cancel** button is not available, then another SafeShare administrator initiated that organisation's removal. In such a scenario, clicking the **Decline** button achieves the same result as clicking the **Cancel** button. Once an organisation's removal request is canceled/declined, its **Removal Status** is cleared.
+
+<a id="approving-an-organisations-removal" />**To approve an organisation's removal:**
+
+1. [Sign in](/CS1.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration using a different account to the one who [initiated the organisation's removal (above)](/CS1.0/admin-platform/administering-organisations#initiating-an-organisations-removal).
+2. Click the **Organisations** option on the left of the [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organisations** page.
+3. Select the left check box of the organisation whose **Removal Status** indicates **Awaiting approval** and click the **Approve** button. You are prompted to confirm this removal and upon clicking **Approve** (on the message box), the organisation (along with all of its data) is permanently removed. <br />
+   **Note:** After another SafeShare administrator initiates an organisation's removal, you can decline this removal request *at any time* by selecting the left check box of the relevant organisation (whose **Removal Status** indicates **Awaiting approval** or **Action in X days**) and clicking the **Decline** button. If the **Decline** button is not available, then you initiated that organisation's removal. In such a scenario, clicking the **Cancel** button achieves the same result as clicking the **Decline** button. Once an organisation's removal request is declined/canceled, its **Removal Status** is cleared.

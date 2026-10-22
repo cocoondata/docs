@@ -1,0 +1,42 @@
+---
+title: "Organisations-Administratorenanleitung für Safe Share 3.1"
+---
+
+Diese Dokumentation gilt für die 3.1.x-Versionen von *Safe Share* und der *Covata-Plattform*.
+
+Informationen zu dieser Dokumentation entnehmen Sie bitte unserem [wichtigen Hinweis](/3.1/de/admin-org/important-notice).
+
+## Übersicht über Safe Share und die Covata-Plattform
+
+Covata beinhaltet eine komplette Lösung und Plattform für den zuverlässigen Schutz und die sichere Freigabe verschlüsselter Dateien und Ordner, die (innerhalb einer Organisation, außerhalb der Domäne und von Mobilgeräten aus) ortsunabhängig gespeichert und zugänglich gemacht werden können.
+
+Covata-Technologien stellen diese Lösung über die *Covata-Plattform* (auf die Safe Share aufbaut), zur Verfügung, deren *Zugriffsdienst* kryptografische *Schlüssel* (zur Ver- bzw. Entschlüsselung von Inhalten) und *Zugriffssteuerungen* (die definieren, wer Inhalte wann entschlüsseln und auf sie zugreifen kann) zentral verwaltet.
+
+Der Zugriffsdienst der Covata-Plattform wickelt die Verwaltung der *Schlüssel* und die *Zugriffssteuerungen* separat von der Kryptografie und den Benutzerinhalten ab. Diese Trennung hilft gewährleisten, dass verschlüsselte Inhalte nur von den definierten Zugriffsberechtigten entschlüsselt werden können, selbst wenn sie in die falschen Hände geraten sollten.
+
+Benutzer von *Covata-Technologien* <sup>&#42;</sup> können anderen Personen ihre sicheren Inhalte über Covatas Safe Share-Anwendungen freigeben. Diese sind mit der Covata-Plattform integriert um sicherzustellen, dass kritische Schlüsselverwaltung und Zugriffssteuerungen angemessen gehandhabt werden.
+
+Die Covata-Plattform stellt eine Programmierschnittstelle (Application Programming Interface/API) zur Verfügung, anhand der Integratoren ihre eigenen Anwendungen entwickeln können, um die leistungsstarken, datenzentrierten Sicherheitsfunktionen von Covata optimal nutzen zu können.
+
+<a id="organisation-administration" />
+
+## Safe Share-Organisationsverwaltung
+
+Die *Safe Share-Organisationsverwaltung* ist eine internetbasierte Oberfläche für die Verwaltung des Zugriffs einer Organisation auf Ressourcen in einer Instanz der Covata-Plattform. Diese Oberfläche gibt Zugriff auf eine Reihe von konfigurierbaren Funktionen der Covata-Technologien <sup>&#42;</sup>, die auf die Organisation *und* Covata-Benutzer, die Mitglied der Organisation sind, Anwendung finden.
+
+![Organisationsverwaltung Seite Dashboard](/images/279473a45f3a-organisation-administration-dashboard-page.png)
+*Organisations-Administratoren* sind Benutzer, die nach ihrer [Anmeldung](/3.1/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung auf das *oben dargestellte) [Dashboard](/3.1/de/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) zugreifen und innerhalb ihrer Organisation auf ihrer Instanz der Covata-Plattform die folgenden Verwaltungsaufgaben ausführen können:
+
+- Konfiguration von [Benutzern](/3.1/de/admin-org/administering-users-within-an-organisation) (d. h. „Covata-Benutzer“), die ihrer Organisation angehören, durch die anfängliche Hinzufügung neuer oder vorregistrierter Benutzer-Accounts auf der Covata-Plattform
+- Konfiguration und Verwaltung der [Benutzer-Positivliste](/3.1/de/admin-org/managing-user-whitelists) ihrer Organisation, in der definiert ist, welchen Personen innerhalb der Organisation Elemente freigegeben werden können, einschließlich Personen, die der Organisation selbst nicht angehören
+- Verwaltung von [Klassifikationen](/3.1/de/admin-org/managing-classifications) und [Gruppen](/3.1/de/admin-org/managing-groups), die gemeinsam verwendet werden, um den Personenkreis einzuschränken, dem Inhalte freigegeben werden können
+- Verwaltung von [Plänen](/3.1/de/admin-org/managing-users-storage-quotas-through-plans), die Speicherkontingente definieren und so den für einzelne Covata-Benutzer-Accounts verfügbaren (letztendlich vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen
+- Deaktivierung bzw. Reaktivierung des Zugriffs auf beliebige, mit Covata-Technologien verschlüsselte [Dateien](/3.1/de/admin-org/administering-files) auf der Covata-Plattform und Anzeige aller hinsichtlich dieser Dateien aufgezeichneten Aktivitäten
+- Erzeugung von [Berichten](/3.1/de/admin-org/generating-reports) über von Client-Anwendungen an die API der Covata-Plattform gerichtete Anforderungen
+- Änderung der [Konfiguration](/3.1/de/admin-org/configuring-organisation-administration-properties) von Eigenschaften der Safe Share-Organisationsverwaltung
+
+<sup>&#42;</sup> Der Begriff *Covata-Technologien* beinhaltet alle Funktionen, die über die Covata-Plattform bereitgestellt werden, u. a. Covatas Safe Share-Anwendungen, die API der Covata-Plattform sowie die Covata-Plattform selbst.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

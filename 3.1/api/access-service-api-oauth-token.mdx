@@ -1,0 +1,101 @@
+---
+title: "<access-service>/api/oauth/token"
+---
+
+## URL structure <a id="access-service-api-oauth-token-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/oauth/token
+```
+
+## Supported methods and overview <a id="access-service-api-oauth-token-supported-methods-and-overview" />
+
+- `POST` - used to request for an [access token](/3.1/api/authentication-and-authorization) (and optional refresh token).
+
+## Detailed description <a id="access-service-api-oauth-token-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Initiates a request for an access token (and optionally a refresh token) using the OAuth 2.0 *password* grant type grant type.
+- Completes authorization (to obtain the access token) when using the OAuth 2.0 *authorization code* grant type.
+
+## Supported roles <a id="access-service-api-oauth-token-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [Originator](/3.1/admin/administering-users#originator-role)
+- [Collaborator](/3.1/admin/administering-users#collaborator-role)
+- [Ad hoc](/3.1/admin/administering-users#adhoc-role)
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+- [User administrator](/3.1/admin/administering-users#user-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-oauth-token#access-service-api-oauth-token-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-oauth-token-required-headers" />
+
+The request's header requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1), whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
+
+<Note>
+
+The client ID and client secret values constitute your application's client credentials, which would have been generated when your application was [registered](/3.1/api/authentication-and-authorization#registering-your-application-on-the-covata-platform) on the Covata Platform. Also see [Configuring client applications](/3.1/admin/configuring-client-applications) in the Covata Platform Administrator's Guide for more information.
+
+</Note>
+
+For example, encoding:
+
+- `exampleClientApplication:exampleClientApplicationSecret` <br />
+   with Base64 results in the value:
+- `ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+Therefore, the HTTP Basic authentication header would be:
+
+- `Authentication: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+The request also requires form URL-encoded data in the body:
+
+- `Content-Type: application/x-www-form-urlencoded`
+
+## Required parameters <a id="access-service-api-oauth-token-required-parameters" />
+
+The following required parameter must be sent in the body of the request (as form URL-encoded data):
+
+- **grant_type** - The grant type used in the authentication and authorization request/s to the Covata Platform. Specify a value of:
+
+  - `password` for the password grant type <br />
+    *or*
+  - `authorization_code` for the authorization code grant type.
+
+## Grant type-specific parameters <a id="access-service-api-oauth-token-grant-type-specific-parameters" />
+
+In addition to the [required parameters](/3.1/api/access-service-api-oauth-token#access-service-api-oauth-token-required-parameters) above, some of the following parameters are *also required* based on the grant type used and should be included in the body of the request (as form URL-encoded data):
+
+- **code** ( *Required when using the authorization code grant type* ) - The authorization code itself, which is retrieved in the response from the Covata Platform (i.e. following an initial request to /api/oauth/authorize to retrieve an access token using the authorization code grant type).
+- **redirect_uri** ( *Required when using the authorization code grant type* ) - The redirect URI that was submitted in the initial request to /api/oauth/authorize to retrieve an access token using the authorization code grant type. The value specified here is only used validate that it matches the **redirect_uri** value specified in this initial request.
+- **username** ( *Required when using the password grant type* ) - The email address of a Covata user's credentials (acquired through your application).
+- **password** ( *Required when using the password grant type* ) - The password of a Covata user's credentials (acquired through your application).
+
+  **Example (using the password grant type):**
+
+  ```text
+  grant_type=password&username=alex.originator%40covata.com&password=password1
+  ```
+
+## Returns <a id="access-service-api-oauth-token-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **access_token** - The access token itself, as a universally unique identifier (UUID) value.
+- **token_type** - The brief description for the type of token (above) - i.e. usually `bearer`.
+- **refresh_token** - The refresh token itself, as a universally unique identifier (UUID) value. This value will not be present if the configuration of your client application on the Covata Platform does not permit refresh tokens to be issued. See [Registering your application on the Covata Platform](/3.1/api/authentication-and-authorization#registering-your-application-on-the-covata-platform) for more information.
+- **expires_in** - The number of seconds remaining for the access token's validity (i.e. from the time this response was issued).
+
+  **Example:**
+
+  ```json
+  {
+    "access_token": "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+    "token_type": "bearer",
+    "refresh_token": "q7r8s9t0-u1v2-w3x4-y5z6-a7b8c9d0e1f2",
+    "expires_in": 9999
+  }
+  ```

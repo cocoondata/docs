@@ -1,0 +1,121 @@
+---
+title: "Authentication and authorization"
+---
+
+All features of Covata technologies are accessed through a *Covata user*. A Covata user is a user account registered on the Covata Platform. For more information about Covata users, refer to the [Administering users](/3.1/admin/administering-users) page of the [Covata Platform Administrator's Guide](/3.1/admin/index).
+
+A Covata user must first be authenticated and authorized to the Covata Platform to allow your application to access that user's resources on the Covata Platform. In fact, any reqeust to almost all Covata API endpoints require an appropriate Covata user to have first been successfully authenticated and authorized.
+
+The Covata API utilizes the [OAuth 2.0 Authorization Framework](http://tools.ietf.org/html/rfc6749) to achieve this purpose. The implementation of this framework allows your application and Covata users to be securely authenticated and authorized to the Covata Platform.
+
+If you are familiar with the OAuth 2.0 protocol, you will recall that the OAuth 2.0 'dance' for the *authorization code* grant type <sup>(1)</sup> consists of the following steps:
+
+1. The client application fetches an initial authorization code from the authorization server (i.e. the Covata Platform).
+2. The Covata user authenticates themselves to the authorization server (directly).
+3. The client application submits the authorization code (along with its client credentials) back to the authorization server to retrieve an access token <sup>(2)</sup>.
+
+The Covata API also provides support for *implicit* and *password* grant types, which are part of the OAuth 2.0 Authorization Framework too. These additional grant types provide authentication/authorization solutions for a wider range of client application types and are simpler processes than that of the authorization code grant type described above. However, both the implicit and password grant types are *less secure to use* than the authorization code grant type.
+
+<sup>(1)</sup> An OAuth 2.0 *grant type* is a credential representing a Covata user's *authorization* to access that user's protected resources on the Covata Platform.
+
+<sup>(2)</sup> Essentially, an *access token* defines a set of accessible resources available to a user on the Covata Platform. For more information about Covata Platform *access* and *refresh tokens*, refer to the description of the [Grant types](/3.1/admin/configuring-client-applications#grant-types) field on the [Configuring client applications](/3.1/admin/configuring-client-applications) page of the Covata Platform Administrator's Guide.
+
+<a id="client-application-types-and-best-suited-oauth-2-0-grant-types" /> The following table lists different client application types and the corresponding OAuth grant types best suited for these application types:
+
+| Client application type | Recommended OAuth 2.0 grant types |
+| --- | --- |
+| Server-side web application | Authorization code |
+| Native desktop/laptop or mobile application | Authorization code (more secure and the preferred grant type to implement) <br />  or <br />  Password (if a high level of trust can be assured between the Covata user and client application) |
+| User agent (e.g. client-side application running in a web browser) | Implicit |
+| Administrator/system-run service (e.g. Java scheduled job) | Password |
+
+## Registering your application on the Covata Platform
+
+Before developing your application, you should consult your Covata Platform administrator to begin the process of registering your application on their Covata Platform.
+
+After agreeing with your administrator on the grant type(s) that your application will implement, your administrator can proceed with your application's registration process.
+
+Once your application is registered, your administrator should provide you with client credentials (a client ID and client secret) to hard code into your application. These credentials are required by the Covata Platform to either 'authenticate' or identify your application to the Covata Platform.
+
+See [Configuring client applications](/3.1/admin/configuring-client-applications) in the Covata Platform Administrator's Guide for more information.
+
+## Overview of the OAuth 2.0 process <a id="overview-of-the-oauth-2-0-process" />
+
+The following steps outline the Covata API OAuth 2.0 process for authenticating and authorizing your application to access a Covata user's resources on the Covata Platform:
+
+1. [Authorizing your application](/3.1/api/authentication-and-authorization#authorizing-your-application) (initiating a request for an access token)
+2. [Completing authorization](/3.1/api/authentication-and-authorization#completing-authorization) (obtaining the access token)
+
+## Authorizing your application
+
+Authorizing your application to a Covata Platform instance begins by initiating a request to obtain an access token from the Covata Platform instance. This request is based on one of the three OAuth 2.0 grant types supported by the Covata Platform (mentioned in the table [above](/3.1/api/authentication-and-authorization#client-application-types-and-best-suited-oauth-2-0-grant-types)).
+
+The grant type utilized when authorizing your application is based on a combination of API endpoint and `grant_type` URL parameter used in the initial request.
+
+If your request is successful, an access token is returned to your application. Pass this token in subsequent requests to the Covata Platform to perform other interactions and activities.
+
+<Note>
+
+Currently, only the password grant type is documented. Documentation for the other grant types will be added in the near future.
+
+</Note>
+
+### Using the password grant type
+
+To obtain an access token from the Covata Platform using the password grant type, make a `POST` method call/request to the [&lt;access-service&gt;/api/oauth/token](/3.1/api/access-service-api-oauth-token) API endpoint with the following parameters sent as form URL-encoded (i.e. `application/x-www-form-urlencoded`) data in the body of the request:
+
+- `grant_type` - Use the value `password`
+- `username` - The email address of a Covata user's credentials (acquired through your application).
+- `password` - The password of a Covata user's credentials (acquired through your application).
+
+This request requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1) in its header, whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
+
+<Tip>
+
+The client ID and client secret values constitute your application's client credentials, which would have been generated when your application was [registered](/3.1/api/authentication-and-authorization#registering-your-application-on-the-covata-platform) on the Covata Platform.
+
+</Tip>
+
+For example, encoding:
+
+- `exampleClientApplication:exampleClientApplicationSecret` <br />
+   with Base64 results in the value:
+- `ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+**Example request:** Initiating a request to obtain an access token from the Covata Platform using the password grant type:
+
+```bash
+curl https://access-service.xy-company.com/api/oauth/token \
+    -H 'Authorization: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==' \
+    -d 'grant_type=password' \
+    -d 'username=alex.originator%40covata.com' \
+    -d 'password=password1' \
+    -X POST
+```
+
+<Note>
+
+Submitting a cURL command like the one above with at least one `-d` option results in the following header: <br />
+`Content-Type: application/x-www-form-urlencoded` <br />
+ being automatically included in the request. Be aware that this header is required for the request to succeed.
+
+</Note>
+
+## Completing authorization
+
+Completing your application's authorization to the Covata Platform involves retrieving the access token from the Covata Platform's response to your application's initial request. However, this process is different depending on the grant type you used.
+
+### Completing password grant type authorization
+
+If your request ([above](/3.1/api/authentication-and-authorization#using-the-password-grant-type)) was sent successfully, the Covata Platform responds by sending back a [JSON](http://json.org/) object containing an access token, as well as a refresh token (if the client application on the Covata Platform is configured to issue one).
+
+**Example response:** Response from the Covata Platform upon successfully processing a client application's request for an access token:
+
+```json
+{
+  "access_token": "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+  "token_type": "bearer",
+  "refresh_token": "q7r8s9t0-u1v2-w3x4-y5z6-a7b8c9d0e1f2",
+  "expires_in": 9999
+}
+```

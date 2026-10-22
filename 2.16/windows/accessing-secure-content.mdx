@@ -1,0 +1,149 @@
+---
+title: "Accessing secure content"
+---
+
+To access secure content, you can:
+
+- [Decrypt, view or print personally owned items](/2.16/windows/accessing-secure-content#decrypting-viewing-or-printing-your-own-secure-content) you have previously stored securely with Safe Share [for Windows](/2.16/windows/storing-and-sharing-content-securely#storing-personally-owned-content-securely) or the [web application](/2.16/user/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content). These actions can also be performed on items that you had stored to share through another user's folder with Safe Share [for Windows](/2.16/windows/storing-and-sharing-content-securely#storing-content-to-share-through-another-users-folder) or the [web application](/2.16/user/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder).
+- [Decrypt or view/print items](/2.16/windows/accessing-secure-content#decrypting-or-viewing-printing-secure-content-shared-with-you) which someone else has stored securely and shared with you using Safe Share [for Windows](/2.16/windows/storing-and-sharing-content-securely#sharing-secure-content) or the [web application](/2.16/user/uploading-storing-and-sharing-content-securely#sharing-secure-content). You can only print or [download+decrypt](/2.16/windows/accessing-secure-content#decrypting-or-viewing-printing-secure-content-shared-with-you) these items if the creators/owners who shared the items have granted permission to perform these actions.
+
+## Decrypting, viewing or printing your own secure content
+
+**To decrypt, view or print content which you have previously stored securely:**
+
+1. [Access](/2.16/windows/storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. Within the `My Secured Files` subfolder, locate to the file(s) or folder(s) whose content you wish to decrypt, view or print.
+3. Do one of the following based on the action to be performed:
+
+   - To begin decrypting your own secure content, either:
+
+     - Select the item(s) and drag/copy/move them to a location outside the `Safe Share` folder; for example, dragging them to your desktop: <br />
+       ![Decrypting my own files to desktop by drag and drop](/images/ca880cbed00c-decrypting-my-own-files-to-desktop-by-drag-and-drop.jpg)
+       <br />
+       **Note:** Regardless of whether you copy or move items from `My Secured Files`, the secured items will remain in the `My Secured Files` subfolder. <br />
+       *OR*
+     - Alternatively, select and right-click on one or more file(s) and/or folder(s) and choose a **Decrypt...** option from the pop-up menu: <br />
+       <a id="decrypt-copy-to-image" />
+       ![Decrypting my own files to desktop using the pop-up menu](/images/ab92e5c86a6b-right-clicking-an-item-owner.png)
+
+       <br />
+        If you choose:
+
+       - **Decrypt to Desktop**, a decrypted copy of your selected content is saved to the desktop.
+       - **Decrypt...**, the **Browse For Folder** dialog box opens, prompting you to specify a folder where a decrypted copy of your selected content will be saved.
+
+     Safe Share for Windows saves the decrypted content at the target location (e.g. your desktop). <br />
+     **Note:** If one of the following problems occurs upon attempting to decrypt one or more files:
+
+     - The message '*The encrypted content was not found in remote storage.*' appears (from the taskbar notification area icon), <br />
+       *or*
+     - The decrypted content cannot be opened (and appears corrupted),
+
+     then the following procedure may resolve these problems:
+
+     1. Note the names of these files (to which these problems occurred).
+     2. [Sign out](/2.16/windows/starting-the-application-and-signing-in#signing-out) of Safe Share for Windows.
+     3. **Delete** these files from their location/s within the `My Secured Files` subfolder. (Do not use Safe Share for Windows' **Safe Delete** feature.)
+     4. [Sign in](/2.16/windows/starting-the-application-and-signing-in#signing-in-manually) to Safe Share for Windows again to re-synchronize the encrypted files from remote storage managed by the Covata Platform.
+     5. [Re-attempt decrypting](/2.16/windows/accessing-secure-content#decrypting-viewing-or-printing-your-own-secure-content) these files.
+
+     *OR*
+   - To begin viewing or printing your own secure content, either:
+
+     - For a single viewable file, double-click it to open Safe Share for Windows' read-only content viewer window (i.e. the [Safe Share Content Viewer](/2.16/windows/accessing-secure-content#read-only-content-viewer)). <br />
+       **Note:** If the file you double-clicked is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/2.16/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/2.16/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/2.16/user/index) for more information. <br />
+       *OR*
+     - For one or more file(s), select and right-click on these files and choose **View file(s)**. A separate [Safe Share Content Viewer](/2.16/windows/accessing-secure-content#read-only-content-viewer) window opens for each viewable item of your selected content. <br />
+       **Notes:**
+
+       - If one of the files you selected is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/2.16/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/2.16/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/2.16/user/index) for more information.
+       - The **View file(s)** menu item is disabled if the selected items *only consist* of folders and/or non-viewable files. Although this menu option is available if one or more folders have been selected *in addition* to viewable files, any content within these folders is ignored and not opened in the Safe Share Content Viewer.
+
+## Decrypting or viewing/printing secure content (shared with you) <a id="decrypting-or-viewing-printing-secure-content-shared-with-you" />
+
+**To decrypt or view/print secure content which someone else has securely shared with you:**
+
+1. [Access](/2.16/windows/storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. Within the `Shared With Me` subfolder, locate the folder of the Covata user who shared content with you. <br />
+   **Notes:**
+
+   - The files/folders of each Covata user who shares content with you appears in its own folder within `Shared With Me`. The names of these folders have the format: <br />
+     `Shared By <local-part-of-email-address> - <domain-part-of-email-address>`
+   - You can only decrypt files that have been shared with you if the creators/owners of those files have allowed you to download them. If the creator/owner has not granted this permission, then you may only be able to view/print the content of these files.
+   - Viewable items which have been shared with you but whose original content cannot be downloaded and decrypted typically appear as a 1 KB (or less) file in the `Shared With Me` folder (of the ['Safe Share' folder](/2.16/windows/storing-and-sharing-content-securely#accessing-the-applications-folder)).
+3. Within this Covata user's folder, locate the file(s) or folder(s) whose content you wish to decrypt or view/print. <br />
+   **Note:** To determine if you can view or print the content of a file or folder (i.e. by having the **View** or **Print** permission respectively on the item), right-click the item and choose **Show permissions** from the pop-up menu. See the procedure for [determining if you have permissions to upload content to another user's folder](/2.16/windows/storing-and-sharing-content-securely#determining-folder-permissions) for more information.
+4. Do one of the following based on the action to be performed:
+
+   - To begin decrypting secure content which someone else has securely shared with you, either:
+
+     - Select the item(s) and drag/copy/move them to a location outside the `Safe Share` folder - e.g. dragging them to your desktop:
+
+       ![Decrypting a shared file to desktop by drag and drop](/images/5b3afb2741dc-decrypting-a-shared-file-to-desktop-by-drag-and-drop.jpg)
+       <br />
+       **Note:** Regardless of whether you copy or move items from `Shared With Me`, the secured items will remain in the `Shared With Me` subfolder. <br />
+       *OR*
+     - Alternatively, select and right-click on one or more file(s) and/or folder(s) and choose a **Decrypt...** option from the pop-up menu (as shown [above](/2.16/windows/accessing-secure-content#decrypt-copy-to-image) when decrypting your own content). If you choose:
+
+       - **Decrypt to Desktop**, a decrypted copy of your selected content is saved to the desktop.
+       - **Decrypt...**, the **Browse For Folder** dialog box opens, prompting you to specify a folder where a decrypted copy of your selected content will be saved.
+
+     Safe Share for Windows saves the decrypted content at the target location (e.g. your desktop). <br />
+     **Note:** If one of the following problems occurs upon attempting to decrypt one or more files:
+
+     - The message '*The encrypted content was not found in remote storage.*' appears (from the taskbar notification area icon), <br />
+       *or*
+     - The decrypted content cannot be opened (and appears corrupted),
+
+     then the following procedure may resolve these problems:
+
+     1. Note the names of these files (to which these problems occurred).
+     2. [Sign out](/2.16/windows/starting-the-application-and-signing-in#signing-out) of Safe Share for Windows.
+     3. **Delete** these files from their location/s within the `Shared With Me` subfolder. (Do not use Safe Share for Windows' **Safe Delete** feature.)
+     4. [Sign in](/2.16/windows/starting-the-application-and-signing-in#signing-in-manually) to Safe Share for Windows again to re-synchronize the encrypted files from remote storage managed by the Covata Platform.
+     5. [Re-attempt decrypting](/2.16/windows/accessing-secure-content#decrypting-or-viewing-printing-secure-content-shared-with-you) these files.
+
+     *OR*
+   - <a id="to-begin-viewing-or-printing-secure-content" />To begin viewing or printing secure content which someone else has securely shared with you, either:
+
+     - For a single viewable file, double-click it to open Safe Share for Windows' read-only content viewer window (i.e. the [Safe Share Content Viewer](/2.16/windows/accessing-secure-content#read-only-content-viewer)). <br />
+       **Note:** If the file you double-clicked is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/2.16/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/2.16/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/2.16/user/index) for more information. <br />
+       *OR*
+     - For one or more file(s), select and right-click on these files and choose **View file(s)**. A separate [Safe Share Content Viewer](/2.16/windows/accessing-secure-content#read-only-content-viewer) window opens for each viewable item of your selected content. <br />
+       **Notes:**
+
+       - If one of the files you selected is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/2.16/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/2.16/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/2.16/user/index) for more information.
+       - The **View file(s)** menu item is disabled if the selected items *only consist* of folders and/or non-viewable files. Although this menu option is available if one or more folders have been selected *in addition* to viewable files, any content within these folders is ignored and not opened in the Safe Share Content Viewer.
+
+<Note>
+
+- If files were *moved out* of any `Safe Share` folder to a network drive location, then these files will only reappear in the source `Safe Share` folder following the next Safe Share for Windows synchronization event (with remote storage managed by the Covata Platform). Regardless of the `Safe Share` folder's [cache policy settings](/2.16/windows/managing-cache-policy-settings), these files will always reappear as `.covl` files and their encrypted content will only be downloaded the next time the files are decrypted (using Safe Share for Windows).
+- If Safe Share for Windows experiences delays in network communication, you may notice the following behavior:
+
+  1. The encrypted files are temporarily copied to their target location.
+  2. Safe Share for Windows decrypts these files from their temporary copies (created in the previous step) and saves them to the same location as their temporary copies.
+  3. The temporary copies are deleted.
+
+</Note>
+
+## Safe Share for Windows' read-only content viewer <a id="read-only-content-viewer" />
+
+Safe Share for Windows' read-only content viewer (also known as the *Safe Share Content Viewer* within the application) is equivalent to the [content viewer](/2.16/user/accessing-secure-content#content-viewer) of the Safe Share web application, with similar functionality:
+
+**Safe Share for Windows' content viewer for image files:**
+
+![Safe Share for Windows' content viewer for image files](/images/53520b965037-content-viewer-image.jpg)
+
+**Safe Share for Windows' content viewer for document files:**
+
+![Safe Share for Windows' content viewer for document files](/images/9b72c109e0d6-content-viewer-document.png)
+
+<Note>
+
+If the print button at the top left is disabled (when viewing a document), then you do not have the **Print** permission on this file (i.e. the owner of this file did not grant you **Download** permissions when they [shared the file or one of its parent folders](/2.16/windows/storing-and-sharing-content-securely#sharing-secure-content) with you).
+
+</Note>
+
+---
+
+#### Please provide your feedback here

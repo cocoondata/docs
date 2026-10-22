@@ -1,0 +1,232 @@
+---
+title: "<access-service>/api/v1/i18n/localedetails"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-localedetails-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/localedetails
+```
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-localedetails-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of field information for all supported locales on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-i18n-localedetails-detailed-description" />
+
+This API endpoint retrieves a list of field information for all supported locales on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-i18n-localedetails-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-i18n-localedetails#access-service-api-v1-i18n-localedetails-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-localedetails-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-i18n-localedetails-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - .
+
+  - **locale** - .
+
+    - **localeCode** - .
+    - **displayDescription** - .
+  - **hasBuiltinBundle** - .
+  - **hasCustomBundle** - .
+  - **adminDefault** - .
+- **offset** - .
+- **count** - . <br />
+  **Example:**
+
+  ```json
+  {
+      "items": [{
+          "locale": {
+              "localeCode": "da",
+              "displayDescription": "Dansk"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "de_de",
+              "displayDescription": "Deutsch (Deutschland)"
+          },
+          "hasBuiltinBundle": true,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "el",
+              "displayDescription": "ελληνικά"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "en_gb",
+              "displayDescription": "English (UK)"
+          },
+          "hasBuiltinBundle": true,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "en_us",
+              "displayDescription": "English (US)"
+          },
+          "hasBuiltinBundle": true,
+          "hasCustomBundle": false,
+          "adminDefault": true
+      }, {
+          "locale": {
+              "localeCode": "es_es",
+              "displayDescription": "Español (España)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "es_us",
+              "displayDescription": "Español (Estados Unidos)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "fr_ca",
+              "displayDescription": "Français (Canada)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "fr_fr",
+              "displayDescription": "Français (France)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "it_it",
+              "displayDescription": "Italiano (Italia)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "ja",
+              "displayDescription": "日本語"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "ko",
+              "displayDescription": "Korean"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "nl_nl",
+              "displayDescription": "Nederlands (Nederland)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "pt_br",
+              "displayDescription": "Português (Brasil)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "pt_pt",
+              "displayDescription": "Português (Portugal)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "ru",
+              "displayDescription": "Русский"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "sv",
+              "displayDescription": "Svenska"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "zh_cn",
+              "displayDescription": "中文 (中国)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "zh_hans",
+              "displayDescription": "中文 (简体)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "zh_hant",
+              "displayDescription": "中文 (繁體)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }, {
+          "locale": {
+              "localeCode": "zh_tw",
+              "displayDescription": "中文 (台灣)"
+          },
+          "hasBuiltinBundle": false,
+          "hasCustomBundle": false,
+          "adminDefault": false
+      }],
+      "offset": "0",
+      "count": "21"
+  }
+  ```

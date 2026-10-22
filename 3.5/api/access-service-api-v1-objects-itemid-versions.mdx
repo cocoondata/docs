@@ -1,0 +1,125 @@
+---
+title: "<access-service>/api/v1/objects/{itemId}/versions"
+---
+
+## URL structure <a id="access-service-api-v1-objects-itemid-versions-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects/{itemId}/versions
+```
+
+where `{itemId}` is the ID of a file object/Secure Object.
+
+## Supported methods and overview <a id="access-service-api-v1-objects-itemid-versions-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of information associated with the versions of a file object/[Secure Object](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) (specified by `itemId`).
+
+## Detailed description <a id="access-service-api-v1-objects-itemid-versions-detailed-description" />
+
+This API endpoint retrieves a list of information associated with the versions of a file object (specified by `itemId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-objects-itemid-versions-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object whose ID is specified by `{itemId}` in the request's URL.
+- **Originator**, [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Rename** [permission](/3.5/api/access-service-api-v1-permissions-sets) on the file object whose ID is specified by `{itemId}` in the URL. (The **Rename** permission restricts access to collaborators who have been applied either the **Modify** or **Manage** *permission set* on this file object.)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-objects-itemid-versions#access-service-api-v1-objects-itemid-versions-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-objects-itemid-versions-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-objects-itemid-versions-optional-parameters" />
+
+The following optional parameters can also be sent in the **URL** of the request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is information about a file object within the organisation. If this parameter is `0`, then no limit is imposed. If this parameter is omitted, then its value is `25` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. file objects) from the Covata Platform returned in the response. Calls to this API endpoint are soon likely to amount to potentiallly unmanagable numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. file objects) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `DESC` by default.
+- **sortBy** - An enum value representing the field (i.e. member) of a retrieved item by which items (i.e. file objects) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `created` - the date when the file version was created,
+  - `createdBy` - the email address of the owner or collaborator who created the file's version,
+  - `contentSize` - the size (in bytes) of the file version's unencrypted data (as recorded by the Covata Platform's Access Service).
+
+  **Example (request - retrieving information about an file's versions created by the Covata user `alex.originator@xy-company.com`):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/objects/722338038193385472/versions?createdBy=alex.originator@xy-company.com
+  ```
+
+## Returns <a id="access-service-api-v1-objects-itemid-versions-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing information about all versions of a file object. Each element of this array contains information about one of these file's versions (represented as an object containing the following members unless otherwise stated).
+- **id** - The version's ID.
+- **itemId** - The file object's ID.
+- **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage.
+- **sha512** - The SHA-512 value associated with the file's version.
+- **contentSize** - The amount of space (in bytes) of the file version's unencrypted data (as recorded by the Covata Platform's Access Service).
+- **encryptedContentSize** - The amount of space (in bytes) of the file version's encrypted data (as recorded by the Covata Platform's Access Service).
+- **canGenerateView** - A boolean value that indicates whether or not the Content Service is capable of generating a read-only view of the file version's data.
+- **originator** - A member containing information about the owner or collaborator who created the file's version.
+
+  - **email** - This email address of this Covata user.
+  - **id** - The ID of this Covata users account.
+- **modifiedAt** - The date and time when the file's version was last modified.
+- **createdAt** - The date and time when the file's version was created. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "id": "750609121728065536",
+          "itemId": "749866326952308736",
+          "hasView": true,
+          "sha512": "wKDPBCKRQB2AwvYI9XvopJCWBxNu6vOdxi6GTPib5qKkkTJGYLszUJvZ2tieUmYmIBHKP0HeS6jWFHsXjTYKzw==",
+          "contentSize": "634183",
+          "encryptedContentSize": "634192",
+          "canGenerateView": true,
+          "originator": {
+              "email": "alex.originator@xy-company.com",
+              "id": "749419842687528960"
+          },
+          "modifiedAt": "2016-09-02T06:52:41.397Z",
+          "createdAt": "2016-09-02T06:52:40.709Z"
+      }, {
+          "id": "750608937082220544",
+          "itemId": "749866326952308736",
+          "hasView": true,
+          "sha512": "psSqW8kUICaKUznWXnrzbA5K9fZHAHSlDSvd0mN4uF1prtCc5SkeTQ9Gdp9BEXFnnQX8a3xTbueLzhwtC/tI9g==",
+          "contentSize": "549732",
+          "encryptedContentSize": "549744",
+          "canGenerateView": true,
+          "originator": {
+              "email": "alex.originator@xy-company.com",
+              "id": "749419842687528960"
+          },
+          "modifiedAt": "2016-09-02T06:51:57.536Z",
+          "createdAt": "2016-09-02T06:51:56.897Z"
+      }, {
+          "id": "749866328462258176",
+          "itemId": "749866326952308736",
+          "hasView": true,
+          "sha512": "KtEhueZ0lpUcUfURQZ3+VvGZvmcrLY+znVOkQMiLvc0Okgx+t7tpdKmREE+rYRk43xoSKzFGN7Mfo4LdgsSU1Q==",
+          "contentSize": "621849",
+          "encryptedContentSize": "621856",
+          "canGenerateView": true,
+          "originator": {
+              "email": "alex.originator@xy-company.com",
+              "id": "749419842687528960"
+          },
+          "modifiedAt": "2016-08-31T05:41:05.516Z",
+          "createdAt": "2016-08-31T05:41:04.993Z"
+      }],
+      "offset": "0",
+      "count": "3"
+  }
+  ```

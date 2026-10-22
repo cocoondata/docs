@@ -1,0 +1,154 @@
+---
+title: "Verwaltung von Organisationen"
+---
+
+Eine „Organisation“ ist eine in sich geschlossene Einheit, die den Zugriff einer Organisation (oder einer Abteilung) auf Ressourcen in einer Instanz der Covata-Plattform darstellt.
+
+- Eine Organisation ist eine *in sich geschlossene Einheit*, d. h. die Erstellung, Freigabe und Bearbeitung von Dateien <sup>&#42;</sup> und Ordnern (auch als Sammlungen bezeichnet) wird ausschließlich innerhalb der Organisation selbst abgewickelt. Organisationen ermöglichen die *Mandantenfähigkeit* auf der Covata-Plattform, wobei jede Organisation einen individuellen „Mandanten“ darstellt.
+- Der Zugriff eines Covata-Benutzers auf Dateien/Ordner innerhalb einer Organisation hängt davon ab, ob der betreffende Benutzer Besitzer oder Mitwirkender dieser Elemente ist. Weitere Informationen über Covata-Benutzer innerhalb einer Organisation finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+- Alle Covata-Benutzer können in einer Instanz der Covata-Plattform Mitglieder mehrerer Organisationen sein. In diesem Fall wird der betreffende Covata-Benutzer-Account für jede dieser Organisationen verwendet. Die Covata-Plattform behandelt jedoch alle Dateien und Ordner innerhalb einer Organisation (sowie den Zugriff jeglicher Covata-Benutzer auf diese Elemente) *völlig unabhängig* von den Dateien und Ordnern innerhalb einer anderen Organisation.
+
+<sup>&#42;</sup> Eine Datei (auch als Dateiobjekt/sicheres Objekt bezeichnet) ist definiert als von Covata verschlüsselte, auf der Covata-Plattform registrierte Daten sowie die zu diesen verschlüsselten Daten gehörigen Eigenschaften. Weitere Informationen über Dateiobjekte finden Sie unter [Verwaltung von Dateien](/3.3/de/admin-platform/administering-files) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+
+<a id="organisations-page" />
+
+![Seite Organisationen](/images/3c2f75115575-organisations-page.png)
+Bei der ersten Nutzung der Safe Share-Verwaltung in einer neu installierten oder von Version 2.16 (oder früher) aktualisierten Instanz der Covata-Plattform ist eine Organisation vorhanden.
+
+- Bei *neu installierten* Instanzen der Covata-Plattform gilt für diese Organisation Folgendes:
+
+  - Ihr Name ist anfänglich **Default**, und sie enthält keine Covata-Benutzer oder Dateien/Ordner.
+  - Für sie ist kein Organisations-Administrator definiert.
+- Bei *aktualisierten* Instanzen der Covata-Plattform gilt Folgendes:
+
+  - Diese Organisation, deren Name anfänglich ebenfalls **Default** lautet, enthält alle Covata-Benutzer und deren Dateien/Ordner aus der vorherigen Version der Covata-Plattform.
+  - Alle Covata-Benutzer, die in der vorherigen Version der Covata-Plattform die Rolle eines Systemadministrators innehatten, haben nun stattdessen die folgenden beiden Rollen inne:
+
+    - die [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) für den Zugriff auf die Funktionen der [Safe Share-Verwaltung](/3.3/de/admin-platform/index#platform-administration) für ihre Instanz der Covata-Plattform und
+    - die [Organisations-Administrator-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) für diese **Default**- Organisation (für den Zugriff auf die Funktionen der [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration)).
+  - Für die **Default**-Organisation ist keine Kontaktperson festgelegt.
+
+Der Name einer Organisation kann ebenso [geändert/bearbeitet werden](/3.3/de/admin-platform/administering-organisations#editing-an-existing-organisation) wie der anfängliche Organisations-Administrator bzw. die anfängliche Kontaktperson für die Organisation. Sobald der Organisations-Administrator bzw. die Kontaktperson jedoch festgelegt wurde, kann dieser Wert von der Safe Share-Verwaltung aus nicht mehr geändert werden.
+
+## Verwaltung einer Organisation <a id="administering-an-organisation" />
+
+Die Seite **Organisationen** der Safe Share-Verwaltung ([oben](/3.3/de/admin-platform/administering-organisations#organisations-page)) gibt Zugriff auf die folgenden Funktionen:
+
+- [Hinzufügen neuer Organisationen zur Covata-Plattform](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation)
+- [Suche nach](/3.3/de/admin-platform/administering-organisations#finding-existing-organisations), [Bearbeitung](/3.3/de/admin-platform/administering-organisations#editing-an-existing-organisation) oder [Entfernen](/3.3/de/admin-platform/administering-organisations#removing-an-organisation) vorhandener Organisationen
+
+## Hinzufügen einer neuen Organisation <a id="adding-a-new-organisation" />
+
+<Warning>
+
+Beachten Sie Folgendes, ehe Sie diesen Vorgang fortsetzen:
+
+- Wenn Sie Ihrer Instanz der Covata-Plattform Benutzer über [einen LDAP-Server/ein LDAP-Benutzerverzeichnis](/3.3/de/admin-platform/configuring-ldap) hinzufügen möchten, *fügen Sie keine Organisationen hinzu*. Wenn auf einer neu installierten oder aktualisierten Instanz der Covata-Plattform mehr als eine Organisation vorhanden ist, z. B. mehr als die eine, ursprünglich mit dem Namen **Default** bezeichnete Organisation, ist die Funktion LDAP-Konfiguration deaktiviert.
+- Wenn Sie ähnlich [eine LDAP-Verbindung hinzufügen](/3.3/de/admin-platform/configuring-ldap#adding-a-new-ldap-connection) oder eine oder mehrere LDAP-Verbindungen bereits vorhanden sind, wird die Möglichkeit, Ihrer Instanz der Covata-Plattform neue Organisationen hinzuzufügen, *endgültig deaktiviert*, d. h. bei Vorhandensein einer konfigurierten LDAP-Verbindung wird diese Funktion dauerhaft deaktiviert.
+
+</Warning>
+
+**Hinzufügen einer neuen Organisation zur Covata-Plattform:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Organisationen** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Organisationen** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. <a id="add-new-organisation-dialog-box" />Geben Sie im Dialogfeld **Neue Organisation hinzufügen** Folgendes an:
+
+   - **Name der Organisation** - der Wert dieses Felds ist der Name der Organisation, den Covata-Benutzer in Safe Share-Anwendungen angezeigt sehen.
+   - **Kontingent (GB)** - der Wert des dieser Organisation zugeteilten Kontingents (in Gigabytes). <br />
+     **Hinweis:** Das Gesamtkontingent für alle Covata-Benutzer innerhalb dieser Organisation (die über ein Kontingent verfügen) wird von dem hier angegebenen Wert begrenzt. Weitere Informationen über das Speicherkontingent von Covata-Benutzern finden Sie unter [Verwaltung der Speicherkontingente von Benutzern anhand von Plänen](/3.3/de/admin-platform/managing-users-storage-quotas-through-plans) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+   - **Administrator** - die E-Mail-Adresse des anfänglichen Organisations-Administrators dieser Organisation. Wenn Sie sich selbst als Organisations-Administrator dieser Organisation definieren möchten, geben Sie hier die E-Mail-Adresse für Ihren Safe Share-Administrator-Account an. Ist diese E-Mail-Adresse einmal festgelegt, gilt Folgendes:
+
+     - sie kann von *keinem* Safe Share-Administrator mehr geändert werden (sofern er nicht auch ein Organisations-Administrator der betreffenden Organisation ist) und
+     - die Bezeichnung dieses Felds gibt nach dem Hinzufügen und der anschließenden [Bearbeitung](/3.3/de/admin-platform/administering-organisations#editing-an-existing-organisation) der betreffenden Organisation die **Kontaktperson** an, und dieser Wert kann über die Safe Share-Verwaltung nicht mehr geändert werden. Nur ein Organisations-Administrator der betreffenden Organisation kann diesen Wert später über die Seite [Eigenschaften](/3.3/de/admin-platform/configuring-organisation-administration-properties) in der [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) [ändern](/3.3/de/admin-platform/configuring-organisation-administration-properties#organisations-contact-person).
+5. Klicken Sie auf **Speichern**, und die neue Organisation erscheint als neue Eintragung auf der Seite **Organisationen**. <br />
+   **Tipps:**
+
+   - Wenn Sie sich selbst zum Organisations-Administrator dieser Organisation gemacht haben, können Sie auf die Oberfläche für die Safe Share-Organisationsverwaltung zugreifen, indem Sie in der Spalte **Verwalten** die Schaltfläche **Verwalten** für die betreffende Organisation anklicken.
+   - Wenn Sie diese Organisation versehentlich hinzugefügt haben, können Sie sie (wie unten beschrieben) [wieder entfernen](/3.3/de/admin-platform/administering-organisations#removing-an-organisation).
+
+## Suche nach vorhandenen Organisationen <a id="finding-existing-organisations" />
+
+Wenn der Covata-Plattform im Lauf der Zeit mehr Organisationen hinzugefügt werden, kann es schwierig werden, bestimmte Organisationen in der Safe Share-Verwaltung über die Seite **Organisationen** zu finden. Die Seite **Organisationen** bietet daher Funktionen, die es Ihnen erleichtern, bestimmte Organisationen schneller zu finden.
+
+**Auffinden spezifischer Organisationen auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Organisationen** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Organisationen** aufzurufen.
+3. Verwenden Sie eine der folgenden Funktionen, um eine bestimmte Organisation (oder eine Untergruppe der betreffenden Organisationen) zu finden:
+
+   - *Organisationen filtern* - fangen Sie im Feld **Suche nach** (rechts auf der Seite **Organisationen**) an, eine Zeichenfolge einzugeben, die in den Feldern **Name** oder **Kontaktperson** einer der Organisationen enthalten ist, und drücken Sie dann die Eingabe-/Return-Taste. Dies filtert die Liste der Organisationen auf der Covata-Plattform nach denen, deren Name oder Kontaktperson die im Feld **Suche nach** eingegebene Zeichenfolge enthält. <br />
+      Standardmäßig werden für den Filter die Felder **Name** und **Kontaktperson** verwendet (d. h. **Alle**), aber Sie können den Filter anhand des Dropdown-Menüs auch auf eines dieser Felder beschränken.
+   - *Zu spezifischen Organisationen navigieren* - verwenden Sie gegebenenfalls die Schaltflächen zur Seitennavigation (rechts unten auf der Seite **Organisationen**).
+
+<Tip>
+
+Sie können Organisationen auch auf der Seite **Organisationen** sortieren, indem Sie auf den verknüpften Namen (im Spaltenkopf) des betreffenden Felds klicken, nach dem Sie Ihre Organisationen sortieren möchten:
+
+- Mehrfaches Anklicken eines verknüpften Feldnamens schaltet zwischen einer Sortierung der Organisationen in aufsteigender und absteigender Reihenfolge (gemäß dem betreffenden Feld) um.
+- Aktualisieren Sie einfach die Seite, um zur normalen Sortierung der Organisationen in der Liste zurückzukehren.
+
+</Tip>
+
+## Bearbeitung einer bestehenden Organisation <a id="editing-an-existing-organisation" />
+
+<Tip>
+
+Verwenden Sie diesen Vorgang, um den anfänglichen Organisations-Administrator der **Default**-Organisation festzulegen.
+
+</Tip>
+
+**Bearbeitung einer bestehenden Organisation:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Organisationen** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Organisationen** aufzurufen.
+3. Aktivieren Sie das Kontrollkästchen links neben der zu bearbeitenden Organisation und klicken Sie auf die Schaltfläche **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Organisation bearbeiten** Folgendes wie gewünscht:
+
+   - **Name der Organisation** - der Wert dieses Felds ist der Name der Organisation, den Covata-Benutzer in Safe Share- (und anderen Client-)Anwendungen angezeigt sehen.
+   - **Kontingent (GB)** - der Wert des dieser Organisation zugeteilten Kontingents (in Gigabytes).
+
+     **Hinweis:** Das Gesamtkontingent für alle Covata-Benutzer innerhalb dieser Organisation (die über ein Kontingent verfügen) wird von dem hier angegebenen Wert begrenzt. Weitere Informationen über das Speicherkontingent von Covata-Benutzern finden Sie unter [Verwaltung der Speicherkontingente von Benutzern anhand von Plänen](/3.3/de/admin-platform/managing-users-storage-quotas-through-plans) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+
+   Das letzte Feld in diesem Dialogfeld kann abhängig von der gerade bearbeiteten Organisation und ihrem Status unterschiedlich sein.
+
+   - Wenn Sie eine Organisation bearbeiten, deren Organisations-Administrator bereits festgelegt wurde (d. h. alle Organisationen außer der **Default**-Organisation), zeigt dieses (als **Kontaktperson** bezeichnete) Feld eine E-Mail-Adresse, die *nicht bearbeitet werden kann*. Diese ist entweder:
+
+     - die Adresse des Organisations-Administrators, der zunächst festgelegt wurde, als die Organisation von einem Safe Share-Administrator [hinzugefügt wurde](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation), oder
+     - die Adresse der anschließend von einem Organisations-Administrator der betreffenden Organisation über die Seite [Eigenschaften](/3.3/de/admin-platform/configuring-organisation-administration-properties) in der [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) [festgelegten Kontaktperson](/3.3/de/admin-platform/configuring-organisation-administration-properties#organisations-contact-person).
+   - Wenn Sie die anfänglich als **Default** bezeichnete Organisation bearbeiten, trägt dieses *bearbeitbare Feld* eine der folgenden Bezeichnungen:
+
+     - Bei neu installierten Instanzen der Covata-Plattform **Administrator**, weil für **Default** noch kein Organisations-Administrator festgelegt ist. Sie müssen hier die E-Mail-Adresse eines Organisations-Administrators eingeben, um Ihre Änderungen in den anderen (oben beschriebenen) Feldern speichern zu können. Für wichtige Informationen über die Bearbeitung dieses Felds, ehe Sie Ihre Änderungen speichern, siehe [Schritt 4](/3.3/de/admin-platform/administering-organisations#add-new-organisation-dialog-box) unter [Hinzufügen einer neuen Organisation](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation) (oben). <br />
+       **Hinweis:** Sie können sich selbst als Organisations-Administrator der **Default**-Organisation definieren, indem Sie hier die E-Mail-Adresse für Ihren Safe Share-Administrator-Account eingeben.
+     - Bei aktualisierten Instanzen der Covata-Plattform **Kontaktperson**. Sie müssen die E-Mail-Adresse einer Kontaktperson eingeben, zum Beispiel die Adresse eines der für die **Default**-Organisation festgelegten Organisations-Administratoren, um Ihre Änderungen in den anderen (oben beschriebenen) Feldern speichern zu können. Beachten Sie hierbei, dass die E-Mail-Adresse der Kontaktperson nicht die Adresse eines Organisations-Administrators oder eines anderen Covata-Benutzers innerhalb der betreffenden Organisation sein muss.
+5. Klicken Sie auf **Speichern**, und die Details der Organisation werden entsprechend aktualisiert.
+
+## Entfernen einer Organisation <a id="removing-an-organisation" />
+
+Dieser Abschnitt wendet sich an Safe Share-Administratoren, die versehentlich eine oder mehrere Organisationen hinzugefügt haben und sie (bald nach ihrer Erstellung) entfernen möchten.
+
+Das Entfernen von Organisationen kann in den folgenden Fällen hilfreich sein:
+
+- Wenn Sie die Funktion für die LDAP-Konfiguration durch das [Hinzufügen neuer Organisationen](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation) versehentlich deaktiviert haben, da Sie auf die [LDAP-Konfiguration](/3.3/de/admin-platform/configuring-ldap) wieder zugreifen können, sobald alle Organisationen außer derjenigen, die Sie nutzen möchten, entfernt wurden.
+- Um die Seite **Organisationen** übersichtlicher zu gestalten.
+
+<Note>
+
+Eine Organisation kann nicht entfernt werden, wenn innerhalb der Organisation Covata-Benutzer mit [Ersteller-](/3.3/de/admin-platform/administering-users-within-an-organisation#originator-role), [Mitwirkender-](/3.3/de/admin-platform/administering-users-within-an-organisation#collaborator-role) oder [Ad-hoc](/3.3/de/admin-platform/administering-users-within-an-organisation#adhoc-role)-Rolle vorhanden sind. Weitere Informationen über diese Rollen finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+
+</Note>
+
+**Entfernen einer Organisation:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Organisationen** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Organisationen** aufzurufen.
+3. Aktivieren Sie das Kontrollkästchen links neben der Organisation, die Sie entfernen möchten, und klicken Sie auf die Schaltfläche **Entfernen**. Sie werden aufgefordert, die Entfernung zu bestätigen. Die Organisation wird entfernt, sobald Sie **Ja** angeklickt haben. <br />
+   **Hinweise:**
+
+   - Wenn Sie die Fehlermeldung „*Diese Organisation kann nicht entfernt werden ...*“ erhalten, hat einer der Organisations-Administratoren der Organisation (wie oben erwähnt) wahrscheinlich mindestens einem Covata-Benutzer (zum Beispiel sich selbst) die Ersteller- oder Mitwirkender-Rolle zugewiesen. Um dies zu beheben, bitten Sie *einen beliebigen* Organisations-Administrator der Organisation (der *nicht selbst* die Ersteller- oder Mitwirkender-Rolle hat), alle Covata-Benutzer aus der Organisation zu entfernen, ehe Sie diese Organisation entfernen.
+   - Hat die Organisation nur einen Covata-Benutzer, der selbst die Organisations-Administrator-Rolle *und* die Ersteller- oder Mitwirkender-Rolle innehat (die von einem Benutzer nicht entfernt werden können), müsste der betreffende Organisations-Administrator Folgendes tun, um es dem Safe Share-Administrator zu ermöglichen, die betreffende Organisation zu entfernen:
+
+     1. Erstellen eines anderen Covata-Benutzer-Accounts mit nur der Organisations-Administrator-Rolle.
+     2. Anmeldung zur Safe Share-Organisationsverwaltung über diesen neuen Account und Entfernen des ursprünglichen Organisations-Administrator-Accounts (d. h. des Accounts mit der zusätzlichen Ersteller- oder Mitwirkender-Rolle).
+     3. Benachrichtigung des Safe Share-Administrators, dass die Organisation nun entfernt werden kann.

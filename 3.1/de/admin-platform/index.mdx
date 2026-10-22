@@ -1,0 +1,44 @@
+---
+title: "Safe Share-Administratorenanleitung für Safe Share 3.1"
+---
+
+Diese Dokumentation gilt für die 3.1.x-Versionen von *Safe Share* und der *Covata-Plattform*.
+
+Informationen zu dieser Dokumentation entnehmen Sie bitte unserem [wichtigen Hinweis](/3.1/de/admin-platform/important-notice).
+
+## Übersicht über Safe Share und die Covata-Plattform
+
+Covata beinhaltet eine komplette Lösung und Plattform für den zuverlässigen Schutz und die sichere Freigabe verschlüsselter Dateien und Ordner, die (innerhalb einer Organisation, außerhalb der Domäne und von Mobilgeräten aus) ortsunabhängig gespeichert und zugänglich gemacht werden können.
+
+Covata-Technologien stellen diese Lösung über die *Covata-Plattform* (auf die Safe Share aufbaut), zur Verfügung, deren *Zugriffsdienst* kryptografische *Schlüssel* (zur Ver- bzw. Entschlüsselung von Inhalten) und *Zugriffssteuerungen* (die definieren, wer Inhalte wann entschlüsseln und auf sie zugreifen kann) zentral verwaltet.
+
+Der Zugriffsdienst der Covata-Plattform wickelt die Verwaltung der *Schlüssel* und die *Zugriffssteuerungen* separat von der Kryptografie und den Benutzerinhalten ab. Diese Trennung hilft gewährleisten, dass verschlüsselte Inhalte nur von den definierten Zugriffsberechtigten entschlüsselt werden können, selbst wenn sie in die falschen Hände geraten sollten.
+
+Benutzer von *Covata-Technologien* <sup>&#42;</sup> können anderen Personen ihre sicheren Inhalte über Covatas Safe Share-Anwendungen freigeben. Diese sind mit der Covata-Plattform integriert um sicherzustellen, dass kritische Schlüsselverwaltung und Zugriffssteuerungen angemessen gehandhabt werden.
+
+Die Covata-Plattform stellt eine Programmierschnittstelle (Application Programming Interface/API) zur Verfügung, anhand der Integratoren ihre eigenen Anwendungen entwickeln können, um die leistungsstarken, datenzentrierten Sicherheitsfunktionen von Covata optimal nutzen zu können.
+
+<a id="platform-administration" />
+
+## Safe Share-Verwaltung
+
+*Safe Share-Verwaltung* ist eine internetbasierte Oberfläche für die Verwaltung von Organisationen auf einer Instanz der Covata-Plattform. Diese Oberfläche gibt Zugriff auf eine Reihe von konfigurierbaren Funktionen der Covata-Technologien <sup>&#42;</sup>, die auf alle Organisationen Anwendung finden, die auf der Covata-Plattform konfiguriert sind.
+
+![Seite Dashboard](/images/6be784aefa49-platform-administration-dashboard-page.png)
+*Safe Share-Administratoren* sind Benutzer, die [nach ihrer Anmeldung](/3.1/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung auf das (oben dargestellte) [Dashboard](/3.1/de/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) zugreifen und auf ihrer Instanz der Covata-Plattform die folgenden Administrationsaufgaben ausführen können:
+
+- Verwaltung aller [Safe Share-Administrator-Benutzer](/3.1/de/admin-platform/administering-platform-administrator-users) auf der Covata-Plattform. <br />
+  **Hinweis:** Alle Benutzer, für die auf der Covata-Plattform ein Account registriert ist, werden als Covata-Benutzer bezeichnet. Ein Safe Share-Administrator ist ein bestimmter Typ Covata-Benutzer. Weitere Informationen über andere Arten von Covata-Benutzern finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.1/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/organisation-administration) dieses Handbuchs.
+- Verwaltung aller [Organisationen](/3.1/de/admin-platform/administering-organisations) auf der Covata-Plattform.
+- Konfiguration von Covata-Benutzern über [LDAP-Verbindungen](/3.1/de/admin-platform/configuring-ldap) (nur für Covata-Plattform-Instanzen mit nur einer Organisation)
+- Konfiguration der Einzelanmeldung (single sign-on/SSO) über einen [SAML](/3.1/de/admin-platform/configuring-single-sign-on-using-an-idp)-basierten Identitätsanbieter (IdP)
+- Registrierung von [Client-Apps](/3.1/de/admin-platform/configuring-client-applications), d. h. von Integratoren entwickelte Anwendungen, die beliebige Aspekte der Covata-Technologien nutzen, die über die API der Covata-Plattform bereitgestellt werden.
+- Änderung der [Konfiguration](/3.1/de/admin-platform/configuring-platform-administration-properties) von Eigenschaften der Safe Share-Verwaltung
+- Anpassung der Darstellung der Safe Share-Webanwendung, Safe Share-Verwaltung und Safe Share-Organisationsverwaltung mithilfe eines [Designs](/3.1/de/admin-platform/re-theming-the-application-and-administration)
+- Anpassung der auf der Benutzeroberfläche der Safe Share-Verwaltung und Safe Share-Organisationsverwaltung verfügbaren Sprachen und der Standardsprache der Safe Share-Webanwendung sowie Upload/Löschen von Sprachpaketen mithilfe der Funktion [Internationalisierung](/3.1/de/admin-platform/managing-internationalization)
+
+<sup>&#42;</sup> Der Begriff *Covata-Technologien* beinhaltet alle Funktionen, die über die Covata-Plattform bereitgestellt werden, u. a. Covatas Safe Share-Anwendungen, die API der Covata-Plattform sowie die Covata-Plattform selbst.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

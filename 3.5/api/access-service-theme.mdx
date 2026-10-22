@@ -1,0 +1,112 @@
+---
+title: "<access-service>/theme..."
+---
+
+## URL structure <a id="access-service-theme-url-structure" />
+
+```text
+https://access-service.xy-company.com/theme...
+```
+
+where `...` represents either nothing or any one of the following paths (appended to the URL [above](/3.5/api/access-service-theme#access-service-theme-url-structure)):
+
+- `/adminEmail`
+- `/adminHelpUrl`
+- `/androidAuthenticatorUrl`
+- `/applicationName`
+- `/companyName`
+- `/copyright`
+- `/iphoneAuthenticatorUrl`
+- `/legalUrl`
+- `/orgAdminHelpUrl`
+- `/orgRemovalActionDays`
+- `/privacyUrl`
+- `/supportLink`
+- `/versionUrl`
+- `/webappHelpUrl`
+- `/windowsAuthenticatorUrl`
+
+## Supported methods and overview <a id="access-service-theme-supported-methods-and-overview" />
+
+- `GET` - retrieves the current values for each (or all) theme-related SafeShare Administration properties, many of which can be [overridden through Organisation Administration](/3.5/api/access-service-api-v1-organisations-orggroupid).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-theme-detailed-description" />
+
+This API endpoint retrieves the current values for all theme-related SafeShare Administration properties (i.e. when nothing is appended to the URL [above](/3.5/api/access-service-theme#access-service-theme-url-structure)). Many of these properties can be [overridden through Organisation Administration](/3.5/api/access-service-api-v1-organisations-orggroupid).
+
+Each of the following paths (which can be appended to the URL above) relates to an individual property (accessible through the [System Details](/3.5/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.5/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration), such that making a `GET` request on that URL/path combination retrieves the value for that property only:
+
+| Appended URL path | System Details property | Can be modified through this API endpoint |
+| --- | --- | --- |
+| /adminEmail | Admin Email | [&lt;access-service&gt;/api/v1/config/theme/adminEmail](/3.5/api/access-service-api-v1-config-theme-adminemail) |
+| /adminHelpUrl | SafeShare Administration Help URL | [&lt;access-service&gt;/api/v1/config/theme/adminHelpUrl](/3.5/api/access-service-api-v1-config-theme-adminhelpurl) |
+| /androidAuthenticatorUrl | Android Phone Authenticator URL | [&lt;access-service&gt;/api/v1/config/theme/androidAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-androidauthenticatorurl) |
+| /applicationName | Application Name | [&lt;access-service&gt;/api/v1/config/theme/applicationName](/3.5/api/access-service-api-v1-config-theme-applicationname) |
+| /companyName | Company Name | [&lt;access-service&gt;/api/v1/config/theme/companyName](/3.5/api/access-service-api-v1-config-theme-companyname) |
+| /copyright | Email Notification Copyright Notice | [&lt;access-service&gt;/api/v1/config/theme/copyright](/3.5/api/access-service-api-v1-config-theme-copyright) |
+| /iphoneAuthenticatorUrl | iPhone Authenticator URL | [&lt;access-service&gt;/api/v1/config/theme/iphoneAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-iphoneauthenticatorurl) |
+| /legalUrl | Legal URL | [&lt;access-service&gt;/api/v1/config/theme/legalUrl](/3.5/api/access-service-api-v1-config-theme-legalurl) |
+| /orgAdminHelpUrl | Organisation Administration Help URL | [&lt;access-service&gt;/api/v1/config/theme/orgAdminHelpUrl](/3.5/api/access-service-api-v1-config-theme-orgadminhelpurl) |
+| /orgRemovalActionDays | Days to action organisation removal | [&lt;access-service&gt;/api/v1/config/theme/orgRemovalActionDays](/3.5/api/access-service-api-v1-config-theme-orgremovalactiondays) |
+| /privacyUrl | The URL of the privacy statement | [&lt;access-service&gt;/api/v1/config/theme/privacyUrl](/3.5/api/access-service-api-v1-config-theme-privacyurl) |
+| /supportLink | Support URL | [&lt;access-service&gt;/api/v1/config/theme/supportLink](/3.5/api/access-service-api-v1-config-theme-supportlink) |
+| /versionUrl | Version URL | [&lt;access-service&gt;/api/v1/config/theme/versionUrl](/3.5/api/access-service-api-v1-config-theme-versionurl) |
+| /webappHelpUrl | Web Application Help URL | [&lt;access-service&gt;/api/v1/config/theme/webappHelpUrl](/3.5/api/access-service-api-v1-config-theme-webapphelpurl) |
+| /windowsAuthenticatorUrl | Windows Phone Authenticator URL | [&lt;access-service&gt;/api/v1/config/theme/windowsAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-windowsauthenticatorurl) |
+
+## Supported roles and conditions <a id="access-service-theme-supported-roles-and-conditions" />
+
+This request does not require any [authentication or authorisation](/3.5/api/authentication-and-authorisation) through a Covata user account.
+
+## Required headers <a id="access-service-theme-required-headers" />
+
+No additional headers are required for submission with this request. This request does not require an access (i.e. `Bearer`) token.
+
+## Returns <a id="access-service-theme-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **property_name** - The name of the property, followed by its value. <br />
+  **Notes:**
+
+  - Most **property_name**s are similar to (but do not match) the URL path components [above](/3.5/api/access-service-theme#access-service-theme-detailed-description), which can be appended to this endpoint's URL. These names are hard-coded in the Covata Platform.
+  - When a URL path component is appended to this endpoint's URL, the property name is returned as just **property**.
+
+  **Example (response from a GET request to '&lt;access-service&gt;/theme'):**
+
+  ```json
+  {
+      "copyright": "YEAR Covata.",
+      "org_removal_days_to_action":"30",
+      "authenticator_windows_url": "https://www.windowsphone.com/en-au/store/app/authenticator/021dd79f-0598-e011-986b-78e7d1fa76f8",
+      "authenticator_android_url": "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2",
+      "support_link": "https://support.covata.com",
+      "org_admin_help_url": "https://docs.covata.com/latest/admin-org/",
+      "admin_email": "",
+      "admin_help_url": "https://docs.covata.com/latest/admin-platform/",
+      "application_name": "SafeShare",
+      "legal_url": "https://docs-staticassets.covata.io/html/legal.html",
+      "company_name": "Covata",
+      "authenticator_iphone_url": "https://itunes.apple.com/au/app/google-authenticator/id388497605?mt=8",
+      "privacy_url": "",
+      "webapp_help_url": "https://docs.covata.com/latest/user/",
+      "version_url": "https://www.covata.com/product-releasenotes/"
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request to '&lt;access-service&gt;/theme/companyName'):**
+
+  ```json
+  {
+      "property": "Covata"
+  }
+  ```

@@ -1,0 +1,156 @@
+---
+title: "<access-service>/api/v1/users/me/contacts"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-contacts-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/contacts
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-contacts-supported-methods-and-overview" />
+
+- `POST` - creates a new [contact](/3.5/user/managing-your-account#managing-your-contacts) for a [Covata user](/3.5/api/authentication-and-authorisation) (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-supported-roles) to this endpoint).
+- `GET` - retrieves a list of information for all contacts of a Covata user (whose access token is submitted in the request to this endpoint).
+
+## Detailed description <a id="access-service-api-v1-users-me-contacts-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Creates a new contact for a Covata user (whose access token is submitted in the request to this endpoint). This contact consists of a mandatory email address as well as optional first and last names. <br />
+  **Notes:**
+
+  - A contact can be created for any person who does not have a registered Covata user account. However, if the Covata user successfully shares an item with this contact, then a new Covata user account is automatically created for this contact (with the [Ad hoc role](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)).
+  - A contact can also be created through the [Contacts](/3.5/user/managing-your-account#managing-your-contacts) feature of [SafeShare for Web](/3.5/user/index).
+- Retrieves a list of information for all contacts of a Covata user (whose access token is submitted in the request to this endpoint). The list of contacts returned in the [response](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-returns) can be filtered according to contacts whose email address, first name or last name contains the string specified in the request.
+
+## Supported roles <a id="access-service-api-v1-users-me-contacts-supported-roles" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-contacts-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-users-me-contacts-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **contacts** - An array of elements about each contact to be created for the Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-supported-roles) to this endpoint). Each element of this array contains the sub-element **email** (in an object), whose value is the email address of a contact.
+- **ignoreDuplicates** - A boolean value of:
+
+  - `true` to force a valid request to return an HTTP response of `200 OK` (along with a JSON-formatted object with additional data) in the event that existing contacts of this Covata user match any contacts in the request payload. In such instances, these matching contacts in the request are ignored.
+  - `false` to return an HTTP response of `400 Bad Request` (along with a JSON-formatted object containing an appropriate message) in the event that an existing contact of this user matches any contact in the request payload. In such instances, no contact in the request payload is created for this user.
+
+  **Example (POST request):**
+
+  ```json
+  {
+    "contacts": [
+      {
+        "email": "chris.collaborator@xy-company.com"
+      }
+    ],
+    "ignoreDuplicate": true
+  }
+  ```
+
+## Optional POST-request parameters <a id="access-service-api-v1-users-me-contacts-optional-post-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the POST request, each as individual members/sub-elements of the **JSON object** that includes the [Required POST-request parameters](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-post-request-parameters) above:
+
+- **contacts** - An array of elements containing one or more of the following sub-elements (relating to the **email** sub-element [above](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-post-request-parameters)).
+
+  - **firstName** - The first name for the contact.
+  - **lastName** - The last name for the contact.
+
+  **Example (POST request with optional parameters):**
+
+  ```json
+  {
+    "contacts": [
+      {
+        "email": "chris.collaborator@xy-company.com",
+        "firstName": "Chris",
+        "lastName": "Collaborator"
+      },
+      {
+        "email": "olly.originator@xy-company.com"
+      }
+    ],
+    "ignoreDuplicate": true
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-users-me-contacts-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **searchText** - Any text substring used to filter for *all* contacts of the Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-supported-roles) to this endpoint), where this text substring must match that of the contact's email address, first name or last name. If this parameter is omitted, then no filtering is performed.
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is information about a contact of this Covata user. If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. contacts of this Covata user) from the Covata Platform returned in the response. Calls to this API endpoint may amount to potentially unmanageable numbers of items being returned. Therefore, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default. <br />
+  **Example (GET request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/users/me/contacts?searchText=xy-company
+  ```
+
+## Returns <a id="access-service-api-v1-users-me-contacts-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing information about contacts of the Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-supported-roles) to this endpoint), either which:
+
+  - have been created for this user (via a `POST` request), or
+  - this user currently has (via a `GET` request) filtered by any [parameters](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-optional-get-request-parameters) submitted in the request.
+
+  Each element of this array contains information about one of these contacts (represented as an object containing the following members unless otherwise stated):
+
+  - **id** - The ID of the contact.
+  - **email** - The email address of the contact.
+  - **firstName** - The optional first name of the contact. If this value was not specified when the contact was created and/or last modified, then its value is `null`.
+  - **lastName** - The optional last name of the contact. If this value was not specified when the contact was created and/or last modified, then its value is also `null`.
+  - **createdAt** - The date and time when the contact was created.
+  - **modifiedAt** - The date and time when the contact was last modified.
+- **count** - The maximum number of items (i.e. all contacts of this Covata user) that can be returned in the response. <br />
+  **Notes:**
+
+  - If the **searchText** [parameter](/3.5/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-optional-get-request-parameters) was specified in the request, then this value represents the number of items (above) returned in the response.
+  - This value is always `0` for responses returned from `POST` requests to this endpoint.
+- **offset** - The value of the **offset** which had been used in the `GET` request to this endpoint. This value is always `0` for responses returned from `POST` requests to this endpoint. <br />
+  **Example (response from a POST request):**
+
+  ```json
+  {
+      "items": [{
+          "id": "762179066710499328",
+          "email": "chris.collaborator@xy-company.com",
+          "firstName": "Chris",
+          "lastName": "Collaborator",
+          "modifiedAt": "2016-10-04T05:07:30.106Z",
+          "createdAt": "2016-10-04T05:07:30.106Z"
+      }, {
+          "id": "762179066710499329",
+          "email": "olly.originator@xy-company.com",
+          "firstName": null,
+          "lastName": null,
+          "modifiedAt": "2016-10-04T05:07:30.106Z",
+          "createdAt": "2016-10-04T05:07:30.106Z"
+      }],
+      "count": "0",
+      "offset": "0"
+  }
+  ```

@@ -1,0 +1,126 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups/{groupId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-groupid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups/{groupId}
+```
+
+where `{orgId}` is the ID of an organization and `{groupId}` is the ID of one of this organization's groups.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-groupid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a [group](/3.3/admin-org/managing-groups) (specified by `groupId`) defined in an organization (specified by `orgId`).
+- `PUT` - used to modify the fields of an existing group (specified by `groupId`) in an organization (specified by `orgId`), which includes the association of [classifications](/3.3/admin-org/managing-classifications) and the membership of [Covata users](/3.3/api/authentication-and-authorisation) [in the organization](/3.3/admin-org/administering-users-within-an-organisation) with this group.
+- `DELETE` - used to delete an existing group (specified by `groupId`) in an organization (specified by `orgId`).
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-groupid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about a group (specified by `groupId`) defined in an organization (specified by `orgId`). A group's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.3/api/access-service-api-v1-organisations-orgid-groups) API endpoint, which retrieves a list of information for all groups defined in an organization (specified by `orgId`). <br />
+  **Tip:** All information returned in the [response](/3.3/api/access-service-api-v1-organisations-orgid-groups-groupid#access-service-api-v1-organisations-orgid-groups-groupid-returns) from a `GET` request to this API endpoint is also returned in the [response](/3.3/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-returns) from the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.3/api/access-service-api-v1-organisations-orgid-groups) endpoint. Therefore, there is no need to call the `GET` method on this endpoint if you already have a group's **name**, **description** and/or **id** from calling [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.3/api/access-service-api-v1-organisations-orgid-groups).
+- Modifies the fields of an existing group (specified by `groupId`) in an organization (specified by `orgId`), which includes the association of classifications and the membership of Covata users with this group. This endpoint's `PUT` method allows modification of the group's name and description, as well as:
+
+  - the association (i.e. addition or removal) of classifications (configured through the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.3/api/access-service-api-v1-organisations-orgid-labels)) and [related](/3.3/api/classification-endpoints) API endpoints) with the group and
+  - the addition (i.e. membership) of Covata users to (or their removal from) the group.
+- Deletes an existing group (specified by `groupId`) from an organization (specified by `orgId`). <br />
+  **Important:** Deleting a group removes any association between the Covata users who were members of this group as well as any classifications that were associated with the group. Therefore, if a Covata user was shared a file object with a classification that is associated with one or more groups (of which the user is also a member) and the deletion of one of these groups results in the user:
+
+  - Still remaining associated with this classification (through the classification's association with other groups to which the user is also a member), then the user will still have access to this file object.
+  - Losing their association with this classification (because the user is not a member of any other group that remains associated with this classification), then the user loses access to this file object.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-groups-groupid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orgid-groups-groupid#access-service-api-v1-organisations-orgid-groups-groupid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-groupid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-organisations-orgid-groups-groupid-optional-parameters" />
+
+The following optional parameters can also be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **name** - The updated name for the group.
+- **description** - The updated description for the group.
+- **labels** - A parameter containing the following optional sub-element parameters that relate to the classifications being **add**ed to or **remove**d from this group.
+
+  - **add** - An array of elements about each classification to be added to this group.
+
+    - **id** - The ID of a classification to be added to this group. This classification must be configured within the organization specified by `{orgId}` in the request's URL.
+  - **remove** - An array of elements about each classification to be removed from this group.
+
+    - **id** - The ID of a classification to be removed from this group.
+- **members** - A parameter containing the following optional sub-element parameters that relate to the Covata user accounts being **add**ed to or **remove**d from this group.
+
+  - **add** - An array of elements about each user account to be added to this group.
+
+    - **email** - The email address of a Covata user account to be added to this group. This Covata user must also be a member of the organization specified by `{orgId}` in the request's URL.
+  - **remove** - An array of elements about each user account to be removed from this group.
+
+    - **email** - The email address of a Covata user account to be removed from this group.
+
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Company partners (without any security clearance)",
+    "description": "Staff members of companies partnered with XY Company, who themselves do not have any security clearance within their organization.",
+    "labels": {
+      "add": [
+        {
+          "id": "766862496543055872"
+        }
+      ]
+    },
+    "members": {
+      "add": [
+        {
+          "email": "alex.originator@xy-company.com"
+        }
+      ]
+    }
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-groups-groupid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` and `PUT` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **description** - The (updated) description of the group.
+- **name** - The (updated) name of the group.
+- **id** - The ID of the group. <br />
+  **Example (response from a GET or PUT request):**
+
+  ```json
+  {
+      "description": {
+          "value": "Staff members of companies partnered with XY Company, who themselves do not have any security clearance within their organization."
+      },
+      "name": {
+          "value": "Company partners (without any security clearance)"
+      },
+      "id": "767257860555186176"
+  }
+  ```

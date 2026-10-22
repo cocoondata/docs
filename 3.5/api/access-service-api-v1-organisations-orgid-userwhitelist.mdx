@@ -1,0 +1,115 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/userwhitelist"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-userwhitelist-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/userwhitelist
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-userwhitelist-supported-methods-and-overview" />
+
+- `POST` - adds one or more new [user whitelist rule/s](/3.5/admin-org/managing-user-whitelists) to an organisation (specified by `orgId`).
+- `GET` - retrieves a list of information for all existing user whitelist rules configured in an organisation (specified by `orgId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-userwhitelist-detailed-description" />
+
+This API endpoint servers a number of purposes:
+
+- Adds one or more new user whitelist rule/s to an organisation (specified by `orgId`). If the email addresses of any [Covata users](/3.5/api/authentication-and-authorisation) *do not match/comply with* any user whitelist rule configured in the organisation, then these users cannot be shared items by other users within the organisation. This also includes anyone else who does not yet have a user account registered on the Covata Platform but whose email address does not match/comply with an existing user whitelist rule. <br />
+  **Note:** The user whitelist feature becomes enabled when at least one rule has been added to/is specified in the organisation. It possible to first check which existing Covata user accounts will be affected (i.e. prevented from being shared content) within the organisation by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist/check](/3.5/api/access-service-api-v1-organisations-orgid-userwhitelist-check) API endpoint with an **action** parameter value of **add** in the JSON object, along with each **pattern** (i.e. an individual rule to be added) as an array of **items**.
+- Retrieves a list of information for all existing user whitelist rules configured in an organisation (specified by `orgId`). The list of user whitelist rules returned in the [response](/3.5/api/access-service-api-v1-organisations-orgid-userwhitelist#access-service-api-v1-organisations-orgid-userwhitelist-returns) can be ordered, sorted and paginated.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-userwhitelist-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-organisations-orgid-userwhitelist#access-service-api-v1-organisations-orgid-userwhitelist-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-userwhitelist-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-orgid-userwhitelist-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **items** - .
+
+  - **pattern** - The domain or email address of the user whitelist rule to add to the organisation specified by `{orgId}` in the request's URL.
+  - **description** - The description for this new user whitelist rule.
+
+  **Example (request):**
+
+  ```json
+  {
+    "items": [
+      {
+        "pattern": "xy-company.com",
+        "description": "XY Company staff"
+      }
+    ]
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orgid-userwhitelist-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response, where an individual item is information about a user whitelist entry in the organisation (specified by `{orgId}` in the request's URL). If this parameter is omitted, then its value is `0` by default, which does not apply restrictions to the number of items returned in the response.
+- **offset** - A value representing the count order of all retrievable items (i.e. user whitelist entries in the organisation specified by `{orgId}` in the URL) returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. user whitelist entries in the organisation specified by `{orgId}` in the URL) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. user whitelist entries in the organisation specified by `{orgId}` in the URL) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `pattern` - the domain or email address of the user whitelist rule,
+  - `description` - the description of the user whitelist rule,
+  - `created` - the date and time when the user whitelist rule was created and
+  - `modified` - the date and time when the user whitelist rule was last modified.
+
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/760756644367081472/userwhitelist?offset=1&orderBy=DESC&sortBy=created
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-userwhitelist-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all existing user whitelist rules configured in the organisation (specified by `{orgId}` in the request's URL), where these rules have been filtered by any [parameters](/3.5/api/access-service-api-v1-organisations-orgid-userwhitelist#access-service-api-v1-organisations-orgid-userwhitelist-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these user whitelist rules (represented as an object containing the following members unless otherwise stated).
+
+  - **id** - The ID of the user whitelist rule.
+  - **pattern** - The domain or email address of this user whitelist rule.
+  - **description** - The description of this user whitelist rule.
+- **count** ( *from GET requests only* ) - The maximum number of items (i.e. user whitelist entries in the organisation specified by `{orgId}` in the URL) that can be returned in the response.
+- **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this endpoint. <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items": [{
+          "id": "765456269464346624",
+          "pattern": "xy-company.com",
+          "description": "XY Company staff"
+      }, {
+          "id": "765708906118029312",
+          "pattern": "*.xy-company.com",
+          "description": "Other XY Company staff"
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

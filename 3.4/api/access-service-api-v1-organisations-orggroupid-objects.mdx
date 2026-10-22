@@ -1,0 +1,389 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/objects"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-objects-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/objects
+```
+
+where `{orgGroupId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-objects-supported-methods-and-overview" />
+
+- `POST` - initializes a new *Incomplete* file object (i.e. [Secure Object](/3.4/api/working-with-files-and-folders-fundamentals#secure-object)) within an organization (specified by `orgGroupId`), along with the option to set any combination of the following properties on the resulting file:
+
+  - The file's name and location.
+  - Collaborators (as well as their [permission sets](/3.4/api/access-service-api-v1-permissions-sets)).
+  - Classifications.
+- `GET` - retrieves a list of high-level information associated with all (active versions of) file objects that have been created in an organization specified by `orgGroupId` (available to Organization administrators only).
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-objects-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+**POST method requests:**
+
+- Initializes a new *Incomplete* file object within an organization (specified by `orgGroupId`), by associating the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys) endpoint) with this new file object. This allows the file object's data to be either:
+
+  - Encrypted locally (by your client application) and then uploaded to the Covata Platform's Content Service in its encrypted form (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint - in multiple requests if necessary). During the upload process, the file object is then completed (which changes its state from *Incomplete* to *Created*) using the [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value (calculated locally by your client application) of the locally-encrypted data.
+  - Uploaded in its unencrypted form (also via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint - in multiple requests if necessary) for server-side encryption by the Content Service, then storage. This process automatically completes the file object because the Content Service associates its own calculated SHA-512 value of the server-side encrypted data, with the file object.
+
+- ( *Deprecated* ) Creates a new completed file object (whose state is *Created*) within an organization (`POST` method), by associating the new file object with both its cryptographic key *and* the SHA-512 value of the file's encrypted data (specified through this endpoint's **sha512** [parameter](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters)). (Be aware that this data must have been encrypted externally - i.e. not via server-side encryption by the Content Service). <br />
+  **Note:** Associating the SHA-512 value of a file object's encrypted data through this endpoint is now a deprecated approach. Instead use the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint for this purpose.
+
+The [Covata user](/3.4/admin-org/administering-users-within-an-organisation) whose account creates a new file object through this endpoint becomes the *owner* <sup>1</sup> of this file object. When making the `POST` method request to this endpoint, the following properties can also be set on this file object:
+
+- Name (specified through this endpoint's **name** [parameter](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters)) - the name of the new file.
+- Parent folder - i.e. [collection](/3.4/api/working-with-files-and-folders-fundamentals#collection) (specified through this endpoint's **parentId** parameter) - the folder in which the new file will be located.
+- Collaborators and their [permission sets](/3.4/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** parameter) - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following four permission sets can be applied:
+
+  - **View** - grants the collaborator the individual **View** [permission](/3.4/api/access-service-api-v1-permissions-sets) to allow the file's <sup>2</sup> :
+
+    - content to be viewed from a Safe Share application's [content viewer](/3.4/user/accessing-secure-content#viewing-and-printing-content), as well as the
+    - *read-only view* to be downloaded (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/3.4/api/content-service-api-v1-objects-objectid-view) endpoint).
+  - **Download** - grants the collaborator the individual **View** permission (provided by the **View** permission set), as well as the following additional permissions to:
+
+    - **Download** the file's actual content <sup>2</sup> (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint).
+    - **Print** the file's content <sup>2</sup> from a Safe Share application's content viewer.
+  - **Upload** - grants the collaborator the individual permissions provided by the **Download** permission set, as well the following additional permissions to:
+
+    - Upload a new version of the file and its actual content (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/versions](/3.4/api/content-service-api-v1-objects-objectid-versions) endpoint), through the **Upload File** permission.
+    - Access more information/properties about the file's collaborators, through the **View Other** permission.
+  - **Modify** - grants the collaborator the individual permissions provided by the **Upload** permission set, as well as the following additional permissions to perform any of these actions on this file object and/or its content (in the owner's storage space):
+
+    - **Rename** the file (via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint). The **Rename** permission also provides access to a file's other versions, which includes the ability to perform any of the following actions:
+
+      - Retrieve information about all existing versions of the file (via the `GET` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/3.4/api/access-service-api-v1-objects-itemid-versions) endpoint).
+      - Download the *read-only view* of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/view](/3.4/api/content-service-api-v1-versions-versionid-view) endpoint).
+      - Download the actual content of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/contents](/3.4/api/content-service-api-v1-versions-versionid-contents) endpoint).
+      - Set another version of the file to be active (via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/3.4/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+      - Permanently delete a version of the file other than the active one (via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/3.4/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+    - Remove the file (including all of its versions) to the [Recycle Bin](/3.4/user/managing-secure-content#accessing-the-recycle-bin) (via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint), through the **Remove (File)** permission.
+    - **Move** the file to a different folder within a common folder hierarchy (via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint). A *common folder hierarchy* is a folder hierarchy that contains this file, in which the same collaborator has also been added (with either the **Modify** or **Manage** permission set) to a higher level (i.e. a common) folder, such that this higher level folder forms the top of the folder's hierarchy.
+  - **Manage** - grants the collaborator the individual permissions provided by the **Modify** permission set, as well as the following additional permissions to perform any of these actions on this file object and/or its content (in the owner's storage space):
+
+    - **Share** the file with other collaborators (either via this endpoint's **collaborators** [parameter](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), which also includes the ability to modify the **labelId** parameter, or via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint).
+- Classification (specified through this endpoint's **labelId** [parameter](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters)) - defines which groups of Covata users can be shared the file.
+- Others such as the MIME type and content size of the file object's data in its unencrypted form, both of which can be specified through the **mimeType** and **contentSize** parameters, respectively.
+
+<sup>1</sup> Be aware that the ownership of a file object [can be changed](/3.4/api/access-service-api-v1-organisations-orgid-items-transfer) to that of another Covata user.
+
+<sup>2</sup> Relates to the active version of the file.
+
+**GET method requests:**
+
+- Retrieves a list of high-level information only associated with all (active versions of) file objects that have been created in an organization (specified by `orgGroupId`) for its Organization administrators. Access to more detailed information about a file object, such as its encrypted data and sharing/collaborator details, is not permitted through this API endpoint.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-objects-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - using the `POST` method, when this user:
+
+  - is a member of the organization whose ID is specified by `{orgGroupId}` in the request's URL and
+  - will create and initially own the resulting file object.
+- **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - using the `POST` method, when the **parentId** [parameter](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters) is specified for a folder (within the organization specified by `{orgGroupId}`) on which this user is a collaborator with the **Upload File** [permission](/3.4/api/access-service-api-v1-permissions-sets). <br />
+  **Note:** Such a collaborator user:
+
+  - Automatically becomes a collaborator on the resulting file object.
+  - Cannot set this endpoint's (now deprecated) **sha512** parameter in the request. However, the user account utlized in creating a file object through this endpoint can also be utilized to set this file object's **sha512** parameter value via the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint.
+  - Cannot set this endpoint's **collaborators** parameter, unless this user also has the **Share** permission on the folder represented by **parentId**.
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `GET` method, when this user is a member of the organization specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-objects-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object (i.e. POST requests only):
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-orggroupid-objects-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **keyId** - The ID value associated with the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys) endpoint). Specifying this parameter associates the cryptographic key with the new file object. <br />
+  **Example (POST request parameters - minimum required - initializing an *Incomplete* file object with a cryptographic key's ID only):**
+
+  ```json
+  { "keyId": "730248393980776448" }
+  ```
+
+## Optional POST-request parameters <a id="access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the POST request, each as individual members of the **JSON object** that includes the [Required POST-request parameters](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-required-post-request-parameters) above:
+
+- **collaborators** ( *For collaborator users as opposed to owners, requires the **Share** [permission](/3.4/api/access-service-api-v1-permissions-sets) on **parentId*** ) - A parameter containing the following optional sub-element parameters that relate to the collaborators being applied to this file object:
+
+  - **list** - An array of elements about each collaborator, where each element of this array contains the following optional sub-elements:
+
+    - **email** - The email address of the person to add as a collaborator to the file object. (This sub-element is optional, although omitting it serves no purpose.)
+    - **permissionSet** - The [permission set](/3.4/api/access-service-api-v1-permissions-sets) to apply to this collaborator. To apply a permission set to this collaborator, specify its ID as a sub-element parameter of this parameter:
+
+      - **id** - The ID of the permission set. This ID can be obtained by calling the [&lt;access-service&gt;/api/v1/permissions/sets](/3.4/api/access-service-api-v1-permissions-sets) API endpoint.
+
+      **Note:** If this sub-element is omitted, then the **View** permission set is automatically applied to this collaborator.
+
+  **Additional notes:**
+
+  - It is no longer possible to set a time/date controls via calls to this endpoint. If you need to specify time/date controls when specifying collaborators, use the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) API endpoint instead.
+  - It is worthwhile your client application storing these set of collaborators and their respective permission sets (e.g. in its own object) because [any modifications to one or more collaborators on a file object](/3.4/api/access-service-api-v1-objects-objectid) requires all collaborators and their permission sets to be [specified in the request to modify a file object](/3.4/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-put-request-parameters).
+- **contentSize** ( *For collaborator users, requires the **Upload File** permission on **parentId*** ) - The size (in bytes) of the file object's data (in its unencrypted form) to be recorded by the Covata Platform's Access Service. Specify this value to record the size of a completed file object's unencrypted data, which is to be encrypted locally by your client application. <br />
+  **Important:**
+
+  - The **contentSize** value can only be set once on a file object, at which point this property becomes immutable.
+  - If you intend to [upload](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) the file object's *unencrypted* data to storage via the Covata Platform's Content Service, then *omit this parameter*. When you make the [upload](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) request, the Content Service automatically calculates the size of the unencrypted data and assigns this value to **contentSize**. The Content Service then proceeds to encrypt the data and send this encrypted data to storage.
+  - If you have already specified the **contentSize** parameter's value *before* uploading a file object's unencrypted data, then the Content Service will be unable to assign the unencrypted data's size to the **contentSize** property as it is immutable. The Access and Content Services will record errors in their respective logs. Nevertheless, the unencrypted data will still be encrypted by the Content Service, followed by the encrypted data being sent to storage and associated with the file object.
+- **labelId** ( *Only settable by the owner of the resulting file object - not by a collaborator user on the **parentId*** ) - The ID of the classification to apply to the file object. If this parameter's value is an empty string or the parameter is omitted altogether, then no classification is applied to the file object and therefore, no classification restrictions (i.e. checks on Covata users' group membership and the association of these groups with classifications - see [User group endpoints](/3.4/api/user-group-endpoints) for more information) are placed on any collaborators added to this file object. <br />
+  **Notes:**
+
+  - Applying a classification has the potential to restrict access to the file object by any inherited collaborators. Inherited collaborators are collaborators who are able to access this file object because these collaborators were explicitly applied to an ancestral folder.
+  - If Covata users' group memberships (associated with the classification applied to the file object in the request) do not comply with any **collaborators** applied to this file object (above), then this request will fail.
+  - For more information about configuring classifications, see [Classification endpoints](/3.4/api/classification-endpoints).
+- **mimeType** ( *For collaborator users, requires the **Upload File** permission on **parentId*** ) - The MIME type of the data associated with the file object. For example, if the data to be encrypted into this file object is an image in JPEG format, its MIME type value would be `image/jpeg`.
+- **name** ( *For collaborator users, requires the **Upload File** permission on **parentId*** ) - The name to apply to the file object. For example, this might be the name of the original file (whose data is being encrypted into this file object) and its extension.
+- **parentId** - The ID of the [folder](/3.4/api/folder-handling-endpoints) (within the organization specified by `{orgGroupId}`) that will contain the file object. Specifying a value of `0` (or omitting this parameter) results in the new file being located at the default logical root storage location.
+- **sha512** ( *Deprecated* ) - The [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) value of the file object's encrypted data. <br />
+  **Important:**
+
+  - This parameter is deprecated on this endpoint. To set this value on a file object, do so through the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint.
+  - The **sha512** value can only be set once on a file object, at which point this property becomes immutable.
+  - Omitting this parameter results in the initialization of an *Incomplete* file object.
+  - Specifying this parameter and its value results in the creation of a completed file object, whose state is *Created*.
+  - You can specify this parameter if you have encrypted the file object's data externally (e.g. locally by your client application) and intend to [upload](/3.4/api/content-service-api-v1-objects-objectid-contents) this *[encrypted data](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters)* to storage via the Covata Platform's Content Service.
+  - If you intend to upload the file object's *unencrypted* data to storage via the Content Service, then *omit this parameter*; the Content Service automatically assigns this **sha512** value (after performing server-side encryption) when you make the [upload](/3.4/api/content-service-api-v1-objects-objectid-contents) request.
+
+  **Example (POST request parameters - initializing an *Incomplete* file object with collaborators and a classification):**
+
+  ```json
+  {
+    "keyId": "732857710936506368",
+    "collaborators": {
+      "list": [
+        {
+          "email": "chris.collaborator@xy-company.com",
+          "permissionSet": {
+            "id": 2
+          }
+        },
+        {
+          "email": "olly.originator@xy-company.com",
+          "permissionSet": {
+            "id": 3
+          }
+        }
+      ]
+    },
+    "labelId": "732858991201665024",
+    "mimeType": "image/jpeg",
+    "name": "paraglider.jpg",
+    "parentId": "0"
+  }
+  ```
+
+   **Note:** The permission set with an ID of **2** is **Download** and with an ID of **3** is **Modify**. See [&lt;access-service&gt;/api/v1/permissions/sets](/3.4/api/access-service-api-v1-permissions-sets) for more information about permission sets.
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **searchText** - Any text substring used to filter for *all* file objects which have been either initialized or created within the organization, where this text substring must match that of the file object's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
+- **searchColumn** - The file object's field upon which the text substring (specified in **searchText** above) is used for filtering file objects returned in the response. The fields available to this text searching include:
+
+  - `name` - the file object's name,
+  - `id` - the file object's ID,
+  - `owner_email` - email address of the file object's current owner and
+  - `all` - any of these fields above.
+
+  If this parameter is omitted, then no filtering is performed.
+- **limit** - A value from `0` to any positive integer, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is information about a file object within the organization. If this parameter is omitted, then its value is `0` by default, which imposes no limit on the number of items returned.
+- **offset** - A value representing the count order of all retrievable items (i.e. file objects) from the Covata Platform returned in the response. Calls to this API endpoint are soon likely to amount to potentially unmanagable numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. file objects) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `DESC` by default.
+- **sortBy** - An enum value representing the field (i.e. member) of a retrieved item by which items (i.e. file objects) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `name` - the file object's name,
+  - `owner_email` - the email address of the file's owner,
+  - `state` - the terms *Created*, *Deleted*, *Incomplete* or *Recycled* (alphabetically),
+  - `created` - the date when the file object was created,
+  - `modified` - the date when the file object was last modified and
+  - `id` - the file object's ID.
+
+  These enum values can also be specified using uppercase characters. If this parameter is omitted, then its value is `id` by default - bearing in mind that file object IDs are generated in numerical order. <br />
+  **Example (GET request - retrieving information about an organization's file objects whose name contains the text substring 'paraglider'):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/722338038193385472/objects?searchText=paraglider&searchColumn=name
+  ```
+
+<Note>
+
+Calling this method without any parameters retrieves a list of all file objects that have been created within the organization. See [Supported roles and conditions](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-supported-roles-and-conditions) above for details.
+
+</Note>
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-objects-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all file objects that have been initialized or created on the Covata Platform, which have been filtered by any [parameters](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these file objects (represented as an object containing the following members unless otherwise stated).
+- **id** - The ID value of the initialized (i.e. *Incomplete*) or *Created* file object.
+- **shareStartTime** ( *from GET requests only* ) - The date and time from which collaborators on this file object can begin accessing the file's content. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning the value of `null` in any requests to this endpoint.
+- **shareEndTime** ( *from GET requests only* ) - The date and time from which collaborators' access to this file object's content ceases. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning the value of `null` in any requests to this endpoint.
+- **enabled** ( *from GET requests only* ) - A boolean value that indicates whether or not the file object is enabled (i.e. `true`) or disabled (`false`). For more information about disabling/re-enabling file objects, see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects/\{objectId\}/enable](/3.4/api/access-service-api-v1-organisations-orggroupid-objects-objectid-enable).
+- **shared** - A boolean value that indicates whether or not the file object has been shared with any collaborators. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning the value of `false` in any requests to this endpoint.
+- **name** - The name of the file object, which was set when the file object was [initialized or created](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/3.4/api/access-service-api-v1-objects-objectid). This value is `null` if the **name** was never specified.
+- **sha512** ( *from POST requests only* ) - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with the *Created*/complete file object. For initialized/*Incomplete* file objects, this value is `null`.
+- **owner** ( *from GET requests only* ) - A member containing information about the Covata user who is the current owner of the file object. This member contains the following sub-members:
+
+  - **email** - This email address of the Covata user who owns this file object.
+  - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+  - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Covata user on their own account, or enforced for all members of the organization (by an Organization administrator).
+  - **id** - The ID of this Covata user's account.
+  - **accountType** - A member containing the internationalization (I18N) property key/code <sup>3</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+    - **i18n** - A member containing the I18N code <sup>3</sup> for the account type as sub-members:
+
+      - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+    - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+    <sup>3</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.4/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.4/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+    **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org/index).
+- **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage. <br />
+  **Notes:**
+
+  - The Content Service automatically sets this value to `true` *after* it sets the value of **canGenerateView** (below) to `true` *and* the Content Service has successfully generated and stored a read-only view of the file object's data.
+  - If your client application is managing its own file data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **canGenerateView** - A boolean value that indicates whether or not the Content Service is capable of generating a read-only view of the file object's data, which is based on the file name extension of the original file that was encrypted (as specified in **name**). For more information, see [File formats supported by the content viewer](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in Safe Share for Web User's Guide. <br />
+  **Notes:**
+
+  - Assuming the file name extension is one that supports a view being generated, the Content Service then automatically sets this value to `true` *after* the file object's data has been successfully [uploaded and stored](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) *and* the size of this data is less than the maximum configured file size for generating a view (i.e. 20 MB by default).
+  - If your client application is managing its own file object data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **organisation** ( *from POST requests only* ) - A member containing information about the organization in which this file object was created. This member contains the following sub-members:
+
+  - **name** - The name of the organization.
+  - **description** - The description of the organization, which can be set by Organization administrators.
+  - **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has been enforced for all members of the organization.
+  - **id** - The ID of the organization.
+- **permissions** - An array listing the individual [permissions](/3.4/api/access-service-api-v1-permissions-sets) that the **owner** above or a collaborator (whose access token was used in the request to this endpoint), has inherited from the location represented by **parentId**. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning an empty array in any requests to this endpoint.
+- **mimeType** - The MIME type of the data associated with the file object, which was set when the file object was [initialized or created](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/3.4/api/access-service-api-v1-objects-objectid). This value is `null` if either the **mimeType** was never specified or this member is a response from a GET request. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning the value `null` in any GET requests to this endpoint.
+- **contentSize** - The amount of space (in bytes) of the file object's data (as recorded by the Covata Platform's Access Service). For initialized/*Incomplete* file objects, this value is `null`.
+- **parentId** ( *from POST requests only* ) - The ID of the [folder/collection](/3.4/api/folder-handling-endpoints) that contains the file object. A value of `0` indicates that this file object is located at the logical root location.
+- **state** - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or `deleted` for a deleted file.
+- **modifiedAt** - The date and time when the file object was last modified. In responses from POST requests, this date and time should match (or be close to) that of the `createdAt` value below. Otherwise, if the file object has since been [modified](/3.4/api/access-service-api-v1-objects-objectid), this date and time should reflect when the file object was last modified.
+- **createdAt** - The date and time when the file object was first created, either in its *Incomplete* or *Created* states.
+- **labelName** ( *from POST requests only* ) - The name of the classification applied to the file object. Like **labelId** below, if this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/3.4/api/access-service-api-v1-objects-objectid). This means that no classification restrictions (i.e. checks on Covata users' group membership and the association of these groups with individual classifications - see [User group endpoints](/3.4/api/user-group-endpoints) for more information) have been placed on collaborators added to this file object.
+- **labelId** ( *from POST requests only* ) - The ID of the classification applied to the file object. If this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/3.4/api/access-service-api-v1-objects-objectid).
+- **count** ( *from GET requests only* ) - The total number of file objects which have been created within the organization (regardless of these file objects' **state**s). <br />
+  **Note:** If the **searchText** and **searchColumn** [parameters](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters) were specified in the request, then this value represents the number of items (above) returned in the response.
+- **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this API endpoint. <br />
+  **Example (response from a POST request - initializing an *Incomplete* file object):**
+
+  ```json
+  {
+      "id": "732860187958231040",
+      "shared": false,
+      "name": "paraglider.jpg",
+      "sha512": null,
+      "hasView": false,
+      "canGenerateView": null,
+      "organisation": {
+          "name": "XY Company",
+          "description": "",
+          "mfaEnabled": false,
+          "id": "732855142835470336"
+      },
+      "permissions": [],
+      "mimeType": "image/jpeg",
+      "contentSize": null,
+      "parentId": "0",
+      "state": "server.object.states.incomplete",
+      "modifiedAt": "2016-07-15T07:24:44.693Z",
+      "createdAt": "2016-07-15T07:24:44.693Z",
+      "labelName": "Unclassified",
+      "labelId": "732858991201665024"
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request - retrieving a list of file objects created within the organization):**
+
+  ```json
+  {
+      "items": [{
+          "id": "732861715897040896",
+          "shareStartTime": null,
+          "shareEndTime": null,
+          "enabled": true,
+          "shared": false,
+          "name": "Board Presentation.docx",
+          "owner": {
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator",
+              "mfaEnabled": false,
+              "id": "732856217122553856",
+              "accountType": {
+                  "i18n": {
+                      "code": "server.useraccounttype.local",
+                      "arguments": []
+                  },
+                  "value": "LOCAL"
+              }
+          },
+          "hasView": false,
+          "canGenerateView": null,
+          "permissions": [],
+          "mimeType": null,
+          "state": "server.object.states.created",
+          "modifiedAt": "2016-07-15T07:31:04.897Z",
+          "createdAt": "2016-07-15T07:30:48.982Z",
+          "contentSize": null
+      }, {
+          "id": "732860187958231040",
+          "shareStartTime": null,
+          "shareEndTime": null,
+          "enabled": true,
+          "shared": false,
+          "name": "paraglider.jpg",
+          "owner": {
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator",
+              "mfaEnabled": false,
+              "id": "732856217122553856",
+              "accountType": {
+                  "i18n": {
+                      "code": "server.useraccounttype.local",
+                      "arguments": []
+                  },
+                  "value": "LOCAL"
+              }
+          },
+          "hasView": false,
+          "canGenerateView": null,
+          "permissions": [],
+          "mimeType": null,
+          "state": "server.object.states.incomplete",
+          "modifiedAt": "2016-07-15T07:24:44.985Z",
+          "createdAt": "2016-07-15T07:24:44.693Z",
+          "contentSize": null
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

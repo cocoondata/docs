@@ -1,0 +1,67 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/items/storage"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/items/storage
+```
+
+where `{orgGroupId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-supported-methods-and-overview" />
+
+- `GET` - retrieves a summary of information about storage requirements and usage for an organisation (specified by `orgGroupId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-detailed-description" />
+
+This API endpoint retrieves a summary of information about storage requirements and usage for an organisation (specified by `orgGroupId`).
+
+The storage requirement information provided consists of the amount of:
+
+- Storage space (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)/MiB) currently allocated to this organisation.
+- Storage space required for [Cocoon Data users](/CS1.2/admin-org/administering-users-within-an-organisation) (also in MiB), which is based on the sum of all [quotas](/CS1.2/admin-org/managing-users-storage-quotas-through-plans) associated with all users in this organisation who have the [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) role.
+
+The storage space usage information provided is the amount (in bytes) currently consumed by Cocoon Data users (i.e. with the Originator role) in the organisation.
+
+The information returned by this API endpoint is utilized on the [Organisation Administration dashboard](/CS1.2/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-supported-roles-and-conditions" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)):
+
+- [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation whose ID is specified by `{orgGroupId}` in the request's URL.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orggroupid-statistics-items-storage#access-service-api-v1-organisations-orggroupid-statistics-items-storage-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-items-storage-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **organisationQuota** - The amount of storage space (in [MiB](http://physics.nist.gov/cuu/Units/binary.html)) currently allocated to the organisation (specified by `{orgGroupId}` in the request's URL).
+- **objectStorageRequired** - The amount of storage space required for Cocoon Data users (also in MiB), which is based on the sum of all [quotas](/CS1.2/admin-org/managing-users-storage-quotas-through-plans) associated with all users in the organisation (specified by `orgGroupId`) who have the [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) role.
+- **objectStorageUsed** - The amount of storage space (in bytes) currently consumed by Cocoon Data users (i.e. with the Originator role) in the organisation (specified by `orgGroupId`). <br />
+  **Example (response):**
+
+  ```json
+  {
+      "organisationQuota": "4194304",
+      "objectStorageRequired": "10240",
+      "objectStorageUsed": "67026768"
+  }
+  ```

@@ -1,0 +1,92 @@
+---
+title: "<access-service>/api/v1/users/me"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the currently authenticated [Covata user](/2.16/admin/administering-users)<sup>&#42;</sup>.
+- `PUT` - used to modify the account details of the currently authenticated Covata user.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves a detailed set of information about the currently authenticated Covata user<sup>&#42;</sup>.
+- Modifies the account details of the currently authenticated Covata user. <br />
+  **Note:** These account details can also be modified through the [My Account](/2.16/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/2.16/user/index).
+
+## Supported roles and conditions <a id="access-service-api-v1-users-me-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)) and conditions:
+
+- [Originator](/2.16/admin/administering-users#originator-role)
+- [Collaborator](/2.16/admin/administering-users#collaborator-role)
+- [Ad hoc](/2.16/admin/administering-users#adhoc-role) - a Covata user with this role can call the `GET` method only.
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+- [User administrator](/2.16/admin/administering-users#user-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-users-me#access-service-api-v1-users-me-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-users-me-optional-parameters" />
+
+The following parameters can also be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **firstName** - .
+- **lastName** - .
+- **otherName** - .
+- **mobileNumber** - .
+
+  **Example ():**
+
+Although specifying none of the parameters above in a PUT request serves no purpose, an empty JSON object must at least be passed in the body of PUT requests to this endpoint for a successful response:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-users-me-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **externalUserId** - .
+- **email** - .
+- **firstName** - .
+- **lastName** - .
+- **otherName** - .
+- **mobileNumber** - .
+- **plan** - .
+
+  - **name** - .
+  - **description** - .
+  - **quota** - .
+- **notificationFrequency** - .
+- **lastLoginIp** - .
+- **lastLoginClient** - .
+- **id** - .
+- **lastLoginTime** - .
+- **accountType** - .
+- **roles** - .
+
+  **Example (response from ...):**
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-users-me#access-service-api-v1-users-me-required-headers) of requests to this endpoint.

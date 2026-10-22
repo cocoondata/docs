@@ -1,0 +1,103 @@
+---
+title: "Signing in"
+---
+
+**To sign in to SafeShare for Web:**
+
+1. Access the SafeShare Sign-in page by doing either of the following:
+
+   - Open a compatible web browser and specify the base URL of your SafeShare for Web instance (which is also the Covata Platform URL) into your browser's URL field - e.g: <br />
+     `https://safe-share.xy-company.com` <br />
+     **Tip:** You may wish to bookmark this URL. <br />
+     **Note:** If a SafeShare administrator has configured your Covata Platform instance (and hence, SafeShare for Web) with single sign-on, such that authentication can be handled through a separate Identity Provider (IdP), refer to the [Signing in using single sign-on](/3.5/user/signing-in#signing-in-using-single-sign-on) procedure below instead.
+   - Open one of your Covata Notification email messages (such as a message containing one the following subject lines) and in the message's body, click the **Click here** link or 'click this link' URL to open the Sign-in page:
+
+     - '*New items have been shared with you*'
+     - '*Covata account created*'
+     - '*Account Updated Notification*'
+2. On the SafeShare Sign-in page, enter your **Email address** and **Password** into the relevant fields:
+
+   ![SafeShare sign-in page](/images/4b596f0f070f-sign-in-with-credentials.png)
+
+   <br />
+   **Notes:**
+
+   - If you have forgotten your password, then again, leave the **Password** field blank but click the **Forgot your password?** link instead. Follow the instructions on the page and then in your email notification to reset your password.
+   - If you would like to change your current language (for your region/locale), you can choose the appropriate language (for all languages currently configured on your Covata Platform instance) at the top-left of the SafeShare Sign-in page. Doing so changes your default language settings available through the [My Account](/3.5/user/managing-your-account) feature.
+3. Click the **SIGN IN** button (or type 'enter'/'return') and the main SafeShare page is displayed: <br />
+   ![Main page](/images/ea17335e730c-initial-post-sign-in-page.png)
+   <br />
+   <a id="two-factor-auth-page" />*Otherwise*, if instead you see 'Two-factor authentication is enabled on your account...' on the page (see below) and a request to enter your **Authentication code**, then either you have configured your Covata user account with two-factor authentication (2FA) (through the ['My Account' feature](/3.5/user/managing-your-account#enabling-or-disabling-2fa-on-your-account)) or at least one of your SafeShare Organisation administrators has enforced this feature on your account. <br />
+    If you see the following page for the first time or you need to (re-)configure a mobile device with your Covata user account for 2FA, refer to the [Configuring a mobile device for two-factor authentication](/3.5/user/signing-in#configuring-a-mobile-device-for-two-factor-authentication) procedure below before continuing on. <br />
+   <a id="entering-your-authentication-code" />
+   ![SafeShare 2FA authentication code](/images/710474266947-2fa-authentication-code.png)
+
+   - To complete the authentication process:
+
+     1. Open the authenticator app on your mobile device.
+     2. In the **Authentication code** field, enter the code from the authenticator app that relates to your Covata user account.
+     3. Click the **Authenticate** button to complete the authentication process and the main SafeShare page is displayed.
+
+   **Note:** If you successfully authenticated after accessing the SafeShare Sign-in page from a:
+
+   - '*file has been shared with you*' email notification, you are taken directly to the file's [content viewer](/3.5/user/accessing-secure-content#content-viewer) instead of the main SafeShare page (above).
+   - '*Covata account created*' email notification, you may be required to reset your password first before the main SafeShare page is displayed.
+
+<a id="main-safe-share-page-tips" />
+
+<Tip>
+
+- If you navigate to another page within SafeShare for Web, you can easily navigate back to the root location of the main SafeShare page by clicking your email address at the top-right and choosing **Home** from the drop-down menu:
+
+  ![SafeShare application menu](/images/2cf30d781aeb-application-menu.png)
+
+  <br />
+   See [Organising content with folders](/3.5/user/managing-secure-content#organising-content-with-folders) for more information about creating folders. <br />
+  **Note:** The **Administration** option is only present if your organisation's SafeShare Organisation administrators has granted your user account the **Organisation administrator** role (or in rare circumstances, one of your Covata Platform's SafeShare administrators has granted your account the **SafeShare administrator** role). For more information about the Organisation administrator role, please refer to the [Organisation Administrator's Guide](/3.5/admin-org/index) (and for the SafeShare administrator role, the [SafeShare Administrator's Guide](/3.5/admin-platform/index)).
+- If changes have been made by another Covata user to any items you can access from the main SafeShare page (e.g. because this other Covata user [shared content with you](/3.5/user/uploading-storing-and-sharing-content-securely#sharing-secure-content)), then a number appears on the refresh button near the top-left of the page
+  ![Refresh button with number](/images/1e875a693f87-refresh-button-with-number.png)
+
+   . This number indicates how many of your accessible items have changed and accounts for all of your accessible items located in the root location, your current folder, as well as all other subfolders you can access from the main SafeShare page. Click this button to refresh all your accessible items in all of these locations and folders.
+
+</Tip>
+
+## Configuring a mobile device for two-factor authentication
+
+If either you or one of your Organisation administrators has configured your Covata user account with two-factor authentication (2FA), then you require a mobile device (i.e. an Android-, iPhone-, iPad-, iPod Touch- or Microsoft Windows-based one) running an authenticator application (from Google or Microsoft) to be able to sign in to SafeShare for Web.
+
+This authenticator application (aka authenticator app) that runs on your mobile device provides the 2nd authentication factor for your account, where your password is the 1st authentication factor.
+
+**To configure your mobile device with your Covata user account for 2FA:**
+
+1. Check for a Covata Notification email message containing the subject line '*Two-factor authentication has been enabled for your account*'.
+2. Open this email message and follow its instructions - i.e. click the link to open the 2FA configuration pages. <br />
+    Follow the remaining instructions on these 2FA configuration pages to complete the process for configuring your mobile device and then [continue with entering your authentication code](/3.5/user/signing-in#entering-your-authentication-code) to complete the authentication process and sign in to SafeShare for Web.
+
+## Signing in using single sign-on
+
+If a SafeShare administrator has configured the Covata Platform and SafeShare for Web with single sign-on, such that authentication is handled through a separate Identity Provider (IdP), you can begin the process of signing in to SafeShare by doing the following:
+
+1. Specify the base URL of your SafeShare for Web instance (appended by `/sso`) into your browser's URL field - e.g: <br />
+   `https://safe-share.xy-company.com/sso`
+2. Click the **Single Sign-on** button.
+3. Sign/log in through your IdP service's page by entering your credentials into this page. You should then be directed back to SafeShare for Web (in a signed in state), with the main SafeShare page being displayed: <br />
+   ![Main page](/images/ea17335e730c-initial-post-sign-in-page.png)
+   <br />
+    See the [Tips](/3.5/user/signing-in#main-safe-share-page-tips) section above for more information about navigating SafeShare for Web. <br />
+   **Note:** If the two-factor authentication (2FA) page ([above](/3.5/user/signing-in#two-factor-auth-page)) is displayed *before* the main SafeShare page is shown, you may wish to disable the 2FA feature on your Covata user account, since your IdP service may provide its own 2FA or other multi-factor authentication features. If you cannot disable 2FA for your account, contact an Organisation administrator from each organisation you are a member of to determine if one of these administrators has made 2FA mandatory for all user accounts which are members of their organisation. For more information about this SafeShare Organisation Administration [feature](/3.5/admin-org/configuring-organisation-administration-properties#enforce-2fa-for-organisation-members), see [Configuring SafeShare Organisation Administration properties](/3.5/admin-org/configuring-organisation-administration-properties) in the [Organisation Administrator's Guide](/3.5/admin-org/index).
+
+## Signing out
+
+**To sign out of SafeShare for Web:**
+
+- Click your email address at the top-right of the page and choose **Sign Out** from the drop-down menu:
+
+  ![SafeShare application menu](/images/2cf30d781aeb-application-menu.png)
+
+  <br />
+  **Notes:**
+
+  - If you do not yet have a password, you will only see the **Set Password** and **Sign Out** options in the drop-down menu (above). You can upgrade to a full account (to gain access to more of the features above) by choosing **Set Password** and following the instructions provided.
+  - Be aware that if you signed in to SafeShare for Web [using single sign-on](/3.5/user/signing-in#signing-in-using-single-sign-on), then accessing SafeShare for Web's single sign-on URL - e.g: <br />
+    `https://safe-share.xy-company.com/sso` <br />
+     in your browser and clicking the **Single Sign-on** button will automatically sign you back in to SafeShare for Web (without you needing to enter your credentials into the IdP service's page). This is intentional behavior because your IdP service handles the signing/logging out process. If you are uncertain about how to sign out from your IdP service, consult a SafeShare administrator of your Covata Platform instance or the system administrator who administers your IdP service for more information about this process.

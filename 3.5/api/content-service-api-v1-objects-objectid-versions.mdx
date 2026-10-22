@@ -1,0 +1,361 @@
+---
+title: "<content-service>/api/v1/objects/{objectId}/versions"
+---
+
+## URL structure <a id="content-service-api-v1-objects-objectid-versions-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/objects/{objectId}/versions
+```
+
+where `{objectId}` is the ID of a file object/Secure Object.
+
+## Supported methods and overview <a id="content-service-api-v1-objects-objectid-versions-supported-methods-and-overview" />
+
+- `POST` - creates a new version of a file object/[Secure Object](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) (specified by `objectId`) by uploading the data associated with this new version to storage via the Covata Platform's Content Service.
+
+## Detailed description <a id="content-service-api-v1-objects-objectid-versions-detailed-description" />
+
+This API endpoint creates a new version of a file object (specified by `objectId`) by uploading the data associated with this new version to storage managed by the Content Service.
+
+This data can be uploaded in either unencrypted or encrypted form. If the data will be encrypted locally, obtain a cryptographic key through the [&lt;access-service&gt;/api/v1/keys](/3.5/api/access-service-api-v1-keys) endpoint to:
+
+1. Encrypt the data locally.
+2. Associate this key with the file version (specified through this endpoint's **keyId** [parameter](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-keyid-parameter)).
+
+The maximum amount of data that can be uploaded in any one request is defined on the Covata Platform. The default value of this maximum amount (known as the *chunk size*) is 10 MiB. Therefore, if the total amount of data you are uploading is greater than the permitted chunk size, then the data must be uploaded as a series of chunks, each as an individual upload request to this API endpoint.
+
+<Note>
+
+- A *MiB* is a [mebibyte](http://physics.nist.gov/cuu/Units/binary.html), where one MiB = 1 x 1024 x 1024 bytes = 1048576 bytes.
+- Data is only stored (via the Content Service) in its encrypted form.
+- Whenever data is uploaded to the Content Service in unencrypted form, it is encrypted (before being sent to storage) through a separate Content Service process.
+- Once all of a version's data has been uploaded (through one or more requests to this endpoint), the new file object's version is automatically created - i.e. no other API endpoint requests are required.
+
+</Note>
+
+## Supported roles and conditions <a id="content-service-api-v1-objects-objectid-versions-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object whose ID is specified by `{objectId}` in the request's URL.
+- **Originator**, [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Upload File** [permission](/3.5/api/access-service-api-v1-permissions-sets) on the file object whose ID is specified by `{objectId}` in the URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-objects-objectid-versions-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is also required to allow multi-part (including binary) form data elements to be uploaded through the request:
+
+- `Content-Type: multipart/form-data; boundary=-----------------------------12345678901234567890123456`
+
+<Note>
+
+The `boundary` component's value is a unique string value used to demarcate each multi-part form data element in the body of the request. <br />
+ Based on the example above, the following string value is used to demarcate each multi-part form data element in the body of the request: <br />
+`-----------------------------12345678901234567890123456`
+
+</Note>
+
+## Required parameters <a id="content-service-api-v1-objects-objectid-versions-required-parameters" />
+
+The following required parameter must be sent in the **URL** of the request:
+
+- **format** - Specify either the value `plaintext` (if uploading unencrypted data to the Covata Platform's Content Service) or `encrypted` (if the data was pre-encrypted before uploading; e.g. encryption was conducted locally by the client application). <br />
+  **Notes:**
+
+  - If you are uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) below for details) then this parameter must be specified in each request.
+  - If you are pre-encrypting your data before uploading it to storage via the Content Service, then ensure that this data is encrypted using:
+
+    - The AES algorithm (in CBC mode) with [PKCS #7 padding](http://tools.ietf.org/html/rfc2315) (see [Optional parameters](/3.5/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) of [&lt;access-service&gt;/api/v1/keys](/3.5/api/access-service-api-v1-keys) for more information), as well as
+    - The cryptographic key and initialization vector ([returned](/3.5/api/access-service-api-v1-keys#access-service-api-v1-keys-returns) by calling the [&lt;access-service&gt;/api/v1/keys](/3.5/api/access-service-api-v1-keys) API endpoint) for the key associated with this new file version.
+
+    If you do not follow these encryption guidelines, then either your attempt to upload your encrypted data may fail or if successful, any attempt to [download](/3.5/api/content-service-api-v1-versions-versionid-contents#content-service-api-v1-versions-versionid-contents-required-parameters) the file version's data in its decrypted form will result in the retrieval of garbled data.
+
+  **Example:**
+
+  ```text
+  https://content-service.xy-company.com/api/v1/objects/987654321098765432/versions?format=encrypted
+  ```
+
+<a id="content-service-api-v1-objects-objectid-versions-keyid-parameter" />Additionally, the following required parameters must be sent in the **body** of the request, each as individual **multi-part form data** elements and if uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) below for details) then the following parameters must be specified in each request, unless otherwise indicated:
+
+- **contentSize** ( *Only required if uploading locally encrypted data - i.e. if **format** is `encrypted`* ) - The size (in bytes) of the new file version's data in its unencrypted form, which is recorded by the Covata Platform's Access Service.
+- **keyId** ( *Only required if **format** is `encrypted`* ) - The ID value associated with the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/3.5/api/access-service-api-v1-keys) endpoint) that was used to encrypt the new file version's data locally. Specifying this parameter associates the cryptographic key with the new file version.
+- **sha512** ( *Only required if **format** is `encrypted`* ) - The [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) value of the file version's encrypted data. <br />
+  **Notes:**
+
+  - If you are uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) below for details), then this parameter only needs to be specified in the final chunk upload request. The **sha512** value is set once on a file version (in the final data upload request), at which point this property becomes immutable.
+  - If you are uploading the file version's *unencrypted* data to storage via the Content Service, then the Content Service automatically assigns this **sha512** value (after performing server-side encryption) once all upload requests to this endpoint are complete.
+- **totalFileSizeBytes** - The size (in bytes) of the total amount of unencrypted or encrypted data to be uploaded.
+- **filename** - The name of the file whose new version you are uploading, including its extension. <br />
+  **Note:** The actual file name submitted for this parameter (excluding the extension component) can be any string value. However, the Content Service checks to ensure that the file name extension of the file's new version being uploaded matches that of the file object's existing extension. If there is a mismatch between these extensions, then the upload request will fail.
+- **data** - The actual unencrypted or encrypted data to be uploaded to the Content Service. <br />
+  **Notes:**
+
+  - If the total amount of data you are uploading is greater than the *chunk size* permitted by the the Covata Platform (e.g. 10 MiB), then you must upload this data as part of a multi-chunk upload and more parameters are required with each *chunk upload request*; see [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) (below) for details. Your client application need to extract the appropriately-sized data chunks sequentially (for submission with each chunk upload request) from the total amount of data to be uploaded.
+  - The default `Content-Type` for this parameter is `application/octet-stream` <br />
+     (Use this `Content-Type` for any multi-chunk upload.)
+
+  **<a id="content-service-api-v1-objects-objectid-versions-single-request" />Example (uploading data less than or equal to the *chunk size* permitted by the Covata Platform in a single request):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  549732
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="filename"
+
+  paraglider-modified.jpg
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="paraglider-modified.jpg"
+  Content-Type: image/jpeg
+
+  {YOUR ACTUAL UNENCRYPTED OR ENCRYPTED DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Required parameters for multi-chunk uploads <a id="content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads" />
+
+If the total amount of data being uploaded is greater than the *chunk size* permitted by the Covata Platform, then divide this amount of data by this chunk size. The data must then be uploaded chunk-by-chunk in a series of requests to this API endpoint (each of which is referred to as a *chunk upload request*), until all data has been uploaded.
+
+In addition to the parameters [above](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters), the following parameters must also be sent in the **body** of each chunk upload request. Each of these parameters must be sent as individual **multi-part form data** elements:
+
+- **chunkSize** - The size (in bytes) of the unencrypted or encrypted data being uploaded to the Covata Platform's Content Service (for storage) in this *chunk upload request*. <br />
+   Assuming the default Covata Platform upload limit of 10 MiB, specify a value of `10485760` (bytes) for the first chunk upload request. Then continue specifying this value in subsequent upload requests (each containing a subsequent 10 MiB chunk of the data being uploaded) until the following upload request of 10 MiB (which is the final one) exceeds the remainder of the total amount of data being uploaded. For this final upload request, specify the remaining amount of the total data instead. <br />
+   For example, if you are uploading 48 MiB file, you would send four chunk upload requests of 10 MiB (each of whose **chunkSize** value would be `10485760`) followed by a final chunk upload request of 8 MiB (whose **chunkSize** value would be `8388608`).
+- **partIndex** - The index number for the chunk of data being submitted in this *chunk upload request*, starting from `0`. For example, for the first chunk upload request, **partIndex** would be `0`; for the second chunk upload request, **partIndex** would be `1`; for the third, **partIndex** would be `2` and so on.
+- **partByteOffset** - The number of bytes from the beginning of the total amount of data, where the start of the actual data being uploaded (in this *chunk upload request*) commences. <br />
+   For example, following on from the 48 MiB file example (above), the value of this **partByteOffset** parameter's value would be `0` in the first chunk upload request. In the second chunk upload request, this parameter's value would be `10485760`. In the third request, this parameter's value would be `20971520` (i.e. `10485760` + `10485760`) and so on.
+- **totalParts** - The total number of *chunk upload requests* required to upload the total amount of unencrypted or encrypted data. <br />
+   Following on from the 48 MiB file example (above), **totalParts** would be `5`.
+- **uploadId** ( *Only used after the first 'chunk upload request'* ) - Specify the value of the **uploadId** member returned in response to the previous chunk upload request.
+- **bucket** ( *Only used after the first 'chunk upload request'* ) - Specify the value of the **bucket** member returned in response to the previous chunk upload request.
+- **etags[X]** ( *Only used in the final 'chunk upload request'* ) - Specify the value of each **etags** member returned in all previous *chunk upload requests*. A given **etags** parameter in the final chunk upload request has a value of **X** and an associated alphanumeric string value, which corresponds respectively to the **X** sub-member (and its associated value) of the **etags** member returned in the [response](/3.5/api/content-service-api-v1-objects-objectid-versions#response-from-an-intermediate-request) from a respective chunk upload request. <br />
+   Following on from the 48 MiB file example (above), the final chunk upload request would contain four **etags** parameters. <br />
+  **<a id="content-service-api-v1-objects-objectid-versions-first-chunk-upload-request" />Example (uploading data greater than the *chunk size* permitted by the Covata Platform - first *chunk upload request*):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  0
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  0
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="filename"
+
+  large-image-modified-chunk-1.jpg
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-modified-chunk-1.jpg"
+  Content-Type: image/jpeg
+
+  {FIRST CHUNK OF YOUR ACTUAL UNENCRYPTED OR ENCRYPTED DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+   <br />
+  **<a id="content-service-api-v1-objects-objectid-versions-second-chunk-upload-request" />Example (second *chunk upload request* - based on the example [response](/3.5/api/content-service-api-v1-objects-objectid-versions#response-from-an-intermediate-request) below from the [first](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-first-chunk-upload-request) request above):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="uploadId"
+
+  749427370888589312
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="bucket"
+
+  987654321019181716
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  1
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="filename"
+
+  large-image-modified-chunk-2.jpg
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-modified-chunk-2.jpg"
+  Content-Type: image/jpeg
+
+  {SECOND CHUNK OF YOUR ACTUAL DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+   <br />
+  **<a id="content-service-api-v1-objects-objectid-versions-final-chunk-upload-request" />Example (final *chunk upload request* - based on the example [response](/3.5/api/content-service-api-v1-objects-objectid-versions#response-from-an-intermediate-request) below from the [second](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-second-chunk-upload-request) request above):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="etags[1]"
+
+  1
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="etags[2]"
+
+  2
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="uploadId"
+
+  749427370888589312
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="bucket"
+
+  987654321019181716
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  8388608
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  2
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  20971520
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="filename"
+
+  large-image-modified-chunk-5.jpg
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-modified-chunk-5.jpg"
+  Content-Type: image/jpeg
+
+  {FINAL CHUNK OF YOUR ACTUAL DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Returns <a id="content-service-api-v1-objects-objectid-versions-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **objectId** - The ID value of the file object. This value should match the `{objectId}` value specified specified in the [URL of this request](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-url-structure).
+- **success** - A boolean value that indicates `true` if the request succeeded or `false` if the request failed.
+- **uploadId** - An ID value returned after the first *chunk upload request* of a multi-chunk upload. This value:
+
+  - Is an ID for the total amount of data (associated with the file object's version) to be uploaded to storage via the Covata Platform's Content Service,
+  - Is returned in every response to every request throughout a multi-chunk upload. This value must be included in all requests (following the initial request) of a multi-chunk upload. See [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) (above) for more information.
+
+  **Note:** This value is `null` in responses from requests to upload data which is either less than or equal to the *chunk size* permitted by the Covata Platform.
+
+<a id="response-from-single-or-final-request" />**Additional members returned from a *single* or *final* request**
+
+In a response from either:
+
+- A request to upload data which is either less than or equal to the *chunk size* permitted by the Covata Platform, or
+- The final request to upload data which is greater than the *chunk size* permitted by the Covata Platform (i.e. the final request of a multi-chunk upload),
+
+the following members are also returned:
+
+- **contentSize** - The amount of space (in bytes) of the file version's data (as recorded by the Covata Platform's Access Service).
+- **sha512** - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with the file version.
+- **uploadedAs** - Indicates `plaintext` if unencrypted data was uploaded to storage, or `encrypted` if pre-encrypted data was uploaded. <br />
+  **Note:** This value should match the value of the **format** [URL parameter](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters) submitted in each request to this API endpoint. <br />
+  **Example (uploading data less than or equal to the *chunk size* permitted by the Covata Platform - response from the [single](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-single-request) request above):**
+
+  ```json
+  {
+      "contentSize": 549732,
+      "objectId": "987654321098765432",
+      "sha512": "mDxrkb0Nj5m44ZPYxgIJOvHckXHr577f8Ww4VGxssQ60yv5pyhtrrlepL2ZNCNytLRdwcY4CrwRQmiEG\/0y5Mw==",
+      "success": true,
+      "uploadId": null,
+      "uploadedAs": "encrypted"
+  }
+  ```
+
+   <br />
+  **Example (uploading data greater than the *chunk size* permitted by the Covata Platform - response from the [final](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-final-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "contentSize": 12582912,
+      "objectId": "987654321012345678",
+      "sha512": "Ii5TdQLLK7s4KjWmAWrHGVf6UFOHR8f3BHnYgzu5w+RVHdDS+hhGT0z2Hxo8xyvVUcfhGBiWi9pXuQa+LHOjag==",
+      "success": true,
+      "uploadId": "749427370888589312",
+      "uploadedAs": "encrypted"
+  }
+  ```
+
+<a id="response-from-an-intermediate-request" />**Additional members returned from an *intermediate* request**
+
+In a response from a multi-chunk upload request (except for the final response), the following members are also returned:
+
+- **bucket** - A unique identifier for the location in storage where the encrypted data of a multi-chunk upload is held. This value is returned in every response to every request throughout a multi-chunk upload and must be included in all requests (following the initial request) of a multi-chunk upload. See [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) (above) for more information.
+- **etags** - A member containing the sub-member **X** (a number representing the sequential index number of this request in a multi-chunk upload, starting from `1`), whose value is an alphanumeric string value. <br />
+  **Important:** Your client application needs to collate the **etags** sub-members of each multi-chunk upload request, since each one of these needs to be included in the final *chunk upload request*. See [Required parameters for multi-chunk uploads](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-required-parameters-for-multi-chunk-uploads) (above) for more information. <br />
+  **Example (uploading data greater than the *chunk size* permitted by the Covata Platform - response from the [first](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-first-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "bucket": "987654321019181716",
+      "etags": {
+          "1": "1"
+      },
+      "objectId": "987654321012345678",
+      "success": true,
+      "uploadId": "749427370888589312"
+  }
+  ```
+
+   <br />
+  **Example (response from the [second](/3.5/api/content-service-api-v1-objects-objectid-versions#content-service-api-v1-objects-objectid-versions-second-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "bucket": "987654321019181716",
+      "etags": {
+          "2": "2"
+      },
+      "objectId": "987654321012345678",
+      "success": true,
+      "uploadId": "749427370888589312"
+  }
+  ```

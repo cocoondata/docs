@@ -1,0 +1,133 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/userwhitelist/check"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/userwhitelist/check
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-supported-methods-and-overview" />
+
+- `POST` - checks which [Cocoon Data user](/CS1.2/api/authentication-and-authorisation) accounts in an organisation (specified by `orgId`) will be affected by adding or deleting one or more [user whitelist rule/s](/CS1.2/admin-org/managing-user-whitelists).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-detailed-description" />
+
+This API endpoint checks which Cocoon Data user accounts in an organisation (specified by `orgId`) will be affected by adding or deleting one or more user whitelist rules.
+
+- Adding user whitelist rules (via the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist) API endpoint) is likely to result in the prevention of Cocoon Data user accounts (including users whose accounts are not yet registered on the Cocoon Data Platform) being shared content within an organisation.
+- Deleting user whitelist rules (via the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist/\{whitelistId\}](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist-whitelistid) endpoint) is likely to result in Cocoon Data user accounts (including users whose accounts are not yet registered on the Cocoon Data Platform) regaining the ability to be shared content within an organisation.
+
+Therefore, use this endpoint first to check which Cocoon Data user accounts will be affected before adding or deleting any user whitelist rules.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+
+- [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgId}` in the request's URL.
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist-check#access-service-api-v1-organisations-orgid-userwhitelist-check-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **action** - The enumeration (enum) value `add` or `delete`.
+- **items** - An array of information about one or more user whitelist rule/s to be added *or* existing user whitelist rules to be deleted (based on the **action** value above).
+
+  - To check for Cocoon Data user accounts that will be prevented from being shared content by *adding* new user whitelist rules, each element of this array must contain the following members:
+
+    - **pattern** - The domain pattern or email address of the user whitelist rule to be added to the organisation specified by `{orgId}` in the request's URL.
+
+  - To check for Cocoon Data user accounts that will be disabled by *deleting* existing user whitelist rules, each element of this array must contain the following members:
+
+    - **id** - The ID of the existing user whitelist rule in the organisation specified by `{orgId}` in the URL.
+    - **pattern** - The domain pattern or email address of the user whitelist rule to be deleted (represented by **id** above). <br />
+      **Note:** This value can be any valid domain pattern or email address. Irrespective of this value, the value of **id** above is used to perform the check.
+
+  **Example (request - checking which Cocoon Data user accounts will be affected by adding '*.xy-company.com'):**
+
+  ```json
+  {
+    "action": "add",
+    "items": [
+      {
+        "pattern": "*.xy-company.com"
+      }
+    ]
+  }
+  ```
+
+   **Example (request - checking which Cocoon Data user accounts will be affected by removing '*.xy-company.com'):**
+
+  ```json
+  {
+    "action": "delete",
+    "items": [
+      {
+        "id": "765733965205381120",
+        "pattern": "*.xy-company.com"
+      }
+    ]
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing information about the Cocoon Data user accounts in the organisation specified by `{orgId}` in the request's URL, which will be affected by adding or deleting user whitelist rule/s specified in the request. (I.e. adding rules prevents users the ability to be shared content in the organisation whereas deleting rules grants users this ability.) Each element of this array contains information about one of these user accounts (represented as an object containing the following members unless otherwise stated). If no user accounts are returned in the response, then this array will be empty.
+- **email** - The email address of the Cocoon Data user account.
+- **firstName** - The first name set by this user, which is `null` if this value has not already been set via a `PUT` request to the [&lt;access-service&gt;/api/v1/users/me](/CS1.2/api/access-service-api-v1-users-me) API endpoint. This is the first name that appears on the [Users](/CS1.2/admin-org/administering-users-within-an-organisation) page of SafeShare Organisation Administration and/or the [My Account](/CS1.2/user/managing-your-account) feature of Cocoon Data SafeShare for Web.
+- **lastName** - The last name set by this user, which is `null` if this value has not already been set via a `PUT` request to the [&lt;access-service&gt;/api/v1/users/me](/CS1.2/api/access-service-api-v1-users-me) endpoint. Like the first name (above), this appears on the **User** page of Organisation Administration and/or the **My Account** feature of SafeShare for Web.
+- **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has either been set by this user on their own account, or enforced for all members of the organisation (by any Organisation administrator of this organisation).
+- **id** - The ID of this Cocoon Data user account.
+- **accountType** - A member containing the internationalization (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Cocoon Data Platform), as sub-members:
+
+  - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
+
+    - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+  - **value** - The value of **accountType** as it is hard-coded in the Cocoon Data Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+  <sup>&#42;</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalization in the SafeShare Administrator's Guide. <br />
+  **Note:** For more information about account types, see the description for [Account Type](/CS1.2/admin-org/administering-users-within-an-organisation#account-type) in the [Organisation Administrator's Guide](/CS1.2/admin-org/index).
+- **count** - The total number of items returned in the response.
+- **offset** - This value should always be `0`. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "email": "alex.ersteller@xy-firma.de",
+          "firstName": "Alex",
+          "lastName": "Ersteller",
+          "mfaEnabled": false,
+          "id": "766806291997040640",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      }],
+      "count": "1",
+      "offset": "0"
+  }
+  ```

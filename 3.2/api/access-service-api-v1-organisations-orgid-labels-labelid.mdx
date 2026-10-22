@@ -1,0 +1,67 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/labels/{labelId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-labels-labelid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/labels/{labelId}
+```
+
+where `{orgId}` is the ID of an organization and `{labelId}` is the ID of one of this organization's classifications.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-labels-labelid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about an organization's [classification](/3.2/admin-org/managing-classifications), based on the classification's ID.
+- `DELETE` - used to delete an organization's classification.
+
+<Note>
+
+Both of these methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-labels-labelid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an organization's classification, using the classification's ID. A classification's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.2/api/access-service-api-v1-organisations-orgid-labels) API endpoint, which retrieves a list of information for all classifications in an organization. <br />
+  **Tip:** All information (except the **description** member) returned in the [response](/3.2/api/access-service-api-v1-organisations-orgid-labels-labelid#access-service-api-v1-organisations-orgid-labels-labelid-returns-from-a-GET-request) from a `GET` method call to this API endpoint is also returned in the [response](/3.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.2/api/access-service-api-v1-organisations-orgid-labels) endpoint. Therefore, if you do not require a classification's **description** when retrieving information about the classification, there is no need to call the `GET` method on this API endpoint.
+- Deletes a classification from an organization. <br />
+  **Important:** Deleting a classification also removes:
+
+  - this classification from all [new](/3.2/api/access-service-api-v1-organisations-orggroupid-objects) and [existing](/3.2/api/access-service-api-v1-objects-objectid) file objects it had been applied to and more importantly,
+  - removes all current collaborators from these file objects.
+
+Be aware that by design and for security reasons, it is not possible to edit any aspect of a classification.
+
+## Supported roles <a id="access-service-api-labels-labelid-supported-roles" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides) and conditions:
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role), [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Ad hoc](/3.2/admin-org/administering-users-within-an-organisation#adhoc-role) - using the `GET` method, if this user is a member of the organization specified by the `{orgId}` of the request's URL.
+- **Organization administrator** - using the `DELETE` method, if this user is a member of the organization specified by the `{orgId}` of the request's URL.
+- [Safe Share administrator](/3.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the `GET` method.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orgid-labels-labelid#access-service-api-v1-organisations-orgid-labels-labelid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-labels-labelid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns from a GET request <a id="access-service-api-v1-organisations-orgid-labels-labelid-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+- **priority** - .
+
+  **Example (response from ...):**
+
+## Returns from a DELETE request <a id="access-service-api-v1-organisations-orgid-labels-labelid-returns-from-a-DELETE-request" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

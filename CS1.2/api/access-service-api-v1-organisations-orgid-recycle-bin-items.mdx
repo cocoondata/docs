@@ -1,0 +1,135 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/recycle-bin/items"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/recycle-bin/items
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of high-level information associated with all items currently in the [Recycle Bin](/CS1.2/user/managing-secure-content#accessing-the-recycle-bin) of the Cocoon Data user whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-organisations-orgid-recycle-bin-items#access-service-api-v1-organisations-orgid-recycle-bin-items-supported-roles) to this endpoint.
+- `DELETE` - deletes all items in the Recycle Bin of the Cocoon Data user whose access token is submitted in the request.
+
+<Note>
+
+The `DELETE` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves a list of high-level information associated with all items currently in the Recycle Bin of the Cocoon Data user whose access token is submitted with the request to this endpoint.
+- Deletes all items in the Recycle Bin of the Cocoon Data user whose access token is submitted with the request. <br />
+  **Note:** This action:
+
+  - Permanently deletes all items in the Recycle Bin, along with [all versions](/CS1.2/user/managing-file-versions) associated with every file deleted. If an item is a folder, this includes *every item* contained within this folder.
+  - Automatically deletes the encrypted data associated with all these deleted file objects (and their versions) from storage managed by the Cocoon Data Platform's Content Service.
+  - Changes the state of all deleted file objects to *Deleted*. However, this does not remove these file objects' associated properties from the Cocoon Data Platform. Nevertheless, a file object and all its properties are deleted from the system if the [Cocoon Data user who owns the file object is removed from the organisation](/CS1.2/api/access-service-api-v1-users-userid) (without the ownership of the file object being [transferred to another Cocoon Data user](/CS1.2/api/access-service-api-v1-organisations-orgid-items-transfer) in the organisation).
+  - Unlike permanently deleting file objects, permanently deleting folders removes all trace of the folder and its properties from the Cocoon Data Platform.
+
+## Supported roles <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-supported-roles" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)):
+
+- [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - when this user is a member of the organisation whose ID is specified by `{orgId}` in the request's URL.
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orgid-recycle-bin-items#access-service-api-v1-organisations-orgid-recycle-bin-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-optional-get-request-parameters" />
+
+The following optional parameter can be sent in the URL of the GET request:
+
+- **limit** - A value from `0` to any positive integer, representing the maximum number of items to be returned in the response from the Cocoon Data Platform, where an individual item is information about a file object within the organisation. Specifying the value `0` imposes no limit on the number of items returned. If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. file objects) from the Cocoon Data Platform returned in the response. Calls to this API endpoint are soon likely to amount to potentiallly unmanagable numbers of items being returned from the Cocoon Data Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. file objects) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `DESC` by default.
+- **sortBy** - An enum value representing the field (i.e. member) of a retrieved item by which items (i.e. file objects and folders) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `name` - the item's name,
+  - `size` - the date when the file object was created,
+  - `time` - the file object's ID.
+
+  These enum values can also be specified using uppercase characters. If this parameter is omitted, then its value is `time` by default. <br />
+  **Example (GET request - retrieving information about a Cocoon Data user's recycled items in ascending alphabetical order by item name):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/722338038193385472/recycle-bin/items?sortBy=name&orderBy=ASC
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-recycle-bin-items-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing information about all currently recycled items in the Cocoon Data user whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-organisations-orgid-recycle-bin-items#access-service-api-v1-organisations-orgid-recycle-bin-items-supported-roles) to this endpoint. Each element of this array contains information about one of these recycled items (represented as an object containing the following members unless otherwise stated).
+- **id** - The ID of the item.
+- **name** - The name of the item.
+- **type** - The item's type - i.e. indicates `object` if the item is a file object or `collection` if the item is a folder.
+- **recycledTime** - The time when the item was recycled.
+- **totalVersionSize** - The amount of space (in bytes) of all versions of the file object's data (as recorded by the Cocoon Data Platform's Access Service).
+- **requestorEmail** - The email address of the user who recycled the item.
+- **shared** - A boolean value indicated whether or not the item was shared (prior to the item being recycled).
+- **organisationId** - The ID of the organisation to which this item belongs. (This value should match that of `{orgId}` in the request's URL.)
+- **parentId** - The ID of the folder/location that contained this item (prior to it being recycled). A value of `0` indicates that this item is located at the logical root location.
+- **ownerId** - The ID of this item's owner's Cocoon Data user account.
+- **daysToPurge** - The number of days remaining before the Cocoon Data Platform automatically deletes (purges) this item from the Recycle Bin.
+- **count** - The maximum number of items (i.e. recycled files and/or folders) that can be returned in the response.
+- **offset** - The value of the **offset** which had been used in the request to this endpoint. <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items": [{
+          "name": "Other",
+          "recycledTime": "2016-09-16T04:13:06.936Z",
+          "organisationId": "749418071827214336",
+          "requestorEmail": "alex.originator@xy-company.com",
+          "shared": true,
+          "daysToPurge": 29,
+          "type": "collection",
+          "parentId": "755603158478508032",
+          "totalVersionSize": "210176",
+          "id": "752389961810243584",
+          "ownerId": "749419842687528960"
+      }, {
+          "name": "Executive Report.pdf",
+          "recycledTime": "2016-09-16T00:48:04.624Z",
+          "organisationId": "749418071827214336",
+          "requestorEmail": "alex.originator@xy-company.com",
+          "shared": false,
+          "daysToPurge": 29,
+          "type": "object",
+          "parentId": "751980834491527168",
+          "totalVersionSize": "3596928",
+          "id": "753099536981094400",
+          "ownerId": "749419842687528960"
+      }, {
+          "name": "paraglider.jpg",
+          "recycledTime": "2016-09-16T04:12:56.396Z",
+          "organisationId": "749418071827214336",
+          "requestorEmail": "alex.originator@xy-company.com",
+          "shared": true,
+          "daysToPurge": 29,
+          "type": "object",
+          "parentId": "755603158478508032",
+          "totalVersionSize": "1183936",
+          "id": "752047795879604224",
+          "ownerId": "749419842687528960"
+      }],
+      "count": "3",
+      "offset": "0"
+  }
+  ```

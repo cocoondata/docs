@@ -1,0 +1,511 @@
+---
+title: "Working with files and folders (fundamentals)"
+---
+
+This page describes how to use the Covata API to:
+
+- [Obtain a cryptographic key](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key) from the Covata Platform's Access Service, which is required for encrypting or decrypting a [file's/Secure Object's](/3.4/api/working-with-files-and-folders-fundamentals#secure-object) data.
+- [Initialize a new 'Incomplete' file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) within an [organization](/3.4/api/working-with-files-and-folders-fundamentals#organisation) by associating the cryptographic key with this new file.
+- [Complete a file object by uploading its locally-encrypted data](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data), which involves your client application encrypting the file object's data first, then uploading this encrypted data to the Covata Platform's Content Service for storage.
+- [Complete a file object by uploading its unencrypted data](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-unencrypted-data) to the Content Service for encryption, then storage.
+- [Download a file object's data](/3.4/api/working-with-files-and-folders-fundamentals#downloading-a-file-objects-data) for local decryption if required.
+- [Create a folder](/3.4/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) to manage files and other folders.
+- [Move items to other folders](/3.4/api/working-with-files-and-folders-fundamentals#moving-items-to-other-folders).
+
+<Note>
+
+- Before creating and/or manipulating either a file or a folder, your application must have a valid access token obtained by authenticating and authorizing a Covata user to the Covata Platform, where this user has the appropriate [role](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) and/or permissions within their organization to create and/or manipulate either:
+
+  - their own items, or
+  - items owned by or located within another Covata user's folder.
+
+  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.4/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.4/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.4/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+- The **Supported roles (and conditions)** section of each API endpoint page (accessible from the relevant procedures throughout this Developer's Guide) contains details about the roles a Covata user requires and the conditions they must meet, for requests to these endpoints (which would include a valid access token representing the user's authenticated session) to succeed.
+
+</Note>
+
+## Definitions
+
+### Secure Object
+
+A *Secure Object* (in its *Created* or 'completed' state) represents a file and its data/content which has been encrypted according to the Covata Platform's encryption requirements - see [Completing a file object (uploading its locally-encrypted data)](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data) for more information - along with the file's associated *properties*, which are recorded by the Covata Platform's Access Service. These properties define details such as the file's name, location, which people (i.e. collaborators) can access the file's data and the level of access these people have to the file's data.
+
+A Secure Object's content is only handled either by the Covata Platform's Content Service or externally by your application. While a Secure Object's content is not handled by the Access Service, a Secure Object's associated properties are retrieved from the Access Service, which in turn can assist in:
+
+- downloading the Secure Object's content from storage (either in its encrypted or unencrypted form) from the Content Service,
+- obtaining the necessary key required to decrypt a Secure Object's content, which has been encrypted, handled and/or stored externally (e.g. by your application).
+
+Conceptually, within the scope of Covata's Safe Share applications, a Secure Object represents a *file* and throughout Covata's product documentation, is referred to as a 'file object' (or when the context is unambiguous, simply just a 'file').
+
+<Note>
+
+- A file object in an *Incomplete* state is one that has been [initialized](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) (and associated with a [key](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)), although is not yet associated with any encrypted data (which would change the file object's state to *Created*).
+- When using Covata Safe Share applications, an incomplete file object could also result from a failure in either encrypting the file's data or uploading this content to storage.
+- In Organization Administration, a file object's current state can be seen through the **Files** [page](/3.4/admin-org/administering-files). For more information, see the [Organization Administrator's Guide](/3.4/admin-org/index).
+
+</Note>
+
+### Collection
+
+A *collection*:
+
+- Represents a folder for logically organizing one or more Secure Objects and/or other collections.
+- Like a Secure Object, a collection also has its own associated *properties*.
+
+Collections are:
+
+- Analogous to an operating system's folders/directories on a file system and
+- Used by the Covata Platform's Content Service to logically organize Secure Objects and other collections.
+
+Conceptually, within the scope of Covata's Safe Share applications, a collection represents an operating system's *folder* or directory and throughout Covata's product documentation, is referred to as simply just a 'folder'.
+
+### Item
+
+An *item* (in the context of [Secure Objects](/3.4/api/working-with-files-and-folders-fundamentals#secure-object) and [collections](/3.4/api/working-with-files-and-folders-fundamentals#collection)) is a generic term that refers to either a file (object) or a folder.
+
+Every item, regardless of whether it is a file or a folder has a *unique identifier* (or ID).
+
+### Organization <a id="organisation" />
+
+All [items](/3.4/api/working-with-files-and-folders-fundamentals#item) on the Covata Platform are managed and handled within the scope of a self-contained unit called an *organization*.
+
+An organization is *self-contained* meaning that [creating and manipulating](/3.4/api/working-with-files-and-folders-fundamentals) of items as well as [sharing](/3.4/api/sharing-items) them is handled solely within the scope of an organization itself. Organizations provide the Covata Platform with *multitenancy* capabilities, whereby each organization represents an individual 'tenant'.
+
+Be aware, however, that a Covata user can:
+
+- be a member of one or more organizations and also
+- share their content with users in other organizations.
+
+Therefore, a Covata user's ownership of content (or permissions to access this content) as well as the roles they have been granted to access Safe Share features are specific to each organization.
+
+However, if a Covata user is a member of an organization and this user shares content with another Covata user (who is not a member of the organization), then that 2nd user automatically becomes a member of this organization.
+
+## Obtaining a cryptographic key
+
+A cryptographic key is required to encrypt data into a complete file object.
+
+To obtain a cryptographic key from the Covata Platform's Access Service (which is the first step before creating a new file object), make a `POST` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys)
+
+with a [JSON](http://json.org/) object in the body of the request that either:
+
+- contains the optional **keyLength** parameter (as a name/value pair) which determines the bit length of the cryptographic key to be returned from the Covata Platform. Specify a value of `128`, `192` or `256`. <br />
+  *OR*
+- is empty. Specifying an empty JSON object implicitly sets the **keyLength** parameter's value to `256`.
+
+**Example request:**
+
+```bash
+curl 'https://access-service.xy-company.com/api/v1/keys' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -H 'Content-Type: application/json' \
+    -d '{}' \
+    -X POST
+```
+
+<Note>
+
+As indicated in this example, the access token obtained after [authentication and authorization](/3.4/api/authentication-and-authorisation#initiating-authentication-and-authorisation) to the Covata Platform, must be included in the header of this request (as the bearer token) for the request to succeed.
+
+</Note>
+
+If the request was successful, the Covata Platform responds by sending back a JSON object containing the key's ID value (required to associate a cryptographic key with a file object), other information about the key's characteristics and a date and time stamp of when the key was created.
+
+**Example response:**
+
+```json
+{
+    "keys": [{
+        "id": "728882421139116032",
+        "keyValue": "o6rwD3MQ4Saq1g1PnSGB6jarZGa26yLW4IRd38EGnVM=",
+        "initializationVector": "E2wWB9FuvOXsimgLULDZfA==",
+        "cryptographicAlgorithm": "AES",
+        "keyLength": 256,
+        "createdAt": "2016-07-04T07:58:31.180Z",
+        "modifiedAt": "2016-07-04T07:58:31.180Z"
+    }]
+}
+```
+
+**Next step:** Now that you have a cryptographic key, you can begin the process of creating a new file object by [Initializing a new 'Incomplete' file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object), from which you can either upload the file object's unencrypted data (for server-side encryption) then remote storage, or encrypt the file object's data locally before uploading it to remote storage.
+
+## Initializing a new 'Incomplete' file object <a id="initialising-a-new-incomplete-file-object" />
+
+Initializing a new file object (whose state is *Incomplete*):
+
+- associates the cryptographic key with a new file object in an [organization](/3.4/api/working-with-files-and-folders-fundamentals#organisation), which results in an incomplete file object and
+- is the initial step required to create a new file object.
+
+To do this, make a `POST` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.4/api/access-service-api-v1-organisations-orggroupid-objects)
+
+with a JSON object in the body of the request that contains the **keyId** parameter (as a name/value pair) whose value is the ID of the key ([obtained above](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)).
+
+The value of `{orgGroupId}` in the URL path of the request is the ID of the organization in which the file object will be created.
+
+<Tip>
+
+In this request, you may also wish to specify the **name** and **mimeType** parameters too.
+
+</Tip>
+
+**Example request:**
+
+```bash
+curl 'https://access-service.xy-company.com/api/v1/organisations/722338038193385472/objects' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "keyId": "728882421139116032",
+          "mimeType": "image/jpeg",
+          "name": "paraglider.jpg"
+        }' \
+    -X POST
+```
+
+If the request was successful, a JSON object is returned in the response containing an **id** member whose value is the *ID* of the incomplete *file object*.
+
+**Example response:**
+
+```json
+{
+    "id": "732860187958231040",
+    "shared": false,
+    "name": "paraglider.jpg",
+    "sha512": null,
+    "hasView": false,
+    "canGenerateView": null,
+    "organisation": {
+        "name": "XY Company",
+        "description": "",
+        "mfaEnabled": false,
+        "id": "732855142835470336"
+    },
+    "permissions": [],
+    "mimeType": "image/jpeg",
+    "contentSize": null,
+    "parentId": "0",
+    "state": "server.object.states.incomplete",
+    "modifiedAt": "2016-07-15T07:24:44.693Z",
+    "createdAt": "2016-07-15T07:24:44.693Z",
+    "labelName": "Unclassified",
+    "labelId": "732858991201665024"
+}
+```
+
+<Note>
+
+- You may wish that your application (temporarily) stores this file object's ID value as this value is required to complete the file object (see **Next step** section below) or when making subsequent modifications to the file object, such as changing its name, location or who it is [shared with](/3.4/api/sharing-items).
+- Your application does not need to store any information about the cryptographic key, since this can (and for security reasons should) be retrieved from the Covata Platform using the file object's ID.
+- When making this request, ensure that your application submits an access token with sufficient permissions within the organization for the request to succeed. See [Supported roles and conditions](/3.4/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-supported-roles-and-conditions) (of [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.4/api/access-service-api-v1-organisations-orggroupid-objects)) for more information.
+
+</Note>
+
+**Next step:** Now that you have initialized your file object, you can begin encrypting its data and complete the file object. Depending on your application's requirements, this involves either:
+
+- [Completing a file object (uploading its locally-encrypted data)](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data), whose data is encrypted locally before being uploaded to remote storage (via the Covata Platform's Content Service).
+- [Completing a file object (uploading its unencrypted data)](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-unencrypted-data), whose unencrypted data is uploaded to the Content Service, which the Content Service then automatically encrypts and then transfers to remote storage. <br />
+  **Deciding which of these approaches is right for you** <br />
+   If the connection between a client's machine (which stores the locally unencrypted data) and the Covata Platform's Content Service is secured using properly implemented TLS, then the 2nd approach above (i.e. uploading unencrypted data) may be suitable for your requirements. <br />
+   If, however, you do not wish a file object's locally stored data to be sent from the client's machine *over any type of connection* in its unencrypted form, your application can encrypt this data on the client machine first before uploading the encrypted data to remote storage via the Content Service.
+
+<Warning>
+
+Email notifications that inform collaborators about an item being shared with them are triggered by the Covata Platform *at the time when* these collaborators are initially shared the item (see [Sharing items](/3.4/api/sharing-items) for more information). Therefore, if creating a file object within a [folder](/3.4/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) (specified by the **parentId** parameter in the request above) when this folder has already been [shared with collaborators](/3.4/api/sharing-items#sharing-a-folder-with-collaborators), then it is recommended that your application completes the file object by uploading its data to remote storage *as soon as practicable*. Otherwise, there is a risk that collaborators will receive such an email notification *before* the file's content becomes accessible.
+
+</Warning>
+
+## Completing a file object (uploading its locally-encrypted data)
+
+Completing a file object by uploading its locally-encrypted data involves the following steps:
+
+1. Ensuring you [obtained a cryptographic key](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key) for the file object and [initialized the file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) with this cryptographic key.
+2. Using this cryptographic key to encrypt the file object's data locally and obtaining the [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) value of this encrypted data.
+3. Associating this encrypted data with the file object by both:
+
+   - uploading the encrypted data to remote storage via the Covata Platform's Content Service and
+   - assigning this SHA-512 value to the file object
+
+   using the file object's ID. This step 'completes' the file object, which changes its state from *Incomplete* to *Created*.
+
+<a id="requirements-for-encrypting-data-locally" />**Requirements for encrypting data locally**
+
+When encrypting your data with the cryptographic key ([obtained above](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)), ensure your client application encrypts this data using:
+
+- The AES algorithm (in CBC mode) with [PKCS #7 padding](http://tools.ietf.org/html/rfc2315) (see [Optional parameters](/3.4/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) of [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys) for more information), as well as
+- Both the cryptographic key and initialization vector ([returned](/3.4/api/access-service-api-v1-keys#access-service-api-v1-keys-returns) by calling the [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys) API endpoint) for this file object.
+
+If you do not follow these requirements, then either your attempt to upload your encrypted data may fail or if successful, any attempt to [download](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-get-request-parameters) the file object's data in its decrypted form will result in the retrieval of garbled data.
+
+Before continuing, your client application should also calculate the SHA-512 value of this *encrypted data* (in its entirety).
+
+**Completing the file object**
+
+Once a file object's data has been encrypted locally ([above](/3.4/api/working-with-files-and-folders-fundamentals#requirements-for-encrypting-data-locally)), your application can send this encrypted data to remote storage via the Content Service, which changes the file object's state to *Created*.
+
+To upload a completed file object's encrypted data to the Content Service, make one or more `POST` method request/s to this API endpoint:
+
+- [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)
+
+along with the actual *encrypted* data to be uploaded in the body of the request as multi-part form data elements.
+
+The value of `{objectId}` in the URL path of the request is the ID of the file object that was previously [initialized](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object).
+
+When making these requests, the value of the **format** URL parameter must be `encrypted` and the **sha512** parameter's value (submitted as a multi-part form data element) must be the SHA-512 value of the entire locally-encrypted data. See [Required POST-request parameters](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)) for more information.
+
+**Example request:**
+
+```bash
+curl 'https://content-service.xy-company.com/api/v1/objects/732860187958231040/contents?format=encrypted' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -F 'sha512=mDxrkb0Nj5m44ZPYxgIJOvHckXHr577f8Ww4VGxssQ60yv5pyhtrrlepL2ZNCNytLRdwcY4CrwRQmiEG\/0y5Mw==' \
+    -F 'totalFileSizeBytes=549732' \
+    -F 'data=@paraglider-encrypted.jpg;type=image/jpeg' \
+    -X POST
+```
+
+<Note>
+
+- If the data being uploaded is larger than the upload *chunk size* permitted by the Covata Platform (whose default value is 10 [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)), then the data must be uploaded in multiple requests to this endpoint. Your client application must break up this data into chunks of this size, each of which must be uploaded in separate calls to this upload endpoint (above). See [Required parameters for multi-chunk uploads](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)) for more information.
+- The **sha512** parameter only needs to be submitted once (and for multi-chunk uploads, in the final chunk upload request).
+
+</Note>
+
+If a request was successful, a JSON object is returned in the response containing a **success** member whose boolean value is `true` (and from a *single* or *final* successful request, the response also contains the **sha512** member whose value was the SHA-512 value submitted in the request).
+
+**Example response:**
+
+```json
+{
+    "objectId": "732860187958231040",
+    "success": true,
+    "uploadId": null,
+    "sha512": "mDxrkb0Nj5m44ZPYxgIJOvHckXHr577f8Ww4VGxssQ60yv5pyhtrrlepL2ZNCNytLRdwcY4CrwRQmiEG\/0y5Mw==",
+    "contentSize": 549732,
+    "uploadedAs": "encrypted"
+}
+```
+
+## Completing a file object (uploading its unencrypted data)
+
+Completing a file object by uploading unencrypted data stored locally involves the following steps:
+
+1. Ensuring you [obtained a cryptographic key](/3.4/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key) for the file object and [initialized the file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) with this cryptographic key.
+2. Uploading the file object's unencrypted data to remote storage via the Covata Platform's Content Service. This step automatically encrypts and 'completes' the file object, which changes its state from *Incomplete* to *Created*.
+
+To upload an *incomplete* file object's *unencrypted* data to the Content Service, make one or more `POST` method request/s to this API endpoint:
+
+- [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)
+
+along with the actual *unencrypted* data to be uploaded in the body of the request as multi-part form data elements.
+
+The value of `{objectId}` in the URL path of the request is the ID of the file object that was previously [initialized](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object).
+
+When making these requests, the value of the **format** URL parameter must be `plaintext` (and the **sha512** parameter should be omitted). See [Required POST-request parameters](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)) for more information.
+
+**Example request:**
+
+```bash
+curl 'https://content-service.xy-company.com/api/v1/objects/732860187958231040/contents?format=plaintext' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -F 'totalFileSizeBytes=549581' \
+    -F 'data=@paraglider.jpg;type=image/jpeg' \
+    -X POST
+```
+
+<Note>
+
+If the data being uploaded is larger than the upload *chunk size* permitted by the Covata Platform (whose default value is 10 [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)), then the data must be uploaded in multiple requests to this endpoint. Your client application must break up this data into chunks of this size, each of which must be uploaded in separate calls to this upload endpoint (above). See [Required parameters for multi-chunk uploads](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) (for more information).
+
+</Note>
+
+After completing all required requests to upload the unencrypted data (above), the Content Service automatically:
+
+1. Encrypts the data.
+2. Calculates the [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) value of this encrypted data.
+3. Transfers the encrypted data to remote storage.
+4. Associates this SHA-512 value with the file object, which:
+
+   - is returned in the response to the last upload request - see [Returns](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-returns) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)) for more information and
+   - completes the file object (changing its state from *Incomplete* to *Created*).
+
+<Note>
+
+For a multi-chunk upload, steps 1 to 3 above are conducted for each chunk and after the last chunk has been uploaded, the final SHA-512 value (for the entire encrypted data) is calculated and associated with the file object.
+
+</Note>
+
+If a request was successful, a JSON object is returned in the response containing a **success** member whose boolean value is `true` (and from a *single* or *final* successful request, the response also contains the **sha512** member whose value is the SHA-512 value calculated automatically by the Content Service).
+
+**Example response:**
+
+```json
+{
+    "objectId": "732860187958231040",
+    "success": true,
+    "uploadId": null,
+    "sha512": "Ii5TdQLLK7s4KjWmAWrHGVf6UFOHR8f3BHnYgzu5w+RVHdDS+hhGT0z2Hxo8xyvVUcfhGBiWi9pXuQa+LHOjag==",
+    "contentSize": 549796,
+    "uploadedAs": "plaintext"
+}
+```
+
+## Downloading a file object's data
+
+A file object's data can be downloaded in either its encrypted or unencrypted form (regardless of whether it was uploaded in [encrypted](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data) or [unencrypted](/3.4/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-unencrypted-data) form).
+
+To download (the active version of) a file object's data, make a `GET` method request to this API endpoint:
+
+- [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)
+
+with the **format** URL parameter with one of these values to specify the format in which the file object's data is downloaded:
+
+- `encrypted` - in encrypted form, or
+- `plaintext` - in unencrypted form.
+
+<Note>
+
+Specify the **encoding** URL parameter with a value of `base64` to download the file object's data as [Base64](https://tools.ietf.org/html/rfc4648)-encoded data. Otherwise, the data is downloaded in its native or binary form.
+
+</Note>
+
+The value of `{objectId}` in the URL path of the request is the ID of the file object to be downloaded.
+
+**Example request:**
+
+```bash
+curl 'https://content-service.xy-company.com/api/v1/objects/732860187958231040/contents?format=encrypted' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -X GET
+```
+
+If the request was successful, the file object's data is downloaded locally.
+
+<Note>
+
+When making this request, ensure that your application submits an access token with sufficient permissions within the organization for the request to succeed. See [Supported roles and conditions](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-supported-roles-and-conditions) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents)) for more information.
+
+</Note>
+
+**Obtaining the key to decrypt the file object's data locally**
+
+If the request was made with the **format** URL parameter value of `encrypted`, then your application will need to decrypt this data locally.
+
+This requires your application to retrieve the cryptographic key (from the Covata Platform) that was originally used to encrypt this file object's data when the file object was completed.
+
+To obtain this cryptographic key, make a `GET` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/3.4/api/access-service-api-v1-objects-objectid-keys)
+
+where value of `{objectId}` in the URL path of the request is the ID of the file object whose data is to be decrypted locally.
+
+**Example request:**
+
+```bash
+curl 'https://access-service.xy-company.com/api/v1/objects/732860187958231040/keys' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -X GET
+```
+
+If the request was successful, a JSON object is returned in the response containing the cryptographic key and initialization vector (required to decrypt the file object's data locally).
+
+**Example response:**
+
+```json
+{
+    "keyValue": "2VCZkPeYPhvL4VkzrEqIVGaW2AGmRM1uwuXiPRbe8NU=",
+    "cryptographicAlgorithm": "AES",
+    "keyLength": 256,
+    "initializationVector": "fpEIYIk+dnMw7rgFA+Bz8g=="
+}
+```
+
+**Requirements for decrypting data locally**
+
+When decrypting your data with the cryptographic key (obtained above), ensure your client application decrypts this data using:
+
+- The AES algorithm (in CBC mode) with [PKCS #7 padding](http://tools.ietf.org/html/rfc2315) (see [Optional parameters](/3.4/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) of [&lt;access-service&gt;/api/v1/keys](/3.4/api/access-service-api-v1-keys) for more information), as well as
+- Both the cryptographic key and initialization vector ([returned](/3.4/api/access-service-api-v1-objects-objectid-keys#access-service-api-v1-objects-objectid-keys-returns) by calling the [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/3.4/api/access-service-api-v1-objects-objectid-keys) API endpoint) for this file object.
+
+If you do not follow these requirements, then your attempt to decrypt the encrypted data will result in garbled data.
+
+## Creating a folder to manage items
+
+The Covata Platform allows the creation of folders, which are utilized to organise a Covata user's files and other folders (i.e. [items](/3.4/api/working-with-files-and-folders-fundamentals#item)).
+
+To create a folder, make a `POST` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections)
+
+with a JSON object in the body of the request that contains the **name** of the folder and the **parentId** value, both of which are parameters (each specified as name/value pairs).
+
+The **parentId** value should be either:
+
+- `0` to specify that the new folder will be created at the logical root level, or
+- the ID value of an existing folder that will become the parent of this new folder. See [Retrieving information about items](/3.4/api/retrieving-information-about-items) for details about retrieving information on existing folders.
+
+The value of `{orgId}` in the URL path of the request is the ID of the organization in which the folder will be created.
+
+**Example request:**
+
+```bash
+curl 'https://access-service.xy-company.com/api/v1/organisations/722338038193385472/collections' \
+    -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "name": "Scenery",
+          "parentId": "0"
+        }' \
+    -X POST
+```
+
+If the request was successful, a JSON object is returned in the response containing an **id** member whose value is the *ID* of the new *folder*.
+
+**Example response:**
+
+```json
+{
+    "id": "876543210191817161",
+    "name": "Scenery",
+    "createdAt": "2014-10-15T01:19:08.294Z",
+    "modifiedAt": "2014-10-15T01:19:08.294Z",
+    "shared": false,
+    "parentId": "0"
+}
+```
+
+<Note>
+
+- A new file object or folder can be created within an existing folder by specifying the *ID* of a folder as the **parentId** value when [Initializing a new 'Incomplete' file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) or [creating another folder](/3.4/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items).
+- When making this request, ensure that your application submits an access token with sufficient permissions within the organization for the request to succeed. See [Supported roles and conditions](/3.4/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-supported-roles-and-conditions) (of [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections)) for more information.
+
+</Note>
+
+## Moving items to other folders
+
+To move a Covata user's [item](/3.4/api/working-with-files-and-folders-fundamentals#item) to another folder, make a `PUT` method request to either of these API endpoints:
+
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) (if the item being moved is a file), or
+- [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.4/api/access-service-api-v1-collections-collectionid) (if the item being moved is a folder)
+
+with a JSON object in the body of the request that contains the **parentId** parameter (as a name/value pair), whose value is the ID of the folder to which the item is being moved.
+
+The **parentId** value should be either:
+
+- `0` to specify that the item will be moved to the logical root level, or
+- the ID value of an existing folder that will become the parent of the item, bearing in mind that the **parentId** folder and the item being moved must be within the same organization. See [Retrieving information about items](/3.4/api/retrieving-information-about-items) for details about retrieving information on existing folders.
+
+If the request was successful, a JSON object is returned in the response containing an **id** member whose value is the *ID* of the *item that was moved* and the **parentId** member whose value is the *ID* of the folder/location to which the item was moved.
+
+<Note>
+
+When making this request:
+
+- Ensure that your application submits an access token with sufficient permissions within the organization for the request to succeed. See [Supported roles and conditions](/3.4/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-supported-roles-and-conditions) (of [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid)) and [Supported roles and conditions](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-supported-roles-and-conditions) (of [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.4/api/access-service-api-v1-collections-collectionid)) for more information.
+- If the Covata user (whose access token is submitted in the header of the request) is a collaborator (see [Sharing items](/3.4/api/sharing-items) for more information) on both the item being moved and the **parentId** folder, then this user must have the **Move** permission on both these items, which have been *inherited* from a common parent folder. (**parentId** could also be the common parent folder itself.)
+- If the Covata user is a collaborator on the **parentId** folder but is the owner of the item being moved (or vice versa), then it is not possible to move the item into the **parentId** folder.
+- For more information about the **parentId** parameter on the API endpoints above, see [Optional PUT-request parameters](/3.4/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-put-request-parameters) (of [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid)) and [Optional parameters](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters) (of [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.4/api/access-service-api-v1-collections-collectionid)).
+
+</Note>

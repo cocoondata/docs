@@ -1,0 +1,61 @@
+---
+title: "<content-service>/api/v1/objects/{objectId}/view"
+---
+
+## URL structure <a id="content-service-api-v1-objects-objectid-view-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/objects/{objectId}/view
+```
+
+where `{objectId}` is the ID of a Secure Object.
+
+## Supported methods and overview <a id="content-service-api-v1-objects-objectid-view-supported-methods-and-overview" />
+
+- `GET` - used to download a [Secure Object](/3.2/api/creating-files-and-folders#secure-object)'s encrypted *read-only view* data from storage via the Covata Platform's Content Service.
+- `PUT` - used to regenerate a Secure Object's *read-only view* (based on the Secure Object's actual data) which is also stored and managed by the Content Service.
+
+<Note>
+
+The `PUT` method take no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-objects-objectid-view-detailed-description" />
+
+This API endpoint serves a number of purposes, all of which are managed by the Covata Platform's Content Service:
+
+- Downloads a Secure Object's encrypted *read-only view* data from storage. <br />
+  **Note:** The key required to decrypt this *read-only view* can be obtained by calling the [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys/view](/3.2/api/access-service-api-v1-objects-objectid-keys-view) API endpoint.
+- Regenerates a Secure Object's *read-only view* (based on the Secure Object's actual data) in storage.
+
+## Supported roles and conditions <a id="content-service-api-v1-objects-objectid-view-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)), conditions and [permissions](/3.2/api/access-service-api-v1-permissions-sets) (where applicable):
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role) - a Covata user with this role can call the `GET` and `PUT` methods on a Secure Object they own.
+- **Originator**, [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.2/admin-org/administering-users-within-an-organisation#adhoc-role) - a Covata user with any of these roles can call the `GET` method for a Secure Object they are a collaborator on (with the **View** *permission*).
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/content-service-api-v1-objects-objectid-view#content-service-api-v1-objects-objectid-view-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-objects-objectid-view-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="content-service-api-v1-objects-objectid-view-optional-parameters-on-GET" />
+
+The following optional parameter can be sent in the URL of the GET request:
+
+- **encoding** - Specify the value `base64` to download the encrypted view as [Base64](https://tools.ietf.org/html/rfc4648)-encoded data. Otherwise, omit this parameter to download the encrypted view as raw/binary data. In both cases, the `Content-Type` in the response is `application/octet-stream`.
+
+  **Example:**
+
+  ```text
+  https://content-service.xy-company.com/api/v1/objects/987654321098765432/view?encoding=base64
+  ```
+
+## Returns <a id="content-service-api-v1-objects-objectid-view-returns-from-a-GET-or-PUT-request" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

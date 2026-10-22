@@ -1,0 +1,80 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/labels/{labelId}/priority"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/labels/{labelId}/priority
+```
+
+where `{orgId}` is the ID of an organization and `{labelId}` is the ID of one of this organization's classifications.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-supported-methods-and-overview" />
+
+- `PUT` - used to shift the priority of a [classification](/3.3/admin-org/managing-classifications) (specified by `labelId` in an organization specified by `orgId`) either up or down.
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-detailed-description" />
+
+This API endpoint shifts the priority of a classification (specified by `labelId` in an organization specified by `orgId`) either up or down. A classification's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.3/api/access-service-api-v1-organisations-orgid-labels) API endpoint, which retrieves a list of information for all classifications configured in an organization (specified by `orgId`).
+
+A priority is defined by a series of consecutive positive integer numbers called *priority integer values*. These values are used for sorting classifications from the highest priority (i.e. a priority integer value of `1`) through to the lowest priority (i.e. the highest priority integer value, which equals the total number of all classifications defined in an organization).
+
+When a new classification is [added](/3.3/api/access-service-api-v1-organisations-orgid-labels) to an organization, it is automatically given the lowest priority (i.e. the highest priority integer number). When any classification (except for the classification with the lowest priority) is [deleted](/3.3/api/access-service-api-v1-organisations-orgid-labels-labelid), then the priority integer numbers of all other classifications with a lower priority (i.e. higher integer values) are automatically decreased by a value of `1`.
+
+When a classification's priority is shifted:
+
+- `up` - then the priority integer values of this classification and its neighboring classification (i.e. with the next lowest priority integer value) switch their priority values.
+- `down` - then the priority integer values of this classification and its neighboring classification (i.e. with the next highest priority integer value) switch their priority values.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by the `{orgId}` of the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orgid-labels-labelid-priority#access-service-api-v1-organisations-orgid-labels-labelid-priority-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Required parameters <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-required-parameters" />
+
+The following required parameters must be sent in the **URL** of the PUT request:
+
+- **direction** - Specify `up` to shift up the priority of the classification (specified by `{labelId}` in the request's URL) in the organization (specified by `{orgId}`), or specify `down` to shift the classification's priority down. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/760756644367081472/labels/766862496543055872/priority?direction=up
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-labels-labelid-priority-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the classification.
+- **name** - The name of the classification.
+- **description** - The description of the classification.
+- **priority** - The new priority value, which is used for sorting classifications from highest (i.e. a priority integer value of 1) through to the lowest priority (i.e. the highest priority integer value, which equals the total number of all classifications defined in an organization).
+- **applyI18n** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "id":"766862496543055872",
+      "name":{
+          "value":"Unclassified"
+      },
+      "description":{
+          "value":"Used for content that does not have a classification level. People who are not members of staff (or without security clearance) may view such content."
+      },
+      "priority":"2",
+      "applyI18n":false
+  }
+  ```

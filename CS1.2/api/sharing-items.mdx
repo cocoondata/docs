@@ -1,0 +1,110 @@
+---
+title: "Sharing items"
+---
+
+The owner of a file or folder (i.e. an [item](/CS1.2/api/working-with-files-and-folders-fundamentals#item)), including a *collaborator* with the **Manage** *permission set* on an item (explained in more detail below) can share this item with other people. These people could be other Cocoon Data users or those who do not yet have a user account on the Cocoon Data Platform.
+
+A person who has been shared an item is referred to as a *collaborator*. If a collaborator did not have a Cocoon Data user account when they were shared an item, the act of sharing the item with this person (via their email address) automatically creates them a user account with this email address on the Cocoon Data Platform (with the [Ad hoc role](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role)).
+
+When sharing an item, the item's owner (or an existing collaborator with the **Manage** permission set on the item) can apply one of up to five *permission sets* to any collaborator being added/modified on the item. Therefore, each collaborator on an item is associated with their own permission set. A permission set grants the collaborator one or more individual *permissions*, each of which allows that collaborator to perform various actions on that item and its contents. For more information about permission sets and the individual permissions they grant, see [&lt;access-service&gt;/api/v1/permissions/sets](/CS1.2/api/access-service-api-v1-permissions-sets).
+
+All collaborators and their respective permission sets on a folder are *implicitly* propagated down through that folder's item hierarchy. Therefore, if a folder has been shared with a collaborator and a given *permission set*, then that collaborator can access and perform specific actions (granted by the permission set's individual *permissions*) on this folder, as well as on every item contained within this folder and its subfolders.
+
+If, however, one of the following had been conducted on a sub-item within this folder:
+
+- a collaborator was removed from the sub-item, or
+- a collaborator's permission set on this sub-item was changed,
+
+then such a modification is made *explicitly* to this collaborator on this sub-item, which has the following implications:
+
+- Any implicit sharing this collaborator had to this sub-item (inherited *implicitly* from the closest ancestral folder) is overridden by this explicit modification.
+- If the sub-item is a folder, then the explicit modification on this subfolder is *implicitly* propagated down through this subfolder's item hierarchy.
+
+This page describes how to use the Cocoon Data API to:
+
+- [Share a file with collaborators](/CS1.2/api/sharing-items#sharing-a-file-with-collaborators),
+- [Share a folder with collaborators](/CS1.2/api/sharing-items#sharing-a-folder-with-collaborators),
+- [Determine existing collaborators on an item](/CS1.2/api/sharing-items#determining-existing-collaborators-on-an-item) and
+- [Modify existing collaborators on an item](/CS1.2/api/sharing-items#modifying-existing-collaborators-on-an-item)
+
+<Note>
+
+- Before sharing a file or a folder, your application must have a valid access token obtained by authenticating and authorizing a Cocoon Data user to the Cocoon Data Platform, where this user has the appropriate [role](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) to create items and/or permissions to share them. <br />
+   For more information about authenticating and authorizing Cocoon Data users to the Cocoon Data Platform, see [Initiating authentication and authorization](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/CS1.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/CS1.2/admin-platform/configuring-client-applications) page of the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index).
+- The **Supported roles (and conditions)** section of each API endpoint page (accessible from the relevant procedures throughout this Developer's Guide) contains details about the roles a Cocoon Data user requires and the conditions they must meet, for requests to these endpoints (which would include a valid access token representing the user's authenticated session) to succeed.
+
+</Note>
+
+## Sharing a file with collaborators
+
+A file can be shared with collaborators when the file object is either [initialized](/CS1.2/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) or subsequently modified (the latter approach being the recommended one <sup>&#42;</sup> ).
+
+To share a file object with collaborators, do one of the following:
+
+- If sharing a file object at the time of its creation/initialization, make a `POST` request to the API endpoint for creating a new file object:
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects)
+
+  with a [JSON](http://json.org/) object in the body of the request that contains the **collaborators** parameter, which in turn contains a **list** array whose elements each relate to a collaborator and the collaborator's permission set that will be applied to the new file object. See [Optional POST-request parameters](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters) (of [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects)) for more information. <br />
+   The **keyId** parameter (name/value pair) whose value is the ID of the key ([obtained earlier](/CS1.2/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key)) must also be specified in this request. <br />
+   The value of `{orgGroupId}` in the URL path of the request is the ID of the organisation in which the file object will be created and shared. <br />
+   If the request was successful, a JSON object is returned in the response containing information about the newly initialized file object.
+- ( *Recommended* <sup>&#42;</sup> ) If sharing an existing file object (i.e. after its creation), make a `PUT` request to this API endpoint:
+
+  - [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid)
+
+  with a JSON object in the body of the request that contains the **collaborators** parameter, which in turn contains a **list** array whose elements each relate to a collaborator and the collaborator's permission set that will be applied to the file object. See [Optional PUT-request parameters](/CS1.2/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-put-request-parameters) (of [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid)) for more information. <br />
+   The value of `{objectId}` in the URL path of the request is the ID of the file object being shared. <br />
+   If the request was successful, a JSON object is returned in the response containing an extensive set of information about the updated file object.
+
+<sup>&#42;</sup> Email notifications that inform collaborators about an item being shared with them are triggered by the Cocoon Data Platform *at the time when* these collaborators are initially shared the item. Therefore, it is recommended that a file object be shared with collaborators *only after* the file object is initialized and ideally, *also after* the file object is completed by uploading its [locally-encrypted](/CS1.2/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data) or [unencrypted](/CS1.2/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-unencrypted-data) data to the Cocoon Data Platform's Content Service. Otherwise, there is a risk that collaborators will receive such an email notification *before* the file's content becomes accessible. Furthermore, it is no longer possible to specify **shareStartTime** and **shareEndTime** parameters when using the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) API endpoint.
+
+## Sharing a folder with collaborators
+
+A folder can be shared with collaborators when the folder is either [first created](/CS1.2/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) or subsequently modified.
+
+To share a folder with collaborators, do one of the following:
+
+- If sharing a folder at the time of its creation, make a `POST` request to the API endpoint for creating a new folder:
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/CS1.2/api/access-service-api-v1-organisations-orgid-collections)
+
+  with a JSON object in the body of the request that contains the **collaborators** parameter, which in turn contains a **list** array whose elements each relate to a collaborator and the collaborator's permission set that will be applied to the new folder. See [Optional parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-optional-parameters) (of [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/CS1.2/api/access-service-api-v1-organisations-orgid-collections)) for more information. <br />
+   The **name** and **parentId** parameters (name/value pairs) whose values are described earlier for [creating a folder](/CS1.2/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) must also be specified in this request. <br />
+   The value of `{orgId}` in the URL path of the request is the ID of the organisation in which the folder will be created and shared. <br />
+   If the request was successful, a JSON object is returned in the response containing information about the new folder.
+- If sharing an existing folder (i.e. after its creation), make a `PUT` request to this API endpoint:
+
+  - [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid)
+
+  with a JSON object in the body of the request that contains the **collaborators** parameter, which in turn contains a **list** array whose elements each relate to a collaborator and the collaborator's permission set that will be applied to the folder. See [Optional parameters](/CS1.2/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters) (of [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid)) for more information. <br />
+   The value of `{collectionId}` in the URL path of the request is the ID of the folder being shared. <br />
+   If the request was successful, a JSON object is returned in the response, containing information about the updated folder (including the organisation in which the folder belongs).
+
+## Determining existing collaborators on an item
+
+To determine the existing collaborators (and their respective permission sets) on a file object or folder, simply [retrieve information about a subset of](/CS1.2/api/retrieving-information-about-items) [items](/CS1.2/api/working-with-files-and-folders-fundamentals#item) from a specific [organisation](/CS1.2/api/working-with-files-and-folders-fundamentals#organisation) on the Cocoon Data Platform.
+
+If the request was successful, a JSON object is returned in the response containing information about all collaborators on each item retrieved, as well as each collaborator's respective permission set on an item (and the individual permissions that constitute the permission set).
+
+<Note>
+
+This JSON response only reveals information about collaborators on an item if the valid access token (submitted in the request) was obtained from a successfully authenticated Cocoon Data user that either owns this item or is a collaborator on the item with the **View Other** [permission](/CS1.2/api/access-service-api-v1-permissions-sets).
+
+</Note>
+
+## Modifying existing collaborators on an item
+
+Collaborators can be modified on a file or folder by:
+
+- removing existing collaborators from the item,
+- changing the permission sets of existing collaborators on the item, or
+- adding new collaborators to the item (which is already shared with existing collaborators).
+
+To modify existing collaborators, follow the relevant process above for sharing an existing [file](/CS1.2/api/sharing-items#sharing-a-file-with-collaborators) or [folder](/CS1.2/api/sharing-items#sharing-a-folder-with-collaborators) with collaborators. However, when making the relevant `PUT` request, if you intend to:
+
+- Remove existing collaborators from the item, omit these collaborators from the `PUT` request.
+- Change the permission sets of existing collaborators on the item, re-apply these collaborators in the `PUT` request but modify their permission sets accordingly (i.e. specify the appropriate **permissionSet** / **id** sub-element parameter for each of these collaborators with their updated permission set ID).
+- Add new collaborators to the item, add these new collaborators in the `PUT` request along with their permission sets (i.e. specify the appropriate **permissionSet** / **id** sub-element parameter for each of these collaborators with the appropriate permission set ID).
+
+*Additionally, in this `PUT` request*, ensure that all existing collaborators which are not being altered are re-applied in the request (along with their existing respective permission sets).

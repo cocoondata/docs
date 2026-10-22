@@ -1,0 +1,103 @@
+---
+title: "Anmeldung"
+---
+
+**Anmeldung bei Safe Share for Web:**
+
+1. Greifen Sie auf die Safe Share-Anmeldeseite auf eine der folgenden Weisen zu:
+
+   - Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Instanz von Safe Share for Web (die auch die URL der Covata-Plattform ist) im URL-Feld Ihres Browsers ein, z. B.: <br />
+     `https://safe-share.xy-firma.de` <br />
+     **Tipp:** Es könnte praktisch sein, für diese URL ein Lesezeichen zu setzen. <br />
+     **Hinweis:** Wenn ein Safe Share-Administrator Ihre Instanz der Covata-Plattform (und damit Safe Share for Web) mit Einzelanmeldung konfiguriert hat und die Authentifizierung über einen separaten Identitätsanbieter (IdP) erfolgen kann, siehe stattdessen die Hinweise zum Verfahren [Anmeldung mit Einzelanmeldung](/3.4/de/user/signing-in#signing-in-using-single-sign-on) unten.
+   - Öffnen Sie eine Ihrer E-Mail-Benachrichtigungen von Covata (z. B. eine Nachricht mit einer der folgenden Betreffzeilen) und klicken Sie im E-Mail-Text auf den Link **Hier klicken** oder die URL „Diesen Link anklicken“, um die Anmeldeseite aufzurufen:
+
+     - „*Ihnen wurden neue Elemente freigegeben*“
+     - „*Covata-Account erstellt*“
+     - „*Benachrichtigung über die Account-Aktualisierung*“
+2. Geben Sie auf der Safe Share-Anmeldeseite in den entsprechenden Feldern Ihre **E-Mail-Adresse** und Ihr **Passwort** ein:
+
+   ![Safe Share-Anmeldeseite](/images/4fce5721d608-sign-in-with-credentials.png)
+
+   <br />
+   **Hinweise:**
+
+   - Wenn Sie Ihr Passwort vergessen haben, lassen Sie wiederum das Feld **Passwort** leer, klicken Sie aber stattdessen auf den Link **Passwort vergessen?**. Folgen Sie den Anweisungen auf der aufgerufenen Seite und anschließend in Ihrer E-Mail-Benachrichtigung, um Ihr Passwort zurückzusetzen.
+   - Wenn Sie die (für Ihre Region/Ihr Gebietsschema) aktuell eingestellte Sprache ändern möchten, können Sie die gewünschte Sprache (für alle auf Ihrer Instanz der Covata-Plattform aktuell konfigurierten Sprachen) links oben auf der Safe Share-Anmeldeseite wählen. Damit ändern Sie Ihre Einstellung für die Standardsprache, auf die Sie über die Funktion [Mein Account](/3.4/de/user/managing-your-account) zugreifen können.
+3. Klicken Sie auf die Schaltfläche **ANMELDEN** (oder drücken Sie die Eingabe-/Return-Taste), um die Safe Share-Hauptseite aufzurufen: <br />
+   ![Hauptseite](/images/849fa6e4e795-initial-post-sign-in-page.png)
+   <br />
+   <a id="two-factor-auth-page" />Wenn Sie *andernfalls* die folgende Seite sehen, auf der Sie aufgefordert werden, Ihren **Authentifizierungscode** einzugeben, haben entweder Sie selbst für Ihren Covata-Benutzer-Account (über die Funktion [„Mein Account“](/3.4/de/user/managing-your-account#enabling-or-disabling-2fa-on-your-account)) Zwei-Faktor-Authentifizierung (2FA) konfiguriert oder mindestens einer Ihrer Safe Share-Organisations-Administratoren hat diese Funktion für Ihren Account festgelegt.
+
+   ![Safe Share 2FA-Authentifizierungscode](/images/63815f6cbecb-2fa-authentication-code.png)
+
+   - Schließen Sie den Authentifizierungsvorgang folgendermaßen ab:
+
+     1. Wenn Sie für Ihren Covata-Benutzer-Account noch kein Mobilgerät für 2FA konfiguriert haben, lesen Sie die Hinweise zur [Konfiguration eines Mobilgeräts für Zwei-Faktor-Authentifizierung](/3.4/de/user/signing-in#configuring-a-mobile-device-for-two-factor-authentication) unten, ehe Sie den Vorgang fortsetzen.
+     2. <a id="entering-your-authentication-code" />Öffnen Sie auf Ihrem Mobilgerät die Authentifizierungs-Anwendung.
+     3. Geben Sie im Feld **Authentifizierungscode** den Code ein, den die Authentifizierungs-Anwendung für Ihren Covata-Benutzer-Account erzeugt hat.
+     4. Klicken Sie auf die Schaltfläche **Authentifizieren**, um die Authentifizierung abzuschließen und die Safe Share-Hauptseite aufzurufen.
+
+   **Hinweis:** Bei erfolgreicher Authentifizierung, wenn Sie auf die Safe Share-Anmeldeseite:
+
+   - über eine E-Mail-Benachrichtigung „*Eine Datei wurde Ihnen freigegeben*“ zugreifen, werden Sie direkt zum [Content-Viewer](/3.4/de/user/accessing-secure-content#content-viewer) für die Datei statt zur Safe Share-Hauptseite (oben) geführt;
+   - über eine E-Mail-Benachrichtigung „*Covata-Account erstellt*“ zugreifen, müssen Sie eventuell erst Ihr Passwort zurücksetzen, bevor die Safe Share-Hauptseite angezeigt wird.
+
+<a id="main-safe-share-page-tips" />
+
+<Tip>
+
+- Wenn Sie innerhalb von Safe Share for Web zu einer anderen Seite navigieren, gelangen Sie ganz einfach zurück zum Stammverzeichnis der Safe Share-Hauptseite, indem Sie rechts oben auf Ihre E-Mail-Adresse klicken und im Dropdown-Menü **Start** auswählen:
+
+  ![Safe Share-Anwendungsmenü](/images/0e8ad0b3f055-application-menu.png)
+
+  <br />
+   Für weitere Informationen zur Erstellung von Ordnern siehe [Organisation von Inhalten in Ordnern](/3.4/de/user/managing-secure-content#organising-content-with-folders). <br />
+  **Hinweis:** Die Option **Verwaltung** wird nur angezeigt, wenn die Safe Share-Organisations-Administratoren Ihrer Organisation Ihrem Benutzer-Account die Rolle eines **Organisations-Administrators** zugewiesen haben (oder seltener wenn einer der Safe Share-Administratoren Ihrer Covata-Plattform Ihrem Account die Rolle eines **Safe Share-Administrators** zugeteilt hat). Weitere Informationen über die Rolle eines Organisations-Administrators finden Sie in der [Organisations-Administratorenanleitung](/3.4/de/admin-org/index) (und über die Rolle eines Safe Share-Administrators in der [Safe Share-Administratorenanleitung](/3.4/de/admin-platform/index)).
+- Wenn ein anderer Covata-Benutzer Elemente geändert hat, auf die Sie über die Safe Share-Hauptseite zugreifen können (z. B. weil dieser andere Covata-Benutzer [Ihnen Inhalte freigegeben hat](/3.4/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content)), erscheint in der Schaltfläche Aktualisieren am linken oberen Seitenrand eine Zahl
+  ![Schaltfläche Aktualisieren mit Zahl](/images/1e875a693f87-refresh-button-with-number.png)
+
+   . Diese Zahl gibt an, wie viele der Ihnen zugänglichen Elemente geändert wurden. Sie berücksichtigt alle der Ihnen zugänglichen Elemente im Stammverzeichnis, im aktuellen Ordner und in allen sonstigen Unterordnern, auf die Sie über die Safe Share-Hauptseite zugreifen können. Klicken Sie auf diese Schaltfläche, um alle Ihnen zugänglichen Elemente an allen diesen Speicherorten und in allen diesen Ordnern zu aktualisieren.
+
+</Tip>
+
+## Konfiguration eines Mobilgeräts für Zwei-Faktor-Authentifizierung <a id="configuring-a-mobile-device-for-two-factor-authentication" />
+
+Wenn Sie oder einer Ihrer Organisations-Administratoren für Ihren Covata-Benutzer-Account Zwei-Faktor-Authentifizierung (2FA) konfiguriert hat, benötigen Sie ein Mobilgerät (d. h. ein Android- oder Microsoft Windows-basiertes Handy, ein iPhone, iPad oder iPod Touch), auf dem eine Authentifizierungsanwendung von Google oder Microsoft ausgeführt wird, um sich bei Safe Share for Web anmelden zu können.
+
+Die Authentifizierungsanwendung (Authenticator-App) auf Ihrem Mobilgerät erzeugt den zweiten Authentifizierungsfaktor für Ihren Account. Ihr Passwort ist Ihr erster Authentifizierungsfaktor.
+
+**Konfiguration Ihres Mobilgeräts für 2FA Ihres Covata-Benutzer-Accounts:**
+
+1. Öffnen Sie die E-Mail-Benachrichtigung von Covata mit dem Betreff „*Für Ihren Account wurde Zwei-Faktor-Authentifizierung aktiviert*“.
+2. Befolgen Sie die Anweisungen in dieser E-Mail-Benachrichtigung, d. h. klicken Sie auf den Link, um die Konfigurationsseiten für 2FA zu öffnen. <br />
+    Befolgen Sie die weiteren Anweisungen auf diesen Seiten, um die Konfiguration Ihres Mobilgeräts abzuschließen. Geben Sie anschließend Ihren Authentifizierungscode (aus dem zweiten Schritt des [oben beschriebenen 2FA-Authentifizierungsverfahrens](/3.4/de/user/signing-in#entering-your-authentication-code) ein, um sich bei Safe Share for Web anzumelden.
+
+## Anmeldung mit Einzelanmeldung <a id="signing-in-using-single-sign-on" />
+
+Wenn ein Safe Share-Administrator die Covata-Plattform und Safe Share for Web mit Einzelanmeldung konfiguriert hat und die Authentifizierung über einen separaten Identitätsanbieter (IdP) erfolgt, können Sie die Anmeldung bei Safe Share folgendermaßen beginnen:
+
+1. Geben Sie die Basis-URL Ihrer Instanz von Safe Share for Web (mit der Ergänzung „`/sso`“) im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://safe-share.xy-firma.de/sso`
+2. Klicken Sie auf die Schaltfläche **Einzelanmeldung**.
+3. Melden Sie sich über die Seite Ihres IdP-Service an, indem Sie Ihre Anmeldeinformationen dort eingeben. Sie sollten anschließend zu Safe Share for Web weitergeleitet werden, wo die Safe Share-Hauptseite angezeigt wird (und Sie angemeldet sind): <br />
+   ![Hauptseite](/images/849fa6e4e795-initial-post-sign-in-page.png)
+   <br />
+    Für weitere Informationen über die Navigation in der Safe Share for Web siehe die [Tipps](/3.4/de/user/signing-in#main-safe-share-page-tips) oben. <br />
+   **Hinweis:** Wenn die Seite Zwei-Faktor-Authentifizierung (2FA) ([oben](/3.4/de/user/signing-in#two-factor-auth-page)) *vor* der Safe Share-Hauptseite angezeigt wird, sollten Sie für Ihren Covata-Benutzer-Account eventuell die Funktion 2FA deaktivieren, da Ihr IdP-Service möglicherweise seine eigene 2FA oder andere Multi-Faktor-Authentifizierungsfunktionen bereitstellt. Wenn Sie 2FA für Ihren Account nicht deaktivieren können, wenden Sie sich an einen Organisations-Administrator jeder Organisation, der Sie angehören, um festzustellen, ob einer dieser Administratoren 2FA für alle Benutzer-Accounts innerhalb seiner Organisation verpflichtend vorgegeben hat. Für weitere Informationen über diese [Funktion](/3.4/de/admin-org/configuring-organisation-administration-properties#enforce-2fa-for-organisation-members) der Safe Share-Organisationsverwaltung siehe [Konfiguration von Eigenschaften der Safe Share-Organisationsverwaltung](/3.4/de/admin-org/configuring-organisation-administration-properties) in der [Organisations-Administratorenanleitung](/3.4/de/admin-org/index).
+
+## Abmeldung <a id="signing-out" />
+
+**Abmeldung von Safe Share for Web:**
+
+- Klicken Sie auf Ihre E-Mail-Adresse am rechten oberen Seitenrand und wählen Sie aus dem Dropdown-Menü **Abmelden**:
+
+  ![Safe Share-Anwendungsmenü](/images/0e8ad0b3f055-application-menu.png)
+
+  <br />
+  **Hinweise:**
+
+  - Wenn Sie noch kein Passwort haben, sehen Sie im Dropdown-Menü (oben) nur die Optionen **Passwort festlegen** und **Abmelden**. Sie können Ihren Account auf einen vollen Account erweitern (um Zugriff auf mehr Funktionen zu erhalten), indem Sie **Passwort festlegen** wählen und die entsprechenden Anweisungen befolgen.
+  - Beachten Sie bitte: Wenn Sie sich bei Safe Share for Web über die [Einzelanmeldung](/3.4/de/user/signing-in#signing-in-using-single-sign-on) angemeldet haben, dann auf die URL für die Einzelanmeldung bei Safe Share for Web zugreifen, z. B.: <br />
+    `https://safe-share.xy-firma.de/sso` <br />
+     und auf die Schaltfläche **Einzelanmeldung** klicken, werden Sie automatisch wieder bei Safe Share for Web angemeldet (ohne dass Sie Ihre Anmeldeinformationen auf der Seite Ihres IdP-Service eingeben müssen). Dies ist beabsichtigt, da Ihre An- und Abmeldung über Ihren IdP-Service erfolgt. Wenn Sie sich nicht sicher sind, wie Sie sich von Ihrem IdP-Service abmelden, wenden Sie sich für weitere Informationen über diesen Vorgang an einen Safe Share-Administrator Ihrer Instanz der Covata-Plattform oder den Systemadministrator, der Ihren IdP-Service verwaltet.

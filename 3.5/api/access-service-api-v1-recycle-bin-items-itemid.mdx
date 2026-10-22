@@ -1,0 +1,135 @@
+---
+title: "<access-service>/api/v1/recycle-bin/items/{itemId}"
+---
+
+## URL structure <a id="access-service-api-v1-recycle-bin-items-itemid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/recycle-bin/items/{itemId}
+```
+
+where `{itemId}` is the ID of a file object/Secure Object or folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-recycle-bin-items-itemid-supported-methods-and-overview" />
+
+- `GET` - retrieves information associated with a file or folder (specified by `itemId`), which is currently located in the [Recycle Bin](/3.5/user/managing-secure-content#accessing-the-recycle-bin) of the Covata user whose [access token is submitted in the request](/3.5/api/access-service-api-v1-recycle-bin-items-itemid#access-service-api-v1-recycle-bin-items-itemid-supported-roles) to this endpoint.
+- `PUT` - restores a file or folder (specified by `itemId`) in the Recycle Bin (of the Covata user whose access token is submitted in the request), back to its original location.
+- `DELETE` - deletes a file or folder (specified by `itemId`) currently located in the Recycle Bin of the Covata user whose access token is submitted in the request, permanently.
+
+<Note>
+
+Both the `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-recycle-bin-items-itemid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information associated with a file or folder specified by its ID (specified by `itemId`), which is currently located in the Recycle Bin of the Covata user whose access token is submitted in the request to this endpoint.
+- Restores a file or folder (specified by `itemId`) in the Recycle Bin (of the Covata user whose access token is submitted in the request), back to its original location.
+- Deletes a file (along with [all its associated versions](/3.5/user/managing-file-versions)) or folder (along with *every item* in this folder) specified by `itemId`, which is currently located in the Recycle Bin of the Covata user whose access token is submitted in the request, permanently. <br />
+  **Notes:** This action:
+
+  - Automatically deletes the encrypted data associated with the file object (and its versions) from storage managed by the Covata Platform's Content Service.
+  - Changes the state of a file object to *Deleted*. However, this does not remove this file objects' associated properties from the Covata Platform. Nevertheless, a file object and all its properties are deleted from the system if the [Covata user who owns the file object is removed from the organisation](/3.5/api/access-service-api-v1-users-userid) (without the ownership of the file object being [transferred to another Covata user](/3.5/api/access-service-api-v1-organisations-orgid-items-transfer) in the organisation).
+  - Unlike permanently deleting a file object, permanently deleting a folder removes all trace of the folder and its properties from the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-recycle-bin-items-itemid-supported-roles" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the item whose ID is specified by `{itemId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-recycle-bin-items-itemid#access-service-api-v1-recycle-bin-items-itemid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-recycle-bin-items-itemid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional PUT-request parameters <a id="access-service-api-v1-recycle-bin-items-itemid-optional-put-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **name** - The new name to specify for the item when it is restored. This feature is useful if an existing item with the same name exists in the location to which the recycled item will be restored.
+- **parentId** - The ID of a folder to which the item will be restored. If this value is omitted, then the item is restored to the folder/location that contained this item (prior to it being recycled, whose ID can be obtained through the **parentId** value by making a `GET` method request to this endpoint). <br />
+  **Example (request):**
+
+  ```json
+  {
+    name: "paraglider-amended.jpg",
+    parentId: "755604875433627648"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-recycle-bin-items-itemid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` requests only, a JSON-formatted response containing the following members:
+
+- **name** - The name of the item.
+- **recycledTime** - The time when the item was recycled.
+- **organisationId** - The ID of the organisation to which this item belongs.
+- **owner** - A member containing information about the Covata user who is the current owner of the recycled item. This member contains the following sub-members:
+
+  - **email** - The email address of the Covata user who owns this recycled item.
+  - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.5/admin-org/administering-users-within-an-organisation) page of SafeShare Organisation Administration and the [My Account](/3.5/user/managing-your-account) feature of Covata SafeShare for Web.
+  - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organisation Administration and the **My Account** feature of SafeShare for Web.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Covata user on their own account, or enforced for all members of the organisation (by an Organisation administrator).
+  - **id** - The ID of this Covata user's account.
+  - **accountType** - A member containing the internationalisation (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+    - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
+
+      - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+    - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+    <sup>&#42;</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.5/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalisation](/3.5/admin-platform/managing-internationalisation) in the SafeShare Administrator's Guide. <br />
+    **Note:** For more information about account types, see the description for [Account Type](/3.5/admin-org/administering-users-within-an-organisation#account-type) in the [Organisation Administrator's Guide](/3.5/admin-org/index).
+- **daysToPurge** - The number of days remaining before the Covata Platform automatically deletes (purges) this item from the Recycle Bin.
+- **extension** - The file object's file name extension. <br />
+  **Note:** If this item is a folder, then this value is `null`.
+- **type** - The type of this item - i.e. indicates `object` if the item is a file object or `collection` if the item is a folder.
+- **parentId** - The ID of the folder/location that contained this item (prior to it being recycled). A value of `0` indicates that this item is located at the logical root location.
+- **state** - The I18N code for the current state of the item. This I18N code should contain the substring `recycled` signifying either a file object or folder in the Recycled Bin.
+- **totalVersionSize** - The amount of space (in bytes) of all versions of the file object's data (as recorded by the Covata Platform's Access Service). <br />
+  **Note:** If this item is a folder, then this value is `0`.
+- **id** - The ID of the recycled item. (This value should match that of `{itemId}` in the request's URL.) <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "name": "paraglider.jpg",
+      "recycledTime": "2016-09-16T00:48:04.747Z",
+      "organisationId": "749418071827214336",
+      "owner": {
+          "email": "alex.originator@xy-company.com",
+          "firstName": "Alex",
+          "lastName": "Originator",
+          "mfaEnabled": false,
+          "id": "749419842687528960",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      },
+      "daysToPurge": 29,
+      "extension": "jpg",
+      "type": "object",
+      "parentId": "751980834491527168",
+      "state": "server.object.states.recycled",
+      "totalVersionSize": "1183936",
+      "id": "752047795879604224"
+  }
+  ```

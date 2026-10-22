@@ -1,0 +1,73 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}/removalRequest"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-removalrequest-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}/removalRequest
+```
+
+where `{organisationId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-removalrequest-supported-methods-and-overview" />
+
+- `POST` - initiates a request to remove an organisation (specified by `organisationId`) configured on the Cocoon Data Platform.
+- `DELETE` - cancels or declines an existing request to remove an organisation (specified by `organisationId`).
+
+<Note>
+
+The `DELETE` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-removalrequest-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Initiates a request to remove an organisation (specified by `organisationId`) configured on the Cocoon Data Platform.
+- Either cancels an existing request (initiated by the same SafeShare administrator) to remove an organisation specified by `organisationId`, or declines such an existing request (i.e. initiated by another SafeShare administrator).
+
+<Tip>
+
+To determine if an organisation has an existing request for its removal, use the [&lt;access-service&gt;/api/v1/organisations](/CS1.2/api/access-service-api-v1-organisations) API endpoint to retrieve information about organisations configured on the Cocoon Data Platform and if the required organisation's `organisationRemovalRequest` member is not `null` and contains sub-members, then the organisation has an existing request for its removal.
+
+</Tip>
+
+## Supported roles <a id="access-service-api-v1-organisations-organisationid-removalrequest-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-organisationid-removalrequest#access-service-api-v1-organisations-organisationid-removalrequest-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-removalrequest-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-organisationid-removalrequest-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **notificationEnabled** - A boolean value specifying whether (`true`) or not (`false`) the contact person of the organisation (specified by `organisationId`) will be sent an email notification informing them that a SafeShare administrator had initiated a request to remove their organisation from the Cocoon Data Platform. <br />
+  **Note:** If the **Days to action organisation removal** property value (accessible through the [&lt;access-service&gt;/api/v1/config/theme/orgRemovalActionDays](/CS1.2/api/access-service-api-v1-config-theme-orgremovalactiondays) API endpoint) is cleared, then no email notification is sent, regardless of the **notificationEnabled** property value submitted in the request. Since this property is required, however, if the **Days to action organisation removal** property value is cleared/not set, it is recommended submitting this **notificationEnabled** property's value as `false` to ensure correct system behavior. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "notificationEnabled": "true"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-removalrequest-returns" />
+
+If the `POST` request succeeded, then an HTTP response status `201 Created` is returned.
+
+If the `DELETE` request succeeded, then an HTTP response status `204 No Content` is returned.

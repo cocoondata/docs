@@ -1,0 +1,81 @@
+---
+title: "Signing in"
+---
+
+**To sign in to the Safe Share web application:**
+
+1. Access the Safe Share Sign-in page by doing either of the following:
+
+   - Open a compatible web browser and specify the base URL of your Safe Share web application instance (which is also the Covata Platform URL) into your browser's URL field - e.g: <br />
+     `https://safe-share.xy-company.com` <br />
+     **Tip:** You may wish to bookmark this URL.
+   - Open one of your Covata Notification email messages (containing one the following subject lines) and click the **Access file** / **Access folder** / **Click here** link in the message's body to open the Sign-in page:
+
+     - 'A file/folder has been shared with you'
+     - 'Covata account created'
+2. On the Safe Share Sign-in page, enter your email address and password into the upper and lower fields, respectively:
+
+   ![Safe Share sign-in page](/images/d3bd0941de28-sign-in-with-credentials.png)
+
+   <br />
+   **Notes:**
+
+   - If you do not yet have a password, leave the **Your password** field blank and click the **Don't have a password** button to obtain a one-time access link/password. Follow the instructions in your email notification to complete the sign-in process. Be aware that this password is time-limited and can only be used once.
+   - If you have forgotten your password, then again, leave the **Your password** field blank but click the **Forgot your password** button and follow the instructions in your email notification to reset your password.
+3. Click the **Sign in** button (or type 'Enter'/'Return').
+
+   - If you see the following page which requests you to enter your authentication code in the field depicted below, then your Covata Platform administrator has configured your Covata user account with two-factor authentication (2FA).
+
+     ![Safe Share 2FA authentication code](/images/de3e2bfe8156-2fa-authentication-code.png)
+
+     1. If you have not yet configured a mobile device with your Covata user account for 2FA, then refer to the [Configuring a mobile device for 2FA](/3.0/compatweb/signing-in#configuring-a-mobile-device-for-2fa) procedure below before continuing on.
+     2. <a id="entering-your-authentication-code" />Open the authenticator app on your mobile device.
+     3. In the field depicted above, enter your authentication code from the authenticator app that relates to your Covata user account.
+     4. Click the **Authenticate** button to complete the authentication process.
+
+   The main Safe Share page is displayed: <br />
+   ![Main page](/images/b5c2a636440d-initial-post-sign-in-page.png)
+   <br />
+   **Notes:** If you accessed the Safe Share Sign-in page from a:
+
+   - 'file has been shared with you' email notification, you are taken directly to the file's [content viewer](/3.0/compatweb/accessing-secure-content#viewing-and-printing-secure-content) (assuming you are accessing the Safe Share web application through a modern web browser) instead of the main Safe Share page (above).
+   - 'Covata account created' email notification, you may be required to reset your password first before the main Safe Share page is displayed.
+
+<a id="main-safe-share-page-tips-and-notes" />
+
+<Tip>
+
+**Tips and notes:**
+
+- If you navigate to another page within the Safe Share web application, you can easily navigate back to the root location of the main Safe Share page by clicking your email address at the top-right and choosing **Home** from the drop-down menu:
+
+  ![Safe Share application menu](/images/3ed9df75609f-application-menu.png)
+
+  <br />
+   See [Organising content with folders](/3.0/compatweb/managing-secure-content#organising-content-with-folders) for more information about creating folders.
+- If changes have been made by another Covata user to any items you can access from the main Safe Share page (e.g. because this other Covata user [shared content with you](/3.0/compatweb/uploading-storing-and-sharing-content-securely#sharing-secure-content)), then you will need to refresh the page in order to see these changes.
+
+</Tip>
+
+## Configuring a mobile device for 2FA
+
+If your Covata Platform administrator has configured your Covata user account with two-factor authentication (2FA), then you require a mobile device (i.e. Android-based, iPhone, iPad, iPod Touch or Microsoft Windows-based) running an authenticator application (from Google or Microsoft) to be able to sign in to the Safe Share web application.
+
+This authenticator application (aka authenticator app) that runs on your mobile device provides the 2nd authentication factor for your account, where your password is the 1st authentication factor.
+
+**To configure your mobile device with your Covata user account for two-factor authentication:**
+
+1. Open your Covata Notification email message containing the subject line '*Two-factor authentication has been enabled for your account*'.
+2. Follow the instructions in this email message - i.e. click the link to open the two-factor authentication configuration pages. <br />
+    Follow the remaining instructions on these pages to complete the process for configuring your mobile device and then continue with [entering your authentication code](/3.0/compatweb/signing-in#entering-your-authentication-code) to sign in to the Safe Share web application.
+
+## Signing out
+
+**To sign out of the Safe Share web application:**
+
+- Click your email address at the top-right of the page and choose **Sign Out** from the drop-down menu:
+
+  ![Safe Share application menu](/images/3ed9df75609f-application-menu.png)
+
+  <br />
+  **Note:** If you do not yet have a password, you will only see the **Set Password** and **Sign Out** options in the drop-down menu (above). You can upgrade to a full account (to gain access to more of the features above) by choosing **Set Password** and following the instructions provided.

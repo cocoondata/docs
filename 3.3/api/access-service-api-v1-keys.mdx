@@ -1,0 +1,90 @@
+---
+title: "<access-service>/api/v1/keys"
+---
+
+## URL structure <a id="access-service-api-v1-keys-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/keys
+```
+
+## Supported methods and overview <a id="access-service-api-v1-keys-supported-methods-and-overview" />
+
+- `POST` - used to generate a cryptographic key.
+
+## Detailed description <a id="access-service-api-v1-keys-detailed-description" />
+
+This API endpoint generates a cryptographic key, which in turn is required to encrypt the data of a file object.
+
+A file object (i.e. [Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object)) is created through the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) endpoint.
+
+## Supported roles and conditions <a id="access-service-api-v1-keys-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user will be either [creating their own file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) or [uploading a new version of a file (whose data is encrypted locally)](/3.3/api/content-service-api-v1-objects-objectid-versions).
+- [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user will be either [creating a file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) or [uploading a new version of a file (whose data is encrypted locally)](/3.3/api/content-service-api-v1-objects-objectid-versions), within a folder on which the user has the **Upload File** [permission](/3.3/api/access-service-api-v1-permissions-sets).
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-keys#access-service-api-v1-keys-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-keys-required-headers" />
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required body <a id="access-service-api-v1-keys-required-body" />
+
+If none of the [Optional parameters](/3.3/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) below are specified, then an empty **JSON object** must be passed in the **body** of the request:
+
+- `{}`
+
+## Optional parameters <a id="access-service-api-v1-keys-optional-parameters" />
+
+The following optional parameters can be sent in the body of the POST request, each as individual members of a JSON object:
+
+- **keyLength** - The bit length of the cryptographic key to be returned from the Covata Platform. This key is used to encrypt data using an [Advanced Encryption Standard (AES) cryptographic algorithm](http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf) whose mode of operation is [CipherBlock Chaining (CBC)](http://csrc.nist.gov/publications/fips/fips81/fips81.htm). Valid values for this parameter are: `128`, `192` or `256`. If this parameter is not specified, a value of `256` is assumed. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "keyLength": 128
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-keys-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response is also returned, which contains a `keys` array that has the following elements:
+
+- **id** - The ID value associated with the cryptographic key value returned below. <br />
+  **Important:** Retain this value as it is required during the initial stages of creating a file object or one of its versions - i.e. this key ID value is used:
+
+  - to [associate the cryptographic key with the new file object itself](/3.3/api/access-service-api-v1-organisations-orggroupid-objects),
+  - to [associate the cryptographic key with a file object's version](/3.3/api/content-service-api-v1-objects-objectid-versions) (if encrypting the file object's data locally), or,
+  - if the [key needs to be deleted](/3.3/api/access-service-api-v1-keys-keyid) as a result of too many failed attempts to associate cryptographic keys with file objects or their versions.
+- **keyValue** - The cryptographic key value itself. The length of this key may differ depending on the `keyLength` value submitted as part of the request's [optional parameters](/3.3/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) above. <br />
+  **Note:** This value is returned for the purposes of local/client-side encryption (i.e. if your client application does not rely on the Covata Platform's server-side encryption). The **keyValue** value should be retained by your client application after associating this key with an [initialized file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-required-post-request-parameters) (see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) for more information), until you have performed local/client-side encryption.
+- **initializationVector** - The initialization vector required to begin local/client-side encryption using the AES algorithm (in CBC mode). <br />
+  **Note:** Like **keyValue** above, this value is also returned for the purposes of local/client-side encryption. The **initializationVector** value should be retained after associating **keyValue** (above) with an [initialized file object](/3.3/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-required-post-request-parameters) (see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) for more information), until you have performed local/client-side encryption.
+- **cryptographicAlgorithm** - The cryptographic algorithm supported by the Covata Platform. This should be `AES`.
+- **keyLength** - The bit length of the cryptographic key value returned above. This should be `256` or match the value of the `keyLength` submitted as part of the request's [optional parameters](/3.3/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) above.
+- **createdAt** - The date and time when the cryptographic key was created.
+- **modifiedAt** - This value should match the `createdAt` value above.
+
+  **Example (response):**
+
+  ```json
+  {
+      "keys": [{
+          "id": "732857710936506368",
+          "keyValue": "eAQ5SC/Txsva85kBzHVTM2LsT9WOgRA1y1lzYbzGrbQ=",
+          "initializationVector": "0GlFPnFNErU18PUFGDIQ4Q==",
+          "cryptographicAlgorithm": "AES",
+          "keyLength": 256,
+          "createdAt": "2016-07-15T07:14:54.125Z",
+          "modifiedAt": "2016-07-15T07:14:54.125Z"
+      }]
+  }
+  ```

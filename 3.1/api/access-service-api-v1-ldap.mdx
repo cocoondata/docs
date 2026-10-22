@@ -1,0 +1,95 @@
+---
+title: "<access-service>/api/v1/ldap"
+---
+
+## URL structure <a id="access-service-api-v1-ldap-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldap
+```
+
+## Supported methods and overview <a id="access-service-api-v1-ldap-supported-methods-and-overview" />
+
+- `POST` - used to add a new [LDAP connection](/3.1/admin/configuring-ldap).
+- `GET` - used to retrieve a list of field information for all LDAP connections configured on the Covata Platform.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-ldap-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new connection to an LDAP server/user directory on the Covata Platform. <br />
+  **Notes:**
+
+  - To test that the Covata Platform can successfully connect to the LDAP server/user directory first before adding the LDAP connection itself, call the [&lt;access-service&gt;/api/v1/ldap/verifyconnection](/3.1/api/access-service-api-v1-ldap-verifyconnection) API endpoint (before calling the `POST` method on this API endpoint).
+  - All accounts in the LDAP user directory will appear as new user accounts on the Covata Platform when the Covata Platform next synchronizes with the LDAP server.
+  - All new LDAP user accounts added to the Covata Platform from an LDAP server/user directory automatically have the Originator role.
+  - If the email address of an existing user account on the Covata Platform matches that of the **emailField** of a user in the LDAP user directory, then a new account will not be added to the Covata Platform for that account in LDAP (during synchronization).
+- Retrieves a list of field information for all LDAP connections configured on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-ldap-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-ldap#access-service-api-v1-ldap-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldap-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-ldap-required-parameters" />
+
+The following required parameters must be sent in the body of the POST request, each as individual members of a JSON object:
+
+- **accountNameField** - .
+- **authFilter** - .
+- **baseDN** - .
+- **domain** - .
+- **emailField** - .
+- **fullnameField** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **serverTimeout** - .
+- **serverUrl** - .
+- **statusDisabledValue** - .
+- **statusField** - .
+- **syncFilter** - .
+- **userPrincipalNameField** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-ldap-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **serverUrl** - .
+  - **serverTimeout** - .
+  - **baseDN** - .
+  - **authFilter** - .
+  - **managerDN** - .
+  - **managerPassword** - .
+  - **syncFilter** - .
+  - **domain** - .
+  - **enabled** - .
+  - **accountNameField** - .
+  - **emailField** - .
+  - **userPrincipalNameField** - .
+  - **fullnameField** - .
+  - **statusField** - .
+  - **statusDisabledValue** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

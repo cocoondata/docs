@@ -1,0 +1,48 @@
+---
+title: "<access-service>/api/v1/clientapps/{clientInfoId}/enable"
+---
+
+## URL structure <a id="access-service-api-v1-clientapps-clientinfoid-enable-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/clientapps/{clientInfoId}/enable
+```
+
+where `{clientInfoId}` is the ID for the client application's configuration information.
+
+## Supported methods and overview <a id="access-service-api-v1-clientapps-clientinfoid-enable-supported-methods-and-overview" />
+
+- `PUT` - used to enable or disable a registered [client application](/3.0/admin/configuring-client-applications), based on its configuration information ID. <br />
+  **Note:** This ID value *is not* the [client ID](/3.0/admin/configuring-client-applications#client-id) value.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-clientapps-clientinfoid-enable-detailed-description" />
+
+This API endpoint enables or disables a registered client application, using the client application's configuration information ID (i.e. not the [client ID](/3.0/admin/configuring-client-applications#client-id) value).
+
+Calling this endpoint on a given client application successively toggles between enabling and disabling this client application.
+
+The configuration information ID of the required client application can be obatined by calling the `GET` method of the [&lt;access-service&gt;/api/v1/clientapps](/3.0/api/access-service-api-v1-clientapps) API endpoint, which retrieves a list of field information for all client applications on the Covata Platform.
+
+## Supported roles <a id="access-service-api-clientapps-clientappid-enable-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-clientapps-clientinfoid-enable#access-service-api-v1-clientapps-clientinfoid-enable-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-clientapps-clientinfoid-enable-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-clientapps-clientinfoid-enable-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

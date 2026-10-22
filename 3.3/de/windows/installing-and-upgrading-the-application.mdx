@@ -1,0 +1,163 @@
+---
+title: "Installation und Aktualisierung von Safe Share for Windows"
+---
+
+## Systemanforderungen <a id="system-requirements" />
+
+Für die Installation von Safe Share for Windows muss Ihr Windows-Computer mindestens die folgenden Systemanforderungen erfüllen:
+
+#### Hardwareanforderungen
+
+- CPU mit 1 GHz oder schneller
+- 1 GB RAM (32-Bit) oder 2 GB RAM (64-Bit)
+- 1 GB verfügbarer Speicherplatz
+
+<a id="software-requirements" />
+
+#### Softwareanforderungen
+
+Windows 7 mit Service Pack 1 (32-Bit- und 64-Bit-Versionen) oder höher.
+
+Für Safe Share for Windows müssen in Ihrem Betriebssystem außerdem die folgenden Softwarebibliotheken installiert sein:
+
+- [Microsoft .NET Framework 4.5.1 (Mindestversion)](http://www.microsoft.com/download/details.aspx?id=40779)
+- [Microsoft Visual C++ Redistributable 2012 x86 Update 4 11.0.61030.0](http://www.microsoft.com/download/details.aspx?id=30679)
+- [Microsoft Visual C++ Redistributable 2013 x86/x64 12.0.21005.1](http://www.microsoft.com/download/details.aspx?id=40784)
+
+<Tip>
+
+**Tipps und Hinweise:**
+
+- Die „.exe“-Version des [Safe Share for Windows-Installers](/3.3/de/windows/installing-and-upgrading-the-application#installing) installiert diese (oben genannten) Softwarebibliotheken automatisch, wenn sie noch nicht installiert sind.
+- Wenn Sie Safe Share for Windows mit der „.msi“-Version des [Installers](/3.3/de/windows/installing-and-upgrading-the-application#installing) installieren möchten, beachten Sie bitte, dass dieses Programm diese (oben genannten) Softwarebibliotheken weder beinhaltet noch installiert. Diese Bibliotheken müssen daher zunächst auf allen Computern installiert werden, auf denen die „.msi“-Version des Installers für Safe Share for Windows ausgeführt werden soll.
+
+</Tip>
+
+## Installation <a id="installing" />
+
+Diese Anweisungen gelten für benutzergesteuerte/manuelle Installationen von Safe Share for Windows im Gegensatz zu automatischen/Remote-Installationen der Anwendung, die im Allgemeinen von einem Systemadministrator innerhalb Ihrer Organisation vorgenommen werden.
+
+<Note>
+
+Wenn Safe Share for Windows auf Ihrem Computer bereits installiert ist (weil die Anwendung von einem Systemadministrator automatisch/im Remote-Verfahren installiert wurde), brauchen Sie diese Abläufe nicht zu befolgen. Dies gilt wahrscheinlich auch für die [Konfiguration Ihrer Instanz der Covata-Plattform](/3.3/de/windows/installing-and-upgrading-the-application#configuring-your-server-url) und die [Aktualisierung](/3.3/de/windows/installing-and-upgrading-the-application#upgrading). Wenn Safe Share for Windows auf Ihrem Computer bereits installiert und konfiguriert ist, lesen Sie weiter bei [Start von Safe Share for Windows und Anmeldung](/3.3/de/windows/starting-the-application-and-signing-in).
+
+</Note>
+
+**Installation von Safe Share for Windows:**
+
+1. Doppelklicken Sie auf den ausführbaren Installer, um den *Setup-Assistenten für Safe Share (for Windows)* zu starten. Sie werden zunächst aufgefordert, die für Ihre Region (für den Installer) am besten geeignete Sprache zu wählen, ehe Sie die Willkommensnachricht für den Installer sehen:
+
+   ![Setup-Assistent - Start](/images/df336a580846-setup-wizard-1.jpg)
+
+   <br />
+   **Hinweise:**
+
+   - Wenn in Windows Funktionen für die Benutzerkontensteuerung aktiviert sind, gestatten Sie es der Anwendung "Covata Safe Share", an Ihrem Computer Änderungen vorzunehmen.
+   - Die in diesem Schritt gewählte Sprache legt lediglich die Sprache des Installers fest, nicht die der Anwendung Safe Share for Windows selbst. Die Sprache der Anwendung Safe Share for Windows wird von den Sprach- und Gebietsschema-Einstellungen Ihres Windows-Betriebssystems festgelegt.
+   - Wenn Anti-Viren- oder Anti-Malware-Software die Ausführung des Installers verhindert, führen Sie die folgenden Schritte aus, damit der *Setup-Assistent* und die Installation von Safe Share for Windows fortgesetzt werden können.
+2. Klicken Sie auf **Weiter** um festzulegen, wo Safe Share for Windows installiert werden soll:
+
+   ![Setup-Assistent - Installationsverzeichnis](/images/58617ae869ad-setup-wizard-2.png)
+
+   <br />
+   **Hinweis:** Ein entsprechendes Installationsverzeichnis wird standardmäßig vorgegeben.
+3. Klicken Sie auf **Weiter** um zu bestätigen, dass Sie Safe Share for Windows mit den von Ihnen vorgenommenen Einstellungen installieren möchten:
+
+   ![Setup-Assistent - Installationsbereit](/images/65d8f2367787-setup-wizard-3.png)
+4. Klicken Sie auf **Installieren** um mit der Installation von Safe Share for Windows zu beginnen:
+
+   ![Setup-Assistent - Wird installiert](/images/b0a5d0d81c33-setup-wizard-4.png)
+
+   <br />
+   <a id="installing-prerequisites" /> **Hinweise:**
+
+   - Während dieses Schritts fordert Sie der Setup-Assistent eventuell auf, den Windows Explorer zu schließen. Befolgen Sie diese Aufforderung, da der Windows Explorer automatisch neu startet, sobald die Installation abgeschlossen ist.
+   - Wenn Sie die „.exe“-Version des Installers für Safe Share for Windows ausführen *und* Ihr Computer bestimmte Bedingungen (d. h. hinsichtlich [Softwarebibliotheken](/3.3/de/windows/installing-and-upgrading-the-application#software-requirements) für Safe Share for Windows) nicht erfüllt, beginnt der *Setup-Assistent* automatisch mit der Installation dieser Komponenten, ehe er die Installation von Safe Share selbst fortsetzt (siehe oben). Sie werden eventuell aufgefordert, Ihren Computer neu zu starten, ehe der *Setup-Assistent* für Safe Share selbst (siehe oben) die Installation fortsetzt; dies sollte nach dem Neustart automatisch geschehen.
+5. Klicken Sie nach dem Abschluss des Installationsvorgangs auf **Fertigstellen**, um den Setup-Assistenten zu schließen.
+
+   ![Setup-Assistent - Abschluss](/images/2b69e8489cc1-setup-wizard-5.jpg)
+
+   <br />
+    Anschließend müssen Sie Ihren Computer neu starten:
+
+   ![Neustart Ihres Computers](/images/4663a47d144c-setup-wizard-6.png)
+6. Konfigurieren Sie nach dem Neustart Ihres Computers Safe Share for Windows für Ihre Instanz der Covata-Plattform (sofern dies noch nicht geschehen ist). Für weitere Informationen siehe [Konfiguration Ihrer Instanz der Covata-Plattform](/3.3/de/windows/installing-and-upgrading-the-application#configuring-your-server-url) unten.
+
+## Konfiguration Ihrer Instanz der Covata-Plattform <a id="configuring-your-server-url" />
+
+Wenn Ihr Computer nach der [Installation](/3.3/de/windows/installing-and-upgrading-the-application#installing) eben neu gestartet wurde, zeigt Safe Share for Windows das Dialogfeld **Konfiguration der Serviceadresse**, in dem Sie Ihre Instanz der Covata-Plattform konfigurieren können (mit der Safe Share for Windows integriert ist, damit Sie Ihre sicheren Daten in den Remotespeicher hochladen, sie freigeben und Daten aus dem Speicher herunterladen können):
+
+![Konfiguration der Serviceadresse](/images/5ebe95ae9845-configure-server-url.png)
+
+<Note>
+
+Wenn dieses Dialogfeld nicht angezeigt wird, obwohl Safe Share for Windows bereits gestartet ist, war Safe Share for Windows auf Ihrem Computer eventuell bereits installiert, aber die Registrierungsschlüssel wurden bei einer [Deinstallation](/3.3/de/windows/installing-and-upgrading-the-application#uninstalling) nicht vollständig entfernt. Wenn Sie die Instanz der Covata-Plattform aktualisieren müssen, mit der Safe Share for Windows arbeitet, siehe [Änderung der URL der Covata-Plattform](/3.3/de/windows/installing-and-upgrading-the-application#modifying-the-server-url).
+
+</Note>
+
+Geben Sie die URL Ihrer Instanz der Covata-Plattform in diesem Dialogfeld ein. Sie erhalten diese URL:
+
+- von Ihrem Safe Share-Administrator, Organisations-Administrator oder dem Systemadministrator, der Ihre Instanz der Covata-Plattform installiert und konfiguriert hat, *oder*
+- direkt von Covata (für von Covata gehostete Instanzen der Covata-Plattform).
+
+Klicken Sie auf **OK**. Die Anwendung prüft, ob die angegebene URL zu einer gültigen Instanz der Covata-Plattform weist, und Safe Share for Windows öffnet anschließend automatisch das [Dialogfeld Anmeldung](/3.3/de/windows/starting-the-application-and-signing-in#sign-in-dialog-box), um Sie zur Anmeldung aufzufordern. Sie können sich alternativ auch [manuell anmelden](/3.3/de/windows/starting-the-application-and-signing-in#signing-in-manually).
+
+## Aktualisierung <a id="upgrading" />
+
+Diese Anweisungen gelten für benutzergesteuerte/manuelle Aktualisierungen von Safe Share for Windows im Gegensatz zu automatischen/Remote-Aktualisierungen der Anwendung, die im Allgemeinen von einem Systemadministrator vorgenommen werden.
+
+**Aktualisierung von Safe Share for Windows:**
+
+- Doppelklicken Sie auf die neuere Version des ausführbaren Installers für Safe Share, um den Setup-Assistenten zu starten. <br />
+   Die Schritte für die Aktualisierung von Safe Share for Windows sind dieselben wie für die [Installation des Produkts](/3.3/de/windows/installing-and-upgrading-the-application#installing). Folgendes ist jedoch nicht erforderlich:
+
+  - [Installation von Komponenten](/3.3/de/windows/installing-and-upgrading-the-application#software-requirements) (sofern diese nicht in der Zwischenzeit deinstalliert wurden)
+  - [Neukonfiguration Ihrer Instanz der Covata-Plattform](/3.3/de/windows/installing-and-upgrading-the-application#configuring-your-server-url).
+
+## Deinstallation <a id="uninstalling" />
+
+Diese Anweisungen gelten für die benutzergesteuerte/manuelle Deinstallation von Safe Share for Windows im Gegensatz zur automatischen/Remote-Deinstallation der Anwendung, die im Allgemeinen von einem Systemadministrator vorgenommen wird.
+
+**Deinstallation von Safe Share for Windows:**
+
+1. Sie haben die folgenden Optionen:
+
+   - Wählen Sie im Windows-Startmenü die Option **Safe Share deinstallieren**.
+   - Wählen Sie in Windows die Funktion „Programm deinstallieren oder ändern“, dort **Covata Safe Share** und die Option **Deinstallieren**.
+2. Befolgen Sie die weiteren Aufforderungen, um Safe Share for Windows zu deinstallieren.
+
+<Note>
+
+Die Registrierungsschlüssel für Safe Share for Windows (von denen einer die URL der konfigurierten Instanz Ihrer Covata-Plattform enthält) werden durch diesen Vorgang nicht entfernt. Löschen Sie den Registrierungsschlüssel, um Safe Share for Windows vollständig von Ihrem Computer zu entfernen:
+
+- `HKEY_CURRENT_USER\Software\Covata\Safe Share`
+
+Wenn Sie diesen Registrierungsschlüssel nicht löschen und Safe Share for Windows später neu installieren, wird das Dialogfeld **Konfiguration der Serviceadresse ** nach dem Abschluss des Installationsvorgangs nicht angezeigt. Um die URL Ihrer Instanz der Covata-Plattform neu zu konfigurieren/zu aktualisieren, müssen Sie [die URL der Covata-Plattform ändern](/3.3/de/windows/installing-and-upgrading-the-application#modifying-the-server-url). <br />**Wichtig:** Eine Änderung der Windows-Registrierung kann Ihr Betriebssystem unwiderruflich beschädigen, wenn Sie nicht genau wissen, was Sie tun. Wenn Sie mit der Änderung der Windows-Registrierung nicht vertraut sind, wenden Sie sich zu Ihrer Unterstützung bei diesem Vorgang an eine kompetente Person (z. B. einen Systemadministrator).
+
+</Note>
+
+## Änderung der URL der Covata-Plattform <a id="modifying-the-server-url" />
+
+**Änderung der URL der Covata-Plattform:**
+
+1. Vergewissern Sie sich, dass Safe Share for Windows [gestartet](/3.3/de/windows/starting-the-application-and-signing-in#starting-the-application) wurde.
+2. Klicken Sie auf das Symbol
+   ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    oder
+
+   ![Safe Share for Windows - Abgemeldet](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    der Anwendung im Infobereich der Taskleiste, um den *Anwendungsbereich* von Safe Share for Windows zu öffnen (der rechts unten auf dem Bilschirm erscheint). Klicken Sie dann auf das Symbol „Einstellungen“
+
+   ![Symbol Anwendungsbereich-Einstellungen](/images/5d9feb547c51-application-pane-settings-icon.png)
+
+    rechts oben im Anwendungsbereich ... :
+
+   ![Zugriff auf das Symbol Anwendungsbereich-Einstellungen](/images/94fb0f60f5d3-application-pane-signed-in.png)
+
+   <br />
+    und wählen Sie aus dem Popup-Menü dieses Symbols **Einstellungen**, um das Dialogfeld **Einstellungen** aufzurufen: <br />
+   ![Dialogfeld Einstellungen - Register Allgemein](/images/a577304d4255-settings-dialog-box-general-tab.png)
+3. Geben Sie die URL Ihrer neuen/geänderten Instanz der Covata-Plattform im Feld **Serviceadresse** ein.
+4. Klicken Sie auf **Speichern**, um die aktualisierte URL der Covata-Plattform zu übernehmen.

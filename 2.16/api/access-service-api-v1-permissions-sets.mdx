@@ -1,0 +1,99 @@
+---
+title: "<access-service>/api/v1/permissions/sets"
+---
+
+## URL structure <a id="access-service-api-v1-permissions-sets-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/permissions/sets
+```
+
+## Supported methods and overview <a id="access-service-api-v1-permissions-sets-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of permission sets along with their individual permissions, where a permission set defines the degree of access to a [Secure Object](/2.16/api/creating-secure-objects-and-collections#secure-object) or a [collection](/2.16/api/creating-secure-objects-and-collections#collection) that a collaborator on this [item](/2.16/api/creating-secure-objects-and-collections#item) has.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-permissions-sets-detailed-description" />
+
+This API endpoint retrieves a list of *permission sets* along with their individual *permissions*.
+
+A *permission set*:
+
+- Can be applied to an individual collaborator on a newly created or existing Secure Object or collection (i.e. [item](/2.16/api/creating-secure-objects-and-collections#item)), whenever collaborators are modified by the item's owner.
+- Consists of one or more individual *permissions*, each of which allows specific methods of the Covata API's endpoints involving an item to be called by a Covata user who:
+
+  - is a collaborator on the item and
+  - has the appropriate *permission(s)* (by virtue of their *permission set*).
+
+The following table lists each *permission set*, which can be applied by a Covata user with the [Originator role](/2.16/admin/administering-users#originator-role) (on their own item) to other Covata users, when the owner of this item adds these other Covata users as collaborators to their [Secure Object](/2.16/api/access-service-api-v1-objects-objectid) or [collection](/2.16/api/access-service-api-v1-collections-collectionid).
+
+| Permission set | Permissions |
+| --- | --- |
+| Download | Download, Print, View |
+| Manage | Download, Remove (File), Upload File <sup>&#42;</sup>, Create Folder <sup>&#42;</sup>, Remove (Folder) <sup>&#42;</sup>, Move, Print, Rename, View, View Other |
+| Upload (collections only) | Download, Upload File, Print, View, View Other |
+| View | View |
+
+<sup>&#42;</sup> These *permissions* are not applicable when the **Manage** *permission set* is applied to a Secure Object.
+
+<Note>
+
+Individual *permissions* cannot be applied to collaborators - only *permission sets*.
+
+</Note>
+
+## Supported roles <a id="access-service-api-v1-permissions-sets-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [Originator](/2.16/admin/administering-users#originator-role)
+- [Collaborator](/2.16/admin/administering-users#collaborator-role)
+- [Ad hoc](/2.16/admin/administering-users#adhoc-role)
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-permissions-sets#access-service-api-v1-permissions-sets-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-permissions-sets-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-permissions-sets-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **permissionSets** - A list of all available permission sets available through the Covata Platform.
+
+  - **id** - The ID of a specific permission set.
+  - **permissions** - A list of individual permissions relating to a specific permission set.
+
+    - **scopes** - This is either `object` (for [Secure Objects](/2.16/api/creating-secure-objects-and-collections#secure-object)) or `collection` (for [collections](/2.16/api/creating-secure-objects-and-collections#collection)) or both of an individual/specific permission.
+    - **nameI18nCode** - The I18N code of the specific permission's name, which is one of the following (listed by the English language name value for the permission):
+
+      - **Download** - `server.permission.name.download`
+      - **Remove** (File) - `server.permission.name.file.delete`
+      - **Upload File** - `server.permission.name.file.upload`
+      - **Create Folder** - `server.permission.name.folder.create`
+      - **Remove** (Folder) - `server.permission.name.folder.delete`
+      - **Move** - `server.permission.name.move`
+      - **Print** - `server.permission.name.print`
+      - **Rename** - `server.permission.name.rename`
+      - **View** - `server.permission.name.view`
+      - **View Other** - `server.permission.name.view.other`
+    - **id** - The ID of the specific permission.
+  - **scopes** - This is either `object` (for [Secure Objects](/2.16/api/creating-secure-objects-and-collections#secure-object)) or `collection` (for [collections](/2.16/api/creating-secure-objects-and-collections#collection)) or both of the specific permission set.
+  - **nameI18nCode** - The I18N code of the specific permission set's name, which is one of the following (listed by the English language name value for the permission set):
+
+    - **Download** - `server.permissionset.name.download`
+    - **Manage** - `server.permissionset.name.manage`
+    - **Upload** - `server.permissionset.name.upload`
+    - **View** - `server.permissionset.name.view`
+  - **descriptionI18nCode** - The I18N code of the specific permission set's description.
+
+  **Example:**

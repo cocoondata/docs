@@ -1,0 +1,58 @@
+---
+title: "<access-service>/api/v1/ldapconnections/availability"
+---
+
+## URL structure <a id="access-service-api-v1-ldapconnections-availability-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldap/verifyconnection
+```
+
+## Supported methods and overview <a id="access-service-api-v1-ldapconnections-availability-supported-methods-and-overview" />
+
+- `POST` - verifies the connection to an [LDAP user directory](/CS1.2/admin-platform/configuring-ldap).
+
+## Detailed description <a id="access-service-api-v1-ldapconnections-availability-detailed-description" />
+
+This API endpoint verifies the connection to an LDAP user directory.
+
+With this request, a [core subset of LDAP connection parameters](/CS1.2/api/access-service-api-v1-ldapconnections-availability#access-service-api-v1-ldapconnections-availability-required-parameters) must be submitted, which includes the:
+
+- address of the server running LDAP (along with the connection timeout duration),
+- LDAP user directory's manager credentials (to perform LDAP authentication and synchronization),
+- root node in LDAP from which the Cocoon Data Platform finds users and groups and
+- LDAP field against which the Cocoon Data Platform matches the email address of a Cocoon Data user when they authenticate.
+
+## Supported roles <a id="access-service-api-v1-ldapconnections-availability-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-ldapconnections-availability#access-service-api-v1-ldapconnections-availability-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldapconnections-availability-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-ldapconnections-availability-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **serverUrl** - .
+- **serverTimeout** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **baseDN** - .
+- **authFilter** - . <br />
+  **Example (request):**
+
+## Returns <a id="access-service-api-v1-ldapconnections-availability-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

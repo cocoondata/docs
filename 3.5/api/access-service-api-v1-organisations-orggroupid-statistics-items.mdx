@@ -1,0 +1,64 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/items"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/items
+```
+
+where `{orgGroupId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-items-supported-methods-and-overview" />
+
+- `GET` - retrieves a summary of information about the total numbers of file objects/[Secure Objects](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) and folders/[collections](/3.5/api/working-with-files-and-folders-fundamentals#collection) as well as shared and unshared items within an organisation (specified by `orgGroupId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-items-detailed-description" />
+
+This API endpoint retrieves a summary of information about the total numbers of file objects and folders as well as shared and unshared items within an organisation (specified by `orgGroupId`).
+
+The information returned by this API endpoint is utilised on the [Organisation Administration dashboard](/3.5/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-statistics-items-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)):
+
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation whose ID is specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-organisations-orggroupid-statistics-items#access-service-api-v1-organisations-orggroupid-statistics-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-items-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **objectsCount** - The total number of file objects in the organisation (specified by `{orgGroupId}` in the request's URL).
+- **collectionsCount** - The total number of folders in the organisation (specified by `orgGroupId`).
+- **objectsSharedCount** - The total number of shared file objects in the organisation (specified by `orgGroupId`).
+- **objectsUnsharedCount** - The total number of file objects in the organisation (specified by `orgGroupId`) which have not been shared.
+- **totalCount** - The total number of both file objects and folders (i.e. items) within the organisation specified by `orgGroupId`. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "objectsCount": "5",
+      "collectionsCount": "8",
+      "objectsSharedCount": "0",
+      "objectsUnsharedCount": "5",
+      "totalCount": "13"
+  }
+  ```

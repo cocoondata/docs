@@ -1,0 +1,138 @@
+---
+title: "<access-service>/api/oauth/token"
+---
+
+## URL structure <a id="access-service-api-oauth-token-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/oauth/token
+```
+
+## Supported methods and overview <a id="access-service-api-oauth-token-supported-methods-and-overview" />
+
+- `POST` - obtains an [access token](/3.4/admin-platform/configuring-client-applications#grant-types) (and optional refresh token) representing a [Covata user's](/3.4/api/authentication-and-authorisation) session and their access to resources on the Covata Platform. This access token can be obtained:
+
+  - by the Covata user authenticating themselves via the *authorization code* or *password* OAuth 2.0 grant type flows,
+  - using a refesh token, or
+  - using a two-factor authentication (2FA/MFA) code.
+
+## Detailed description <a id="access-service-api-oauth-token-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Completes authorization to obtain an access token (and optionally a refresh token) through the OAuth 2.0 [authorization code](/3.4/api/authentication-and-authorisation#using-the-authorization-code-grant-type-step-3) grant type. This grant type flow requires an initial call to the [&lt;access-service&gt;/api/oauth/authorize](/3.4/api/access-service-api-oauth-authorize) API endpoint.
+- Initiates a request for an access token (and optionally a refresh token) through the OAuth 2.0 [password](/3.4/api/authentication-and-authorisation#using-the-password-grant-type) grant type.
+- Retrieves a new access token utilizing the refresh token returned by the Covata Platform from a previous request to this API endpoint.
+- Retrieves a new *full* access token utilizing the code from the Covata user's configured authenticator application, as well as the *restrictive* access token returned from the initial request to this endpoint.
+
+## Required headers <a id="access-service-api-oauth-token-required-headers" />
+
+The request's header requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1), whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
+
+<Note>
+
+The client ID and client secret values constitute your application's client credentials, which would have been generated when your application was [registered](/3.4/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Covata Platform. Also see [Configuring client applications](/3.4/admin-platform/configuring-client-applications) in the Safe Share Administrator's Guide for more information.
+
+</Note>
+
+For example, encoding:
+
+- `exampleClientApplication:exampleClientApplicationSecret` <br />
+   with Base64 results in the value:
+- `ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+Therefore, the HTTP Basic authentication header would be:
+
+- `Authentication: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+The request also requires form URL-encoded data in the body:
+
+- `Content-Type: application/x-www-form-urlencoded`
+
+## Required parameters <a id="access-service-api-oauth-token-required-parameters" />
+
+The following required parameters must be sent in the **body** of the request (as **form URL-encoded data**):
+
+- **grant_type** - The grant type used in the authentication and authorization request/s to the Covata Platform. Specify a value of:
+
+  - `password` for the password grant type <br />
+    *or*
+  - `authorization_code` for the authorization code grant type.
+  - Alternatively, specify the value:
+
+    - `refresh_token` to obtain a new access token using the refresh token value returned by the Covata Platform in a previous request to this API endpoint.
+    - `mfa` to obtain a *full* access token representing the Covata user (whose credentials were used for authentication) has access to on the Covata Platform.
+
+## Grant type-specific parameters <a id="access-service-api-oauth-token-grant-type-specific-parameters" />
+
+In addition to the [required parameters](/3.4/api/access-service-api-oauth-token#access-service-api-oauth-token-required-parameters) above, some of the following parameters are *also required* based on the **grant_type** value used ([above](/3.4/api/access-service-api-oauth-token#access-service-api-oauth-token-required-parameters)), and these must be included in the **body** of the request (as **form URL-encoded data**):
+
+- **code** ( *Required when using the authorization code grant type* ) - The authorization code itself, which is retrieved in the response from the Covata Platform (i.e. following an initial request to [&lt;access-service&gt;/api/oauth/authorize](/3.4/api/access-service-api-oauth-authorize) to initiate the process for obtaining an access token).
+- **redirect_uri** ( *Required when using the authorization code grant type* ) - The redirect URI that was submitted in the initial request to [&lt;access-service&gt;/api/oauth/authorize](/3.4/api/access-service-api-oauth-authorize) to retrieve an access token. The value specified here is only used validate that it matches the **redirect_uri** value specified in this initial request.
+- **username** ( *Required when using the password grant type* ) - The email address of a Covata user's credentials (acquired through your application).
+- **password** ( *Required when using the password grant type* ) - The password of a Covata user's credentials (acquired through your application).
+- **refresh_token** ( *Required when using a refresh token* ) - The value of the refresh token (returned by the Covata Platform in a previous request to this API endpoint).
+- **authCode** ( *Required when the property **mfaRequired** is returned from an initial [response](/3.4/api/access-service-api-oauth-token#access-service-api-oauth-token-returns) to this API endpoint with a value of `true`* ) - The value of the code from the Covata user's configured authenticator application.
+- **access_token** ( *Also required when the property **mfaRequired** is returned from an initial response to this API endpoint with a value of `true`* ) - The value of the *restrictive* access token (returned by the Covata Platform in the previous request to this API endpoint). <br />
+  **Example (request parameters - utilizing the password grant type):**
+
+  ```text
+  grant_type=password&username=alex.originator@xy-company.com&password=password1
+  ```
+
+   <br />
+  **Example (request parameters - using a refresh token):**
+
+  ```text
+  grant_type=refresh_token&refresh_token=75605643-a194-4bfc-a379-0d0154ab9783
+  ```
+
+   <br />
+  **Example (request parameters - using a 2FA authenticator application code):**
+
+  ```text
+  grant_type=mfa&authCode=123456&access_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0ODA2NTI3MTYsInVzZXJfbmFtZSI6ImNocmlzL...
+  ```
+
+## Returns <a id="access-service-api-oauth-token-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **access_token** - The access token itself, as a [JSON Web Token (JWT)](https://jwt.io/introduction/) value. The resources (i.e. API endpoints) of the Covata Platform that this access token grants permission to are based on the Covata user whose credentials were used for authentication, this user's [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (explained in more detail in the [Organization Administrator's Guide](/3.4/admin-org/index)) and if applicable to the API endpoint, the user's:
+
+  - membership of organizations and
+  - ownership or collaborator status on files or folders.
+
+  **Note:** If the property **mfaRequired** is returned with a value of `true` (below), then this is a *restrictive* access token that only grants permission to call this API endpoint again with the **authCode** property value ([above](/3.4/api/access-service-api-oauth-token#access-service-api-oauth-token-grant-type-specific-parameters)) obtained from the Covata user's configured authenticator application.
+- **token_type** - The brief description for the type of token (above) - i.e. usually `bearer`.
+- **refresh_token** - The refresh token itself, as a universally unique identifier (UUID) value. This value will not be present if the configuration of your client application on the Covata Platform does not permit refresh tokens to be issued. See [Registering your application on the Covata Platform](/3.4/api/authentication-and-authorisation#registering-your-application-on-the-platform) for more information.
+- **jti** - The UUID value for the JWT access token issued in this response. This value is a unique ID for the JWT issued in this response and is also known as a JWT ID.
+- **mfaRequired** - A boolean value indicating (i.e. with the value `true`) that this endpoint must be called again with the following parameters:
+
+  - **authCode** - the code from the Covata user's configured authenticator application.
+  - **access_token** - the value of the *restrictive* access token (above and example at the end of this page).
+
+  **Example (response from an authenticated Covata user account *without* 2FA enabled *or* response from a 2nd call to this endpoint initiated by a Covata user authenticating themselves through their account *with* 2FA enabled):**
+
+  ```json
+  {
+      "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub3JpZ2luYXRvckB4eS1jb21wYW55LmNvbSIsImF1dGhvcml0aWVzIjpbIlBFUk1fRklMRV9ERUxFVEUiLCJQRVJNX0FQUF9BUFBST1ZBTF9SRVZPS0UiLCJQRVJNX1ZJRVciLCJQRVJNX1VTRVJJTkZPX0dFVF9OT1RJRllfUFJFRiIsIlBFUk1fUFJJTlQiLCJQRVJNX0FQSV9WMV9BQ0NFU1MiLCJQRVJNX1NFTEZfUkVWT0tFX1RPS0VOUyIsIlBFUk1fTU9WRSIsIlBFUk1fVVNFUklORk9fR0VUU0VMRiIsIlBFUk1fUkVOQU1FIiwiUEVSTV9BUElfT0FVVEhfQUNDRVNTIiwiUEVSTV9WSUVXX09USEVSIiwiUEVSTV9ERVZJQ0VfQVVUSEVOVElDQVRJT04iLCJQRVJNX0ZJTEVfQUREIiwiUEVSTV9DT05UQUNUU19MSVNUIiwiUEVSTV9GT0xERVJfQUREIiwiUEVSTV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiUEVSTV9GT0xERVJfREVMRVRFIiwiUk9MRV9PUklHSU5BVE9SIiwiUEVSTV9PQVVUSF9UT0tFTl9SRVZPS0UiLCJQRVJNX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJQRVJNX1NIQVJFIiwiUEVSTV9BUElfQUNDT1VOVF9BQ0NFU1MiLCJQRVJNX0RPV05MT0FEIiwiUEVSTV9DT05UQUNUU19VUERBVEUiLCJQRVJNX0xBQkVMX0xJU1QiLCJQRVJNX0FQUF9BUFBST1ZBTF9MSVNUIiwiUEVSTV9PUkdBTklTQVRJT05fR0VUU0VMRiIsIlBFUk1fT0FVVEhfVE9LRU5fTElTVF9CWV9DTElFTlQiLCJQRVJNX0FQSUNMSUVOVF9BREQiLCJQRVJNX0FQSUNMSUVOVF9MSVNUIiwiUEVSTV9ERUxFVEVfT1RIRVIiLCJQRVJNX09BVVRIX1RPS0VOX0xJU1QiLCJQRVJNX0FERFJFU1NCT09LX0xJU1QiLCJQRVJNX0NPUFkiLCJQRVJNX0NPTlRBQ1RTX0NSRUFURSIsIlBFUk1fUkVNT1ZFX1NFTEYiLCJQRVJNX0NPTlRBQ1RTX0RFTEVURSIsIlBFUk1fVVNFUklORk9fVVBEQVRFIl0sImp0aSI6ImYxY2Q4NGVhLWM2ZTgtNDc4OC04NzliLTEzZDM0ZDQ0ZDUyNiIsImNsaWVudF9pZCI6ImV4YW1wbGVDbGllbnRBcHBsaWNhdGlvbiIsInNjb3BlIjpbIlNDT1BFX09BVVRIX1RPS0VOX0xJU1QiLCJTQ09QRV9DT05UQUNUU19MSVNUIiwiU0NPUEVfT0FVVEhfVE9LRU5fUkVWT0tFIiwiU0NPUEVfRklMRV9ERUxFVEUiLCJTQ09QRV9GSUxFX0FERCIsIlNDT1BFX0ZPTERFUl9BREQiLCJTQ09QRV9BUElfVjFfQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0FERCIsIlNDT1BFX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJTQ09QRV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiU0NPUEVfREVWSUNFX0FVVEhFTlRJQ0FUSU9OIiwiU0NPUEVfQ09OVEFDVFNfVVBEQVRFIiwiU0NPUEVfRk9MREVSX0RFTEVURSIsIlNDT1BFX01PVkUiLCJTQ09QRV9PQVVUSF9UT0tFTl9MSVNUX0JZX0NMSUVOVCIsIlNDT1BFX1JFTU9WRV9TRUxGIiwiU0NPUEVfU0VMRl9SRVZPS0VfVE9LRU5TIiwiU0NPUEVfVklFVyIsIlNDT1BFX0NPTlNPTEVfQURNSU5fQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0xJU1QiLCJTQ09QRV9BRERSRVNTQk9PS19MSVNUIiwiU0NPUEVfU0hBUkUiLCJTQ09QRV9VU0VSSU5GT19VUERBVEUiLCJTQ09QRV9BQ0xfQURNSU4iLCJTQ09QRV9DT05UQUNUU19ERUxFVEUiLCJTQ09QRV9BUFBfQVBQUk9WQUxfUkVWT0tFIiwiU0NPUEVfUFJJTlQiLCJTQ09QRV9VU0VSSU5GT19HRVRfTk9USUZZX1BSRUYiLCJTQ09QRV9WSUVXX09USEVSIiwiU0NPUEVfUkVOQU1FIiwiU0NPUEVfQ09OVEFDVFNfQ1JFQVRFIiwiU0NPUEVfREVMRVRFX09USEVSIiwiU0NPUEVfQVBJX09BVVRIX0FDQ0VTUyIsIlNDT1BFX0RPV05MT0FEIiwiU0NPUEVfQVBQX0FQUFJPVkFMX0xJU1QiLCJTQ09QRV9VU0VSSU5GT19HRVRTRUxGIiwiU0NPUEVfQ09QWSJdfQ.XMEGyBnYEfy8dAPnJhchYlSJGreBRYGN1KbSF4DZoM6aegIPuSd-hES-nDH56ErrY-xLoMnrWYNeBKEE-Z1eJ6Y2qTnUexebWe7FMcqlVDRSKKQHw2pvcchRMuET3DibxwMZv-JwYcgb1npOWQL5ESRD38k-4kKoVfLfmStkm3kGuPsOr7db2kj6mQF8eMuvXjplzUMU2o42YdgBxLQ0jPcN-FM9yGxFJhWqZ_u6J45Fjlcc1SNYtgQZbwdd4IhfuBtLXqfeEVnNA7gRuNBwsEgBqx3G-i1xtu7ibt8i382JBO0gNmkxxPEK-E5tys-0EwOEv1i42_EYX7nBKd5i5A",
+      "token_type": "bearer",
+      "refresh_token": "75605643-a194-4bfc-a379-0d0154ab9783",
+      "jti": "f1cd84ea-c6e8-4788-879b-13d34d44d526"
+  }
+  ```
+
+   **Example (initial response from an authenticated Covata user account *with* 2FA enabled - the access token returned here is *restrictive*):**
+
+  ```json
+  {
+      "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0ODA2NTI3MTYsInVzZXJfbmFtZSI6ImNocmlzLmNvbGxhYm9yYXRvckB4eS1jb21wYW55LmNvbSIsImF1dGhvcml0aWVzIjpbIk1GQV9BVVRIX1NURVBfVFdPIl0sImp0aSI6IjZjYTYxNDA2LThjNTItNDUyZC1hNDE1LTg0MDI1MGJlNjNhYiIsImNsaWVudF9pZCI6ImV4YW1wbGVDbGllbnRBcHBsaWNhdGlvbiIsInNjb3BlIjpbIlNDT1BFX09BVVRIX1RPS0VOX0xJU1QiLCJTQ09QRV9DT05UQUNUU19MSVNUIiwiU0NPUEVfT0FVVEhfVE9LRU5fUkVWT0tFIiwiU0NPUEVfRklMRV9ERUxFVEUiLCJTQ09QRV9GSUxFX0FERCIsIlNDT1BFX0ZPTERFUl9BREQiLCJTQ09QRV9BUElfVjFfQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0FERCIsIlNDT1BFX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJTQ09QRV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiU0NPUEVfREVWSUNFX0FVVEhFTlRJQ0FUSU9OIiwiU0NPUEVfQ09OVEFDVFNfVVBEQVRFIiwiU0NPUEVfRk9MREVSX0RFTEVURSIsIlNDT1BFX01PVkUiLCJTQ09QRV9PQVVUSF9UT0tFTl9MSVNUX0JZX0NMSUVOVCIsIlNDT1BFX1JFTU9WRV9TRUxGIiwiU0NPUEVfU0VMRl9SRVZPS0VfVE9LRU5TIiwiU0NPUEVfVklFVyIsIlNDT1BFX0NPTlNPTEVfQURNSU5fQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0xJU1QiLCJTQ09QRV9BRERSRVNTQk9PS19MSVNUIiwiU0NPUEVfU0hBUkUiLCJTQ09QRV9VU0VSSU5GT19VUERBVEUiLCJTQ09QRV9BQ0xfQURNSU4iLCJTQ09QRV9DT05UQUNUU19ERUxFVEUiLCJTQ09QRV9BUFBfQVBQUk9WQUxfUkVWT0tFIiwiU0NPUEVfUFJJTlQiLCJTQ09QRV9VU0VSSU5GT19HRVRfTk9USUZZX1BSRUYiLCJTQ09QRV9WSUVXX09USEVSIiwiU0NPUEVfUkVOQU1FIiwiU0NPUEVfQ09OVEFDVFNfQ1JFQVRFIiwiU0NPUEVfREVMRVRFX09USEVSIiwiU0NPUEVfQVBJX09BVVRIX0FDQ0VTUyIsIlNDT1BFX0RPV05MT0FEIiwiU0NPUEVfQVBQX0FQUFJPVkFMX0xJU1QiLCJTQ09QRV9VU0VSSU5GT19HRVRTRUxGIiwiU0NPUEVfQ09QWSJdfQ.KkZpeMzwe-fPje19-oZXSwf_32USLMIyUKTlIpvijJ1fxARIVF9RRL6Sf91NHSf5kM_DPHM9nUvi6UGMkzFV1R1Gmu9RQXFwRnpNtv68nUO5SWTN-deQQMJOltAc9aw45HgImhLDskip0v44bdYPsh_erTDnnMqvE9jCVfGL9nlia_rTfSQ1KRfj2NdiUwZK-Y0MVW1EOKSbiHMb7F8jeeY2lX8Y0bN6cRonA7XLqD7teF3Y0EmCpiGU8f3NuUls241sMDA8r5MWozLCMCbsx6s2raTtkvtQL7xf4izOxEWmDpkm_NhiPm1Lh9lprlZGYgCj72JOYLNmsMWwCf0tIA",
+      "token_type": "bearer",
+      "refresh_token": "4ff49ca2-57c4-4438-88be-42af7602d3e2",
+      "jti": "f1cd84ea-c6e8-4788-879b-13d34d44d526",
+      "mfaRequired": true
+  }
+  ```

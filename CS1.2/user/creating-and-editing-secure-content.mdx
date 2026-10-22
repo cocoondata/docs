@@ -1,0 +1,76 @@
+---
+title: "Creating and editing secure content"
+---
+
+What is Creating and Editing in Office Online & why is it important?
+
+The act of downloading a document from SafeShare removes the document from the secure environment that SafeShare provides. By adding the "Create“ and "Edit in Office Online” features, users are able to collaborate on Microsoft Office documents while remaining within SafeShare’s security controls.
+
+## Creating New Content in Office Online
+
+This feature allows new Microsoft Office Online documents to be created from within SafeShare. These documents can be saved directly into SafeShare and will therefore improve the security and control of sensitive documents.
+
+Notes:
+
+1. Having an Office Online subscription is a pre-requisite for using this feature. It is not available on Mobile Clients.
+2. One of the key purposes of this feature is to reduce the number of copies of sensitive files on user devices. Although the option of granting permission to download and edit the files still exists, users should be aware that the process of downloading results in copies of the documents being created outside SafeShare and therefore not covered by the audit and security controls provided by SafeShare. These factors should be considered before granting any permission beyond View and Edit in Office Online.
+
+**To create a new document**
+
+1. Ensure you are [signed in](/CS1.2/user/signing-in) to SafeShare for Web.
+2. To create a document, click the ‘Create’ button (situated in the top left corner of the menu bar) and select one of the three Microsoft Office Online features (Microsoft Word, Microsoft Excel & Microsoft PowerPoint). <br />
+   ![Create a Document](/images/bb871f254e0b-create-a-document.png)
+   <br />
+3. Create a file name for the document and click ‘save’. <br />
+   ![Name Your Document](/images/266e2178d801-name-your-document.png)
+   <br />
+4. An Office Online subscription is essential to begin using the Microsoft features. Once logged in, the selected document will open within SafeShare. All Office Online features are able to use as normal, every couple of minutes the document will automatically save. <br />
+   ![Name Your Document](/images/be6fbc57b9a5-log-into-office-online.png)
+   <br />
+5. To exit the document, select the ‘Return and save to SafeShare’ (top left corner). The document will be saved in its current state into SafeShare. <br />
+   ![Saving and Exiting in Office Online](/images/cb5196362db6-saving-and-exiting-in-office-online.png)
+   <br />
+6. If the document is a draft and has been shared amongst others, the other users will not be able to view, or edit the current draft. By highlighting the document, select the ‘Save After Edit’ feature to enable others to view and edit the latest document. <br />
+   ![Save After Edit Feature](/images/d7e64845f28a-save-after-edit-feature.png)
+
+## Sharing permissions
+
+“Edit in Office Online” allows permitted users to edit the document. It appears as a permission as shown in the screenshot below. The Edit in Office Online permission does not allow the Collaborator to Download, Create or Manage the file(s). However, if any of these higher permission levels are given, the user will also have the Edit in Office Online option. <br />
+![Share Edit in Office Online](/images/b912e2c779e2-share-edit-in-office-online.png)
+
+The Edit in Office Online feature is currently only available for the supported document types listed at the end of this document.
+
+## Editing documents
+
+1. A document can be opened to edit in the browser by clicking the Edit in Office Online Icon. At this point, the document will enter a “checked out” status. <br />
+   ![Editing Documents](/images/320771d1ec6e-editing-documents.png)
+   <br />
+2. An iframe will then be opened in the same browser window. Users will have the same edit options that are offered by Office 365 Online. <br />
+   ![Editing Documents](/images/a37210599853-editing-documents-in-office-online.png)
+   <br />
+3. While editing, the document is saved in a separate “Drafts” section of SafeShare. The drafts are only accessible to the user who has the document checked out. After editing is complete and the document is checked back in by the user, it is uploaded to SafeShare as a new version.
+4. Only one user at a time can edit a document using this feature, as the document is locked for further edits while checked out.
+
+Definitions: Check out - The state of the document when it is opened by “Edit in Office Online” by a user. Check in - The act of saving the draft version of the document when “Save after Edit” as the new, active version in SafeShare
+
+## Saving and Checking Back In
+
+After editing is completed, the window should be closed (by clicking the close cross in the top left corner) and the document is automatically saved into the “Draft” section of SafeShare. At this point, the new version of the document is NOT uploaded into SafeShare to be accessed by other users.
+
+The document will be accessible to other users ONLY after it is checked in. Check in is achieved by clicking on the “Save after Edit” icon next to the item in SafeShare as shown below. <br />
+![Save After Edit Feature](/images/d7e64845f28a-save-after-edit-feature.png)
+
+Definitions: Check out - The state of the document when it is opened by “Edit in Office Online” by a user. Check in - The act of saving the draft version of the document when “Save after Edit” as the new, active version in SafeShare
+
+## Version Management
+
+While a document is checked out for “Edit in Office Online”, the draft version is accessible only to the user who has checked it out. The document’s previous versions are still available to other SafeShare users.
+
+The version history reflects the new versions when the document is checked in by clicking “Save after Edit”. screenshot <br />
+![Version Management](/images/a59ded39a7db-version-management.png)
+
+## File types supported by Edit in Office Online
+
+Any documents supported by Office Online can be edited (xlsx, vsdx, one, docx, pptx, ppsx, xlsm, odp, docm, xlsb, onetoc2, odt, ods).
+
+Notes: Security of Edit in Office Online: Cocoon Data have designed the feature so that it does not fundamentally compromise the security model. The file (in draft and published versions) is only ever saved into SafeShare, however for it to be Edited within O365 we have had to send an unencrypted copy to Microsoft’s O365 service. The file only exists in memory on the desktop and in cache on the O365 platform, which is encrypted. This does represent a small compromise to the Cocoon Data security principle of not allowing the system or administrators to see document content and an organisation needs to trust this security model before allowing Edit in Office Online to be used.

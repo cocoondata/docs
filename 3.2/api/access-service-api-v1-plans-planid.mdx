@@ -1,0 +1,76 @@
+---
+title: "<access-service>/api/v1/plans/{planId}"
+---
+
+## URL structure <a id="access-service-api-v1-plans-planid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/plans/{planId}
+```
+
+where `{planId}` is the ID of a plan.
+
+## Supported methods and overview <a id="access-service-api-v1-plans-planid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a [plan](/3.2/admin/managing-users-storage-quotas-through-plans), based on the plan's ID.
+- `PUT` - used to modify the fields of an existing plan.
+- `DELETE` - used to delete an existing plan.
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-plans-planid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about a plan, using the plan's ID. A plan's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/plans](/3.2/api/access-service-api-v1-plans) API endpoint, which retrieves a list of field information for all current plans on the Covata Platform.
+- Modifies the fields of an existing plan, based on the plan's ID. These fields include the plan's name, description, quota value (in MB) and a flag that determines whether or not this plan will be the new default plan (i.e. which will be applied to [newly added Covata users](/3.2/api/access-service-api-v1-users) or [existing users whose role has been upgraded](/3.2/api/access-service-api-v1-users-userid) to [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role)).
+- Deletes an existing plan from the Covata Platform. <br />
+  **Notes:**
+
+  - Any Covata users who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of Content Service-managed storage utilized by any of these users, then these users will no longer be able to upload any data until their storage utilization drops below the **default** plan's quota.
+  - It is not possible delete the **default** plan.
+
+## Supported roles <a id="access-service-api-plans-planid-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-plans-planid#access-service-api-v1-plans-planid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-plans-planid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-plans-planid-optional-parameters" />
+
+The following optional parameters can be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **default** - .
+- **description** - .
+- **name** - .
+- **quota** - Specify in MB.
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-plans-planid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+- **quota** - .
+- **default** - .
+
+  **Example (response from ...):**

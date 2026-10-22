@@ -1,0 +1,170 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/collections"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-collections-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collections/{orgId}/collections
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-collections-supported-methods-and-overview" />
+
+- `POST` - creates a new folder (i.e. [collection](/CS1.2/api/working-with-files-and-folders-fundamentals#collection)) within an organisation (specified by `orgId`), which involves specifying the following properties on the resulting folder:
+
+  - The folder's location and name.
+  - ( *Optionally* ) Collaborators (as well as their [permission sets](/CS1.2/api/access-service-api-v1-permissions-sets)).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-collections-detailed-description" />
+
+This API endpoint creates a new folder, which can be used to organize file objects/[Secure Objects](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object) and other folders.
+
+A folder/collection is analogous to an operating system's folders/directories on a file system. The Cocoon Data Platform's folders are used for organizing files and other folders logically in storage managed by the Content Service.
+
+The [Cocoon Data user](/CS1.2/admin-org/administering-users-within-an-organisation) whose account creates a new folder through this endpoint becomes the *owner* <sup>1</sup> of this folder. When creating this new folder, other than setting its required name and parent properties (through the **name** and **parentId** [parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters) respectively), collaborators and their [permission sets](/CS1.2/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-optional-parameters)) can also be set - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following five permission sets can be applied:
+
+- **View** - grants the collaborator the individual **View** [permission](/CS1.2/api/access-service-api-v1-permissions-sets) on any files subsequently contained within this new folder, which allows these files':
+
+  - content to be viewed from a SafeShare application's [content viewer](/CS1.2/user/accessing-secure-content#viewing-and-printing-content), as well as their
+  - *read-only views* to be downloaded (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/CS1.2/api/content-service-api-v1-objects-objectid-view) endpoint).
+- **Download** - grants the collaborator the individual **View** permission (provided by the **View** permission set), as well as the following additional permissions on any files subsequently contained within this new folder <sup>2</sup> :
+
+  - **Download** the file's actual content <sup>3</sup> (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint).
+  - **Print** the file's content <sup>3</sup> from a SafeShare application's content viewer.
+- **Upload** - grants the collaborator the individual permissions provided by the **Download** permission set, as well as the following permissions to perform these additional actions within this new folder <sup>2</sup> (in the owner's storage space):
+
+  - Initialize a new *Incomplete* file object within this folder <sup>2</sup> (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) endpoint), through the **Upload File** permission.
+  - Upload this *Incomplete* file object's data, which changes the file object's state to *Created* (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint), again through the **Upload File** permission.
+  - Upload a new version of a file (and its actual content) within this folder (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/versions](/CS1.2/api/content-service-api-v1-objects-objectid-versions) endpoint), through the **Upload File** permission.
+  - Create a new folder within this folder <sup>2</sup> (via this endpoint's **parentId** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters)), through the **Create Folder** permission.
+- **Modify** - grants the collaborator the individual permissions provided by the **Upload** permission set, as well as the following permissions to perform these additional actions on this new folder itself (or any files/folders subsequently contained within this new folder) <sup>2</sup> in the owner's storage space:
+
+  - **Rename** the item (via the `PUT` method on either the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid) or [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid) endpoints). The **Rename** permission also provides access to a file's other versions, which includes the ability to perform any of the following actions:
+
+    - Retrieve information about all existing versions of the file (via the `GET` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/CS1.2/api/access-service-api-v1-objects-itemid-versions) endpoint).
+    - Download the *read-only view* of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/view](/CS1.2/api/content-service-api-v1-versions-versionid-view) endpoint).
+    - Download the actual content of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/contents](/CS1.2/api/content-service-api-v1-versions-versionid-contents) endpoint).
+    - Set another version of the file to be active (via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/CS1.2/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+    - Permanently delete a version of the file other than the active one (via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/CS1.2/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+  - Remove the file (including all of its versions) or folder (including all of its content) to the [Recycle Bin](/CS1.2/user/managing-secure-content#accessing-the-recycle-bin), via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid) endpoint (through the **Remove (File)** permission) or [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid) endpoint (through the **Remove (Folder)** permission), respectively. <br />
+    **Important:** Be aware that a more restrictive permission set applied to any items contained within this child folder being deleted are ignored and as such, these items will also be removed to the Recycle Bin.
+  - **Move** the item to a different folder within a common folder hierarchy (via the `PUT` method on either the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid) or this endpoint's **parentId** [parameter](/CS1.2/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters)). A *common folder hierarchy* is a folder hierarchy that contains this new folder (including items subsequently contained within it), in which the same collaborator has also been added (with either the **Modify** or **Manage** permission set) to a higher level (i.e. a common) folder, such that this higher level folder forms the top of the folder's hierarchy.
+- **Manage** - grants the collaborator the individual permissions provided by the **Modify** permission set, as well as the following permissions to perform these additional actions on this new folder itself (or any files/folders subsequently contained within this new folder) <sup>2</sup> in the owner's storage space:
+
+  - **Share** the item with other collaborators, for:
+
+    - files, via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) endpoint or `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid) endpoint, or
+    - folders, via this endpoint's **collaborators** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-optional-parameters) or the `PUT` method on the [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid) endpoint.
+
+<sup>1</sup> Be aware that the ownership of a folder [can be changed](/CS1.2/api/access-service-api-v1-organisations-orgid-items-transfer) to that of another Cocoon Data user.
+
+<sup>2</sup> If any of these items are subsequently moved to a child folder on which a more restrictive permission set (listed above) has been applied for a given collaborator, then that collaborator will only possess the relevant permissions (granted by this more restrictive permission set) on this child folder and any other items contained within it. The exceptions are the **Remove (File)** and **Remove (Folder)** permissions, which are propagated down through a folder hierarchy, regardless of whether or not a more restrictive permission set has been applied to an item further down the hierarchy.
+
+<sup>3</sup> Relates to the active version of the file.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-collections-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+
+- [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - when this user:
+
+  - is a member of the organisation whose ID is specified by `{orgId}` in the request's URL and
+  - will create and initially own the resulting folder.
+- **Originator**, [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - when the **parentId** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters) is specified for a folder (within the organisation specified by `{orgId}`) on which this user is a collaborator with the **Create Folder** [permission](/CS1.2/api/access-service-api-v1-permissions-sets). <br />
+  **Note:** Such a collaborator user cannot set this endpoint's **collaborators** parameter, unless this user also has the **Share** permission on the folder represented by **parentId**.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-collections-required-headers" />
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-organisations-orgid-collections-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, as individual members of a **JSON object**:
+
+- **name** - The name to apply to the folder (in storage).
+- **parentId** - The ID of an existing folder (within the organisation specified by `{orgId}`) that will contain this new folder. Specifying a value of `0` results in the new folder being created at the logical root location in storage. <br />
+  **Example (creating a collection at the root location in storage):**
+
+  ```json
+  {
+    "name": "Scenery",
+    "parentId": "0"
+  }
+  ```
+
+## Optional parameters <a id="access-service-api-v1-organisations-orgid-collections-optional-parameters" />
+
+The following optional parameters can also be sent in the **body** of the POST request, each as individual members of the **JSON object** that includes the [Required parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters) above:
+
+- **collaborators** ( *For collaborator users, requires the **Share** [permission](/CS1.2/api/access-service-api-v1-permissions-sets) on **parentId*** ) - A parameter containing the following optional sub-element parameters that relate to the collaborators being applied to this folder:
+
+  - **list** - An array of elements about each collaborator, where each element of this array contains the following optional sub-elements:
+
+    - **email** - The email address of the person to add as a collaborator to the folder. (Although this sub-element is optional, omitting it serves no purpose.)
+    - **permissionSet** - The [permission set](/CS1.2/api/access-service-api-v1-permissions-sets) to apply to this collaborator. This is done by specifying the ID of the permission set as a sub-element parameter of this parameter:
+
+      - **id** - The ID of the permission set to apply to this collaborator. This ID can be obtained by calling the [&lt;access-service&gt;/api/v1/permissions/sets](/CS1.2/api/access-service-api-v1-permissions-sets) API endpoint.
+
+      **Note:** If this sub-element is omitted, then the **View** permission set is automatically applied to this collaborator.
+
+  **Tip:** It is worthwhile your client application storing these set of collaborators and their respective permission sets (e.g. in its own object) because [any modifications to one or more collaborators on an existing folder](/CS1.2/api/access-service-api-v1-collections-collectionid) requires all collaborators and their permission sets to be [specified in the request to modify a folder](/CS1.2/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters). <br />
+  **Example (creating a new folder within an existing folder, while adding new collaborators each with different sets of permissions to this new folder):**
+
+  ```json
+  {
+    "name": "Large Files",
+    "parentId": "876543210987654321"
+    "collaborators": {
+      "list": [
+        {
+          "email": "chris.collaborator@xy-company.com",
+          "permissionSet": {
+            "id": 5
+          }
+        },
+        {
+          "email": "olly.originator@xy-company.com",
+          "permissionSet": {
+            "id": 3
+          }
+        },
+        {
+          "email": "adhoc.user@another-xy-company.com"
+        }
+      ]
+    }
+  }
+  ```
+
+   **Note:** The permission set with an ID of 5 is **Upload** and with an ID of 3 is **Modify**. See [&lt;access-service&gt;/api/v1/permissions/sets](/CS1.2/api/access-service-api-v1-permissions-sets) for more information about permission sets.
+
+## Returns <a id="access-service-api-v1-organisations-orgid-collections-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID value of the created folder.
+- **name** - The name of the folder, which was set when the folder was created (using this endpoint).
+- **createdAt** - The date and time when the folder was created.
+- **modifiedAt** - The date and time when the folder was last modified, which should be the same as (or close to) that of `createdAt` above.
+- **shared** - A boolean value that indicates whether or not the folder has been shared with any collaborators.
+- **parentId** - The ID of the folder that contains this new folder. A value of `0` indicates that this new folder is located at the default logical root storage location. <br />
+  **Example (response from creating a new folder within an existing folder):**
+
+  ```json
+  {
+      "id": "876543210191817161",
+      "name": "Large Files",
+      "createdAt": "2014-10-15T01:19:08.294Z",
+      "modifiedAt": "2014-10-15T01:19:08.294Z",
+      "shared": true,
+      "parentId": "876543210987654321"
+  }
+  ```

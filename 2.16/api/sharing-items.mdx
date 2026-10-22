@@ -1,0 +1,105 @@
+---
+title: "Sharing items"
+---
+
+The owner of an [item](/2.16/api/creating-secure-objects-and-collections#item) (either a [Secure Object](/2.16/api/creating-secure-objects-and-collections#secure-object) or [collection](/2.16/api/creating-secure-objects-and-collections#collection)) can share this item with other people, who could be other Covata users or people who do not yet have a user account on the Covata Platform.
+
+A person who has been shared an item (by its owner) is referred to as a *collaborator*. If someone does not yet have a Covata user account, the act of sharing an item with this person (via their email address) automatically creates that person a user account on the Covata Platform (with the [Ad hoc role](/2.16/admin/administering-users#adhoc-role)).
+
+An item's owner can apply one of up to four sets of permissions (each of which is referred to as a *permission set*) to a collaborator on the item, such that each collaborator is associated with their own permission set on any given item. A permission set grants the collaborator one or more individual *permissions*, each of which permit the collaborator to perform various actions on that item and its contents. For more information about permission sets and the individual permissions they grant, see [&lt;access-service&gt;/api/v1/permissions/sets](/2.16/api/access-service-api-v1-permissions-sets).
+
+All collaborators and their permission sets on a collection are *implicitly* cascaded down through that collection and the items contained within it. This means that if a collection has been shared with a collaborator and a given permission set, then that collaborator can access and perform specific actions (based on the permissions granted by this permission set) on this collection, as well as on every item contained within this collection. If, however, the collection's owner had done one of the following to one of these collaborators on a descendant item within this collection:
+
+- removed the collaborator from the descendant item, or
+- changed the collaborator's permission set on this descendant item,
+
+then this modification is made *explicitly* on this descendant item, which has the following implications:
+
+- Any implicit sharing this collaborator had to this descendant item (inherited *implicitly* from the closest ancestral collection) is overridden by this explicit modification.
+- If the descendant item is a collection, then the explicit modification on this descendant collection is *implicitly* cascaded down through the items contained within.
+
+This page describes how to use Covata's API to:
+
+- [Share a Secure Object with collaborators](/2.16/api/sharing-items#sharing-a-secure-object-with-collaborators),
+- [Share a collection with collaborators](/2.16/api/sharing-items#sharing-a-collection-with-collaborators),
+- [Determine existing collaborators on an item](/2.16/api/sharing-items#determining-existing-collaborators-on-an-item) and
+- [Modify existing collaborators on an item](/2.16/api/sharing-items#modifying-existing-collaborators-on-an-item)
+
+<Note>
+
+- Before sharing a [Secure Object](/2.16/api/creating-secure-objects-and-collections#secure-object) or a [collection](/2.16/api/creating-secure-objects-and-collections#collection), your application must have a valid access token obtained by authenticating and authorizing a Covata user to the Covata Platform, where this user has the appropriate [role](/2.16/admin/administering-users#a-users-roles) and/or permissions to create their own items to share. <br />
+   For more information about authenticating and authorizing Covata users to the Covata Platform, see [Authorizing your application](/2.16/api/authentication-and-authorization#authorizing-your-application) on the [Authentication and authorization](/2.16/api/authentication-and-authorization) page of this guide and the [Configuring client applications](/2.16/admin/configuring-client-applications) page of the [Covata Platform Administrator's Guide](/2.16/admin/index).
+- The **Supported roles (and permissions)** sections of each API endpoint page (linked to from the procedures below) contain details about the roles and permissions that a Covata user requires for a successful request to the endpoint (along with a valid access token representing this user).
+
+</Note>
+
+## Sharing a Secure Object with collaborators
+
+A Secure Object can be shared with collaborators when the Secure Object is either [first created/initialized](/2.16/api/creating-secure-objects-and-collections#initializing-a-new-incomplete-secure-object) or [completed (if its data is encrypted locally)](/2.16/api/creating-secure-objects-and-collections#creating-a-completed-secure-object-data-encrypted-locally), or at any time thereafter.
+
+To a Secure Object with collaborators, do one of the following <sup>(1)</sup>:
+
+- Make a `POST` request to the [&lt;access-service&gt;/api/v1/objects](/2.16/api/access-service-api-v1-objects) API endpoint with a [JSON](http://json.org/) object in the body of the request containing:
+
+  - A **collaborators** parameter pair whose value is an object containing:
+
+    - A **list** parameter pair whose value is an array containing object elements, each of which represents a collaborator. Each of these objects contains the following members:
+
+      - **email** - A parameter pair whose value is the email address of the collaborator.
+      - **permissionSet** - A parameter pair whose value is an object containing a single **id** parameter (as a name/value pair), where the value is the ID of the specific permission set to apply to this collaborator. See [&lt;access-service&gt;/api/v1/permissions/sets](/2.16/api/access-service-api-v1-permissions-sets) for more information about retrieving the ID of a permission set.
+  - The **keyId** parameter (name/value pair) whose value is the ID of the key ([obtained earlier](/2.16/api/creating-secure-objects-and-collections#obtaining-a-cryptographic-key)).
+  - If the Secure Object is to be completed (and its data encrypted locally), then also include the **sha512** parameter (name/value pair), whose value is the [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) value of this locally encrypted data.
+- Make a `PUT` request to the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/2.16/api/access-service-api-v1-objects-objectid) API endpoint with a JSON object in the body of the request containing the **collaborators** (and if required, the **sha512**) parameter pair/s (above).
+
+<sup>(1)</sup> For all of these actions, a valid access token representing the Covata user who either will own the Secure Object being created or currently owns the Secure Object in question, must be included in the header of the requests.
+
+## Sharing a collection with collaborators
+
+A collection can be shared with collaborators when the collection is either [first created](/2.16/api/creating-secure-objects-and-collections#creating-a-collection-for-managing-secure-objects) or at any time thereafter.
+
+To share a collection with collaborators, do one of the following <sup>(2)</sup>:
+
+- Make a `POST` request to the [&lt;access-service&gt;/api/v1/collections](/2.16/api/access-service-api-v1-collections) API endpoint with a JSON object in the body of the request containing:
+
+  - A **collaborators** parameter pair whose value is an object containing:
+
+    - A **list** parameter pair whose value is an array containing object elements, each of which represents a collaborator. Each of these objects contains the following members:
+
+      - **email** - A parameter pair whose value is the email address of the collaborator.
+      - **permissionSet** - A parameter pair whose value is an object containing a single **id** parameter (as a name/value pair), where the value is the ID of the specific permission set to apply to this collaborator. See [&lt;access-service&gt;/api/v1/permissions/sets](/2.16/api/access-service-api-v1-permissions-sets) for more information about retrieving the ID of a permission set.
+  - The **name** and **parentId** parameters (name/value pairs) whose values are described earlier for [creating a collection](/2.16/api/creating-secure-objects-and-collections#creating-a-collection-for-managing-secure-objects).
+- Make a `PUT` request to the [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/2.16/api/access-service-api-v1-collections-collectionid) API endpoint with a JSON object in the body of the request containing the **collaborators** (and if required, the **name** and **parentId**) parameter pair/s (above).
+
+<sup>(2)</sup> For all of these actions, a valid access token representing the Covata user who either will own the collection being created or currently owns the collection in question, must be included in the header of the requests.
+
+## Determining existing collaborators on an item
+
+To determine the existing collaborators (and their respective permission sets) on a Secure Object or collection:
+
+1. Retrieve the ID of this item, which can be achieved by [retrieving information about a filtered subset of items](/2.16/api/retrieving-information-about-items-from-the-covata-platform) from the Covata Platform.
+2. Call the [&lt;access-service&gt;/api/v1/items/\{itemId\}](/2.16/api/access-service-api-v1-items-itemid) API endpoint, where `{itemId}` is the ID of the item in question. The JSON response reveals all collaborators on the item, as well as each collaborator's respective permission set (and the individual permissions that constitute the permission set). <br />
+   **Note:** For this JSON response to reveal information about collaborators on this item, then the (valid) access token (in the header of the request) must meet the following conditions:
+
+   - Relate to a Covata user who either owns this item or is a collaborator on the item.
+   - If the Covata user is a collaborator on this item, they must have either the **Upload** or **Manage** permission set on the item (or more specifically, the individual **View Other** permission) to retrieve information about other collaborators on the item. <br />
+      Be aware that if the item is a Secure Object (on which the Covata user inherited the **Upload** permission set from a ancestral collection), then the user's permission set on this Secure Object (along with the corresponding individual permissions) are 'demoted' to the **Download** permission set (and corresponding individual permissions), since some of the **Upload** permission set's individual permissions do not apply to Secure Objects. Nevertheless, the currently authenticated Covata user can observe all their individual permissions to this Secure Object through the top-level **permissions** member in the JSON response. For more information about permission sets and their individual permissions, see [&lt;access-service&gt;/api/v1/permissions/sets](/2.16/api/access-service-api-v1-permissions-sets).
+
+## Modifying existing collaborators on an item
+
+Collaborators can be modified on a Secure Object or collection by:
+
+- removing existing collaborators from the item,
+- changing the permission set of existing collaborators on the item, or
+- adding new collaborators to the item (which is already shared with existing collaborators).
+
+To modify existing collaborators, follow the relevant `PUT` request process above for initially sharing a [Secure Object](/2.16/api/sharing-items#sharing-a-secure-object-with-collaborators) or [collection](/2.16/api/sharing-items#sharing-a-collection-with-collaborators) with collaborators. However, when making this `PUT` request, if you intend to:
+
+- Remove existing collaborators from the item, then ensure the collaborators who should not be removed are re-applied in the `PUT` request (along with their respective permission sets).
+- Change the permission sets of existing collaborators on the item, ensure existing collaborators are re-applied in the `PUT` request (along with their respective permission sets). However, for each collaborator whose permission set needs modifying, specify the **id** parameter of the **permissionSet** parameter with the updated permission set ID.
+- Add new collaborators to the item, ensure all existing collaborators and their respective permission sets are re-applied in the `PUT` request, along with any new collaborators.
+
+<Tip>
+
+It is worthwhile your client application storing existing collaborators (with whom a [Secure Object](/2.16/api/sharing-items#sharing-a-secure-object-with-collaborators) or [collection](/2.16/api/sharing-items#sharing-a-collection-with-collaborators) was last shared, along with the collaborators respective permission sets) in an object. Doing so avoids the need to [retrieve an item to determine its existing collaborators and their permission sets](/2.16/api/sharing-items#determining-existing-collaborators-on-an-item)).
+
+</Tip>

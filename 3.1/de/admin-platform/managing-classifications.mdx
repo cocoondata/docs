@@ -1,0 +1,44 @@
+---
+title: "Verwaltung von Klassifikationen"
+---
+
+Die Seite **Klassifikationen** ermöglicht es Organisations-Administratoren, eine Reihe von Klassifikationen zu definieren, aus denen [Covata-Benutzer](/3.1/de/admin-platform/administering-users-within-an-organisation) wählen können, wenn sie anderen Personen über Safe Share-Anwendungen, einschließlich andere Client-Anwendungen, die mit der API der Covata-Plattform arbeiten, Dateien/sichere Objekte freigeben. (Weitere Informationen über sichere Objekte finden Sie unter [Verwaltung von Dateien](/3.1/de/admin-platform/administering-files).)
+
+Anhand von Klassifikationen können Covata-Benutzer die Möglichkeit der Freigabe von Dateien/sicheren Objekten auf eine bestimmte [Gruppe von Covata-Benutzern](/3.1/de/admin-platform/managing-groups) beschränken. Ist eine Klassifikation einem Covata-Benutzer nicht zugewiesen (d. h. die Klassifikation ist keiner [Gruppe](/3.1/de/admin-platform/managing-groups) zugewiesen, der der betreffende Benutzer angehört), kann eine Datei mit der betreffenden Klassifikation an diesen Benutzer nicht freigegeben werden.
+
+![Seite Klassificationen](/images/da0991da9042-classifications-page.png)
+## Hinzufügen einer neuen Klassifikation <a id="adding-a-new-classification" />
+
+**Hinzufügen einer neuen Klassifikation zu Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.1/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Klassifikationen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Klassifikation** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neue Klassifikation hinzufügen** Folgendes an:
+
+   - **Name** - der Wert dieses Felds ist der Name der Klassifikation, den Covata-Benutzer von Safe Share-Anwendungen, einschließlich Client-Anwendungen, die mit der API der Covata-Plattform arbeiten, (bei der Freigabe eines Elements) sehen.
+   - **Beschreibung (*Optional*)** - eine längere Beschreibung für mehr Informationen über die Klassifikation, z. B. ihren Zweck oder die beabsichtigte Zielgruppe. Der Wert dieses Felds ist nur für Organisations-Administratoren auf dieser Seite **Klassifikationen** sichtbar.
+
+   **Hinweis:** Bitte vergewissern Sie sich, dass Sie mit den obigen Werten zufrieden sind, ehe Sie den Vorgang fortsetzen, da es konzeptionsgemäß sowie aus Sicherheitsgründen nicht möglich ist, jegliche Aspekte einer Klassifikation zu bearbeiten, nachdem sie erstellt wurde.
+5. Klicken Sie auf **Speichern**, und die neue Klassifikation erscheint als neue Eintragung auf der Seite **Klassifikationen**. <br />
+   **Hinweise:**
+
+   - Siehe [Verwaltung von Gruppen](/3.1/de/admin-platform/managing-groups), um diese Klassifikation einem oder mehreren Covata-Benutzern (als Gruppe) zuzuweisen. Dieser Vorgang ermöglicht es, die Freigabe von Dateien anhand der Klassifikation auf die betreffenden Benutzer zu beschränken.
+   - Es wird empfohlen, alle neu hinzugefügten Klassifikationen baldmöglichst mindestens einer [Gruppe von Covata-Benutzern zuzuweisen](/3.1/de/admin-platform/managing-groups), da die Auswahl einer noch keiner Gruppe oder keinen Benutzern zugewiesenen Klassifikation bei der Freigabe von Dateien/sicheren Objekten verhindert, dass diese tatsächlich freigegeben werden können.
+
+## Entfernen einer bestehenden Klassifikation <a id="removing-an-existing-classification" />
+
+Entfernen einer Klassifikation entfernt einerseits die betreffende Klassifikation von allen Dateien, denen sie bei ihrer Freigabe zugewiesen wurde, und andererseits alle Mitwirkenden von den betreffenden Dateien.
+
+**Entfernen einer bestehenden Klassifikation aus Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.1/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Klassifikationen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Klassifikation** aufzurufen.
+3. Suchen Sie die betreffende Klassifikation bzw. blättern Sie zur gewünschten Klassifikation und aktivieren Sie das Kontrollkästchen links daneben.
+4. Klicken Sie auf die Schaltfläche **Entfernen**. Eine Meldung **Klassifikation löschen** wird angezeigt, die Sie warnt, dass das Entfernen der Klassifikation diese von allen Dateien entfernt, denen sie bei der Freigabe zugewiesen wurde. <br />
+   **Hinweis:** Beachten Sie, dass diese Aktion auch alle Mitwirkenden von den betreffenden Dateien entfernt, ehe Sie den Vorgang fortsetzen.
+5. Klicken Sie in dieser Meldung auf **Ja**, um die Klassifikation zu entfernen.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

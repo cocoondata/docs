@@ -1,0 +1,145 @@
+---
+title: "Accessing Covata Administration"
+---
+
+Most [Covata Administration](/3.4/admin/index#administration) features are only available to Covata Platform administrators, where a *Covata Platform administrator* is any [Covata user](/3.4/admin/administering-users) who has the [System administrator](/3.4/admin/administering-users#system-administrator-role) [role](/3.4/admin/administering-users#a-users-roles).
+
+<Note>
+
+Covata Platform administrators can grant themselves the [User administrator role](/3.4/admin/administering-users#user-administrator-role) to gain access to *all* administration features of the Covata Platform.
+
+</Note>
+
+## Signing in
+
+When signing in to Covata Administration, a Covata user account must have the:
+
+- [System administrator role](/3.4/admin/administering-users#system-administrator-role) to access all administration features of the Covata Platform (with the exception of the [Transfer Ownership](/3.4/admin/transferring-user-ownership) feature).
+- [User administrator role](/3.4/admin/administering-users#user-administrator-role) to access the [Transfer Ownership](/3.4/admin/transferring-user-ownership) feature. A Covata user who only has this *Covata Administration role*, only has access to the **Transfer Ownership** feature of Covata Administration.
+
+<Note>
+
+If accessing Covata Administration for the first time, see [Accessing for the first time](/3.4/admin/accessing-administration#accessing-for-the-first-time) (below) before continuing.
+
+</Note>
+
+**To sign in to Covata Administration:**
+
+1. Open a compatible web browser and specify the base URL of your Covata Platform instance (appended by `/#/admin`) into your browser's URL field - e.g: <br />
+   `https://covata-platform.xy-company.com/#/admin` <br />
+   **Tip:** You may wish to bookmark this URL.
+2. On the Covata Sign-in page, enter the **Email address** and **Your password** associated with your Covata user account which has the [System](/3.4/admin/administering-users#system-administrator-role) and/or [User](/3.4/admin/administering-users#user-administrator-role) administrator roles. <br />
+   **Forgotten your password?** If you have, then leave the **Your password** field blank, click the **Email my password** link and follow the instructions in your email notification to reset your password.
+3. Click the **Sign in** button (or type 'Enter'/'Return') and if successful, the [Covata Administration interface](/3.4/admin/accessing-administration#the-administration-interface) is displayed. <br />
+   **Notes:**
+
+   - The email address of the currently signed in user appears at the top right-hand corner of the Covata Administration interface.
+   - If the main Covata [Safe Share web application](/3.4/user/index) page appears instead of the Covata Administration interface, click your email address at the top-right and choose **Administration** from the drop-down menu.
+
+<Tip>
+
+A Covata Platform administrator (i.e. typically a Covata user account with only the [System administrator role](/3.4/admin/administering-users#system-administrator-role)) can [edit their own user account](/3.4/admin/administering-users#editing-an-existing-user) to grant themselves the [User administrator role](/3.4/admin/administering-users#user-administrator-role).
+
+</Tip>
+
+## The Covata Administration interface <a id="the-administration-interface" />
+
+The Covata Administration interface consists of a set of configuration pages, each of which is accessible from the options on the left (below). Note that:
+
+- Covata Platform administrators who have the [System administrator role](/3.4/admin/administering-users#system-administrator-role) (but not the [User administrator](/3.4/admin/administering-users#user-administrator-role) one) can access all of these options on the left of the Covata Administration interface except **Transfer Ownership**.
+- [Covata users](/3.4/admin/administering-users) who have the [User administrator role](/3.4/admin/administering-users#user-administrator-role) (but not the [System administrator](/3.4/admin/administering-users#system-administrator-role) one) can only access the **Transfer Ownership** page of the Covata Administration interface. The other options are not available.
+- Covata Platform administrators who have both of these *Covata Administration roles* can access all Covata Administration options on the left of the interface.
+
+The **Dashboard** [page](/3.4/admin/accessing-administration#the-dashboard) is initially displayed upon a Covata Platform administrator successfully signing in to Covata Administration.
+
+<Note>
+
+If accessing Covata Administration from a tablet or phone, tap the 'menu' icon in the top left hand corner of the screen to access these options.
+
+</Note>
+
+![Dashboard page](/images/47c98ce412b7-dashboard-page.png)
+The table below describes each of these Covata Administration pages, which can be accessed by clicking its option on the left of the interface.
+
+| Covata Administration page | Description |
+| --- | --- |
+| [Dashboard](/3.4/admin/accessing-administration#the-dashboard) | Provides a single-page graphical overview of various aspects of your Covata Platform's current statuses (presented in panels), recent activities (presented in graph form) as well as a variety of system usage metrics involving user accounts, files and storage (presented in pie charts). |
+| [Users](/3.4/admin/administering-users) | Allows access to all Covata users, from which any Covata user can be configured, including the ability to:  <br />•  Modify the roles of a user, which permits what the user can do with Covata technologies. <br />•  Expire a user's access tokens (i.e. sessions); this immediately signs the user out from every application through which they were signed in to the Covata Platform.  |
+| [User Whitelist](/3.4/admin/managing-user-whitelists) | Allows the management and configuration of the user whitelist, which defines the users that can access the Covata Platform. Any users whose email addresses do not match a user whitelist rule cannot:  <br />•  Sign in to the Covata Platform or use any aspect of Covata technologies. <br />•  Be shared files or folders (i.e. added as a collaborator to items) by other people.  |
+| [Client Apps](/3.4/admin/configuring-client-applications) | Allows the registration and configuration of applications (e.g. built by integrators using the Covata Platform's API) which uses Covata technologies to create and/or access Secure Objects. The configurations of these 'client' applications on the Covata Platform define:  <br />•  Which OAuth 2.0 grant types the application can use to authenticate to the Covata Platform. <br />•  The application's client ID and client secret (i.e. the credentials of the application itself, which also identifies the application to the Covata Platform). <br />•  The validity of the application's access and refresh tokens, which determines the duration of a user's session with the Covata Platform when they use this application. <br />•  The application's 'redirect URI(s)', to which the Covata Platform sends its request (and is handled by the application) to complete the OAuth 2.0 authorization process. <br />•  Whether the application's access to the Covata Platform is either disabled or re-enabled.  |
+| [Files](/3.4/admin/administering-files) | Allows any files encrypted using Covata technologies on the Covata Platform to be searched and filtered. From this filtered list, individual files can:  <br />•  Be disabled (which prevents any access to their unencrypted data) or re-enabled, as well as <br />•  Have all their recorded activities inspected.  |
+| [LDAP](/3.4/admin/configuring-ldap) | Allows the configuration of connections to one or more LDAP user directories, which can be used to populate the Covata Platform with users. |
+| [SAML](/3.4/admin/configuring-single-sign-on-using-an-idp) | Allows the configuration of a SAML-based Identity Provider (IdP) service to which Covata users can authenticate to gain access to the Covata Platform and the Safe Share web application through single sign-on. |
+| [Reports](/3.4/admin/generating-reports) | Allows the generation of reports on all requests made by client applications to the Covata Platform's API, which can be downloaded in either PDF or CSV formats. The results of these reports can be filtered by a wide range of criteria. |
+| [Configuration](/3.4/admin/configuring-administration-properties) | Allows the modification of properties that affect certain functional areas of Covata Administration. |
+| [Theme](/3.4/admin/re-theming-the-application-and-administration) | Allows the Safe Share web application (and Covata Administration) to be 're-themed' by modifying the logos of its user interface as well as email notifications. |
+| [Internationalization](/3.4/admin/managing-internationalization) | Allows the user interface language for Covata Administration and the default one used by the Safe Share web application to be changed. Also allows custom/external language bundles to be uploaded to provide the Covata Platform with greater internationalization support for more languages. |
+| [Groups](/3.4/admin/managing-groups) | Allows the definition of groups of Covata users, which in turn can be used in conjunction with labels to restrict the people with whom files can be shared. |
+| [Labels](/3.4/admin/managing-labels) | Allows the definition of labels that:  <br />•  can be selected by Covata users when sharing files and <br />•  once applied to groups of Covata users, <br />restricts the ability to share files to Covata users who are members of these groups. |
+| [Plans](/3.4/admin/managing-users-storage-quotas-through-plans) | Allows the definition of plans, each of which defines a storage quota that is used to limit the amount of storage (managed by the Covata Platform's Content Service) available to Covata user accounts. |
+| [Transfer Ownership](/3.4/admin/transferring-user-ownership) | Allows the ownership of a Covata user's content (consisting of their entire set of Secure Objects + collections) to be transferred to that of another user. <br /> **Note:** A *collection* is analogous to a file system folder/directory and is used to group and organize other Secure Objects and collections. |
+
+## The dashboard
+
+The **Dashboard** page is initially displayed upon a Covata Platform administrator successfully [signing in](/3.4/admin/accessing-administration#signing-in) to Covata Administration.
+
+![Dashboard page](/images/47c98ce412b7-dashboard-page.png)
+The following table describes each component of the **Dashboard** page from left to right and top to bottom.
+
+| Dashboard page component | Description |
+| --- | --- |
+| Total Users | This panel shows the total number of Covata users registered on the Covata Platform, including the numbers of these users whose accounts are either enabled or disabled. Clicking this panel opens the **Users** [page](/3.4/admin/administering-users). |
+| Files | This panel shows the total number of encrypted files/Secure Objects which have been created through the Covata Platform, including the number of these files which are either shared or not shared. Clicking this panel opens the **Files** [page](/3.4/admin/administering-files). |
+| Required Storage Capacity | This panel shows the total amount of storage space that the Covata Platform (managed through the Content Service) requires to be able to store content for all Covata users with the [Originator role](/3.4/admin/administering-users#originator-role) (i.e. who have a [plan](/3.4/admin/managing-users-storage-quotas-through-plans)). This panel includes the amounts of this storage which are currently used and unused. Clicking this panel opens the **Plans** [page](/3.4/admin/managing-users-storage-quotas-through-plans). <br /> **Note:** This total is calculated by summing the quota values of all Covata users with the Originator role. |
+| User Sign-in Activity | This graph shows Covata user sign-in activity over the past week, with each point along a curve representing activity pertinent to that curve on a given day. Each curve on the graph represents the number of successful sign-ins from one of the [three types of Covata user account](/3.4/admin/administering-users#account-type). The fourth curve represents the total number of failed sign-in attempts. |
+| Users Allocated to Plans | This pie chart represents all Covata users with the Originator role (i.e. who have a plan) and shows the proportions of these users assigned to each plan (i.e. of all plans) defined on the Covata Platform. |
+| Users Allocated to Groups | This pie chart represents all Covata users who are members of any [added group](/3.4/admin/managing-groups#adding-a-new-group) (i.e. excluding the **All Users** group) and shows the proportions of these users who belong to each [group](/3.4/admin/managing-groups) (i.e. of all added groups) defined on the Covata Platform. |
+| Users (Local vs LDAP vs External) | This pie chart shows the proportions of all [enabled](/3.4/admin/administering-users#disabling-or-re-enabling-users) Covata users' [account types](/3.4/admin/administering-users#account-type). <br /> **Note:** [Disabled](/3.4/admin/administering-users#disabling-or-re-enabling-users) Covata users are not included in this pie chart.  |
+
+## Signing out
+
+**To sign out of Covata Administration:**
+
+- Click your email address at the top right-hand corner of the [Covata Administration interface](/3.4/admin/accessing-administration#the-administration-interface) and choose **Sign Out** from the drop-down menu. <br />
+   The Covata Sign-in page is redisplayed.
+
+<Warning>
+
+After administering the Covata Platform, please ensure that you explicitly sign out of Covata Administration using this procedure (above). If you simply close the browser tab or window that contained your Covata Administration session, then you will *not be signed out*, leading to the risk that your session may be compromised by someone else subsequently using your computer.
+
+</Warning>
+
+## Accessing for the first time
+
+New Covata Platform instances have a default administrator user account (with email address `admin@default.com`).
+
+This user exists for the purpose of allowing a Covata Platform administrator to initially sign in to Covata Administration to create new user accounts, one of which is a Covata Platform administrator user for themselves.
+
+<Warning>
+
+For security reasons, this default administrator user account should be deleted or disabled after it is used to create these new user accounts.
+
+</Warning>
+
+**To access a new Covata Platform instance and initially set up Covata Administration users:**
+
+1. Open a compatible web browser and specify the base URL of your Covata Platform instance (appended by `/#/admin`) into your browser's URL field - e.g: <br />
+   `https://covata-platform.xy-company.com/#/admin`
+2. On the Covata Sign-in page, specify the:
+
+   - **Email address** `admin@default.com` and
+   - **password** which is simply `password`
+3. Create a new user account for Covata Platform administration purposes. <br />
+   **Notes:**
+
+   - See [Adding a new user](/3.4/admin/administering-users#adding-a-new-user) for more information about this step. <br />
+      (New user accounts added directly through Covata Administration are of a [Local](/3.4/admin/administering-users#account-type) account type.)
+   - Ensure this new user has been granted the [System administrator role](/3.4/admin/administering-users#system-administrator-role).
+4. ( *Optional* ) Create any additional Local user accounts (including those for other Covata Platform administrators if required).
+5. [Sign out](/3.4/admin/accessing-administration#signing-out) and [sign in](/3.4/admin/accessing-administration#signing-in) again as your new Covata Platform administrator user. <br />
+   **Note:** Your initial password (automatically generated by the Covata Platform) will be emailed to you in a **Covata account created** notification.
+6. [Delete](/3.4/admin/administering-users#deleting-users) or [disable](/3.4/admin/administering-users#disabling-or-re-enabling-users) the `admin@default.com` user.
+
+---
+
+#### Please provide your feedback here

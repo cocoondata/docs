@@ -1,0 +1,89 @@
+---
+title: "<access-service>/api/v1/users/me/contacts"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-contacts-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/contacts
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-contacts-supported-methods-and-overview" />
+
+- `POST` - used to create a new contact for the currently authenticated [Covata user](/3.0/admin/administering-users)<sup>&#42;</sup>.
+- `GET` - used to retrieve a list of field information for all contacts of the currently authenticated Covata user.
+
+## Detailed description <a id="access-service-api-v1-users-me-contacts-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Creates a new contact for the currently authenticated Covata user<sup>&#42;</sup>. This contact consists of a mandatory email address as well as optional first and last names. <br />
+  **Note:** A contact can be created for any person who does not have a registered Covata user account. However, as to whether or not sharing the currently authenticated Covata user's content with this contact will succeed, ultimately depends on the contact's email address complying with a rule of an enabled user whitelist on the Covata Platform. If this content is successfully shared with this contact, then a new Covata user account is automatically created for this contact (with the [Ad hoc role](/3.0/admin/administering-users#adhoc-role)).
+- Retrieves a list of field information for all contacts of the currently authenticated Covata user. The list of contacts returned in the [response](/3.0/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-returns) can be filtered according to contacts whose email address, first name or last name contains the string specified in the request.
+
+## Supported roles <a id="access-service-api-users-me-contacts-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [Originator](/3.0/admin/administering-users#originator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-contacts-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-users-me-contacts-required-parameters-on-POST" />
+
+The following required parameters must be sent in the body of the POST request, as individual members of a JSON object:
+
+- **contacts** - An array of **email** elements.
+- **ignoreDuplicates** - true or false.
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-users-me-contacts-optional-parameters-on-POST" />
+
+The following optional parameters can also be sent in the body of the POST request, each as individual members of the JSON object that includes the [Required parameters on POST](/3.0/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-parameters-on-POST) above:
+
+- **contacts** - An array containing one or more of the following elements (in addition to the **email** element [above](/3.0/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-parameters-on-POST)).
+
+  - **firstName** - .
+  - **lastName** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-users-me-contacts-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 10).
+- **offset** - default is 0.
+- **searchText** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-users-me-contacts-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **email** - .
+  - **firstName** - .
+  - **lastName** - .
+  - **createdAt** - .
+  - **modifiedAt** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-users-me-contacts#access-service-api-v1-users-me-contacts-required-headers) of requests to this endpoint.

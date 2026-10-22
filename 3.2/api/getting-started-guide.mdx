@@ -1,0 +1,49 @@
+---
+title: "Getting Started Guide"
+---
+
+## What the Covata API can do
+
+The Covata API allows your application to:
+
+- [Authenticate and authorize](/3.2/api/authentication-and-authorisation) a Covata user to the Covata Platform,
+- [Obtain a cryptographic key](/3.2/api/creating-files-and-folders#obtaining-a-cryptographic-key) from the the Covata Platform's Access Service, which is required for encrypting or decrypting a [file's/Secure Object's](/3.2/api/creating-files-and-folders#secure-object) data,
+- [Initialize a new 'Incomplete' file object](/3.2/api/creating-files-and-folders#initializing-a-new-incomplete-file-object) by associating the cryptographic key with this new file,
+- [Create a completed file object by encrypting its data locally](/3.2/api/creating-files-and-folders#creating-a-completed-file-object-data-encrypted-locally), either for:
+
+  - [Remote storage uploaded](/3.2/api/creating-files-and-folders#uploading-a-completed-files-encrypted-data) to and handled by the the Covata Platform's Content Service, or
+  - Storage handled independently by your application,
+- [Create a completed file object by uploading its unencrypted data](/3.2/api/creating-files-and-folders#creating-a-completed-file-object-uploading-unencrypted-data) to the Content Service for encryption, then storage and
+- [Create a folder](/3.2/api/creating-files-and-folders#creating-a-folder-for-managing-files) for managing files.
+- Retrieve a list of information about:
+
+  - All immediate files and folders (i.e. [items](/3.2/api/creating-files-and-folders#item)) [of a common parent folder](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-immediate-items-of-a-common-parent-folder),
+  - All items [filtered by text search](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-items-filtered-by-text-search),
+  - All items [based on ownership or sharing status](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-items-based-on-ownership-or-sharing-status), or
+  - All [ancestral folders](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-ancestral-folders-of-an-item) of a specific file or folder.
+- Allow specific people (known as 'collaborators') to access a [file](/3.2/api/sharing-items#sharing-a-file-with-collaborators) or a [folder](/3.2/api/sharing-items#sharing-a-folder-with-collaborators), as well as decrypt its content,
+- [Identify existing collaborators](/3.2/api/sharing-items#determining-existing-collaborators-on-an-item) on a file or folder,
+- [Modify (i.e. remove or add)](/3.2/api/sharing-items#modifying-existing-collaborators-on-an-item) collaborators on a file or folder,
+
+The Covata Platform keeps a record of all files and folders created, as well as information about which users are collaborators on each file or folder.
+
+To perform the activities above, a [Covata user](/3.2/api/authentication-and-authorisation) is required to authenticate to the Covata Platform, which permits access to the the Covata Platform's resources (i.e. through Covata API endpoints) that are available to this user.
+
+## Tools for accessing the Covata API <a id="tools-for-accessing-the-product-api" />
+
+### cURL
+
+Example API calls used throughout this Getting Started Guide are based on the standard command line tool [cURL](http://curl.haxx.se/), which allows you to construct API requests at the command line to submit to the appropriate endpoints of either the Covata Platform's Access or Content Services.
+
+### Postman - REST Client
+
+The Google Chrome tool [Postman - REST Client](https://chrome.google.com/webstore/search/postman?hl=en), provides a graphical user interface (GUI) that allows you to construct and save a set of API endpoint requests to submit to the Covata Platform. Postman also allows you to upload data files to submit as part of a request (e.g. binary data as part of a multi-part form data element).
+
+## Getting Started Guide contents
+
+This Getting Started Guide consists of the following sections:
+
+- [Authentication and authorization](/3.2/api/authentication-and-authorisation)
+- [Creating files and folders](/3.2/api/creating-files-and-folders)
+- [Retrieving information about items from the Covata Platform](/3.2/api/retrieving-information-about-items-from-the-platform)
+- [Sharing items](/3.2/api/sharing-items)

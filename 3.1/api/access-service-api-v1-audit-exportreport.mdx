@@ -1,0 +1,55 @@
+---
+title: "<access-service>/api/v1/audit/exportReport"
+---
+
+## URL structure <a id="access-service-api-v1-audit-exportreport-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/audit/exportReport
+```
+
+## Supported methods and overview <a id="access-service-api-v1-audit-exportreport-supported-methods-and-overview" />
+
+- `POST` - used to export a list of field information for all API-based requests made to the Covata Platform's Access Service.
+
+## Detailed description <a id="access-service-api-v1-audit-exportreport-detailed-description" />
+
+This API endpoint exports a list of field information for all API-based requests made to the Covata Platform's Access Service.
+
+## Supported roles <a id="access-service-api-v1-audit-exportreport-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-audit-exportreport#access-service-api-v1-audit-exportreport-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-audit-exportreport-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has form URL-encoded data in the body:
+
+- `Content-Type: application/x-www-form-urlencoded`
+
+## Optional parameters <a id="access-service-api-v1-audit-exportreport-optional-parameters" />
+
+The following optional parameters can be sent in the body of the request (as form URL-encoded data):
+
+- **action** - CREATED, DELETED, RETRIEVED, UPDATED.
+- **apiType** - AUTH, COLLABORATIONS, COLLECTIONS, CONTACTS, KEYS, NOTIFICATIONS, OBJECTS, USERS.
+- **clientId** - .
+- **email** - .
+- **endTime** - .
+- **exportFormat** - csv, pdf (default is csv).
+- **pageSize** - .
+- **pageStart** - .
+- **startTime** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-audit-exportreport-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

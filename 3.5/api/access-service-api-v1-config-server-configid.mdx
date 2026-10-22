@@ -1,0 +1,94 @@
+---
+title: "<access-service>/api/v1/config/server/{configId}"
+---
+
+## URL structure <a id="access-service-api-v1-config-server-configid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/server/{configId}
+```
+
+where `{configId}` is the ID of a SafeShare Administration-only property (not related to theming SafeShare's interfaces).
+
+## Supported methods and overview <a id="access-service-api-v1-config-server-configid-supported-methods-and-overview" />
+
+- `GET` - retrieves the value of a configurable [SafeShare Administration-only property](/3.5/admin-platform/configuring-platform-administration-properties) (specified by `configId`).
+- `PUT` - modifies the value of a configurable SafeShare Administration-only property (not related to theming SafeShare's interfaces).
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-config-server-configid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves the value of a configurable SafeShare Administration-only property (specified by `configId`). Such a SafeShare Administration property's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/config/server](/3.5/api/access-service-api-v1-config-server) API endpoint, which retrieves a list of information for all configurable SafeShare Administration properties (not related to theming SafeShare's interfaces). <br />
+  **Tip:** All information returned in the [response](/3.5/api/access-service-api-v1-config-server-configid#access-service-api-v1-config-server-configid-returns) from a `GET` request to this API endpoint is also returned in the [response](/3.5/api/access-service-api-v1-config-server#access-service-api-v1-config-server-returns) from the [&lt;access-service&gt;/api/v1/config/server](/3.5/api/access-service-api-v1-config-server) endpoint. Therefore, if you already have a configurable SafeShare Administration-only property's ID, there is no need to call the `GET` method on this API endpoint.
+- Modifies the value of a configurable SafeShare Administration-only property (not related to theming SafeShare's interfaces).
+
+## Supported roles <a id="access-service-api-config-server-configid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/3.5/admin-platform/index)):
+
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-config-server-configid#access-service-api-v1-config-server-configid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-server-configid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Parameters <a id="access-service-api-v1-config-server-configid-parameters" />
+
+The following optional parameter can also be sent in the **body** of the PUT request, as an individual member of a **JSON object**:
+
+- **propertyValue** - The value to set for the configurable SafeShare Administration-only property (specified by `{configId}` in the request's URL). <br />
+  **Example (request - modifying the 'Minimum Password Length' property whose `configId` value is `1`):**
+
+  ```json
+  {
+    "propertyValue": 7
+  }
+  ```
+
+Although omitting the **propertyValue** parameter above in a request serves no purpose, an empty **JSON object** must at least be passed in the **body** of PUT requests to this endpoint for a successful response:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-config-server-configid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **modified** - .
+- **propertyName** - .
+- **grouping** - .
+- **propertyDescription** - .
+- **configGroup** - .
+- **id** - .
+- **propertyValue** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "modified": "2016-10-12T03:19:15.644Z",
+      "propertyName": "password.length.min",
+      "grouping": "PASSWORD_PROPERTIES",
+      "propertyDescription": "db.configuration.minimumPasswordLength",
+      "configGroup": "PASSWORD_PROPERTIES",
+      "id": "1",
+      "propertyValue": {
+          "value": "7"
+      }
+  }
+  ```

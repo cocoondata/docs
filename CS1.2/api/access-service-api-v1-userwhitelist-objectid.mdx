@@ -1,0 +1,58 @@
+---
+title: "<access-service>/api/v1/userwhitelist/{objectId}"
+---
+
+## URL structure <a id="access-service-api-v1-userwhitelist-objectid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/userwhitelist/{objectId}
+```
+
+where `{objectId}` is the ID of a user whitelist rule.
+
+## Supported methods and overview <a id="access-service-api-v1-userwhitelist-objectid-supported-methods-and-overview" />
+
+- `GET` ( *Deprecated* ) - retrieves information about an existing [user whitelist rule](/CS1.2/admin-org/managing-user-whitelists) (specified by `objectId`) in any organisation, available to SafeShare administrators only.
+
+<Note>
+
+- This endpoint is deprecated and should no longer be used. Organisation administrators can retrieve information about existing user whitelist rules by calling the `GET` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist) API endpoint.
+- This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-userwhitelist-objectid-detailed-description" />
+
+This API endpoint retrieves information about an existing user whitelist rule (specified by `objectId`) in any organisation, available to SafeShare administrators only. This ID can be obtained from a `GET` method to the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist) API endpoint, which retrieves a list of information for all current user whitelist within an organisation (specified by `orgId`). <br />
+**Tip:** All information returned in the [response](/CS1.2/api/access-service-api-v1-userwhitelist-objectid#access-service-api-v1-userwhitelist-objectid-returns) to this API endpoint is also returned in the [response](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist#access-service-api-v1-organisations-orgid-userwhitelist-returns) from a `GET` method call to the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist](/CS1.2/api/access-service-api-v1-organisations-orgid-userwhitelist) endpoint. Therefore, if you do not already have a user whitelist rule's ID, there is no need to call the `GET` method on this API endpoint.
+
+## Supported roles <a id="access-service-api-v1-userwhitelist-objectid-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-userwhitelist-objectid#access-service-api-v1-userwhitelist-objectid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-userwhitelist-objectid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-userwhitelist-objectid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - The ID of the user whitelist rule, which should match `{objectId}` in the request's URL.
+- **pattern** - The domain or email address of this user whitelist rule.
+- **description** - The description of this user whitelist rule. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "id": "765456269464346624",
+      "pattern": "xy-company.com",
+      "description": "XY Company staff"
+  }
+  ```

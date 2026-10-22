@@ -1,0 +1,80 @@
+---
+title: "Verwaltung der Einstellungen für die Cache-Richtlinien"
+---
+
+Safe Share for Windows verschlüsselt und entschlüsselt Dateien für maximale Datensicherheit stets lokal auf dem Computer eines Covata-Benutzers. Verschlüsselte Inhalte im [„Safe Share“-Ordner](/3.1/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) eines Covata-Benutzers *müssen daher*:
+
+- Lokal im Unterordner „Meine sicheren Dateien“ generiert worden sein, wenn der Benutzer [Inhalte in seinem persönlichen Besitz sicher speichert](/3.1/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content).
+- Lokal im Unterordner „Mir freigegeben“ des Benutzers (zur Entschlüsselung) vorhanden sein, wenn ein anderer Covata-Benutzer dem aktuell angemeldeten Covata-Benutzer über eine beliebige Anwendung von Safe Share [sichere Inhalte freigibt](/3.1/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content). Ist der verschlüsselte Inhalt nicht lokal verfügbar, lädt Safe Share for Windows den Inhalt vor der Entschlüsselung zunächst aus dem von der Covata-Plattform verwalteten Remotespeicher herunter.
+
+Durch die lokale Ablage verschlüsselter Inhalte im Zwischenspeicher braucht Safe Share for Windows den Inhalt einer Datei nicht jedes Mal vom Remotespeicher herunterzuladen, wenn die Datei entschlüsselt werden muss. Diese Zwischenspeicherung kann jedoch im Lauf der Zeit auf dem lokalen Laufwerk beträchtlichen Speicherplatz beanspruchen.
+
+Die Funktion *Cache-Richtlinien* in Safe Share for Windows ermöglicht es daher Benutzern festzulegen, ob alle verschlüsselten Inhalte in den „Safe Share“-Ordnern auf dem Computer lokal (zwischen)gespeichert bleiben sollen.
+
+Standardmäßig nimmt Safe Share for Windows keine lokale Zwischenspeicherung verschlüsselter Inhalte vor. Dies bedeutet, dass Safe Share for Windows bei der Erstellung verschlüsselter Inhalte zum Hochladen in den Speicher oder Herunterladen zur Entschlüsselung die betreffenden lokal verschlüsselten Inhalte nach Abschluss dieser Aktionen automatisch löscht (d. h. wenn die verschlüsselten Inhalte nicht mehr benötigt werden).
+
+<Tip>
+
+Innerhalb von [„Safe Share“-Ordnern](/3.1/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) gilt für von *Covata gesicherte Dateien* Folgendes:
+
+- Dateien mit der Erweiterung „.cov“ sind lokal zwischengespeichert und
+- Dateien mit der Erweiterung „.covl“ sind *nicht* lokal zwischengespeichert. Die Größe solcher Dateien beträgt &lt; 1 KB. Safe Share for Windows lädt bei jeder Entschlüsselung einer „.covl“-Datei den verschlüsselten Inhalt zunächst aus dem Remotespeicher herunter.
+
+</Tip>
+
+## Zugriff auf die Einstellungen für die Cache-Richtlinien <a id="accessing-cache-policy-settings" />
+
+<Note>
+
+Sie brauchen nicht bei Safe Share for Windows angemeldet sein, um auf diese Funktion zuzugreifen.
+
+</Note>
+
+**Zugriff auf die Funktion Einstellungen für die Cache-Richtlinien in Safe Share for Windows:**
+
+1. Vergewissern Sie sich, dass Safe Share for Windows [gestartet](/3.1/de/windows/starting-the-application-and-signing-in#starting-the-application) wurde.
+2. Klicken Sie auf das Symbol
+   ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    oder
+
+   ![Safe Share for Windows - Abgemeldet](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    der Anwendung im Infobereich der Taskleiste. Klicken Sie dann auf das Symbol „Einstellungen“
+
+   ![Symbol Anwendungsbereich-Einstellungen](/images/bd516587c63f-application-pane-settings-icon.png)
+
+    rechts oben im Anwendungsbereich ... :
+
+   ![Zugriff auf das Symbol Anwendungsbereich-Einstellungen](/images/1e20bd2fcb42-application-pane-signed-in.png)
+
+   <br />
+    und wählen Sie aus dem Popup-Menü dieses Symbols **Einstellungen**, um das Dialogfeld **Einstellungen** (im Register **Allgemeines**) aufzurufen: <br />
+3. Klicken Sie auf das Register **Cache-Richtlinien**, um auf die aktuellen Einstellungen dieser Funktion zuzugreifen: <br />
+   ![Dialogfeld Einstellungen - Register Cache-Richtlinien](/images/a33a24f1dca1-settings-dialog-box-cache-policy-tab.png)
+   <br />
+    Da Safe Share for Windows standardmäßig keine lokale Zwischenspeicherung verschlüsselter Inhalten vornimmt, ist beim ersten Zugriff auf dieses Dialogfeld die Option **Keine verschlüsselten Inhalte zwischenspeichern** aktiviert.
+
+## Änderung der Einstellungen für die Cache-Richtlinien <a id="modifying-cache-policy-settings" />
+
+Die Einstellungen für die Cache-Richtlinien sind mit dem *Windows-Benutzerkonto* verbunden, mit dem Sie aktuell bei Windows angemeldet sind.
+
+<Note>
+
+Diese Funktion ist unabhängig vom Covata-Benutzer-account, mit dem Sie bei Safe Share for Windows angemeldet sind. Sie brauchen sich daher nicht bei Safe Share for Windows [anzumelden](/3.1/de/windows/starting-the-application-and-signing-in#signing-in-manually), um diese Einstellungen zu ändern.
+
+</Note>
+
+**Änderung der Einstellungen für die Cache-Richtlinien in Safe Share for Windows:**
+
+1. [Greifen Sie](/3.1/de/windows/managing-cache-policy-settings#accessing-cache-policy-settings) auf die Funktion Einstellungen für die Cache-Richtlinien zu.
+2. Wählen Sie im Register **Cache-Richtlinien** im Dialogfeld **Einstellungen** eine der folgenden Optionen:
+
+   - **Keine verschlüsselten Inhalte zwischenspeichern** - Dies ist die Standardoption, bei der alle lokal verschlüsselten Inhalte automatisch gelöscht werden, sobald sie nicht mehr benötigt werden.
+   - **Alle verschlüsselten Inhalte zwischenspeichern (beansprucht mehr Speicherplatz)** - Diese Option veranlasst, dass alle lokal verschlüsselten Inhalte (in den `Safe Share`-Ordnern) gespeichert bleiben, sodass die verschlüsselten Inhalte einer Datei zu ihrer Entschlüsselung nicht aus dem Remotespeicher heruntergeladen werden müssen. <br />
+     **Hinweis:** Beachten Sie, dass bei der Aktivierung dieser Option die verschlüsselten Inhalte aller Dateien (in den `Safe Share`-Ordnern), deren verschlüsselte Inhalte (noch) nicht lokal gespeichert sind, bei der jeweils nächsten Entschlüsselung der Dateien heruntergeladen und zwischengespeichert werden.
+3. Klicken Sie auf **Speichern**, um die aktualisierten Einstellungen für die Cache-Richtlinien zu übernehmen.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

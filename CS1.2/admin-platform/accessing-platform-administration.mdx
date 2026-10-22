@@ -1,0 +1,132 @@
+---
+title: "Accessing SafeShare Administration"
+---
+
+The features of [SafeShare Administration](/CS1.2/admin-platform/index#platform-administration) are only available to SafeShare administrators, where a *SafeShare administrator* is any [Cocoon Data user](/CS1.2/admin-platform/administering-platform-administrator-users) who has the [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) [role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles).
+
+## Signing in to SafeShare Administration <a id="signing-in-to-platform-administration" />
+
+When signing in to SafeShare Administration, a Cocoon Data user account must have the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) to access all SafeShare Administration features of the Cocoon Data Platform<sup>&#42;</sup>.
+
+<Note>
+
+If accessing SafeShare Administration for the first time, see [Accessing SafeShare Administration for the first time](/CS1.2/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time) (below) before continuing.
+
+</Note>
+
+**To sign in to SafeShare Administration:**
+
+1. Open a compatible web browser and enter the base URL of your Cocoon Data Platform instance (appended by `/#/admin`) in your browser's URL field - e.g: <br />
+   `https://cocoondata-platform.xy-company.com/#/admin` <br />
+   **Tip:** You may wish to bookmark this URL.
+2. On the Cocoon Data Sign-in page, enter the **Email address** and **Password** associated with your Cocoon Data user account which has the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role). <br />
+   *Forgotten your password?* If you have, then leave the **Password** field blank but click the **Forgot your password** link instead. Follow the instructions on the page and then in your email notification to reset your password.
+3. Click the **SIGN IN** button (or type 'Enter'/'Return') and if successful, the [SafeShare Administration interface](/CS1.2/admin-platform/accessing-platform-administration#the-platform-administration-interface) is displayed. <br />
+   **Notes:**
+
+   - If, instead, you see 'Multi-factor authentication is enabled on your account...' on the page with a field requesting you to enter your **Authentication code** (for the first time), then:
+
+     1. Check for a Cocoon Data Notification email message containing the subject line '*Multi-factor authentication has been enabled for your account*'.
+     2. Open this email message and follow its instructions to configure your mobile device with your Cocoon Data user account for MFA. For more information, see [Enabling or disabling MFA for a SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator).
+     3. Sign in [again](/CS1.2/admin-platform/accessing-platform-administration#signing-in-to-platform-administration).
+   - The email address of the currently signed in user appears at the top right-hand corner of the SafeShare Administration interface.
+   - If the main Cocoon Data [SafeShare for Web](/CS1.2/user/index) page appears instead of the SafeShare Administration interface, click your email address at the top-right and choose **Administration** from the drop-down menu.
+
+<Note>
+
+<sup>&#42;</sup> **Additional notes:**
+
+- Any Cocoon Data user (including any SafeShare administrator) whose account has the [Organisation administrator role](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for a given [organisation](/CS1.2/admin-platform/administering-organisations) can *manage* and administer that organisation. For more information about the Organisation administrator role, see [Administering users within an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation) in the [Organisation Administration](/CS1.2/admin-platform/organisation-administration) section of this guide.
+- A SafeShare administrator (typically a Cocoon Data user account with only the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)) can grant themselves the [Organisation administrator role](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for an organisation by making themselves the administrator of this organisation *when they* [add/create the organisation](/CS1.2/admin-platform/administering-organisations#adding-a-new-organisation). This user (who now has both the SafeShare administrator role and the Organisation administrator role for this organisation) can then grant other Cocoon Data users the Organisation administrator role for their organisation. Otherwise (and perhaps more typically), a SafeShare administrator cannot administer an organisation added to their Cocoon Data Platform instance, unless the Organisation administrator initially set for this organisation (or someone else that this person subsequently made an Organisation administrator of their organisation) grants the SafeShare administrator the Organisation administrator role for their organisation (i.e. when [adding the SafeShare administrator to the organisation](/CS1.2/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account)).
+
+</Note>
+
+## The SafeShare Administration interface <a id="the-platform-administration-interface" />
+
+The SafeShare Administration interface consists of a set of configuration pages, each of which is accessible from the options on the left (below). Note that:
+
+- Cocoon Data users who have the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) can access all of these options on the left of the SafeShare Administration interface.
+- Cocoon Data users who have both the SafeShare administrator role and the [Organisation administrator role](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for one or more organisations can access the [Organisation Administration interface](/CS1.2/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for these organisations (only), in addition to all SafeShare Administration options on the left of the interface. For more information about managing organisations, see the [Organisation Administration](/CS1.2/admin-platform/organisation-administration) section of this guide.
+
+The **Dashboard** [page](/CS1.2/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) is initially displayed upon a SafeShare administrator successfully [signing in to SafeShare Administration](/CS1.2/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) (above).
+
+<Note>
+
+If accessing SafeShare Administration from a tablet or phone, tap the 'menu' icon in the top left hand corner of the screen to access these options.
+
+</Note>
+
+![Dashboard page](/images/ffa5fccb2ddc-platform-administration-dashboard-page.png)
+The table below describes each of these SafeShare Administration pages, which can be accessed by clicking its option on the left of the interface.
+
+| SafeShare Administration page | Description |
+| --- | --- |
+| [Dashboard](/CS1.2/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) | Provides a single-page graphical overview of various aspects of your Cocoon Data Platform's current statuses (presented in panels), recent sign-in attempts (presented in graph form) as well as system usage metrics for each organisation including Cocoon Data user account roles and storage usage/availability. |
+| [Organisations](/CS1.2/admin-platform/administering-organisations) | Allows SafeShare administrator-level access to all organisations configured on your Cocoon Data Platform instance. From this page, any SafeShare administrator can:  <br />•  Create a new organisation. <br />•  Rename an organisation, as shown to all Cocoon Data users who are members of this organisation. <br />•  Modify the quota used to limit the amount of storage (managed by the Cocoon Data Platform's Content Service) available to an organisation. <br />•  Under certain limited conditions, remove an organisation.  |
+| [Administrators](/CS1.2/admin-platform/administering-platform-administrator-users) | Allows access to all Cocoon Data users who are SafeShare administrators, from which any SafeShare administrator can:  <br />•  add SafeShare administrator user accounts, which either creates new Cocoon Data user accounts with the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) or grants existing Cocoon Data user accounts this role, or <br />•  remove SafeShare administrator accounts, which removes the SafeShare administrator role from Cocoon Data user accounts.  |
+| [Client Apps](/CS1.2/admin-platform/configuring-client-applications) | Allows the registration and configuration of applications (e.g. built by integrators using the Cocoon Data Platform's API) which uses Cocoon Data technologies to create and/or access files (also known as file objects or Secure Objects). The configurations of these 'client' applications on the Cocoon Data Platform define:  <br />•  Which OAuth 2.0 grant types the application can use to authenticate to the Cocoon Data Platform. <br />•  The application's client ID and client secret (i.e. the credentials of the application itself, which also identifies the application to the Cocoon Data Platform). <br />•  The validity of the application's access and refresh tokens, which determines the duration of a user's session with the Cocoon Data Platform when they use this application. <br />•  The application's 'redirect URI(s)', to which the Cocoon Data Platform sends its request (and is handled by the application) to complete the OAuth 2.0 authorisation process. <br />•  Whether the application's access to the Cocoon Data Platform is either disabled or re-enabled.  |
+| [SAML](/CS1.2/admin-platform/configuring-single-sign-on-using-an-idp) | Allows the configuration of a SAML-based Identity Provider (IdP) service to which Cocoon Data users can authenticate to gain access to the Cocoon Data Platform and SafeShare for Web through single sign-on. |
+| [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) | Allows the modification of properties that affect certain functional areas across the Cocoon Data Platform (including all organisations configured on it). |
+| [Internationalisation](/CS1.2/admin-platform/managing-internationalisation) | Allows custom/external language bundles to be uploaded to provide the Cocoon Data Platform with greater internationalisation support for more languages. Also allows SafeShare administrators to change the user interface language for the sign-in page, as well as the default language of SafeShare Administration, Organisation Administration and (initially) SafeShare for Web for any newly added Cocoon Data users. |
+
+## The SafeShare Administration dashboard <a id="the-platform-administration-dashboard" />
+
+The **Dashboard** page is initially displayed upon a SafeShare administrator successfully [signing in](/CS1.2/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to SafeShare Administration.
+
+![Dashboard page](/images/ffa5fccb2ddc-platform-administration-dashboard-page.png)
+The following table describes each component of the **Dashboard** page from left to right/top to bottom.
+
+| Dashboard page component | Description |
+| --- | --- |
+| Maximum Required Disk Space | This panel shows the total amount of storage space that the Cocoon Data Platform (managed through the Content Service) requires to store content for all Cocoon Data users with the [Originator role](/CS1.2/admin-platform/administering-users-within-an-organisation#originator-role) (i.e. who have a [plan](/CS1.2/admin-platform/managing-users-storage-quotas-through-plans)) across all of the Cocoon Data Platform's configured organisations. Clicking this panel opens the **Organisations** [page](/CS1.2/admin-platform/administering-organisations). <br /> **Notes:**  <br />•  This total is calculated by summing the quota values of all organisations. <br />•  The Originator role and plans are discussed in more detail in [Administering users within an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation) (of this guide's [Organisation Administration](/CS1.2/admin-platform/organisation-administration) section).  |
+| Client Applications | This panel shows the total number of [client applications](/CS1.2/admin-platform/configuring-client-applications) currently registered on the Cocoon Data Platform. Clicking this panel opens the **Client Applications** [page](/CS1.2/admin-platform/configuring-client-applications). |
+| User Sign-in Attempts | This graph shows Cocoon Data user sign-in attempts over the past week, with each point along a curve representing activity pertinent to that curve on a given day. Each curve on the graph represents the number of successful sign-in attempts from one of the [three types of Cocoon Data user account](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) (discussed in more detail in [Administering users within an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation), of this guide's [Organisation Administration](/CS1.2/admin-platform/organisation-administration) section). The fourth curve represents the total number of failed sign-in attempts. |
+| Organisations | This section of the dashboard shows each [organisation](/CS1.2/admin-platform/administering-organisations) configured on the Cocoon Data Platform. For each of these organisations, the following information is indicated:  <br />•  The organisation's name at the top. <br />•  The total numbers of Cocoon Data users (within the organisation) with the [Originator](/CS1.2/admin-platform/administering-users-within-an-organisation#originator-role) and [Collaborator](/CS1.2/admin-platform/administering-users-within-an-organisation#collaborator-role) roles, where each user who has the Originator role has a [plan](/CS1.2/admin-platform/managing-users-storage-quotas-through-plans) that grants them a quota of storage space. <br />•  A pie chart representing the used and free percentages of the storage space quota assigned to the organisation. <br />•  The actual amounts (in bytes/MB/GB) of this used (in orange text) and free storage space, as well as the storage space quota itself (in bold black text). <br />**Note:** The Originator and Collaborator roles as well as plans are discussed in more detail in [Administering users within an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation) (of this guide's [Organisation Administration](/CS1.2/admin-platform/organisation-administration) section). |
+
+## Signing out of SafeShare Administration <a id="signing-out-of-platform-administration" />
+
+**To sign out of SafeShare Administration:**
+
+- Click your email address at the top right-hand corner of the [SafeShare Administration interface](/CS1.2/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) and choose **Sign Out** from the drop-down menu. <br />
+   The Cocoon Data Sign-in page is redisplayed.
+
+<Warning>
+
+Please ensure that you explicitly sign out of SafeShare Administration using this procedure. If you simply close the browser tab or window that contained your SafeShare Administration session, then you will *not be signed out*, leading to the risk that your session may be compromised by someone else subsequently using your computer.
+
+</Warning>
+
+## Accessing SafeShare Administration for the first time <a id="accessing-platform-administration-for-the-first-time" />
+
+New Cocoon Data Platform instances have a default administrator user account (with email address `admin@default.com`).
+
+This user account exists for the purpose of:
+
+- Allowing a SafeShare administrator to initially sign in to SafeShare Administration to create a new SafeShare administrator account for themselves, including others if required.
+- Add the initial Organisation administrator account to the **Default** organisation (used for configuring an [LDAP connection](/CS1.2/admin-platform/configuring-ldap) to work with the Cocoon Data Platform and SafeShare). See [Administering organisations](/CS1.2/admin-platform/administering-organisations) for more information.
+
+<Warning>
+
+For security reasons:
+
+- After the `admin@default.com` account is used to create your new SafeShare administrator account/s, then use one of these new accounts to remove the `admin@default.com` account from SafeShare Administration.
+- If the `admin@default.com` account was used to add an Organisation administrator account to the initially-named **Default** organisation (described in [Editing an existing organisation](/CS1.2/admin-platform/administering-organisations#editing-an-existing-organisation) and [Adding an organisation user account](/CS1.2/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account)), then use this Organisation administrator account to remove the `admin@default.com` account from Organisation Administration.
+
+</Warning>
+
+**To access a new Cocoon Data Platform instance and initially set up SafeShare Administration users:**
+
+1. Open a compatible web browser and specify the base URL of your Cocoon Data Platform instance (appended by `/#/admin`) into your browser's URL field - e.g: <br />
+   `https://cocoondata-platform.xy-company.com/#/admin`
+2. On the Cocoon Data Sign-in page, specify the:
+
+   - **Email address** `admin@default.com` and
+   - **Password** which is simply `password`
+
+   **Note:** If the **Make SafeShare personal!** dialog box appears, click its **Cancel** button, since this account will be a short-lived one.
+3. Create a new SafeShare administrator user account for the Cocoon Data Platform and SafeShare Administration purposes. See [Adding a SafeShare administrator account](/CS1.2/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) for more information about this step.
+4. ( *Optional* ) Create any additional SafeShare administrator user accounts (if required).
+5. Specify an Organisation administrator for the **Default** organisation by following the procedure for [Editing an existing organisation](/CS1.2/admin-platform/administering-organisations#editing-an-existing-organisation) before continuing on.
+6. [Sign out](/CS1.2/admin-platform/accessing-platform-administration#signing-out-of-platform-administration) and [sign in](/CS1.2/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) again with your new/recently added SafeShare administrator user account. <br />
+   **Note:** Your initial password (automatically generated by the Cocoon Data Platform) will be emailed to you in a **Cocoon Data account created** notification.
+7. [Remove](/CS1.2/admin-platform/administering-platform-administrator-users#removing-platform-administrators) the `admin@default.com` user account (from SafeShare Administration).

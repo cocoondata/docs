@@ -1,0 +1,79 @@
+---
+title: "<access-service>/api/v1/userwhitelist/{userwhitelistId}"
+---
+
+## URL structure <a id="access-service-api-v1-userwhitelist-userwhitelistid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/userwhitelist/{userwhitelistId}
+```
+
+where `{userwhitelistId}` is the ID of a user whitelist rule.
+
+## Supported methods and overview <a id="access-service-api-v1-userwhitelist-userwhitelistid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about an existing [user whitelist rule](/3.2/admin/managing-user-whitelists), based on the rule's ID.
+- `PUT` - used to modify the description of an existing user whitelist rule.
+- `DELETE` - used to delete an existing user whitelist rule.
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-userwhitelist-userwhitelistid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an existing user whitelist rule, based on the user whitelist rule's ID. This ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/userwhitelist](/3.2/api/access-service-api-v1-userwhitelist) API endpoint, which retrieves a list of field information for all current user whitelist rules on the Covata Platform. <br />
+  **Tip:** All information returned in the [response](/3.2/api/access-service-api-v1-userwhitelist-userwhitelistid#access-service-api-v1-userwhitelist-userwhitelistid-returns) from a `GET` method call to this API endpoint is also returned in the [response](/3.2/api/access-service-api-v1-userwhitelist#access-service-api-v1-userwhitelist-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/userwhitelist](/3.2/api/access-service-api-v1-userwhitelist) endpoint. Therefore, if you do not already have a user whitelist rule's ID and you called the [&lt;access-service&gt;/api/v1/userwhitelist](/3.2/api/access-service-api-v1-userwhitelist) endpoint to retrieve it, then there is no need to subsequently call the `GET` method on this API endpoint.
+- Modifies the description of an existing user whitelist rule, based on the user whitelist rule's ID. <br />
+  **Note:** It is not possible to modify a user whitelist rule's domain **pattern** or email address (i.e. the rule itself) as this has the equivalent impact of deleting the rule and [adding a new one](/3.2/api/access-service-api-v1-userwhitelist).
+- Deletes an existing user whitelist rule from the Covata Platform. <br />
+  **Important:**
+
+  - Deleting a user whitelist rule (except the last one) may disable several Covata user accounts. Hence, before doing this, it is advisable to first check which Covata user accounts will be disabled by calling the [&lt;access-service&gt;/api/v1/userwhitelist/check](/3.2/api/access-service-api-v1-userwhitelist-check) API endpoint with an **action** parameter value of **delete** in the JSON object, along with a single **id** (i.e. of the whitelist rule to be deleted) in the **items** array.
+  - It is also possible to delete one or more user whitelist rules in a single action by calling the [&lt;access-service&gt;/api/v1/userwhitelist/bulk](/3.2/api/access-service-api-v1-userwhitelist-bulk) API endpoint.
+  - Deleting the last user whitelist rule from the Covata Platform results in the user whitelist feature being disabled. When the user whitelist feature is disabled, be aware that:
+
+    - Covata user accounts *are not* [disabled](/3.2/api/access-service-api-v1-users-bulk) by *not having a user whitelist rule*.
+    - Directly [disabling or re-enabling Covata user accounts](/3.2/api/access-service-api-v1-users-userid-enable) has no impact on the user whitelist feature.
+    - Any LDAP user accounts that were disabled by not matching/complying with a user whitelist rule (when the user whitelist feature was enabled) are automatically re-enabled when the Covata Platform next synchronizes with the LDAP server.
+
+## Supported roles <a id="access-service-api-v1-userwhitelist-userwhitelistid-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-userwhitelist-userwhitelistid#access-service-api-v1-userwhitelist-userwhitelistid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-userwhitelist-userwhitelistid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-userwhitelist-userwhitelistid-required-parameters" />
+
+The following optional parameters can be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **pattern** - Specify the domain pattern or email address of the user whitelist rule whose **description** is to be modified.
+- **description** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-userwhitelist-userwhitelistid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **pattern** - .
+- **description** - .
+
+  **Example (response from ...):**

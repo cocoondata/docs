@@ -1,0 +1,98 @@
+---
+title: "Retrieving information about items from the Covata Platform"
+---
+
+The Covata API's interaction with specific [Secure Objects](/3.2/api/creating-files-and-folders#secure-object) and [collections](/3.2/api/creating-files-and-folders#collection) relies heavily on submitting requests to the API using the ID values of these [items](/3.2/api/creating-files-and-folders#item).
+
+If your application does not store these items' IDs, information about a specific subset of items can be retrieved (as a list) by filtering all items recorded on the Covata Platform using navigable or memorable criteria, such as a 'search' substring that matches part of an item's name, or email address, first name or last name of the item's owner. From this manageable list of items retrieved from the Covata Platform, the required items' IDs can be obtained.
+
+This page describes how to use Covata's API to retrieve a list of information about:
+
+- [All immediate items of a common parent](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-immediate-items-of-a-common-parent-folder),
+- [All items filtered by text search](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-items-filtered-by-text-search) (i.e. items whose name or owner's email address/first name/last name contains a specified string),
+- [All items based on ownership or sharing status](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-items-based-on-ownership-or-sharing-status) (where 'sharing status' refers to items that a Covata user either has shared or is a collaborator on) and
+- [All ancestral collections of an item](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-ancestral-folders-of-an-item).
+
+This page also describes how to [sort, order and paginate](/3.2/api/retrieving-information-about-items-from-the-platform#sorting-ordering-and-paginating-the-list-of-item-info) any list of items retrieved using these procedures.
+
+<Note>
+
+- Before retrieving a list of [Secure Objects](/3.2/api/creating-files-and-folders#secure-object) and [collections](/3.2/api/creating-files-and-folders#collection), your application must have a valid access token obtained by authenticating and authorizing a Covata user to the Covata Platform, where this user either:
+
+  - has the appropriate role to create their own items (i.e. the [Originator role](/3.2/admin-org/administering-users-within-an-organisation#originator-role)) or
+  - be a *collaborator* on items which other users have shared with them. For more information about the definition of a collaborator and sharing items, see [Sharing items](/3.2/api/sharing-items).
+
+  For more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.2/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.2/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.2/admin-platform/index).
+- The **Supported roles (and conditions)** sections of each API endpoint page (linked to from the procedures below) contain details about the roles and permissions that a Covata user requires for a successful request to the endpoint (along with a valid access token representing this user).
+
+</Note>
+
+## Retrieving info about all immediate items of a common parent <a id="retrieving-info-about-all-immediate-items-of-a-common-parent-folder" />
+
+Information about immediate child items (i.e. both Secure Objects and collections) of a common parent can be retrieved as a list from the Covata Platform. This common parent can be either a parent collection of these child items, or the logical root level.
+
+To retrieve this list of information about all immediate child items of a common parent, make a `GET` request to the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) API endpoint with the **collectionId** URL parameter whose value is either:
+
+- the parent collection's ID (i.e. of the collection that contains these child items), or
+- `0` to specify items located at the logical root level.
+
+## Retrieving info about all items filtered by text search
+
+Information about all items whose name or owner's email address/first name/last name contains a specified string, irrespective of an item's location or ownership, can be retrieved as a list from the Covata Platform. (This is effectively a text search feature.)
+
+To retrieve a list of information about all items whose name or owner's email address/first name/last name contains a specified string, make a `GET` request to the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) API endpoint with the **searchText** URL parameter whose value contains the specified string itself.
+
+<Note>
+
+It is not possible to specify both the **searchText** and [collectionId](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-immediate-items-of-a-common-parent-folder) (above) URL parameters in the same request.
+
+</Note>
+
+## Retrieving info about all items based on ownership or sharing status <a id="retrieving-info-about-items-based-on-ownership-or-sharing-status" />
+
+Information about all items belonging to a Covata user (represented by an access token), or all items which this user has shared or is a collaborator on (i.e. the items' sharing status in relation to the user) can be retrieved as a list from the Covata Platform.
+
+To retrieve this list of information about all items:
+
+- belonging to a Covata user or
+- based on their sharing status in relation to this user,
+
+make a `GET` request to the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) API endpoint and specifying the **view** URL parameter with a value of:
+
+- `owned-by-me` to retrieve all items owned by the specified Covata user<sup>&#42;</sup>,
+- `shared-with-me` to retrieve all items that other Covata users have shared with the specified Covata user<sup>&#42;</sup>,
+- `sharing` to retrieve all items that the specified Covata user<sup>&#42;</sup> has shared with other people, or
+- `all` to retrieve all items that the specified Covata user<sup>&#42;</sup> can access.
+
+<sup>&#42;</sup> In each case, the specified Covata user is represented by its valid access token passed in the header of the request.
+
+<Tip>
+
+The **view** URL parameter can be used in conjunction with both the [collectionId](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-immediate-items-of-a-common-parent-folder) and [searchText](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-items-filtered-by-text-search) parameters (above) for additional filtering.
+
+</Tip>
+
+## Retrieving info about all ancestral collections of an item <a id="retrieving-info-about-all-ancestral-folders-of-an-item" />
+
+To retrieve information about all ancestral collections (back to the logical root level) of an item, make a `GET` request to the [&lt;access-service&gt;/api/v1/items/\{itemId\}/ancestry](/3.2/api/access-service-api-v1-items-itemid-ancestry) API endpoint.
+
+All ancestral collections from the logical root level through to the parent collection of item whose ID is specified in this request's URL is returned in the response. The response is a flat list of information about these ancestral collections in hierarchical order from the logical root level.
+
+## Sorting, ordering and paginating the list of item info
+
+The list of information about all retrieved items [from a common parent](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-immediate-items-of-a-common-parent-folder), [filtered by text search](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-all-items-filtered-by-text-search) or [based on ownership or sharing status](/3.2/api/retrieving-information-about-items-from-the-platform#retrieving-info-about-items-based-on-ownership-or-sharing-status) can be sorted, ordered and paginated by specifying the following additional URL parameters in the appropriate `GET` request to the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) API endpoint:
+
+- **sortBy** - The item's field by which the items in the list is ordered. Valid values are:
+
+  - `NAME` - the item's name (which is the default value if this parameter is omitted),
+  - `OWNER` - the item's owner,
+  - `MODIFIED` - the date when the item was last modified, or
+  - `CREATED` - the date when the item was created.
+- **orderBy** - The **sortBy** field is ordered by the value of this field. Valid values are:
+
+  - `ASC` - for ascending alphanumeric or chronological order (which is the default value if this parameter is omitted), or
+  - `DESC` - for descending alphanumeric or chronological order.
+- **limit** - The maximum number of items returned in the response. If this parameter is omitted, its value is `10` by default.
+- **offset** - The count order of all retrievable items from the Covata Platform filtered using other URL parameters in the request. If this parameter is omitted, its value is `0` by default.
+
+For more information about the **limit** and **offset** URL parameters for paginating items returned in the response, refer to the descriptions of these parameters in the [Optional parameters](/3.2/api/access-service-api-v1-items#access-service-api-v1-items-optional-parameters) section on the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) page.

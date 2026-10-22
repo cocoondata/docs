@@ -1,0 +1,145 @@
+---
+title: "Zugriff auf die Covata-Verwaltung"
+---
+
+Die meisten Funktionen der [Covata-Verwaltung](/2.16/de/admin/index#administration) stehen nur Covata-Plattform-Administratoren zur Verfügung, wobei *Covata-Plattform-Administratoren* alle [Covata-Benutzer](/2.16/de/admin/administering-users) sind, deren [Rolle](/2.16/de/admin/administering-users#a-users-roles) diejenige eines [Systemadministrators](/2.16/de/admin/administering-users#system-administrator-role) ist.
+
+<Note>
+
+Covata-Plattform-Administratoren können sich selbst die [Rolle eines Benutzer-Administrators](/2.16/de/admin/administering-users#user-administrator-role) zuweisen, um Zugriff auf *alle* Verwaltungsfunktionen der Covata-Plattform zu erhalten.
+
+</Note>
+
+## Anmeldung <a id="signing-in" />
+
+Bei der Anmeldung zur Covata-Verwaltung, müssen Covata-Benutzer-Accounts:
+
+- die [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) innehaben, um auf alle Verwaltungsfunktionen der Covata-Plattform (außer der Funktion [Besitz übertragen](/2.16/de/admin/transferring-user-ownership)) zugreifen zu können;
+- die [Benutzer-Administrator-Rolle](/2.16/de/admin/administering-users#user-administrator-role) innehaben, um auf die Funktion [Besitz übertragen](/2.16/de/admin/transferring-user-ownership) zugreifen zu können. Ein Covata-Benutzer, der lediglich diese *Rolle innerhalb der Covata-Verwaltung* hat, hat dementsprechend nur Zugriff auf die Funktion **Besitz übertragen** der Covata-Verwaltung.
+
+<Note>
+
+Wenn Sie erstmals auf die Covata-Verwaltung zugreifen, lesen Sie bitte zunächst den Abschnitt [Erste Anmeldung](/2.16/de/admin/accessing-administration#accessing-for-the-first-time) (unten).
+
+</Note>
+
+**Anmeldung bei der Covata-Verwaltung:**
+
+1. Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Covata-Plattform-Instanz (gefolgt von `/#/admin`) im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://covata-plattform.xy-firma.de/#/admin` <br />
+   **Tipp:** Es könnte praktisch sein, für diese URL ein Lesezeichen zu setzen.
+2. Geben Sie auf der Anmeldeseite für Covata die **E-Mail-Adresse** und **Ihr Passwort** für Ihren Covata-Benutzer-Account mit der Rolle [Systemadministrator](/2.16/de/admin/administering-users#system-administrator-role) und/oder [Benutzer-Administrator](/2.16/de/admin/administering-users#user-administrator-role) ein. <br />
+   **Passwort vergessen?** Wenn ja, lassen Sie das Feld **Ihr Passwort** leer, klicken Sie auf den Link **Mein Passwort per E-Mail senden** und folgen Sie den Anweisungen in Ihrer E-Mail-Benachrichtigung, um Ihr Passwort zurückzusetzen.
+3. Klicken Sie auf die Schaltfläche **Anmelden** (oder drücken Sie die Eingabe-/Return-Taste). Bei erfolgreicher Anmeldung wird jetzt die [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface) angezeigt. <br />
+   **Hinweise:**
+
+   - Die E-Mail-Adresse des aktuell angemeldeten Benutzers erscheint in der rechten oberen Ecke der Covata-Verwaltung-Oberfläche.
+   - Erscheint statt der Covata-Verwaltung-Oberfläche die Hauptseite der Covata [Safe Share-Webanwendung](/2.16/de/user/index), klicken Sie auf Ihre E-Mail-Adresse rechts oben und wählen Sie aus dem Dropdown-Menü **Verwaltung**.
+
+<Tip>
+
+Ein Covata-Plattform-Administrator (d. h. im Allgemeinen ein Covata-Benutzer-Account mit nur der [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role)) kann [seinen eigenen Benutzer-Account bearbeiten](/2.16/de/admin/administering-users#editing-an-existing-user), um sich selbst die [Rolle eines Benutzer-Administrators](/2.16/de/admin/administering-users#user-administrator-role) zuzuweisen.
+
+</Tip>
+
+## Die Covata-Verwaltung-Oberfläche <a id="the-administration-interface" />
+
+Die Covata-Verwaltung-Oberfläche umfasst eine Reihe von Konfigurationsseiten, die jeweils über die Optionen am linken Seitenrand zugänglich sind (siehe unten). Beachten Sie bitte:
+
+- Covata-Plattform-Administratoren mit [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) (aber ohne [Benutzer-Administrator-Rolle](/2.16/de/admin/administering-users#user-administrator-role)) haben auf alle diese Optionen am linken Seitenrand der Covata-Verwaltung-Oberfläche Zugriff, außer **Besitz übertragen**.
+- [Covata-Benutzer](/2.16/de/admin/administering-users) mit [Benutzer-Administrator-Rolle](/2.16/de/admin/administering-users#user-administrator-role) (aber ohne [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role)) haben nur Zugriff auf die Seite **Besitz übertragen** der Covata-Verwaltung-Oberfläche. Die anderen Optionen sind ihnen nicht verfügbar.
+- Covata-Plattform-Administratoren mit beiden dieser *Covata-Verwaltung-Rollen* haben Zugriff auf alle der am linken Seitenrand dargestellten Optionen der Covata-Verwaltung.
+
+Die **Dashboard**-[Seite](/2.16/de/admin/accessing-administration#the-dashboard) wird nach der erfolgreichen Anmeldung eines Covata-Plattform-Administrators bei der Covata-Verwaltung zuerst aufgerufen.
+
+<Note>
+
+Wenn Sie von einem Tablet oder Mobiltelefon aus auf die Covata-Verwaltung zugreifen, tippen Sie auf das „Menü“-Symbol in der linken oberen Ecke Ihres Displays, um auf diese Optionen zuzugreifen.
+
+</Note>
+
+![Dashboard-Seite](/images/994372e007c6-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Seiten der Covata-Verwaltung. Sie erreichen diese durch Anklicken der jeweiligen Option am linken Seitenrand.
+
+| Seite der Covata-Verwaltung | Beschreibung |
+| --- | --- |
+| [Dashboard](/2.16/de/admin/accessing-administration#the-dashboard) | Bietet auf einer Seite eine klare Übersicht über verschiedene Aspekte Ihrer Covata-Plattform: aktuelle Status (in Bereichen dargestellt), jüngste Aktivitäten (in Grafiken dargestellt) sowie verschiedene Nutzungsmetriken bezüglich Benutzer-Accounts, Dateien und Speicher (in Kreisdiagrammen dargestellt). |
+| [Benutzer](/2.16/de/admin/administering-users) | Gestattet den Zugriff auf alle Covata-Benutzer und damit die Konfiguration jedes Covata-Benutzers, einschließlich der folgenden Möglichkeiten:  <br />•  Änderung der Benutzer-Rollen, die festlegen, was der betreffende Benutzer mit den Covata-Technologien tun kann <br />•  Ablauf der Zugriffs-Token (d. h. Sitzungen) eines Benutzers; der betreffende Benutzer wird damit sofort von allen Anwendungen abgemeldet, über die er bei der Covata-Plattform angemeldet war  |
+| [Benutzer-Positivliste](/2.16/de/admin/managing-user-whitelists) | Ermöglicht die Verwaltung und Konfiguration der Benutzer-Positivliste, in der die zum Zugriff auf die Covata-Plattform berechtigten Benutzer definiert sind. Benutzern, deren E-Mail-Adresse der Benutzer-Positivliste nicht entspricht, stehen die folgenden Optionen nicht zur Verfügung:  <br />•  Anmeldung bei der Covata-Plattform oder Nutzung jeglicher Aspekte der Covata-Technologien <br />•  Empfang freigegebener Dateien oder Ordner (d. h. Hinzufügung als Mitwirkende von Elementen) anderer Personen  |
+| [Client-Anwendungen](/2.16/de/admin/configuring-client-applications) | Ermöglicht die Registrierung und Konfiguration von Anwendungen (z. B. von Integratoren mithilfe der API der Covata-Plattform entwickelte Apps), die Covata-Technologien verwenden, um sichere Objekte zu erstellen und/oder auf sie zuzugreifen. Die Konfigurationen dieser „Client“-Anwendungen innerhalb der Covata-Plattform definieren Folgendes:  <br />•  die von der Anwendung zur Authentifizierung bei der Covata-Plattform nutzbaren OAuth 2.0-Erteilungstypen <br />•  die Client-ID und den geheimen Client-Schlüssel (d. h. die Anmeldeinformationen der Anwendung selbst, die auch die Anwendung gegenüber der Covata-Plattform identifizieren) <br />•  die Gültigkeit der Zugriffs- und Aktualisierungs-Token der Anwendung, von denen die Dauer der Sitzung eines Benutzers bei der Covata-Plattform bei seiner Nutzung der Anwendung bestimmt wird <br />•  die „Weiterleitungs-URI(s)“ der Anwendung, der/denen die Covata-Plattform ihre Anforderungen sendet (und die von der Anwendung gehandhabt wird/werden), um das OAuth 2.0-Autorisierungsverfahren abzuschließen <br />•  die Aktivierung bzw. Deaktivierung des Zugriffs der Anwendung auf die Covata-Plattform  |
+| [Dateien](/2.16/de/admin/administering-files) | Gestattet es, alle mithilfe von Covata-Technologien verschlüsselten Dateien auf der Covata-Plattform zu durchsuchen und filtern. Von dieser gefilterten Liste können einzelne Dateien:  <br />•  deaktiviert bzw. reaktiviert werden (ersteres verhindert allen Zugriff auf ihre unverschlüsselten Daten) und <br />•  hinsichtlich aller ihrer verzeichneten Aktivitäten geprüft werden.  |
+| [LDAP](/2.16/de/admin/configuring-ldap) | Ermöglicht die Konfiguration von Verbindungen zu einem oder mehreren LDAP-Benutzerverzeichnis(sen), das/die verwendet werden kann/können, um in der Covata-Plattform Benutzer anzulegen. |
+| [SAML](/2.16/de/admin/configuring-single-sign-on-using-an-idp) | Ermöglicht die Konfiguration eines SAML-basierten IdP-Service (Identitätsanbieter-Service), bei dem sich Covata-Benutzer authentifizieren können, um über Einzelanmeldung Zugriff auf die Covata-Plattform und die Safe Share-Webanwendung zu erhalten. |
+| [Berichte](/2.16/de/admin/generating-reports) | Ermöglicht die Erstellung von Berichten über alle von Client-Anwendungen an die API der Covata-Plattform gerichteten Anforderungen. Die Berichte können in PDF- oder CSV-Format heruntergeladen werden und lassen sich nach vielfältigen Kriterien filtern. |
+| [Konfiguration](/2.16/de/admin/configuring-administration-properties) | Ermöglicht die Änderung von Eigenschaften, die bestimmte Funktionsbereiche der Covata-Verwaltung beeinflussen. |
+| [Design](/2.16/de/admin/re-theming-the-application-and-administration) | Ermöglicht es, die auf den Benutzeroberflächen der Safe Share-Webanwendung (und Covata-Verwaltung) sowie in E-Mail-Benachrichtigungen dargestellten Logos und das Erscheinungsbild der Anwendung zu ändern. |
+| [Internationalisierung](/2.16/de/admin/managing-internationalization) | Ermöglicht es, die Sprache der Benutzeroberfläche der Covata-Verwaltung sowie die Standardsprache der Safe Share-Webanwendung zu ändern. Anhand dieser Option lassen sich auch benutzerdefinierte/externe Sprachpakete hochladen, um innerhalb der Covata-Plattform umfangreichere Unterstützung für Internationalisierung und weitere Sprachen bereitzustellen. |
+| [Gruppen](/2.16/de/admin/managing-groups) | Ermöglicht die Definition von Gruppen für Covata-Benutzer, die zusammen mit Bezeichnungen eingesetzt werden können, um den Personenkreis einzuschränken, dem Dateien freigegeben werden können. |
+| [Bezeichnungen](/2.16/de/admin/managing-labels) | Ermöglicht die Definition von Bezeichnungen:  <br />•  die Covata-Benutzer bei der Freigabe von Dateien auswählen können und <br />•  die nach ihrer Anwendung auf Covata-Benutzer-Gruppen <br />die Möglichkeit einschränken, Dateien an Covata-Benutzer freizugeben, die Mitglieder dieser Gruppen sind. |
+| [Pläne](/2.16/de/admin/managing-users-storage-quotas-through-plans) | Ermöglicht die Definition von Plänen, die jeweils ein Speicherkontingent festlegen und so den Covata-Benutzer-Accounts verfügbaren (vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen. |
+| [Besitz übertragen](/2.16/de/admin/transferring-user-ownership) | Ermöglicht es, den Besitz an den Inhalten eines Covata-Benutzers (d. h. an dessen kompletten sicheren Objekten und Sammlungen) einem anderen Benutzer zu übertragen. <br /> **Hinweis:** Eine *Sammlung* ist einem Systemordner/-verzeichnis von Dateien analog; sie wird verwendet, um andere sichere Objekte und Sammlungen zu gruppieren und organisieren. |
+
+## Das Dashboard <a id="the-dashboard" />
+
+Die Seite **Dashboard** wird nach der erfolgreichen [Anmeldung](/2.16/de/admin/accessing-administration#signing-in) eines Covata-Plattform-Administrators bei der Covata-Verwaltung zuerst aufgerufen.
+
+![Dashboard-Seite](/images/994372e007c6-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Komponenten der Seite **Dashboard** von links nach rechts und oben nach unten.
+
+| Komponente der Dashboard-Seite | Beschreibung |
+| --- | --- |
+| Benutzer gesamt | Dieser Bereich zeigt die Gesamtzahl der für die Covata-Plattform registrierten Covata-Benutzer, einschließlich der Zahl dieser Benutzer mit aktivierten oder deaktivierten Accounts. Anklicken dieses Bereichs öffnet die [Seite](/2.16/de/admin/administering-users) **Benutzer**. |
+| Dateien | Dieser Bereich zeigt die Gesamtzahl der verschlüsselten Dateien/sicheren Objekte, die über die Covata-Plattform erstellt wurden, einschließlich der Zahl dieser Dateien, die freigegeben oder nicht freigegeben sind. Anklicken dieses Bereichs öffnet die [Seite](/2.16/de/admin/administering-files) **Dateien**. |
+| Erforderliche Speicherkapazität | Dieser Bereich zeigt den gesamten (über den Inhaltsdienst verwalteten) Speicherplatz an, den die Covata-Plattform benötigt, um für alle Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) Inhalte speichern zu können (d. h. für Benutzer mit einem [Plan](/2.16/de/admin/managing-users-storage-quotas-through-plans)). Dieser Bereich zeigt den aktuell genutzten und ungenutzten Speicher an. Anklicken dieses Bereichs öffnet die [Seite](/2.16/de/admin/managing-users-storage-quotas-through-plans) **Pläne**. <br /> **Hinweis:** Diese Speicherkapazität wird berechnet, indem die Kontingente aller Covata-Benutzer mit Ersteller-Rolle addiert werden. |
+| Anmeldeaktivität der Benutzer | Diese Grafik zeigt die Anmeldeaktivität der Covata-Benutzer in der vergangenen Woche. Jeder Punkt entlang einer Kurve stellt für die betreffende Kurve am gegebenen Tag relevante Aktivität dar. Jede Kurve in der Grafik stellt die Zahl der erfolgreichen Anmeldungen eines der drei verschiedenen [Arten von Covata-Benutzer-Accounts](/2.16/de/admin/administering-users#account-type) dar. Die vierte Kurve stellt die Gesamtzahl der fehlgeschlagenen Anmeldeversuche dar. |
+| Plänen zugewiesene Benutzer | Dieses Kreisdiagramm stellt alle Covata-Benutzer mit Ersteller-Rolle dar (d. h. Benutzer mit einem Plan) und zeigt das Verhältnis der Benutzer, die den verschiedenen für die Covata-Plattform definierten Plänen zugewiesen sind. |
+| Gruppen zugewiesene Benutzer | Dieses Kreisdiagramm stellt alle Covata-Benutzer dar, die Mitglieder einer [hinzugefügten Gruppe](/2.16/de/admin/managing-groups#adding-a-new-group) sind (d. h. ausschließlich der Gruppe **Alle Benutzer**), und zeigt das Verhältnis der Benutzer, die den einzelnen für die Covata-Plattform definierten [Gruppen](/2.16/de/admin/managing-groups) angehören (d. h. relativ zu allen hinzugefügten Gruppen). |
+| Benutzer (lokal vs. LDAP vs. extern) | Dieses Kreisdiagramm zeigt das Verhältnis aller [aktivierten](/2.16/de/admin/administering-users#disabling-or-re-enabling-users), für Covata-Benutzer verfügbaren [Account-Typen](/2.16/de/admin/administering-users#account-type). <br /> **Hinweis:** [Deaktivierte](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) Covata-Benutzer sind in diesem Kreisdiagramm nicht berücksichtigt.  |
+
+## Abmeldung <a id="signing-out" />
+
+**Abmeldung von der Covata-Verwaltung:**
+
+- Klicken Sie auf Ihre E-Mail-Adresse rechts oben auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface) und wählen Sie aus dem Dropdown-Menü **Abmelden**. <br />
+   Die Seite Covata-Anmeldung wird erneut angezeigt.
+
+<Warning>
+
+Vergewissern Sie sich nach dem Abschluss Ihrer Verwaltungsaufgaben auf der Covata-Plattform bitte, dass Sie sich wie oben beschrieben explizit von der Covata-Verwaltung abmelden. Wenn Sie lediglich das entsprechende Register oder Fenster in Ihrem Browser schließen, in dem Sie Ihre Covata-Verwaltung abgewickelt haben, werden Sie *nicht abgemeldet*, d. h. es besteht das Risiko, dass Ihre Sitzung von einer anderen Person, die Ihren Computer nach Ihnen verwendet, kompromittiert wird.
+
+</Warning>
+
+## Erste Anmeldung <a id="accessing-for-the-first-time" />
+
+Neue Covata-Plattform-Instanzen haben einen Standard-Account für Administratoren mit der E-Mail-Adresse `admin@default.com`.
+
+Dieser Benutzer existiert, sodass ein Covata-Plattform-Administrator sich erstmals bei der Covata-Verwaltung anmelden und dort neue Benutzer-Accounts erstellen kann, von denen einer der Benutzer Covata-Plattform-Administrator für sich selbst ist.
+
+<Warning>
+
+Dieser Standard-Administrator-Account sollte aus Sicherheitsgründen gelöscht oder deaktiviert werden, sobald diese neuen Benutzer-Accounts angelegt wurden.
+
+</Warning>
+
+**Zugriff auf eine neue Covata-Plattform-Instanz und erste Erstellung von Covata-Verwaltung-Benutzern:**
+
+1. Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Covata-Plattform-Instanz (gefolgt von `/#/admin`) im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://covata-plattform.xy-firma.de/#/admin`
+2. Geben Sie auf der Covata-Anmeldeseite Folgendes an:
+
+   - die **E-Mail-Adresse** `admin@default.com` und
+   - das **Passwort**, das einfach `password` lautet.
+3. Erstellen Sie einen neuen Benutzer-Account für die Verwaltung der Covata-Plattform. <br />
+   **Hinweise:**
+
+   - Für weitere Informationen über diesen Schritt siehe [Hinzufügen eines neuen Benutzers](/2.16/de/admin/administering-users#adding-a-new-user). <br />
+      (Direkt über die Covata-Verwaltung hinzugefügte neue Benutzer-Accounts haben den Account-Typ [Lokal](/2.16/de/admin/administering-users#account-type).)
+   - Vergewissern Sie sich, dass dem neuen Benutzer die [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) zugewiesen ist.
+4. ( *Optional* ) Erstellen Sie etwaige weitere lokale Benutzer-Accounts (einschließlich Accounts für weitere Covata-Plattform-Administratoren, falls erforderlich).
+5. [Melden Sie sich ab](/2.16/de/admin/accessing-administration#signing-out) und [melden Sie sich wieder an](/2.16/de/admin/accessing-administration#signing-in) als der neu angelegte Covata-Plattform-Administrator-Benutzer. <br />
+   **Hinweis:** Sie erhalten Ihr erstes (von der Covata-Plattform automatisch generiertes) Passwort in einer E-Mail-Benachrichtigung **Covata-Account erstellt**.
+6. [Löschen](/2.16/de/admin/administering-users#deleting-users) oder [deaktivieren](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) Sie den Benutzer `admin@default.com`.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

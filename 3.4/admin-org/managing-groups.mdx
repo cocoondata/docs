@@ -1,0 +1,109 @@
+---
+title: "Managing groups"
+---
+
+The **Groups** page allows Organization administrators to define groups of [Covata users](/3.4/admin-org/administering-users-within-an-organisation) with whom [files](/3.4/admin-org/administering-files) can be [shared](/3.4/user/uploading-storing-and-sharing-content-securely#sharing-secure-content).
+
+Permission to share a file with a group of users is granted through the group's association with a [classification](/3.4/admin-org/managing-classifications), which in turn is specified when sharing the file.
+
+If a [Covata user](/3.4/admin-org/administering-users-within-an-organisation):
+
+- Belongs to any group, which in turn is associated with a [classification](/3.4/admin-org/managing-classifications), then that Covata user can be shared a file when this classification is specified.
+- Is not associated with a classification (by virtue of their account not being a member of any group associated with this classification), then that Covata user cannot be shared a file when this classification is specified.
+
+![Groups page](/images/e2749a4411f3-groups-page.png)
+
+<Note>
+
+Groups are not exposed in any way to [Covata users](/3.4/admin-org/administering-users-within-an-organisation) who do not have the [Organization administrator role](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role).
+
+</Note>
+
+## Adding a new group
+
+**To add a new group to your organization on the Covata Platform:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Groups** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Groups** page.
+3. Click the **Add New** button.
+4. In the **Add new group** dialog box, specify the:
+
+   - **Name** - A name that best describes the group's members (i.e. Covata users) in a short sentence.
+   - **Description ( *Optional* )** - A longer description to provide more information about the group. Be aware that the value of this field is only visible when this group is subsequently [edited](/3.4/admin-org/managing-groups#editing-an-existing-group) (in the **Edit group** dialog box).
+5. Click **Save** and the new group is added and will appear as a new entry on the **Groups** page. <br />
+   **Notes:**
+
+   - To add one or more [Covata users](/3.4/admin-org/administering-users-within-an-organisation) to this group, see [Modifying users in an existing group](/3.4/admin-org/managing-groups#modifying-users-in-an-existing-group).
+   - To associate this group with one or more [classifications](/3.4/admin-org/managing-classifications), which would then allow these classifications to restrict file sharing to any Covata users who are members of this group, see [Modifying classifications on an existing group](/3.4/admin-org/managing-groups#modifying-classifications-on-an-existing-group).
+
+## Modifying users in an existing group
+
+**To modify the membership of Covata users in an existing group:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Groups** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Groups** page.
+3. In the **Members** column, click the numbered link associated with the group whose existing [Covata users](/3.4/admin-org/administering-users-within-an-organisation) are to be modified. This opens the 'group's members' dialog box.
+4. In this dialog box, any Covata users whose email addresses appear in the **Group members** section on the right are already members of the group:
+
+   | To do the following: | Do this: | Which results in this: |
+   | --- | --- | --- |
+   | Add a user to the group | Click the email address of that user in the **Available users** section. | Transfers that user to the **Group members** section. |
+   | Remove a user from the group | Click the email address of that user in the **Group members** section. | Transfers that user to the **Available users** section. |
+   | Find specific users by filtering them (making it easier to add or remove them above) | In either the **Available users** or **Group members** sections, begin typing (into its respective **Filter...** box) a series of characters contained in the Covata users' email addresses. | The list of users (in their respective section/s) being filtered to those whose email address contains the subset of characters entered into its **Filter...** box. |
+   | Add all users to the group | Click the  ![Add all button](/images/ba0414469515-add-all.png) <br />  (Add all) button in the **Available users** section. | Transfers all remaining users in this section to **Group members**. |
+   | Remove all users from the group | Click the  ![Remove all button](/images/ceb2b8442518-remove-all.png) <br />  (Remove all) button in the **Group members** section. | Transfers all remaining users in this section to **Available users**. |
+5. Click **Save** and the group's membership will be modified accordingly. The number in the **Members** column associated with this group is updated to reflect the total number of Covata users that were in **Group members** section (just before clicking **Save**). <br />
+   **Note:** To associate this group (of one or more Covata users) with one or more [classifications](/3.4/admin-org/managing-classifications) (which would then allow these classifications to restrict file sharing to these Covata users), see [Modifying classifications on an existing group](/3.4/admin-org/managing-groups#modifying-classifications-on-an-existing-group).
+
+## Modifying classifications on an existing group
+
+**To modify the association of classifications with an existing group:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Groups** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Groups** page.
+3. In the **Permissions** column, click the numbered link associated with the group whose existing [classifications](/3.4/admin-org/managing-classifications) are to be modified. This opens the 'group's classifications' dialog box.
+4. In this dialog box, any classifications which appear in the **Group classifications** section on the right are already associated with the group:
+
+   | To do the following: | Do this: | Which results in this: |
+   | --- | --- | --- |
+   | Add a classification to the group | Click the classification in the **Available classifications** section. | Transfers that classification to the **Group classifications** section. |
+   | Remove a classification from the group | Click the classification in the **Group classifications** section. | Transfers that classification to the **Available classifications** section. |
+   | Find specific classifications by filtering them (making it easier to add or remove them above) | In either the **Available classifications** or **Group classifications** sections, begin typing (into its respective **Filter...** box) a series of characters contained in the classification's name. | The list of classifications (in their respective section/s) being filtered to those whose name contains the subset of characters entered into its **Filter...** box. |
+   | Add all classifications to the group | Click the  ![Add all button](/images/ba0414469515-add-all.png) <br />  (Add all) button in the **Available classifications** section. | Transfers all remaining classifications in this section to **Group classifications**. |
+   | Remove all classifications from the group | Click the  ![Remove all button](/images/ceb2b8442518-remove-all.png) <br />  (Remove all) button in the **Group classifications** section. | Transfers all remaining classifications in this section to **Available classifications**. |
+5. Click **Save** and the group's classifications will be modified accordingly. The number in the **Permissions** column associated with this group is updated to reflect the total number of classifications that were in **Group classifications** section (just before clicking **Save**). <br />
+   **Note:** To add one or more [Covata users](/3.4/admin-org/administering-users-within-an-organisation) to this group, which would then allow these classifications to restrict file sharing to these Covata users (including any others who are members of this group), see [Modifying users in an existing group](/3.4/admin-org/managing-groups#modifying-users-in-an-existing-group).
+
+## Editing an existing group
+
+Editing an existing group allows modification of the group's **Name** and **Description**. This functionality can also be used to view a group's **Description**.
+
+**To edit an existing group in your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Groups** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Groups** page.
+3. Locate/scroll to the relevant group and select its check box on the left.
+4. Click the **Edit** button.
+5. In the **Edit group** dialog box, modify the:
+
+   - **Name** - A name that best describes its members (i.e. [Covata users](/3.4/admin-org/administering-users-within-an-organisation)) in a short sentence.
+   - **Description ( *Optional* )** - A longer description to provide more information about the group. Be aware that this field is only visible from this dialog box.
+6. Click **Save** and the group's **Name** and **Description** are updated accordingly. <br />
+   **Note:** Due to a minor bug that will be fixed in a future product release, it is currently not possible to clear the **Description** field once any text has been added.
+
+## Removing an existing group
+
+Removing an existing group removes any association between the [Covata users who were members](/3.4/admin-org/managing-groups#modifying-users-in-an-existing-group) of this group as well as any [classifications that were associated](/3.4/admin-org/managing-groups#modifying-classifications-on-an-existing-group) with the group.
+
+Therefore, if a Covata user was shared a file with a classification that is associated with one or more groups (of which the user is also a member) and the removal of one of these groups results in the user:
+
+- Still remaining associated with this classification (through the classification's association with other groups to which the user is also a member), then the user will still have access to this file.
+- Losing their association with this classification (because the user was not a member of any other group that had an association with this classification), then the user loses access to this file.
+
+**To remove an existing group from your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Groups** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Groups** page.
+3. Locate/scroll to the relevant group and select its check box on the left.
+4. Click the **Remove** button.
+5. On the **Remove group** message box, click **Yes** to proceed with the group's removal.

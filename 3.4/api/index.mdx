@@ -1,0 +1,36 @@
+---
+title: "Covata API 3.4 Documentation"
+---
+
+This documentation is for 3.4.x versions of the *Covata Platform*.
+
+Please refer to our [important notice](/3.4/api/important-notice) for information that relates to this documentation.
+
+## Overview of the Covata Platform and its API
+
+Covata provides a complete solution and platform for securely protecting and sharing encrypted files and folders which can be stored and accessed anywhere (within an organization, outside the domain and from mobile devices).
+
+Covata's technologies provide this solution through the *Covata Platform* (upon which Safe Share is built), whose *Access Service* centrally manages cryptographic *keys* (used to encrypt/decrypt content) and *access controls* (which define who can access/decrypt content and when).
+
+The Covata Platform also consists of a separate *Content Service*, which handles the upload/download of encrypted content to and from an S3-compatible storage provider, as well as server-side cryptography in situations where a zero-footprint (e.g. web browser-based) solution is required for sharing content.
+
+This separation between the roles of the Covata Platform's *Access* and *Content Services* helps ensure that encrypted content is only able to be decrypted by the people it's intended for.
+
+Users of Covata technologies can share their secured content with others through Covata's Safe Share applications. However, the Covata Platform *also* provides an Application Programming Interface (API) <sup>&#42;</sup> to provide integrators with the ability to develop their own applications or solutions that leverage Covata's powerful data-centric security features.
+
+The [Developer's Guide](/3.4/api/developers-guide) provides integrators with instructions on how to get set up and begin using the Covata Platform's API.
+
+The [API Reference Guide](/3.4/api/api-reference-guide), which integrates with the Developer's Guide, describes each API endpoint exposed through the Covata Platform and the various user roles and conditions that each endpoint supports.
+
+<Note>
+
+<sup>&#42;</sup> **Notes:**
+
+- The the Covata Platform's API (also known as the Covata API):
+
+  - provides a range of *endpoints*, each of which is analogous to one or more object *methods* (in object-oriented programming), offering programmers the means to develop applications that interact with the Covata Platform <br />
+     and
+  - is accessed through a secured Hypertext Transfer Protocol (HTTPS) connection.
+- For more information about administering the Covata Platform (which can also be performed through the Covata API), see the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+
+</Note>

@@ -1,0 +1,118 @@
+---
+title: "<access-service>/api/v1/items"
+---
+
+## URL structure <a id="access-service-api-v1-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items
+```
+
+## Supported methods and overview <a id="access-service-api-v1-items-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of metadata/attribute information associated with [Secure Objects](/3.1/api/creating-secure-objects-and-collections#secure-object) and [collections](/3.1/api/creating-secure-objects-and-collections#collection) (i.e. [items](/3.1/api/creating-secure-objects-and-collections#item)).
+
+## Detailed description <a id="access-service-api-v1-items-detailed-description" />
+
+This API endpoint retrieves a list of metadata/attribute information associated with Secure Objects and collections.
+
+If the access token passed in the [header](/3.1/api/access-service-api-v1-items#access-service-api-v1-items-required-headers) of requests to this endpoint belongs to a Covata user with the:
+
+- [Originator role](/3.1/admin/administering-users#originator-role), then only items which this user owns or is a collaborator on are returned in the [response](/3.1/api/access-service-api-v1-items#access-service-api-v1-items-returns).
+- [Collaborator](/3.1/admin/administering-users#collaborator-role) or [Ad hoc](/3.1/admin/administering-users#adhoc-role) roles, then only items which this user is a collaborator on are returned in the response.
+- [System administrator role](/3.1/admin/administering-users#system-administrator-role), then any item can be returned in the response. <br />
+  **Note:** A Covata user with this role (regardless of whether or not they also have either the Originator or Collaborator role), cannot access the appropriate cryptographic keys required to decrypt a Secure Object's [content](/3.1/api/access-service-api-v1-objects-objectid-keys) or [read-only view](/3.1/api/access-service-api-v1-objects-objectid-keys-view) unless this user owns or is a collaborator (with the necessary [permissions](/3.1/api/access-service-api-v1-permissions-sets)) on that Secure Object.
+
+The list of items returned in the [response](/3.1/api/access-service-api-v1-items#access-service-api-v1-items-returns) can also be filtered either according to items:
+
+- whose name, or owner's email address, first name or last name contains a string specified in the request, <br />
+  *OR*
+- which are immediate children of those contained within a collection whose ID is specified in the request.
+
+In addition to this filtering, further filtering can be performed, based on the ownership or sharing status on these items, where 'sharing status' means items that a Covata user either has shared or is a collaborator on.
+
+## Supported roles <a id="access-service-api-v1-items-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [Originator](/3.1/admin/administering-users#originator-role)
+- [Collaborator](/3.1/admin/administering-users#collaborator-role)
+- [Ad hoc](/3.1/admin/administering-users#adhoc-role)
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-items#access-service-api-v1-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-items-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **collectionId** - The ID of a (parent) collection. Specifying this value filters for items (in the response) which are only immediate children of this collection. Explicitly specifying this parameter's value as `0` forces the filtering of items to those at the root level only. The default value of this parameter is `null` (by omitting this parameter in the request). Omitting this parameter *as well as*:
+
+  - Omitting the **view** parameter (below) *or* specifying the **view** parameter with a valid value other than `sharing` is equivalent to specifying this **collectionId** parameter with a value of `0`, which filters for items at the root level only.
+  - Specifying the **searchText** parameter and/or the **view** parameter with a value of `sharing` does not result in items being filtered to those located only at the root level (or immediately within any parent collection).
+
+    - If the **searchText** parameter is specified, filtering is conducted on *all* items (regardless of their location or ownership).
+    - Regardless of whether or not the **searchText** parameter is specified, specifying the **view** parameter with a value of `sharing` filters for *all* items (regardless of their location) which are owned and currently shared by the Covata user whose access token is passed in the header of the request.
+
+  **Note:** This parameter cannot be specified in conjunction with **searchText**. Doing so will cause the request to fail.
+- **incomplete** - A boolean value that indicates whether (i.e. `true`) or not (`false`) Secure Objects whose state is *Incomplete* should also be retrieved in the response. If this parameter is omitted, then its value is `false` by default.
+- **limit** - A value from `0` to `100` indicating the maximum number of items to be returned in the response. If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order (i.e. of *all* retrievable items from the Covata Platform) from which items are returned in the response. Calling this API endpoint with URL parameters that:
+
+  - widen (i.e. **incomplete**) or filter (i.e. **collectionId**, **searchText** and **view**) the *scope* of items, and/or
+  - modify the *ordering* (i.e. **orderBy** and **sortBy**) of items
+
+  retrieved from the Covata Platform, may amount to more than 100 retrievable items (based on the scope) which could differ (based on the ordering). Since the maximum number of items in a response can be no greater than 100 (i.e. the maximum allowed in the **limit** parameter), this **offset** parameter provides pagination for item results, allowing items to be retrieved from any count greater than `0`. If this parameter is omitted, then its value is `0` by default, which results in items being retrieved for the response from its starting item/count (based on the scope and ordering of all retrievable items from the Covata Platform).
+- **orderBy** - An enumeration (enum) value representing the order in which items are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (i.e. where this parameter's enum value is `ASC`) or descending order (`DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **searchText** - Any text substring used to filter for *all* items (in the response), regardless of their location or ownership, where any of the **name**, **email**, **firstName** or **lastName** members' values in these items must contain the text substring specified in this parameter. If this parameter is omitted, then no text substring filtering is performed in the request. <br />
+  **Note:** This parameter cannot be specified in conjunction with **collectionId**. Doing so will cause the request to fail.
+- **sortBy** - An enum value representing the field (i.e. member) value (of a retrieved item) by which items returned in the response will be sorted. These members are **name** (i.e. where this parameter's enum value is `NAME`), **owner** (`OWNER`), **modifiedAt** (`MODIFIED`) and **createdAt** (`CREATED`). These enum values can also be specified using lowercase characters. If this parameter is omitted, then its value is `NAME` by default.
+- **view** - A string value used to filter for items in the response which the Covata user (whose access token is passed in the header of the request):
+
+  - currently owns (i.e. where this parameter's string value is `owned-by-me`),
+  - is a collaborator on because other people have shared the items with this user (`shared-with-me`),
+  - has shared with other people (`sharing`), or
+  - has access to (`all`).
+
+  If this parameter is omitted, then its value is `all` by default. If `sharing` is specified for this parameter's value *and* **collectionId** is omitted, then *all* items currently owned and shared by this Covata user are returned in the response (i.e. there is no additional filtering to items only located at the root level or immediately within any parent collection).
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-items-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **count** - .
+- **offset** - .
+- **items** - .
+
+  - **id** - .
+  - **name** - .
+  - **parentId** - .
+  - **parentName** - .
+  - **createdAt** - .
+  - **modifiedAt** - .
+  - **extension** - .
+  - **type** - .
+  - **contentSize** - .
+  - **shared** - .
+  - **hasView** - .
+  - **state** - .
+  - **labelId** - .
+  - **labelName** - .
+  - **owner** - .
+
+    - **id** - .
+    - **email** - .
+    - **firstName** - .
+    - **lastName** - .
+  - **permissions** -.
+
+  **Example (response from ...):**

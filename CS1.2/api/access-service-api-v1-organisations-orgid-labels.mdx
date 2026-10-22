@@ -1,0 +1,192 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/labels"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-labels-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/labels
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-labels-supported-methods-and-overview" />
+
+- `POST` - adds a new [classification](/CS1.2/admin-org/managing-classifications) to an organisation (specified by `orgId`).
+- `GET` - retrieves a list of information for all classifications configured within an organisation (specified by `orgId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-labels-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new classification to an organisation (specified by `orgId`). <br />
+  **Notes:**
+
+  - Associating this new classification with one or more [Cocoon Data users](/CS1.2/api/authentication-and-authorisation) [in an organisation](/CS1.2/admin-org/administering-users-within-an-organisation) (through a [clearance](/CS1.2/admin-org/managing-clearances)) allows this classification to restrict file sharing to these users within this organisation. For more information about associating Cocoon Data users with clearances, see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups/\{groupId\}](/CS1.2/api/access-service-api-v1-organisations-orgid-groups-groupid). Also see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/CS1.2/api/access-service-api-v1-organisations-orgid-groups) for more information about adding new clearances to an organisation.
+  - Therefore, it is recommended that any newly added classification be associated with at least one clearance of Cocoon Data users as soon as possible, since a classification not yet associated with any clearance (group) of users which is specified when sharing (i.e. modifying collaborators on) a [new](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) or [existing](/CS1.2/api/access-service-api-v1-objects-objectid) file object, prevents that file from being shared.
+  - Be aware that by design and for security reasons, it is not possible to edit any aspect of a classification once it has been added to an organisation.
+- Retrieves a list of information for all classifications configured in an organisation (specified by `orgId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-labels-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+
+- [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `POST` method, when this user is a member of the organisation specified by `{orgId}` in the request's URL.
+- **Organisation administrator**, [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - using the `GET` method, when this user is a member of the organisation specified by `{orgId}` in the URL.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-labels-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-orgid-labels-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **name** - The name of the new classification to be added to the organisation specified by `{orgId}` in the request's URL. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Unclassified"
+  }
+  ```
+
+## Optional POST-request parameters <a id="access-service-api-v1-organisations-orgid-labels-optional-post-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the POST request, each as individual members of the **JSON object** that includes the [Required POST-request parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-required-post-request-parameters) above:
+
+- **description** - The description of the new classification to be added to the organisation specified by `{orgId}` in the URL. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Unclassified",
+    "description": "Used for content that does not have a classification level. People who are not members of staff (or without security clearance) may view such content."
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orgid-labels-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response, where an individual item is information about a classification configured in the organisation (specified by `{orgId}` in the request's URL). If this parameter is omitted, then its value is `0` by default, which does not apply restrictions to the number of items returned in the response.
+- **offset** - A value representing the count order of all retrievable items (i.e. classifications in the organisation specified by `{orgId}` in the URL) returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Cocoon Data Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. classifications in the organisation specified by `{orgId}` in the URL) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. classifications in the organisation specified by `{orgId}` in the URL) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `name` - the name of the classification,
+  - `description` - the description of the classification and
+  - `priority` - the priority of the classification.
+
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/760756644367081472/labels?limit=10
+  ```
+
+<Note>
+
+Due to a bug, if the **limit** URL parameter above is not specified with a value &gt; `0`, then none of the other parameters submitted in the `GET` request have any impact on items returned in the response.
+
+</Note>
+
+## Returns <a id="access-service-api-v1-organisations-orgid-labels-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all existing classifications configured in the organisation (specified by `{orgId}` in the request's URL), where these classifications have been filtered by any [parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these classifications (represented as an object containing the following members unless otherwise stated).
+- **id** - The ID of the (new) classification.
+- **name** - The name of the (new) classification.
+- **description** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - The description of the (new) classification.
+- **priority** - The current priority value, which is used for sorting classifications from highest (i.e. a priority integer value of 1) through to the lowest priority (i.e. the highest priority integer value, which equals the total number of all classifications defined in an organisation).
+- **assigned** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - A boolean value that indicates whether (`true`) or not (`false`) the classification has been associated with one or more clearances.
+- **applyI18n** - .
+- **nameI18nResponse** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - .
+- **descriptionI18nResponse** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - .
+- **count** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - The total number of items (i.e. classifications configured in the organisation specified by `{orgId}` in the request's URL) that can be returned in the response.
+- **offset** ( *from GET requests only when specifying a **limit** parameter value &gt; 0* ) - The value of the **offset** which had been used in the request to this API endpoint. <br />
+  **Example (response from a POST request - adding a new classification to an organisation):**
+
+  ```json
+  {
+      "id": "766862496543055872",
+      "name": {
+          "value": "Unclassified"
+      },
+      "description": {
+          "value": "Used for content that does not have a classification level. People who are not members of staff (or without security clearance) may view such content."
+      },
+      "priority": "3",
+      "applyI18n": false
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request - specifying a 'limit' parameter value &gt; 0 in the request):**
+
+  ```json
+  {
+      "items": [{
+          "id": "766855749304623104",
+          "name": "Confidential",
+          "description": "This classification level is used for content that should only be accessible to members of staff with security clearance. Anyone outside the company (including partners) should not access this content.",
+          "priority": "1",
+          "assigned": false,
+          "applyI18n": false,
+          "nameI18nResponse": {
+              "value": "Confidential"
+          },
+          "descriptionI18nResponse": {
+              "value": "This classification level is used for content that should only be accessible to members of staff with security clearance. Anyone outside the company (including partners) should not access this content."
+          }
+      }, {
+          "id": "766860228984872960",
+          "name": "Restricted/Protected",
+          "description": "This classification level is used for content that should only be accessible to members of staff (or non-staff company partners with security clearance).",
+          "priority": "2",
+          "assigned": false,
+          "applyI18n": false,
+          "nameI18nResponse": {
+              "value": "Restricted/Protected"
+          },
+          "descriptionI18nResponse": {
+              "value": "This classification level is used for content that should only be accessible to members of staff (or non-staff company partners with security clearance)."
+          }
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request - omitting the 'limit' parameter from the request):**
+
+  ```json
+  {
+      "items": [{
+          "id": "766855749304623104",
+          "name": {
+              "value": "Confidential"
+          },
+          "priority": "1",
+          "applyI18n": false
+      }, {
+          "id": "766860228984872960",
+          "name": {
+              "value": "Restricted/Protected"
+          },
+          "priority": "2",
+          "applyI18n": false
+      }]
+  }
+  ```

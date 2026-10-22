@@ -1,0 +1,131 @@
+---
+title: "Retrieving information about items"
+---
+
+The Covata API's interaction with specific files and folders relies heavily on submitting requests to the API using the ID values of these [items](/3.4/api/working-with-files-and-folders-fundamentals#item).
+
+If your application does not store these items' IDs, information about a specific subset of all items recorded on the Covata Platform (matching specific/memorable criteria and scoped within a specific [organization](/3.4/api/working-with-files-and-folders-fundamentals#organisation) to which the items belong) can be retrieved as a list. Such criteria could be a 'search' substring that matches a property of the item, such as the name of the item or its owner's name, or an enum value defining the sharing/ownership status of the item.
+
+From this manageable list of items retrieved from an organization, the required items' IDs can be obtained.
+
+This page describes how to use the Covata API to retrieve a list of information about:
+
+- [All immediate items of a common parent](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-immediate-items-of-a-common-parent-folder),
+- [All items filtered by text search](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-items-filtered-by-text-search) (i.e. items whose name or owner's email address/first name/last name contains a specified string),
+- [All items based on ownership or sharing status](/3.4/api/retrieving-information-about-items#retrieving-info-about-items-based-on-ownership-or-sharing-status) (where 'sharing status' refers to items that a Covata user either has shared or is a collaborator on) and
+- [All ancestral collections of an item](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-ancestral-folders-of-an-item).
+
+This page also describes how to [sort, order and paginate](/3.4/api/retrieving-information-about-items#sorting-ordering-and-paginating-the-list-of-item-info) any list of items retrieved using these procedures.
+
+<Note>
+
+- Before retrieving a list of files and folders, your application must have a valid access token obtained by authenticating and authorizing a Covata user to the Covata Platform, where this user is either:
+
+  - the owner of these items (i.e. items which they have created - see [Initializing a new 'Incomplete' file object](/3.4/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) and [Creating a folder to manage items](/3.4/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) for more information) or
+  - a *collaborator* on these items, which other users have shared with them - see [Sharing items](/3.4/api/sharing-items) for more information.
+
+  Also, for more information about authenticating and authorizing Covata users to the Covata Platform, see [Initiating authentication and authorization](/3.4/api/authentication-and-authorisation#initiating-authentication-and-authorisation) on the [Authentication and authorization](/3.4/api/authentication-and-authorisation) page of this guide and the [Configuring client applications](/3.4/admin-platform/configuring-client-applications) page of the [Safe Share Administrator's Guide](/3.4/admin-platform/index).
+- The **Supported roles (and conditions)** section of each API endpoint page (accessible from the relevant procedures throughout this Developer's Guide) contains details about the roles a Covata user requires and the conditions they must meet, for requests to these endpoints (which would include a valid access token representing the user's authenticated session) to succeed.
+
+</Note>
+
+## Retrieving info about all immediate items of a common parent <a id="retrieving-info-about-all-immediate-items-of-a-common-parent-folder" />
+
+Information about immediate child items (i.e. both files and folders) of a common parent can be retrieved as a list from the Covata Platform. This common parent can be either a parent folder of these child items, or the logical root level.
+
+To retrieve this list of information about all immediate child items of a common parent, make a `GET` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items)
+
+with the **collectionId** URL parameter whose value is either:
+
+- the parent folder's ID (i.e. of the folder that contains these child items), or
+- `0` to specify items located at the logical root level.
+
+The value of `{orgId}` in the URL path of the request is the ID of the organization from which the items will be retrieved.
+
+If the request was successful, a JSON object is returned in the response containing an **items** member whose value is an array of elements, where each element contains information about one of the retrieved files or folders.
+
+## Retrieving info about all items filtered by text search
+
+Information about all items whose name or owner's email address/first name/last name contains a specified string, irrespective of an item's location or ownership, can be retrieved as a list from the Covata Platform. (This is effectively a text search feature.)
+
+To retrieve a list of information about all items whose name or owner's email address/first name/last name contains a specified string, make a `GET` method request to the following API endpoint:
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items)
+
+with the **searchText** URL parameter whose value contains the specified string itself. Be aware that it is not possible to specify both the **searchText** and [collectionId](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-immediate-items-of-a-common-parent-folder) (above) URL parameters in the same request.
+
+The value of `{orgId}` in the URL path of the request is the ID of the organization from which the items will be retrieved.
+
+If the request was successful, a JSON object is returned in the response containing an **items** member whose value is an array of elements, where each element contains information about one of the retrieved files or folders.
+
+## Retrieving info about items based on ownership or sharing status
+
+For a given organization, the Covata Platform can retrieve a list of information about all items at a given location which:
+
+- belong to a Covata user (represented by an access token),
+- this user is a collaborator on,
+- this user has access to,
+
+*OR*
+
+information about every item which this user has shared.
+
+To retrieve this list of information about items based on these criteria, make a `GET` method request to the following API endpoint:
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items)
+
+and specify the **view** URL parameter with an enum value of:
+
+- `owned-by-me` to retrieve all items owned by a given Covata user <sup>&#42;</sup> ,
+- `shared-with-me` to retrieve all items that other Covata users have shared with a given Covata user <sup>&#42;</sup> ,
+- `sharing` to retrieve all items that a given Covata user <sup>&#42;</sup> has shared with other people, or
+- `all` to retrieve all items that a given Covata user <sup>&#42;</sup> can access.
+
+<Tip>
+
+The **view** URL parameter can be used in conjunction with both the [collectionId](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-immediate-items-of-a-common-parent-folder) and [searchText](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-items-filtered-by-text-search) parameters (above) for additional filtering.
+
+</Tip>
+
+<sup>&#42;</sup> In each case, this Covata user is determined by a valid access token (representing this user) passed in the header of the request.
+
+The value of `{orgId}` in the URL path of the request is the ID of the organization from which the items will be retrieved.
+
+If the request was successful, a JSON object is returned in the response containing an **items** member whose value is an array of elements, where each element contains information about one of the retrieved files or folders.
+
+## Retrieving info about all ancestral collections of an item <a id="retrieving-info-about-all-ancestral-folders-of-an-item" />
+
+To retrieve information about all ancestral folders (back to the logical root level) of an item, make a `GET` method request to the following API endpoint:
+
+- [&lt;access-service&gt;/api/v1/items/\{itemId\}/ancestry](/3.4/api/access-service-api-v1-items-itemid-ancestry)
+
+The value of `{itemId}` in the URL path of the request is the ID of the file or folder from which all ancestral folders (through to the logical root level) will be retrieved in the response.
+
+If the request was successful, a JSON object is returned in the response containing a single array of elements, where each element contains information about an ancestral folder (in hierarchical order from the logical root level).
+
+## Sorting, ordering and paginating the list of item info
+
+The list of information about all retrieved items [from a common parent](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-immediate-items-of-a-common-parent-folder), [filtered by text search](/3.4/api/retrieving-information-about-items#retrieving-info-about-all-items-filtered-by-text-search) or [based on ownership or sharing status](/3.4/api/retrieving-information-about-items#retrieving-info-about-items-based-on-ownership-or-sharing-status) can be sorted, ordered and paginated (when making a `GET` method request to the following API endpoint):
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items)
+
+by specifying the following additional URL parameters:
+
+- **sortBy** - The item's field by which the items in the list is ordered. Valid enum values for this parameter are:
+
+  - `NAME` - the item's name (which is the default value if this parameter is omitted),
+  - `OWNER` - the item's owner,
+  - `MODIFIED` - the date when the item was last modified, or
+  - `CREATED` - the date when the item was created.
+- **orderBy** - The **sortBy** field is ordered by the value of this field. Valid enum values for this parameter are:
+
+  - `ASC` - for ascending alphanumeric or chronological order (which is the default value if this parameter is omitted), or
+  - `DESC` - for descending alphanumeric or chronological order.
+- **limit** - The maximum number of items returned in the response. If this parameter is omitted, its value is `10` by default.
+- **offset** - The count order of all retrievable items from the Covata Platform filtered using other URL parameters in the request. If this parameter is omitted, its value is `0` by default.
+
+For more information about the **limit** and **offset** URL parameters for paginating items returned in the response, see [Optional parameters](/3.4/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-optional-parameters) (of [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items)).
+
+If the request was successful, a JSON object is returned in the response containing an **items** member whose value is an array of elements, where each element contains information about one of the retrieved files or folders.

@@ -1,0 +1,73 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}/audit/exportReport"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}/audit/exportReport
+```
+
+where `{organisationId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-supported-methods-and-overview" />
+
+- `POST` - used to export/download a list of information for all API-based requests made to the Covata Platform's Access Service, within the scope of an organization (specified by `organisationId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-detailed-description" />
+
+This API endpoint exports/downloads a list of field information for all API-based requests made to the Covata Platform's Access Service, within the scope of an organization (specified by `organisationId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by the `{organisationId}` of the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-organisationid-audit-exportreport#access-service-api-v1-organisations-organisationid-audit-exportreport-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has form URL-encoded data in the body:
+
+- `Content-Type: application/x-www-form-urlencoded`
+
+## Optional parameters <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-optional-parameters" />
+
+The following optional parameters can be sent in the **body** of the request (as **form URL-encoded data**):
+
+- **startTime** - Specify a date in the format `DD/MM/YYYY`, where each '`/`' sign is escaped (`%2F`).
+- **endTime** - Specify a later date in the same format as that used for **startTime**.
+- **clientId** - Specify the client ID of a client application configured on the Covata Platform.
+- **email** - Specify the email address of a Covata user account whose access token was submitted in the header of the API-based requests.
+- **action** - Specify the sub-parameter value:
+
+  - `CREATED` - for API-based `POST` method requests,
+  - `RETRIEVED` - for API-based `GET` method requests,
+  - `UPDATED` - for API-based `PUT` method requests,
+  - `DELETED` - for API-based `DELETE` method requests.
+- **apiType** - Specify the sub-parameter value:
+
+  - `AUTH` - for API-based requests relating to authentication and authorization,
+  - `COLLABORATIONS` - for API-based requests relating to collaborators,
+  - `COLLECTIONS` - for API-based requests relating to folders,
+  - `CONTACTS` - for API-based requests relating to contacts,
+  - `KEYS` - for API-based requests relating to keys,
+  - `NOTIFICATIONS` - for API-based requests relating to email notifications,
+  - `OBJECTS` - for API-based requests relating to file objects,
+  - `USERS` - for API-based requests relating to users.
+- **exportFormat** - Specify the enumeration (enum) value of `csv` to export/download the report in CSV format or `pdf` to export/download the report in PDF format. If this parameter is omitted, then its value is `csv` by default.
+- **pageStart** - Specify a value representing the count order of all retrievable items (i.e. API-based requests in the organization specified by `{organisationId}` in this request's URL) returned in the response. This value works similarly to the **offset** parameter, utilized when retrieving API-request reports in JSON format (via request to the [&lt;access-service&gt;/api/v1/organisations/\{organisationId\}/audit](/3.3/api/access-service-api-v1-organisations-organisationid-audit) API endpoint). <br />
+  **Example (request):**
+
+  ```text
+  email=alex.originator@xy-company.com&startTime=15%2F10%2F2016&endTime=23%2F10%2F2016
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-audit-exportreport-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

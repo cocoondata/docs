@@ -1,0 +1,186 @@
+---
+title: "<access-service>/api/v1/organisations"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations
+```
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-supported-methods-and-overview" />
+
+- `POST` - adds a new [organisation](/CS1.2/admin-platform/administering-organisations) to the Cocoon Data Platform.
+- `GET` - retrieves information about all organisations configured on the Cocoon Data Platform.
+
+## Detailed description <a id="access-service-api-v1-organisations-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new organisation to the Cocoon Data Platform.
+- Retrieves information about all organisations configured on the Cocoon Data Platform.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-supported-roles-and-conditions" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the:
+
+  - `POST` method, when no LDAP connection has been configured on the Cocoon Data Platform. To retrieve information about all configured LDAP connections on the Cocoon Data Platform, see [&lt;access-service&gt;/api/v1/ldapconnections](/CS1.2/api/access-service-api-v1-ldapconnections).
+  - `GET` method, without any futher conditions.
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations#access-service-api-v1-organisations-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **name** - The initial name for the new organisation.
+- **quota** - The initial quota for the organisation (in MiB). <br />
+  **Note:** A *MiB* is a [mebibyte](http://physics.nist.gov/cuu/Units/binary.html), where one MiB = 1 x 1024 x 1024 bytes = 1048576 bytes.
+- **adminEmail** - The email address of the initial [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) of this organisation.
+- **contactEmail** - The email address of the initial **Contact Person** of this organisation. <br />
+  **Notes:**
+
+  - This property appears under the name [The email address of the organisation's contact person](/CS1.2/admin-org/configuring-organisation-administration-properties#organisations-contact-person) on the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page in Organisation Administration.
+  - When [adding a new organisation](/CS1.2/admin-platform/administering-organisations#adding-a-new-organisation) through SafeShare Administration, both this property and the **adminEmail** property (above) are set with the same value. However, this API endpoint provides the ability to set these two properties with different email addresses (in a single request to this API).
+
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Another Org.",
+    "quota": 2094080,
+    "adminEmail": "org.administrator@xy-company.com",
+    "contactEmail": "org.administrator@xy-company.com"
+  }
+  ```
+
+## Optional POST-request parameters <a id="access-service-api-v1-organisations-optional-post-request-parameters" />
+
+The following optional parameters can be sent in the **body** of the POST request, each as individual members of the **JSON object** that includes the [Required POST-request parameters](/CS1.2/api/access-service-api-v1-organisations#access-service-api-v1-organisations-required-post-request-parameters) above:
+
+- **description** - The initial description for the new organisation. <br />
+  **Note:** This property appears under the name **A brief description of the organisation** on the **Configuration** page in Organisation Administration. However, as described in the [Configuring SafeShare Organisation Administration properties](/CS1.2/admin-org/configuring-organisation-administration-properties) page of the Organisation Administrator's Guide, this property is currently of limited use. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Another Org.",
+    "description": "The brief description for Another Org.",
+    "quota": 2094080,
+    "adminEmail": "org.administrator@xy-company.com",
+    "contactEmail": "org.administrator@xy-company.com"
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response, where an individual item is information about an organisation configured on the Cocoon Data Platform. If this parameter is omitted, then its value is `0` by default, which does not apply restrictions to the number of items returned in the response.
+- **offset** - A value representing the count order of all retrievable items (i.e. organisations configured on the Cocoon Data Platform) returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Cocoon Data Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. organisations configured on the Cocoon Data Platform) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. organisations configured on the Cocoon Data Platform) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `id` - the ID of the organisation,
+  - `name` - the name of the organisation,
+  - `contact_email` - the email address of the organisation's Contact Person,
+  - `quota` - the name of the organisation and
+  - `description` - the description of the organisation.
+
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations?sortBy=name
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - .
+- **name** - .
+- **description** - .
+- **quota** - .
+- **contactEmail** - .
+- **enabled** - .
+- **adhocSharingDisabled** - A boolean value indicating whether (`false`) or not (`true`) Cocoon Data users in this organisation are allowed to share items with people who are not already members of the organisation.
+- **organisationRemovalRequest** - A member containing the following sub-members that relate to the organisation's removal request (initiated by a SafeShare administrator). If no removal request has been made on this organisation, then this member's value is `null`.
+
+  - **id** - The ID of this organisation.
+  - **initiatorId** - The ID of the SafeShare administrator's user account that initiated this organisation's removal request.
+  - **notificationEnabled** - A boolean value indicating whether (`true`) or not (`false`) the organisation's contact person was sent an email notification informing them that a SafeShare administrator had initiated a request to remove their organisation from the Cocoon Data Platform.
+  - **daysToAction** - Indicates the number of days remaining before before a SafeShare administrator should perform further action on this organisation's removal request. <br />
+    **Note:** If the **Days to action organisation removal** property value (accessible through the [&lt;access-service&gt;/api/v1/config/theme/orgRemovalActionDays](/CS1.2/api/access-service-api-v1-config-theme-orgremovalactiondays) API endpoint) is cleared, then this sub-member's value will always return `null`.
+- **id** - The ID of this organisation.
+- **modifiedAt** - .
+- **createdAt** - .
+- **count** - .
+- **offset** - . <br />
+  **Example (response from a POST request):**
+
+  ```json
+  {
+      "name": "Another Org.",
+      "description": "The brief description for Another Org.",
+      "quota": 2094080,
+      "contactEmail": "org.administrator@xy-company.com",
+      "enabled": true,
+      "adhocSharingDisabled": false,
+      "organisationRemovalRequest": null,
+      "id": "769407354122051584",
+      "modifiedAt": "2016-10-24T03:50:08.120Z",
+      "createdAt": "2016-10-24T03:50:08.120Z"
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items": [{
+          "name": "Default",
+          "description": "",
+          "quota": 0,
+          "contactEmail": "",
+          "enabled": true,
+          "adhocSharingDisabled": false,
+          "organisationRemovalRequest": null,
+          "id": "1",
+          "modifiedAt": "1970-01-01T00:00:00.000Z",
+          "createdAt": "1970-01-01T00:00:00.000Z"
+      }, {
+          "name": "XY Company",
+          "description": "",
+          "quota": 4194304,
+          "contactEmail": "org.administrator@xy-company.com",
+          "enabled": true,
+          "adhocSharingDisabled": false,
+          "organisationRemovalRequest": {
+              "id": 760756644367081472,
+              "initiatorId": 783117434474610688,
+              "notificationEnabled": true,
+              "daysToAction": 29
+          },
+          "id": "760756644367081472",
+          "modifiedAt": "2016-10-10T06:34:19.254Z",
+          "createdAt": "2016-09-30T06:55:18.192Z"
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

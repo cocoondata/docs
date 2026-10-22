@@ -1,0 +1,95 @@
+---
+title: "<access-service>/api/v1/groups"
+---
+
+## URL structure <a id="access-service-api-v1-groups-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/groups
+```
+
+## Supported methods and overview <a id="access-service-api-v1-groups-supported-methods-and-overview" />
+
+- `POST` - used to add a new [group](/3.1/admin/managing-groups).
+- `GET` - used to retrieve a list of field information for all existing groups on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-groups-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new group to the Covata Platform. <br />
+  **Notes:**
+
+  - To add one or more [Covata users](/3.1/admin/administering-users) to this group, see [&lt;access-service&gt;/api/v1/groups/\{groupId\}](/3.1/api/access-service-api-v1-groups-groupid). Also see [&lt;access-service&gt;/api/v1/labels](/3.1/api/access-service-api-v1-labels) for more information about adding new labels.
+  - To associate this group with one or more [labels](/3.1/api/access-service-api-v1-labels), which would then allow these labels to restrict file sharing to any Covata users who are members of this group, see [&lt;access-service&gt;/api/v1/groups/\{groupId\}](/3.1/api/access-service-api-v1-groups-groupid).
+- Retrieves a list of field information for all existing groups on the Covata Platform.
+
+## Supported roles <a id="access-service-api-groups-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-groups#access-service-api-v1-groups-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-groups-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-groups-required-parameters" />
+
+The following required parameter must be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **name** - .
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-groups-optional-parameters-on-POST" />
+
+The following optional parameter can also be sent in the body of the POST request, as an individual member of the JSON object that includes the [Required parameters on POST](/3.1/api/access-service-api-v1-groups#access-service-api-v1-groups-required-parameters) above:
+
+- **description** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-groups-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 0).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-groups-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+
+  **Example (response from ...):**
+
+## Returns from a GET request <a id="access-service-api-v1-groups-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **name** - .
+  - **labelCount** - .
+  - **memberCount** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

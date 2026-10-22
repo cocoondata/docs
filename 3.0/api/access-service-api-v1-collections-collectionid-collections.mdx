@@ -1,0 +1,102 @@
+---
+title: "<access-service>/api/v1/collections/{collectionId}/collections"
+---
+
+## URL structure <a id="access-service-api-v1-collections-collectionid-collections-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collections/{collectionId}/collections
+```
+
+where `{collectionId}` is the ID of a collection.
+
+## Supported methods and overview <a id="access-service-api-v1-collections-collectionid-collections-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of metadata/attribute information about all collections contained within a [collection](/3.0/api/creating-secure-objects-and-collections#collection) (specified by this collection's ID).
+
+## Detailed description <a id="access-service-api-v1-collections-collectionid-collections-detailed-description" />
+
+This API endpoint retrieves a list of metadata/attribute information about all collections contained within a collection, using this collection's ID.
+
+A collection's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/3.0/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with collections that can be filtered using various 'search' criteria.
+
+If the access token passed in the [header](/3.0/api/access-service-api-v1-collections-collectionid-collections#access-service-api-v1-collections-collectionid-collections-required-headers) of requests to this endpoint belongs to a Covata user with the [Collaborator role](/3.0/admin/administering-users#collaborator-role), then only collections which this user is a collaborator on are returned in the [response](/3.0/api/access-service-api-v1-collections-collectionid-collections#access-service-api-v1-collections-collectionid-collections-returns).
+
+The collections returned in the response can also be filtered according to collections:
+
+- Whose name contains a string specified in the request.
+- Whose owner's email address, first name or last name contains the string specified in the request.
+- Contained within a subcollection whose ID is specified through a parameter in the request.
+
+## Supported roles <a id="access-service-api-collections-collectionid-collections-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [Originator](/3.0/admin/administering-users#originator-role)
+- [Collaborator](/3.0/admin/administering-users#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-collections-collectionid-collections#access-service-api-v1-collections-collectionid-collections-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-collections-collectionid-collections-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-collections-collectionid-collections-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **collectionId** - .
+- **incomplete** - true or false (default is false).
+- **limit** - 0 to 100 (default is 10).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **searchText** - search on any text value.
+- **sortBy** - .
+- **view** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-collections-collectionid-collections-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - The ID of the collection in the URL of this request.
+- **parentId** - .
+- **name** - .
+- **createdAt** - .
+- **modifiedAt** - .
+- **shared** - .
+- **originator** - .
+
+  - **id** - .
+  - **email** - .
+- **owner** - .
+
+  - **id** - .
+  - **email** - .
+  - **firstName** - .
+  - **lastName** - .
+- **permissions** -.
+- **count** - .
+- **offset** - .
+- **items** - .
+
+  - **id** - The ID of a collection contained within the collection whose ID was specified in the URL of this request.
+  - **name** - .
+  - **parentId** - .
+  - **parentName** - .
+  - **createdAt** - .
+  - **modifiedAt** - .
+  - **type** - .
+  - **shared** - .
+  - **owner** - .
+
+    - **id** - .
+    - **email** - .
+    - **firstName** - .
+    - **lastName** - .
+  - **permissions** -.
+
+  **Example (response from ...):**

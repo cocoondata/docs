@@ -1,0 +1,93 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/plans/{planId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-plans-planid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/plans/{planId}
+```
+
+where `{orgGroupId}` is the ID of an organization and `{planId}` is the ID of a plan.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-plans-planid-supported-methods-and-overview" />
+
+- `GET` - retrieves information about a [plan](/3.4/admin-org/managing-users-storage-quotas-through-plans) (specified by `planId`) configured in an organization (specified by `orgGroupId`).
+- `PUT` - modifies the fields of an existing plan (specified by `planId`) in an organization (specified by `orgGroupId`).
+- `DELETE` - deletes an existing plan (specified by `planId`) in an organization (specified by `orgGroupId`).
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-plans-planid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about a plan (specified by `planId`) configured in an organization (specified by `orgGroupId`). A plan's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/plans](/3.4/api/access-service-api-v1-organisations-orggroupid-plans) API endpoint, which retrieves a list of field information for all current plans configured in an organization (specified by `orgGroupId`).
+- Modifies the fields of an existing plan (specified by `planId`) in an organization (specified by `orgGroupId`). These fields include the plan's name, description, quota value (in MiB) and a flag that determines whether or not this plan will be the new default plan.
+- Deletes an existing plan (specified by `planId`) in an organization (specified by `orgGroupId`). <br />
+  **Notes:**
+
+  - A *MiB* is a [mebibyte](http://physics.nist.gov/cuu/Units/binary.html), where one MiB = 1 x 1024 x 1024 bytes = 1048576 bytes.
+  - Any [Covata users](/3.4/api/authentication-and-authorisation) [in this organization](/3.4/admin-org/administering-users-within-an-organisation) who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of remote storage (managed by the Content Service) utilized by any of these users, then those users will no longer be able to upload any data until their storage utilization drops below the **default** plan's quota.
+  - It is not possible delete the **default** plan.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-plans-planid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-orggroupid-plans-planid#access-service-api-v1-organisations-orggroupid-plans-planid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-plans-planid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-organisations-orggroupid-plans-planid-optional-parameters" />
+
+The following optional parameters can be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **name** - The updated name for the plan.
+- **description** - The updated description for the plan.
+- **quota** - The updated quota (in MiB) for the plan.
+- **default** - An updated boolean value determining whether (`true`) or not (`false`) the plan being updated in the organization (specified by `{orgGroupId}` in the URL) will be flagged as the new **default** plan for this organization. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "default": true
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-plans-planid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the (updated) plan.
+- **name** - The (updated) name of the plan.
+- **description** - The (updated) description of the plan.
+- **quota** - The (updated) quota of the plan (in MiB).
+- **default** - An (updated) boolean value indicated whether (`true`) or not (`false`) this (updated) plan in the organization (specified by `{orgGroupId}` in the URL) is flagged as the **default** plan for this organization. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "id": "767973799974182912",
+      "name": "Temporary Staff Originators",
+      "description": "Temporary staff members with the Originator role.",
+      "quota": 4096,
+      "default": true
+  }
+  ```

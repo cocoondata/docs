@@ -1,0 +1,15 @@
+---
+title: "Client application endpoints"
+---
+
+The endpoints in this section are used for handling client applications on the Covata Platform.
+
+- [&lt;access-service&gt;/api/v1/clientapps](/3.4/api/access-service-api-v1-clientapps)
+- [&lt;access-service&gt;/api/v1/clientapps/\{clientInfoId\}](/3.4/api/access-service-api-v1-clientapps-clientinfoid)
+- [&lt;access-service&gt;/api/v1/clientapps/\{clientInfoId\}/enable](/3.4/api/access-service-api-v1-clientapps-clientinfoid-enable)
+
+The following endpoint (mentioned in the response to the Access Service discovery endpoint [&lt;access-service&gt;/api/v1](/3.4/api/access-service-api-v1-discovery)) is both deprecated and undocumented:
+
+- `<access-service>/api/v1/clientapps/grants/{clientInfo}` ( *Deprecated* )
+
+The purpose of this endpoint is to retrieve a list of OAuth 2.0 grant types through which a client application configured on the Covata Platform (specified by `{clientInfo}`) can authenticate a Covata user. However, this information can be retrieved through the first two endpoints (above).

@@ -1,0 +1,100 @@
+---
+title: "Verwaltung von Dateien"
+---
+
+Die Seite **Dateien** lässt Organisations-Administratoren alle anhand von Covata-Technologien verschlüsselten Dateien (d. h. sichere Objekte **) innerhalb ihrer Organisation [suchen](/3.2/de/admin-org/administering-files#finding-secure-objects). Auf dieser Seite können die folgenden Aktionen mit beliebigen dieser Dateien ausgeführt werden:
+
+- [Anzeige](/3.2/de/admin-org/administering-files#viewing-activities-on-secure-objects) aller an der Datei ausgeführten aufgezeichneten Aktionen
+- [Deaktivierung](/3.2/de/admin-org/administering-files#disabling-or-re-enabling-secure-objects) der Datei - die Deaktivierung einer Datei/eines sicheren Objekts verhindert jeglichen Zugriff auf jegliche ihrer Aspekte, auch für ihren Besitzer:
+
+  - über eine Covata Safe Share-Anwendung oder
+  - über eine andere Client-Anwendung unter Verwendung der API der Covata-Plattform.
+
+** Ein sicheres Objekt wird von den folgenden Parametern definiert:
+
+- von Covata verschlüsselte, auf der Covata-Plattform registrierte Daten. <br />
+  **Hinweis:** Von Covata verschlüsselte Daten sind Daten aus einer Datei oder einem Datenstrom, die auf einem der folgenden Wege verschlüsselt wurden:
+
+  - durch Covata-Technologien (d. h. mittels eines Covata Safe Share-Produkts oder einer anderen Client-Anwendung, die zur Verschlüsselung über den Inhaltsdienst mit der Covata-Plattform-API arbeitet) oder
+  - gemäß den Covata-Verschlüsselungsanforderungen (d. h. eine Client-Anwendung mit ihrer eigenen Implementierung der Verschlüsselung). Für weitere Informationen über die Covata-Verschlüsselungsanforderungen siehe den Abschnitt [Erforderliche Parameter für POST](/3.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) auf der Seite `<content-service>/api/v1/objects/{objectId}/contents` der [Covata-API-Dokumentation](/3.2/api/index) (nur in englischer Sprache verfügbar).
+- die diesen verschlüsselten Daten zugeordneten Metadaten. Manche dieser Metadaten können vom Ersteller/Besitzer des sicheren Objekts bestimmt werden.
+
+![Seite Dateien](/images/9d5f85a56129-files-page.png)
+## Auffinden sicherer Objekte <a id="finding-secure-objects" />
+
+Sie können unter allen sicheren Objekten, die innerhalb Ihrer Organisation (auf der Covata-Plattform) erstellt wurden, bestimmte sichere Objekte nach ihrem Namen (d. h. Dateinamen), der E-Mail-Adresse, dem Vor- oder Familiennamen ihres Besitzers oder der ID des betreffenden sicheren Objekts suchen.
+
+**Auffinden spezifischer sicherer Objekte innerhalb Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. Verwenden Sie eine der folgenden Funktionen, um ein bestimmtes sicheres Objekt (oder eine Untergruppe sicherer Objekte) zu finden:
+
+   - *Sichere Objekte filtern* - fangen Sie im Feld **Suche nach...** (rechts auf der Seite **Dateien**) an, eine Zeichenfolge einzugeben, die in den [Feldern](/3.2/de/admin-org/administering-files#a-secure-objects-fields) **ID**, **Name** oder **Besitzer** des sicheren Objekts enthalten ist (das letztere Feld enthält auch den Vor- und Familiennamen des Besitzers). Dies filtert die Liste der sicheren Objekte auf der Covata-Plattform nach denen, deren ID, Name oder E-Mail-Adresse, Vor- oder Familienname des Besitzers die im Feld **Suche nach...** eingegebene Zeichenfolge enthält. <br />
+      Standardmäßig werden für den Filter die Felder **ID**, **Name** und **Besitzer** (einschließlich der Felder E-Mail, Vor- und Familienname) verwendet (d. h. **Alle**), aber Sie können den Filter anhand des Dropdown-Menüs auch auf eines dieser Felder beschränken.
+   - *Zu spezifischen sicheren Objekten navigieren* - verwenden Sie gegebenenfalls die Schaltflächen zur Seitennavigation (rechts unten auf der Seite **Dateien**).
+
+<Tip>
+
+- Sie können sichere Objekte auch auf der Seite **Dateien** sortieren, indem Sie auf den verknüpften Namen (im Spaltenkopf) des betreffenden Felds klicken, nach dem Sie Ihre sicheren Objekte sortieren möchten:
+
+  - Mehrfaches Anklicken eines verknüpften Feldnamens schaltet zwischen einer Sortierung der sicheren Objekte in aufsteigender und absteigender Reihenfolge (gemäß dem betreffenden Feld) um.
+  - Aktualisieren Sie einfach die Seite, um zur normalen Sortierung der sicheren Objekte in der Liste zurückzukehren.
+- Der Bereich **Verlauf** rechts kann durch Anklicken des betreffenden Symbols **&gt;** / **&lt;** oben in diesem Bereich reduziert oder erweitert werden.
+
+</Tip>
+
+## Felder eines sicheren Objekts <a id="a-secure-objects-fields" />
+
+Jedes auf der Covata-Plattform erstellte sichere Objekt ist mit seinen eigenen Metadaten verknüpft. Manche dieser Metadaten sind auf der Seite **Dateien** dargestellt und können für die [Suche nach sicheren Objekten](/3.2/de/admin-org/administering-files#finding-secure-objects) verwendet werden.
+
+| Feld | Beschreibung |
+| --- | --- |
+| ID | Der eindeutige Identifikator (ID), der für jedes auf der Covata-Plattform erstellte sichere Objekt generiert wird. |
+| Name | Der Name des sicheren Objekts. Wurde ein sicheres Objekt über eine Covata Safe Share-Anwendung erstellt (indem eine Datei über eine Safe Share-Anwendung in den Speicher hochgeladen wurde), ist der Name des sicheren Objekts mit dem Dateinamen identisch. |
+| Besitzer | Die E-Mail-Adresse des Covata-Benutzers, der das sichere Objekt aktuell besitzt. Wurde der Besitz am betreffenden sicheren Objekt nicht an einen anderen Covata-Benutzer übertragen (dies ist nur möglich, wenn der Benutzer-Account des ursprünglichen Besitzers [aus der Organisation entfernt wird](/3.2/de/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation)), dann ist der Besitzer des sicheren Objekts der Covata-Benutzer, der es erstellt hat, und damit ist auch diese E-Mail-Adresse diejenige des Erstellers. Der Ersteller eines sicheren Objekts ist der Covata-Benutzer:  <br />•  der bei einer Safe Share-Anwendung angemeldet war, als er die Datei des sicheren Objekts in vom Inhaltsdienst der Covata-Plattform verwalteten Speicher hochlud, <br />•  dessen Account gegenüber der Covata-Plattform authentifiziert war, als das sichere Objekt über eine Client-Anwendung (unter Verwendung der API der Covata-Plattform) erstellt wurde.  |
+| Status | Der aktuelle Status des sicheren Objekts, der die folgenden Werte annehmen kann:  <br />•  **Erstellt** - zeigt an, dass das sichere Objekt erfolgreich angelegt wurde. Dies bedeutet, dass die Daten des sicheren Objekts erfolgreich verschlüsselt wurden, dass das sichere Objekt an andere Personen freigegeben werden kann und dass seine Zugriffssteuerungen, sein Name und sein Speicherort geändert werden können. <br />•  **Gelöscht** - zeigt an, dass das sichere Objekt von seinem Besitzer oder einem Mitwirkenden mit *Änderungs*- oder *Verwaltungs-*Berechtigung am sicheren Objekt gelöscht wurde. Das sichere Objekt ist dementsprechend keinem Covata-Benutzer mehr zugänglich, unabhängig davon, ob der Zugriff über eine Covata Safe Share-Anwendung oder eine andere Client-Anwendung (unter Verwendung der API der Covata-Plattform) erfolgen soll. <br /> **Tipp:** Für weitere Informationen über Berechtigungen von Mitwirkenden siehe [Freigabe sicherer Inhalte](/3.2/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) in der [Safe Share-Benutzeranleitung](/3.2/de/user/index) und die Seite &lt;access-service&gt;/api/v1/permissions/sets in der Covata API-Dokumentation (nur in englischer Sprache verfügbar). <br />•  **Unvollständig** - weist je nach der Client-Anwendung, über die das sichere Objekt erstellt wurde, auf eine von zwei Möglichkeiten hin:  <br />•  Eine Covata Safe Share-Anwendung:  <br />•  ist gerade dabei, das sichere Objekt zu erstellen (d. h. seine Daten zu verschlüsseln) und es in (über den Inhaltsdienst der Covata-Plattform verwalteten) Speicher hochzuladen. Sobald diese Abläufe abgeschlossen sind, wird der Status des sicheren Objekts zu **Erstellt** geändert. <br /> *oder* <br />•  war gerade dabei, das sichere Objekt zu erstellen oder es in über den Inhaltsdienst verwalteten Speicher hochzuladen, aber einer dieser Abläufe ist fehlgeschlagen. In diesem Fall bleibt der Status des sicheren Objekts **Unvollständig**. <br />Unabhängig von diesen Szenarien ist Folgendes für ein **unvollständiges** sicheres Objekt, das über eine Covata Safe Share-Anwendung erstellt wurde, nicht möglich: <br />•  Freigabe an andere Personen, <br />•  Änderung der Zugriffssteuerungen, des Namens oder des Speicherorts. <br />•  Eine Client-Anwendung hat (unter Verwendung der API der Covata-Plattform) ein neues sicheres Objekt *initialisiert* (und so ein sicheres Objekt erstellt, dessen Status **Unvollständig** lautet), es aber nicht *aktualisiert* (um seine Daten zu verschlüsseln und es so zu „vervollständigen“ - nach erfolgreichem Abschluss dieses Vorgangs, würde der Status des Objekts zu **Erstellt** geändert). In diesem Szenario könnte die Client-Anwendung am **unvollständigen** sicheren Objekt die folgenden Aktionen noch ausführen:  <br />•  Abruf des sicheren Objekts von der Covata-Plattform (anhand seiner ID), <br />•  Freigabe des sicheren Objekts an andere Personen und/oder <br />•  Änderung der Zugriffssteuerungen, des Namens oder des Speicherorts des sicheren Objekts.  |
+| Erstellt | Ortszeit und Datum der Erstellung des sicheren Objekts. |
+| Geändert | Ortszeit und Datum der letzten Änderung des sicheren Objekts durch seinen Besitzer. Die Darstellung von Datum/Zeit in diesem Feld wird aktualisiert, sobald der Besitzer des betreffenden sicheren Objekts Folgendes ändert:  <br />•  die Mitwirkenden, denen das sichere Objekt freigegeben ist, <br />•  die Zugriffssteuerungen des sicheren Objekts, d. h. die Zeiten, ab/bis wann das sichere Objekt zugänglich ist oder ob die Daten des sicheren Objekts ausgedruckt oder heruntergeladen werden dürfen, <br />•  die Metadaten des sicheren Objekts (einschließlich seines Speicherorts), z. B. Änderungen am Namen des sicheren Objekts oder an seinem übergeordneten Ordner/seiner übergeordneten Sammlung.  |
+
+## Anzeige von an sicheren Objekten ausgeführten Aktivitäten <a id="viewing-activities-on-secure-objects" />
+
+**Anzeige aller an einem sicheren Objekt in Ihrer Organisation ausgeführten Aktivitäten:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. [Suchen Sie](/3.2/de/admin-org/administering-files#finding-secure-objects) das sichere Objekt, dessen Aktivitäten Sie anzeigen lassen möchten.
+4. *Markieren* Sie das Element, indem Sie es anklicken. Dies zeigt (im Bereich **Verlauf** rechts) den Verlauf aller für das sichere Objekt aufgezeichneten Aktivitäten in umgekehrter zeitlicher Abfolge an. Die aufgezeichneten Aktivitäten beinhalten Aktivitäten:
+
+   - des Besitzers des sicheren Objekts,
+   - aller Mitwirkenden des sicheren Objekts und
+   - aller Organisations-Administratoren der Organisation, in der das sichere Objekt erstellt wurde. (Diese Aktivitäten beinhalten die Deaktivierung und Reaktivierung sicherer Objekte.)
+
+<Note>
+
+Siehe [Arten von Aktivitäten](/3.2/de/user/viewing-activities-on-secure-content#types-of-activities-indicated) in der [Safe Share-Benutzeranleitung](/3.2/de/user/index) für weitere Informationen über Aktivitäten von Besitzern und Mitwirkenden sicherer Objekte (d. h. Dateien), die aufgezeichnet werden.
+
+</Note>
+
+## Deaktivierung und (Re-)Aktivierung sicherer Objekte <a id="disabling-or-re-enabling-secure-objects" />
+
+Die Deaktivierung eines sicheren Objekts verhindert jeglichen Zugriff auf sämtliche seiner Aspekte, auch für seinen Besitzer. Die Deaktivierung eines sicheren Objekts bewirkt Folgendes:
+
+- Die betreffende Datei ist für ihren Besitzer und ihre Mitwirkenden nach deren Anmeldung bei Covatas Safe Share-Anwendungen nicht mehr sichtbar oder verfügbar.
+- Sie kann über eine Client-Anwendung unter Verwendung der API der Covata-Plattform nicht mehr abgerufen werden.
+
+<Note>
+
+Die Deaktivierung sicherer Objekte, die über eine Client-Anwendung unter Verwendung der API der Covata-Plattform lediglich initialisiert wurden (d. h. deren Status noch „unvollständig“ lautet), verhindert, dass die betreffenden sicheren Objekte von einer solchen Anwendung „vervollständigt“ werden können. Sollen solche sicheren Objekte vervollständigt werden, muss ein Organisations-Administrator diese Objekte zunächst (z. B. über die Safe Share-Organisationsverwaltung) reaktivieren.
+
+</Note>
+
+**Deaktivierung, Aktivierung und Reaktivierung eines sicheren Objekts in Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. [Suchen Sie](/3.2/de/admin-org/administering-files#finding-secure-objects) das sichere Objekt, das deaktiviert, aktiviert oder reaktiviert werden soll.
+4. Führen Sie einen der folgenden Schritte aus:
+
+   - Klicken Sie zur *Deaktivierung des sicheren Objekts* auf die grüne Schaltfläche **Aktiviert** des sicheren Objekts (in der Spalte **Aktiviert**), sodass die Schaltfläche auf rot wechselt und **Deaktiviert** anzeigt.
+   - Klicken Sie zur *Aktivierung oder Reaktivierung des sicheren Objekts* auf die rote Schaltfläche **Deaktiviert** des sicheren Objekts (in der Spalte **Aktiviert**), sodass die Schaltfläche auf grün wechselt und als **Aktiviert** angezeigt wird.

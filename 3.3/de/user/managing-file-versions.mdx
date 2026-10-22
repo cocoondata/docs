@@ -1,0 +1,138 @@
+---
+title: "Verwaltung von Dateiversionen"
+---
+
+Wenn eine Datei an einen bestimmten Speicherort im Elementebereich der Safe Share-Hauptseite (oder in einer anderen Safe Share-Anwendung) hochgeladen wird, wo eine Datei mit *demselben Namen* bereits vorhanden ist, wird eine neue Version dieser Datei generiert. Eine solche neu hochgeladene Datei kann eine Datei [in Ihrem Besitz](/3.3/de/user/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder im Besitz eines [anderen Covata-Benutzers](/3.3/de/user/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) sein.
+
+Die Safe Share-Funktion Dateiversionen gibt Ihnen über die Seite Versionsverwaltung der betreffenden Datei [Zugriff auf andere Dateiversionen](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file). Auf dieser Seite können Sie an Dateiversionen die folgenden Funktionen ausführen:
+
+- [Anzeige oder Download](/3.3/de/user/managing-file-versions#viewing-and-downloading-another-version-of-a-file)
+- [Upload](/3.3/de/user/managing-file-versions#uploading-a-new-version-of-a-file)
+- (dauerhafte) [Löschung](/3.3/de/user/managing-file-versions#deleting-a-version-of-a-file) oder
+- [Festlegung als „aktive“ Version](/3.3/de/user/managing-file-versions#changing-a-files-active-version). Die **aktive** Version einer Datei ist diejenige Version, die über den Elementebereich des Benutzers auf der Safe Share-Hauptseite unmittelbar verfügbar ist.
+
+<Note>
+
+Jede neue Version einer Datei beansprucht mehr des Ihnen in Safe Share zugeteilten Speicherkontingents. Die vollständige Größe einer Datei (einschließlich aller ihrer Versionen) wird im Feld **Größe aller Versionen** im Abschnitt **Dateidetails** im Register **Details** angezeigt, wenn Sie die Datei auf der Safe Share-Hauptseite ausgewählt haben. Für weitere Informationen über die Nutzung Ihres Speicherplatzes siehe [Anzeige Ihrer Speichernutzung und Ihrer Speicherkontingente](/3.3/de/user/managing-your-account#viewing-your-storage-usages-and-quotas).
+
+</Note>
+
+## Zugriff auf andere Versionen einer Datei <a id="accessing-other-versions-of-a-file" />
+
+Der Besitzer einer Datei oder ein Mitwirkender mit **Änderungs**- oder **Verwaltungs**-[Berechtigung](/3.3/de/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) für eine Datei kann auf die anderen Versionen dieser Datei zugreifen. Mitwirkende einer Datei mit weniger weitreichenden Berechtigungen können nur auf die [„aktive“ Version](/3.3/de/user/managing-file-versions#changing-a-files-active-version) der Datei zugreifen. Ein Mitwirkender mit **Upload**-Berechtigung für den übergeordneten Ordner einer Datei kann jedoch [eine neue Version der Datei hochladen](/3.3/de/user/managing-file-versions#uploading-a-new-version-of-a-file).
+
+**Zugriff auf andere Versionen einer Datei:**
+
+1. Vergewissern Sie sich, dass Sie bei Safe Share for Web [angemeldet sind](/3.3/de/user/signing-in).
+2. Wenn neben dem Home-Symbol links oben (vor dem Namen Ihrer aktuellen Organisation) kein Dropdown-Symbol erscheint, sind Sie nur Mitglied einer Organisation. Sie können daher direkt zum [nächsten Schritt](/3.3/de/user/managing-file-versions#locating-your-file-to-access-its-versions) weitergehen. <br />
+   *Andernfalls* wird der Name Ihrer aktuellen Organisation angezeigt. Sie können dann von diesem Bildschirm aus Folgendes tun:
+
+   - Weitergehen zum [nächsten Schritt](/3.3/de/user/managing-file-versions#locating-your-file-to-access-its-versions), um anschließend auf eine Version einer Datei dieser Organisation zuzugreifen, oder
+   - Zugriff auf eine Version einer Datei einer anderen Organisation (der Sie als Mitglied angehören), indem Sie [Ihre Organisation wechseln](/3.3/de/user/uploading-storing-and-sharing-content-securely#changing-organisations), ehe Sie den Vorgang fortsetzen.
+3. <a id="locating-your-file-to-access-its-versions" />[Suchen Sie](/3.3/de/user/managing-secure-content#finding-secure-content) die Datei, auf deren andere Version(en) Sie zugreifen möchten.
+4. Führen Sie zum Zugriff auf die Versionen dieser Datei zunächst einen der folgenden Schritte aus:
+
+   - *Klicken Sie mit der rechten Maustaste auf die Zeile der Datei* und wählen Sie aus dem Popup-Menü **Versionen verwalten**:
+
+     ![Rechtsklick auf Datei als Besitzer - Kontextmenü](/images/6cde1cb4ccc3-right-clicking-a-file-context-menu-owner.png)
+
+     <br />
+     **Hinweis:** Wenn diese Menüoption nicht verfügbar ist, können Sie das Element nicht freigeben, da Sie es nicht besitzen *oder* Ihnen für das Element bei seiner Freigabe (bzw. der Freigabe eines übergeordneten Ordners) keine **Änderungs**-Berechtigung erteilt wurde. (Ihre aktuellen Berechtigungen an einem gewählten Element werden anhand des Werts im Feld **Zugriff** im Abschnitt **Datei-/Ordnerdetails** im Register **Details** rechts vom Elementebereich angezeigt.) <br />
+     *ODER*
+
+   1. Klicken Sie auf die Zeile des Elements (bei Ordnern rechts vom Namen), um es *auszuwählen*: <br />
+      ![Auswahl eines freigegebenen Elements als Besitzer](/images/d1d611c702b9-selecting-a-shared-item-owner.png)
+   2. Klicken Sie rechts in der Symbolleiste am oberen Seitenrand auf das Dropdown-Menü **Mehr** und wählen Sie **Versionen verwalten**. Beachten Sie bitte, dass die Option „Versionen verwalten“ nicht verfügbar ist, wenn Sie Mitwirkender des betreffenden Elements sind (siehe [Freigabe sicherer Inhalte](/3.3/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content)) und Ihnen für das Element nicht **Änderungs**- oder **Verwaltungs**-Berechtigung gewährt wurde.
+
+   Die Seite Versionsverwaltung wird für die betreffende Datei angezeigt: <br />
+   ![Seite Versionsverwaltung](/images/6da78f9cfe38-versions-management-page.png)
+   <br />
+    Die als **aktiv** gekennzeichnete Version einer Datei ist diejenige Version, die über den Elementebereich des Benutzers auf der Safe Share-Hauptseite unmittelbar verfügbar ist.
+5. Von dieser Seite aus können Sie die folgenden Funktionen ausführen:
+
+   - [Anzeige und/oder Download](/3.3/de/user/managing-file-versions#viewing-and-downloading-another-version-of-a-file) anderer Dateiversionen
+   - [Upload](/3.3/de/user/managing-file-versions#uploading-a-new-version-of-a-file) einer neuen Version der Datei
+   - (dauerhafte) [Löschung](/3.3/de/user/managing-file-versions#deleting-a-version-of-a-file) anderer Dateiversionen
+   - [Festlegung als „aktive“ Version](/3.3/de/user/managing-file-versions#changing-a-files-active-version) und
+   - Anklicken der Schaltfläche **Abbrechen** links von der Symbolleiste am oberen Seitenrand, um zur vorherigen Ansicht der Safe Share-Hauptseite zurückzukehren. <br />
+     **Hinweis:** Wenn Sie auf die Seite Versionsverwaltung direkt zugegriffen haben (z. B. über eine URL), führt Sie das Anklicken der Schaltfläche **Abbrechen** zum Stammverzeichnis der Safe Share-Hauptseite (für Ihre aktuelle Organisation) zurück.
+
+## Anzeige und Download anderer Versionen einer Datei <a id="viewing-and-downloading-another-version-of-a-file" />
+
+Diese Aktionen können von allen Benutzern (Besitzer und Mitwirkende) mit [Zugriff auf die anderen Versionen einer Datei](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) ausgeführt werden.
+
+**Anzeige und/oder Download einer anderen Version einer Datei:**
+
+1. [Greifen Sie](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) auf die Seite Versionsverwaltung für die betreffende Datei zu.
+2. Führen Sie zur Anzeige oder zum Download einer anderen Version dieser Datei zunächst einen der folgenden Schritte aus:
+
+   - *Klicken Sie mit der rechten Maustaste auf die Zeile des Elements* und wählen Sie aus dem Popup-Menü die gewünschte Option **Anzeigen** oder **Herunterladen**. <br />
+     *ODER*
+   - *Fahren Sie den Cursor* über die Zeile des Elements (oder *wählen Sie* bzw. klicken Sie auf die Zeile) und klicken Sie auf das gewünschte Symbol „Anzeigen“
+     ![View icon](/images/2d867cdd824a-view-icon.png)
+
+      bzw. „Herunterladen“
+
+     ![Symbol Herunterladen](/images/895e98c86ac0-download-icon.png)
+
+      (für das jeweilige Element) in der betreffenden Zeile oder rechts in der Symbolleiste am oberen Seitenrand.
+
+   **Hinweise:**
+
+   - Wenn Sie die Anzeige einer Dateiversion wählen, wird die betreffende Version direkt im [Content-Viewer](/3.3/de/user/accessing-secure-content#content-viewer) angezeigt.
+   - Die Option Anzeige ist nicht verfügbar, wenn der betreffende Dateityp im Content-Viewer nicht geöffnet werden kann. Für eine Liste der vom Content-Viewer unterstützten Dateitypen siehe [Vom Content-Viewer unterstützte Dateiformate](/3.3/de/user/accessing-secure-content#file-formats-supported-by-the-content-viewer).
+
+## Upload einer neuen Version einer Datei <a id="uploading-a-new-version-of-a-file" />
+
+Sie können eine neue Dateiversion nicht nur durch Drag & Drop erstellen, indem Sie als [Besitzer](/3.3/de/user/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) der Datei oder [Mitwirkender](/3.3/de/user/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) mit **Änderungs**- oder **Verwaltungs**-[Berechtigung](/3.3/de/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) an der Datei oder **Upload**-Berechtigung an ihrem übergeordneten Ordner eine Datei mit *demselben Namen* wie eine bereits vorhandene Datei an einen bestimmten Speicherort verschieben, sondern neue Dateiversionen können auch erstellt werden, indem Sie die neue Version direkt über die Seite Versionsverwaltung der jeweiligen Datei hochladen.
+
+Wenn Sie diese Option auf der Seite Versionsverwaltung nutzen, muss die hochzuladende neue Dateiversion lediglich dieselbe Erweiterung haben wie die aktuelle(n) Dateiversion(en) und nicht auch denselben Dateinamen.
+
+**Upload einer neuen Version einer Datei über die Seite Versionsverwaltung:**
+
+1. [Greifen Sie](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) auf die Seite Versionsverwaltung für die betreffende Datei zu.
+2. Klicken Sie auf die Schaltfläche **Neue Version hochladen** links von der Symbolleiste am oberen Seitenrand.
+3. Wählen Sie im anschließend aufgerufenen Dialogfeld die gewünschte neue Datei (mit derselben Erweiterung). Beachten Sie, dass der Dateiname von demjenigen der Datei unterschiedlich sein kann, deren Seite Versionsverwaltung Sie aktuell geöffnet haben. <br />
+    Nach dem erfolgreichen Upload der neuen Datei wird diese die **aktive** Version der betreffenden Datei.
+
+## Löschen einer Version einer Datei <a id="deleting-a-version-of-a-file" />
+
+Sie können anhand der Seite Versionsverwaltung eine Version einer Datei löschen. Dadurch wird die Dateiversion sofort gelöscht, ohne zunächst in den Papierkorb verschoben zu werden.
+
+Diese Funktion kann nur vom Besitzer der jeweiligen Datei ausgeführt werden, nicht von Mitwirkenden.
+
+**Löschen anderer Versionen einer Datei:**
+
+1. [Greifen Sie](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) auf die Seite Versionsverwaltung für die betreffende Datei, deren Besitzer Sie sein müssen, zu.
+2. Führen Sie zum Löschen einer anderen Version dieser Datei (außer der **aktiven** Version) zunächst einen der folgenden Schritte aus:
+
+   - *Klicken Sie mit der rechten Maustaste auf die Zeile des Elements* und wählen Sie aus dem Popup-Menü die Option **Löschen**. <br />
+     *ODER*
+   - *Fahren Sie den Cursor* über die Zeile des Elements (oder *wählen Sie* bzw. klicken Sie auf die Zeile) und klicken Sie auf das Symbol „Löschen“
+     ![Symbol Löschen](/images/3e6e90b07df6-remove-icon.png)
+
+      (für das jeweilige Element) in der betreffenden Zeile oder rechts in der Symbolleiste am oberen Seitenrand.
+
+   Safe Share for Web fordert Sie auf, den Löschvorgang zu bestätigen. Sobald Sie **Ja** anklicken, werden die Dateiversion und ihre Inhalte aus dem Speicher gelöscht. Alle Personen, die auf diese Dateiversion und ihre Inhalte Zugriff hatten, können damit nicht mehr auf diese Version zugreifen. <br />
+   **Hinweis:** Die Option „Löschen“ ist nicht verfügbar, wenn die betreffende Version die **aktive** Dateiversion ist und/oder Sie lediglich Mitwirkender des betreffenden Elements sind.
+
+## Änderung der „aktiven“ Version einer Datei <a id="changing-a-files-active-version" />
+
+Die **aktive** Version einer Datei ist diejenige Version, die über den Elementebereich des Besitzers oder eines Mitwirkenden auf der Safe Share-Hauptseite (einschließlich der entsprechenden Oberflächen aller anderen Safe Share-Anwendungen) sowie Links zu Dateien bzw. Ordnern in Benachrichtigungen von Covata oder benutzerdefinierten Nachrichten unmittelbar verfügbar ist.
+
+Diese Aktion kann von allen Benutzern (Besitzer und Mitwirkende) mit [Zugriff auf die anderen Versionen einer Datei](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) ausgeführt werden.
+
+**Änderung der „aktiven“ Version einer Datei:**
+
+1. [Greifen Sie](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) auf die Seite Versionsverwaltung für die betreffende Datei zu.
+2. Führen Sie zur Änderung der **aktiven** Version dieser Datei zunächst einen der folgenden Schritte aus:
+
+   - *Klicken Sie mit der rechten Maustaste auf die Zeile des Elements* und wählen Sie aus dem Popup-Menü die Option **Diese Version als aktiv festlegen**. <br />
+     *ODER*
+   - *Fahren Sie den Cursor* über die Zeile des Elements (oder *wählen Sie* bzw. klicken Sie auf die Zeile) und klicken Sie auf das Symbol „Diese Version als aktiv festlegen“
+     ![Symbol Als aktiv festlegen](/images/ea9a9f0d7260-make-active-icon.png)
+
+      (für das jeweilige Element) in der betreffenden Zeile oder rechts in der Symbolleiste am oberen Seitenrand.
+
+   Safe Share for Web fordert Sie auf, diese Änderung zu bestätigen. Sobald Sie **Ja** anklicken, wird die Dateiversion, an der Sie die obige Aktion ausgeführt haben, die **aktive** Version der Datei. Alle Personen, die über den Dateibereich der Safe Share-Hauptseite Zugriff auf diese Datei hatten, können jetzt über ihren Dateibereich nur noch auf die neue **aktive** Version der Datei zugreifen. <br />
+   **Hinweis:** Der Besitzer der Datei oder ein Mitwirkender mit **Änderungs**- oder **Verwaltungs**-Berechtigung für die Datei kann weiterhin über die [Seite Versionsverwaltung](/3.3/de/user/managing-file-versions#accessing-other-versions-of-a-file) der Datei auf ihre anderen Versionen zugreifen.

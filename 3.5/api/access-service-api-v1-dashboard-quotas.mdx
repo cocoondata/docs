@@ -1,0 +1,54 @@
+---
+title: "<access-service>/api/v1/dashboard/quotas"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-quotas-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/quotas
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-quotas-supported-methods-and-overview" />
+
+- `GET` - retrieves the maximum required storage (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)) based on the current quotas specified for all configured organisations.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-quotas-detailed-description" />
+
+This API endpoint retrieves the maximum required storage (in mebibytes/MiB) based on the current quotas specified for all configured organisations.
+
+This information is utilised on the [SafeShare Administration dashboard](/3.5/admin-platform/accessing-platform-administration#the-platform-administration-dashboard).
+
+## Supported roles <a id="access-service-api-v1-dashboard-quotas-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/3.5/admin-platform/index)):
+
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-dashboard-quotas#access-service-api-v1-dashboard-quotas-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-quotas-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-dashboard-quotas-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **sumOfAllQuota** - The maximum required storage (in [MiB](http://physics.nist.gov/cuu/Units/binary.html)) based on the current quotas specified for all configured organisations. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "sumOfAllQuota": 4194304
+  }
+  ```

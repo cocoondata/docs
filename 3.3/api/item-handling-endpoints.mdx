@@ -1,0 +1,31 @@
+---
+title: "Item handling endpoints"
+---
+
+The endpoints in this section are used for handling items (i.e. both files / [Secure Objects](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) and folders / [collections](/3.3/api/working-with-files-and-folders-fundamentals#collection)) on the Covata Platform.
+
+### Item handling endpoints
+
+- **Item list retrieval, including information retrieval about an item's properties, ancestry, history and changes**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.3/api/access-service-api-v1-organisations-orgid-items)
+  - [&lt;access-service&gt;/api/v1/items/\{itemId\}](/3.3/api/access-service-api-v1-items-itemid)
+  - [&lt;access-service&gt;/api/v1/items/\{itemId\}/ancestry](/3.3/api/access-service-api-v1-items-itemid-ancestry)
+  - [&lt;access-service&gt;/api/v1/items/\{itemId\}/history](/3.3/api/access-service-api-v1-items-itemid-history)
+  - [&lt;access-service&gt;/api/v1/items/delta](/3.3/api/access-service-api-v1-items-delta)
+- **Item unsharing (i.e. collaborator removal)**
+
+  - [&lt;access-service&gt;/api/v1/items/\{itemId\}/unshare](/3.3/api/access-service-api-v1-items-itemid-unshare)
+  - [&lt;access-service&gt;/api/v1/collaborations/items/\{itemId\}](/3.3/api/access-service-api-v1-collaborations-items-itemid)
+- **Item ownership transferral (for Organization administrators only)**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items/transfer](/3.3/api/access-service-api-v1-organisations-orgid-items-transfer)
+
+### Recycled item handling endpoints
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/recycle-bin/items](/3.3/api/access-service-api-v1-organisations-orgid-recycle-bin-items)
+- [&lt;access-service&gt;/api/v1/recycle-bin/items/\{itemId\}](/3.3/api/access-service-api-v1-recycle-bin-items-itemid)
+
+### Permissions information endpoints
+
+- [&lt;access-service&gt;/api/v1/permissions/sets](/3.3/api/access-service-api-v1-permissions-sets)

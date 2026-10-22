@@ -1,0 +1,83 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/items/transfer"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-items-transfer-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/items/transfer
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-items-transfer-supported-methods-and-overview" />
+
+- `POST` - transfers the ownership of all file objects and folders from one Cocoon Data user to another Cocoon Data user.
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-items-transfer-detailed-description" />
+
+This API endpoint transfers the ownership of all files/[Secure Objects](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object) and folders/[collections](/CS1.2/api/working-with-files-and-folders-fundamentals#collection) (in which these files are contained) from one Cocoon Data user to another Cocoon Data user, within the organisation specified by the `{orgId}` of the request's URL.
+
+<Note>
+
+- When using [Organisation Administration](/CS1.2/admin-org/index) to transfer item ownership from one Cocoon Data user to another, this process must be done as part of [removing a user account from an organisation](/CS1.2/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation).
+- However, when using the Cocoon Data API, transferring item ownership from a Cocoon Data user can be accomplished without having to remove this user from the organisation.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-items-transfer-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+
+- [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by the `{orgId}` of the request's URL.
+
+The Cocoon Data Platform's resources available to Cocoon Data users meeting this criteria is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orgid-items-transfer#access-service-api-v1-organisations-orgid-items-transfer-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-items-transfer-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-organisations-orgid-items-transfer-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, as individual members of a **JSON object**:
+
+- **from** - The ID of a Cocoon Data user (with the [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) role), whose items will be transferred to another Cocoon Data user.
+- **to** - The ID of another Cocoon Data user (with the **Originator** role) to whom these items will be transferred. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "from": "749419842687528960",
+    "to": "750613175405441024"
+  }
+  ```
+
+## Optional parameters <a id="access-service-api-v1-organisations-orgid-items-transfer-optional-parameters" />
+
+The following optional parameter can also be sent in the **body** of the POST request, as an individual member of the **JSON object** that includes the [Required parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-items-transfer#access-service-api-v1-organisations-orgid-items-transfer-required-parameters) above:
+
+- **folderName** - The name of a new folder that will be created at the root location of the Cocoon Data user (represented by **to** above) to whom the complete hierarchy of items (belonging to the user represented by **from** above) will be transferred. <br />
+  **Note:** If this parameter is omitted, then a new folder (like this) will automatically be created with a default name consisting of the email address of the Cocoon Data user (represented by **from**) followed by an underscore, followed by the current date.
+- **deleteUser** - A boolean value that indicates whether (`true`) or not (`false`) the Cocoon Data user specified in the `from` field above, whose items are being transfered to another user, will be removed from the organisation.
+
+  <br />
+  **Example (request):**
+
+  ```json
+  {
+    "from": "749419842687528960",
+    "to": "750613175405441024",
+    "folderName": "Alex's items",
+    "deleteUser": true
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-items-transfer-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

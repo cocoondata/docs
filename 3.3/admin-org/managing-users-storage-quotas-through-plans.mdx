@@ -1,0 +1,67 @@
+---
+title: "Managing users' storage quotas through plans"
+---
+
+The **Plans** page allows Organization administrators to define storage quotas, which are used to limit the amount of storage (managed by the Covata Platform's Content Service) available to Covata user accounts accessed through either:
+
+- Covata Safe Share applications, or
+- Other client applications that utilize the Covata Platform's API.
+
+A storage quota is defined by a *plan*, which in turn can be applied to a Covata user account with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) (through the **Users** [page](/3.3/admin-org/administering-users-within-an-organisation)) when the account is either [added](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to the organization) or [edited](/3.3/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account).
+
+![Plans page](/images/f2e9dea19c0b-plans-page.png)
+## Adding a new plan
+
+At least one plan must be added to your organization (the first of which becomes the initial **default** plan) before a Covata user with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) can be added to your organization.
+
+**To add a new plan to your organization on the Covata Platform:**
+
+1. [Sign in](/3.3/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Plans** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Plans** page.
+3. Click the **Add New** button.
+4. In the **Add new plan** dialog box, specify the:
+
+   - **Plan Name** - The value of this field is the name of the plan shown in the list of available plans when a Covata user with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) is [added](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to the organization) or [edited](/3.3/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) through the **Users** [page](/3.3/admin-org/administering-users-within-an-organisation).
+   - **Quota (MB)** - The value of the quota (in megabytes) that this plan defines.
+   - **Description** - A longer description to provide more information about the plan, such as the plan's purpose or which type of Covata users the plan is intended for. The value of this field is only visible to Organization administrators on this **Plans** page.
+5. ( *Optional* ) Select the **Default Plan** check box to ensure that *this* plan (you are about to add) is selected by default when a Covata user with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) is being [added](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to the organization).
+6. Click **Save** and the new plan is added and will appear as a new entry on the **Plans** page. <br />
+   **Note:** If the **Default Plan** check box was selected, the **default** indicator on the **Plans** page switches to this plan you just added.
+
+## Editing an existing plan
+
+Editing an existing plan allows modification of all of its fields. This is useful when it is necessary to modify the plan's quota or change this plan to the **default** one.
+
+**To edit an existing plan in your organization:**
+
+1. [Sign in](/3.3/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Plans** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Plans** page.
+3. Locate/scroll to the relevant plan and click its **Edit** link.
+4. In the **Edit plan** dialog box, modify the:
+
+   - **Plan Name** - The value of this field is the name of the plan shown in the list of available plans when a Covata user with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) is [added](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to the organization) or [edited](/3.3/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) through the **Users** [page](/3.3/admin-org/administering-users-within-an-organisation).
+   - **Quota (MB)** - The value of the quota (in megabytes) that this plan defines.
+   - **Description** - A longer description to provide more information about the plan, such as the plan's purpose or which type of Covata users the plan is intended for. The value of this field is only visible to Organization administrators on this **Plan Management** page.
+5. ( *Optional* ) Select the **Default Plan** check box to ensure that *this* plan (you are editing) is selected by default when a Covata user with the [Originator role](/3.3/admin-org/administering-users-within-an-organisation#originator-role) is either being [added](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to the organization) or being [edited](/3.3/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account).
+6. Click **Save** and the plan's fields are updated accordingly. <br />
+   **Note:** If the **Default Plan** check box was selected, the **default** indicator on the **Plans** page switches to this plan you just edited.
+
+## Removing an existing plan
+
+Removing an existing plan prevents this plan from being selected when [adding a Covata user account](/3.3/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to an organization) or [editing the account](/3.3/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) through the **Users** [page](/3.3/admin-org/administering-users-within-an-organisation).
+
+When a plan is removed, any users who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of Content Service-managed storage utilized by any of these users, then these users will no longer be able to upload any data through Safe Share (including any other client applications that utilize the Covata Platform's API) until these users' storage utilization drops below the **default** plan's quota.
+
+<Note>
+
+It is not possible to remove the plan marked **default**. To delete a plan marked **default**, [edit another plan](/3.3/admin-org/managing-users-storage-quotas-through-plans#editing-an-existing-plan) first and choose its **Default Plan** check box (then **Save**), which switches the **default** indicator away from the plan you intend to remove.
+
+</Note>
+
+**To remove an existing plan from your organization:**
+
+1. [Sign in](/3.3/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Plans** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Plan Management** page.
+3. Locate/scroll to the relevant group and select its check box on the left.
+4. Click the **Remove** button.
+5. On the **Delete Plan** message box, click **Yes** to proceed with the plan's removal.

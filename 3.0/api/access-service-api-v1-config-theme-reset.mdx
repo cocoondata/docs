@@ -1,0 +1,73 @@
+---
+title: "<access-service>/api/v1/config/theme/..."
+---
+
+## URL structure <a id="access-service-api-v1-config-theme-reset-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/theme/...
+```
+
+where `...` represents any one of the following:
+
+- [adminHelpUrl](/3.0/api/access-service-api-v1-config-theme-adminhelpurl)
+- [applicationName](/3.0/api/access-service-api-v1-config-theme-applicationname)
+- [companyName](/3.0/api/access-service-api-v1-config-theme-companyname)
+- [copyright](/3.0/api/access-service-api-v1-config-theme-copyright)
+- [emailHeaderDividerColor](/3.0/api/access-service-api-v1-config-theme-emailheaderdividercolor)
+- [headerPrimaryColor](/3.0/api/access-service-api-v1-config-theme-headerprimarycolor)
+- [headerTextColor](/3.0/api/access-service-api-v1-config-theme-headertextcolor)
+- [legalUrl](/3.0/api/access-service-api-v1-config-theme-legalurl)
+- [supportLink](/3.0/api/access-service-api-v1-config-theme-supportlink)
+- [versionUrl](/3.0/api/access-service-api-v1-config-theme-versionurl)
+- [webappHelpUrl](/3.0/api/access-service-api-v1-config-theme-webapphelpurl)
+
+## Supported methods and overview <a id="access-service-api-v1-config-theme-reset-supported-methods-and-overview" />
+
+- `DELETE` - resets the value which had been set using a `PUT` method to `<access-service>/api/v1/config/theme/...` (listed [above](/3.0/api/access-service-api-v1-config-theme-reset#access-service-api-v1-config-theme-reset-url-structure)) back to its default value.
+
+<Note>
+
+To reset image logos, see [&lt;access-service&gt;/api/v1/config/theme/img/\{imageLocationToOverride\}](/3.0/api/access-service-api-v1-config-theme-img-imagelocationtooverride).
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-config-theme-reset-detailed-description" />
+
+Using the `DELETE` method with a API endpoint listed above resets that endpoint's value back to its default.
+
+Be aware that when using this method on one of these endpoints, [a piece of plain text is required in the body of the request](/3.0/api/access-service-api-v1-config-theme-reset#access-service-api-v1-config-theme-reset-required-body) that is specific to the particular endpoint being called.
+
+## Supported roles <a id="access-service-api-v1-config-theme-reset-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-config-theme-reset#access-service-api-v1-config-theme-reset-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-theme-reset-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Required body <a id="access-service-api-v1-config-theme-reset-required-body" />
+
+Specify one of the following that relates to `...` ([above](/3.0/api/access-service-api-v1-config-theme-reset#access-service-api-v1-config-theme-reset-url-structure)) in the body of the request as plain text:
+
+- **admin_help_url** - for [adminHelpUrl](/3.0/api/access-service-api-v1-config-theme-adminhelpurl).
+- **application_name** - for [applicationName](/3.0/api/access-service-api-v1-config-theme-applicationname).
+- **company_name** - for [companyName](/3.0/api/access-service-api-v1-config-theme-companyname).
+- **copyright** - for [copyright](/3.0/api/access-service-api-v1-config-theme-copyright).
+- **email_header_divider_color** - for [emailHeaderDividerColor](/3.0/api/access-service-api-v1-config-theme-emailheaderdividercolor).
+- **header_primary_color** - for [headerPrimaryColor](/3.0/api/access-service-api-v1-config-theme-headerprimarycolor).
+- **header_text_color** - for [headerTextColor](/3.0/api/access-service-api-v1-config-theme-headertextcolor).
+- **legal_url** - for [legalUrl](/3.0/api/access-service-api-v1-config-theme-legalurl).
+- **support_link** - for [supportLink](/3.0/api/access-service-api-v1-config-theme-supportlink).
+- **version_url** - for [versionUrl](/3.0/api/access-service-api-v1-config-theme-versionurl).
+- **webapp_help_url** - for [webappHelpUrl](/3.0/api/access-service-api-v1-config-theme-webapphelpurl).
+
+## Returns <a id="access-service-api-v1-config-theme-reset-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

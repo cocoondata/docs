@@ -1,0 +1,67 @@
+---
+title: "<access-service>/api/v1/objects/{objectId}/keys/view"
+---
+
+## URL structure <a id="access-service-api-v1-objects-objectid-keys-view-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects/{objectId}/keys/view
+```
+
+where \{objectId\} is the ID of a Secure Object.
+
+## Supported methods and overview <a id="access-service-api-v1-objects-objectid-keys-view-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the cryptographic key required to decrypt the *read-only view* of a [Secure Object](/3.1/api/creating-secure-objects-and-collections#secure-object), based on the Secure Object's ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-objects-objectid-keys-view-detailed-description" />
+
+This API endpoint retrieves the cryptographic key required to decrypt the *read-only view* of a Secure Object, using the Secure Object's ID.
+
+This key is generated after [uploading](/3.1/api/content-service-api-v1-objects-objectid-contents) a Secure Object's data to storage *and* both of the following criteria have been met:
+
+- The Secure Object's file name (i.e. its **name** value) contains an [extension](/3.1/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) which is supported by Safe Share's [content viewer](/3.1/user/accessing-secure-content#content-viewer).
+- The size of the file in its unencrypted form (i.e. its **contentSize** value) is less than the default of 20,000,000 bytes.
+
+A Secure Object's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/3.1/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with Secure Objects that can be filtered using various 'search' criteria.
+
+## Supported roles and conditions <a id="access-service-api-objects-objectid-keys-view-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)) and conditions:
+
+- [Originator](/3.1/admin/administering-users#originator-role) - a Covata user with this role can call this endpoint on a Secure Object they own.
+- **Originator**, [Collaborator](/3.1/admin/administering-users#collaborator-role) and [Ad hoc](/3.1/admin/administering-users#adhoc-role) - a Covata user with any of these roles can call this endpoint for a Secure Object they are a collaborator on.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-objects-objectid-keys-view#access-service-api-v1-objects-objectid-keys-view-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-objects-objectid-keys-view-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-objects-objectid-keys-view-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **keyValue** - .
+- **cryptographicAlgorithm** - .
+- **keyLength** - .
+- **initializationVector** - .
+
+  **Example:**
+
+  ```json
+  {
+    "keyValue": "2VCZkPeYPhvL4VkzrEqIVGaW2AGmRM1uwuXiPRbe8NU=",
+    "cryptographicAlgorithm": "AES",
+    "keyLength": 256,
+    "initializationVector": "fpEIYIk+dnMw7rgFA+Bz8g=="
+  }
+  ```

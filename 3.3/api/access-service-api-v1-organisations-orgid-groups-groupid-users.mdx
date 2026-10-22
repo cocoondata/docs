@@ -1,0 +1,185 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups/{groupId}/users"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups/{groupId}/users
+```
+
+where `{orgId}` is the ID of an organization and `{groupId}` is the ID of one of this organization's groups.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information for all [Covata users](/3.3/api/authentication-and-authorisation) who are currently members of a [group](/3.3/admin-org/managing-groups) (specified by `groupId`) in an organization (specified by `orgId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-detailed-description" />
+
+This API endpoint retrieves a list of information for all Covata users who are currently members of a group (specified by `groupId`) in an organization (specified by `orgId`).
+
+A group's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.3/api/access-service-api-v1-organisations-orgid-groups) API endpoint, which retrieves a list of information for all groups in an organization (specified by `orgId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - if this user is a member of the organization specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orgid-groups-groupid-users#access-service-api-v1-organisations-orgid-groups-groupid-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orgid-groups-groupid-users-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+- **email** - .
+- **firstName** - .
+- **lastName** - .
+- **mfaEnabled** - .
+- **id** - .
+- **accountType** - .
+- **organisations** - .
+- **count** - .
+- **offset** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "email": "alex.originator@xy-company.com",
+          "firstName": "Alex",
+          "lastName": "Originator",
+          "mfaEnabled": false,
+          "id": "760757111507689472",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          },
+          "organisations": [{
+              "id": "760756644367081472",
+              "name": "XY Company",
+              "addressBookEnabled": false,
+              "watermarkingEnabled": false,
+              "plan": {
+                  "id": "760757068528656384",
+                  "name": "Staff Originators",
+                  "description": "Staff members with the Originator role.",
+                  "quota": 10240,
+                  "default": true
+              },
+              "adminEmail": "",
+              "organisationAlias": null,
+              "userMessage": null,
+              "supportUrl": "",
+              "companyName": null,
+              "legalUrl": null,
+              "webappHelpUrl": null,
+              "orgAdminHelpUrl": null,
+              "privacyUrl": "",
+              "securityRoles": [{
+                  "i18n": {
+                      "code": "db.securityroles.organisationadmin",
+                      "arguments": []
+                  },
+                  "value": "ROLE_ORGANISATION_ADMIN"
+              }, {
+                  "i18n": {
+                      "code": "db.securityroles.originator",
+                      "arguments": []
+                  },
+                  "value": "ROLE_ORIGINATOR"
+              }]
+          }]
+      }, {
+          "email": "chris.collaborator@xy-company.com",
+          "firstName": null,
+          "lastName": null,
+          "mfaEnabled": false,
+          "id": "760765715686137856",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          },
+          "organisations": [{
+              "id": "760756644367081472",
+              "name": "XY Company",
+              "addressBookEnabled": false,
+              "watermarkingEnabled": false,
+              "plan": null,
+              "adminEmail": "",
+              "organisationAlias": null,
+              "userMessage": null,
+              "supportUrl": "",
+              "companyName": null,
+              "legalUrl": null,
+              "webappHelpUrl": null,
+              "orgAdminHelpUrl": null,
+              "privacyUrl": "",
+              "securityRoles": [{
+                  "i18n": {
+                      "code": "db.securityroles.collaborator",
+                      "arguments": []
+                  },
+                  "value": "ROLE_COLLABORATOR"
+              }]
+          }]
+      }, {
+          "email": "org.administrator@xy-company.com",
+          "firstName": "Org",
+          "lastName": "Administrator",
+          "mfaEnabled": false,
+          "id": "760756646413901824",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          },
+          "organisations": [{
+              "id": "760756644367081472",
+              "name": "XY Company",
+              "addressBookEnabled": false,
+              "watermarkingEnabled": false,
+              "plan": null,
+              "adminEmail": "",
+              "organisationAlias": null,
+              "userMessage": null,
+              "supportUrl": "",
+              "companyName": null,
+              "legalUrl": null,
+              "webappHelpUrl": null,
+              "orgAdminHelpUrl": null,
+              "privacyUrl": "",
+              "securityRoles": [{
+                  "i18n": {
+                      "code": "db.securityroles.organisationadmin",
+                      "arguments": []
+                  },
+                  "value": "ROLE_ORGANISATION_ADMIN"
+              }]
+          }]
+      }],
+      "count": "3",
+      "offset": "0"
+  }
+  ```

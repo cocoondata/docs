@@ -1,0 +1,54 @@
+---
+title: "<access-service>/api/v1/items/{itemId}/ancestry"
+---
+
+## URL structure <a id="access-service-api-v1-items-itemid-ancestry-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/{itemId}/ancestry
+```
+
+where `{itemId}` is the ID of a Secure Object or collection.
+
+## Supported methods and overview <a id="access-service-api-v1-items-itemid-ancestry-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information about the ancestral [collections](/2.16/api/creating-secure-objects-and-collections#collection) of a specified [Secure Object](/2.16/api/creating-secure-objects-and-collections#secure-object) or collection (i.e. [item](/2.16/api/creating-secure-objects-and-collections#item)), based on the item's ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-items-itemid-ancestry-detailed-description" />
+
+This API endpoint retrieves a list of information about the ancestral collections of a specified Secure Object or collection, using this item's ID.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/2.16/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with Secure Objects and collections that can be filtered using various 'search' criteria.
+
+The collections are ordered in the list (returned in the response) from the root location (whose ID is `0`) first, through to the immediate parent collection.
+
+## Supported roles and conditions <a id="access-service-api-v1-items-itemid-ancestry-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)) and conditions:
+
+- [Originator](/2.16/admin/administering-users#originator-role) - a Covata user with this role can call this endpoint on an item they own.
+- **Originator**, [Collaborator](/2.16/admin/administering-users#collaborator-role) and [Ad hoc](/2.16/admin/administering-users#adhoc-role) - a Covata user with any of these roles can call this endpoint on an item they are a collaborator on.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-items-itemid-ancestry#access-service-api-v1-items-itemid-ancestry-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-itemid-ancestry-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-items-itemid-ancestry-returns" />
+
+A JSON-formatted response containing an array of elements, each of which contains the following members:
+
+- **id** - .
+- **name** - .
+- **parentId** - .
+
+  **Example (response from ...):**

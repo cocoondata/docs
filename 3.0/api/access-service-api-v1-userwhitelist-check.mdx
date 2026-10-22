@@ -1,0 +1,72 @@
+---
+title: "<access-service>/api/v1/userwhitelist/check"
+---
+
+## URL structure <a id="access-service-api-v1-userwhitelist-check-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/userwhitelist/check
+```
+
+## Supported methods and overview <a id="access-service-api-v1-userwhitelist-check-supported-methods-and-overview" />
+
+- `POST` - used to check which [Covata user](/3.0/admin/administering-users) accounts will be disabled by adding or deleting one or more [user whitelist rules](/3.0/admin/managing-user-whitelists).
+
+## Detailed description <a id="access-service-api-v1-userwhitelist-check-detailed-description" />
+
+This API endpoint checks which Covata user accounts will be disabled by [adding](/3.0/api/access-service-api-v1-userwhitelist) or deleting [one](/3.0/api/access-service-api-v1-userwhitelist-userwhitelistid) or [more](/3.0/api/access-service-api-v1-userwhitelist-bulk) user whitelist rules.
+
+The user whitelist feature becomes enabled when at least one user whitelist rule has been added to/is specified on the Covata Platform.
+
+An enabled user whitelist feature means that any user whitelist rules which are then either added to or deleted<sup>&#42;</sup> from the Covata Platform may result in several Covata user accounts being disabled.
+
+Therefore, use this endpoint first to check which Covata user accounts will be disabled before adding or deleting any user whitelist rules.
+
+<sup>&#42;</sup> Deleting the last user whitelist rule from the Covata Platform results in the user whitelist feature being disabled. When the user whitelist feature is disabled, be aware that:
+
+- Covata user accounts *are not* [disabled](/3.0/api/access-service-api-v1-users-bulk) by *not having a user whitelist rule*.
+- Directly [disabling or re-enabling Covata user accounts](/3.0/api/access-service-api-v1-users-userid-enable) has no impact on the user whitelist feature.
+- Any [LDAP](/3.0/admin/administering-users#account-type) user accounts that were disabled by not matching/complying with a user whitelist rule (when the user whitelist feature was enabled) are automatically re-enabled when the Covata Platform next synchronizes with the LDAP server.
+
+## Supported roles <a id="access-service-api-v1-userwhitelist-check-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-userwhitelist-check#access-service-api-v1-userwhitelist-check-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-userwhitelist-check-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-userwhitelist-check-required-parameters" />
+
+The following required parameters must be sent in the body of the POST request, each as individual members of a JSON object:
+
+- **action** - add or delete.
+- **items** - an array of user whitelist rules to be added *or* existing user whitelist rules to be deleted.
+
+  - To check for Covata user accounts that will be disabled by adding new user whitelist rules, each element of this array (unless qualitified as optional) must contain the following members:
+
+    - **pattern** - .
+    - **description** ( *Optional* ) - .
+
+  - To check for Covata user accounts that will be disabled by deleting existing user whitelist rules, each element of this array must contain the following members:
+
+    - **id** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-userwhitelist-check-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **email** - .
+- **firstName** - .
+- **lastName** - .
+
+  **Example ():**

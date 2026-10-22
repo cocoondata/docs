@@ -1,0 +1,109 @@
+---
+title: "Verwaltung von Gruppen"
+---
+
+Anhand der Seite **Gruppen** können Organisations-Administratoren Gruppen von [Covata-Benutzern](/3.3/de/admin-org/administering-users-within-an-organisation) definieren, denen [Dateien](/3.3/de/admin-org/administering-files) [freigegeben](/3.3/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) werden können.
+
+Die Berechtigung zur Freigabe einer Datei an eine Gruppe von Benutzern wird über die Zuweisung von [Klassifikationen](/3.3/de/admin-org/managing-classifications) an die Gruppe gewährt. Dies geschieht bei der Freigabe von Dateien.
+
+Für [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation) gilt Folgendes:
+
+- Gehören sie zu einer Gruppe, der eine [Klassifikation](/3.3/de/admin-org/managing-classifications) zugewiesen ist, können Dateien an die betreffenden Covata-Benutzer freigegeben werden, wenn diese Klassifikation vorgegeben wird.
+- Ist ihnen eine Klassifikation nicht zugewiesen (d. h. ihr Account gehört zu keiner Gruppe, der die betreffende Klassifikation zugewiesen ist), können Dateien an die betreffenden Covata-Benutzer nicht freigegeben werden, wenn diese Klassifikation vorgegeben wird.
+
+![Seite Gruppen](/images/4eb861ed4f39-groups-page.png)
+
+<Note>
+
+Gruppen sind für [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation) ohne [Organisations-Administrator-Rolle](/3.3/de/admin-org/administering-users-within-an-organisation#organisation-administrator-role) überhaupt nicht zugänglich.
+
+</Note>
+
+## Hinzufügen einer neuen Gruppe <a id="adding-a-new-group" />
+
+**Hinzufügen einer neuen Gruppe zu Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neue Gruppe hinzufügen** Folgendes an:
+
+   - **Name** - ein Name, der die Gruppenmitglieder (d. h. Covata-Benutzer) in einem kurzen Satz möglichst gut beschreibt.
+   - **Beschreibung ( *Optional* )** - eine längere Beschreibung für mehr Informationen über die Gruppe. Beachten Sie, dass der Wert dieses Felds nur sichtbar ist, wenn diese Gruppe im Dialogfeld **Gruppe bearbeiten** später [bearbeitet](/3.3/de/admin-org/managing-groups#editing-an-existing-group) wird.
+5. Klicken Sie auf **Speichern**, und die neue Gruppe erscheint als neue Eintragung auf der Seite **Gruppen**. <br />
+   **Hinweise:**
+
+   - Für Informationen über das Hinzufügen eines oder mehrerer [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation) zu dieser Gruppe siehe [Änderung der Benutzer in einer bestehenden Gruppe](/3.3/de/admin-org/managing-groups#modifying-users-in-an-existing-group).
+   - Siehe [Änderung der Klassifikationen einer bestehenden Gruppe](/3.3/de/admin-org/managing-groups#modifying-classifications-on-an-existing-group), um der betreffenden Gruppe eine oder mehrere [Klassifikationen](/3.3/de/admin-org/managing-classifications) zuzuweisen. Diese Klassifikationen ermöglichen es, die Freigabe von Dateien auf Covata-Benutzer zu beschränken, die der betreffenden Gruppe angehören.
+
+## Änderung der Benutzer in einer bestehenden Gruppe <a id="modifying-users-in-an-existing-group" />
+
+**Änderung der Mitgliedschaft von Covata-Benutzern bei einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Klicken Sie in der Spalte **Mitglieder** auf den nummerierten Link neben der Gruppe, deren bestehende [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation) geändert werden sollen. Dies öffnet das Dialogfeld für die Gruppenmitglieder.
+4. In diesem Dialogfeld sind alle Covata-Benutzer, deren E-Mail-Adressen rechts im Abschnitt **Gruppenmitglieder** gezeigt werden, bereits Mitglieder der Gruppe:
+
+   | Wenn Sie Folgendes vornehmen möchten: | Führen Sie diesen Schritt aus: | Der zu diesem Ergebnis führt: |
+   | --- | --- | --- |
+   | Hinzufügen eines Benutzers zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Benutzer** auf die E-Mail-Adresse des betreffenden Benutzers. | Der betreffende Benutzer wird in den Abschnitt **Gruppenmitglieder** übertragen. |
+   | Entfernen eines Benutzers von der Gruppe | Klicken Sie im Abschnitt **Gruppenmitglieder** auf die E-Mail-Adresse des betreffenden Benutzers. | Der betreffende Benutzer wird in den Abschnitt **Verfügbare Benutzer** übertragen. |
+   | Suche nach bestimmten Benutzern durch Filtern (dies vereinfacht das Hinzufügen oder Entfernen, siehe oben) | Geben Sie im Abschnitt **Verfügbare Benutzer** oder **Gruppenmitglieder** (im betreffenden Feld **Filter...**) eine in den E-Mail-Adressen der Covata-Benutzer enthaltene Zeichenfolge ein. | Die Liste der Benutzer (in ihren jeweiligen Abschnitten) wird nach denjenigen gefiltert, deren E-Mail-Adressen die im Feld **Filter...** eingegebene Zeichenfolge enthalten. |
+   | Hinzufügen aller Benutzer zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Benutzer** auf die Schaltfläche  ![Schaltfläche Alle hinzufügen](/images/ba0414469515-add-all.png) <br />  (Alle hinzufügen). | Alle in diesem Abschnitt verbleibenden Benutzer werden in den Abschnitt **Gruppenmitglieder** übertragen. |
+   | Entfernen aller Benutzer von der Gruppe | Klicken Sie im Abschnitt **Gruppenmitglieder** auf die Schaltfläche  ![Schaltfläche Alle entfernen](/images/ceb2b8442518-remove-all.png) <br />  (Alle entfernen). | Alle in diesem Abschnitt verbleibenden Benutzer werden in den Abschnitt **Verfügbare Benutzer** übertragen. |
+5. Klicken Sie auf **Speichern**, und die Gruppenmitglieder werden entsprechend geändert. Die in der Spalte **Mitglieder** der Gruppe gezeigte Zahl wird aktualisiert, um die Gesamtzahl der Covata-Benutzer anzuzeigen, die im Abschnitt **Gruppenmitglieder** enthalten waren, ehe Sie **Speichern** angeklickt haben. <br />
+   **Hinweis:** Siehe [Änderung der Klassifikationen einer bestehenden Gruppe](/3.3/de/admin-org/managing-groups#modifying-classifications-on-an-existing-group), um der betreffenden Gruppe (eines oder mehrerer Covata-Benutzer) eine oder mehrere [Klassifikationen](/3.3/de/admin-org/managing-classifications) zuzuweisen. Diese Klassifikationen ermöglichen es, die Freigabe von Dateien auf die betreffenden Covata-Benutzer zu beschränken.
+
+## Änderung der Klassifikationen einer bestehenden Gruppe <a id="modifying-classifications-on-an-existing-group" />
+
+**Änderung der Zuweisung von Klassifikationen zu einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Klicken Sie in der Spalte **Berechtigungen** auf den nummerierten Link neben der Gruppe, deren bestehende [Klassifikationen](/3.3/de/admin-org/managing-classifications) geändert werden sollen. Dies öffnet das Dialogfeld für die Klassifikationen der Gruppe.
+4. In diesem Dialogfeld sind alle Klassifikationen, die rechts im Abschnitt **Gruppen-Klassifikationen** angezeigt werden, der Gruppe bereits zugewiesen:
+
+   | Wenn Sie Folgendes vornehmen möchten: | Führen Sie diesen Schritt aus: | Der zu diesem Ergebnis führt: |
+   | --- | --- | --- |
+   | Hinzufügen einer Klassifikation zur Gruppe | Klicken Sie die Klassifikation im Abschnitt **Verfügbare Klassifikationen** an. | Die betreffende Klassifikation wird in den Abschnitt **Gruppen-Klassifikationen** übertragen. |
+   | Entfernen einer Klassifikation von der Gruppe | Klicken Sie die Klassifikation im Abschnitt **Gruppen-Klassifikationen** an. | Die betreffende Klassifikation wird in den Abschnitt **Verfügbare Klassifikationen** übertragen. |
+   | Suche nach bestimmten Klassifikationen durch Filtern (dies vereinfacht das Hinzufügen oder Entfernen, siehe oben) | Geben Sie im Abschnitt **Verfügbare Klassifikationen** oder **Gruppen-Klassifikationen** (im betreffenden Feld **Filter...**) eine im Namen der Klassifikation enthaltene Zeichenfolge ein. | Die Liste der Klassifikationen (in ihren jeweiligen Abschnitten) wird nach denjenigen gefiltert, deren Namen die im Feld **Filter...** eingegebene Zeichenfolge enthalten. |
+   | Hinzufügen aller Klassifikationen zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Klassifikationen** auf die Schaltfläche  ![Schaltfläche Alle hinzufügen](/images/ba0414469515-add-all.png) <br />  (Alle hinzufügen). | Alle in diesem Abschnitt verbleibenden Klassifikationen werden in den Abschnitt **Gruppen-Klassifikationen** übertragen. |
+   | Entfernen aller Klassifikationen von der Gruppe | Klicken Sie im Abschnitt **Gruppen-Klassifikationen** auf die Schaltfläche  ![Schaltfläche Alle entfernen](/images/ceb2b8442518-remove-all.png) <br />  (Alle entfernen). | Alle in diesem Abschnitt verbleibenden Klassifikationen werden in den Abschnitt **Verfügbare Klassifikationen** übertragen. |
+5. Klicken Sie auf **Speichern**, und die Gruppen-Klassifikationen werden entsprechend geändert. Die in der Spalte **Berechtigungen** der Gruppe gezeigte Zahl wird aktualisiert, um die Gesamtzahl der Klassifikationen anzuzeigen, die im Abschnitt **Gruppen-Klassifikationen** enthalten waren, ehe Sie **Speichern** angeklickt haben. <br />
+   **Hinweis:** Siehe [Änderung der Benutzer in einer bestehenden Gruppe](/3.3/de/admin-org/managing-groups#modifying-users-in-an-existing-group), um der betreffenden Gruppe einen oder mehrere [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation) hinzuzufügen. Die Freigabe von Dateien kann dann anhand der Klassifikationen auf die betreffenden Covata-Benutzer (und andere Mitglieder derselben Gruppe) beschränkt werden.
+
+## Bearbeiten einer bestehenden Gruppe <a id="editing-an-existing-group" />
+
+Bei der Bearbeitung einer bestehenden Gruppe können der **Name** und die **Beschreibung** der Gruppe geändert werden. Mithilfe dieser Funktion kann auch die **Beschreibung** einer Gruppe angezeigt werden.
+
+**Bearbeitung einer bestehenden Gruppe in Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zur gewünschten Gruppe und aktivieren Sie das Kontrollkästchen links daneben.
+4. Klicken Sie auf die Schaltfläche **Bearbeiten**.
+5. Ändern Sie im Dialogfeld **Gruppe bearbeiten** Folgendes wie gewünscht:
+
+   - **Name** - ein Name, der die Gruppenmitglieder (d. h. [Covata-Benutzer](/3.3/de/admin-org/administering-users-within-an-organisation)) in einem kurzen Satz möglichst gut beschreibt.
+   - **Beschreibung ( *Optional* )** - eine längere Beschreibung für mehr Informationen über die Gruppe. Beachten Sie, das dieses Feld nur über dieses Dialogfeld sichtbar ist.
+6. Klicken Sie auf **Speichern**, und der **Name** und die **Beschreibung** der Gruppe werden entsprechend aktualisiert. <br />
+   **Hinweis:** Aufgrund eines kleinen Fehlers, der in einer künftigen Produktversion behoben wird, ist es aktuell nicht möglich, das Feld **Beschreibung** zu löschen, sobald Text eingegeben wurde.
+
+## Entfernen einer bestehenden Gruppe <a id="removing-an-existing-group" />
+
+Wird eine bestehende Gruppe entfernt, werden alle Verbindungen zu [Covata-Benutzer-Mitgliedern](/3.3/de/admin-org/managing-groups#modifying-users-in-an-existing-group) der betreffenden Gruppe und alle [der Gruppe zugewiesenen Klassifikationen](/3.3/de/admin-org/managing-groups#modifying-classifications-on-an-existing-group) entfernt.
+
+Wurde also einem Covata-Benutzer eine Datei mit einer Klassifikation freigegeben, die einer oder mehreren Gruppen (denen der Benutzer angehört) zugewiesen ist, wirkt sich das Entfernen einer dieser Gruppen auf den Benutzer folgendermaßen aus:
+
+- Bleibt die Verbindung zur Klassifikation erhalten (weil die Klassifikation auch anderen Gruppen zugewiesen ist, denen der Benutzer angehört), hat der Benutzer weiterhin Zugriff auf die betreffende Datei.
+- Geht die Verbindung zur Klassifikation verloren (weil der Benutzer keiner Gruppe angehört, der die Klassifikation zugewiesen ist), verliert der Benutzer den Zugriff auf die betreffende Datei.
+
+**Entfernen einer bestehenden Gruppe aus Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zur gewünschten Gruppe und aktivieren Sie das Kontrollkästchen links daneben.
+4. Klicken Sie auf die Schaltfläche **Entfernen**.
+5. Klicken Sie in der Meldung **Gruppe entfernen** auf **Ja**, um die Gruppe zu entfernen.

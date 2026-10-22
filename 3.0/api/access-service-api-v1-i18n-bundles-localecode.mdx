@@ -1,0 +1,121 @@
+---
+title: "<access-service>/api/v1/i18n/bundles/{localeCode}"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-bundles-localecode-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/bundles/{localeCode}
+```
+
+where `{localeCode}` is a supported locale code.
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-bundles-localecode-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the contents of an internationalization (i18n) bundle as key/value pairs in [JSON format](http://json.org/).
+- `POST` - used to upload a custom i18n bundle to the Covata Platform's Access Service.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-i18n-bundles-localecode-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves the contents of the bundle (specified by `{localCode}`) as key/value pairs in JSON format.
+- Uploads a custom i18n bundle to the Covata Platform's Access Service.
+
+## Supported roles and conditions <a id="access-service-api-v1-i18n-bundles-localecode-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)) and conditions:
+
+- [Originator](/3.0/admin/administering-users#originator-role), [Collaborator](/3.0/admin/administering-users#collaborator-role), [Ad hoc](/3.0/admin/administering-users#adhoc-role), [System administrator](/3.0/admin/administering-users#system-administrator-role) and [User administrator](/3.0/admin/administering-users#user-administrator-role) - a Covata user with any of these roles can call the `GET` method.
+- **System Administrator** - a Covata user with this role can call the `POST` method.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-i18n-bundles-localecode#access-service-api-v1-i18n-bundles-localecode-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-bundles-localecode-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is also required in a POST request to allow multi-part (including binary) form data elements to be uploaded through the request:
+
+- `Content-Type: multipart/form-data`
+
+<Note>
+
+It is also worth appending to this header a `boundary` parameter, whose string value is used to demark each multi-part form data element of the request (i.e. this string is not used for any other purpose throughout the entire request). <br />
+ For example, to use the following string to demark each multi-part form data element: <br />
+`-----------------------------12345678901234567890123456` <br />
+ assign this string value to the `boundary` parameter, which in turn is appended to the `Content-Type: multipart/form-data` header, such that this header will be: <br />
+`Content-Type: multipart/form-data; boundary=-----------------------------12345678901234567890123456`
+
+</Note>
+
+## Required parameters on POST <a id="access-service-api-v1-i18n-bundles-localecode-required-parameters-on-POST" />
+
+The following required parameter must be sent in the body of the POST request, as an individual multi-part form data elements:
+
+- **file** - The actual data of the custom i18n bundle (in [JSON format](http://json.org/)) to be uploaded to the Covata Platform's Access Service. <br />
+  **Example:**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="file"; filename="da.json"
+  Content-Type: application/json
+
+  {YOUR ACTUAL CUSTOM I18N BUNDLE IN JSON FORMAT HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Returns from a GET request <a id="access-service-api-v1-i18n-bundles-localecode-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **i18nCode** - .
+- **bundle** - A list of key/value pairs consisting of a series of i18n keys and their respective content values. <br />
+  **Example:**
+
+  ```json
+  {
+    "i18nCode": "en_us",
+    "bundle": {
+      "webapp.htmltemplate.myAccount.upgradeaccount.accountboxdescription": "Upgrade your account, set your password below",
+      "server.constraints.datetime.valid": "Date is not in the correct format",
+      "admin.clientApps.edit.registeredRedirectURI": "Registered redirect URI(s)",
+      ...
+    }
+  }
+  ```
+
+## Returns from a POST request <a id="access-service-api-v1-i18n-bundles-localecode-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **bundleErrors** - .
+
+  - **deltas** - .
+  - **whitelisterrors** - .
+- **success** - .
+- **errors** - . <br />
+  **Example:**
+
+  ```json
+  {
+    "bundleErrors": {
+      "deltas": null,
+      "whitelisterrors": [
+
+      ]
+    },
+    "success": true,
+    "errors": [
+
+    ]
+  }
+  ```

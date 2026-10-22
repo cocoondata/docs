@@ -1,0 +1,273 @@
+---
+title: "<access-service>/api/v1/permissions/sets"
+---
+
+## URL structure <a id="access-service-api-v1-permissions-sets-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/permissions/sets
+```
+
+## Supported methods and overview <a id="access-service-api-v1-permissions-sets-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of permission sets along with their individual permissions, where a permission set defines access that a collaborator has to a file/[Secure Object](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) or folder/[collection](/3.5/api/working-with-files-and-folders-fundamentals#collection).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-permissions-sets-detailed-description" />
+
+This API endpoint retrieves a list of *permission sets* along with their individual *permissions*.
+
+A *permission set*:
+
+- Can be applied to an individual collaborator on a newly created or existing file object or folder (i.e. [item](/3.5/api/working-with-files-and-folders-fundamentals#item)), whenever collaborators are modified by either:
+
+  - the item's owner or
+  - another collaborator with the **Manage** permission set on the item.
+- Consists of one or more individual *permissions*, each of which allows specific methods of the Covata API's endpoints involving an item to be called by a Covata user who:
+
+  - is a collaborator on the item and
+  - has the appropriate permission(s) (by virtue of the collaborator's permission set on the item).
+
+The following table lists each permission set and their individual permissions:
+
+| Permission set | Permission set ID | Individual permissions |
+| --- | --- | --- |
+| View | 1 | View |
+| Download | 2 | View, Print, Download |
+| Upload | 5 | View, Print, Download, View Other, Upload File, Create Folder <sup>&#42;</sup> |
+| Modify | 3 | View, Print, Download, View Other, Upload File, Create Folder <sup>&#42;</sup> , Rename, Remove (File), Remove (Folder) <sup>&#42;</sup> , Move |
+| Manage | 6 | View, Print, Download, View Other, Upload File, Create Folder <sup>&#42;</sup> , Rename, Remove (File), Remove (Folder) <sup>&#42;</sup> , Move, Share |
+
+For details about these permission sets and individual permissions and their affect on items, refer to the **Detailed description - PUT method requests** sections of:
+
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.5/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-detailed-description) - for files
+- [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.5/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-detailed-description) - for folders
+
+<sup>&#42;</sup> These individual permissions are not applicable when either the **Modify** or **Manage** permission set is applied to collaborators *on files*.
+
+<Note>
+
+Individual *permissions* cannot be applied to collaborators - only *permission sets*.
+
+</Note>
+
+## Supported roles <a id="access-service-api-v1-permissions-sets-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [SafeShare Administrator's](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-permissions-sets#access-service-api-v1-permissions-sets-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-permissions-sets-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-permissions-sets-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **permissionSets** - An array listing all available permission sets available through the Covata Platform.
+
+  - **id** - The ID of a specific permission set.
+  - **permissions** - An array listing the individual permissions relating to a specific permission set.
+
+    - **scopes** - An array containing either the strings `object` (if the individual permission applies to files/[Secure Objects](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) only) or `collection` (if the permission applies to folders/[collections](/3.5/api/working-with-files-and-folders-fundamentals#collection) only) or both of these values (if the permission applies to both files and folders).
+    - **nameI18nCode** - The I18N code of the specific permission's name, which is one of the following (listed by the English language name value for the permission):
+
+      - **View** - `server.permission.name.view`
+      - **View Other** - `server.permission.name.view.other`
+      - **Print** - `server.permission.name.print`
+      - **Download** - `server.permission.name.download`
+      - **Upload File** - `server.permission.name.file.upload`
+      - **Create Folder** - `server.permission.name.folder.create`
+      - **Rename** - `server.permission.name.rename`
+      - **Remove** (File) - `server.permission.name.file.delete`
+      - **Remove** (Folder) - `server.permission.name.folder.delete`
+      - **Move** - `server.permission.name.move`
+      - **Share** - `server.permission.name.share`
+    - **id** - The ID of the individual permission.
+  - **scopes** - An array containing either the strings `object` (if the permission set applies to files only) or `collection` (if the permission set applies to folders only) or both of these values (if the permission set applies to both files and folders).
+  - **nameI18nCode** - The I18N code of the specific permission set's name, which is one of the following (listed by the English language name value for the permission set):
+
+    - **View** - `server.permissionset.name.view`
+    - **Download** - `server.permissionset.name.download`
+    - **Upload** - `server.permissionset.name.upload`
+    - **Modify** - `server.permissionset.name.modify`
+    - **Manage** - `server.permissionset.name.manage`
+  - **descriptionI18nCode** - The I18N code of the permission set's description.
+
+  **Example:**
+
+  ```json
+  {
+      "permissionSets": [{
+          "id": "1",
+          "permissions": [{
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view",
+              "id": "60"
+          }],
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permissionset.name.view",
+          "descriptionI18nCode": "server.permissionset.description.view"
+      }, {
+          "id": "2",
+          "permissions": [{
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.print",
+              "id": "61"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.download",
+              "id": "62"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view",
+              "id": "60"
+          }],
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permissionset.name.download",
+          "descriptionI18nCode": "server.permissionset.description.download"
+      }, {
+          "id": "5",
+          "permissions": [{
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.print",
+              "id": "61"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.download",
+              "id": "62"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view",
+              "id": "60"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view.other",
+              "id": "71"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.folder.create",
+              "id": "65"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.file.upload",
+              "id": "64"
+          }],
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permissionset.name.upload",
+          "descriptionI18nCode": "server.permissionset.description.upload"
+      }, {
+          "id": "3",
+          "permissions": [{
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.file.delete",
+              "id": "66"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.print",
+              "id": "61"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.folder.delete",
+              "id": "67"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.download",
+              "id": "62"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view",
+              "id": "60"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.move",
+              "id": "69"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.rename",
+              "id": "68"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view.other",
+              "id": "71"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.folder.create",
+              "id": "65"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.file.upload",
+              "id": "64"
+          }],
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permissionset.name.modify",
+          "descriptionI18nCode": "server.permissionset.description.modify"
+      }, {
+          "id": "6",
+          "permissions": [{
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.file.delete",
+              "id": "66"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.print",
+              "id": "61"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.folder.delete",
+              "id": "67"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.download",
+              "id": "62"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view",
+              "id": "60"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.move",
+              "id": "69"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.share",
+              "id": "73"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.rename",
+              "id": "68"
+          }, {
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permission.name.view.other",
+              "id": "71"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.folder.create",
+              "id": "65"
+          }, {
+              "scopes": ["collection"],
+              "nameI18nCode": "server.permission.name.file.upload",
+              "id": "64"
+          }],
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permissionset.name.manage",
+          "descriptionI18nCode": "server.permissionset.description.manage"
+      }]
+  }
+  ```

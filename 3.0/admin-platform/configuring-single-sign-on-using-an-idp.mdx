@@ -1,0 +1,96 @@
+---
+title: "Configuring single sign-on using an IdP"
+---
+
+A Safe Share administrator can configure an external Identity Provider (IdP) service (also known as an Identity Assertion Provider) to work with their Covata Platform instance using Security Assertion Markup Language (SAML) 2.0. (Be aware that the Covata Platform does not support SAML version 1.0.)
+
+Upon successfully establishing this configuration, the Covata Platform can then delegate the authentication of *any* Covata user to this IdP service through a separate URL, thereby providing the Covata Platform with single sign-on support. ('*Any* Covata user' includes [Safe Share administrators](/3.0/admin-platform/administering-platform-administrator-users) as well as [users within an organization](/3.0/admin-platform/administering-users-within-an-organisation), regardless of the organization/s they belong to.)
+
+Once a user has successfully authenticated to the Covata Platform's IdP service, the IdP automatically issues a SAML token (representing this user) back to the Covata Platform, which in turn exchanges this SAML token for an access/refresh token.
+
+Configuring an IdP service on the Covata Platform has the following *requirements*:
+
+- An **IdP metadata file** - this is a [SAML-standard](http://saml.xml.org/saml-specifications) XML file that can be obtained from your IdP service and contains configuration information for 3rd party services (such as the Covata Platform) to interact with the IdP service itself.
+- The **IdP's email field** - Covata user accounts (on the Covata Platform) are matched against this user field on the IdP service. Note that this field configuration information may not be part of the IdP metadata file.
+- A **private key** and **public X.509 certificate** (for the **Covata Platform**) - this X.509 certificate is uploaded (either manually or automatically) to the IdP service, which the IdP service then uses to communicate securely with the Covata Platform. <br />
+  **Note:** The IdP metadata file also contains a public X.509 certificate for the IdP service, which the Covata Platform uses to communicate securely with the IdP service.
+
+<Warning>
+
+The Covata Platform's Access Service does *not* support the creation of users on an IdP service. Currently, users on an IdP service will need to be added or updated directly on the IdP itself (for example, through an LDAP server). Be aware that new Covata user accounts created on the Covata Platform as a result of adding them either:
+
+- manually through [Organization Administration](/3.0/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) or [Safe Share Administration](/3.0/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) (which have the **Local** [Account Type](/3.0/admin-platform/administering-users-within-an-organisation#account-type)), or
+- automatically by the Covata Platform as a user with the [Ad hoc role](/3.0/admin-platform/administering-users-within-an-organisation#adhoc-role) (which has the **External** Account Type),
+
+*will not automatically be added* to the IdP service.
+
+Therefore, if a configured IdP service is enabled on the Covata Platform, then these users can only authenticate through the Covata Platform's own sign-in URL (as opposed to the Covata Platform's single sign-on URL that delegates authentication to the IdP service).
+
+If, however, these Covata users subsequently have an equivalent account (i.e. with the same email address) created directly on the IdP service, then these users can take advantage of the Covata Platform's single sign-on URL.
+
+</Warning>
+
+<a id="saml-page" />
+
+![IdP/SAML page](/images/bf1de6d8d360-saml-page.png)
+## Configuring an IdP service
+
+The **SAML** page of Safe Share Administration ([above](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#saml-page)) allows:
+
+- The [addition of an IdP service configuration](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#adding-an-idp-service-configuration) on their Covata Platform instance.
+- The existing IdP service configuration to be [edited](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#editing-the-idp-service-configuration), as well as [disabled or re-enabled](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#disabling-or-re-enabling-the-idp-service-configuration).
+
+## Adding an IdP service configuration
+
+**To add an IdP service configuration to the Covata Platform:**
+
+1. [Sign in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **SAML** option on the left of the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **SAML** page.
+3. Click the **Add IdP Configuration** button.
+4. In the **Add IdP Configuration** dialog box, complete the IdP service configuration fields described in the [table](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#idp-service-configuration-fields) (below).
+5. Click **Save** and the IdP service configuration will appear on the **SAML** page. <br />
+   **Notes:**
+
+   - Once the IdP service has been configured successfully, users can then authenticate to the IdP service by specifying into their browser's URL field, the base URL of your Safe Share web application instance (which is also the Covata Platform URL), appended by `/sso` (for single sign-on) - e.g: <br />
+     `https://safe-share.xy-company.com/sso`
+   - To allow your Covata users to sign out from the IdP service, ensure that the IdP service has been configured to allow this and if necessary, that sufficient instructions are provided to these users on how to sign out from the IdP. Otherwise, your users will continue to be signed in to the Safe Share web application whenever they revisit the single sign-on URL (above) and then click the **Single Sign-on** button.
+   - It is only possible to add one IdP service configuration, which can then be edited below.
+
+<a id="idp-service-configuration-fields" />The following table describes all IdP-related fields which are required by the Covata Platform for a successful connection to an LDAP server/user directory.
+
+| Field | Description |
+| --- | --- |
+| Time difference buffer | The maximum permitted time difference (in seconds) between the clocks of the Identity Provider (IdP) service and the Covata Platform's Access Service. <br />  It is assumed that there is an inherent time difference between the server clocks of the IdP service and the Access Service. Therefore, for the purpose of defining the **SAML session validity** below (to which this **Time difference buffer** value is added), define the maximum tolerated time difference between the IdP service and the Access Service. |
+| SAML session validity | The SAML session (i.e. assertions issued by the IdP service) will be valid for this number of seconds. <br />  After a user successfully authenticates to the IdP service, the IdP service then creates an *assertion* which it then typically caches and subsequently issues to all of its service providers utilizing single sign-on (one of which is the Covata Platform's Access Service). This assertion typically contains:  <br />•  The SAML token itself (described [above](/3.0/admin-platform/configuring-single-sign-on-using-an-idp)) representing the authenticated user. <br />•  An *issue time* indicating when the assertion was created by the IdP service. <br />At the request of the Access Service, the IdP service sends its (cached) assertion (containing the SAML token) to the Access Service when the Covata user's access token (and refresh token) expires - see the [table](/3.0/admin-platform/configuring-client-applications#client-application-fields) on [Configuring client applications](/3.0/admin-platform/configuring-client-applications) for more information about access/refresh token validity periods. Therefore, this SAML token effectively overrides the validity periods of access/refresh tokens (since a valid SAML token is exchanged by the Access Service for a fresh access/refresh token). <br />  The *total SAML session validity* is calculated as this **SAML session validity** value added to the **Time difference buffer** value above. If the time difference between the Access Service's current time and the cached assertion's *issue time* is greater than this *total SAML session validity*, then the Covata Platform will reject this assertion (+ its SAML token) from the IdP service. The user will then be forced to re-authenticate to the IdP service (which in turn is forced to create a new assertion with a new issue time). <br /> **Notes:**  <br />•  Set an optimal **SAML session validity** period that suits other service providers utilizing the configured IdP service:  <br />•  Setting this value too high may increase the risk of a user's session with the Covata Platform being compromised. <br />•  Setting this value too low may force users to re-authenticate to the IdP service too frequently, which may impact upon other service providers utilizing this IdP service. <br />•  Be aware that once the Covata Platform rejects an IdP service's assertion (because the *total SAML session validity* period has been exceeded) any user sessions with valid access/refresh tokens will remain open, unless the user signs out or their tokens/sessions have been terminated (through [Safe Share web application](/3.0/user/managing-your-account#terminating-your-accounts-sessions), [Organization Administration](/3.0/admin-platform/administering-users-within-an-organisation#terminating-your-organisation-administrator-accounts-sessions) or [Safe Share Administration](/3.0/admin-platform/administering-platform-administrator-users#terminating-your-platform-administrator-accounts-sessions)).  |
+| IdP email field | The name of the IdP metadata field that corresponds to users' email addresses. <br />**Note:** If an IdP metadata file defines its email field in this file, then the value specified in this **IdP email field** entry overrides the value specified in the IdP metadata file.  |
+| IdP metadata file | Indicates whether or not the IdP's metadata file has been uploaded and configured in the Covata Platform. This file is one of the requirements (described [above](/3.0/admin-platform/configuring-single-sign-on-using-an-idp)) for configuring an IdP service on the Covata Platform. <br />**To upload the IdP metadata file:** <br />•  [Sign in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration. <br />•  Click the **SAML** option on the left of the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **SAML** page. <br />•  Click the **Upload IdP Metadata** button. <br />•  In the **IdP Metadata** dialog box, click **Upload IdP metadata XML file**. <br />•  Navigate to and select your IdP metadata (SAML-standard XML) file containing configuration information which the Covata Platform can use to interact with the IdP service. <br />•  Click **Close** to close the **IdP Metadata** dialog box. <br /> **Note:** You can remove an uploaded IdP metadata file at any time by opening this **IdP Metadata** dialog box and clicking **Remove IdP configuration** (which replaces **Upload IdP metadata XML file** whenever an IdP metadata file has been successfully uploaded to the Covata Platform) and then **Save** to record this removal. <br />Once an IdP metadata file has been uploaded to the Covata Platform, a service provider (SP) private key and certificate must be uploaded to the Covata Platform, which is also one of the requirements (described [above](/3.0/admin-platform/configuring-single-sign-on-using-an-idp)) for configuring an IdP service on the Covata Platform. <br />**To upload the SP private key and certificate:** <br />•  Ensure you have [signed in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration and clicked the **SAML** option on the left of the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **SAML** page. <br />•  Click the **Upload SP Certificate** button. <br />•  In the **Service Provider Private Key and Certificate** dialog box, follow the instructions at the top to generate a private key and certificate, which the Covata Platform will use to allow the IdP service to communicate securely with the Covata Platform. <br />•  Click **Save** to store the private key and certificate. <br />•  Click **Close** to close the **Service Provider Private Key and Certificate** dialog box. <br /> **Notes:**  <br />•  You can remove a configured SP private key and certificate at any time by opening this **Service Provider Private Key and Certificate** dialog box and clicking **Remove certificate** (which replaces **Save** whenever an SP private key and certificate have been successfully configured on the Covata Platform). <br />•  Once an SP private key and certificate has been successfully configured, you can download a SAML-standard XML file of the SP certificate (to upload manually to the IdP service) by clicking the **Download metadata** link either on the **Service Provider Private Key and Certificate** dialog box or directly on the **SAML** Safe Share Administration page.  |
+| IdP enabled? | Indicates whether or not the Covata Platform is able to work with its configured IdP service (for delegated authentication and single sign-on). <br />**Note:** This field is empty until the IdP service configuration has been added to the Covata Platform.  |
+
+## Editing the IdP service configuration
+
+1. [Sign in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **SAML** option on the left of the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **SAML** page.
+3. Click the **Edit IdP Configuration** link.
+4. In the **Edit IdP Configuration** dialog box, modify the IdP service configuration fields described in the [table](/3.0/admin-platform/configuring-single-sign-on-using-an-idp#idp-service-configuration-fields) (above).
+5. Click **Save** and the IdP service configuration will be updated.
+
+## Disabling or re-enabling the IdP service configuration
+
+Disabling the IdP service configuration disables single sign-on capabilities to the Covata Platform (through this configured IdP service).
+
+Therefore, if the IdP service configuration is disabled, users will no longer be able to use the base URL of your Safe Share web application instance, appended by `/sso` to sign in to Covata - e.g:
+
+`https://safe-share.xy-company.com/sso`
+
+**To disable, enable or re-enable the IdP service configuration:**
+
+1. [Sign in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **SAML** option on the left of the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **SAML** page.
+3. To:
+
+   - *Disable the IdP service configuration* - click the (green) **Enabled** button until it reads **Disabled**.
+   - *Enable or re-enable the IdP service configuration* - click the (red) **Disabled** button until it reads **Enabled**.
+
+---
+
+#### Please provide your feedback here

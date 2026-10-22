@@ -1,0 +1,58 @@
+---
+title: "<access-service>/api/v1/items/delta"
+---
+
+## URL structure <a id="access-service-api-v1-items-delta-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/delta
+```
+
+## Supported methods and overview <a id="access-service-api-v1-items-delta-supported-methods-and-overview" />
+
+- `GET` - used to retrieve lists of changes to the currently authenticated Covata user's<sup>&#42;</sup> [Secure Objects](/3.2/api/creating-files-and-folders#secure-object) and [collections](/3.2/api/creating-files-and-folders#collection) (i.e. [items](/3.2/api/creating-files-and-folders#item)).
+
+## Detailed description <a id="access-service-api-v1-items-delta-detailed-description" />
+
+This API endpoint retrieves lists of changes to the currently authenticated Covata user's<sup>&#42;</sup> Secure Objects and collections from a given point in time, which includes separate lists for:
+
+- New items (added),
+- Deleted items (removed) and
+- Modified items.
+
+## Supported roles <a id="access-service-api-items-delta-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-delta-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-items-delta-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **cursor** - The cursor value returned from the previous request to this API endpoint. The default value is `0`.
+- **pageSize** - 1 to 100 (default is 10).
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-items-delta-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **added** - .
+- **removed** - .
+- **modified** - .
+- **cursor** - An ID value representing the current point in time from which a subsequent call to this API endpoint can generate new (i.e. subsequent) lists of changes to the currently authenticated Covata user's items.
+
+  **Example (response from ...):**
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-required-headers) of requests to this endpoint.

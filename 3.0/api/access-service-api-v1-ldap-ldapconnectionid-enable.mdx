@@ -1,0 +1,47 @@
+---
+title: "<access-service>/api/v1/ldap/{ldapconnectionId}/enable"
+---
+
+## URL structure <a id="access-service-api-v1-ldap-ldapconnectionid-enable-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldap/{ldapconnectionId}/enable
+```
+
+where `{ldapconnectionId}` is the ID of a LDAP connection.
+
+## Supported methods and overview <a id="access-service-api-v1-ldap-ldapconnectionid-enable-supported-methods-and-overview" />
+
+- `PUT` - used to enable or disable an existing [LDAP connection](/3.0/admin/configuring-ldap), based on its ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-ldap-ldapconnectionid-enable-detailed-description" />
+
+This API endpoint enables or disables an LDAP connection, using the LDAP connection's ID.
+
+Calling this endpoint on a given LDAP connection successively toggles between enabling and disabling this LDAP connection.
+
+The LDAP connection's ID can be obtained by calling the `GET` method on the [&lt;access-service&gt;/api/v1/ldap](/3.0/api/access-service-api-v1-ldap) API endpoint, which retrieves a list of field information for all LDAP connections configured on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-ldap-ldapconnectionid-enable-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-ldap-ldapconnectionid-enable#access-service-api-v1-ldap-ldapconnectionid-enable-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldap-ldapconnectionid-enable-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-ldap-ldapconnectionid-enable-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

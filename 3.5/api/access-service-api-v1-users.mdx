@@ -1,0 +1,154 @@
+---
+title: "<access-service>/api/v1/users"
+---
+
+## URL structure <a id="access-service-api-v1-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-supported-methods-and-overview" />
+
+- `PUT` - adds the [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) role to (or removes it from) a [Covata user](/3.5/api/authentication-and-authorisation) account <sup>&#42;</sup> on the Covata Platform.
+- `GET` - retrieves a list of information associated with existing SafeShare administrator users on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-users-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Grants the SafeShare administrator role to (or remove it from) a Covata user account <sup>&#42;</sup> on the Covata Platform. The SafeShare administrator role grants a user access to [SafeShare Administration](/3.5/admin-platform/index#platform-administration).
+- Retrieves a list of information associated with existing SafeShare administrators on the Covata Platform. The list of users returned in the [response](/3.5/api/access-service-api-v1-users#access-service-api-v1-users-returns):
+
+  - can be filtered according to users whose email address contains the string specified in the request,
+  - can be sorted according to the user's email address, first name, last name or user ID and
+  - is utilised on the [Administrators](/3.5/admin-platform/administering-platform-administrator-users) page of SafeShare Administration.
+
+<sup>&#42;</sup> If a Covata user account is not already registered on the Covata Platform, then making this request automatically creates this user account.
+
+## Supported roles and conditions <a id="access-service-api-v1-users-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/3.5/admin-platform/index)):
+
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) - when this user is another SafeShare administrator user to the one whose account is being granted the SafeShare administrator role (or having it removed).
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-users#access-service-api-v1-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required PUT-request parameters <a id="access-service-api-v1-users-required-put-request-parameters" />
+
+The following required parameters must be sent in the **body** of the PUT request, as individual members of a **JSON object**:
+
+- **email** - The email address of the Covata user account with which to grant or remove the [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) role.
+- **admin** - A boolean value of `true` to grant the SafeShare administrator role to the user (specified by **email**) or `false` to remove the SafeShare administrator role from this user. <br />
+  **Example (PUT request parameters):**
+
+  ```json
+  {
+      "email": "platform.administrator@xy-company.com",
+      "admin": true
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-users-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **searchText** - Any text substring used to filter for *all* Covata users with the [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) role on the Covata Platform, where this text substring must match that of the user account's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
+- **searchColumn** - The user's field upon which the text substring (specified in **searchText** above) is used for filtering user accounts returned in the response. The fields available to this text searching include:
+
+  - `email` - the email address associated with the Covata user.
+
+  If this parameter is omitted, then no filtering is performed.
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is information about a Covata user with the SafeShare administrator role. If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. Covata users with the SafeShare administrator role) from the Covata Platform returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. Covata users with the SafeShare administrator role) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. Covata users with the SafeShare administrator role) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `email` - the email address associated with the Covata user,
+  - `firstName` - the first name (set by this user),
+  - `lastName` - the last name (set by this user) and
+  - `userId` - the ID of the Covata user account.
+
+  If this parameter is omitted, then its value is `email` by default. <br />
+  **Example (GET request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/users?searchText=administrator&searchColumn=email
+  ```
+
+## Returns <a id="access-service-api-v1-users-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all Covata user accounts on the Covata Platform which have the [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) role, which have been filtered by any [parameters](/3.5/api/access-service-api-v1-users#access-service-api-v1-users-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these user accounts (represented as an object containing the following members unless otherwise stated).
+- **email** - The email address of a Covata user account that either:
+
+  - has the SafeShare administrator role (from a `GET` request to this endpoint), or
+  - with which the SafeShare administrator role was granted or removed (from a `PUT` request).
+- **firstName** - The first name set by this user. This is the first name that appears on the [Administrators](/3.5/admin-platform/administering-platform-administrator-users) page of SafeShare Administration, the [Users](/3.5/admin-org/administering-users-within-an-organisation) page of SafeShare Organisation Administration and/or the [My Account](/3.5/user/managing-your-account) feature of Covata SafeShare for Web.
+- **lastName** - The last name set by this user. Like the first name (above), this appears on the **Administrators** page of SafeShare Administration, the **User** page of Organisation Administration and/or the **My Account** feature of SafeShare for Web.
+- **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has been set by this user on their own account, by another SafeShare administrator, or if this user is also a member of an organisation, enforced for all members of the organisation (by any Organisation administrator of that organisation).
+- **systemAdmin** - A boolean value that indicates whether (`true`) or not (`false`) this user's account has the **SafeShare administrator** role.
+- **enabled** - A boolean value that indicates whether (`true`) or not (`false`) this user's account has any role, such as the **SafeShare administrator** role. This value should be `true`.
+- **accountNonLocked** - A boolean value that indicates whether (`false`) or not (`true`) this user's account is locked. A Covata user account may become locked as a result of the user mistyping their password more than the maximum number of times configured (by themselves or another SafeShare administrator of their Covata Platform instance). The user themselves will need to unlock this account by following the instructions in their '*account lockout*' notification (or by resetting their password via any of the options on the Covata Sign-in page).
+- **numFailedLogins** - The number of times this user failed to successfully sign in.
+- **id** ( *from GET requests only* ) - The ID value of this Covata user account.
+- **count** ( *from GET requests only* ) - The maximum number of items (i.e. Covata users with the SafeShare administrator role) that can be returned in the response.
+- **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this endpoint. <br />
+  **Example (response from a PUT request):**
+
+  ```json
+  {
+      "email": "platform.administrator@xy-company.com",
+      "firstName": null,
+      "lastName": null,
+      "mfaEnabled": false,
+      "systemAdmin": true,
+      "enabled": true,
+      "accountNonLocked": true,
+      "numFailedLogins": 0
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items": [{
+          "email": "another.administrator@xy-company.com",
+          "firstName": "Another",
+          "lastName": "Administrator",
+          "mfaEnabled": false,
+          "systemAdmin": true,
+          "enabled": true,
+          "accountNonLocked": true,
+          "numFailedLogins": 0,
+          "id": "747696349168070656"
+      }, {
+          "email": "platform.administrator@xy-company.com",
+          "firstName": "Platform",
+          "lastName": "Administrator",
+          "mfaEnabled": false,
+          "systemAdmin": true,
+          "enabled": true,
+          "accountNonLocked": true,
+          "numFailedLogins": 0,
+          "id": "757412808257589248"
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

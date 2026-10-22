@@ -1,0 +1,125 @@
+---
+title: "Accessing Safe Share Administration"
+---
+
+The features of [Safe Share Administration](/3.0/admin-platform/index#platform-administration) are only available to Safe Share administrators, where a *Safe Share administrator* is any [Covata user](/3.0/admin-platform/administering-platform-administrator-users) who has the [Safe Share administrator](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role) [role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles).
+
+## Signing in to Safe Share Administration <a id="signing-in-to-platform-administration" />
+
+When signing in to Safe Share Administration, a Covata user account must have the [Safe Share administrator role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role) to access all Safe Share Administration features of the Covata Platform <sup>&#42;</sup> .
+
+<Note>
+
+If accessing Safe Share Administration for the first time, see [Accessing Safe Share Administration for the first time](/3.0/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time) (below) before continuing.
+
+</Note>
+
+**To sign in to Safe Share Administration:**
+
+1. Open a compatible web browser and enter the base URL of your Covata Platform instance (appended by `/#/admin`) in your browser's URL field - e.g: <br />
+   `https://covata-platform.xy-company.com/#/admin` <br />
+   **Tip:** You may wish to bookmark this URL.
+2. On the Covata Sign-in page, enter the **Email address** and **Password** associated with your Covata user account which has the [Safe Share administrator role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role). <br />
+   *Forgotten your password?* If you have, then leave the **Password** field blank but click the **Forgot your password** link instead. Follow the instructions on the page and then in your email notification to reset your password.
+3. Click the **SIGN IN** button (or type 'Enter'/'Return') and if successful, the [Safe Share Administration interface](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) is displayed. <br />
+   **Notes:**
+
+   - The email address of the currently signed in user appears at the top right-hand corner of the Safe Share Administration interface.
+   - If the main Covata [Safe Share web application](/3.0/user/index) page appears instead of the Safe Share Administration interface, click your email address at the top-right and choose **Administration** from the drop-down menu.
+
+<Note>
+
+<sup>&#42;</sup> **Notes:**
+
+- Any Covata user (including any Safe Share administrator) whose account has the [Organization administrator role](/3.0/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for a given [organization](/3.0/admin-platform/administering-organisations) can *manage* and administer that organization. For more information about the Organization administrator role, see [Administering users within an organization](/3.0/admin-platform/administering-users-within-an-organisation) in the [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section of this guide.
+- A Safe Share administrator (typically a Covata user account with only the [Safe Share administrator role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role)) can grant themselves the [Organization administrator role](/3.0/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for an organization by making themselves the administrator of this organization *when they* [add/create the organization](/3.0/admin-platform/administering-organisations#adding-a-new-organisation). This user (who now has both the Safe Share administrator role and the Organization administrator role for this organization) can then grant other Covata users the Organization administrator role for their organisation. Otherwise (and perhaps more typically), a Safe Share administrator cannot administer an organization added to their Covata Platform instance, unless the Organization administrator initially set for this organization (or someone that this Organization administrator subsequently made an Organization administrator of their organization) grants the Safe Share administrator the Organization administrator role for the organization when [adding the Safe Share administrator to the organization](/3.0/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account).
+
+</Note>
+
+## The Safe Share Administration interface <a id="the-platform-administration-interface" />
+
+The Safe Share Administration interface consists of a set of configuration pages, each of which is accessible from the options on the left (below). Note that:
+
+- Covata users who have the [Safe Share administrator role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role) can access all of these options on the left of the Safe Share Administration interface.
+- Covata users who have both the Safe Share administrator role and the [Organization administrator role](/3.0/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) for one or more organizations can access the [Organization Administration interface](/3.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for these organizations (only), in addition to all Safe Share Administration options on the left of the interface. For more information about managing organizations, see the [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section of this guide.
+
+The **Dashboard** [page](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) is initially displayed upon a Safe Share administrator successfully [signing in to Safe Share Administration](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) (above).
+
+<Note>
+
+If accessing Safe Share Administration from a tablet or phone, tap the 'menu' icon in the top left hand corner of the screen to access these options.
+
+</Note>
+
+![Dashboard page](/images/d0bb71e52136-platform-administration-dashboard-page.png)
+The table below describes each of these Safe Share Administration pages, which can be accessed by clicking its option on the left of the interface.
+
+| Safe Share Administration page | Description |
+| --- | --- |
+| [Dashboard](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) | Provides a single-page graphical overview of various aspects of your Covata Platform's current statuses (presented in panels), recent sign-in attempts (presented in graph form) as well as system usage metrics for each organization including Covata user account roles and storage usage/availability. |
+| [Organizations](/3.0/admin-platform/administering-organisations) | Allows Safe Share administrator-level access to all organizations configured on your Covata Platform instance. From this page, any Safe Share administrator can:  <br />•  Create a new organization. <br />•  Rename an organization, as shown to all Covata users who are members of this organization. <br />•  Modify the quota used to limit the amount of storage (managed by the Covata Platform's Content Service) available to an organization. <br />•  Under certain limited conditions, remove an organization.  |
+| [Administrators](/3.0/admin-platform/administering-platform-administrator-users) | Allows access to all Covata users who are Safe Share administrators, from which any Safe Share administrator can:  <br />•  add Safe Share administrator user accounts, which either creates new Covata user accounts with the [Safe Share administrator role](/3.0/admin-platform/administering-platform-administrator-users#platform-administrator-role) or grants existing Covata user accounts this role, or <br />•  remove Safe Share administrator accounts, which removes the Safe Share administrator role from Covata user accounts.  |
+| [Client Apps](/3.0/admin-platform/configuring-client-applications) | Allows the registration and configuration of applications (e.g. built by integrators using the Covata Platform's API) which uses Covata technologies to create and/or access Secure Objects. The configurations of these 'client' applications on the Covata Platform define:  <br />•  Which OAuth 2.0 grant types the application can use to authenticate to the Covata Platform. <br />•  The application's client ID and client secret (i.e. the credentials of the application itself, which also identifies the application to the Covata Platform). <br />•  The validity of the application's access and refresh tokens, which determines the duration of a user's session with the Covata Platform when they use this application. <br />•  The application's 'redirect URI(s)', to which the Covata Platform sends its request (and is handled by the application) to complete the OAuth 2.0 authorization process. <br />•  Whether the application's access to the Covata Platform is either disabled or re-enabled.  |
+| [LDAP](/3.0/admin-platform/configuring-ldap) | Allows the configuration of connections to one or more LDAP user directories, which can be used to populate the Covata Platform with [Covata user accounts](/3.0/admin-platform/administering-users-within-an-organisation). |
+| [SAML](/3.0/admin-platform/configuring-single-sign-on-using-an-idp) | Allows the configuration of a SAML-based Identity Provider (IdP) service to which Covata users can authenticate to gain access to the Covata Platform and the Safe Share web application through single sign-on. |
+| [Configuration](/3.0/admin-platform/configuring-platform-administration-properties) | Allows the modification of properties that affect certain functional areas across the Covata Platform (including all organizations configured on it). |
+| [Theme](/3.0/admin-platform/re-theming-the-application-and-administration) | Allows the Safe Share web application and Safe Share Organization Administration user interfaces for all organisations configured on the Covata Platform (including the Safe Share Administration interface) to be 're-themed' by modifying the logos of its user interface as well as email notifications. |
+| [Internationalization](/3.0/admin-platform/managing-internationalization) | Allows custom/external language bundles to be uploaded to provide the Covata Platform with greater internationalization support for more languages. Also allows Safe Share administrators to change the user interface language for the sign-in page, as well as the default language of Safe Share Administration, Safe Share Organization Administration and (initially) the Safe Share web application for any newly added Covata users. |
+
+## The Safe Share Administration dashboard <a id="the-platform-administration-dashboard" />
+
+The **Dashboard** page is initially displayed upon a Safe Share administrator successfully [signing in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+
+![Dashboard page](/images/d0bb71e52136-platform-administration-dashboard-page.png)
+The following table describes each component of the **Dashboard** page from left to right/top to bottom.
+
+| Dashboard page component | Description |
+| --- | --- |
+| Maximum Required Disk Space | This panel shows the total amount of storage space that the Covata Platform (managed through the Content Service) requires to store content for all Covata users with the [Originator role](/3.0/admin-platform/administering-users-within-an-organisation#originator-role) (i.e. who have a [plan](/3.0/admin-platform/managing-users-storage-quotas-through-plans)) across all of the Covata Platform's configured organizations. Clicking this panel opens the **Organizations** [page](/3.0/admin-platform/administering-organisations). <br /> **Notes:**  <br />•  This total is calculated by summing the quota values of all organizations. <br />•  The Originator role and plans are discussed in more detail in [Administering users within an organization](/3.0/admin-platform/administering-users-within-an-organisation) (of this guide's [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section).  |
+| Client Applications | This panel shows the total number of [client applications](/3.0/admin-platform/configuring-client-applications) currently registered on the Covata Platform. Clicking this panel opens the **Client Applications** [page](/3.0/admin-platform/configuring-client-applications). |
+| LDAP Connections | This panel shows the total number of [LDAP connections](/3.0/admin-platform/configuring-ldap) currently configured on the Covata Platform. Clicking this panel opens the **LDAP Connections** [page](/3.0/admin-platform/configuring-ldap). |
+| User Sign-in Attempts | This graph shows Covata user sign-in attempts over the past week, with each point along a curve representing activity pertinent to that curve on a given day. Each curve on the graph represents the number of successful sign-in attempts from one of the [three types of Covata user account](/3.0/admin-platform/administering-users-within-an-organisation#account-type) (discussed in more detail in [Administering users within an organization](/3.0/admin-platform/administering-users-within-an-organisation), of this guide's [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section). The fourth curve represents the total number of failed sign-in attempts. |
+| Organizations | This section of the dashboard shows each [organization](/3.0/admin-platform/administering-organisations) configured on the Covata Platform. For each of these organizations, the following information is indicated:  <br />•  The organization's name at the top. <br />•  The total numbers of Covata users (within the organization) with the [Originator](/3.0/admin-platform/administering-users-within-an-organisation#originator-role) and [Collaborator](/3.0/admin-platform/administering-users-within-an-organisation#collaborator-role) roles, where each user who has the Originator role has a [plan](/3.0/admin-platform/managing-users-storage-quotas-through-plans) that grants them a quota of storage space. <br />•  A pie chart representing the used and free percentages of the storage space quota assigned to the organization. <br />•  The actual amounts (in bytes/MB/GB) of this used (in orange text) and free storage space, as well as the storage space quota itself (in bold black text). <br />**Note:** The Originator and Collaborator roles as well as plans are discussed in more detail in [Administering users within an organization](/3.0/admin-platform/administering-users-within-an-organisation) (of this guide's [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section). |
+
+## Signing out of Safe Share Administration <a id="signing-out-of-platform-administration" />
+
+**To sign out of Safe Share Administration:**
+
+- Click your email address at the top right-hand corner of the [Safe Share Administration interface](/3.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) and choose **Sign Out** from the drop-down menu. <br />
+   The Covata Sign-in page is redisplayed.
+
+<Warning>
+
+After administering the Covata Platform, please ensure that you explicitly sign out of Safe Share Administration using this procedure (above). If you simply close the browser tab or window that contained your Safe Share Administration session, then you will *not be signed out*, leading to the risk that your session may be compromised by someone else subsequently using your computer.
+
+</Warning>
+
+## Accessing Safe Share Administration for the first time <a id="accessing-platform-administration-for-the-first-time" />
+
+New Covata Platform instances have a default administrator user account (with email address `admin@default.com`).
+
+This user account exists for the purpose of allowing a Safe Share administrator to initially sign in to Safe Share Administration to create a new Safe Share administrator account for themselves, including others if required.
+
+<Warning>
+
+For security reasons, this default administrator user account *should be removed* after it is used to create these new Safe Share administrator accounts.
+
+</Warning>
+
+**To access a new Covata Platform instance and initially set up Safe Share Administration users:**
+
+1. Open a compatible web browser and specify the base URL of your Covata Platform instance (appended by `/#/admin`) into your browser's URL field - e.g: <br />
+   `https://covata-platform.xy-company.com/#/admin`
+2. On the Covata Sign-in page, specify the:
+
+   - **Email address** `admin@default.com` and
+   - **Password** which is simply `password`
+3. Create a new Safe Share administrator user account for the Covata Platform and Safe Share Administration purposes. See [Adding a Safe Share administrator account](/3.0/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) for more information about this step.
+4. ( *Optional* ) Create any additional Safe Share administrator user accounts (if required).
+5. [Sign out](/3.0/admin-platform/accessing-platform-administration#signing-out-of-platform-administration) and [sign in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) again as your new Safe Share administrator user. <br />
+   **Note:** Your initial password (automatically generated by the Covata Platform) will be emailed to you in a **Covata account created** notification.
+6. [Remove](/3.0/admin-platform/administering-platform-administrator-users#removing-platform-administrators) the `admin@default.com` user.
+
+---
+
+#### Please provide your feedback here

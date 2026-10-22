@@ -1,0 +1,75 @@
+---
+title: "<access-service>/api/v1/plans"
+---
+
+## URL structure <a id="access-service-api-v1-plans-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/plans
+```
+
+## Supported methods and overview <a id="access-service-api-v1-plans-supported-methods-and-overview" />
+
+- `POST` - used to add a new [plan](/3.1/admin/managing-users-storage-quotas-through-plans).
+- `GET` - used to retrieve a list of field information for all current plans on the Covata Platform.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-plans-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new plan to the Covata Platform.
+- Retrieves a list of field information for all current plans on the Covata Platform.
+
+## Supported roles <a id="access-service-api-plans-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-plans#access-service-api-v1-plans-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-plans-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-plans-required-parameters" />
+
+The following required parameters must be sent in the body of the POST request, as individual members of a JSON object:
+
+- **description** - .
+- **name** - .
+- **quota** - Specify in MB.
+
+  **Example ():**
+
+## Optional parameters <a id="access-service-api-v1-plans-optional-parameters" />
+
+The following optional parameter can also be sent in the body of the POST request, as individual members of the JSON object that includes the [Required parameters](/3.1/api/access-service-api-v1-plans#access-service-api-v1-plans-required-parameters) above:
+
+- **default** - true or false.
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-plans-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **name** - .
+  - **default** - .
+
+  **Example (response from ...):**

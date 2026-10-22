@@ -1,0 +1,214 @@
+---
+title: "<access-service>/api/v1/config"
+---
+
+## URL structure <a id="access-service-api-v1-config-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config
+```
+
+## Supported methods and overview <a id="access-service-api-v1-config-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of 'public' properties (and their values) about the Covata Platform's Access Service for consumption by client applications.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-config-detailed-description" />
+
+This API endpoint retrieves a list of public properties (and their values) from the the Covata Platform's Access Service for consumption by client applications.
+
+While the response from this endpoint returns an extensive list of properties, only a subset of these properties (most likely to be used) are described in the [Returns](/3.3/api/access-service-api-v1-config#access-service-api-v1-config-returns) section below.
+
+## Supported roles and conditions <a id="access-service-api-config-supported-roles-and-conditions" />
+
+This request does not require any [authentication or authorization](/3.3/api/authentication-and-authorisation) through a Covata user account.
+
+## Required headers <a id="access-service-api-v1-config-required-headers" />
+
+No additional headers are required for submission with this request. This request does not require an access (i.e. `Bearer`) token.
+
+## Returns <a id="access-service-api-v1-config-returns" />
+
+A JSON-formatted response containing numerous properties (each as individual members of this response) for consumption by the client application. Some useful properties include the following members:
+
+- **googleAnalyticsDomain** - The current value of the **The tracking domain used for Google Analytics** Covata Administration property. <br />
+  **Note:** Be aware that the [&lt;access-service&gt;/api/v1/config/server](/3.3/api/access-service-api-v1-config-server) API endpoint returns this member as **analytics.google.trackingDomain**.
+- **googleAnalyticsTrackingCode** - The current value of the **The tracking code used for Google Analytics** Covata Administration property. <br />
+  **Note:** Be aware that the [&lt;access-service&gt;/api/v1/config/server](/3.3/api/access-service-api-v1-config-server) API endpoint returns this member as **analytics.google.trackingCode**.
+- **content.service.url** - The URL for the Covata Platform's Content Service.
+- **document.viewer.enabled** - A boolean value that indicates whether (i.e. `true`) or not (`false`) the read-only view functionality of Safe Share is available. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "admin.console.userwhitelist.heading": "User Whitelist",
+      "admin.help.ldap.baseDN": "The root node in LDAP from which the Covata Platform finds users and groups. Example: ou=users,dc=example-company,dc=com (Maximum 512 characters)",
+      "theme.privacy.url": "",
+      "account.changepassword.cancel.button": "Cancel",
+      "account.changepassword.failed": "An error was encountered while changing your password. Contact your Administrator.",
+      "admin.console.objects.search.admin": "Admin",
+      "webapp.oauth.callback.url.base": "https://safe-share-webapp.xy-company.com",
+      "account.changepassword.oldpassword.placeholder": "Old password",
+      "console.login.password.placeholder": "Your password",
+      "mobile.users.can.set.passcode": "true",
+      "admin.console.ldap.disabled.button": "Disabled",
+      "console.login.unsuccessful": "Your sign-in attempt was not successful! If you fail #maxLoginAttempts# times, then your account will be locked and instructions will be sent to your email on how to unlock it.",
+      "admin.console.menu.reports.icon": "fa fa-bar-chart-o",
+      "googleAnalyticsDomain": "",
+      "admin.console.config.heading": "Configuration",
+      "account.upgrade.confirm.password.placeholder": "Confirm new password",
+      "admin.console.ldap.edit.title": "Edit LDAP Connection",
+      "hide.admin.file.names": "false",
+      "account.changepassword.newpassword.confirm.info": "Renter your new password",
+      "account.changepassword.contact.admin": "To change your password, contact your Administrator.",
+      "googleAnalyticsTrackingCode": "",
+      "account.resetpassword.expired": "The link you selected has expired. Check to see if you received a more recent email to reset your password.",
+      "account.changepassword.newpassword.info": "Enter your new password",
+      "admin.console.help": "Help",
+      "admin.help.config.configGroup": "The group or category of this property",
+      "theme.support.link.default": "http://support.covata.com",
+      "maxLoginAttempts": "25",
+      "version": "3.3.512",
+      "admin.console.heading": "Administration",
+      "admin.help.ldap.managerPassword": "The password for the 'manager' user who has privileges to perform LDAP authentication and synchronization and browse the 'Base DN' (Maximum 128 characters)",
+      "account.resetpassword.failed": "Your password could not be reset. Try again. If the problem persists contact your Administrator.",
+      "console.set.password.label": "Set password",
+      "admin.help.ldap.serverUrl": "The address of the server running LDAP. Example: ldap://ldap.example-company.com",
+      "admin.console.menu.dashboard.icon": "fa fa-dashboard",
+      "admin.help.users.enabled": "",
+      "console.login.button.label": "Sign in",
+      "admin.console.ldap.add.title": "Add LDAP Connection",
+      "admin.console.menu.dashboard": "Dashboard",
+      "account.resetpassword.success": "Your password has successfully been reset.",
+      "admin.help.clientapi.authorities": "",
+      "admin.help.ldap.syncFilter": "The filter used to specify which Covata Platform users will be synchronized based on their LDAP path and attributes (Maximum 512 characters)",
+      "admin.help.users.firstName": "",
+      "admin.console.menu.reports": "Reports",
+      "support.url": null,
+      "account.upgrade.success": "Your password has been set. Sign out and sign in again with your new password.",
+      "account.upgrade.password.placeholder": "New password",
+      "admin.console.users.add.title": "Add User",
+      "admin.console.menu.userwhitelist": "User Whitelist",
+      "admin.console.menu.objects": "Secure Objects",
+      "admin.help.users.email": "",
+      "admin.console.clientapps.add.title": "Add Client Application",
+      "console.login.title": "Sign in",
+      "admin.help.users.force.reset.password": "Force the user to reset their password on first sign-in",
+      "admin.console.ldap.enabled.button": "Enabled",
+      "account.changepassword.title": "Change your password",
+      "admin.console.objects.button.enabled": "enabled",
+      "mfa.password.expiry.time": "7",
+      "admin.console.required.key": "Required Field",
+      "account.unlock.success": "Your account is now unlocked and you may proceed to login",
+      "admin.console.ldap.heading": "LDAP Connections",
+      "admin.password.character.set.invalid": "Must contain characters from at least %d of the following character sets: lowercase letters, uppercase letters, numbers, symbols",
+      "admin.console.menu.theme.icon": "glyphicons sampler",
+      "admin.help.users.accountType": "",
+      "admin.console.objects.search.originator": "Originator",
+      "admin.help.users.lastName": "",
+      "admin.console.edit.title": "Edit",
+      "admin.console.users.edit.title": "Edit User",
+      "admin.console.button.close.label": "Cancel",
+      "admin.console.objects.search.role": "Role",
+      "admin.console.theme.max.image.upload.kilobytes": "100",
+      "admin.console.menu.clientapps": "Client Apps",
+      "webapp.crypto.max.bulk.downloads.count": "100",
+      "admin.console.ldap.edit.button": "Edit",
+      "admin.console.menu.ldap.icon": "fa fa-book",
+      "webapp.crypto.max.chunked.size": "104857600",
+      "admin.console.menu.ldap": "LDAP",
+      "admin.console.users.heading": "Users",
+      "admin.password.min.length.invalid": "Must have at least %d characters",
+      "admin.help.clientapi.refreshTokenValiditySeconds": "Refresh tokens issued by the Covata Platform will be valid for this number of seconds",
+      "admin.help.ldap.statusField": "The LDAP field used by the Covata Platform to determine whether or not a user is disabled. Example: userAccountControl (Max 64 characters)",
+      "admin.help.config.propertyValue": "",
+      "admin.console.logout": "Sign Out",
+      "account.changepassword.newpassword.placeholder": "New password",
+      "admin.console.menu.config.icon": "fa fa-sliders",
+      "console.login.nopassword.title": "Email me a password or reset-password instructions",
+      "admin.console.menu.theme": "Theme",
+      "admin.console.objects.heading": "Files",
+      "account.unlock.failed": "The link you selected has expired.  Please try logging in (you may be already unlocked), or else check to see if you received a more recent email to unlock your account.",
+      "admin.help.ldap.domain": "The domain for the LDAP user directory (Maximum 64 characters)",
+      "admin.help.clientapi.accessTokenValiditySeconds": "Access tokens issued by the Covata Platform will be valid for this number of seconds",
+      "console.login.otp.sent": "Please check your email for further instructions.",
+      "webapp.multi.download.not.allowed.browsers": "safari",
+      "admin.help.ldap.serverTimeout": "The amount of time (in milliseconds) that the Covata Platform will wait when attempting to connect to or read data from the LDAP server",
+      "admin.console.menu.config": "Configuration",
+      "admin.console.edit.button": "edit",
+      "admin.help.ldap.authFilter": "The LDAP field against which the Covata Platform matches the email address of a Covata Platform user when they authenticate. Example: userPrincipalName={0} (Maximum 512 characters)",
+      "server.mfa.enabled": "true",
+      "admin.console.add.button": "Add New",
+      "admin.help.clientapi.clientId": "This Client ID value must be unique",
+      "admin.console.menu.groups.icon": "fa fa-users",
+      "admin.console.theme.heading": "Theme",
+      "account.changepassword.oldpassword.info": "Enter your current password",
+      "content.service.url": "https://safe-share-content.xy-company.com",
+      "admin.console.objects.button.disabled": "disabled",
+      "account.changepassword.success": "Your password has successfully been changed.",
+      "admin.console.menu.users.icon": "glyphicon glyphicon-user",
+      "account.changepassword.newpassword.confirm.placeholder": "Confirm new password",
+      "admin.console.search.everything": "All",
+      "admin.console.objects.search.name": "Name",
+      "admin.console.menu.clientapps.icon": "glyphicon glyphicon-phone",
+      "admin.help.users.mobileNumber": "",
+      "admin.console.menu.users": "Users",
+      "admin.help.clientapi.enabled": "",
+      "admin.console.organisations.search.contact.name": "ContactEmail",
+      "admin.help.ldap.accountNameField": "The LDAP field used to specify an additional/other name for Covata Platform users. Example: sAMAccountName (Max 64 characters) This field is required for internal Covata Platform functionality",
+      "admin.console.clientapps.edit.title": "Edit Client Application",
+      "account.changepassword.submit.button": "Change",
+      "admin.help.ldap.userPrincipalNameField": "The LDAP field used to specify the external user identifier for Covata Platform users. Example: userPrincipalName (Max 64 characters) This field is required for internal Covata Platform functionality",
+      "admin.help.users.password": "",
+      "admin.console.webAppName": "Safe Share",
+      "console.login.nopassword.info": "<p>Please enter your email address below. If you:<ul><li>have a password but have forgotten it, then you will be sent instructions on how to proceed</li><li>have not set a password, then a one-time access link/password will be sent to you</li></ul></p>",
+      "admin.console.menu.labels": "Labels",
+      "admin.console.reports.heading": "Reports",
+      "admin.help.clientapi.clientSecret": "This Client Secret value is not utilized when the client application uses the 'Implicit' grant type",
+      "console.login.nopassword.send.button": "Send Email",
+      "admin.console.organisations.search.name": "Name",
+      "admin.help.clientapi.authorizedGrantTypes": "This client application can use these OAuth 2.0 grant types for authentication and authorization. 'Allow Refresh Token' is not a grant type - it is an additional option that applies to the 'Authorization Code' and/or 'Password' grant types",
+      "webapp.crypto.max.bulk.downloads.size": "104857600",
+      "admin.console.home": "/users",
+      "admin.console.clientapps.heading": "Client Applications",
+      "admin.help.ldap.statusDisabledValue": "The value of the 'Status field' (in the LDAP directory) to indicate that a user is disabled (Max 64 characters)",
+      "admin.console.search": "Search by...",
+      "admin.console.menu.userwhitelist.icon": "icon-user-whitelist",
+      "admin.help.clientapi.registeredRedirectUris": "These redirect URIs are handled by the client application to complete the OAuth 2.0 authorization process. If more than one redirect URI is required (e.g. to support different grant types), separate each URI with a comma",
+      "webapp.crypto.max.uploads.in.progress": "10",
+      "admin.help.ldap.fullnameField": "The LDAP field used to specify the first name for Covata Platform users. Example: name (Max 64 characters)",
+      "admin.console.reports.view": "View",
+      "admin.console.button.save.label": "Save",
+      "admin.console.menu.default.icon": "glyphicon glyphicon-user",
+      "company.name": null,
+      "admin.console.enabled.button": "enabled",
+      "admin.console.disabled.button": "disabled",
+      "admin.console.objects.enabled.title": "Status",
+      "admin.help.clientapi.appName": "",
+      "admin.help.config.propertyDescription": "",
+      "account.upgrade.failed": "Your password could not be set. It may have already been set.",
+      "admin.help.ldap.emailField": "The LDAP field used to specify the email address for Covata Platform users. Example: mail (Max 64 characters)",
+      "console.login.email.placeholder": "Email address",
+      "webapp.crypto.max.file.size": "15728640",
+      "console.login.nopassword.email.placeholder": "Email address",
+      "admin.help.ldap.authFactorField": "The LDAP field whose value the Covata Platform uses for the second step of two-factor authentication. Example: mobile (Max 64 characters) Be aware that this field is not used in the Covata Platform",
+      "admin.console.objects.search.id": "ID",
+      "admin.console.enabled.title": "Status",
+      "admin.help.ldap.managerDN": "The Distinguished Name (DN) of the 'manager' user who has privileges to perform LDAP authentication and synchronization and browse the 'Base DN' (Maximum 512 characters)",
+      "admin.console.error.default": "An unspecified error has occurred",
+      "admin.console.menu.objects.icon": "fa fa-lock",
+      "document.viewer.enabled": "true",
+      "admin.console.add.title": "Add",
+      "theme.legal.url": "https://safe-share-webapp.xy-company.com/html/legal.html",
+      "console.login.nopassword": "Email my password",
+      "admin.console.menu.groups": "Groups",
+      "admin.console.menu.labels.icon": "fa fa-tags",
+      "console.login.nopassword.cancel.button": "Cancel",
+      "admin.console.title": "Administration"
+  }
+  ```

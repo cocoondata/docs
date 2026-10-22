@@ -1,0 +1,65 @@
+---
+title: "<access-service>/api/v1/i18n/adminpreference"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-adminpreference-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/adminpreference
+```
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-adminpreference-supported-methods-and-overview" />
+
+- `PUT` - sets a supported locale as the SafeShare administrator's default locale.
+
+## Detailed description <a id="access-service-api-v1-i18n-adminpreference-detailed-description" />
+
+This API endpoint sets a supported locale as the SafeShare administrator's default locale. This is equivalent to setting the **System Default** language through the Internationalization page of SafeShare Administration.
+
+The SafeShare administrator's default locale serves a number of purposes:
+
+- This locale (and language) is the default used for the Cocoon Data Sign-in page, Cocoon Data email notifications and the [SafeShare Administration](/CS1.2/admin-platform/index), [Organisation Administration](/CS1.2/admin-org/index) and [SafeShare for Web](/CS1.2/user/index) user interfaces.
+- This is the initial locale used for all newly created Cocoon Data users.
+- When a custom locale *without* an existing internationalization (i18n) bundle is [deleted](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-delete), any Cocoon Data users utilizing this locale (which they would have chosen through SafeShare) will automatically be reverted to use this SafeShare administrator's default locale.
+
+## Supported roles <a id="access-service-api-v1-i18n-adminpreference-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-i18n-adminpreference#access-service-api-v1-i18n-adminpreference-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-adminpreference-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-i18n-adminpreference-required-parameters" />
+
+The following required parameter must be sent in the **body** of the PUT request, as an individual member of a **JSON object**:
+
+- **i18nCode** - A supported i18n code, where *supported* refers to a locale/language which is available through a language bundle on the Cocoon Data Platform. <br />
+  **Tip:** Valid i18n codes values are listed in the **I18n Code** column on the Internationalization page of SafeShare Administration. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "i18nCode": "en_us"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-i18n-adminpreference-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, the following string is returned in the body of the response:
+
+```text
+"OK"
+```

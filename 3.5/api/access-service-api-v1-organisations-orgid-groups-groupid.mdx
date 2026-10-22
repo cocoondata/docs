@@ -1,0 +1,126 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups/{groupId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-groupid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups/{groupId}
+```
+
+where `{orgId}` is the ID of an organisation and `{groupId}` is the ID of one of this organisation's clearances.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-groupid-supported-methods-and-overview" />
+
+- `GET` - retrieves information about a [clearance](/3.5/admin-org/managing-clearances) (specified by `groupId`) defined in an organisation (specified by `orgId`).
+- `PUT` - modifies the fields of an existing clearance (specified by `groupId`) in an organisation (specified by `orgId`), which includes the association of [classifications](/3.5/admin-org/managing-classifications) and the membership of [Covata users](/3.5/api/authentication-and-authorisation) [in the organisation](/3.5/admin-org/administering-users-within-an-organisation) with this clearance.
+- `DELETE` - deletes an existing clearance (specified by `groupId`) in an organisation (specified by `orgId`).
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-groupid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about a clearance (specified by `groupId`) defined in an organisation (specified by `orgId`). A clearance's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.5/api/access-service-api-v1-organisations-orgid-groups) API endpoint, which retrieves a list of information for all clearances defined in an organisation (specified by `orgId`). <br />
+  **Tip:** All information returned in the [response](/3.5/api/access-service-api-v1-organisations-orgid-groups-groupid#access-service-api-v1-organisations-orgid-groups-groupid-returns) from a `GET` request to this API endpoint is also returned in the [response](/3.5/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-returns) from the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.5/api/access-service-api-v1-organisations-orgid-groups) endpoint. Therefore, there is no need to call the `GET` method on this endpoint if you already have a clearance's **name**, **description** and/or **id** from calling [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.5/api/access-service-api-v1-organisations-orgid-groups).
+- Modifies the fields of an existing clearance (specified by `groupId`) in an organisation (specified by `orgId`), which includes the association of classifications and the membership of Covata users with this clearance. This endpoint's `PUT` method allows modification of the clearance's name and description, as well as:
+
+  - the association (i.e. addition or removal) of classifications (configured through the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.5/api/access-service-api-v1-organisations-orgid-labels)) and [related](/3.5/api/classification-endpoints) API endpoints) with the clearance and
+  - the addition (i.e. membership) of Covata users to (or their removal from) the clearance.
+- Deletes an existing clearance (specified by `groupId`) from an organisation (specified by `orgId`). <br />
+  **Important:** Deleting a clearance removes any association between the Covata users who were members of this clearance as well as any classifications that were associated with the clearance. Therefore, if a Covata user was shared a file object with a classification that is associated with one or more clearances (of which the user is also a member) and the deletion of one of these clearances results in the user:
+
+  - Still remaining associated with this classification (through the classification's association with other clearances to which the user is also a member), then the user will still have access to this file object.
+  - Losing their association with this classification (because the user is not a member of any other clearance that remains associated with this classification), then the user loses access to this file object.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-groups-groupid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-organisations-orgid-groups-groupid#access-service-api-v1-organisations-orgid-groups-groupid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-groupid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-organisations-orgid-groups-groupid-optional-parameters" />
+
+The following optional parameters can also be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **name** - The updated name for the clearance.
+- **description** - The updated description for the clearance.
+- **labels** - A parameter containing the following optional sub-element parameters that relate to the classifications being **add**ed to or **remove**d from this clearance.
+
+  - **add** - An array of elements about each classification to be added to this clearance.
+
+    - **id** - The ID of a classification to be added to this clearance. This classification must be configured within the organisation specified by `{orgId}` in the request's URL.
+  - **remove** - An array of elements about each classification to be removed from this clearance.
+
+    - **id** - The ID of a classification to be removed from this clearance.
+- **members** - A parameter containing the following optional sub-element parameters that relate to the Covata user accounts being **add**ed to or **remove**d from this clearance.
+
+  - **add** - An array of elements about each user account to be added to this clearance.
+
+    - **email** - The email address of a Covata user account to be added to this clearance. This Covata user must also be a member of the organisation specified by `{orgId}` in the request's URL.
+  - **remove** - An array of elements about each user account to be removed from this clearance.
+
+    - **email** - The email address of a Covata user account to be removed from this clearance.
+
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Company partners (without any security clearance)",
+    "description": "Staff members of companies partnered with XY Company, who themselves do not have any security clearance within their organisation.",
+    "labels": {
+      "add": [
+        {
+          "id": "766862496543055872"
+        }
+      ]
+    },
+    "members": {
+      "add": [
+        {
+          "email": "alex.originator@xy-company.com"
+        }
+      ]
+    }
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-groups-groupid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` and `PUT` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **description** - The (updated) description of the clearance.
+- **name** - The (updated) name of the clearance.
+- **id** - The ID of the clearance. <br />
+  **Example (response from a GET or PUT request):**
+
+  ```json
+  {
+      "description": {
+          "value": "Staff members of companies partnered with XY Company, who themselves do not have any security clearance within their organisation."
+      },
+      "name": {
+          "value": "Company partners (without any security clearance)"
+      },
+      "id": "767257860555186176"
+  }
+  ```

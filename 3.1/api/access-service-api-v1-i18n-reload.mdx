@@ -1,0 +1,41 @@
+---
+title: "<access-service>/api/v1/i18n/reload"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-reload-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/reload
+```
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-reload-supported-methods-and-overview" />
+
+- `PUT` - used to flush the internationalization (i18n) bundle cache of the Covata Platform's Access Service and reload i18n bundles (which are stored in the database) to this cache.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-i18n-reload-detailed-description" />
+
+This API endpoint flushes the i18n bundle cache of the Covata Platform's Access Service and reloads i18n bundles (stored in the database) to this cache.
+
+## Supported roles <a id="access-service-api-v1-i18n-reload-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-i18n-reload#access-service-api-v1-i18n-reload-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-reload-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-i18n-reload-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

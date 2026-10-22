@@ -1,0 +1,322 @@
+---
+title: "<access-service>/api/v1/objects"
+---
+
+## URL structure <a id="access-service-api-v1-objects-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects
+```
+
+## Supported methods and overview <a id="access-service-api-v1-objects-supported-methods-and-overview" />
+
+- `POST` - used to initialize a new *Incomplete* [Secure Object](/3.0/api/creating-secure-objects-and-collections#secure-object) or create a new completed Secure Object, along with the option to set any combination of the following attributes/metadata on the resulting Secure Object:
+
+  - Collaborators (as well as their [permission sets](/3.0/api/access-service-api-v1-permissions-sets)).
+  - Label and time/date controls.
+  - The Secure Object's location and name.
+- `GET` - used to retrieve information about a Secure Object based on its SHA512 value or for System administrators, all Secure Objects that have been created on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-objects-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Initializes a new *Incomplete* Secure Object by associating the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/3.0/api/access-service-api-v1-keys) endpoint) with this new Secure Object. This allows the Secure Object's data to be either:
+
+  - Encrypted externally (i.e. locally by your client application) and then uploaded to the Content Service in its encrypted form (by calling the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint - multiple times if necessary). The Secure Object can then be completed (which changes its state from *Incomplete* to *Created*) by calling the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint with the SHA512 value of the externally-encrypted data.
+  - Uploaded in its unencrypted form (also by calling the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint - multiple times if necessary) for server-side encryption by the Content Service, then storage. Note that this process automatically completes the Secure Object - the Content Service automatically associates the SHA512 value of the encrypted data with the Secure Object.
+
+- Creates a new completed Secure Object (whose state is *Created*) by associating the new Secure Object with both its cryptographic key *and* its encrypted data's SHA512 value. Be aware that this data would have been encrypted externally (i.e. not through server-side encryption by the Content Service). <br />
+  **Note:** This process effectively initializes and completes the Secure Object in a single request.
+- Retrieves information about a Secure Object using the SHA512 value of its encrypted content, or for a [System administrator](/3.0/admin/administering-users#system-administrator-role), retrieves all Secure Objects that have been created on the Covata Platform.
+
+The [Covata user](/3.0/admin/administering-users) whose account either initializes a new *Incomplete* Secure Object or creates a new completed Secure Object becomes the *owner*<sup>1</sup> of this Secure Object. When making the request, this Covata user can also set the following attributes/metadata on this Secure Object:
+
+- Label (specified through this endpoint's **labelId** [parameter](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST)) - defines which groups of Covata users can be shared the Secure Object.
+- Time/date controls (specified through this endpoint's **shareStartTime** and **shareEndTime** parameters) - the time and date from which collaborators can begin accessing the Secure Object's content and/or when this access ceases.
+- Parent [collection](/3.0/api/creating-secure-objects-and-collections#collection) (specified through this endpoint's **parentId** parameter) - the collection to which the Secure Object will be moved.
+- Name (specified through this endpoint's **name** parameter) - the name of the Secure Object.
+- Collaborators and their [permission sets](/3.0/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** [parameter](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST)) - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following three *permission sets* can be applied:
+
+  - **Download** - grants the collaborator the following [permissions](/3.0/api/access-service-api-v1-permissions-sets):
+
+    - **Download** the Secure Object's content (by calling the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint).
+    - **Print** and **View** the Secure Object's content from a Safe Share application's [content viewer](/3.0/user/accessing-secure-content#viewing-and-printing-secure-content). The **View** *permission* also allows the Secure Object's *read-only view* to be downloaded (by calling the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/3.0/api/content-service-api-v1-objects-objectid-view) endpoint).
+  - **Manage** - grants the collaborator the following *permissions* to perform any of the following actions on the Secure Object and/or its content in the owner's storage space:
+
+    - **Download** the Secure Object's content.
+    - Delete the Secure Object and its content (by calling the `DELETE` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint followed by the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint), through the **Remove (File)** *permission*.
+    - **Move** the Secure Object to a different collection *within* a *common collection hierarchy* (by calling the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint). A *common collection hierarchy* is a collection hierarcy that contains this Secure Object/item, where the owner of this item has also added the same collaborator (with the **Manage** *permission set*) to the root (or common) collection of this collection hierarchy.
+    - **Print** the Secure Object's content from the Safe Share web application's content viewer.
+    - **Rename** the Secure Object (by calling the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint).
+    - **View** the Secure Object's content in a Safe Share application's content viewer, which also allows the Secure Object's *read-only view* to be downloaded.
+  - **View** - grants the collaborator the **View** *permission* to allow the Secure Object's:
+
+    - content to be viewed from a Safe Share application's content viewer, as well as
+    - *read-only view* to be downloaded.
+
+<sup>1</sup> Be aware that the ownership of a Secure Object [can be changed](/3.0/api/content-service-api-v1-items-transfer) to that of another Covata user.
+
+## Supported roles and conditions <a id="access-service-api-v1-objects-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)), conditions and [permissions](/3.0/api/access-service-api-v1-permissions-sets) (where applicable):
+
+- [Originator](/3.0/admin/administering-users#originator-role) - a Covata user with this role can call the `POST` method and the `GET` method on a Secure Object they intend to create and/or own, where the `GET` method requires the Secure Object's SHA512 value to be specified.
+- **Originator**, [Collaborator](/3.0/admin/administering-users#collaborator-role) and [Ad hoc](/3.0/admin/administering-users#adhoc-role) - a Covata user with any of these roles can call:
+
+  - the `POST` method, specifying the **parentId** [parameter](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST) of any collection that this user has the **Upload File** *permission* on<sup>2</sup> and
+  - the `GET` method for a Secure Object which:
+
+    - they are a collaborator on and
+    - has been specified using its SHA512 value.
+- [System administrator](/3.0/admin/administering-users#system-administrator-role) - a Covata user with this role can call the `GET` method without specifying the SHA512 value of a Secure Object.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-required-headers) of requests to this endpoint.
+
+<sup>2</sup> With the exception of the **collaborators** parameter, all other [parameters](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST) can be specified in such a request, because the Covata user making the request will not own the resulting Secure Object initialized/created.
+
+## Required headers <a id="access-service-api-v1-objects-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-objects-required-parameters-on-POST" />
+
+The following required parameter must be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **keyId** - The ID value associated with the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/3.0/api/access-service-api-v1-keys) endpoint). Specifying this parameter associates the cryptographic key with the new Secure Object.
+
+  **Example (initializing an Incomplete Secure Object with a cryptographic key's ID only):**
+
+  ```json
+  { "keyId": "123456789012345678" }
+  ```
+
+## Optional parameters on POST <a id="access-service-api-v1-objects-optional-parameters-on-POST" />
+
+The following optional parameters can also be sent in the body of the POST request, each as individual members of the JSON object that includes the [Required parameters on POST](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-required-parameters-on-POST) above:
+
+- **collaborators** - A parameter containing the following optional sub-element parameters, relating to the collaborators being applied to this Secure Object:
+
+  - **list** - An array of elements about each collaborator, where each element of this array contains the following optional sub-elements:
+
+    - **email** - The email address of the person to add as a collaborator to the Secure Object. (Although this sub-element is optional, omitting it serves no purpose.)
+    - **permissionSet** - The [permission set](/3.0/api/access-service-api-v1-permissions-sets) to apply to this collaborator. This is done by specifying the ID of the permission set as a sub-element parameter of this parameter:
+
+      - **id** - The ID of the permission set to apply to this collaborator. This ID can be obtained by calling the [&lt;access-service&gt;/api/v1/permissions/sets](/3.0/api/access-service-api-v1-permissions-sets) API endpoint.
+
+      **Note:** If this sub-element is omitted, then the **View** permission set is automatically applied to this collaborator.
+  - **note** - A custom message to send as part of an email notification to collaborators (in the **list** above) once the request is sent.
+
+  **Tip:** It is worthwhile your client application storing these set of collaborators and their respective permission sets (e.g. in an object) because [any modifications to one or more collaborators on an existing Secure Object](/3.0/api/access-service-api-v1-objects-objectid) requires all collaborators and their permission sets to be [specified in the Secure Object modification request](/3.0/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-parameters).
+- **contentSize** - The size (in bytes) of the Secure Object's data (in its unencrypted form) to be recorded by the Covata Platform's Access Service. Specify this value to record the size of a completed Secure Object's unencrypted data, which is to be encrypted locally by your client application. <br />
+  **Important:**
+
+  - The **contentSize** value can only be set once on a Secure Object.
+  - If you intend to [upload](/3.0/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) the Secure Object's *unencrypted* data to storage via the Covata Platform's Content Service, then *omit this parameter*. When you make the [upload](/3.0/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) request, the Content Service automatically calculates the size of the unencrypted data and assigns this value to **contentSize**, before the Content Service proceeds to encrypt the data and send this encrypted data to storage.
+  - If you have already specified the **contentSize** parameter's value *before* uploading a Secure Object's unencrypted data, then your Secure Object is stuck with this **contentSize** value as the Content Service cannot assign the unencrypted data's size to **contentSize** once its value has been set. The Covata Platform's Access and Content Services will record errors in their respective logs. Nevertheless, this unencrypted data will still be successfully encrypted by the Content Service, the encrypted data sent to storage and the encrypted data associated with the Secure Object.
+- **labelId** - The ID of the label to apply to the Secure Object. If this parameter's value is `0` or the parameter is omitted altogether, then `No Label` is applied to the Secure Object and no label restrictions (i.e. checks on Covata users' group membership and the association of these groups with labels) are placed on any collaborators added to this Secure Object. <br />
+  **Notes:**
+
+  - Applying a label has the potential to restrict access to the Secure Object by any inherited collaborators. Inherited collaborators are collaborators who have been able to access this Secure Object because they were explicitly applied to an ancestral [collection](/3.0/api/creating-secure-objects-and-collections#collection).
+  - If Covata users' group memberships (associated with the label applied to the Secure Object in the request) do not comply with any **collaborators** applied to this Secure Object (above), then this request will fail.
+- **mimeType** - The MIME type of the data associated with the Secure Object. For example, if the data to be encrypted into this Secure Object is an image in JPEG format, its MIME type value would be `image/jpeg`.
+- **name** - The name to apply to the Secure Object. For example, this might be the name of the original file (whose data is being encrypted into this Secure Object) and its extension.
+- **parentId** - The ID of the [collection](/3.0/api/creating-secure-objects-and-collections#collection) that will contain the Secure object. Specifying a value of `0` (or omitting this parameter) results in the new Secure Object being located at the default logical root storage location.
+- **sha512** - The SHA512 value of the Secure Object's encrypted data. <br />
+  **Important:**
+
+  - The **sha512** value can only be set once on a Secure Object.
+  - Omitting this parameter results in the initialization of an *Incomplete* Secure Object.
+  - Specifying this parameter and its value results in the creation of a completed Secure Object, whose state is *Created*.
+  - Specify this parameter if you have encrypted the Secure Object's data externally (e.g. locally by your client application) and intend to [upload](/3.0/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) this *encrypted* data to storage via the Covata Platform's Content Service.
+  - If you intend to upload the Secure Object's *unencrypted* data to storage via the Content Service, then *omit this parameter*; the Content Service automatically assigns this **sha512** value (after performing server-side encryption) when you make the [upload](/3.0/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) request.
+- **shareStartTime** - The date and time from which collaborators can begin accessing the Secure Object's content. Omitting this member makes the Secure Object's content available immediately. <br />
+  **Note:** This parameter should only be specified in conjunction with the **collaborators** parameter. If the **shareStartTime** parameter is specified without the **collaborators** parameter, then the **shareStartTime** parameter's value will not be saved when the request is submitted.
+- **shareEndTime** - The date and time from which collaborators' access to the Secure Object's content ceases. Omitting this member makes the Secure Object's content available indefinitely (after its **shareStartTime**). <br />
+  **Note:** This parameter should only be specified in conjunction with the **collaborators** parameter. If the **shareEndTime** parameter is specified without the **collaborators** parameter, then the **shareEndTime** parameter's value will not be saved when the request is submitted.
+
+  **Example (initializing an Incomplete Secure Object with collaborators, a label as well as dates and times when collaborators can access the Secure Object):**
+
+  ```json
+  {
+    "keyId": "123456789012345678",
+    "collaborators": {
+      "list": [
+        {
+          "email": "chris.collaborator@xy-company.com",
+          "permissionSet": {
+            "id": 2
+          }
+        },
+        {
+          "email": "olly.originator@xy-company.com",
+          "permissionSet": {
+            "id": 3
+          }
+        }
+      ],
+      "note": "I'm adding you as a collaborator to this file."
+    }
+    "labelId": "123456789101112131",
+    "mimeType": "image/jpeg",
+    "name": "paraglider.jpg",
+    "parentId": "0",
+    "shareStartTime": "2014-10-03T05:15:00.000Z",
+    "shareEndTime": "2014-10-03T05:30:00.000Z"
+  }
+  ```
+
+   **Note:** The permission set with an ID of 2 is **Download** and with an ID of 3 is **Manage**. See [&lt;access-service&gt;/api/v1/permissions/sets](/3.0/api/access-service-api-v1-permissions-sets) for more information about permission sets.
+
+## Required parameters on GET <a id="access-service-api-v1-objects-required-parameters-on-GET" />
+
+The following required parameter must be sent in the URL of the GET request (for Covata users with the [Originator](/3.0/admin/administering-users#originator-role), [Collaborator](/3.0/admin/administering-users#collaborator-role) or [Ad hoc](/3.0/admin/administering-users#adhoc-role) role):
+
+- **sha512** - The unique [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of the encrypted data associated with the Secure Object, which the Covata user owns or is a collaborator on. (See [Supported roles and conditions](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-supported-roles-and-conditions) above for details). This value will be different each time a given piece of data is encrypted (i.e. using AES). Use the **sha512** value to retrieve information about a Secure Object (including the Secure Object's ID) when only its SHA-512 value is available.
+
+  **Example:**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/objects?sha512=AXgmY9RbaR/zBhw544zNba0MblTGk9YOPYz8c/74W5KzutrTukFWVSJHuejR1ulfFCSkxfzwSrrMBbo5eHOpvw==
+  ```
+
+<Note>
+
+A Covata user with the [System administrator role](/3.0/admin/administering-users#system-administrator-role) should call this method without any parameters, which retrieves a list of all Secure Objects that have been created on the Covata Platform instance. See [Supported roles and conditions](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-supported-roles-and-conditions) above for details.
+
+</Note>
+
+## Returns <a id="access-service-api-v1-objects-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - The ID value of the initialized (i.e. *Incomplete*) or *Created* Secure Object.
+- **name** - The name of the Secure Object, which was set when the Secure Object was [initialized or created](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST), or [last updated](/3.0/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-parameters). This value is `null` if the **name** was never specified.
+- **sha512** - The unique [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of the encrypted data associated with the Created/complete Secure Object. For initialized/Incomplete Secure Objects, this value is `null`.
+- **owner** - A member containing information about the Covata user who is the current owner of the Secure Object. This member contains the following sub-members:
+
+  - **email** - This Covata user's email address (which forms part of the Covata user's user credentials and is utilized to sign in).
+  - **firstName** - The Covata user's first name. This is the first name that appears on the [User](/3.0/admin/administering-users) page of Covata Administration and the [My Account](/3.0/user/managing-your-account) feature of the Covata Safe Share web application.
+  - **lastName** - The Covata user's last name. Like the first name (above), this appears on the **User** page of Covata Administration and the **My Account** feature of the Safe Share web application.
+  - **id** - The Covata user's ID.
+
+  **Notes:**
+
+  - If the ownership of the Secure Object has never been changed, then this Covata user will be the same as that for the **originator** (below).
+  - This member is not returned in responses from POST requests to this API endpoint.
+- **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the Secure Object's data in storage. <br />
+  **Notes:**
+
+  - The Content Service automatically sets this value to `true` *after* it sets the value of **canGenerateView** (below) to `true` *and* the Content Service has successfully generated and stored a read-only view of the Secure Object's data.
+  - If your client application is managing its own Secure Object data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **canGenerateView** - A boolean value that indicates whether or not the Covata Platform's Content Service is capable of generating a read-only view of the Secure Object's data, based on the file name extension of the original file that was encrypted (as specified in **name**). Covata determines a file's format (for the purpose of genereating a read-only view) based on this file name externsion. For more information, see [File formats supported by the content viewer](/3.0/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the Safe Share User's Guide (for the web application). <br />
+  **Notes:**
+
+  - Assuming the file name extension is one that supports a view being generated, the Content Service then automatically sets this value to `true` *after* the Secure Object's data has been successfully [uploaded + stored](/3.0/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) *and* the size of this data is less than the maximum configured file size for generating a view (i.e. 20 MB by default).
+  - If your client application is managing its own Secure Object data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **mimeType** - The MIME type of the data associated with the Secure Object, which was set when the Secure Object was [initialized or created](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST), or [last updated](/3.0/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-parameters). This value is `null` if the **mimeType** was never specified.
+- **originator** - A member containing information about the Covata user who created this Secure Object. This member contains the equivalent **email** and **id** sub-members only of the **owner** member (above). <br />
+  **Note:** This member is not returned in responses from POST requests to this API endpoint.
+- **labelName** - The name of the label applied to the Secure Object. If this element's value is `No Label`, then a **labelID** value of `0` was specified (or the **labelID** parameter was omitted) when the Secure Object was [initialized or created](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST), or [last updated](/3.0/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-parameters). This means that no label restrictions (i.e. checks on Covata users' group membership and the association of these groups with labels) have been placed on collaborators added to this Secure Object.
+- **shared** - A boolean value that indicates whether or not the Secure Object has been shared with any collaborators.
+- **contentSize** - The amount of space (in bytes) of the Secure Object's data (as recorded by the Covata Platform's Access Service). For initialized/Incomplete Secure Objects, this value should be `null`.
+- **parentId** - The ID of the [collection](/3.0/api/creating-secure-objects-and-collections#collection) that contains the Secure object. A value of `0` indicates that this Secure Object is located at the default logical root storage location.
+- **createdAt** - The date and time when the Secure Object was either initialized or completed.
+- **modifiedAt** - In responses from POST requests to this API endpoint, this date and time should be the same as (or close to) that of `createdAt` above. Otherwise, if the Secure Object has been modified (see [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) for more information), this date and time should reflect when this Secure Object was last modified.
+- **type** - Indicates `object`, which indicates that this response to a request on an item was performed on a Secure Object. <br />
+  **Note:** This member is not returned in responses from POST requests to this API endpoint.
+- **labelId** - The ID of the label to apply to the Secure Object. Like **labelName** (above), if this element's value is `0`, then a **labelID** value of `0` was specified (or the **labelID** parameter was omitted) when the Secure Object was [initialized or created](/3.0/api/access-service-api-v1-objects#access-service-api-v1-objects-optional-parameters-on-POST), or [last updated](/3.0/api/access-service-api-v1-objects-objectid#access-service-api-v1-objects-objectid-optional-parameters). This means that no label restrictions (i.e. checks on Covata users' group membership and the association of these groups with labels) have been placed on collaborators added to this Secure Object.
+- **collaborators** - An array containing information about each Covata user who is currently a collaborator on the Secure Object. Each element of this array contains information about one of these Covata users and is represented as an object, containing the following members:
+
+  - **shareStartTime** - The date and time from which this Covata user can begin accessing the Secure Object's content.
+  - **shareEndTime** - The date and time from which this Covata user's access to the Secure Object's content ceases.
+  - **shareParentId** - Indicates either a value of `null` or `0`. A value of `null` indicates that the Secure Object's location in its hierarchy of collections (e.g. as indicated in a Safe Share application's list of items) are equivalent between this Covata user and the current owner of this Secure Object. A value of `0` indicates that this Secure Object is being shared at the logical root storage location for this Covata user. In Safe Share applications, this occurs when the owner of the Secure Object has shared this Secure Object with this Covata user, but the Secure Object's parent collection/folder has not also been shared with that Covata user.
+  - **shareName** - Reserved for future use.
+  - **email** - This Covata user's email address (which forms part of the Covata user's user credentials and is utilized to sign in).
+  - **firstName** - The Covata user's first name. This is the first name that appears on the [User](/3.0/admin/administering-users) page of Covata Administration and the [My Account](/3.0/user/managing-your-account) feature of the Covata Safe Share web application.
+  - **lastName** - The Covata user's last name. Like the first name (above), this appears on the **User** page of Covata Administration and the **My Account** feature of the Safe Share web application.
+  - **id** - The Covata user's ID.
+
+  **Note:** This array is not returned in responses from POST requests to this API endpoint.
+- **state** - Indicates the current state of the Secure Object, which could be `Incomplete` for an initialized Secure Object, `Created` for a completed Secure Object or `Deleted` for a deleted Secure Object.
+
+  **Example (response from initializing an Incomplete Secure Object):**
+
+  ```json
+  {
+    "id": "987654321098765432",
+    "name": "paraglider.jpg",
+    "sha512": null,
+    "hasView": false,
+    "canGenerateView": false,
+    "mimeType": "image/jpeg",
+    "labelName": "Unclassified",
+    "shared": true,
+    "contentSize": null,
+    "parentId": "0",
+    "createdAt": "2014-10-01T01:50:36.648Z",
+    "modifiedAt": "2014-10-01T01:50:36.713Z",
+    "labelId": "123456789101112131",
+    "state": "Incomplete"
+  }
+  ```
+
+  **Example (response from retrieving an Incomplete Secure Object):**
+
+  ```json
+  {
+    "id": "987654321098765432",
+    "name": "paraglider.jpg",
+    "sha512": null,
+    "owner": {
+      "email": "alex.originator@covata.com",
+      "firstName": "Alex",
+      "lastName": "Originator",
+      "id": "567890123456789012"
+    },
+    "hasView": false,
+    "canGenerateView": false,
+    "mimeType": "image/jpeg",
+    "originator": {
+      "email": "alex.originator@covata.com",
+      "id": "567890123456789012"
+    },
+    "labelName": "No Label",
+    "shared": true,
+    "contentSize": null,
+    "parentId": "0",
+    "createdAt": "2014-10-01T01:50:36.648Z",
+    "modifiedAt": "2014-10-07T00:34:07.358Z",
+    "type": "object",
+    "labelId": "0",
+    "collaborators": [
+      {
+        "shareStartTime": "2014-10-08T05:15:00.000Z",
+        "shareEndTime": "2014-10-08T05:30:00.000Z",
+        "shareParentId": null,
+        "shareName": null,
+        "email": "chris.collaborator@covata.com",
+        "firstName": "Chris",
+        "lastName": "Collaborator",
+        "id": "543210987654321098"
+      },
+      {
+        "shareStartTime": "2014-10-08T05:15:00.000Z",
+        "shareEndTime": "2014-10-08T05:30:00.000Z",
+        "shareParentId": null,
+        "shareName": null,
+        "email": "olly.originator@covata.com",
+        "firstName": "Olly",
+        "lastName": "Originator",
+        "id": "543210191817161514"
+      }
+    ],
+    "state": "Incomplete"
+  }
+  ```

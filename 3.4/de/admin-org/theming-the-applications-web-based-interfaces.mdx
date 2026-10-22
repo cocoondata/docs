@@ -1,0 +1,87 @@
+---
+title: "Design der webbasierten Schnittstellen von Safe Share"
+---
+
+Designs ermöglichen die benutzerdefinierte Anpassung der innerhalb der Benutzeroberfläche von [Safe Share for Web](/3.4/de/user/index) verwendeten Farbkonzepte und Logos für individuelle [Organisationen](/3.4/de/user/index#organisations), sodass jede einzelne Organisation ihr jeweiliges Design erhält. (Für weitere Informationen über das Hinzufügen/die Konfiguration von Organisationen über die [Safe Share-Verwaltung](/3.4/de/admin-platform/index#platform-administration)siehe [Verwaltung von Organisationen](/3.4/de/admin-platform/administering-organisations) in der [Safe Share-Administratorenanleitung](/3.4/de/admin-platform/index).)
+
+In dieser Version von Safe Share und der Covata-Plattform werden Designs anhand eines separaten Tools erstellt (des [Covata/WebApp Design-Builders](https://www.npmjs.com/package/covata-theme-builder)), das von Covata entwickelt wird und als lokal ausführbares [npm-Paket](https://www.npmjs.com/) verfügbar ist.
+
+Diese benutzerdefinierten Anpassungen der Farbkonzepte und Logos werden auch auf den folgenden Oberflächen verwendet:
+
+- [Organisationsverwaltung](/3.4/de/admin-org/index#organisation-administration),
+- [Safe Share-Verwaltung](/3.4/de/admin-platform/index#platform-administration) sowie
+- in von der Covata-Plattform gesendeten E-Mail-Benachrichtigungen
+
+Neu installierte Instanzen von Safe Share beinhalten das *Covata-Standarddesign*. Dieses Design wird zunächst für die Oberflächen von Safe Share for Web und der Organisationsverwaltung aller Organisationen, in E-Mail-Benachrichtigungen sowie für die Oberfläche der Safe Share-Verwaltung verwendet.
+
+Mit dem WebApp Design-Builder können Sie für verschiedene Organisationen jeweils unterschiedliche Designs sowie Ihr eigenes Standarddesign (das so genannte „Systemdesign“) erstellen. Letzteres wird für Folgendes verwendet:
+
+- alle Organisationen, für die kein Design definiert ist
+- die Oberfläche der Safe Share-Verwaltung und
+- die Funktion [Mein Account](/3.4/de/user/managing-your-account)
+
+Besuchen Sie die Seite [covata-theme-builder](https://www.npmjs.com/package/covata-theme-builder) (auf der npm-Website nur in englischer Sprache verfügbar) für weitere Informationen, wie Sie den WebApp Design-Builder bekommen und nutzen und Designs auf einer Instanz der Covata-Plattform bereitstellen.
+
+<Note>
+
+Weitere Aspekte von Safe Share, die Sie benutzerdefiniert anpassen können, z. B. den Anwendungsnamen, die Firma und den Urheberrechtsvermerk in E-Mail-Benachrichtigungen, können anhand des Abschnitts [Eigenschaften der Systemdetails](/3.4/de/admin-platform/configuring-platform-administration-properties#system-details-properties) auf der **Konfigurations**-[Seite](/3.4/de/admin-platform/configuring-platform-administration-properties) der [Safe Share-Verwaltung](/3.4/de/admin-platform/index) konfiguriert werden. Die Firma kann jedoch für die einzelnen Organisationen anhand der jeweiligen **Konfigurations**-[Seite](/3.4/de/admin-org/configuring-organisation-administration-properties) der Organisationsverwaltung benutzerdefiniert angepasst werden.
+
+</Note>
+
+## Mit Designs gestaltbare Bereiche von Safe Share for Web <a id="themable-areas-of-the-web-application" />
+
+Die folgenden Diagramme zeigen die *mit Designs gestaltbaren Komponenten* der Benutzeroberfläche von Safe Share for Web, die mit dem WebApp Design-Builder benutzerdefiniert angepasst werden können. Diese gestaltbaren Komponenten beinhalten Bilder/Logos und andere Eigenschaften, deren Werte die Nutzung von Farben festlegen. Diese sind unten jeweils nach dem Namen der Eigenschaft in der Datei `theme.properties` aufgeführt.
+
+**Safe Share-Hauptseite**
+
+![Gestaltbare Bereiche der Anwendungs-Hauptseite](/images/53d06b6dd450-themable-areas-of-the-main-application-page.jpg)
+
+<Note>
+
+Die `Primärfarbe` wird auch für Animationen bei Warte- bzw. Bearbeitungsvorgängen verwendet, die z. B. beim Download einer Dateiansicht angezeigt werden.
+
+</Note>
+
+**Dialogfelder**
+
+![Gestaltbare Bereiche eines Dialogfelds](/images/dd0c326acf4b-themable-areas-of-a-dialog-box.jpg)
+
+## Mit Designs gestaltbare Bereiche der webbasierten Verwaltung <a id="themable-web-based-administration-areas" />
+
+Die folgenden Diagramme zeigen die *mit Designs gestaltbaren Komponenten* der webbasierten Verwaltungsseiten von Safe Share, die mit dem WebApp Design-Builder benutzerdefiniert angepasst werden können. Diese gestaltbaren Komponenten beinhalten Bilder/Logos und andere Eigenschaften, deren Werte die Nutzung von Farben festlegen. Diese sind unten jeweils nach dem Namen der Eigenschaft in der Datei `theme.properties` aufgeführt.
+
+**Organisationsverwaltung-Oberfläche**
+
+Bei den einzelnen Organisationen wirken sich die ([oben dargestellten](/3.4/de/admin-org/theming-the-applications-web-based-interfaces#themable-areas-of-the-web-application)) organisationsspezifischen Komponenten der Safe Share-Hauptseite, die über einen spezifischen Eigenschaftswert verfügen, auch auf die entsprechende Komponente der Organisationsverwaltung-Oberfläche der betreffenden Organisation aus. Das folgende Diagramm zeigt weitere Komponenten, die auf der Safe Share-Hauptseite bzw. -Oberfläche keine Entsprechung haben, aber auch mit dem WebApp Design-Builder benutzerdefiniert angepasst werden können.
+
+![Gestaltbare Bereiche der Organisationsverwaltung](/images/747f4b46309c-themable-areas-of-the-org-admin-interface.jpg)
+## Weitere mit Designs gestaltbare Bereiche von Safe Share <a id="other-themable-application-areas" />
+
+Die folgenden Diagramme zeigen die *mit Designs gestaltbaren Komponenten* anderer (oben nicht abgedeckter) Bereiche und Aspekte von Safe Share, die mit dem WebApp Design-Builder benutzerdefiniert angepasst werden können. Diese gestaltbaren Komponenten beinhalten Bilder/Logos und andere Eigenschaften, deren Werte die Nutzung von Farben festlegen. Diese sind unten jeweils nach dem Namen der Eigenschaft in der Datei `theme.properties` aufgeführt.
+
+<Note>
+
+Für die folgenden Bereiche werden nur die im Systemdesign-Verzeichnis gespeicherten Logos/Bilder und Eigenschaftswerte (der Datei `theme.properties`) verwendet:
+
+</Note>
+
+**Anmeldeseite**
+
+![Gestaltbare Bereiche der Anmeldeseite](/images/7d4d88f5162f-themable-areas-of-the-sign-in-page.jpg)
+
+**E-Mail-Benachrichtigungen**
+
+![Gestaltbare Bereiche einer E-Mail-Benachrichtigung](/images/9e2ea527e62b-themable-areas-of-an-email-notification.jpg)
+
+<Note>
+
+Das Design von E-Mail-Benachrichtigungen richtet sich nach dem Safe Share-“Bereich“, auf den sich der Inhalt der Benachrichtigung bezieht. <br />
+ Für E-Mail-Benachrichtigungen über verschiedene Aktivitäten gilt z. B. jeweils Folgendes:
+
+- Für über die Safe Share-Verwaltung ausgeführte Aktivitäten, z. B. das Hinzufügen eines Safe Share-Administratoren-Accounts, wird das Systemdesign verwendet.
+- Für über die Organisationsverwaltung ausgeführte Aktivitäten, z. B. das Entfernen eines Covata-Benutzer-Accounts von einer Organisation, wird das Organisationsdesign verwendet. <sup>&#42;</sup>
+- Für über eine beliebige Safe Share-Anwendung ausgeführte Aktivitäten, z. B. die Freigabe eines Elements an eine andere Person, wird das Design der Standardorganisation des Empfängers verwendet. <sup>&#42;</sup> Dieses Prinzip gilt auch für auf der Covata-Plattform noch nicht registrierte Personen (d. h. Personen, deren Accounts erstellt und einer Organisation hinzugefügt werden, wenn ihnen ein vorhandener Covata-Benutzer in der betreffenden Organisation ein Element freigibt).
+
+<sup>&#42;</sup> Wenn für eine Organisation kein Design definiert ist, wird für solche Benachrichtigungen stattdessen das Systemdesign verwendet.
+
+</Note>

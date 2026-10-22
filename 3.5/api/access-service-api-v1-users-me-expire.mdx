@@ -1,0 +1,49 @@
+---
+title: "<access-service>/api/v1/users/me/expire"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-expire-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/expire
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-expire-supported-methods-and-overview" />
+
+- `PUT` - [invalidates all valid refresh tokens](/3.5/user/managing-your-account#terminating-your-user-accounts-sessions) associated with the [Covata user](/3.5/api/authentication-and-authorisation) whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-expire#access-service-api-v1-users-me-expire-supported-roles) to this endpoint.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-expire-detailed-description" />
+
+This API endpoint invalidates all valid refresh tokens associated with the Covata user whose access token is submitted in the request to this endpoint.
+
+If this request succeeds, all valid refresh tokens associated with this Covata user are invalidated. Every other active session this Covata user has with the Covata Platform will terminate once these sessions' access tokens expire.
+
+Passing any invalidated access token in the header of requests to any Covata API endpoint will cause these requests to fail.
+
+## Supported roles <a id="access-service-api-v1-users-me-expire-supported-roles" />
+
+This API endpoint supports requests utilising Covata user accounts with the following roles (as described in the [SafeShare Administrator's](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-users-me-expire#access-service-api-v1-users-me-expire-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-expire-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-users-me-expire-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,91 @@
+---
+title: "<access-service>/api/v1/items/{itemId}/history"
+---
+
+## URL structure <a id="access-service-api-v1-items-itemid-history-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/{itemId}/history
+```
+
+where `{itemId}` is the ID of a Secure Object or collection.
+
+## Supported methods and overview <a id="access-service-api-v1-items-itemid-history-supported-methods-and-overview" />
+
+- `GET` - used to retrieve history information about the activities which have been performed on a specified [Secure Object](/3.2/api/creating-files-and-folders#secure-object) or [collection](/3.2/api/creating-files-and-folders#collection) (i.e. [item](/3.2/api/creating-files-and-folders#item)), based on the item's ID.
+
+## Detailed description <a id="access-service-api-v1-items-itemid-history-detailed-description" />
+
+This API endpoint retrieves history information about the activities which have been performed on a specified Secure Object or collection, using this item's ID.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/3.2/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with Secure Objects and collections that can be filtered using various 'search' criteria.
+
+The amount of history information retrieved in a response depends on the role of the currently authenticated Covata user<sup>&#42;</sup> (below), as well as:
+
+- The items that the currently authenticated user<sup>&#42;</sup> owns and
+- The items which have been shared with this user.
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-required-headers) of requests to this endpoint.
+
+## Supported roles <a id="access-service-api-v1-items-itemid-history-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role)
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-itemid-history-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-items-itemid-history-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **cursor** - default is 0.
+- **pageSize** - 1 to 100 (default is 10).
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-items-itemid-history-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **activities** - .
+
+  - **actor** - .
+
+    - **id** - .
+    - **firstName** - .
+    - **lastName** - .
+    - **email** - .
+  - **action** - .
+
+    - **ACCESS_ORIGINAL_CONTENT** - .
+    - **ACCESS_VIEWABLE_CONTENT** - .
+    - **UNKNOWN** - .
+    - **ACCESS_DENIED** - .
+    - **ACCESS_GRANTED** - .
+    - **ACCESS_REVOKED** - .
+    - **CREATE_ITEM** - .
+    - **DELETE_ITEM** - .
+    - **MOVE_ITEM** - .
+    - **PERMISSION_CHANGE** - .
+    - **REMOVE_SELF_FROM_COLLABORATORS** - .
+    - **RENAME_ITEM** - .
+    - **SET_VIEWABLE_CONTENT** - .
+    - **SHARE_ITEM** - .
+    - **UNSHARE_ITEM** - .
+    - **CHANGE_ITEM_OWNER** - .
+  - **severity** - .
+  - **target** - .
+  - **timestamp** - .
+- **nextCursor** - .
+- **previousCursor** - .
+
+  **Example (response from ...):**

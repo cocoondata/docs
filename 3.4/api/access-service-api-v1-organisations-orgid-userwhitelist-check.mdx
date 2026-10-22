@@ -1,0 +1,133 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/userwhitelist/check"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/userwhitelist/check
+```
+
+where `{orgId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-supported-methods-and-overview" />
+
+- `POST` - checks which [Covata user](/3.4/api/authentication-and-authorisation) accounts in an organization (specified by `orgId`) will be affected by adding or deleting one or more [user whitelist rule/s](/3.4/admin-org/managing-user-whitelists).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-detailed-description" />
+
+This API endpoint checks which Covata user accounts in an organization (specified by `orgId`) will be affected by adding or deleting one or more user whitelist rules.
+
+- Adding user whitelist rules (via the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist](/3.4/api/access-service-api-v1-organisations-orgid-userwhitelist) API endpoint) is likely to result in the prevention of Covata user accounts (including users whose accounts are not yet registered on the Covata Platform) being shared content within an organization.
+- Deleting user whitelist rules (via the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/userwhitelist/\{whitelistId\}](/3.4/api/access-service-api-v1-organisations-orgid-userwhitelist-whitelistid) endpoint) is likely to result in Covata user accounts (including users whose accounts are not yet registered on the Covata Platform) regaining the ability to be shared content within an organization.
+
+Therefore, use this endpoint first to check which Covata user accounts will be affected before adding or deleting any user whitelist rules.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-orgid-userwhitelist-check#access-service-api-v1-organisations-orgid-userwhitelist-check-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **action** - The enumeration (enum) value `add` or `delete`.
+- **items** - An array of information about one or more user whitelist rule/s to be added *or* existing user whitelist rules to be deleted (based on the **action** value above).
+
+  - To check for Covata user accounts that will be prevented from being shared content by *adding* new user whitelist rules, each element of this array must contain the following members:
+
+    - **pattern** - The domain pattern or email address of the user whitelist rule to be added to the organization specified by `{orgId}` in the request's URL.
+
+  - To check for Covata user accounts that will be disabled by *deleting* existing user whitelist rules, each element of this array must contain the following members:
+
+    - **id** - The ID of the existing user whitelist rule in the organization specified by `{orgId}` in the URL.
+    - **pattern** - The domain pattern or email address of the user whitelist rule to be deleted (represented by **id** above). <br />
+      **Note:** This value can be any valid domain pattern or email address. Irrespective of this value, the value of **id** above is used to perform the check.
+
+  **Example (request - checking which Covata user accounts will be affected by adding '*.xy-company.com'):**
+
+  ```json
+  {
+    "action": "add",
+    "items": [
+      {
+        "pattern": "*.xy-company.com"
+      }
+    ]
+  }
+  ```
+
+   **Example (request - checking which Covata user accounts will be affected by removing '*.xy-company.com'):**
+
+  ```json
+  {
+    "action": "delete",
+    "items": [
+      {
+        "id": "765733965205381120",
+        "pattern": "*.xy-company.com"
+      }
+    ]
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing information about the Covata user accounts in the organization specified by `{orgId}` in the request's URL, which will be affected by adding or deleting user whitelist rule/s specified in the request. (I.e. adding rules prevents users the ability to be shared content in the organization whereas deleting rules grants users this ability.) Each element of this array contains information about one of these user accounts (represented as an object containing the following members unless otherwise stated). If no user accounts are returned in the response, then this array will be empty.
+- **email** - The email address of the Covata user account.
+- **firstName** - The first name set by this user, which is `null` if this value has not already been set via a `PUT` request to the [&lt;access-service&gt;/api/v1/users/me](/3.4/api/access-service-api-v1-users-me) API endpoint. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and/or the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+- **lastName** - The last name set by this user, which is `null` if this value has not already been set via a `PUT` request to the [&lt;access-service&gt;/api/v1/users/me](/3.4/api/access-service-api-v1-users-me) endpoint. Like the first name (above), this appears on the **User** page of Organization Administration and/or the **My Account** feature of Safe Share for Web.
+- **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has either been set by this user on their own account, or enforced for all members of the organization (by any Organization administrator of this organization).
+- **id** - The ID of this Covata user account.
+- **accountType** - A member containing the internationalization (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+  - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
+
+    - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+  - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+  <sup>&#42;</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.4/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.4/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+  **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org/index).
+- **count** - The total number of items returned in the response.
+- **offset** - This value should always be `0`. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "email": "alex.ersteller@xy-firma.de",
+          "firstName": "Alex",
+          "lastName": "Ersteller",
+          "mfaEnabled": false,
+          "id": "766806291997040640",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      }],
+      "count": "1",
+      "offset": "0"
+  }
+  ```

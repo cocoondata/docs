@@ -1,0 +1,270 @@
+---
+title: "Managing your account"
+---
+
+You can manage the following aspects of your Cocoon Data user account through the **My Account** feature of SafeShare:
+
+- Edit your [Account Details](/CS1.2/user/managing-your-account#updating-your-account-details) such as your first, last and other names, as well as your mobile number and default language settings.
+- Modify your **Security** settings, such as your [Password](/CS1.2/user/managing-your-account#changing-your-password) and [Two-factor authentication](/CS1.2/user/managing-your-account#enabling-or-disabling-2fa-on-your-account) settings, as well as [Terminate](/CS1.2/user/managing-your-account#terminating-your-user-accounts-sessions) all of your currently active (i.e. signed in) sessions with the Cocoon Data Platform.
+- View information about your [last sign-in](/CS1.2/user/managing-your-account#viewing-your-last-sign-in-details) to the Cocoon Data Platform.
+- View information about your storage usage and quota for each [organisation](/CS1.2/user/managing-your-account#viewing-your-storage-usages-and-quotas) you are a member of.
+- Modify your [Email Notification Frequency](/CS1.2/user/managing-your-account#modifying-your-email-notification-preferences).
+- View your [Account History](/CS1.2/user/managing-your-account#viewing-your-account-history).
+- Revoke passcodes set on [registered devices](/CS1.2/user/managing-your-account#revoking-passcodes-on-registered-devices). Currently, passcodes (used to rapidly authenticate a Cocoon Data user to the Cocoon Data Platform) are only supported on iOS and Android devices running their native SafeShare applications.
+- Revoke the right that [non-SafeShare-based client applications](/CS1.2/user/managing-your-account#revoking-client-applications) were initially granted by you to access the Cocoon Data Platform's resources through your Cocoon Data user account.
+
+You can also manage a list of [contacts](/CS1.2/user/managing-your-account#managing-your-contacts) (relating to your account) of people you have either added yourself or shared items with previously. Your contacts list makes it easier to [share items](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) with a regular set of people.
+
+<a id="accessing-the-my-account-feature" />**To access the 'My Account' feature:**
+
+1. Ensure you are [signed in](/CS1.2/user/signing-in) to SafeShare for Web.
+2. Click your email address at the top-right of the page and choose **My Account** from the drop-down menu:
+
+   ![SafeShare application menu](/images/2cf30d781aeb-application-menu.png)
+
+## Updating your account details
+
+**To update your personal details:**
+
+1. [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature.
+2. <a id="updating-your-account-details-from-windows" />In the **Account Details** section of the subsequent page (which you can jump to on this page by clicking the **Account Details** option on the left), update any of the following fields as required:
+
+   - **First Name** - e.g. your given name or nickname
+   - **Last Name** - e.g. your surname or family name
+   - **Other Name** - e.g. a middle or other given name
+   - **Mobile Number** - this must include the country calling code and plus (+) sign prefix
+   - **Default Language** - select the appropriate language that suits your region/locale, which can also be changed from the [SafeShare Sign-in page](/CS1.2/user/signing-in)
+
+   ![Account Details section](/images/40f70cceca9e-my-account-account-details-section.png)
+
+   <br />
+   **Note:** Updating the **First Name**, **Last Name** and **Mobile Number** also updates these fields in SafeShare Organisation Administration, which can be accessed by Organisation administrators. (Refer to the [Organisation Administrator's Guide](/CS1.2/admin-org/index) for more information administering organisations on the Cocoon Data Platform.)
+3. Click the **Save** button and the updates to your personal details are saved.
+
+<Note>
+
+If your Cocoon Data user account was created from an external user directory (i.e. you have an [LDAP account type](/CS1.2/admin-org/administering-users-within-an-organisation#account-type)), then you will not be able to change your password through SafeShare. To change these details, please contact your Cocoon Data Platform's SafeShare administrator or the administrator responsible for managing LDAP/the user directory for your account.
+
+</Note>
+
+## Changing your password
+
+**To change your password:**
+
+1. [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature.
+2. <a id="changing-your-password-from-windows" />Scroll down to the **Security** section of the subsequent page (or click the **Security** option on the left to jump to this section) and then click the **Change password** button.
+3. Specify your old password and then your new password twice (once again to confirm it):
+
+   ![Changing your password](/images/9cacc4f12eef-voluntary-password-change.png)
+4. Click the **Change** button and your Cocoon Data user account's password is now changed.
+
+<Note>
+
+If your Cocoon Data user account was created from a user directory which is external to the Cocoon Data Platform (i.e. you have an [LDAP account type](/CS1.2/admin-org/administering-users-within-an-organisation#account-type)), then you will not be able to change your password through SafeShare. To change your password, please contact your Cocoon Data Platform's SafeShare administrator or the administrator responsible for managing LDAP or the user directory of your account.
+
+</Note>
+
+## Enabling or disabling 2FA on your account
+
+You can improve the security of your Cocoon Data user account by configuring it with two-factor authentication (2FA).
+
+If 2FA is enabled on your Cocoon Data user account, you are then required to enter both your password (i.e. the 1st authentication factor), as well as an authentication code obtained from an authenticator application (aka authenticator app) running on your mobile device (i.e. the 2nd authentication factor), in order to successfully sign in to SafeShare through this account.
+
+SafeShare supports the following mobile devices and authenticator apps:
+
+- Android-based devices running the Google Authenticator app,
+- Apple's iPhone, iPad or iPod Touch devices running the Google Authenticator app, or
+- Microsoft Windows-based devices running Microsoft's authenticator app.
+
+<Note>
+
+- *Before enabling 2FA on your Cocoon Data user account*, ensure you are in possession of one of these supported mobile devices. Otherwise, you risk preventing yourself from being able to sign in to SafeShare.
+- It is possible that (at least) one of your SafeShare Organisation administrators has enforced 2FA on all Cocoon Data user accounts who are members of their organisation/s, which includes your user account. If this is the case, 2FA will be enabled and you will not be able to disable this feature.
+
+</Note>
+
+**To enable or disable 2FA on your account:**
+
+1. [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature.
+2. Scroll down to the **Security** section of the subsequent page (or click the **Security** option on the left to jump to this section).
+
+   - *To enabled 2FA on your account:*
+
+     - In the **Security** section, click the **Enable** button (to the right of 'Two-factor authentication ( disabled )'). <br />
+        Your user account's email address is sent a notification informing you that 2FA has been enabled on your account, along with a time-limited link, with step-by-step instructions for configuring 2FA.
+   - *To disable 2FA on your account:*
+
+     - In the **Security** section, click the **Disable** button (to the right of 'Two-factor authentication ( enabled )'). <br />
+        Your user account's email address is sent a notification informing you that 2FA has been disabled on your account.
+
+## Terminating your user account's sessions
+
+Terminating your Cocoon Data user account's sessions immediately invalidates all of your currently valid refresh tokens. This action immediately signs you out of your current SafeShare for Web session and then *every other* SafeShare application with which you have an active session (i.e. once these sessions' access tokens expire). This also includes any other client applications using the Cocoon Data Platform's resources with access tokens obtained through your account.
+
+This feature is useful if your user account is at risk of being compromised - for example, you suspect that you forgot to sign out from a shared computer or you were signed in from a laptop that was either lost or stolen before you signed out.
+
+**To terminate your Cocoon Data user account's sessions:**
+
+1. [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature.
+2. Scroll down to the **Security** section of the subsequent page (or click the **Security** option on the left to jump to this section) and then click the **Terminate** button. <br />
+    Your current SafeShare for Web session with the Cocoon Data Platform is terminated immediately, which also results in you being signed out from your current session. You will need to sign in again to gain access to SafeShare, as well as your Cocoon Data Platform's resources. <br />
+   **Note:** Every other SafeShare application with which you have an active session (including any other client applications using the Cocoon Data Platform's resources with access tokens obtained through your account), will be terminated once these sessions' access tokens expire.
+
+## Viewing your last sign-in details
+
+**To view information about your 'Last Sign-in Details':**
+
+- [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature and ... <br />
+  <a id="viewing-your-last-sign-in-details-from-windows" /> Scroll down to the **Last Sign-in Details** section of the subsequent page (or click the **Sign In Details** option on the left to jump to this section) to access the following information about your user account's last sign-in to Cocoon Data SafeShare or the Cocoon Data Platform:
+
+  - **Client Application** - the Client ID value of the client application through which your account was used to sign in to Cocoon Data SafeShare or the Cocoon Data Platform. In most cases, this would be the Client ID for SafeShare for Web, including SafeShare for [Windows](/CS1.2/windows/index), OS X, iOS and Android applications. For more information about Client IDs, please refer to the [Client ID description](/CS1.2/admin-platform/configuring-client-applications#client-id) in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index),
+  - **IP Address** - the IP address of the computer/device from which this sign-in occurred and
+  - **Time** - when your account was used to sign in.
+
+## Viewing your storage usages and quotas
+
+Information about your storage *usage/s* and *quota/s* (managed by the Cocoon Data Platform) is available in the **Organisations** section of the **My Account** feature, where each organisation you are a member of has your own storage usage and quota.
+
+**To view information about your storage usage/s and quota/s:**
+
+- [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature and ... <br />
+  <a id="viewing-your-storage-usages-and-quotas-from-windows" /> Scroll down to the **Organisations** section of the subsequent page (or click the **Organisations** option on the left to jump to this section) to access the following information about your Cocoon Data user account's storage usage/s and quota/s:
+
+  - *Organisation name/s* - Within the **Organisations** section, schematics of your user account's storage usage and quota (for each organisation you are a member of) are presented in separate panels (one for each organisation). The organisation's name is indicated in bold text at the top of its panel.
+  - *Percentage usage/s* - Each organisation panel contains a pie chart, which represents the percentages of your account's *quota* (for that organisation) that:
+
+    - your data currently occupies (indicated by the word **Used** upon hovering your mouse over this segment of the pie chart) and
+    - remains free (indicated by the word **Available** upon mouse-over).
+
+    **Notes:**
+
+    - An *Organisation administrator* from each of your organisations would have assigned a *plan* to your account when (and if) they granted your account the **Originator** role within their organisation. (A plan provides your user account with a *quota* of storage space for an organisation.) Refer to [An organisation user's fields](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-fields) in the [Organisation Administrator's Guide](/CS1.2/admin-org/index) for more information.
+    - A pie chart indicates **No plan assigned** if your user account does not have the **Originator** role for that organisation. (The **Originator** role granted to your user account within an organisation provides your account with the ability to securely upload and store content to your own storage space for that organisation.)
+
+    **Tip:** If your **Used** percentage approaches 100% for any organisation, then either [remove some of your own secure content](/CS1.2/user/managing-secure-content#removing-personally-owned-content) from that organisation or ask your relevant Organisation administrator to switch your plan to one with a larger quota.
+  - *Storage usage/s* - Each organisation panel indicates the number of megabytes of storage that your account currently uses (within its respective organisation). This information is not shown if your user account does not have the **Originator** role.
+  - *Quota/s* - Each organisation panel also indicates the amount of your account's quota (in gigabytes) for its respective organisation. Again, this information is not shown if your user account does not have the **Originator** role.
+  - **Recycled** - For each organisation, indicates the amount of storage space consumed by items currently located in the [Recycled Bin](/CS1.2/user/managing-secure-content#accessing-the-recycle-bin) (for your Cocoon Data user account).
+
+  Your current home/default organisation (see [Changing organisations](/CS1.2/user/uploading-storing-and-sharing-content-securely#changing-organisations) for more information about this feature) is indicated by the word 'Home' near the base of its organisation panel. To change your home/default organisation to that of another, click the **Set as home** button within the relevant organisation's panel.
+
+  ![Organisations section](/images/d86b9b137505-my-account-organisations-section.png)
+
+## Modifying your email notification preferences
+
+You can reduce the frequency of your Cocoon Data notifications by modifying your email notification preferences from the default of one email for every file or folder that is shared with you, to a periodic digest of all files and folders that have been shared with you over a set period.
+
+**To modify your email notification preferences:**
+
+1. [Access](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) the **My Account** feature.
+2. <a id="modifying-your-email-notification-preferences-from-windows" />Scroll down to the **Email Notification Frequency** section of the subsequent page (or click the **Email Notifications** option on the left to jump to this section) and choose:
+
+   - **Per Item** to receive an email notification for every file or folder that is shared with you. <br />
+     **Note:** Your Cocoon Data Platform instance has a system-wide property entitled '*Item shared notification frequency in minutes*', whose default value is 15 and [can be configured](/CS1.2/admin-platform/configuring-platform-administration-properties) by a SafeShare administrator through [SafeShare administration](/CS1.2/admin-platform/index). If you are shared multiple items within this time interval, you only receive a single email digest of all files and folders that have been shared with you during that period.
+   - **Daily** to receive a daily email notification of all files and folders that were shared with you over the last day.
+   - **Weekly** to receive a weekly email notification of all files and folders that were shared with you over the last week.
+   - **None** to not receive any email notifications when a file or folder is shared with you.
+
+   ![Email Notification Frequency section](/images/03ef12db828f-my-account-email-notification-frequency-section.png)
+
+   <br />
+3. Click the **Save** button and the updates to your email notification preferences are saved.
+
+## Viewing your account history
+
+The **Account History** section towards the end of this page ([accessed](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) through the **My Account** feature and then by clicking the **Account History** option on the left), shows a history of activities performed by you (or by an Organisation administrator, including a SafeShare administrator if applicable) on your own account in reverse chronological order.
+
+If the administrator is not a member of one of your organisations, then 'An Administrator' is shown instead of the Cocoon Data user's name.
+
+The types of activities recorded include your own changes to your account's:
+
+- [details](/CS1.2/user/managing-your-account#updating-your-account-details),
+- [password](/CS1.2/user/managing-your-account#changing-your-password),
+- [two-factor authentication settings](/CS1.2/user/managing-your-account#enabling-or-disabling-2fa-on-your-account), or
+- other settings, such as [email notification preferences](/CS1.2/user/managing-your-account#modifying-your-email-notification-preferences).
+
+Also recorded are changes to your account settings by an Organisation administrator, as well as the creation of an account (or its addition to an organisation) by an administrator. Be aware that sign-in and sign-out activities are not recorded by this feature.
+
+## Revoking passcodes on registered devices
+
+The **Registered Devices** section towards the middle of this page ([accessed](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) through the **My Account** feature and then by clicking the **Registered Devices** option on the left), only indicates something other than 'No registered devices' if you have:
+
+- used a SafeShare for iOS or Android application *and*
+- have set a passcode through at least one of these devices.
+
+This feature:
+
+- displays the names of devices on which you have registered passcodes (through your Cocoon Data user account), which are used to rapidly authenticate your account to the Cocoon Data Platform through the native SafeShare or iOS/Android applications and more importantly,
+- can be used to revoke passcodes set on specific devices. From a data security perspective, the ability to revoke a passcode set on a specific device is useful if such a device is misplaced, lost or stolen (since entering a passcode bypasses the requirement for a Cocoon Data user to enter their email address and password, and perform the two-factor authentication (2FA) step, to authenticate to the Cocoon Data Platform).
+
+To revoke the passcode set for a specific device, identify the device's name in the list (under **Device Name**) and click its **Remove** button to the right of the page.
+
+## Revoking client applications
+
+The **Applications** section at the middle of this page ([accessed](/CS1.2/user/managing-your-account#accessing-the-my-account-feature) through the **My Account** feature and then by clicking the **Applications** option on the left) indicates 'No applications found' if you have not used a client application that:
+
+- integrates with the Cocoon Data Platform's Application Programming Interface (API) and
+- *is not* a Cocoon Data SafeShare application.
+
+## Managing your contacts
+
+Whenever you [share content](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) with other people, their email addresses are automatically added to your list of **Contacts**. This list makes it easier to specify these people as collaborators in the ['Share' dialog box](/CS1.2/user/uploading-storing-and-sharing-content-securely#share-dialog-box) (using autocompletion) the next time you share your content with them.
+
+You can also manually add, edit or delete any of these personal contacts through the **Contacts** feature.
+
+<Note>
+
+Like the address book feature, which autocompletes the email addresses of any members of your current organisation in the **Share** dialog box and is enabled by an Organisation administrator of your current organisation, your list of **Contacts** also autcompletes the email addresses of people you have added to this list. However, your **Contacts** are available for use in all organisations you are a member of. For more information about these features in the **Share** dialog box, see **Notes about the 'Share' dialog box** after the image of this [step 5](/CS1.2/user/uploading-storing-and-sharing-content-securely#share-dialog-box) of the [Sharing secure content](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) procedure.
+
+</Note>
+
+**To access the '(My) Contacts' feature:**
+
+1. Ensure you are [signed in](/CS1.2/user/signing-in) to SafeShare for Web.
+2. Click your email address at the top-right of the page and choose **Contacts** from the drop-down menu:
+
+   ![SafeShare application menu](/images/2cf30d781aeb-application-menu.png)
+
+   <br />
+    and ensure the **My contacts** tab is selected.
+
+**To manually add a new 'Contact':**
+
+1. Access the **Contacts** feature.
+2. Click the top-left **New Contact** button.
+3. In the **Contacts** dialog box, specify an optional **First name** and **Last name** and mandatory **Email address** fields.
+4. Click **Save** to add your new **Contact**.
+
+**To edit an existing 'Contact':**
+
+1. Access the **Contacts** feature.
+2. Click either the **Edit** or email address link associated with the **Contact** to be edited.
+3. In the **Contacts** dialog box, edit the optional **First name** and **Last name** and mandatory **Email address** fields as required.
+4. Click **Save** to update your existing **Contact**.
+
+**To delete an existing 'Contact':**
+
+1. Access the **Contacts** feature.
+2. Click the **Delete** link associated with the **Contact** to be deleted. <br />
+    The contact's email address will no longer be available for selection when [sharing your content](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content).
+
+## Discovering your contact groups
+
+Whenever you [share content](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content), you can do so with a group of people (configured by your Organisation administrator) called a *contact group*. Contact groups makes it easier to specify a set group of people as collaborators in the ['Share' dialog box](/CS1.2/user/uploading-storing-and-sharing-content-securely#share-dialog-box) (using autocompletion) each time you share your content with them.
+
+**To discover your 'contact groups' and their members:**
+
+1. Ensure you are [signed in](/CS1.2/user/signing-in) to SafeShare for Web.
+2. Click your email address at the top-right of the page and choose **Contacts** from the drop-down menu:
+
+   ![SafeShare application menu](/images/2cf30d781aeb-application-menu.png)
+3. Click the **Contact groups** tab.
+
+   - Each contact group (whose **Name** you can specify in the ['Share' dialog box](/CS1.2/user/uploading-storing-and-sharing-content-securely#share-dialog-box)) is listed on the **Contact groups** tab page.
+   - To discover the members which currently constitute a contact group, click on the contact group's row and then click the **Show Members** button. The members of the selected contact group appear in the resulting **Members** dialog box.
+
+<Note>
+
+For more information about how Organisation administrators configure contact groups, see [Managing contact groups](/CS1.2/admin-org/managing-contact-groups) in the [Organisation Administrator's Guide](/CS1.2/admin-org/index).
+
+</Note>

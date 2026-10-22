@@ -1,0 +1,59 @@
+---
+title: "<content-service>/api/v1/plans/usage/{userid}"
+---
+
+## URL structure <a id="content-service-api-v1-plans-usage-userid-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/plans/usage/{userid}
+```
+
+where `{userId}` is the ID of a Covata user.
+
+## Supported methods and overview <a id="content-service-api-v1-plans-usage-userid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total storage (managed by the Covata Platform's Content Service) which has been utilized by any [Covata user](/3.1/admin/administering-users) (specified through the user's ID).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-plans-usage-userid-detailed-description" />
+
+This API endpoint retrieves the total number of bytes of storage (managed by the Covata Platform's Content Service) which has been utilized by a specific Covata user.
+
+This total consists of the encrypted data of the Covata user's [Secure Objects](/3.1/api/creating-secure-objects-and-collections#secure-object), as well as all *read-only view* data for this user's Secure Objects, whose file types (determined by file name extension) support the generation of read-only views.
+
+## Supported roles <a id="content-service-api-plans-usage-userid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/content-service-api-v1-plans-usage-userid#content-service-api-v1-plans-usage-userid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-plans-usage-userid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="content-service-api-v1-plans-usage-userid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **diskStorage** - A member containing information about the total storage (managed by the Covata Platform's Content Service) which has been utilized by a specific Covata user. This member contains the following sub-member:
+
+  - **total** - The total amount of space (in bytes) of all Secure Objects' encrypted data in storage (managed by the Content Service).
+
+  **Example:**
+
+  ```json
+  {
+    "diskStorage": {
+      "total": "549744"
+    }
+  }
+  ```

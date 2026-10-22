@@ -1,0 +1,112 @@
+---
+title: "Accessing Safe Share Organization Administration"
+---
+
+The features of [Safe Share Organization Administration](/3.3/admin-platform/organisation-administration) are only available to Organization administrators, where an *Organization administrator* is any [Covata user](/3.3/admin-platform/administering-users-within-an-organisation) who has the [Organization administrator](/3.3/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) [role](/3.3/admin-platform/administering-users-within-an-organisation#an-organisation-users-roles) for one or more [organization/s](/3.3/admin-platform/administering-organisations).
+
+## Signing in to Organization Administration <a id="signing-in-to-organisation-administration" />
+
+When signing in to Safe Share Organization Administration for one or more organizations, a Covata user's account must have the [Organization administrator role](/3.3/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) (for each [organization](/3.3/admin-platform/administering-organisations) managed through this account) to access all Safe Share Organization Administration features for these organizations.
+
+**To sign in to Safe Share Organization Administration:**
+
+1. Open a compatible web browser and do either of the following:
+
+   1. Enter the base URL of your Covata Platform instance (appended by `/#/selectOrganisation`) in your browser's URL field - e.g: <br />
+      `https://covata-platform.xy-company.com/#/selectOrganisation` <br />
+      **Tip:** If you manage multiple organizations, you may wish to bookmark this URL, since this is a quicker method for accessing Safe Share Organization Administration than 1-b below <sup>&#42;</sup> .
+   2. Enter only the base URL of your Covata Platform instance in your browser's URL field - e.g: <br />
+      `https://covata-platform.xy-company.com`
+2. On the Covata Sign-in page, enter the **Email address** and **Password** associated with your Covata user account which has the [Organization administrator role](/3.3/admin-platform/administering-users-within-an-organisation#organisation-administrator-role). <br />
+   *Forgotten your password?* If you have, then leave the **Password** field blank but click the **Forgot your password** link instead. Follow the instructions on the page and then in your email notification to reset your password.
+3. Click the **SIGN IN** button (or type 'Enter'/'Return'). If successful and:
+
+   - you performed step 1-a (above), the **Select Your Organization** page is displayed.
+
+     - Choose the organization to administer (even if only one is available), click the **Select** button and the [Safe Share Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for this organization is displayed.
+   - you performed step 1-b (above), one of the following will appear:
+
+     - The [Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) (for the only organization you have permission to manage).
+     - The **Select Your Organization** page (because you have permission to manage more than one organization). If this page appears:
+
+       - Choose the organization to administer and click the **Select** button. The [Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for the selected organization is displayed.
+     - The main Covata [Safe Share for Web](/3.3/user/index) page (because your Covata user account also has either the [Originator](/3.3/admin-platform/administering-users-within-an-organisation#originator-role) or [Collaborator](/3.3/admin-platform/administering-users-within-an-organisation#collaborator-role) roles). If this page appears:
+
+       - Click your email address at the top-right and choose **Administration** from the drop-down menu. Then:
+
+         - If the **Select Your Organization** page then appears, choose the organization to administer and click the **Select** button. The [Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) (for the selected organization) is displayed.
+         - If the Safe Share Administration interface appears, then your account also has the Safe Share administrator role. Follow the substeps in the next bullet point to access Organization Administration.
+     - The [Safe Share Administration interface](/3.3/admin-platform/accessing-platform-administration#the-platform-administration-interface) (because your Covata user account also has the [Safe Share administrator role](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)). If this interface appears:
+
+       1. Click the **Organizations** option on the left of the Safe Share Administration interface to open the **Organizations** [page](/3.3/admin-platform/administering-organisations).
+       2. If necessary, [locate](/3.3/admin-platform/administering-organisations#finding-existing-organisations) the organization to administer.
+       3. In the **Manage** column, click the organization's **Manage** button. The [Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for this organization is displayed.
+
+   **Note:** The email address of the currently signed in user appears at the top right-hand corner of the Organization Administration interface.
+
+<Tip>
+
+<sup>&#42;</sup> **Additional tip:** If you manage multiple organizations but you would prefer to access a specific organization *directly* by URL, enter/bookmark the base URL of your Covata Platform instance (appended by `/#/orgAdmin/{orgGroupId}/dashboard`) - e.g:
+
+- `https://covata-platform.xy-company.com/#/orgAdmin/{orgGroupId}/dashboard` <br />
+   where `{orgGroupId}` is the numeric ID of the specific organization to access directly. <br />
+   This URL and ID value can be obtained from your browser's URL field after successfully [signing in](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to the organization's [Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) (using the procedure above).
+
+Upon entering this URL in your browser's URL field and successfully signing in, the Organization Administration interface for this organization is displayed immediately.
+
+</Tip>
+
+## The Organization Administration interface <a id="the-organisation-administration-interface" />
+
+The Safe Share Organization Administration interface consists of a set of configuration pages, each of which is accessible from the options on the left (below).
+
+The **My Organization/Dashboard** [page](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-dashboard) for an Organization administrator's (chosen) [organization](/3.3/admin-platform/administering-organisations) is initially displayed upon this Covata user successfully [signing in to Safe Share Organization Administration](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) (above).
+
+<Note>
+
+If accessing Safe Share Organization Administration from a tablet or phone, tap the 'menu' icon in the top left hand corner of the screen to access these options.
+
+</Note>
+
+![Organization Administration dashboard page](/images/2b7356978b16-organisation-administration-dashboard-page.png)
+The table below describes each of these Safe Share Organization Administration pages, which can be accessed by clicking its option on the left of the interface.
+
+| Safe Share Organization Administration page | Description |
+| --- | --- |
+| [My Organization/Dashboard](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-dashboard) | Provides a single-page graphical overview of various aspects of your organization's current statuses (presented in panels) as well as a variety of system usage metrics involving user accounts, files and storage (presented in pie charts). |
+| [Configuration](/3.3/admin-platform/configuring-organisation-administration-properties) | Allows the modification of Safe Share Organization Administration properties that affect specific functional areas of your organization on the Covata Platform. |
+| [Users](/3.3/admin-platform/administering-users-within-an-organisation) | Allows access to all Covata users who are members of your organization, from which any of these Covata users can be configured, including the ability to modify the roles of these users, which permits what the users in your organization can do with Covata technologies. |
+| [User Whitelist](/3.3/admin-platform/managing-user-whitelists) | Allows the management and configuration of the user whitelist, which defines the people (based on their email address or domain) that can be shared items by other Covata users within your organization. Any users whose email addresses do not match a user whitelist rule can no longer be shared files or folders (i.e. added as a collaborator to items) by other people. |
+| [Files](/3.3/admin-platform/administering-files) | Allows any files encrypted using Covata technologies within your organization to be searched and filtered. From this filtered list, individual files can:  <br />•  Be disabled (which prevents any access to their unencrypted data) or re-enabled, as well as <br />•  Have all their recorded activities inspected.  |
+| [Groups](/3.3/admin-platform/managing-groups) | Allows the creation of groups of Covata users, which in turn can be used in conjunction with classifications to restrict the people with whom files can be shared. |
+| [Classifications](/3.3/admin-platform/managing-classifications) | Allows the definition of classifications that:  <br />•  can be selected by Covata users when sharing files and <br />•  once applied to groups of Covata users, <br />restricts the ability to share files to Covata users who are members of these groups. |
+| [Plans](/3.3/admin-platform/managing-users-storage-quotas-through-plans) | Allows the definition of plans, each of which defines a storage quota that is used to limit the amount of storage (managed by the Covata Platform's Content Service) available to Covata user accounts. |
+| [Reports](/3.3/admin-platform/generating-reports) | Allows the generation of reports on activities (i.e. requests) within your organization made by client applications to the Covata Platform's API, which can be exported to either PDF or CSV formats. The activities for these reports can be filtered by a range of different criteria. <br />**Note:** In this context, 'client applications' includes Safe Share Administration and Organization Administration (and the relevant administrators of these interfaces performing actions through them).  |
+
+## The Organization Administration dashboard <a id="the-organisation-administration-dashboard" />
+
+The **My Organization/Dashboard** page is initially displayed upon a Organization administrator successfully [signing in](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+
+![Organization Administration dashboard page](/images/2b7356978b16-organisation-administration-dashboard-page.png)
+The following table describes each component of the **My Organization/Dashboard** page from left to right/top to bottom.
+
+| Dashboard page component | Description |
+| --- | --- |
+| Total Users | This panel shows the total number of Covata users within your organization, including the numbers of these users with each of the [roles](/3.3/admin-platform/administering-users-within-an-organisation#an-organisation-users-roles) that can be assigned through Safe Share Organization Administration. Clicking this panel opens the **Users** [page](/3.3/admin-platform/administering-users-within-an-organisation). |
+| Files | This panel shows the total number of encrypted files which have been created through the Covata Platform, including the number of these files which have either been shared or not been shared. Clicking this panel opens the **Files** [page](/3.3/admin-platform/administering-files). |
+| Organization Total Quota | This panel shows the total amount of storage space that a [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) for your Covata Platform instance has granted to your [organization](/3.3/admin-platform/administering-organisations), which the Covata Platform's Content Service utilizes to store content for all Covata users with the [Originator role](/3.3/admin-platform/administering-users-within-an-organisation#originator-role) (i.e. users who have a [plan](/3.3/admin-platform/managing-users-storage-quotas-through-plans)) within your organization. <br />  This panel also indicates the amounts of storage currently allocated to these users (i.e. the sum of their plans' quotas) and the amount of storage space currently consumed. Clicking this panel opens the **Plans** [page](/3.3/admin-platform/managing-users-storage-quotas-through-plans). |
+| Plans | This section of the dashboard shows each plan configured in your organization. For each of these plans, the following information is indicated:  <br />•  The plan's name at the top. <br />•  A pie chart of all Covata users with the Originator role in your organization assigned to this plan, which represents the percentages of these users who are either within their plan's quota, or at/have exceeded their plan's quota. <br />•  The actual numbers of all Covata users (with the Originator role) in your organization assigned to this plan, along with the percentage of all Covata users in your organization (with this role) who are assigned to this plan (in brackets).  |
+| File Extension Breakdown | This section of the dashboard shows a pie chart of all files in your organization, indicating the percentages of different file types (based on file name extensions). |
+
+## Signing out of Organization Administration <a id="signing-out-of-organisation-administration" />
+
+**To sign out of Safe Share Organization Administration:**
+
+- Click your email address at the top right-hand corner of the [Safe Share Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) and choose **Sign Out** from the drop-down menu. <br />
+   The Covata Sign-in page is redisplayed.
+
+<Warning>
+
+After administering your organization through Safe Share Organization Administration, please ensure that you explicitly sign out using this procedure (above). If you just close the browser tab or window that contained your Safe Share Organization Administration session, then you will *not be signed out*, leading to the risk that your session may be compromised by someone else subsequently using your computer.
+
+</Warning>

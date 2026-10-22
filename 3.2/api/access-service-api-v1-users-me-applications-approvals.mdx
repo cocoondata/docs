@@ -1,0 +1,61 @@
+---
+title: "<access-service>/api/v1/users/me/applications/approvals"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-applications-approvals-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/applications/approvals
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-applications-approvals-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information about third party (i.e. non-Covata) client applications which the currently authenticated Covata user<sup>&#42;</sup> has approved access to their resources on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-applications-approvals-detailed-description" />
+
+This API endpoint retrieves a list of information about third party (i.e. non-Covata) client applications which the currently authenticated Covata user<sup>&#42;</sup> has approved access to their resources on the Covata Platform.
+
+Such a client application could be one that you or your organization is developing, where this application integrates with Covata technologies either using Covata's API or a Covata SDK.
+
+<Note>
+
+Before any client application can be granted access to a Covata user's resources, a Covata Platform administrator must first have [registered the client application](/3.2/api/access-service-api-v1-clientapps) on their Covata Platform.
+
+</Note>
+
+## Supported roles <a id="access-service-api-applications-approvals-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-me-applications-approvals#access-service-api-v1-users-me-applications-approvals-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-applications-approvals-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-users-me-applications-approvals-returns" />
+
+A JSON-formatted response containing an array of elements, each of which contains the following members:
+
+- **applications** - .
+
+  - **id** - .
+  - **clientId** - .
+  - **clientDescription** - .
+  - **createdAt** - .
+
+  **Example (response from ...):**
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-me-applications-approvals#access-service-api-v1-users-me-applications-approvals-required-headers) of requests to this endpoint.

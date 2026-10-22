@@ -1,0 +1,50 @@
+---
+title: "Covata Platform 2.16 Administrator's Guide"
+---
+
+This documentation is for 2.16.x versions of the *Covata Platform*.
+
+Please refer to our [important notice](/3.5/admin/important-notice) for information that relates to this documentation.
+
+## Overview of the Covata Platform
+
+Covata provides a complete solution and platform for securely protecting and sharing encrypted files and folders which can be stored and accessed anywhere (within an organization, outside the domain and from mobile devices).
+
+Covata's technologies provide this solution through the *Covata Platform*, whose *Access Service* centrally manages cryptographic *keys* (used to encrypt/decrypt content) and *access controls* (which define who can access/decrypt content and when).
+
+The Covata Platform's Access Service handles its *key* management and *access controls* separately from cryptography and user content. This separation helps ensure that regardless of whether or not encrypted content gets into the wrong hands, it can only be decrypted by the people it's intended for.
+
+Users of *Covata technologies* <sup>(1)</sup> can share their secured content with others through Covata's Safe Share applications, which integrate with the Covata Platform to ensure that critical key management and access controls are adhered to.
+
+The Covata Platform provides an application programming interface (API) that allows integrators to develop their own applications that leverage Covata's powerful data-centric security features.
+
+<a id="administration" />
+
+## Covata Administration
+
+*Covata Administration* is a web-based interface for administering the Covata Platform and provides the overall control of an organization's implementation of Covata technologies. <sup>(1)</sup>
+
+![Dashboard page](/images/47c98ce412b7-dashboard-page.png)
+*Covata Platform administrators* are users who (once [signed in](/3.5/admin/accessing-administration#signing-in) to the Covata Administration [dashboard](/3.5/admin/accessing-administration#the-dashboard) above) can access all <sup>(2)</sup> administration features of their Covata Platform, which includes the ability to:
+
+- Configure all [users](/3.5/admin/administering-users) of the Covata Platform (also known as 'Covata users').
+- Configure and manage their [user whitelist](/3.5/admin/managing-user-whitelists), which defines the people that can access the Covata Platform (based on their email address or domain).
+- Configure Covata users through [LDAP](/3.5/admin/configuring-ldap) connections.
+- Configure single sign-on (SSO) using a [SAML](/3.5/admin/configuring-single-sign-on-using-an-idp)-based Identity Provider (IdP).
+- Manage [labels](/3.5/admin/managing-labels) and [groups](/3.5/admin/managing-groups), which are both used in conjunction to restrict the people with whom secured content can be shared.
+- Manage [plans](/3.5/admin/managing-users-storage-quotas-through-plans) that define storage quotas, which are used to limit the amount of storage (managed by the Covata Platform's Content Service) that is available to Covata user accounts.
+- [Transfer ownership](/3.5/admin/transferring-user-ownership) of one Covata user's secured content to that of another user. <sup>(2)</sup>
+- Disable or re-enable access to any [files](/3.5/admin/administering-files) encrypted using Covata technologies on the Covata Platform, as well as view all recorded activities on these files.
+- Generate [reports](/3.5/admin/generating-reports) on all requests made by client applications to the Covata Platform's API.
+- Register [client apps](/3.5/admin/configuring-client-applications) (i.e. integrator-developed applications that utilize Covata technologies to create and/or access secured content).
+- Change the [configuration](/3.5/admin/configuring-administration-properties) of Covata Administration properties.
+- Customize the appearance of the Safe Share web application and Covata Administration through a [theme](/3.5/admin/re-theming-the-application-and-administration).
+- Adjust the user interface languages of Covata Administration and the default for the Safe Share web application, as well as upload/delete language bundles using [internationalization](/3.5/admin/managing-internationalization).
+
+<sup>(1)</sup> *Covata technologies* refers to all features and functionality provided by (and made available through) the Covata Platform, including Covata's Safe Share applications, the Covata Platform's API and the Covata Platform itself.
+
+<sup>(2)</sup> As explained in more detail on the following [Accessing Covata Administration](/3.5/admin/accessing-administration) page, a Covata Platform administrator requires an additional *User administrator* role (which they can grant themselves) to access the **Transfer Ownership** feature. Furthermore, a user who only has the User administrator role (of the *Covata Administration roles*), only has access to the **Transfer Ownership** feature of Covata Administration.
+
+---
+
+#### Please provide your feedback here

@@ -1,0 +1,144 @@
+---
+title: "<access-service>/api/v1/users/me"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the [Covata user](/3.3/api/authentication-and-authorisation) whose [access token is submitted in the request](/3.3/api/access-service-api-v1-users-me#access-service-api-v1-users-me-supported-roles) to this endpoint.
+- `PUT` - used to modify the account details of the Covata user whose access token is submitted in the request to this endpoint.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about the Covata user whose access token is submitted in the request to this endpoint.
+- Modifies the account details of the Covata user whose access token is submitted in the request to this endpoint. <br />
+  **Note:** These account details can also be modified through the [My Account](/3.3/user/managing-your-account#updating-your-account-details) feature of [Safe Share for Web](/3.3/user/index).
+
+## Supported roles <a id="access-service-api-v1-users-me-supported-roles" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-users-me#access-service-api-v1-users-me-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-users-me-optional-parameters" />
+
+The following parameters can also be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **firstName** - The first name to be set by the Covata user whose [access token is submitted in the request](/3.3/api/access-service-api-v1-users-me#access-service-api-v1-users-me-supported-roles) to this endpoint. Omitting this value in the request clears this property's value to `null` <sup>1</sup> .
+- **lastName** - The last name to be set by this user. Omitting this value in the request clears this property's value to `null` <sup>1</sup> .
+- **otherName** - The other (e.g. middle) name to be set by this user. Omitting this value in the request clears this property's value to `null` <sup>1</sup> .
+- **mobileNumber** - The mobile number to be set by this user. This number must include the country calling code and plus (+) sign prefix - for example, +1 234 567 8910 for a US-based number. Omitting this value in the request clears this property's value to `null` <sup>1</sup> .
+- **i18nPreferenceCode** - The **I18n Code** (described in [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide) representing the language and locale to be set by this user.
+- **homeOrganisationId** - The ID of the organization (to be set by this user) as the user's home organization.
+- **mfaEnabled** - A boolean value to be set by this user to activate (i.e. `true`) or deactivate (`false`) two-factor authentication on the user's account. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "firstName": "Alex",
+    "lastName": "Originator",
+    "otherName": "Jay",
+    "mobileNumber": "+61 401 234 567",
+    "i18nPreferenceCode": "en_gb"
+  }
+  ```
+
+<sup>1</sup> If none of the parameters above are specified, then an empty JSON object must be passed in the body of the PUT request for the request to succeed:
+
+- `{}`
+
+Specifiying an empty JSON object like this clears the values for **firstName**, **lastName**, **otherName** and **mobileNumber** (above) to `null`.
+
+## Returns <a id="access-service-api-v1-users-me-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **externalUserId** - .
+- **email** - The email address of the Covata user account whose [access token was submitted in the request](/3.3/api/access-service-api-v1-users-me#access-service-api-v1-users-me-supported-roles) to this endpoint.
+- **firstName** - The first name set by this user, which is `null` if this value was omitted in a `PUT` request to this endpoint. This is the first name that appears on the [Administrators](/3.3/admin-platform/administering-platform-administrator-users) page of Safe Share Administration, the [Users](/3.3/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and/or the [My Account](/3.3/user/managing-your-account) feature of Covata Safe Share for Web.
+- **lastName** - The last name set by this user, which is `null` if this value was omitted in a `PUT` request to this endpoint. Like the first name (above), this appears on the **Administrators** page of Safe Share Administration, the **User** page of Organization Administration and/or the **My Account** feature of Safe Share for Web.
+- **otherName** - The other name (e.g. middle) set by this user, which is `null` if this value was omitted in a `PUT` request to this endpoint. This name appears on the **My Account** feature of Safe Share for Web.
+- **mobileNumber** - The mobile number set by this user, which is `null` if this value was omitted in a `PUT` request to this endpoint. This number appears on the **My Account** feature of Safe Share for Web.
+- **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has either been set by this user on their own account, or enforced for all members of the organization (by any Organization administrator of this organization).
+- **systemAdmin** - A boolean value that indicates whether (`true`) or not (`false`) this user's account has the [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) role.
+- **homeOrganisationId** - The ID of the organization (set by this user) as their home organization.
+- **i18nPreferenceCode** - The **I18n Code** (described in [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide) representing the language and locale set by this user.
+- **notificationFrequency** - An enumeration (enum) value representing the frequency with which this user receives an email notification about items being shared with them. Valid values include:
+
+  - `ITEM` - An email notification is sent by the Covata Platform to this user each time an item is shared with the user. These notifications may be less frequent (resulting in a list/digest of items being sent) based on the **Item shared notification frequency in minutes** [Notification properties](/3.3/admin-platform/configuring-platform-administration-properties#notifications-properties) setting in Safe Share Administration.
+  - `DAILY` - An email notification (containing a digest of items shared with this user) is sent once per day each time at least one item is shared with the user during this period.
+  - `WEEKLY` - An email notification (containing a digest of items shared with this user) is sent once per week each time at least one item is shared with the user during this period.
+  - `NONE` - No notifications are sent when items are shared.
+- **lastLoginIp** - The IP address of the computer through which this user last signed in.
+- **lastLoginClient** - The Client ID of the application through which this user accessed the Covata Platform.
+- **id** - The ID of this Covata user account.
+- **lastLoginTime** - The date/time when this user last signed in by entering their Covata user credentials.
+- **accountType** - A member containing the internationalization (I18N) property key/code <sup>2</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+  - **i18n** - A member containing the I18N code <sup>2</sup> for the account type as sub-members:
+
+    - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+  - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+  <sup>2</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.3/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+  **Note:** For more information about account types, see the description for [Account Type](/3.3/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.3/admin-org/index). <br />
+  **Example (response):**
+
+  ```json
+  {
+      "externalUserId": null,
+      "email": "alex.originator@xy-company.com",
+      "firstName": "Alex",
+      "lastName": "Originator",
+      "otherName": null,
+      "mobileNumber": null,
+      "mfaEnabled": false,
+      "systemAdmin": false,
+      "homeOrganisationId": "759955653086449664",
+      "i18nPreferenceCode": "en_us",
+      "notificationFrequency": "ITEM",
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginClient": "exampleClientApplication",
+      "id": "759956629344260096",
+      "lastLoginTime": "2016-09-29T23:29:05.443Z",
+      "accountType": {
+          "i18n": {
+              "code": "server.useraccounttype.local",
+              "arguments": []
+          },
+          "value": "LOCAL"
+      }
+  }
+  ```

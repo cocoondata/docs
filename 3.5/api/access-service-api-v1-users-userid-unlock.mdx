@@ -1,0 +1,46 @@
+---
+title: "<access-service>/api/v1/users/{userId}/unlock"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-unlock-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userId}/unlock
+```
+
+where `{userId}` is the ID of a Covata user account.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-unlock-supported-methods-and-overview" />
+
+- `PUT` - unlocks a [Covata user](/3.5/api/authentication-and-authorisation)'s account (specified by `userId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-userid-unlock-detailed-description" />
+
+This API endpoint unlocks a Covata user's account (specified by `userId`).
+
+A Covata user's account can be come locked if the user of this account had entered their password incorrectly more than the Covata Platform's [configured maximum](/3.5/admin-platform/configuring-platform-administration-properties#maximum-number-of-password-retries) (which can be set through the [&lt;access-service&gt;/api/v1/config/server/\{configId\}](/3.5/api/access-service-api-v1-config-server-configid) API endpoint).
+
+## Supported roles and conditions <a id="access-service-api-v1-users-userid-unlock-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following roles (as described in the [SafeShare Administrator's](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role) - when this user is another SafeShare administrator user to the one whose account (specified by `{userId}` in the request's URL) is being unlocked.
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - a bug currently exists, which prevents users with this role from being able to unlock other Covata users who are members of their organisation through this API endpoint.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-users-userid-unlock#access-service-api-v1-users-userid-unlock-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-unlock-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-users-userid-unlock-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

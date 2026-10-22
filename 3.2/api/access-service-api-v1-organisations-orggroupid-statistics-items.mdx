@@ -1,0 +1,53 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/items"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/items
+```
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-items-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total numbers of shared and unshared items on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-items-detailed-description" />
+
+This API endpoint retrieves the total numbers of shared and unshared items on the Covata Platform. Counts for files (i.e. [Secure Objects](/3.2/api/creating-files-and-folders#secure-object)) only include files in the *Created* state.
+
+## Supported roles <a id="access-service-api-v1-organisations-orggroupid-statistics-items-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.2/admin-org/index)):
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orggroupid-statistics-items#access-service-api-v1-organisations-orggroupid-statistics-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-items-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalSharedObjects** - The total number of shared Secure Objects in the *Created* state on the Covata Platform.
+- **totalUnsharedObjects** - The total number of unshared Secure Objects in the *Created* state on the Covata Platform.
+
+  **Example:**
+
+  ```json
+  {
+    "totalSharedObjects": 4,
+    "totalUnsharedObjects": 2
+  }
+  ```

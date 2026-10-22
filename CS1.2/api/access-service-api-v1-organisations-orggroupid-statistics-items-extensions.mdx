@@ -1,0 +1,86 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/items/extensions"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/items/extensions
+```
+
+where `{orgGroupId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-supported-methods-and-overview" />
+
+- `GET` - retrieves a summary of information about the file name extensions of all files within an organisation (specified by `orgGroupId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-detailed-description" />
+
+This API endpoint retrieves a summary of information about the file name extensions of all files within an organisation (specified by `orgGroupId`).
+
+The information returned by this API endpoint is utilized on the [Organisation Administration dashboard](/CS1.2/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-supported-roles-and-conditions" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)):
+
+- [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation whose ID is specified by `{orgGroupId}` in the request's URL.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orggroupid-statistics-items-extensions#access-service-api-v1-organisations-orggroupid-statistics-items-extensions-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-items-extensions-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **organisationId** - The ID of the organisation (which should match `{orgGroupId}` specified in the request's URL).
+- **objectsCount** - The total number of file objects in the organisation (specified by `orgGroupId`).
+- **breakdownByExtension** - An array containing information about the file name extensions of all files in the organisation (specified by `orgGroupId`). Each element of this array contains information about one of these file name extensions and is represented as an object, containing the following members:
+
+  - **extensionType** - The extension itself.
+  - **objectsCount** - The number of file objects possessing this file name extension.
+  - **percentageOfAllObjects** - The percentage of this **objectsCount** value (immediately above) as a proportion of the parent **objectsCount** value (i.e. for the total number of file objects in the organisation).
+
+  **Example (response):**
+
+  ```json
+  {
+      "organisationId": "749418071827214336",
+      "objectsCount": "4",
+      "extensionsBreakdown": [{
+          "extensionType": {
+              "value": "jpg"
+          },
+          "objectsCount": "3",
+          "percentageOfAllObjects": 75.0
+      }, {
+          "extensionType": {
+              "value": "pdf"
+          },
+          "objectsCount": "1",
+          "percentageOfAllObjects": 25.0
+      }, {
+          "extensionType": {
+              "i18n": {
+                  "code": "server.dashboardservice.extensions.noextension",
+                  "arguments": []
+              }
+          },
+          "objectsCount": "0",
+          "percentageOfAllObjects": 0.0
+      }]
+  }
+  ```

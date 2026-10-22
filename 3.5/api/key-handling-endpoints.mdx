@@ -1,0 +1,20 @@
+---
+title: "Key handling endpoints"
+---
+
+The endpoints in this section are used for handling keys to encrypt or decrypt file objects (i.e. [Secure Objects](/3.5/api/working-with-files-and-folders-fundamentals#secure-object)) on the Covata Platform, including the encryption/decryption of file versions and *read-only views*.
+
+### Key generation and deletion
+
+- [&lt;access-service&gt;/api/v1/keys](/3.5/api/access-service-api-v1-keys)
+- [&lt;access-service&gt;/api/v1/keys/\{keyId\}](/3.5/api/access-service-api-v1-keys-keyid)
+
+### Key retrieval for file objects/active file versions and their read-only views
+
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/3.5/api/access-service-api-v1-objects-objectid-keys)
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys/view](/3.5/api/access-service-api-v1-objects-objectid-keys-view)
+
+### Key retrieval for other file versions and their read-only views
+
+- [&lt;access-service&gt;/api/v1/versions/\{versionId\}/key](/3.5/api/access-service-api-v1-versions-versionid-key)
+- [&lt;access-service&gt;/api/v1/versions/\{versionId\}/viewKey](/3.5/api/access-service-api-v1-versions-versionid-viewkey)

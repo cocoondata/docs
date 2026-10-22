@@ -1,0 +1,62 @@
+---
+title: "<content-service>/api/v1/plans/usage"
+---
+
+## URL structure <a id="content-service-api-v1-plans-usage-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/plans/usage
+```
+
+## Supported methods and overview <a id="content-service-api-v1-plans-usage-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the utilization of storage managed by the Covata Platform's Content Service.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-plans-usage-detailed-description" />
+
+This API endpoint retrieves information about the utilization of storage managed by the Covata Platform's Content Service.
+
+This information is broken down into the total number of bytes of storage utilized by:
+
+- All [Secure Objects](/2.16/api/creating-secure-objects-and-collections#secure-object)' encrypted data in storage, as well as
+- All *read-only view* data for Secure Objects whose file types (determined by file name extension) support the generation of read-only views.
+
+## Supported roles <a id="content-service-api-plans-usage-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/content-service-api-v1-plans-usage#content-service-api-v1-plans-usage-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-plans-usage-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="content-service-api-v1-plans-usage-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **diskStorage** - A member containing information about total storage utilized by the Covata Platform's Content Service. This member contains the following sub-members:
+
+  - **total** - The total amount of space (in bytes) of all Secure Objects' encrypted data in storage (managed by the Content Service).
+  - **viewTotal** - The total amount of space (in bytes) of all Secure Objects' encrypted *read-only view* data in storage (managed by the Content Service).
+
+  **Example:**
+
+  ```json
+  {
+    "diskStorage": {
+      "total": "105957104",
+      "viewTotal": "17406912"
+    }
+  }
+  ```

@@ -1,0 +1,100 @@
+---
+title: "Verwaltung von Dateien"
+---
+
+Die Seite **Dateien** lässt Organisations-Administratoren alle anhand von Covata-Technologien verschlüsselten Dateien (auch als Dateiobjekte oder sichere Objekte bezeichnet <sup>&#42;</sup> ) innerhalb ihrer Organisation [suchen](/3.4/de/admin-platform/administering-files#finding-files). Auf dieser Seite können die folgenden Aktionen mit beliebigen dieser Dateien ausgeführt werden:
+
+- [Anzeige](/3.4/de/admin-platform/administering-files#viewing-activities-on-files) aller an der Datei ausgeführten aufgezeichneten Aktionen
+- [Deaktivierung](/3.4/de/admin-platform/administering-files#disabling-or-re-enabling-a-file) - die Deaktivierung einer Datei verhindert jeglichen Zugriff auf sämtliche ihrer Aspekte, auch für ihren Besitzer:
+
+  - über eine Covata Safe Share-Anwendung oder
+  - über eine andere Client-Anwendung unter Verwendung der API der Covata-Plattform.
+
+<sup>&#42;</sup> Ein Dateiobjekt/sicheres Objekt wird von den folgenden Parametern definiert:
+
+- von Covata verschlüsselte, auf der Covata-Plattform registrierte Daten. <br />
+  **Hinweis:** Von Covata verschlüsselte Daten sind Daten aus einer Datei oder einem Datenstrom, die auf einem der folgenden Wege verschlüsselt wurden:
+
+  - durch Covata-Technologien (d. h. mittels eines Covata Safe Share-Produkts oder einer anderen Client-Anwendung, die zur Verschlüsselung über den Inhaltsdienst mit der Covata-Plattform-API arbeitet) oder
+  - gemäß den Covata-Verschlüsselungsanforderungen (d. h. eine Client-Anwendung mit ihrer eigenen Implementierung der Verschlüsselung). Für weitere Informationen über die Covata-Verschlüsselungsanforderungen siehe den Abschnitt Anforderungen für die lokale Verschlüsselung von Daten auf der Seite Arbeit mit Dateien und Ordnern (Grundlagen) der Covata-API-Dokumentation (nur in englischer Sprache verfügbar).
+- Die diesen verschlüsselten Daten zugeordneten Eigenschaften. Manche dieser Eigenschaften können vom Ersteller/Besitzer der Datei bestimmt werden.
+
+![Seite Dateien](/images/bfe2c9ad5853-files-page.png)
+## Suchen von Dateien <a id="finding-files" />
+
+Sie können unter allen Dateien, die innerhalb Ihrer Organisation (auf der Covata-Plattform) erstellt wurden, bestimmte Dateien nach ihrem Namen (d. h. Dateinamen), der E-Mail-Adresse, dem Vor- oder Familiennamen ihres Besitzers oder der ID des betreffenden Dateiobjekts suchen.
+
+**Auffinden spezifischer Dateien innerhalb Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. Verwenden Sie eine der folgenden Funktionen, um eine bestimmte Datei (oder eine Untergruppe von Dateien) zu finden:
+
+   - *Dateien filtern* - fangen Sie im Feld **Suche nach...** (rechts auf der Seite **Dateien**) an, eine Zeichenfolge einzugeben, die in den [Feldern](/3.4/de/admin-platform/administering-files#a-file-objects-fields) **ID**, **Name** oder **Besitzer** der Datei enthalten ist (das letztere Feld enthält auch den Vor- und Familiennamen des Besitzers). Dies filtert die Liste der Dateien innerhalb Ihrer Organisation auf der Covata-Plattform nach denen, deren ID, Name oder E-Mail-Adresse, Vor- oder Familienname des Besitzers die im Feld **Suche nach...** eingegebene Zeichenfolge enthält. <br />
+      Standardmäßig werden für den Filter die Felder **ID**, **Name** und **Besitzer** (einschließlich der Felder E-Mail, Vor- und Familienname) verwendet (d. h. **Alle**), aber Sie können den Filter anhand des Dropdown-Menüs auch auf eines dieser Felder beschränken.
+   - *Zu spezifischen Dateien navigieren* - verwenden Sie gegebenenfalls die Schaltflächen zur Seitennavigation (rechts unten auf der Seite **Dateien**).
+
+<Tip>
+
+- Sie können Dateien auch auf der Seite **Dateien** sortieren, indem Sie auf den verknüpften Namen (im Spaltenkopf) des betreffenden Felds klicken, nach dem Sie Ihre Dateien sortieren möchten:
+
+  - Mehrfaches Anklicken eines verknüpften Feldnamens schaltet zwischen einer Sortierung der Dateien in aufsteigender und absteigender Reihenfolge (gemäß dem betreffenden Feld) um.
+  - Aktualisieren Sie einfach die Seite, um zur normalen Sortierung der Dateien in der Liste zurückzukehren.
+- Der Bereich **Verlauf** rechts kann durch Anklicken des betreffenden Symbols **&gt;** / **&lt;** oben in diesem Bereich reduziert oder erweitert werden.
+
+</Tip>
+
+## Felder eines Dateiobjekts <a id="a-file-objects-fields" />
+
+Jedes auf der Covata-Plattform erstellte Dateiobjekt ist mit seinen eigenen Eigenschaften verknüpft. Manche dieser Eigenschaften sind auf der Seite **Dateien** dargestellt und können für die [Suche nach Dateien](/3.4/de/admin-platform/administering-files#finding-files) verwendet werden.
+
+| Feld | Beschreibung |
+| --- | --- |
+| ID | Der eindeutige Identifikator (ID), der für jedes auf der Covata-Plattform erstellte Dateiobjekt generiert wird. |
+| Name | Der Name des Dateiobjekts. Wurde ein Dateiobjekt über eine Covata Safe Share-Anwendung erstellt (indem eine Datei über eine Safe Share-Anwendung in den Speicher hochgeladen wurde), ist der Name des Dateiobjekts mit dem Dateinamen identisch. |
+| Besitzer | Die E-Mail-Adresse des Covata-Benutzers, der das Dateiobjekt aktuell besitzt. Wurde der Besitz am betreffenden Dateiobjekt nicht an einen anderen Covata-Benutzer übertragen (dies ist nur möglich, wenn der Benutzer-Account des ursprünglichen Besitzers [aus der Organisation entfernt wird](/3.4/de/admin-platform/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation)), dann ist der Besitzer des Dateiobjekts der Covata-Benutzer, der es erstellt hat, und damit ist auch diese E-Mail-Adresse diejenige des Erstellers. Der Ersteller eines Dateiobjekts ist der Covata-Benutzer:  <br />•  der bei einer Safe Share-Anwendung angemeldet war, als er die Datei des Dateiobjekts in vom Inhaltsdienst der Covata-Plattform verwalteten Speicher hochlud, <br />•  dessen Account gegenüber der Covata-Plattform authentifiziert war, als das Dateiobjekt über eine Client-Anwendung (unter Verwendung der API der Covata-Plattform) erstellt wurde.  |
+| Status | Der aktuelle Status des Dateiobjekts, der die folgenden Werte annehmen kann:  <br />•  **Erstellt** - zeigt an, dass das Dateiobjekt erfolgreich angelegt wurde. Dies bedeutet, dass die Daten des Dateiobjekts erfolgreich verschlüsselt wurden, dass das Dateiobjekt an andere Personen freigegeben werden kann und dass seine Zugriffssteuerungen, sein Name und sein Speicherort geändert werden können. <br />•  **Gelöscht** - zeigt an, dass das Dateiobjekt von seinem Besitzer oder einem Mitwirkenden mit *Änderungs*- oder *Verwaltungs-*Berechtigung am Dateiobjekt gelöscht wurde. Das Dateiobjekt ist dementsprechend keinem Covata-Benutzer mehr zugänglich, unabhängig davon, ob der Zugriff über eine Covata Safe Share-Anwendung oder eine andere Client-Anwendung (unter Verwendung der API der Covata-Plattform) erfolgen soll. <br /> **Tipp:** Für weitere Informationen über Berechtigungen von Mitwirkenden siehe [Freigabe sicherer Inhalte](/3.4/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) in der [Safe Share for Web-Benutzeranleitung](/3.4/de/user/index) und die Seite [&lt;access-service&gt;/api/v1/permissions/sets](/3.4/api/access-service-api-v1-permissions-sets) in der [Covata API-Dokumentation](/3.4/api/index) (nur in englischer Sprache verfügbar). <br />•  **Unvollständig** - weist je nach der Client-Anwendung, über die das Dateiobjekt erstellt wurde, auf eine von zwei Möglichkeiten hin:  <br />•  Eine Covata Safe Share-Anwendung:  <br />•  ist gerade dabei, das Dateiobjekt zu erstellen (d. h. seine Daten zu verschlüsseln) und seine Daten in (über den Inhaltsdienst der Covata-Plattform verwalteten) Speicher hochzuladen. Sobald diese Abläufe abgeschlossen sind, wird der Status des Dateiobjekts zu **Erstellt** geändert. <br /> *oder* <br />•  war gerade dabei, das Dateiobjekt zu erstellen oder seine Daten in über den Inhaltsdienst verwalteten Speicher hochzuladen, aber einer dieser Abläufe ist fehlgeschlagen. In diesem Fall bleibt der Status des Dateiobjekts **Unvollständig**. <br />Unabhängig von diesen Szenarien ist Folgendes für ein **unvollständiges** Dateiobjekt, das über eine Covata Safe Share-Anwendung erstellt wurde, nicht möglich: <br />•  Freigabe an andere Personen, <br />•  Änderung der Zugriffssteuerungen, des Namens oder des Speicherorts. <br />•  Eine Client-Anwendung hat (unter Verwendung der API der Covata-Plattform) ein neues Dateiobjekt *initialisiert* (und so ein Dateiobjekt erstellt, dessen Status **Unvollständig** lautet), es aber nicht *aktualisiert* (um seine Daten zu verschlüsseln und es so zu „vervollständigen“ - nach erfolgreichem Abschluss dieses Vorgangs, würde der Status des Dateiobjekts zu **Erstellt** geändert). In diesem Szenario könnte die Client-Anwendung die folgenden Aktionen am **unvollständigen** Dateiobjekt noch ausführen:  <br />•  Abruf des Dateiobjekts von der Covata-Plattform (anhand seiner ID) <br />•  Freigabe des Dateiobjekts an andere Personen und/oder <br />•  Änderung der Zugriffssteuerungen, des Namens oder des Speicherorts des Dateiobjekts  |
+| Erstellt | Ortszeit und Datum der Erstellung des Dateiobjekts. |
+| Geändert | Ortszeit und Datum der letzten Änderung des Dateiobjekts durch seinen Besitzer. Die Darstellung von Datum/Zeit in diesem Feld wird aktualisiert, sobald der Besitzer des betreffenden Dateiobjekts Folgendes ändert:  <br />•  die Mitwirkenden, denen das Dateiobjekt freigegeben ist <br />•  die Zugriffssteuerungen des Dateiobjekts, d. h. die Zeiten, ab/bis wann das Dateiobjekt zugänglich ist oder ob seine Daten ausgedruckt oder heruntergeladen werden dürfen <br />•  die Eigenschaften des Dateiobjekts (einschließlich seines Speicherorts), z. B. Änderungen an seinem Namen oder an seinem übergeordneten Ordner/seiner übergeordneten Sammlung  |
+
+## Anzeige von an Dateien ausgeführten Aktivitäten <a id="viewing-activities-on-files" />
+
+**Anzeige aller an einer Datei in Ihrer Organisation ausgeführten Aktivitäten:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. [Suchen Sie](/3.4/de/admin-platform/administering-files#finding-files) die Datei, deren Aktivitäten Sie anzeigen lassen möchten.
+4. *Markieren* Sie das Element, indem Sie es anklicken. Dies zeigt (im Bereich **Verlauf** rechts) den Verlauf aller für die Datei aufgezeichneten Aktivitäten in umgekehrter zeitlicher Abfolge an. Die aufgezeichneten Aktivitäten beinhalten Aktivitäten:
+
+   - des Besitzers der Datei
+   - aller Mitwirkenden der Datei und
+   - aller Organisations-Administratoren der Organisation, in der die Datei erstellt wurde (Diese Aktivitäten beinhalten nur die Deaktivierung und Reaktivierung von Dateien.)
+
+<Note>
+
+Für weitere Informationen über Aktivitäten von Besitzern und Mitwirkenden von Dateien, die aufgezeichnet werden siehe [Arten von Aktivitäten](/3.4/de/user/viewing-activities-on-secure-content#types-of-activities-indicated) in der [Safe Share for Web-Benutzeranleitung](/3.4/de/user/index).
+
+</Note>
+
+## Deaktivierung und (Re-)Aktivierung einer Datei <a id="disabling-or-re-enabling-a-file" />
+
+Die Deaktivierung einer Datei verhindert jeglichen Zugriff auf sämtliche ihrer Aspekte, auch für ihren Besitzer. Die Deaktivierung einer Datei bewirkt Folgendes:
+
+- Die Datei ist für ihren Besitzer und ihre Mitwirkenden (nach deren Anmeldung) über Covata Safe Share-Anwendungen nicht mehr sichtbar oder verfügbar.
+- Die Datei kann über eine Client-Anwendung unter Verwendung der API der Covata-Plattform nicht mehr abgerufen werden.
+
+<Note>
+
+Die Deaktivierung von Dateien, die über eine Client-Anwendung unter Verwendung der API der Covata-Plattform lediglich initialisiert wurden (d. h. deren Status noch „unvollständig“ lautet), verhindert, dass die betreffende Datei von einer solchen Anwendung „vervollständigt“ werden kann. Sollen solche Dateien vervollständigt werden, muss ein Organisations-Administrator diese Dateien zunächst (z. B. über die Safe Share-Organisationsverwaltung) reaktivieren.
+
+</Note>
+
+**Deaktivierung, Aktivierung und Reaktivierung einer Datei in Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Dateien** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Dateien** aufzurufen.
+3. [Suchen Sie](/3.4/de/admin-platform/administering-files#finding-files) die Datei, die deaktiviert, aktiviert oder reaktiviert werden soll.
+4. Führen Sie einen der folgenden Schritte aus:
+
+   - Klicken Sie zur *Deaktivierung der Datei* auf die grüne Schaltfläche **Aktiviert** der Datei (in der Spalte **Aktiviert**), sodass die Schaltfläche auf rot wechselt und **Deaktiviert** anzeigt.
+   - Klicken Sie zur *Aktivierung oder Reaktivierung der Datei* auf die rote Schaltfläche **Deaktiviert** der Datei (in der Spalte **Aktiviert**), sodass die Schaltfläche auf grün wechselt und als **Aktiviert** angezeigt wird.

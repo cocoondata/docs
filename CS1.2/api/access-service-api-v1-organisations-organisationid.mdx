@@ -1,0 +1,51 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}
+```
+
+where `{organisationId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-supported-methods-and-overview" />
+
+- `DELETE` - removes an organisation (specified by `organisationId`) configured on the Cocoon Data Platform (available to SafeShare administrators only) on the proviso that this organisation has an existing request for its removal (made by another SafeShare administrator).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-detailed-description" />
+
+This API endpoint removes an organisation (specified by `organisationId`) configured on the Cocoon Data Platform by a SafeShare administrator.
+
+For a request to this endpoint to succeed, a previous call to [&lt;access-service&gt;/api/v1/organisations/\{organisationId\}/removalRequest](/CS1.2/api/access-service-api-v1-organisations-organisationid-removalrequest) (i.e. to initiate a request to remove this organisation) must have already been made by another SafeShare administrator whose [access token was submitted in the request to that API endpoint](/CS1.2/api/access-service-api-v1-organisations-organisationid-removalrequest#access-service-api-v1-organisations-organisationid-removalrequest-supported-roles).
+
+<Tip>
+
+To determine if an organisation has an existing request for its removal, use the [&lt;access-service&gt;/api/v1/organisations](/CS1.2/api/access-service-api-v1-organisations) API endpoint to retrieve information about organisations configured on the Cocoon Data Platform and if the required organisation's `organisationRemovalRequest` member is not `null` and contains sub-members, then the organisation has an existing request for its removal.
+
+</Tip>
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-organisationid-supported-roles-and-conditions" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - when this user is a different SafeShare administrator to the one who [initiated the request to remove this organisation](/CS1.2/api/access-service-api-v1-organisations-organisationid-removalrequest).
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-organisationid#access-service-api-v1-organisations-organisationid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

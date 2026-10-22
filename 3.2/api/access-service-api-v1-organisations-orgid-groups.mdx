@@ -1,0 +1,97 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups
+```
+
+where `{orgId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-supported-methods-and-overview" />
+
+- `POST` - used to add a new [group](/3.2/admin-org/managing-groups) to an organization.
+- `GET` - used to retrieve a list of information for all groups defined within an organization.
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new group to an organization. <br />
+  **Notes:**
+
+  - To add one or more [Covata users](/3.2/admin-org/administering-users-within-an-organisation) to a group, see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups/\{groupId\}](/3.2/api/access-service-api-v1-organisations-orgid-groups-groupid). Also see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.2/api/access-service-api-v1-organisations-orgid-labels) for more information about adding new [classifications](/3.2/admin-org/managing-classifications) to an organization.
+  - To associate this group with one or more classifications, which would then allow these classifications to restrict file sharing to any Covata users who are members of this group, see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups/\{groupId\}](/3.2/api/access-service-api-v1-organisations-orgid-groups-groupid).
+- Retrieves a list of information for all groups in an organization.
+
+## Supported roles <a id="access-service-api-groups-supported-roles" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.2/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - if this user is a member of the organization specified by the `{orgId}` of the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-organisations-orgid-groups-required-parameters" />
+
+The following required parameter must be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **name** - .
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-organisations-orgid-groups-optional-parameters-on-POST" />
+
+The following optional parameter can also be sent in the body of the POST request, as an individual member of the JSON object that includes the [Required parameters on POST](/3.2/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-required-parameters) above:
+
+- **description** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-organisations-orgid-groups-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 0).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-organisations-orgid-groups-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+
+  **Example (response from ...):**
+
+## Returns from a GET request <a id="access-service-api-v1-organisations-orgid-groups-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **name** - .
+  - **labelCount** - .
+  - **memberCount** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

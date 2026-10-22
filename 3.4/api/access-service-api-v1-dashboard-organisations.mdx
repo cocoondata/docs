@@ -1,0 +1,115 @@
+---
+title: "<access-service>/api/v1/dashboard/organisations"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-organisations-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/organisations
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-organisations-supported-methods-and-overview" />
+
+- `GET` - retrieves a summary of information about each organization configured on the Covata Platform, consisting of the organization's ID and name, the storage space allocated to the organization and its current usage, and the number of [Covata users](/3.4/admin-org/administering-users-within-an-organisation) in the organization with the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) and [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) roles.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-organisations-detailed-description" />
+
+This API endpoint retrieves a summary of information about each organization configured on the Covata Platform, consisting of the organization's ID and name, the storage space allocated to the organization (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)/MiB) and its current usage (in bytes), and the number of [Covata users](/3.4/admin-org/administering-users-within-an-organisation) in the organization with the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) and [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) roles.
+
+The information returned by this API endpoint is utilized on the [Safe Share Administration dashboard](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-dashboard).
+
+## Supported roles <a id="access-service-api-v1-dashboard-organisations-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.4/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.4/admin-platform/index)):
+
+- [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-dashboard-organisations#access-service-api-v1-dashboard-organisations-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-organisations-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-dashboard-organisations-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **searchText** - Any text substring used to filter for *all* items in the response, where this text substring must match that of the organization's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
+- **searchColumn** - The organization's field upon which the text substring (specified in **searchText** above) is used for filtering items returned in the response. The fields available to this text searching include:
+
+  - `name` - the organization's name,
+  - `contactEmail` - the email address of the organization's contact person,
+  - `id` - the organization's ID and
+  - `all` - any of these fields above.
+
+  If this parameter is omitted, then no filtering is performed.
+- **limit** - A value from `0` to any positive integer, representing the maximum number of items to be returned in the response from the Covata Platform, where an individual item is high-level information about an organization. If this parameter is omitted, then its value is `0` by default, which imposes no limit on the number of items returned.
+- **offset** - A value representing the count order of all retrievable items (i.e. organization summary information) from the Covata Platform returned in the response. Calls to this API endpoint could amount to potentially unmanagable numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (organization summary information) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `DESC` by default.
+- **sortBy** - An enum value representing the field (i.e. member) of a retrieved item by which items (i.e. organization summaries) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `name` - the organization's name,
+  - `contactEmail` - the email address of the organization's contact person and
+  - `id` - the organization's ID.
+
+  These enum values can also be specified using uppercase characters. If this parameter is omitted, then its value is `id` by default - bearing in mind that file object IDs are generated in numerical order. <br />
+  **Example (GET request - retrieving high-level information about all configured organizations on the Covata Platform whose contact person's email address contains the text substring 'administrator'):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/dashboard/organisations/?searchText=administrator&searchColumn=contactEmail
+  ```
+
+<Note>
+
+Calling this method without any parameters retrieves a list of all organizations configured on the Covata Platform.
+
+</Note>
+
+## Returns <a id="access-service-api-v1-dashboard-organisations-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - An array containing high-level information about each organization configured on the Covata Platform. Each element of this array contains summary of information about one of these percentage bands and is represented as an object, containing the following members:
+
+  - **organisationId** - The ID of the organization.
+  - **organisationName** - The name of the organization.
+  - **amountTotalQuota** - The amount of storage space (in [MiB](http://physics.nist.gov/cuu/Units/binary.html)) currently allocated to the organization.
+  - **amountUsedQuota** - The amount of storage space (in bytes) currently consumed by Covata users (i.e. with the [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) role) in the organization.
+  - **originatorsCount** - The number of users in the organization with the Originator role.
+  - **collaboratorsCount** - The number of users in the organization with the Collaborator role.
+- **count** - The maximum number of items (i.e. organizations) that can be returned in the response. <br />
+  **Note:** If the **searchText** and **searchColumn** [parameters](/3.4/api/access-service-api-v1-dashboard-organisations#access-service-api-v1-dashboard-organisations-optional-parameters) were specified in the request, then this value represents the total number of items (above) returned in the response.
+- **offset** - The value of the **offset** which had been used in the request to this endpoint. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "organisationId": "1",
+          "organisationName": "Default",
+          "amountTotalQuota": 0,
+          "amountUsedQuota": 0,
+          "originatorsCount": 0,
+          "collaboratorsCount": 0
+      }, {
+          "organisationId": "749418071827214336",
+          "organisationName": "XY Company",
+          "amountTotalQuota": 4194304,
+          "amountUsedQuota": 2369728,
+          "originatorsCount": 1,
+          "collaboratorsCount": 1
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

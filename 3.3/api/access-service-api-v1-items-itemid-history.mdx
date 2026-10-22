@@ -1,0 +1,245 @@
+---
+title: "<access-service>/api/v1/items/{itemId}/history"
+---
+
+## URL structure <a id="access-service-api-v1-items-itemid-history-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/{itemId}/history
+```
+
+where `{itemId}` is the ID of a file object/Secure Object or folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-items-itemid-history-supported-methods-and-overview" />
+
+- `GET` - used to retrieve history information about the activities which have been performed on a specified file object/[Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) or folder/[collection](/3.3/api/working-with-files-and-folders-fundamentals#collection) (i.e. [item](/3.3/api/working-with-files-and-folders-fundamentals#item)), specified by `itemId`.
+
+## Detailed description <a id="access-service-api-v1-items-itemid-history-detailed-description" />
+
+This API endpoint retrieves history information about the activities which have been performed on a file object or folder, specified by `itemId`. Activities are retrieved in reverse chronological order.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.3/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with file objects and folders that can be filtered using various 'search' criteria.
+
+The extent of history information retrieved in a [response](/3.3/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-returns) depends on the role of the Covata user (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-supported-roles-and-conditions) to this endpoint) and this user's relationship to this item. The extent of history information decreases based on these user relationship to items and roles (explained in more depth in the [next section](/3.3/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-supported-roles-and-conditions)), in the following order:
+
+1. Items belonging to an organization in which this user has the [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) role.
+2. Items that this user owns.
+3. Items that this user is a collaborator on.
+
+## Supported roles and conditions <a id="access-service-api-v1-items-itemid-history-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the item whose ID is specified by `{itemId}` in the request's URL.
+- [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator on the item whose ID is specified by `{itemId}` in the URL.
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization that contains the item whose ID is specified by `{itemId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-itemid-history-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-items-itemid-history-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **cursor** - The ID for an activity entry (typically the *chronologically previous* one), retrieved in the [response](/3.3/api/access-service-api-v1-items-itemid-history#access-service-api-v1-items-itemid-history-returns) (below) from a request to this endpoint. This ID value relates to the activity entry that continues on from this response's last activity entry, which in turn was based on the combination of the values for **cursor** and **pageSize** (below) submitted in this response's request. The combination of these two parameters provides a mechanism for paginating activity entry results. If this **cursor** parameter is omitted, then its value is `0` by default, which is the most recent activity entry recorded on the item.
+- **pageSize** - A value from `1` to `100` indicating the number of activity entries to be returned in the response. If this parameter is omitted, then its value is `10` by default. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/items/749866326952308736/history?pageSize=30
+  ```
+
+## Returns <a id="access-service-api-v1-items-itemid-history-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **nextCursor** - The ID for the activity entry following the last element of the **activities** array (below) retrieved in the response. This is the *chronologically previous* activity entry (after the last one retrieved in this response).
+- **previousCursor** - The ID for the activity entry preceding the first element of the **activities** array (below) retrieved in the response. This is the *chronologically next* activity entry (before the first one retrieved in this response). <br />
+  **Note:** If the first activity entry is the most recent activity entry recorded on the item, then this value is `0`.
+- **activities** - An array of individual activity entries on the item, listed in reverse chronological order. Each element of this array contains information about one of these activity entries and is represented as an object, containing the following members:
+
+  - **actor** - A member containing information about the Covata user account that performed the **action** (below). This member contains the following sub-members:
+
+    - **type** - Should be `USER`, indicating that this member contains information about a Covata user account.
+    - **email** - The email address of this Covata user.
+    - **id** - The ID of the Covata user's account.
+    - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.3/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.3/user/managing-your-account) feature of Covata Safe Share for Web.
+    - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **action** - A string/enumeration (enum) value representing the individual action performed on the item.
+
+    - *Direct item manipulation through the Covata Platform's Access Service* - `CREATE_ITEM`, `MOVE_ITEM`, `RENAME_ITEM`, `RECYCLE_ITEM`, `RESTORE_ITEM`, `DELETE_ITEM`.
+    - *Sharing-related item manipulation through the Access Service* - `ACCESS_GRANTED`, `SHARE_ITEM`, `PERMISSION_CHANGE`, `UNSHARE_ITEM`, `CHANGE_ITEM_LABEL`, `REMOVE_ITEM_LABEL`.
+    - *Organization administrator-related item manipulation through the Access Service* - `ENABLE_ITEM`, `DISABLE_ITEM`, `CHANGE_ITEM_OWNER`.
+    - *Direct item handling through the Covata Platform's Content Service* - `SET_VIEWABLE_CONTENT` (a file object's *read-only view* is automatically generated), `ACCESS_ORIGINAL_CONTENT` (a file object's actual content is accessed), `ACCESS_VIEWABLE_CONTENT` (a file object's *read-only view* is accessed).
+    - *File object version handling* - `CREATE_VERSION` (a new version of a file is created), `ACTIVATE_VERSION` (another version of a file is set as active), `DELETE_VERSION`.
+    - `UNKNOWN` - Anything else that is not covered by an existing action (above).
+  - **severity** - .
+  - **target** ( *only returned for applicable actions above* ) - A member containing information about the Covata user account to which the **action** (above) was directed. This member contains the following sub-members:
+
+    - **type** - Should be `USER`, indicating that this member contains information about a Covata user account.
+    - **email** - The email address of this Covata user.
+    - **id** - The ID of the Covata user's account.
+    - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.3/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.3/user/managing-your-account) feature of Covata Safe Share for Web.
+    - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **timestamp** - .
+
+  **Example (response):**
+
+  ```json
+  {
+      "nextCursor": "750608939867238400",
+      "previousCursor": "0",
+      "activities": [{
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "RECYCLE_ITEM",
+          "severity": "INFO",
+          "timestamp": "2016-09-09T03:48:09.836Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "UNSHARE_ITEM",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 750613175405441024,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-09-09T03:47:04.340Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "SET_VIEWABLE_CONTENT",
+          "severity": "INFO",
+          "timestamp": "2016-09-02T07:12:54.207Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 750613175405441024,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "action": "CREATE_VERSION",
+          "severity": "INFO",
+          "target": {
+              "type": "ITEM",
+              "id": 749866326952308736,
+              "name": "paraglider.jpg"
+          },
+          "timestamp": "2016-09-02T07:12:53.544Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "SHARE_ITEM",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 750613175405441024,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-09-02T07:09:16.738Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "ACCESS_GRANTED",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 750613175405441024,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-09-02T07:09:16.737Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "SET_VIEWABLE_CONTENT",
+          "severity": "INFO",
+          "timestamp": "2016-09-02T06:52:41.401Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "CREATE_VERSION",
+          "severity": "INFO",
+          "target": {
+              "type": "ITEM",
+              "id": 749866326952308736,
+              "name": "paraglider.jpg"
+          },
+          "timestamp": "2016-09-02T06:52:40.712Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "SET_VIEWABLE_CONTENT",
+          "severity": "INFO",
+          "timestamp": "2016-09-02T06:51:57.541Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 749419842687528960,
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "action": "CREATE_VERSION",
+          "severity": "INFO",
+          "target": {
+              "type": "ITEM",
+              "id": 749866326952308736,
+              "name": "paraglider.jpg"
+          },
+          "timestamp": "2016-09-02T06:51:56.900Z"
+      }]
+  }
+  ```

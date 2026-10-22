@@ -1,0 +1,69 @@
+---
+title: "<access-service>/api/v1/users/me/notifications/email"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-notifications-email-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/notifications/email
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-notifications-email-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the currently authenticated Covata user's<sup>&#42;</sup> notification preferences.
+- `PUT` - used to modify the currently authenticated Covata user's notification preferences.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-notifications-email-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about the currently authenticated Covata user's<sup>&#42;</sup> notification preferences (as a list that provides details about all other available notification preference options).
+- Modifies the currently authenticated Covata user's notification preferences. <br />
+  **Note:** These settings can also be modified through the [My Account](/3.2/user/managing-your-account#modifying-your-email-notification-preferences) feature of the [Safe Share web application](/3.2/user/index).
+
+## Supported roles <a id="access-service-api-v1-users-me-notifications-email-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-notifications-email-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-users-me-notifications-email-optional-parameters" />
+
+The following optional parameters can also be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **code** - item, daily, weekly or none.
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-users-me-notifications-email-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **notificationPreferences** - .
+
+  - **name** - .
+  - **code** - .
+  - **selected** - .
+
+  **Example (response from ...):**
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-required-headers) of requests to this endpoint.

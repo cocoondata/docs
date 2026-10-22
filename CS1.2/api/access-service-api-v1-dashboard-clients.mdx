@@ -1,0 +1,54 @@
+---
+title: "<access-service>/api/v1/dashboard/clients"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-clients-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/clients
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-clients-supported-methods-and-overview" />
+
+- `GET` - retrieves the number of [client applications](/CS1.2/admin-platform/configuring-client-applications) currently registered on the Cocoon Data Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-clients-detailed-description" />
+
+This API endpoint retrieves the number of [client applications currently registered](/CS1.2/api/access-service-api-v1-clientapps) on the Cocoon Data Platform.
+
+This information is utilized on the [SafeShare Administration dashboard](/CS1.2/admin-platform/accessing-platform-administration#the-platform-administration-dashboard).
+
+## Supported roles <a id="access-service-api-v1-dashboard-clients-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-dashboard-clients#access-service-api-v1-dashboard-clients-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-clients-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-dashboard-clients-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **totalClientApps** - The total number of client applications currently registered on the Cocoon Data Platform. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "totalClientApps": 7
+  }
+  ```

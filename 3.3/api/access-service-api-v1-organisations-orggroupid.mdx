@@ -1,0 +1,148 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}
+```
+
+where `{orgGroupId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about an organization (specified by `orgGroupId`) configured on the Covata Platform.
+- `PUT` - used to update one or more organization-specific properties for an organization (specified by `orgGroupId`), which can also be set through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration and the [Organizations](/3.3/admin-platform/administering-organisations#administering-an-organisation) page of Safe Share Administration.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an organization (specified by `orgGroupId`) configured on the Covata Platform - available to Covata users who are members of this organization (except users with the [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) role).
+- Updates one or more organization-specific properties for an organization (specified by `orgGroupId`). These properties can also be set through:
+
+  - The [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration by an [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) of this organization.
+  - The [Organizations](/3.3/admin-platform/administering-organisations#administering-an-organisation) page of Safe Share Administration by a [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role), [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `GET` method, when this user is a member of the organization whose ID is specified by `{orgGroupId}` in the request's URL.
+- **Organization administrator** - using the `PUT` method, when this user is a member of the organization whose ID is specified by `{orgGroupId}` in the URL. Such a user can set any of these [parameters](/3.3/api/access-service-api-v1-organisations-orggroupid#access-service-api-v1-organisations-orggroupid-put-request-parameters):
+
+  - **adminEmail**, **addressbookEnabled**, **description**, **contactEmail**, **watermarkingEnabled**, **i18nDefaultAsString**, **enforceMfa**,
+  - **supportUrl**, **companyName**, **legalUrl**, **webappHelpUrl**, **orgAdminHelpUrl**, **privacyUrl** and **userMessage**.
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the `PUT` method. Such a user can set the **name** and/or **quota** parameters.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orggroupid#access-service-api-v1-organisations-orggroupid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## PUT-request parameters <a id="access-service-api-v1-organisations-orggroupid-put-request-parameters" />
+
+At least one of the following parameters must be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- *For Organization administrators who are a members of the organization specified by `orgGroupId`*:
+
+  - **adminEmail** - The email address of the **Organization Admin Email** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then the [Admin Email](/3.3/api/access-service-api-v1-config-theme-adminemail) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **addressbookEnabled** - A boolean value determining if the **Is the address book feature enabled?** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration) is `true` (i.e. enabled) or `false`.
+  - **description** - The value of the **A brief description of the organization** property (accessible through the **Configuration** page of Organization Administration).
+  - **contactEmail** - The value of **The email address of the organization's contact person** property (accessible through the **Configuration** page of Organization Administration and for the benefit of Safe Share administrators), which appears in the **Contact Person** column on the [Organizations](/3.3/admin-platform/administering-organisations) page of Safe Share Administration.
+  - **watermarkingEnabled** - A boolean value determining if the **Is watermarking of viewed files enabled?** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration) is `true` (i.e. enabled) or `false`.
+  - **i18nDefaultAsString** - The **I18n Code** of the **Default i18n setting for new users and email notifications** property (accessible through the **Configuration** page of Organization Administration). Valid **I18n Code** values can be found on the [Internationalization](/3.3/admin-platform/managing-internationalization) page of Safe Share Administration.
+  - **enforceMfa** - A boolean value determining if the **Enforce two-factor authentication for organization members** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration) is `true` (i.e. enabled) or `false`.
+  - **supportUrl** - The URL value of the **Support URL** property (accessible through the **Configuration** page of Organization Administration). If this value is `null` or an empty string, then the [Support URL](/3.3/api/access-service-api-v1-config-theme-supportlink) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **companyName** - The **Company Name** property value (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then the [Company Name](/3.3/api/access-service-api-v1-config-theme-companyname) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **legalUrl** - The URL value of the **Legal URL** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then the [Legal URL](/3.3/api/access-service-api-v1-config-theme-legalurl) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **webappHelpUrl** - The URL value of the **Web Application Help URL** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then the [Web Application Help URL](/3.3/api/access-service-api-v1-config-theme-webapphelpurl) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **orgAdminHelpUrl** - The URL value of the **Organization Administration Help URL** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then the [Organization Administration Help URL](/3.3/api/access-service-api-v1-config-theme-orgadminhelpurl) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **privacyUrl** - The value of **The URL of the privacy statement** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration). If this value is `null` or an empty string, then [The URL of the privacy statement](/3.3/api/access-service-api-v1-config-theme-privacyurl) property value (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration) is used as the fallback.
+  - **userMessage** - The value of the **Custom message to appear on the 'Share' dialog box** property (accessible through the [Configuration](/3.3/admin-org/configuring-organisation-administration-properties) page of Organization Administration).
+
+  **Note:** With the exception of the **contactEmail** and **i18nDefaultAsString** properties above (including all other properties above that require a boolean value), a property value can be 'cleared' by submitting an empty string value for that property in the request. Be aware that properties whose values are initially not defined are returned with `null` values in responses to this endpoint. However, once a property's value is cleared, it is subsequently returned with empty string values (in responses to this endpoint).
+- *For Safe Share administrators only*:
+
+  - **name** - The name of the organization.
+  - **quota** - The organization's quota (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)).
+
+  **Example (request - changing the 'Contact Person's email address and clearing 'The URL of the privacy statement' as an Organization administrator):**
+
+  ```json
+  {
+    "contactEmail": "anotherorg.administrator@xy-company.com",
+    "privacyUrl": ""
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the organization.
+- **name** - The name of the organization as specified by a Safe Share administrator.
+- **description** - .
+- **bytesUploaded** - .
+- **contactEmail** - .
+- **quota** - .
+- **newAccountBaseItem** - .
+- **addressbookEnabled** - .
+- **watermarkingEnabled** - .
+- **mfaEnabled** - .
+- **i18nDefault** - .
+- **adminEmail** - .
+- **organisationAlias** - .
+- **userMessage** - .
+- **supportUrl** - .
+- **companyName** - .
+- **legalUrl** - .
+- **webappHelpUrl** - .
+- **orgAdminHelpUrl** - .
+- **privacyUrl** - .
+- **modifiedAt** - .
+- **createdAt** - . <br />
+  **Example (response from either a GET or PUT request):**
+
+  ```json
+  {
+      "id": "760756644367081472",
+      "name": "XY Company",
+      "description": "",
+      "bytesUploaded": "549744",
+      "contactEmail": "org.administrator@xy-company.com",
+      "quota": 4194304,
+      "newAccountBaseItem": null,
+      "addressbookEnabled": false,
+      "watermarkingEnabled": false,
+      "mfaEnabled": false,
+      "i18nDefault": "en_us",
+      "adminEmail": null,
+      "organisationAlias": null,
+      "userMessage": null,
+      "supportUrl": null,
+      "companyName": null,
+      "legalUrl": null,
+      "webappHelpUrl": null,
+      "orgAdminHelpUrl": null,
+      "privacyUrl": null,
+      "modifiedAt": "2016-09-30T06:55:18.192Z",
+      "createdAt": "2016-09-30T06:55:18.192Z"
+  }
+  ```

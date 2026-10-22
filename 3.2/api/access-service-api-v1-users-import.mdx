@@ -1,0 +1,67 @@
+---
+title: "<access-service>/api/v1/users/import"
+---
+
+## URL structure <a id="access-service-api-v1-users-import-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/import
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-import-supported-methods-and-overview" />
+
+- `POST` - used to add new Covata users in bulk (through a CSV file).
+
+## Detailed description <a id="access-service-api-v1-users-import-detailed-description" />
+
+<Note>
+
+The content in this section of the page (and after **Required Headers** below) is incomplete and will be completed in due course.
+
+</Note>
+
+## Supported roles <a id="access-service-api-users-import-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-import#access-service-api-v1-users-import-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-import-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is also required in a POST request to allow multi-part (including binary) form data elements to be uploaded through the request:
+
+- `Content-Type: multipart/form-data`
+
+<Note>
+
+It is also worth appending to this header a `boundary` parameter, whose string value is used to demark each multi-part form data element of the request (i.e. this string is not used for any other purpose throughout the entire request). <br />
+ For example, to use the following string to demark each multi-part form data element: <br />
+`-----------------------------12345678901234567890123456` <br />
+ assign this string value to the `boundary` parameter, which in turn is appended to the `Content-Type: multipart/form-data` header, such that this header will be: <br />
+`Content-Type: multipart/form-data; boundary=-----------------------------12345678901234567890123456`
+
+</Note>
+
+## Required parameters <a id="access-service-api-v1-users-import-required-parameters" />
+
+The following required parameter must be sent in the body of the POST request, as an individual multi-part form data element:
+
+- **file** - The actual data of the CSV file to be uploaded to the Covata Platform's Access Service. See Adding new users in bulk (from CSV) in the [Covata Platform Administrator's Guide](/3.2/admin/index) for more information about the preparation and requirements for your CSV file.
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-users-import-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **success** - .
+- **message** - .
+- **errors** - An array of strings, each one describing an error encountered when importing a new Covata user to the Covata Platform from the CSV file.
+
+  **Example ():**

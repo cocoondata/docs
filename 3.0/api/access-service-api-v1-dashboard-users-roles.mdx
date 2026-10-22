@@ -1,0 +1,50 @@
+---
+title: "<access-service>/api/v1/dashboard/users/roles"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-users-roles-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/users/roles
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-users-roles-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a summary of information about the [Covata users](/3.0/admin/administering-users) assigned to each [role](/3.0/admin/administering-users#a-users-roles) combination (i.e. individual roles as well as combinations of them) on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-users-roles-detailed-description" />
+
+This API endpoint retrieves a summary of information about the numbers and percentages of Covata users assigned to each role combination (i.e. individual roles as well as combinations of them) on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-dashboard-users-roles-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-dashboard-users-roles#access-service-api-v1-dashboard-users-roles-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-users-roles-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-dashboard-users-roles-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalUserCount** - .
+- **breakdownByRoles** - An array containing information about the association of Covata users with their roles on the Covata Platform. Each element of this array contains information about the associations between all Covata users with their current role combinations and is represented as an object, containing the following members:
+
+  - **roles** - .
+  - **userCount** - .
+  - **percentOfUsers** - .
+
+  **Example (response from ...):**

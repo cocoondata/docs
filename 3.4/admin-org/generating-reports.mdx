@@ -1,0 +1,76 @@
+---
+title: "Generating reports"
+---
+
+The **Reports** page allows Organization administrators to access a history of activities performed by any Covata users who are members of the organization.
+
+The types of activities <sup>&#42;</sup> recorded include:
+
+- Safe Share Organization Administration activities; such as activities relating to:
+
+  - [user administration](/3.4/admin-org/administering-users-within-an-organisation); specifically user [addition](/3.4/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account), [import](/3.4/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) or [removal](/3.4/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation),
+  - the [addition](/3.4/admin-org/managing-classifications#adding-a-new-classification) of [classifications](/3.4/admin-org/managing-classifications),
+  - [group management](/3.4/admin-org/managing-groups); specifically:
+
+    - the [addition of a group](/3.4/admin-org/managing-groups#adding-a-new-group),
+    - the modification of a group's [members](/3.4/admin-org/managing-groups#modifying-users-in-an-existing-group), [classifications](/3.4/admin-org/managing-groups#modifying-classifications-on-an-existing-group) or [details](/3.4/admin-org/managing-groups#editing-an-existing-group) or
+    - the [removal of a group](/3.4/admin-org/managing-groups#removing-an-existing-group),
+  - [plan and user quota management](/3.4/admin-org/managing-users-storage-quotas-through-plans); specifically the [addition](/3.4/admin-org/managing-users-storage-quotas-through-plans#adding-a-new-plan) or [removal](/3.4/admin-org/managing-users-storage-quotas-through-plans#removing-an-existing-plan) of a plan,
+  - [file administration](/3.4/admin-org/administering-files); specifically [disabling or (re-)enabling](/3.4/admin-org/administering-files#disabling-or-re-enabling-a-file) files.
+- Activities relating to organization users with [other roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (typically performed through Safe Share products), such as:
+
+  - file creation,
+  - file decryption (including decryption of a file's *read-only view*); requiring the retrieval of the required key/s from the Covata Platform,
+  - the retrieval of items' details; for example, these types of activities are required when files and/or folders are listed through Safe Share products,
+  - sharing items (i.e. file and/or folders) with collaborators,
+  - managing an item; for example, renaming, moving or removing an item.
+
+<sup>&#42;</sup> Each of these activities involve requests to endpoints of the Covata Platform's API. For more information about the Covata Platform's API and its endpoints, see the [API Reference Guide](/3.4/api/api-reference-guide) page in the [Covata API documentation](/3.4/api/index).
+
+![Reports page](/images/ea175ccbee90-reports-page.png)
+## Activity fields
+
+Each activity (i.e. 'activity item') on the **Reports** page represents a request to an endpoint of the Covata Platform API. Each activity on this page consists of the following fields:
+
+| Report field | Description |
+| --- | --- |
+| Date/time | The date and time when the activity was conducted. |
+| Email | The email address of the Covata user within the organization whose account was used to perform the activity (i.e. make the request to the Covata Platform API endpoint). |
+| Action | The type of action being conducted by the activity. These action types correspond to the HTTP-based method types used in making requests to endpoints of the Covata Platform's API:  <br />•  **Created** (corresponds to a `POST` method request made to a Covata Platform API endpoint) - indicates that the action involved the creation of content/data on the Covata Platform. <br />•  **Retrieved** (corresponds to a `GET` request made to a Covata Platform API endpoint) - indicates that the action involved the retrieval of data from the Covata Platform. <br />•  **Updated** (corresponds to a `PUT` request made to a Covata Platform API endpoint) - indicates that the action involved updating existing content/data on the Covata Platform. <br />•  **Deleted** (corresponds to a `DELETE` request made to a Covata Platform API endpoint) - indicates that the action involved removing existing content/data on the Covata Platform.  |
+| Resource | The HTTP-based endpoint of the Covata Platform API to which the activity's request was made. |
+| Response | The HTTP-based status of the response to this activity's request (to the Covata Platform's API). <br />  Typically, this value is `Successful`, representing an HTTP response status `200 OK` being returned by the Covata Platform. However, other values (i.e. for failed requests, etc.) may be returned for the response. |
+| IP address | The IP address of the computer or device on which the activity was performed. |
+| Client ID | The unique identifier of a client application (configured on the organization's Covata Platform instance) through which the activity was conducted. <br />  For more information about client IDs, see the description for [Client ID](/3.4/admin-platform/configuring-client-applications#client-id) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index). <br />**Note:** Any activities conducted through Safe Share for Web or Safe Share Organization Administration have the client ID value `covataWebApp`.  |
+| Event Info | Important 'event information' returned by the Covata Platform as a result of the activity. <br />  Depending on the activity's **Resource** (above, representing a request to a Covata Platform API endpoint), data (in the form of properties or [JSON](http://json.org/) object members) may be returned in the response from the Covata Platform. <br />  Hence, a number of activities on the **Reports** page are associated with subsets of such data (returned in these activities' responses from the Covata Platform), which in turn constitutes the important 'event information' associated with these activities. <br />**Note:** Event info is only accessible when [generating reports of these activities](/3.4/admin-org/generating-reports#generating-a-report) exported to PDF or CSV format. Since a single activity may contain numerous data members for its event info, the **Reports** page itself does not display this field.  |
+
+## Generating a report
+
+Each time the **Reports** page is opened, the most recent 25 activities (i.e. API requests) are displayed in reverse chronological order. Older activities can be accessed using the page navigation buttons (lower-right of the **Reports** page).
+
+Activities on this page can be viewed as well as exported to either PDF or [CSV](http://tools.ietf.org/html/rfc4180) format, where CSV is useful if this report data requires subsequent manipulation.
+
+Due to the heavy volume of activities accessible through this page, it is useful to filter the activities by criteria relevant to your requirements before generating the actual report.
+
+**To generate a report of user activities recorded within your organization:**
+
+1. [Sign in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Reports** option on the left of the [Safe Share Organization Administration interface](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Reports** page, which displays the most recent 25 activities in reverse chronological order.
+3. <a id="report-filter-fields" />Filter the activities according to the following filter fields available at the top of this page:
+
+   | Filter field | Description |
+   | --- | --- |
+   | Start date | Specify the *date from which* activities conducted within your organization will be retrieved for the report. |
+   | End date | Specify the *date to which* activities conducted within your organization will be retrieved for the report. |
+   | Client ID | The unique identifier of a client application (configured on your organization's Covata Platform instance) through which the activity was conducted. For client applications other than Safe Share ones, the client ID value is configured by (and hence, obtainable from) a Safe Share administrator. Specify the client application's client ID value to retrieve activities for the report, which originate from this application only. <br />  For more information about client IDs, see the description for [Client ID](/3.4/admin-platform/configuring-client-applications#client-id) in the [Safe Share Administrator's Guide](/3.4/admin-platform/index). <br />**Note:** Any activities conducted by a Covata user through Safe Share for Web or Safe Share Organization Administration have the client ID value `covataWebApp`.  |
+   | Email | The email address of the Covata user within your organization who conducted the activity. Specify this user's email address to retrieve activities for the report relating to this user only. |
+   | Action | The type of action being conducted by the activity. These action types correspond to the HTTP-based method types used in making requests to endpoints of the Covata Platform's API. Choose one of the following action types to retrieve activities for the report relating to these action types only:  <br />•  **Created** (corresponds to a `POST` method request made to a Covata Platform API endpoint) - indicates that the action involved the creation of content/data on the Covata Platform. <br />•  **Retrieved** (corresponds to a `GET` request made to a Covata Platform API endpoint) - indicates that the action involved the retrieval of data from the Covata Platform. <br />•  **Updated** (corresponds to a `PUT` request made to a Covata Platform API endpoint) - indicates that the action involved updating existing content/data on the Covata Platform. <br />**Note:** Activities on the **Reports** page may have an additional action type (i.e. 'Deleted'), which corresponds to a `DELETE` method request made to a Covata Platform API endpoint. However, it is not possible to filter for activities with this type of action when generating reports through Safe Share Organization Administration. |
+   | Resource | The type (i.e. category) of resource to which the activity relates. These resource types correspond to different categories of endpoints of the Covata Platform's API. Choose one of the following resource types to retrieve activities for the report relating to these resource types only:  <br />•  **Objects** - an activity involving the creation, decryption, sharing and management of files. <br />•  **Collaboration** - an activity relating to item collaboration. Currently, however, choosing this option retrieves no activities. <br />•  **Keys** - an activity relating to the decryption of files (including the decryption of their *read-only views*).  |
+4. Do any of the following:
+
+   - Click the **View** button to filter the activities on the **Reports** page to items that match all filter field criteria (above).
+   - Click the **Export** drop-down menu and choose:
+
+     - **PDF** to generate a PDF format document of these activities filtered according to the criteria (above).
+     - **CSV** to generate a CSV format file of these activities filtered according to the criteria (above).
+
+     The PDF and CSV format exports contain the additional **Event Info** [field](/3.4/admin-org/generating-reports#activity-fields) data (absent from the **Reports** page), although like the **Reports** page itself, both formats list their activities in reverse chronological order.

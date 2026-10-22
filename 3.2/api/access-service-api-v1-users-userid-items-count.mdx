@@ -1,0 +1,63 @@
+---
+title: "<access-service>/api/v1/users/{userId}/items/count"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-items-count-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userId}/items/count
+```
+
+where `{userId}` is the ID of a Covata user.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-items-count-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total number of [Secure Objects](/3.2/api/creating-files-and-folders#secure-object) currently owned by a Covata user, based on the user's ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-userid-items-count-detailed-description" />
+
+This API endpoint retrieves the total number of Secure Objects currently owned by a Covata user, based on the Covata user's ID.
+
+A Covata user's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/users](/3.2/api/access-service-api-v1-users) API endpoint, which retrieves a list of field information for all Covata Platform users who can be filtered through a variety of 'search' criteria.
+
+This endpoint is useful for determining the number of Secure Objects that a Covata user owns, before [transferring the ownership of these items](/3.2/api/access-service-api-v1-organisations-orgid-items-transfer) over to another user.
+
+<Note>
+
+Although this endpoint contains `[items](/3.2/api/creating-files-and-folders#item)` in its URL, calling it only returns the total number of Secure Objects (i.e. [collections](/3.2/api/creating-files-and-folders#collection) are not counted). However, when [transferring the ownership of items](/3.2/api/access-service-api-v1-organisations-orgid-items-transfer) from one Covata user to another, all of that user's items (i.e. all Secure Objects and collections) are transferred.
+
+</Note>
+
+## Supported roles <a id="access-service-api-v1-users-userid-items-count-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- User administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users-userid-items-count#access-service-api-v1-users-userid-items-count-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-items-count-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-users-userid-items-count-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **count** - The total number of [Secure Objects](/3.2/api/creating-files-and-folders#secure-object) currently owned by the Covata user specified in this endpoint's [URL](/3.2/api/access-service-api-v1-users-userid-items-count#access-service-api-v1-users-userid-items-count-url-structure).
+
+  **Example:**
+
+  ```json
+  {
+    "count": 16
+  }
+  ```

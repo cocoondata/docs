@@ -1,0 +1,53 @@
+---
+title: "<access-service>/api/v1/users/me/applications/approvals/{approvalId}"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-applications-approvals-approvalid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/applications/approvals/{approvalId}
+```
+
+where `{approvalId}` is an application's approval ID.
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-applications-approvals-approvalid-supported-methods-and-overview" />
+
+- `DELETE` - revokes the access that a third party (i.e. non-Cocoon Data) client application (specified by `approvalId`) has to resources on the Cocoon Data Platform, which are accessible to a Cocoon Data user (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-users-me-applications-approvals-approvalid#access-service-api-v1-users-me-applications-approvals-approvalid-supported-roles-and-conditions) to this endpoint).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-applications-approvals-approvalid-detailed-description" />
+
+This API endpoint revokes the access that a third party (i.e. non-Cocoon Data) client application (specified by `approvalId`) has to resources on the Cocoon Data Platform, which are accessible to a Cocoon Data user (whose access token is submitted in the request to this endpoint).
+
+An application's approval ID is obtained using the [&lt;access-service&gt;/api/v1/users/me/applications/approvals](/CS1.2/api/access-service-api-v1-users-me-applications-approvals) API endpoint, which retrieves a list of information about all client applications that this user (whose access token is submitted in the request to this endpoint) has approved access to their resources on the Cocoon Data Platform.
+
+Such a client application could be one that you or your organisation is developing, where this application integrates with Cocoon Data technologies either using the Cocoon Data API.
+
+<Note>
+
+Before any client application can be granted access to a Cocoon Data user's resources, a SafeShare administrator must first have [registered the client application](/CS1.2/api/access-service-api-v1-clientapps) on their Cocoon Data Platform instance.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-users-me-applications-approvals-approvalid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role), [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) and [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user has approved the client application (specified by `{approvalId}` in the request's URL) access to their resources on the Cocoon Data Platform.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-users-me-applications-approvals-approvalid#access-service-api-v1-users-me-applications-approvals-approvalid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-applications-approvals-approvalid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-users-me-applications-approvals-approvalid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

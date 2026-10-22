@@ -1,0 +1,48 @@
+---
+title: "Viewing activities on secure content"
+---
+
+Users of SafeShare for Web can view a history of [specific activities](/CS1.0/user/viewing-activities-on-secure-content#types-of-activities-indicated) performed on a file or folder.
+
+**To view the activities performed on a file or folder:**
+
+1. Ensure you are [signed in](/CS1.0/user/signing-in) to SafeShare for Web.
+2. If the Home icon at the top-left indicates the word 'Home' and no drop-down icon is indicated, skip to the [next step](/CS1.0/user/viewing-activities-on-secure-content#locating-an-item-to-view-its-activity). (This indicates that you are a member of only one organisation.) <br />
+   *Otherwise*, the name of your current organisation is indicated, from which you can either:
+
+   - skip to the [next step](/CS1.0/user/viewing-activities-on-secure-content#locating-an-item-to-view-its-activity) to view activities on an item from this organisation, or
+   - view activities on an item from a different organisation (you are a member of) by [changing your organisation](/CS1.0/user/uploading-storing-and-sharing-content-securely#changing-organisations) before continuing on.
+3. <a id="locating-an-item-to-view-its-activity" />[Locate](/CS1.0/user/managing-secure-content#finding-secure-content) the file or folder whose activity you wish to view.
+4. Ensure the **Details/History** tabs panel on the right is displayed. (If not, click the **&lt;** icon at the top-right of the items area to reveal this panel.)
+5. *Select* the item, by clicking on the item's row (to the right of its name if a folder): <br />
+   ![Selecting a shared item as its owner](/images/c729ca7442c7-selecting-a-shared-item-owner.png)
+6. Click the **History** tab to reveal a history of activities performed on the item in reverse chronological order: <br />
+   ![Activity feed as an owner](/images/205043abffc7-activity-feed-owner.png)
+
+## Types of activities indicated
+
+The types of activities indicated on a file or folder (i.e. item) depend on the following conditions:
+
+- As one of the following:
+
+  - the *owner* of an item,
+  - a collaborator <sup>1</sup> with **Manage** or **Co-Owner** [permissions](/CS1.0/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) on an item, or
+  - a collaborator with **Create** permissions on an item you created <sup>2</sup> ,
+
+  the **History** tab shows when (and by whom) the item was created, when a 'view' was generated of the file or one of its [versions](/CS1.0/user/managing-file-versions) (i.e. for the [content viewer](/CS1.0/user/accessing-secure-content#content-viewer)), as well as each time anyone with access to the item:
+
+  - [Viewed](/CS1.0/user/accessing-secure-content#viewing-and-printing-content) or [downloaded](/CS1.0/user/accessing-secure-content#downloading-secure-content) the item (if it is a file) including any of its versions,
+  - Modified:
+
+    - the item's [name](/CS1.0/user/managing-secure-content#renaming-an-item) or [location](/CS1.0/user/managing-secure-content#moving-an-item) or
+    - the file's [current](/CS1.0/user/managing-file-versions#uploading-a-new-version-of-a-file) or [active](/CS1.0/user/managing-file-versions#changing-a-files-active-version) version (including [deleting a version of the file](/CS1.0/user/managing-file-versions#deleting-a-version-of-a-file)), or
+  - Modified:
+
+    - with whom the item is [shared](/CS1.0/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) or
+    - a [collaborator's permissions](/CS1.0/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) on the item,
+  - Removed the item to (or restored the item from) the [Recycle Bin](/CS1.0/user/managing-secure-content#accessing-the-recycle-bin).
+- As a collaborator with either **Download** or **View** permissions on a *file* you *did not* create, the **History** tab shows each time you either [viewed](/CS1.0/user/accessing-secure-content#viewing-and-printing-content) or [downloaded](/CS1.0/user/accessing-secure-content#downloading-secure-content) that file.
+- As a collaborator with **Create**, **Download** or **View** permissions on a *folder* you *did not* create, no activity is shown on the **History** tab.
+
+<sup>1</sup> A *collaborator* on an item is someone who has permission to access the item. However, the collaborator does not own this item because the item is located in a folder owned by someone else. <br />
+<sup>2</sup> A *collaborator* in this context is yourself, having created a subfolder or uploaded a file within a folder owned by someone else. If the item is a file, then SafeShare implicitly downgrades its permissions from **Create** to **Download** since conceptually, it is not possible to upload content to a file.

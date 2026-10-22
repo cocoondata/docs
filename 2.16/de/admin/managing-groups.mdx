@@ -1,0 +1,112 @@
+---
+title: "Verwaltung von Gruppen"
+---
+
+Anhand der Seite **Gruppen** können Covata-Plattform-Administratoren für [Covata-Benutzer](/2.16/de/admin/administering-users) Gruppen definieren, denen Dateien (oder sichere Objekte) freigegeben werden können.
+
+Die Berechtigung zur Freigabe einer Datei/eines sicheren Objekts an eine Gruppe von Benutzern wird über die Zuweisung von [Bezeichnungen](/2.16/de/admin/managing-labels) an die Gruppe gewährt. Dies geschieht bei der Freigabe der betreffenden Datei/des betreffenden sicheren Objekts.
+
+Für [Covata-Benutzer](/2.16/de/admin/administering-users) gilt Folgendes:
+
+- Gehören sie zu einer Gruppe, der eine [Bezeichnung](/2.16/de/admin/managing-labels) zugewiesen ist, können Dateien/sichere Objekte an die betreffenden Covata-Benutzer freigegeben werden, wenn diese Bezeichnung vorgegeben wird.
+- Ist ihnen eine Bezeichnung nicht zugewiesen (d. h. ihr Account gehört zu keiner Gruppe, der die betreffende Bezeichnung zugewiesen ist), können Dateien/sichere Objekte an die betreffenden Covata-Benutzer nicht freigegeben werden, wenn diese Bezeichnung vorgegeben wird.
+
+![\covataadministration Seite Gruppen](/images/f2f8d7385220-groups-page.png)
+
+<Note>
+
+Gruppen sind für [Covata-Benutzer](/2.16/de/admin/administering-users) ohne [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) überhaupt nicht zugänglich.
+
+</Note>
+
+## Hinzufügen einer neuen Gruppe <a id="adding-a-new-group" />
+
+**Hinzufügen einer neuen Gruppe zur Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Gruppen** aufzurufen. <br />
+   **Hinweis:** Beim Hinzufügen der ersten Gruppe ist eine bestehende Gruppe **Alle Benutzer** sichtbar. Diese „reservierte“ Gruppe enthält alle [Covata-Benutzer](/2.16/de/admin/administering-users) Ihrer Covata-Plattform-Instanz. Sie kann nicht [gelöscht werden](/2.16/de/admin/managing-groups#deleting-an-existing-group). Sie können jedoch [Bezeichnungen dieser Gruppe ändern](/2.16/de/admin/managing-groups#modifying-labels-on-an-existing-group).
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neue Gruppe hinzufügen** Folgendes an:
+
+   - **Name** - ein Name, der die Gruppenmitglieder (d. h. Covata-Benutzer) in einem kurzen Satz möglichst gut beschreibt
+   - **Beschreibung ( *Optional* )** - eine längere Beschreibung für mehr Informationen über die Gruppe. Beachten Sie, dass der Wert dieses Felds nur sichtbar ist, wenn diese Gruppe im Dialogfeld **Gruppe bearbeiten** später [bearbeitet](/2.16/de/admin/managing-groups#editing-an-existing-group) wird.
+5. Klicken Sie auf **Speichern**, und die neue Gruppe erscheint als neue Eintragung auf der Seite **Gruppen**. <br />
+   **Hinweise:**
+
+   - Für Informationen über das Hinzufügen eines oder mehrerer [Covata-Benutzer](/2.16/de/admin/administering-users) zu dieser Gruppe siehe [Änderung der Benutzer einer bestehenden Gruppe](/2.16/de/admin/managing-groups#modifying-users-on-an-existing-group).
+   - Siehe [Änderung der Bezeichnungen einer bestehenden Gruppe](/2.16/de/admin/managing-groups#modifying-labels-on-an-existing-group), um der betreffenden Gruppe eine oder mehrere [Bezeichnungen](/2.16/de/admin/managing-labels) zuzuweisen. Diese Bezeichnungen ermöglichen es, die Freigabe von Dateien auf Covata-Benutzer zu beschränken, die der betreffenden Gruppe angehören.
+
+## Änderung der Benutzer einer bestehenden Gruppe <a id="modifying-users-on-an-existing-group" />
+
+**Änderung der Mitgliedschaft der Covata-Benutzer bei einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Klicken Sie in der Spalte **Mitglieder** auf den nummerierten Link neben der Gruppe, deren bestehende [Covata-Benutzer](/2.16/de/admin/administering-users) geändert werden sollen. Dies öffnet das Dialogfeld für die Gruppenmitglieder. <br />
+   **Hinweis:** Die Mitglieder der Gruppe **Alle Benutzer** können nicht geändert werden, da diese „reservierte“ Gruppe alle Covata-Benutzer Ihrer Covata-Plattform-Instanz umfasst.
+4. In diesem Dialogfeld sind alle Covata-Benutzer, deren E-Mail-Adressen rechts im Abschnitt **Gruppenmitglieder** gezeigt werden, bereits Mitglieder der Gruppe:
+
+   | Aktion: | Vorgang: | Ergebnis: |
+   | --- | --- | --- |
+   | Hinzufügen eines Benutzers zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Benutzer** auf die E-Mail-Adresse des betreffenden Benutzers. | Überträgt diesen Benutzer in den Abschnitt **Gruppenmitglieder** |
+   | Entfernen eines Benutzers von der Gruppe | Klicken Sie im Abschnitt **Gruppenmitglieder** auf die E-Mail-Adresse des betreffenden Benutzers. | Überträgt diesen Benutzer in den Abschnitt **Verfügbare Benutzer** |
+   | Suche nach bestimmten Benutzern durch Filtern (dies vereinfacht das Hinzufügen oder Entfernen, siehe oben) | Geben Sie im Abschnitt **Verfügbare Benutzer** oder **Gruppenmitglieder** (im betreffenden Feld **Filter...**) eine in den E-Mail-Adressen der Covata-Benutzer enthaltene Zeichenfolge ein. | Die Liste der Benutzer (in ihren jeweiligen Abschnitten) wird nach denjenigen gefiltert, deren E-Mail-Adressen die im Feld **Filter...** eingegebene Zeichenfolge enthalten. |
+   | Hinzufügen aller Benutzer zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Benutzer** auf die Schaltfläche  ![Schaltfläche Alle hinzufügen](/images/771492f75633-add-all.png) <br />  (Alle hinzufügen). | Alle in diesem Abschnitt verbleibenden Benutzer werden in den Abschnitt **Gruppenmitglieder** übertragen. |
+   | Entfernen aller Benutzer aus der Gruppe | Klicken Sie im Abschnitt **Gruppenmitglieder** auf die Schaltfläche  ![Schaltfläche Alle entfernen](/images/c470c43a3f70-remove-all.png) <br />  (Alle entfernen). | Alle in diesem Abschnitt verbleibenden Benutzer werden in den Abschnitt **Verfügbare Benutzer** übertragen. |
+5. Klicken Sie auf **Speichern**, und die Gruppenmitglieder werden entsprechend geändert. Die in der Spalte **Mitglieder** der Gruppe gezeigte Zahl wird aktualisiert, um die Gesamtzahl der Covata-Benutzer anzuzeigen, die im Abschnitt **Gruppenmitglieder** enthalten waren, ehe Sie **Speichern** angeklickt haben. <br />
+   **Hinweis:** Siehe [Änderung der Bezeichnungen einer bestehenden Gruppe](/2.16/de/admin/managing-groups#modifying-labels-on-an-existing-group), um der betreffenden Gruppe (eines oder mehrerer Covata-Benutzer) eine oder mehrere [Bezeichnungen](/2.16/de/admin/managing-labels) zuzuweisen. Diese Bezeichnungen ermöglichen es, die Freigabe von Dateien auf die betreffenden Covata-Benutzer zu beschränken.
+
+## Änderung der Bezeichnungen einer bestehenden Gruppe <a id="modifying-labels-on-an-existing-group" />
+
+**Änderung der Zuweisung von Bezeichnungen zu einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Klicken Sie in der Spalte **Berechtigungen** auf den nummerierten Link neben der Gruppe, deren bestehende [Bezeichnungen](/2.16/de/admin/managing-labels) geändert werden sollen. Dies öffnet das Dialogfeld für die Gruppenbezeichnungen.
+4. In diesem Dialogfeld sind alle Bezeichnungen, die rechts im Abschnitt **Gruppenbezeichnungen** angezeigt werden, der Gruppe bereits zugewiesen:
+
+   | Aktion: | Vorgang: | Ergebnis: |
+   | --- | --- | --- |
+   | Hinzufügen einer Bezeichnung zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Bezeichnungen** auf die gewünschte Bezeichnung. | Überträgt diese Bezeichnung in den Abschnitt **Gruppenbezeichnungen** |
+   | Entfernen einer Bezeichnung von der Gruppe | Klicken Sie im Abschnitt **Gruppenbezeichnungen** auf die gewünschte Bezeichnung. | Überträgt diese Bezeichnung in den Abschnitt **Verfügbare Bezeichnungen** |
+   | Suche nach bestimmten Bezeichnungen durch Filtern (dies vereinfacht das Hinzufügen oder Entfernen, siehe oben) | Geben Sie im Abschnitt **Verfügbare Bezeichnungen** oder **Gruppenbezeichnungen** (in das betreffende Feld **Filter...**) eine im Namen der Bezeichnung enthaltene Zeichenfolge ein. | Die Liste der Bezeichnungen (in ihren jeweiligen Abschnitten) wird nach denjenigen gefiltert, deren Namen die im Feld **Filter...** eingegebene Zeichenfolge enthalten. |
+   | Hinzufügen aller Bezeichnungen zur Gruppe | Klicken Sie im Abschnitt **Verfügbare Bezeichnungen** auf die Schaltfläche  ![Schaltfläche Alle hinzufügen](/images/771492f75633-add-all.png) <br />  (Alle hinzufügen). | Alle in diesem Abschnitt verbleibenden Bezeichnungen werden in den Abschnitt **Gruppenbezeichnungen** übertragen. |
+   | Entfernen aller Bezeichnungen aus der Gruppe | Klicken Sie im Abschnitt **Gruppenbezeichnungen** auf die Schaltfläche  ![Schaltfläche Alle entfernen](/images/c470c43a3f70-remove-all.png) <br />  (Alle entfernen). | Alle in diesem Abschnitt verbleibenden Bezeichnungen werden in den Abschnitt **Verfügbare Bezeichnungen** übertragen. |
+5. Klicken Sie auf **Speichern**, und die Gruppenbezeichnungen werden entsprechend geändert. Die in der Spalte **Berechtigungen** der Gruppe gezeigte Zahl wird aktualisiert, um die Gesamtzahl der Bezeichnungen anzuzeigen, die im Abschnitt **Gruppenbezeichnungen** enthalten waren, ehe Sie **Speichern** angeklickt haben. <br />
+   **Hinweis:** Siehe [Änderung der Benutzer einer bestehenden Gruppe](/2.16/de/admin/managing-groups#modifying-users-on-an-existing-group), um der betreffenden Gruppe einen oder mehrere [Covata-Benutzer](/2.16/de/admin/administering-users) hinzuzufügen. Die Freigabe von Dateien kann dann anhand der Bezeichnungen auf die betreffenden Covata-Benutzer (und andere Mitglieder derselben Gruppe) beschränkt werden.
+
+## Bearbeiten einer bestehenden Gruppe <a id="editing-an-existing-group" />
+
+Bei der Bearbeitung einer bestehenden Gruppe können der **Name** und die **Beschreibung** der Gruppe geändert werden. Mithilfe dieser Funktion kann auch die **Beschreibung** einer Gruppe angezeigt werden.
+
+**Bearbeitung einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zu ihr und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Gruppe bearbeiten** Folgendes wie gewünscht:
+
+   - **Name** - ein Name, der die Gruppenmitglieder (d. h. [Covata-Benutzer](/2.16/de/admin/administering-users)) in einem kurzen Satz möglichst gut beschreibt
+   - **Beschreibung ( *Optional* )** - eine längere Beschreibung für mehr Informationen über die Gruppe. Beachten Sie, das dieses Feld nur über dieses Dialogfeld sichtbar ist.
+5. Klicken Sie auf **Speichern**, und der **Name** und die **Beschreibung** der Gruppe werden entsprechend aktualisiert.
+
+## Löschen einer bestehenden Gruppe <a id="deleting-an-existing-group" />
+
+Wird eine bestehende Gruppe gelöscht, werden alle Verbindungen zu [Covata-Benutzer-Mitgliedern](/2.16/de/admin/managing-groups#modifying-users-on-an-existing-group) der betreffenden Gruppe und alle der Gruppe zugewiesenen [Bezeichnungen](/2.16/de/admin/managing-groups#modifying-labels-on-an-existing-group) entfernt.
+
+Wurde also einem Covata-Benutzer eine Datei/ein sicheres Objekt mit einer Bezeichnung freigegeben, die einer oder mehreren Gruppen (denen der Benutzer angehört) zugewiesen ist, wirkt sich die Löschung einer dieser Gruppen auf den Benutzer folgendermaßen aus:
+
+- Bleibt die Verbindung zur Bezeichnung erhalten (weil die Bezeichnung auch anderen Gruppen zugewiesen ist, denen der Benutzer angehört), hat der Benutzer weiterhin Zugriff auf die betreffende Datei/das betreffende sichere Objekt.
+- Geht die Verbindung zur Bezeichnung verloren (weil der Benutzer keiner Gruppe angehört, der die Bezeichnung zugewiesen ist), verliert der Benutzer den Zugriff auf die betreffende Datei/das betreffende sichere Objekt.
+
+**Löschung einer bestehenden Gruppe:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Gruppen** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Gruppen** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zu ihr und klicken Sie auf den Link **Löschen**.
+4. Klicken Sie in der Meldung **Gruppe löschen** auf **Ja**, um die Gruppe zu löschen.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

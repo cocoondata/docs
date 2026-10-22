@@ -1,0 +1,56 @@
+---
+title: "<access-service>/api/v1/groups/{groupId}/users"
+---
+
+## URL structure <a id="access-service-api-v1-groups-groupid-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/groups/{groupId}/users
+```
+
+where `{groupId}` is the ID of a group.
+
+## Supported methods and overview <a id="access-service-api-v1-groups-groupid-users-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of field information for all [Covata users](/2.16/admin/administering-users) who are members of an existing [group](/2.16/admin/managing-groups), based on the group's ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-groups-groupid-users-detailed-description" />
+
+This API endpoint retrieves a list of field information for all Covata users who are members of the group whose ID is specified in the URL of this endpoint.
+
+A group's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/groups](/2.16/api/access-service-api-v1-groups) API endpoint, which retrieves a list of field information for all existing groups on the Covata Platform.
+
+## Supported roles <a id="access-service-api-groups-groupid-users-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-groups-groupid-users#access-service-api-v1-groups-groupid-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-groups-groupid-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-groups-groupid-users-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **email** - .
+  - **firstName** - .
+  - **lastName** - .
+  - **id** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

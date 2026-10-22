@@ -1,0 +1,103 @@
+---
+title: "<access-service>/api/v1/users/me/notifications/email"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-notifications-email-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/notifications/email
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-notifications-email-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the [notification preferences](/3.3/user/managing-your-account#modifying-your-email-notification-preferences) of a [Covata user](/3.3/api/authentication-and-authorisation) (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-supported-roles) to this endpoint).
+- `PUT` - used to modify the notification preferences for a Covata user (whose access token is submitted in the request to this endpoint).
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-notifications-email-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about the notification preferences of a Covata user (whose access token is submitted in the request to this endpoint). These notifications relate to the frequency with which this Covata user receives email notifications about items which have been shared with them.
+- Modifies the notification preferences of a Covata user (whose access token is submitted in the request to this endpoint). <br />
+  **Note:** These settings can also be modified through the [My Account](/3.3/user/managing-your-account#modifying-your-email-notification-preferences) feature of [Safe Share for Web](/3.3/user/index).
+
+## Supported roles <a id="access-service-api-v1-users-me-notifications-email-supported-roles" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-notifications-email-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required PUT-request parameters <a id="access-service-api-v1-users-me-notifications-email-required-put-request-parameters" />
+
+The following parameters must be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **code** - Specify the enumeration (enum) value:
+
+  - `ITEM` - Sets the Covata user (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-supported-roles) to this endpoint) to receive email notifications (entitled '*New items have been shared with you*') each time an item is shared with them. These email notifications contain links to the items (which had been shared with this user since their previous such notification), that opens the items in Safe Share for Web. Bear in mind that multiple items may appear as a 'digest' in a single email notification based on the [Item shared noticication frequency in minutues](/3.3/admin-platform/configuring-platform-administration-properties#notifications-properties) property configured by a [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) (described in the Safe Share Administrator's Guide).
+  - `DAILY` - Sets this Covata user to receive a '*New items have been shared with you*' email notification once a day, containing a digest of all items which had been shared with them since their previous such notification.
+  - `WEEKLY` - Sets this user to receive a '*New items have been shared with you*' email notification once a week, containing a digest of all items which had been shared with them since their previous such notification.
+  - `NONE` - Sets this user to receive no '*New items have been shared with you*' email notifications.
+
+  **Example (request):**
+
+  ```json
+  {
+    "code": "DAILY"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-users-me-notifications-email-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **notificationPreferences** - An array containing information about each available notification preference in the response to this endpoint. Each element of this array contains information about one of these notification preferences, represented as an object containing the following members.
+
+  - **name** - The name of the notification preference as it is exposed through the user interface of Safe Share applications.
+  - **code** - The value of the notification preference as it is hard-coded in the Covata Platform. Each of these are equivalent to the [enum value specified in the request](/3.3/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-required-put-request-parameters) to this endpoint.
+  - **selected** - A boolean value representing whether (`true`) or not (`false`) the notification preference is currently set for the Covata user (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-supported-roles) to this endpoint). From `PUT` requests to this endpoint, this value should be `true` for the notification preference specified in the request to this endpoint (and `false` for the others).
+
+  **Example (response):**
+
+  ```json
+  {
+      "notificationPreferences": [{
+          "name": "Per Item",
+          "code": "ITEM",
+          "selected": true
+      }, {
+          "name": "Daily",
+          "code": "DAILY",
+          "selected": false
+      }, {
+          "name": "Weekly",
+          "code": "WEEKLY",
+          "selected": false
+      }, {
+          "name": "None",
+          "code": "NONE",
+          "selected": false
+      }]
+  }
+  ```

@@ -1,0 +1,123 @@
+---
+title: "Verwaltung der Internationalisierung"
+---
+
+Anhand der Seite **Internationalisierung** (I18n) können Safe Share-Administratoren die folgenden Anpassungen vornehmen:
+
+- Änderung der [Systemstandard](/3.3/de/admin-platform/managing-internationalization#changing-the-system-default-language)-Sprache, die:
+
+  - als Standardsprache für alle der folgenden Benutzeroberflächen verwendet wird <sup>(1)</sup> :
+
+    - die Covata-Anmeldeseite (sofern nicht im Zwischenspeicher eine frühere Sprachauswahl hinterlegt ist),
+    - [Safe Share for Web](/3.3/de/user/index), der Safe Share-Verwaltung und [Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) sowie
+    - E-Mail-Benachrichtigungen von Covata
+
+    und
+  - zunächst die [Standard-Systemsprache einer Organisation](/3.3/de/admin-platform/configuring-organisation-administration-properties#default-i18n-setting-for-organisation) darstellt (die über die Eigenschaft [Organisationsverwaltung](/3.3/de/admin-platform/configuring-organisation-administration-properties) gesteuert wird) <sup>(2)</sup> , wenn die Organisation der Covata-Plattform [hinzugefügt wird](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation).
+- [Export](/3.3/de/admin-platform/managing-internationalization#exporting-a-language-bundle) eines vordefinierten oder benutzerdefinierten Sprachpakets für die Übersetzung/benutzerdefinierte Anpassung sowie [Upload](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) eines übersetzten/benutzerdefiniert angepassten (oder extern verfügbaren) Sprachpakets auf die Covata-Plattform, um für eine Instanz der Covata-Plattform umfassendere Unterstützung für mehr Sprachen und benutzerdefinierten Text für die Benutzeroberflächen bereitzustellen.
+
+<Note>
+
+- <sup>(1)</sup> Jeder Covata-Benutzer kann über die Funktionen zur Bearbeitung seines eigenen Benutzer-Accounts in der [Safe Share-Verwaltung](/3.3/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account), in [Safe Share for Web](/3.3/de/user/managing-your-account#updating-your-account-details) oder der [Organisationsverwaltung](/3.3/de/admin-platform/administering-users-within-an-organisation#editing-your-organisation-administrator-account) seine eigene Sprachpräferenz auswählen, die für alle diese Bereiche der Benutzeroberfläche gegenüber der **Systemstandard**-Sprache Vorrang hat.
+- <sup>(1)</sup> Die Sprachpräferenz eines Covata-Benutzers wird auch eingestellt, wenn der Benutzer aus dem Dropdown-Menü links oben auf der Anmeldeseite von Covata eine Sprache wählt *und sich anschließend* über die [Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration), [Safe Share for Web](/3.3/de/user/signing-in) oder die [Organisationsverwaltung](/3.3/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) anmeldet.
+- <sup>(2)</sup> Solange ein [Organisations-Administrator](/3.3/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) die [Standardsprache für seine Organisation](/3.3/de/admin-platform/configuring-organisation-administration-properties#default-i18n-setting-for-organisation) nicht [geändert hat](/3.3/de/admin-platform/configuring-organisation-administration-properties#modifying-an-organisation-administration-property-value), wird für E-Mail-Benachrichtigungen, die Covata an [Ad-hoc-Benutzer](/3.3/de/admin-platform/administering-users-within-an-organisation#adhoc-role) sendet, die **Systemstandard**-Sprache verwendet (für weitere Informationen siehe [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung), da diese Benutzer ihre Accounts nicht bearbeiten können.
+
+</Note>
+
+![Seite Internationalisierung](/images/0880aa6a60b3-i18n-page.png)
+Die Spalte **Verfügbare Pakete** auf der Seite **Internationalisierung** (siehe oben) ist wichtig. Sie enthält die folgenden Informationen:
+
+- **Vordefiniert** - für in einer Covata-Plattform-Instanz bereits enthaltene Sprachen
+- **Benutzerdefiniert** - für alle unterstützten Sprachen, für die ein benutzerdefiniertes/externes Sprachpaket [hochgeladen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) wurde. Diese können sowohl **benutzerdefinierte** als auch nicht **benutzerdefinierte** Sprachen beinhalten.
+
+Die Covata-Plattform unterstützt derzeit nur die auf der Seite **Internationalisierung** aufgeführten Sprachen. Diese Sprachen sind für Covata-Benutzer jedoch nur dann zur Auswahl verfügbar, wenn:
+
+- die Sprachen auf der Covata-Plattform **vordefiniert** sind - einem [hochgeladenen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) benutzerdefinierten/externen Sprachpaket könnte gegenüber diesen Sprachen jedoch auch Vorrang gegeben werden; <br />
+   oder
+- bei nicht **vordefinierten** Sprachen ein **benutzerdefiniertes** Paket (d. h. ein benutzerdefiniertes/externes Sprachpaket) [hochgeladen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) wurde.
+
+## Änderung der „Systemstandard“-Sprache <a id="changing-the-system-default-language" />
+
+Die **Systemstandard**-Sprache ist die für alle Benutzeroberflächen ([siehe Beschreibung oben](/3.3/de/admin-platform/managing-internationalization)) verwendete Standardsprache, die auf der Seite **Internationalisierung** in der Spalte **Systemstandard** durch die Bezeichnung **Aktiviert** gekennzeichnet ist.
+
+**Änderung der „Systemstandard“-Sprache:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Internationalisierung** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Internationalisierung** aufzurufen.
+3. Klicken Sie auf den Link **Aktivieren** der Sprache, die Sie als neue **Systemstandard**-Sprache setzen möchten. <br />
+   **Hinweise:**
+
+   - Der Link **Aktivieren** ist für Sprachen nicht verfügbar, die nicht **vordefiniert** sind oder für die kein [hochgeladenes](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) **benutzerdefiniertes** Sprachpaket verfügbar ist.
+   - Die **Systemstandard**-Sprache ist die Standardsprache, die neue Covata-Benutzer bei ihrer ersten Anmeldung bei Covata angezeigt sehen.
+
+## Export eines Sprachpakets <a id="exporting-a-language-bundle" />
+
+Der Export eines bestehenden **vordefinierten** oder **benutzerdefinierten** Sprachpakets ermöglicht es, dieses Paket in eine andere, von der Covata-Plattform *unterstützte* Sprache zu übersetzen (d. h. eine auf der Seite **Internationalisierung** aufgeführte Sprache). Sobald die übersetzte Version anschließend [hochgeladen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) wurde, können [Safe Share for Web](/3.3/de/user/index), die Safe Share-Verwaltung und die [Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) die betreffende Sprache unterstützen.
+
+<Tip>
+
+Dieser Ablauf kann auch verwendet werden, um Benutzeroberflächen in Ihrer Sprache für Safe Share for Web, die Safe Share-Verwaltung und/oder die Organisationsverwaltung benutzerdefiniert anzupassen.
+
+</Tip>
+
+**Export eines Sprachpakets:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Internationalisierung** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Internationalisierung** aufzurufen.
+3. Klicken Sie auf den Link **Exportieren** eines **verfügbaren Pakets** (das in dieser Spalte mit der Bezeichnung **vordefiniert** oder **benutzerdefiniert** gekennzeichnet ist) für die Sprache, aus der das Paket übersetzt werden soll. Das Sprachpaket wird sofort im [JSON-Format](http://json.org/) heruntergeladen. <br />
+   **Hinweise:**
+
+   - Beachten Sie bei der Übersetzung der exportierten Sprachpaket-Datei im JSON-Format bitte Folgendes:
+
+     - Ändern Sie den Wert des Internationalisierungscodes (I18nCode) in den entsprechenden **Internationalisierungscode** für die *Zielsprache* (der auf der Seite **Internationalisierung** gezeigt ist). Die Zielsprache ist diejenige Sprache, in die der Inhalt der Datei übersetzt wird.
+     - Beachten Sie innerhalb des jeweiligen Pakets bitte Folgendes:
+
+       - Ändern Sie die Eigenschaftsnamen links von Doppelpunkten nicht. Diese Eigenschaftsnamen dürfen weder bearbeitet noch übersetzt werden.
+       - Die Eigenschaftswerte rechts von Doppelpunkten bilden die zu übersetzenden Inhalte. Beachten Sie jedoch, dass manche dieser Inhalte HTML-Elemente und/oder Variablen enthalten und letztere nicht von sich aus geändert werden sollten. (Variablen sind in geschwungenen Klammern gesetzt.) Die Position von Variablen in Sätzen kann allerdings entsprechend der Zielsprache geändert werden.
+   - Sobald der Inhalt einer exportierten Sprachpaket-Datei in die jeweilige (von der Covata-Plattform unterstützte) Zielsprache übersetzt wurde, kann die übersetzte Datei als benutzerdefiniertes/externes Sprachpaket in die entsprechende [unterstützte Sprache hochgeladen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) werden.
+
+## Upload eines benutzerdefinierten/externen Sprachpakets <a id="uploading-a-customised-external-language-bundle" />
+
+Sobald ein [exportiertes](/3.3/de/admin-platform/managing-internationalization#exporting-a-language-bundle) Sprachpaket in seine von der Covata-Plattform unterstützte Zielsprache übersetzt (oder die entsprechende Benutzeroberfläche angepasst) wurde, kann das benutzerdefinierte Sprachpaket anhand des folgenden Verfahrens hochgeladen werden.
+
+**Upload eines benutzerdefinierten/externen Sprachpakets:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Internationalisierung** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Internationalisierung** aufzurufen.
+3. Klicken Sie auf den Link **Hochladen** der Zielsprache, deren benutzerdefiniertes/externes Sprachpaket hochgeladen werden soll.
+4. Klicken Sie im Dialogfeld **Sprachpaket hochladen** auf die Schaltfläche **Datei auswählen**.
+5. Navigieren Sie zum betreffenden, auf die Covata-Plattform hochzuladenden Sprachpaket im JSON-Format und wählen Sie es aus. <br />
+   **Hinweise:**
+
+   - Die Covata-Plattform unterstützt nun die Zielsprache, und daher:
+
+     - kann diese Sprache nun von einem Safe Share-Administrator als [Systemstandard](/3.3/de/admin-platform/managing-internationalization#changing-the-system-default-language)-Sprache definiert werden,
+     - wird die Sprache als Option **Standardsprache** verfügbar (die Covata-Benutzern bei der Bearbeitung ihres Accounts über die Funktion **Mein Account** in [Safe Share for Web](/3.3/de/user/managing-your-account#updating-your-account-details), der [Safe Share-Verwaltung](/3.3/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) und der [Organisationsverwaltung](/3.3/de/admin-platform/administering-users-within-an-organisation#editing-your-organisation-administrator-account) zur Verfügung steht) und kann von Covata-Benutzern verwendet werden, um die Einstellung für die **Systemsprache** zu überschreiben.
+   - War die Zielsprache **vordefiniert**, überschreiben die Übersetzungen des hochgeladenen benutzerdefinierten/externen Sprachpakets diejenigen im **benutzerdefinierten** Sprachpaket.
+   - Ungeachtet dessen, ob das Sprachpaket auf der Covata-Plattform **vordefiniert** oder **nicht vordefiniert** ist, lautet die Bezeichnung in der Spalte **Verfügbare Pakete** jetzt **Benutzerdefiniert** um anzuzeigen, dass nun das benutzerdefinierte/externe Sprachpaket (für die betreffende Zielsprache) verwendet wird.
+
+## Löschen oder Zurücksetzen eines Sprachpakets <a id="deleting-or-resetting-a-language-bundle" />
+
+- Sobald ein benutzerdefiniertes/externes Sprachpaket [hochgeladen](/3.3/de/admin-platform/managing-internationalization#uploading-a-customised-external-language-bundle) wurde, sind dafür die folgenden Optionen verfügbar:
+- **Löschen** einer nicht **vordefinierten** Sprache oder
+- **Zurücksetzen** auf eine **vordefinierte** Sprache (d. h. die Standardübersetzungen der betreffenden Sprache).
+
+**Löschung oder Zurücksetzen eines Sprachpakets:**
+
+1. [Melden Sie sich](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Internationalisierung** links auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Internationalisierung** aufzurufen.
+3. Suchen Sie die zu löschende/zurückzusetzende Sprache (mit der Bezeichnung **Benutzerdefiniert** in der Spalte **Verfügbare Pakete**) und klicken Sie:
+
+   - auf den Link **Löschen**, um das benutzerdefinierte/externe Sprachpaket einer nicht **vordefinierten** Sprache zu löschen. <br />
+     **Hinweise:**
+
+     - Diese Aktion entfernt die betreffende Sprache als verfügbare Option für die **Standardsprache** (die Covata-Benutzern bei der Bearbeitung ihres Accounts über die Funktion **Mein Account** in [Safe Share for Web](/3.3/de/user/managing-your-account#updating-your-account-details), der [Safe Share-Verwaltung](/3.3/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) und der [Organisationsverwaltung](/3.3/de/admin-platform/administering-users-within-an-organisation#editing-your-organisation-administrator-account) zur Verfügung steht).
+     - Die Accounts aller Covata-Benutzer, die diese Sprache (über die Funktion **Mein Account**) als ihre **Standardsprache** ausgewählt hatten, werden automatisch auf die [Systemstandard](/3.3/de/admin-platform/managing-internationalization#changing-the-system-default-language)-Sprache umgeschaltet.
+   - auf den Link **Zurücksetzen**, um das benutzerdefinierte/externe Sprachpaket, mit dem die **vordefinierte** Standardübersetzung überschrieben worden war, zu löschen und die Sprache auf die Standardübersetzung zurückzusetzen. <br />
+     **Hinweis:** Diese Aktion entfernt die Sprache zwar nicht als verfügbare Option **Standardsprache** aus der Funktion **Mein Account**, aber alle Covata-Benutzer, die diese Sprache als ihre **Standardsprache** gewählt hatten, werden automatisch auf die **vordefinierte** Standardübersetzung der betreffenden Sprache umgeschaltet.
+
+<Note>
+
+Die aktuell als [Systemstandard](/3.3/de/admin-platform/managing-internationalization#changing-the-system-default-language)-Sprache definierte Sprache kann weder gelöscht noch zurückgesetzt werden.
+
+</Note>

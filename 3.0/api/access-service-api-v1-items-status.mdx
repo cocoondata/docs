@@ -1,0 +1,67 @@
+---
+title: "<access-service>/api/v1/items/status"
+---
+
+## URL structure <a id="access-service-api-v1-items-status-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/status
+```
+
+## Supported methods and overview <a id="access-service-api-v1-items-status-supported-methods-and-overview" />
+
+- `POST` - used to retrieve information about the current status of one or more [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) (i.e. *Incomplete*, *Created* or *Deleted*) as well as one or more [collections](/3.0/api/creating-secure-objects-and-collections#collection).
+
+## Detailed description <a id="access-service-api-v1-items-status-detailed-description" />
+
+This API endpoint retrieves information about the current status of one or more Secure Objects (i.e. *Incomplete*, *Created* or *Deleted*) as well as one or more collections, based on their IDs.
+
+Collections can have one of two statuses - *Created* or *Deleted*. However, *Deleted* collections are not returned in responses from requests to this endpoint.
+
+Also returned in responses are details about the Covata user who owns each item returned in the response.
+
+## Supported roles <a id="access-service-api-items-status-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [Originator](/3.0/admin/administering-users#originator-role)
+- [Collaborator](/3.0/admin/administering-users#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-items-status#access-service-api-v1-items-status-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-status-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-items-status-optional-parameters" />
+
+The following optional parameter can be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **ids** - An array of one or more [item](/3.0/api/creating-secure-objects-and-collections#item) IDs (i.e. of [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) and/or [collections](/3.0/api/creating-secure-objects-and-collections#collection)).
+
+  **Example ():**
+
+Although omitting the **ids** parameter above in a request serves no purpose, an empty JSON object must at least be passed in the body of POST requests to this endpoint for a successful response:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-items-status-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **count** - .
+- **offset** - .
+- **items** - .
+
+  - **id** - .
+  - **owner** - .
+
+    - **email** - .
+    - **firstName** - .
+    - **lastName** - .
+    - **id** - .
+  - **state** - .
+
+  **Example (response from ...):**

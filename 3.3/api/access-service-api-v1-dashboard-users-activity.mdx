@@ -1,0 +1,74 @@
+---
+title: "<access-service>/api/v1/dashboard/users/activity"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-users-activity-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/users/activity
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-users-activity-supported-methods-and-overview" />
+
+- `GET` - used to retrieve data about [Covata users](/3.3/admin-org/administering-users-within-an-organisation)' daily sign-in activities on the Covata Platform over a period of time until the current day.
+
+## Detailed description <a id="access-service-api-v1-dashboard-users-activity-detailed-description" />
+
+This API endpoint retrieves data values about Covata users' daily sign-in activities on the Covata Platform over a period of time until the current day.
+
+These activities (calculated for each day of the time period specified) include the numbers of Covata users (for each [account type](/3.3/admin-org/administering-users-within-an-organisation#account-type)) who successfully signed in, the total numbers of users who failed to sign in and the date for each day of the time period specified.
+
+By default, daily sign-in activities from the last 7 days are returned in the [response](/3.3/api/access-service-api-v1-dashboard-users-activity#access-service-api-v1-dashboard-users-activity-returns) from this API endpoint. However, daily sign-in activities from the last day up to the last year (i.e. 365 days) can be retrieved.
+
+The information returned by this API endpoint is utilized on the [Safe Share Administration dashboard](/3.3/admin-platform/accessing-platform-administration#the-platform-administration-dashboard).
+
+## Supported roles <a id="access-service-api-v1-dashboard-users-activity-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-dashboard-users-activity#access-service-api-v1-dashboard-users-activity-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-users-activity-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-dashboard-users-activity-optional-parameters" />
+
+The following optional parameter can be sent in the **URL** of the GET request:
+
+- **lastDays** - An integer value representing the number of days back from the current time through which to calculate daily data values for all sign-in activities retrieved by this API endpoint. <br />
+  **Notes:**
+
+  - If this parameter is not specified, then a default value of `7` days is assumed.
+  - If a parameter value is specified which is outside the permitted range of `1` to `365` days, then the default of `7` days is assumed.
+- **uniqueLogin** - A boolean value representing whether or not to retrieve values representing a maximum of one sign-in success/failure per Covata user account (i.e. `true`) or each/every sign-in success/failure event (i.e. `false`). If this parameter is not specified, then the default value is `false`. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/dashboard/users/activity?lastDays=14
+  ```
+
+## Returns <a id="access-service-api-v1-dashboard-users-activity-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **daysReported** - An array containing date and time values for the last number of days specified by the **lastDays** parameter in the request.
+- **loginFailures** - An array containing the number of sign-in failures corresponding to the last number of days specified by the **lastDays** parameter in the request.
+- **loggedInUsersExternal** - An array containing the number of successful sign-in attempts for Covata user accounts of the **External** [Account Type](/3.3/admin-org/administering-users-within-an-organisation#account-type), corresponding to the last number of days specified by the **lastDays** parameter in the request.
+- **loggedInUsersLocal** - An array containing the number of successful sign-in attempts for Covata user accounts of the **Local** Account Type, corresponding to the last number of days specified by the **lastDays** parameter in the request.
+- **loggedInUsersLDAP** - An array containing the number of successful sign-in attempts for Covata user accounts of the **LDAP** Account Type, corresponding to the last number of days specified by the **lastDays** parameter in the request. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "daysReported": ["2016-09-09T14:00:00.000Z", "2016-09-10T14:00:00.000Z", "2016-09-11T14:00:00.000Z", "2016-09-12T14:00:00.000Z", "2016-09-13T14:00:00.000Z", "2016-09-14T14:00:00.000Z", "2016-09-15T14:00:00.000Z"],
+      "loginFailures": [0, 0, 0, 1, 1, 0, 0],
+      "loggedInUsersExternal": [0, 0, 0, 0, 0, 0, 0],
+      "loggedInUsersLocal": [0, 0, 6, 10, 15, 12, 5],
+      "loggedInUsersLDAP": [0, 0, 0, 0, 0, 0, 0]
+  }
+  ```

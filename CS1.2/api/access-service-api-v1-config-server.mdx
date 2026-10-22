@@ -1,0 +1,279 @@
+---
+title: "<access-service>/api/v1/config/server"
+---
+
+## URL structure <a id="access-service-api-v1-config-server-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/server
+```
+
+## Supported methods and overview <a id="access-service-api-v1-config-server-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of information for all configurable [SafeShare Administration-only properties](/CS1.2/admin-platform/configuring-platform-administration-properties) (not related to theming SafeShare's interfaces).
+
+## Detailed description <a id="access-service-api-v1-config-server-detailed-description" />
+
+This API endpoint retrieves a list of information for all configurable properties SafeShare Administration-only properties which are not related to theming SafeShare's interfaces.
+
+<Note>
+
+- For properties related to theming SafeShare's interfaces, see [&lt;access-service&gt;/theme...](/CS1.2/api/access-service-theme).
+- From a security perspective, with the exception of the current values of the following few Cocoon Data Administration properties returned by this API endpoint's [response](/CS1.2/api/access-service-api-v1-config-server#access-service-api-v1-config-server-returns), no information about any of the other properties (returned in this response) are contained within the [&lt;access-service&gt;/api/v1/config](/CS1.2/api/access-service-api-v1-config) endpoint's [response](/CS1.2/api/access-service-api-v1-config#access-service-api-v1-config-returns):
+
+  - **analytics.google.trackingCode**
+  - **analytics.google.trackingDomain**
+  - **require.login.on.launch**
+
+</Note>
+
+## Supported roles <a id="access-service-api-config-server-supported-roles" />
+
+This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [SafeShare Administrator's Guide](/CS1.2/admin-platform/index)):
+
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-config-server#access-service-api-v1-config-server-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-server-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-config-server-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response from the Cocoon Data Platform, where an individual item is information about a configurable SafeShare Administration-only property (not related to theming SafeShare's interfaces). If this parameter is omitted, then its value is `0` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. configurable SafeShare Administration-only properties) from the Cocoon Data Platform returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Cocoon Data Platform. This **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/config/server
+  ```
+
+## Returns <a id="access-service-api-v1-config-server-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - .
+
+  - **modified** - .
+  - **propertyName** - .
+  - **grouping** - .
+  - **propertyDescription** - .
+  - **configGroup** - .
+  - **id** - The ID of the configurable SafeShare Administration-only property (not related to theming SafeShare's interfaces).
+  - **propertyValue** - .
+- **count** - .
+- **offset** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "password.length.min",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.minimumPasswordLength",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "1",
+          "propertyValue": {
+              "value": "6"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "reset.password.expiry.time",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.table.forceResetPasswordExpiryTimeInHours",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "2",
+          "propertyValue": {
+              "value": "168"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "mobile.users.can.set.passcode",
+          "grouping": "LOGIN",
+          "propertyDescription": "db.configuration.allowMobileUsersToSetPasscodes",
+          "configGroup": "LOGIN",
+          "id": "3",
+          "propertyValue": {
+              "i18n": {
+                  "code": "server.common.terms.true",
+                  "arguments": []
+              },
+              "value": "true"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "password.numretries",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.maximumNumberOfPasswordRetries",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "8",
+          "propertyValue": {
+              "value": "25"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "password.lockouttime",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.accountLockoutTimeInMinutes",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "9",
+          "propertyValue": {
+              "value": "720"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "email.password.retry.attempts",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.maximumNumberOfEmailMyPasswordRetries",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "10",
+          "propertyValue": {
+              "value": "5"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "password.minimum.character.sets",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.numberOfCharacterTypeCategoriesThatMustAppearInaPassword",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "33",
+          "propertyValue": {
+              "value": "2"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "analytics.google.trackingCode",
+          "grouping": "ANALYTICS",
+          "propertyDescription": "db.configuration.theTrackingCodeUsedForGoogleAnalytics",
+          "configGroup": "ANALYTICS",
+          "id": "73",
+          "propertyValue": {
+              "value": ""
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "analytics.google.trackingDomain",
+          "grouping": "ANALYTICS",
+          "propertyDescription": "db.configuration.theTrackingDomainUsedForGoogleAnalytics",
+          "configGroup": "ANALYTICS",
+          "id": "74",
+          "propertyValue": {
+              "value": ""
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "mfa.password.expiry.time",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.mfaPasswordExpiryTimeInDays",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "76",
+          "propertyValue": {
+              "value": "7"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "ios.smartbanner.show",
+          "grouping": "IOS",
+          "propertyDescription": "db.configuration.showsmartbanner",
+          "configGroup": "IOS",
+          "id": "77",
+          "propertyValue": {
+              "value": "true"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "limit.max.contacts",
+          "grouping": "LIMIT",
+          "propertyDescription": "db.configuration.maxcontactslimit",
+          "configGroup": "LIMIT",
+          "id": "78",
+          "propertyValue": {
+              "value": "1000"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "max.collaborators",
+          "grouping": "ITEM",
+          "propertyDescription": "db.configuration.maximumNumberOfCollaborators",
+          "configGroup": "ITEM",
+          "id": "79",
+          "propertyValue": {
+              "value": "100"
+          }
+      }, {
+          "modified": "2016-09-30T07:19:07.149Z",
+          "propertyName": "notification.frequency.minutes",
+          "grouping": "NOTIFICATION",
+          "propertyDescription": "db.configuration.notificationFrequency",
+          "configGroup": "NOTIFICATION",
+          "id": "80",
+          "propertyValue": {
+              "value": "1"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "adoption.reminder.notification.frequency.days",
+          "grouping": "NOTIFICATION",
+          "propertyDescription": "db.configuration.adoption.reminder.notificationFrequency",
+          "configGroup": "NOTIFICATION",
+          "id": "81",
+          "propertyValue": {
+              "value": "15"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "adoption.reminder.notification.enable",
+          "grouping": "NOTIFICATION",
+          "propertyDescription": "db.configuration.adoption.reminder.notificationEnable",
+          "configGroup": "NOTIFICATION",
+          "id": "82",
+          "propertyValue": {
+              "value": "false"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "server.mfa.enabled",
+          "grouping": "PASSWORD_PROPERTIES",
+          "propertyDescription": "db.configuration.server.mfa.enable",
+          "configGroup": "PASSWORD_PROPERTIES",
+          "id": "83",
+          "propertyValue": {
+              "i18n": {
+                  "code": "server.common.terms.true",
+                  "arguments": []
+              },
+              "value": "true"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "billing.notification.enabled",
+          "grouping": "NOTIFICATION",
+          "propertyDescription": "db.configuration.billing.notification.enabled",
+          "configGroup": "NOTIFICATION",
+          "id": "84",
+          "propertyValue": {
+              "value": "false"
+          }
+      }, {
+          "modified": "1970-01-01T00:00:00.000Z",
+          "propertyName": "billing.notification.to.emails",
+          "grouping": "NOTIFICATION",
+          "propertyDescription": "db.configuration.billing.notification.to.emails",
+          "configGroup": "NOTIFICATION",
+          "id": "85",
+          "propertyValue": {
+              "value": ""
+          }
+      }],
+      "count": "19",
+      "offset": "0"
+  }
+  ```

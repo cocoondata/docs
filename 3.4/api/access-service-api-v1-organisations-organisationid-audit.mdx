@@ -1,0 +1,264 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}/audit"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-audit-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}/audit
+```
+
+where `{organisationId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-audit-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of information for all API-based requests made to the Covata Platform's Access Service, within the scope of an organization (specified by `organisationId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-audit-detailed-description" />
+
+This API endpoint retrieves a list of information for all API-based requests made to the Covata Platform's Access Service, within the scope of an organization (specified by `organisationId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-organisationid-audit-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by the `{organisationId}` of the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-organisationid-audit#access-service-api-v1-organisations-organisationid-audit-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-audit-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-organisations-organisationid-audit-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response, where an individual item is information about an API-based request to the Access Service in the organization (specified by `{organisationId}` in this request's URL). If this parameter is omitted, then its value is `0` by default, which does not apply restrictions to the number of items returned in the response.
+- **offset** - A value representing the count order of all retrievable items (i.e. API-based requests in the organization specified by `{organisationId}` in the URL) returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. API-based requests in the organization specified by `{organisationId}` in the URL) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **searchText** - A text substring of URL 'sub-parameters' and their values, which are used to filter *all* items (in the response). Each sub-parameter and its value is separated by an escaped '`=`' sign (`%3D`) and each sub-parameter + value pair is separated from the next by an escaped '`&`' sign (`%26`). One or more of the following sub-parameters can be specified:
+
+  - **startTime** - Specify a date in the format `DD/MM/YYYY`, where each '`/`' sign is escaped (`%2F`).
+  - **endTime** - Specify a later date in the same format as that used for **startTime**.
+  - **clientId** - Specify the client ID of a client application configured on the Covata Platform.
+  - **email** - Specify the email address of a Covata user account whose access token was submitted in the header of the API-based requests.
+  - **action** - Specify the sub-parameter value:
+
+    - `CREATED` - for API-based `POST` method requests,
+    - `RETRIEVED` - for API-based `GET` method requests,
+    - `UPDATED` - for API-based `PUT` method requests,
+    - `DELETED` - for API-based `DELETE` method requests.
+  - **apiType** - Specify the sub-parameter value:
+
+    - `AUTH` - for API-based requests relating to authentication and authorization,
+    - `COLLABORATIONS` - for API-based requests relating to collaborators,
+    - `COLLECTIONS` - for API-based requests relating to folders,
+    - `CONTACTS` - for API-based requests relating to contacts,
+    - `KEYS` - for API-based requests relating to keys,
+    - `NOTIFICATIONS` - for API-based requests relating to email notifications,
+    - `OBJECTS` - for API-based requests relating to file objects,
+    - `USERS` - for API-based requests relating to users.
+- **sortBy** - . <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/760756644367081472/audit?limit=10&offset=0&orderBy=DESC&searchText=startTime%3D18%2F10%2F2016%26endTime%3D%26clientId%3D%26email%3D%26action%3D%26apiType%3D&sortBy=
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-audit-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** - .
+
+  - **created** - .
+  - **ipAddress** - .
+  - **username** - .
+  - **action** - .
+  - **resource** - .
+  - **queryString** - .
+  - **eventInfo** - .
+  - **status** - .
+  - **clientInfo** - .
+  - **statusDescription** - .
+  - **clientIdString** - .
+  - **i18nActionString** - .
+  - **actionString** - .
+  - **eventInfoAsPlainText** - .
+  - **id** - .
+- **count** - .
+- **offset** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "items": [{
+          "created": "2016-10-21T02:41:25.842Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "RETRIEVED",
+          "resource": "/api/v1/items/768302879164637184",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"768302879164637184\"}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.get",
+          "actionString": "Retrieved",
+          "eventInfoAsPlainText": "Id: 768302879164637184\n",
+          "id": "1000650"
+      }, {
+          "created": "2016-10-21T02:41:25.807Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "RETRIEVED",
+          "resource": "/api/v1/items/768302879164637184",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"768302879164637184\"}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.get",
+          "actionString": "Retrieved",
+          "eventInfoAsPlainText": "Id: 768302879164637184\n",
+          "id": "1000648"
+      }, {
+          "created": "2016-10-21T02:41:20.951Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "CREATED",
+          "resource": "/api/v1/organisations/760756644367081472/objects",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"768302879164637184\",\"sha512\":null}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.post",
+          "actionString": "Created",
+          "eventInfoAsPlainText": "Id: 768302879164637184\n",
+          "id": "1000640"
+      }, {
+          "created": "2016-10-21T02:37:04.430Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "RETRIEVED",
+          "resource": "/api/v1/items/765074389430738944",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"765074389430738944\"}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.get",
+          "actionString": "Retrieved",
+          "eventInfoAsPlainText": "Id: 765074389430738944\n",
+          "id": "1000621"
+      }, {
+          "created": "2016-10-21T02:36:45.544Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "RETRIEVED",
+          "resource": "/api/v1/items/765074389430738944",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"765074389430738944\"}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.get",
+          "actionString": "Retrieved",
+          "eventInfoAsPlainText": "Id: 765074389430738944\n",
+          "id": "1000557"
+      }, {
+          "created": "2016-10-21T00:21:02.310Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "UPDATED",
+          "resource": "/api/v1/organisations/760756644367081472/plans/767973799974182912",
+          "queryString": null,
+          "eventInfo": "{\"quota\":4096,\"name\":\"Temporary Staff Originators - test\",\"isDefault\":true}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.put",
+          "actionString": "Updated",
+          "eventInfoAsPlainText": "IsDefault: true\nQuota: 4096\nName: Temporary Staff Originators - test\n",
+          "id": "1000624"
+      }, {
+          "created": "2016-10-20T06:28:18.768Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "UPDATED",
+          "resource": "/api/v1/organisations/760756644367081472/plans/760757068528656384",
+          "queryString": null,
+          "eventInfo": "{\"quota\":10240,\"name\":\"Staff Originators\",\"isDefault\":true}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.put",
+          "actionString": "Updated",
+          "eventInfoAsPlainText": "IsDefault: true\nQuota: 10240\nName: Staff Originators\n",
+          "id": "1000571"
+      }, {
+          "created": "2016-10-20T06:27:52.518Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "UPDATED",
+          "resource": "/api/v1/organisations/760756644367081472/plans/760757068528656384",
+          "queryString": null,
+          "eventInfo": "{\"quota\":10240,\"name\":\"XStaff Originators\",\"isDefault\":true}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.put",
+          "actionString": "Updated",
+          "eventInfoAsPlainText": "IsDefault: true\nQuota: 10240\nName: XStaff Originators\n",
+          "id": "1000620"
+      }, {
+          "created": "2016-10-20T06:26:56.218Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "UPDATED",
+          "resource": "/api/v1/organisations/760756644367081472/plans/760757068528656384",
+          "queryString": null,
+          "eventInfo": "{\"quota\":10240,\"name\":\"Staff Originators\",\"isDefault\":true}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.put",
+          "actionString": "Updated",
+          "eventInfoAsPlainText": "IsDefault: true\nQuota: 10240\nName: Staff Originators\n",
+          "id": "1000614"
+      }, {
+          "created": "2016-10-20T05:06:10.258Z",
+          "ipAddress": "127.0.0.1",
+          "username": "alex.originator@xy-company.com",
+          "action": "RETRIEVED",
+          "resource": "/api/v1/items/765074389430738944",
+          "queryString": null,
+          "eventInfo": "{\"id\":\"765074389430738944\"}",
+          "status": "200",
+          "clientInfo": "covataWebApp",
+          "statusDescription": "server.httpstatus.ok",
+          "clientIdString": "covataWebApp",
+          "i18nActionString": "server.action.get",
+          "actionString": "Retrieved",
+          "eventInfoAsPlainText": "Id: 765074389430738944\n",
+          "id": "1000586"
+      }],
+      "count": "53",
+      "offset": "0"
+  }
+  ```

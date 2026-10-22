@@ -1,0 +1,87 @@
+---
+title: "<access-service>/api/v1/clientapps/{clientInfoId}"
+---
+
+## URL structure <a id="access-service-api-v1-clientapps-clientinfoid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/clientapps/{clientInfoId}
+```
+
+where `{clientInfoId}` is the ID for the client application's configuration information.
+
+## Supported methods and overview <a id="access-service-api-v1-clientapps-clientinfoid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a registered [client application](/3.2/admin-platform/configuring-client-applications), based on this application's configuration information ID. <br />
+  **Note:** This ID value *is not* the [client ID](/3.2/admin-platform/configuring-client-applications#client-id) value.
+- `PUT` - used to modify the fields of a registered client application.
+- `DELETE` - used to delete a client application.
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-clientapps-clientinfoid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves a list of field information about the OAuth 2.0 configuration of a registered client application, using the client application's configuration information ID (i.e. not the [client ID](/3.2/admin-platform/configuring-client-applications#client-id) value). <br />
+   The configuration information ID of the required client application can be obatined by calling the `GET` method of the [&lt;access-service&gt;/api/v1/clientapps](/3.2/api/access-service-api-v1-clientapps) API endpoint, which retrieves a list of field information for all client applications on the Covata Platform. <br />
+  **Tip:** All information returned in the [response](/3.2/api/access-service-api-v1-clientapps-clientinfoid#access-service-api-v1-clientapps-clientinfoid-returns-from-a-GET-or-PUT-request) from a `GET` method call to this API endpoint is also returned in the [response](/3.2/api/access-service-api-v1-clientapps#access-service-api-v1-clientapps-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/clientapps](/3.2/api/access-service-api-v1-clientapps) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the client application's configuration information ID).
+- Modifies the fields of a registered client application, using the client application's configuration information ID. Only certain fields are required/used based on the values specified for the **authorizedGrantTypes** field.
+- Deletes a registered client application from the Covata Platform. A Covata user account with the System administrator role would need to [re-register this client application](/3.2/api/access-service-api-v1-clientapps) to allow it access to the Covata Platform's resources again. <br />
+  **Note:** This feature is not available in [Safe Share Administration](/3.2/admin-platform/index) (i.e. through the ['Client Applications' configuration page](/3.2/admin-platform/configuring-client-applications)).
+
+## Supported roles <a id="access-service-api-clientapps-clientappid-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-clientapps-clientinfoid#access-service-api-v1-clientapps-clientinfoid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-clientapps-clientinfoid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-clientapps-clientinfoid-optional-parameters" />
+
+The following optional parameters can also be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **accessTokenValiditySeconds** - .
+- **appName** - .
+- **authorizedGrantTypes** - password, authorization_code, refresh_token, implicit
+- **clientId** - .
+- **clientSecret** - .
+- **refreshTokenValiditySeconds** - .
+- **registeredRedirectUris** - .
+
+  **Example ():**
+
+## Returns from a GET or PUT request <a id="access-service-api-v1-clientapps-clientinfoid-returns-from-a-GET-or-PUT-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **clientId** - .
+- **clientSecret** - .
+- **appName** - .
+- **authorizedGrantTypes** - .
+- **registeredRedirectUris** - .
+- **accessTokenValiditySeconds** - .
+- **refreshTokenValiditySeconds** - .
+- **enabled** - .
+
+  **Example (response from ...):**
+
+## Returns from a DELETE request <a id="access-service-api-v1-clientapps-clientinfoid-returns-from-a-DELETE-request" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,156 @@
+---
+title: "<access-service>/api/v1/ldapconnections"
+---
+
+## URL structure <a id="access-service-api-v1-ldapconnections-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldapconnections
+```
+
+## Supported methods and overview <a id="access-service-api-v1-ldapconnections-supported-methods-and-overview" />
+
+- `POST` - used to add a new [LDAP connection](/3.3/admin-platform/configuring-ldap).
+- `GET` - used to retrieve a list of field information for all LDAP connections configured on the Covata Platform.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-ldapconnections-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new connection to an LDAP server/user directory on the Covata Platform. <br />
+  **Notes:**
+
+  - Before calling this API endpoint:
+
+    - Be aware that adding at least one LDAP connection (through this API endpoint) *permanently disables* the ability to add more organizations to the Covata Platform - i.e. doing so permamently disables successful calls to the `POST` method on the [&lt;access-service&gt;/api/v1/organisations](/3.3/api/access-service-api-v1-organisations) endpoint.
+    - Ensure that at least one plan has been configured in the one organization configured on the Covata Platform instance. For more information see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/plans](/3.3/api/access-service-api-v1-organisations-orggroupid-plans).
+  - To test that the Covata Platform can successfully connect to the LDAP server/user directory first before adding the LDAP connection itself, call the [&lt;access-service&gt;/api/v1/ldapconnections/availability](/3.3/api/access-service-api-v1-ldapconnections-availability) API endpoint (before calling the `POST` method on this API endpoint).
+  - All accounts in the LDAP user directory will appear as new user accounts in the one configured organization when the Covata Platform next synchronizes with the LDAP server.
+  - All new LDAP user accounts added to the Covata Platform from an LDAP server/user directory automatically have the [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) role and are assigned the **default** plan.
+  - If the email address of an existing user account on the Covata Platform matches that of the **emailField** of a user in the LDAP user directory, then a new account will not be added to the Covata Platform for that account in LDAP (during synchronization).
+- Retrieves a list of field information for all LDAP connections configured on the Covata Platform.
+
+## Supported roles and conditions <a id="access-service-api-v1-ldapconnections-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the:
+
+  - `POST` method, when only one organization has been configured on the Covata Platform. To retrieve information about all configured organizations on the Covata Platform, see [&lt;access-service&gt;/api/v1/organisations](/3.3/api/access-service-api-v1-organisations).
+  - `GET` method, without any futher conditions.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-ldapconnections#access-service-api-v1-ldapconnections-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldapconnections-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-ldapconnections-required-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **serverUrl** - .
+- **serverTimeout** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **baseDN** - .
+- **syncFilter** - .
+- **authFilter** - .
+- **domain** - .
+- **accountNameField** - .
+- **emailField** - .
+- **userPrincipalNameField** - .
+- **fullnameField** - .
+- **statusField** - .
+- **statusDisabledValue** - . <br />
+  **Example (request):**
+
+  ```json
+  {
+    "serverUrl":"ldap://ldap.xy-company.com",
+    "serverTimeout":45000,
+    "managerDN":"cn=server sync,cn=users,dc=xy-company,dc=com",
+    "managerPassword":"password",
+    "baseDN":"ou=users,dc=xy-company,dc=com",
+    "syncFilter":"(&(memberOf=ou=users,dc=xy-company,dc=com)(userPrincipalName=*@xy-company.com))",
+    "authFilter":"userPrincipalName={0}",
+    "domain":"XY-COMPANY",
+    "accountNameField":"sAMAccountName",
+    "emailField":"mail",
+    "userPrincipalNameField":"userPrincipalName",
+    "fullnameField":"name",
+    "statusField":"userAccountControl",
+    "statusDisabledValue":"2"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-ldapconnections-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - .
+
+  - **id** - .
+  - **serverUrl** - .
+  - **serverTimeout** - .
+  - **baseDN** - .
+  - **authFilter** - .
+  - **managerDN** - .
+  - **managerPassword** - .
+  - **syncFilter** - .
+  - **domain** - .
+  - **enabled** - .
+  - **emailField** - .
+  - **userPrincipalNameField** - .
+  - **statusField** - .
+  - **statusDisabledValue** - .
+  - **accountNameField** - .
+  - **fullnameField** - .
+  - **modifiedAt** - .
+  - **createdAt** - .
+- **count** ( *from GET requests only* ) - .
+- **offset** ( *from GET requests only* ) - . <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items":[
+          {
+              "id":"1000000",
+              "serverUrl":"ldap://ldap.xy-company.com",
+              "serverTimeout":45000,
+              "baseDN":"ou=users,dc=xy-company,dc=com",
+              "authFilter":"userPrincipalName={0}",
+              "managerDN":"cn=server sync,cn=users,dc=xy-company,dc=com",
+              "managerPassword":"password",
+              "syncFilter":"(&(memberOf=ou=users,dc=xy-company,dc=com)(userPrincipalName=*@xy-company.com))",
+              "domain":"XY-COMPANY",
+              "enabled":true,
+              "emailField":"mail",
+              "userPrincipalNameField":"userPrincipalName",
+              "statusField":"userAccountControl",
+              "statusDisabledValue":"2",
+              "accountNameField":"sAMAccountName",
+              "fullnameField":"name",
+              "modifiedAt":"2016-10-27T00:39:55.604Z",
+              "createdAt":"2016-10-27T00:39:55.604Z"
+          }
+      ],
+      "count":"1",
+      "offset":"0"
+  }
+  ```

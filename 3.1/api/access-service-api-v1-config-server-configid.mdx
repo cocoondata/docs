@@ -1,0 +1,74 @@
+---
+title: "<access-service>/api/v1/config/server/{configId}"
+---
+
+## URL structure <a id="access-service-api-v1-config-server-configid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/server/{configId}
+```
+
+where `{configId}` is the ID of a Covata Administration property.
+
+## Supported methods and overview <a id="access-service-api-v1-config-server-configid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the value of a [Covata Administration property](/3.1/admin/configuring-administration-properties), based on this property's ID.
+- `PUT` - used to modify the value of a Covata Administration property.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-config-server-configid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves the value of a Covata Administration property, using this property's ID. A Covata Administration property's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/config/server](/3.1/api/access-service-api-v1-config-server) API endpoint, which retrieves a list of field information for all configurable Covata Administration properties. <br />
+  **Tip:** All information returned in the [response](/3.1/api/access-service-api-v1-config-server-configid#access-service-api-v1-config-server-configid-returns) from a `GET` method call to this API endpoint is also returned in the [response](/3.1/api/access-service-api-v1-config-server#access-service-api-v1-config-server-returns) from the [&lt;access-service&gt;/api/v1/config/server](/3.1/api/access-service-api-v1-config-server) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the Covata Administration property's ID).
+- Modifies the value of a Covata Administration property.
+
+## Supported roles <a id="access-service-api-config-server-configid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-config-server-configid#access-service-api-v1-config-server-configid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-server-configid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-config-server-configid-optional-parameters" />
+
+The following optional parameter can also be sent in the body of the PUT request, as an individual member of a JSON object:
+
+- **propertyValue** - .
+
+  **Example ():**
+
+Although omitting the **propertyValue** parameter above in a request serves no purpose, an empty JSON object must at least be passed in the body of PUT requests to this endpoint for a successful response:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-config-server-configid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **modified** - .
+- **id** - .
+- **propertyName** - .
+- **propertyValue** - .
+- **grouping** - .
+- **propertyDescription** - .
+- **configGroup** - .
+
+  **Example (response from ...):**

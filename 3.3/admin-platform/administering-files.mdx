@@ -1,0 +1,100 @@
+---
+title: "Administering files"
+---
+
+The **Files** page allows Organization administrators to [search](/3.3/admin-platform/administering-files#finding-files) all files (also known as file objects or Secure Objects <sup>&#42;</sup> ) within their organization, which have been encrypted using Covata technologies. Using this page, the following activities can be performed on any of these files:
+
+- [View](/3.3/admin-platform/administering-files#viewing-activities-on-files) all recorded activities conducted on it.
+- [Disable](/3.3/admin-platform/administering-files#disabling-or-re-enabling-a-file) it - disabling a file prevents access to any aspect of it (including access by its owner) from:
+
+  - A Covata Safe Share application, or
+  - Another client application that uses the Covata Platform's API.
+
+<sup>&#42;</sup> A file object / Secure Object is defined by the following:
+
+- Covata-encrypted data that has been registered on the Covata Platform. <br />
+  **Note:** Covata-encrypted data is data from a file or stream, which has then been encrypted either:
+
+  - Using Covata technologies (i.e. with a Covata Safe Share product or another client application that utilizes the Covata Platform's API for encryption via the Content Service), or
+  - According to Covata's encryption requirements (i.e. a client application with its own encryption implementation). For more information about Covata's encryption requirements, see the [Required POST-request parameters](/3.3/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) section on the `<content-service>/api/v1/objects/{objectId}/contents` page of the [Covata API documentation](/3.3/api/index).
+- The properties associated with this encrypted data. Some of these properties can be determined by the creator/owner of the file.
+
+![Files page](/images/61337caa91ba-files-page.png)
+## Finding files
+
+Of all files that have been created within your organization (on the Covata Platform), it is possible to search for specific files by their Name (e.g. file name), the owner's Email address, First Name or Last Name, or by the file object's ID.
+
+**To locate specific files within your organization on the Covata Platform:**
+
+1. [Sign in](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Files** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **Files** page.
+3. Use either of the following features to find a specific file (or subset of files):
+
+   - *Filter files* - In the **Search By** box (right of the **Files** page), begin typing a series of characters contained in any of the files' **ID**, **Name** or **Owner** [fields](/3.3/admin-platform/administering-files#a-file-objects-fields), which also includes the owner's first and last names. This filters the list of files within your organization on the Covata Platform to those whose ID, Name, or Owner's Email, First Name or Last Name contains the subset of characters entered into the **Search By** box. <br />
+      By default, the **ID**, **Name** or **Owner** (which includes their Email, First Name or Last Name) fields are used for filtering (i.e. **All**), although filtering can be restricted to just one of these fields using the adjacent drop-down.
+   - *Navigate to specific files* - If available, use the page navigation buttons (lower-right of the **Files** page).
+
+<Tip>
+
+- You can also sort files on the **Files** page by clicking the linked name (in the column header) of the field by which you would like to sort your files:
+
+  - Clicking a linked field name multiple times toggles between sorting the files (according to that field) in ascending and descending order.
+  - To revert back to the natural ordering of files in the list, simply refresh the page.
+- The **History** panel on the right can be collapsed and expanded by clicking the respective **&gt;** / **&lt;** icon at the top of this panel.
+
+</Tip>
+
+## A file object's fields
+
+Each file object which has been created on the Covata Platform is associated with its own properties. Some of these properties are exposed through the **Files** page and can be used for [finding a file](/3.3/admin-platform/administering-files#finding-files).
+
+| Field | Description |
+| --- | --- |
+| Id | The unique identifier (ID) generated for each file object created on the Covata Platform. |
+| Name | The name of the file object. If a file object was created through a Covata Safe Share application (by uploading a file to storage through a Safe Share application), then the name of the file object is the file's name itself. |
+| Owner | The email address of the Covata user who currently owns the file object. If the ownership of this file object has not been transferred to a different Covata user (only possible when the original owner's user account is being [removed from the organization](/3.3/admin-platform/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation)), then the owner of the file object (and hence this email address) will also be the same as the Covata user who created this file object. A file object's creator is the Covata user:  <br />•  Who was signed in to a Safe Share application when they uploaded the file object's file to storage managed by the Covata Platform's Content Service. <br />•  Whose account was authenticated to the Covata Platform when the file object was created through a client application (utilizing the Covata Platform's API).  |
+| State | The current state of the file object, which could be any of the following values:  <br />•  **Created** - indicates that the file object was created successfully. This means that the file object's data was successfully encrypted and that the file object itself can be shared with other people, as well as have its access controls, name or location modified. <br />•  **Deleted** - indicates that the file object has been deleted either by its owner or by a collaborator with *Modify* or *Manage* permissions on the file object. As a result, the file object is no longer accessible to any Covata user, regardless of whether the file object is being accessed through a Covata Safe Share application or another client application (utilizing the Covata Platform's API). <br /> **Tip:** For more information about collaborator-related permissions, see [Sharing secure content](/3.3/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) in the [Safe Share for Web User's Guide](/3.3/user/index) and the [&lt;access-service&gt;/api/v1/permissions/sets](/3.3/api/access-service-api-v1-permissions-sets) page in the [Covata API documentation](/3.3/api/index). <br />•  **Incomplete** - indicates one of two things, depending on the type of client application creating the file object:  <br />•  A Covata Safe Share application:  <br />•  Is currently in the process of creating the file object (i.e. encrypting its data) and uploading this data to storage (via the Covata Platform's Content Service). Once these processes are complete, the file object's state changes to **Created**. <br /> *or* <br />•  Was in the process of creating the file object or uploading its data to storage via the Content Service, but one of these processes failed. In such a scenario, the file object's state remains **Incomplete**. <br />Regardless of these scenarios, an **Incomplete** file object created through a Covata Safe Share application cannot: <br />•  Be shared with other people. <br />•  Have its access controls, name or location modified. <br />•  A client application (using the Covata Platform's API) *initialized* a new file object (creating a file object whose state is **Incomplete**) but did not *update* it (i.e. to encrypt its data and 'complete' the file object, which would change the file object's state to **Created** upon success). In such a scenario, the client application could still perform the following actions on an **Incomplete** file object:  <br />•  Retrieve the file object (through its ID) from the Covata Platform, <br />•  Share the file object with other people, and/or <br />•  Modify the file object's access controls, name or location.  |
+| Created | The local date and time of when the file object was created. |
+| Modified | The local date and time when the file object was last modified by its owner. A file object's date/time displayed in this field will be updated whenever the owner of this file object modifies:  <br />•  The collaborators with whom the file object is shared. <br />•  The file object's access controls - changes to when the file object can be accessed, or whether or not the file object's data can be printed/downloaded. <br />•  The file object's properties (including location) - for example, changes to the file object's name or its parent folder/collection.  |
+
+## Viewing activities on files
+
+**To view all activities performed on a file in your organization:**
+
+1. [Sign in](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Files** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **Files** page.
+3. [Find](/3.3/admin-platform/administering-files#finding-files) the file whose activities you wish to view.
+4. *Highlight* the item by clicking on it, which reveals (in the **History** panel on the right) a history of all recorded activities performed on the file in reverse chronological order. The activities recorded include those from:
+
+   - The file's owner,
+   - All collaborators on the file and
+   - All Organization administrators of the organization in which the file was created. (These activities only include disabling and re-enabling files).
+
+<Note>
+
+For more information about the activities recorded on a file from its owner or collaborators, see [Types of activities](/3.3/user/viewing-activities-on-secure-content#types-of-activities-indicated) in the [Safe Share for Web User's Guide](/3.3/user/index).
+
+</Note>
+
+## Disabling or (re-)enabling a file
+
+Disabling a file prevents access to any aspect of it (including access by its owner). Once a file is disabled:
+
+- The file will no longer be visible or accessible to its owner and collaborators (upon them signing in) through any Covata's Safe Share applications.
+- The file can no longer be retrieved through a client application using the Covata Platform's API.
+
+<Note>
+
+Disabling files that have only been initialized through a client application using the Covata Platform's API (resulting in an 'incomplete' file), prevents this file from being 'completed' through such an application. To allow these types of files to be completed, an Organization administrator must first re-enable these files (e.g. through Safe Share Organization Administration).
+
+</Note>
+
+**To disable, enable or re-enable a file in your organization:**
+
+1. [Sign in](/3.3/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration.
+2. Click the **Files** option on the left of the [Safe Share Organization Administration interface](/3.3/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **Files** page.
+3. [Find](/3.3/admin-platform/administering-files#finding-files) the file to be disabled, enabled or re-enabled.
+4. Do one of the following:
+
+   - To *disable the file*, click the file's green **Enabled** button (in the **Enabled** column), until this button changes red and indicates **Disabled**.
+   - To *enable or re-enable the file*, click the file's red **Disabled** button (in the **Enabled** column), until the button changes green and indicates **Enabled**.

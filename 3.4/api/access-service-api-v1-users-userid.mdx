@@ -1,0 +1,84 @@
+---
+title: "<access-service>/api/v1/users/{userId}"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userId}
+```
+
+where `{userId}` is the ID of a Covata user account.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-supported-methods-and-overview" />
+
+- `PUT` - either:
+
+  - enables or disables two-factor authentication (2FA) on a [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator) account (specified by `userId`) <br />
+    *OR*
+  - reconfigures 2FA for a Covata user account specified by `userId`, which is either:
+
+    - a [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#re-configuring-2fa-for-a-platform-administrator) or
+    - a member of any [organization](/3.4/admin-org/administering-users-within-an-organisation#re-configuring-2fa-for-an-organisation-user-account).
+
+## Detailed description <a id="access-service-api-v1-users-userid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Enables or disables 2FA on a Safe Share administrator account (specified by `userId`).
+- Reconfigures 2FA for a Covata user account (specified by `userId`) which is either:
+
+  - a Safe Share administrator (by another Safe Share administrator [access token is submitted in the request to this endpoint](/3.4/api/access-service-api-v1-users-userid#access-service-api-v1-users-userid-supported-roles-and-conditions)), or
+  - a member of an organization (by an Organization administrator whose access token is submitted in the request to this endpoint).
+
+<Note>
+
+For more information about retrieving Covata user account IDs, see [&lt;access-service&gt;/api/v1/users](/3.4/api/access-service-api-v1-users) and [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users](/3.4/api/access-service-api-v1-organisations-orggroupid-users).
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-users-userid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.4/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the same organization that the Covata user (specified by `{userId}` in the request's URL) is also a member of.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-users-userid#access-service-api-v1-users-userid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-users-userid-required-parameters" />
+
+The following parameter must be sent in the **body** of the PUT request, each as individual member of a **JSON object**:
+
+- **mfaEnabled** ( *for Safe Share administrator users only* ) - A boolean value of `true` to enable 2FA on the Covata user account represented by `userId` in the request's URL or `false` to disable 2FA on this account.
+- **generateNewAuthenticatorKey** - A boolean value of `true` to reconfigure 2FA for the Covata user represented by `userId` in the URL. <br />
+  **Example (request to enable 2FA on a Covata user account):**
+
+  ```json
+  {
+      "mfaEnabled": true
+  }
+  ```
+
+   <br />
+  **Example (request to reconfigure 2FA on a user account):**
+
+  ```json
+  {
+      "generateNewAuthenticatorKey": true
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-users-userid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,107 @@
+---
+title: "<access-service>/api/v1/clientapps"
+---
+
+## URL structure <a id="access-service-api-v1-clientapps-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/clientapps
+```
+
+## Supported methods and overview <a id="access-service-api-v1-clientapps-supported-methods-and-overview" />
+
+- `POST` - used to register a new [client application](/3.1/admin/configuring-client-applications) with the Covata Platform.
+- `GET` - use to retrieve a list of field information for all client applications on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-clientapps-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Registers a new client application with the Covata Platform for the purposes of configuring that client application's identity (as well as the applcation's Covata user authentication and authorization) with the Covata Platform via OAuth 2.0.
+- Retrieves a list of field information about the OAuth 2.0 configuration of all client applications currently registered on the Covata Platform.
+
+## Supported roles <a id="access-service-api-clientapps-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-clientapps#access-service-api-v1-clientapps-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-clientapps-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-clientapps-required-parameters-on-POST" />
+
+The following required parameters must be sent in the body of the POST request, as individual members of a JSON object:
+
+- **accessTokenValiditySeconds** - .
+- **appName** - .
+- **authorizedGrantTypes** - password, authorization_code, refresh_token, implicit
+- **clientId** - .
+- **clientSecret** - .
+- **refreshTokenValiditySeconds** - .
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-clientapps-optional-parameters-on-POST" />
+
+The following optional parameter can also be sent in the body of the POST request, as an individual member of the JSON object that includes the [Required parameters on POST](/3.1/api/access-service-api-v1-clientapps#access-service-api-v1-clientapps-required-parameters-on-POST) above:
+
+- **registeredRedirectUris** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-clientapps-required-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 0).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-clientapps-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **clientId** - .
+- **clientSecret** - .
+- **appName** - .
+- **authorizedGrantTypes** - .
+- **registeredRedirectUris** - .
+- **accessTokenValiditySeconds** - .
+- **refreshTokenValiditySeconds** - .
+- **enabled** - .
+
+  **Example (response from ...):**
+
+## Returns from a GET request <a id="access-service-api-v1-clientapps-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **clientId** - .
+  - **clientSecret** - .
+  - **appName** - .
+  - **authorizedGrantTypes** - .
+  - **registeredRedirectUris** - .
+  - **accessTokenValiditySeconds** - .
+  - **refreshTokenValiditySeconds** - .
+  - **enabled** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

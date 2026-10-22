@@ -1,0 +1,54 @@
+---
+title: "Anhang"
+---
+
+## Verwaltung von Safe Share for iOS über MDM-Software <a id="managing-safe-share-for-ios-through-mdm-software" />
+
+Wenn Ihre Organisation ein Unternehmen ist, das die Bereitstellung von Safe Share for iOS über MDM-Software (Mobile Device Management) verwaltet oder dies beabsichtigt, können die in diesem Abschnitt enthaltenen Informationen Systemadministratoren bei der Verwaltung einer solchen Bereitstellung unterstützen.
+
+### Schritt 1 - Installation von Safe Share for iOS über MDM-Software <a id="step-1-install-safe-share-for-ios-via-mdm-software" />
+
+Die Anwendung Safe Share for iOS kann für Mobilgeräte über MDM-Software auf zwei Wegen bereitgestellt/installiert werden:
+
+- Wenn Sie die Enterprise-Version von Safe Share for iOS haben (d. h. eine `.ipa`-Datei), wählen Sie diese von Ihrer MDM-Software aus und laden Sie sie auf diese hoch. Die MDM-Software kann anschließend die `.ipa`-Datei im Push-Verfahren an die jeweiligen Mobilgeräte übertragen.
+- Alternativ wählen Sie innerhalb Ihrer MDM-Software die entsprechende Option für die Installation einer „externen“ oder „App-Store“-Anwendung (die genaue Terminologie kann je nach der von Ihnen verwendeten MDM-Software anders lauten). In diesem Szenario werden Sie wahrscheinlich aufgefordert, die Anwendung Safe Share for iOS zu suchen, die Sie hier finden: <br />
+  **Safe Share By Covata** (iTunes URL: [https://itunes.apple.com/au/app/safe-share/id874127973](https://itunes.apple.com/au/app/safe-share/id874127973))
+
+<Warning>
+
+Vergewissern Sie sich, dass Safe Share for iOS unter der Verwaltung Ihrer MDM-Software auf den jeweiligen Mobilgeräten installiert wird, ehe Sie diesen Vorgang fortsetzen.
+
+</Warning>
+
+### Schritt 2 - Konfiguration von Safe Share for iOS über MDM-Software <a id="step-2-configure-safe-share-for-ios-via-mdm-software" />
+
+Geben Sie in Ihrer MDM-Software die Paket-ID der Anwendung Safe Share for iOS ein. Diese lautet:
+
+- `com.covata.safeshare` (für die Apple App Store-Version von Safe Share for iOS) und
+- `com.covata.safeshare.enterprise` (für die Enterprise-Version der Anwendung).
+
+Konfigurieren Sie eine Apple-plist-Datei (`mdm-configuration.plist`) für Safe Share for iOS:
+
+1. Erstellen Sie die Datei `mdm-configuration.plist` auf eine der folgenden Weisen:
+
+   - Arbeiten Sie mit einer geeigneten Anwendung, um diese Datei für Sie zu erstellen (z. B. XCode); diese Datei muss den Schlüssel `accessServiceUrl` enthalten.
+   - Erstellen Sie Ihre eigene Datei `mdm-configuration.plist`, indem Sie den Code-Ausschnitt unten kopieren und in einen Text-Editor einfügen.
+2. Ändern Sie den Wert des Schlüssels `accessServiceUrl` in die URL Ihres Covata-Plattform-Zugriffsdienstes.
+3. Laden Sie diese geänderte plist-Datei anhand Ihrer MDM-Software hoch.
+
+### Die Datei „mdm-configuration.plist“ <a id="the-mdm-configuration-plist-file" />
+
+```text
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>accessServiceUrl</key>
+    <string>https://covata-platform.xy-firma.de</string>
+</dict>
+</plist>
+```
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

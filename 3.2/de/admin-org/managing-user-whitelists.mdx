@@ -1,0 +1,83 @@
+---
+title: "Verwaltung von Benutzer-Positivlisten"
+---
+
+Ein Organisations-Administrator kann die Benutzer-Positivliste konfigurieren und verwalten. Diese Liste definiert die Personen, denen andere Covata-Benutzer innerhalb der Organisation des Administrators Elemente freigeben können.
+
+Auf der Seite **Benutzer-Positivliste** können E-Mail-Adressen oder Domänen (zu der E-Mail-Adressen gehören) als individuelle *Regeln für Benutzer-Positivlisten* vorgegeben werden.
+
+Entsprechen die E-Mail-Adressen beliebiger Covata-Benutzer *keiner* auf dieser Seite für die Benutzer-Positivliste vorgegebenen Regel, können andere Benutzer innerhalb der Organisation diesen Benutzern keine Elemente freigeben [**](/3.2/de/admin-org/managing-user-whitelists#disabled-whitelist-note). Dies beinhaltet auch alle anderen Personen, die noch nicht über einen auf der Covata-Plattform registrierten Benutzer-Account verfügen und deren E-Mail-Adresse keiner bestehenden Regel für die Benutzer-Positivliste entspricht.
+
+Wenn die Funktion Benutzer-Positivliste aktiviert ist, kann sie daher verwendet werden, um die automatische Erstellung von Covata-Benutzer-Accounts auf Domänen auf der Positivliste zu beschränken, da die Covata-Plattform für Personen, deren E-Mail-Adresse nicht in der Benutzer-Positivliste enthalten ist (d. h. Personen mit der [Ad-hoc-Rolle](/3.2/de/admin-org/administering-users-within-an-organisation#adhoc-role)) keine Benutzer-Accounts anlegt.
+
+<a id="user-whitelist-page" />
+
+![Seite Benutzer-Positivliste](/images/9dc614e8aa56-user-whitelist-page.png)
+<a id="disabled-whitelist-note" />** Die Funktion Benutzer-Positivliste ist aktiviert, sobald dieser Seite eine oder mehrere Regeln für die Benutzer-Positivliste hinzugefügt wurden. Die Funktion Benutzer-Positivliste ist deaktiviert, wenn die Seite **Benutzer-Positivliste** leer ist oder die letzte Regel für die Liste entfernt wird.
+
+## Verwaltung der Benutzer-Positivliste <a id="managing-the-user-whitelist" />
+
+Die Seite **Benutzer-Positivliste** der Safe Share-Organisationsverwaltung ([oben](/3.2/de/admin-org/managing-user-whitelists#user-whitelist-page)) ermöglicht (innerhalb Ihrer Organisation) Folgendes:
+
+- [Hinzufügen neuer Regeln für die Benutzer-Positivliste](/3.2/de/admin-org/managing-user-whitelists#adding-new-user-whitelist-rules)
+- [Bearbeitung](/3.2/de/admin-org/managing-user-whitelists#editing-an-existing-user-whitelist-rules-description) der Beschreibungen bestehender Regeln für die Benutzer-Positivliste
+- [Entfernen](/3.2/de/admin-org/managing-user-whitelists#removing-an-existing-user-whitelist-rule) bestehender Regeln für die Benutzer-Positivliste
+
+## Hinzufügen neuer Regeln für die Benutzer-Positivliste <a id="adding-new-user-whitelist-rules" />
+
+**Hinzufügen neuer Regeln für die Benutzer-Positivliste Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Klicken Sie im Dialogfeld **Domänen/E-Mail-Adressen hinzufügen** auf die Schaltfläche **Regel hinzufügen**:
+
+   1. Geben Sie unter **Regel** eine Domäne oder E-Mail-Adresse an. Geben Sie z. B. `xy-firma.com` ein, um ausschließlich die Domäne `xy-firma.com` auf die Positivliste zu setzen. <br />
+      **Hinweise:**
+
+      - Bei der Angabe einer Domäne kann der Platzhalter „`*`“ verwendet werden, um Variationen der Domäne zu erfassen. Geben Sie z. B. Folgendes an:
+
+        - `*.xy-firma.com` um die Domänen `qa.xy-firma.com`, `abc.xy-firma.com` usw. auf die Positivliste zu setzen (aber nicht `xy-firma.com`)
+        - `*xy-firma.com` um die Domänen `xy-firma.com`, `qa-xy-firma.com`, `abc-xy-firma.com` usw. auf die Positivliste zu setzen
+        - `xy-firma.*` um die Domänen `xy-firma.com`, `xy-firma.net`, `xy-firma.abc` usw. auf die Positivliste zu setzen
+      - Bei der Vorgabe einer E-Mail-Adresse kann der Platzhalter „`*`“ nicht verwendet werden. Enthält eine Regel das Zeichen „`@`“, wird eine explizite E-Mail-Adresse erwartet, damit die Regel gültig ist, z. B. `org.administrator@xyfirma.com`.
+   2. ( *Optional* ) Klicken Sie auf **Beschreibung** (oder drücken Sie die „Tab“-Taste), um eine Beschreibung für die Regel für die Benutzer-Positivliste einzugeben.
+   3. Wiederholen Sie Schritt 4, um weitere Regeln zu definieren. <br />
+      **Hinweis:** Wenn Ihre Organisation viele Benutzer-Accounts beinhaltet, achten Sie darauf, ausreichend viele Regeln hinzuzufügen um zu verhindern, dass nach der Aktivierung dieser Funktion bestimmten Covata-Benutzern versehentlich keine Elemente mehr freigegeben werden können.
+5. Klicken Sie auf die Schaltfläche **Weiter**, um die oben definierte(n) Regel(n) für die Benutzer-Positivliste zu validieren:
+
+   - Bei erfolgreicher Validierung der Regel(n) zeigt das Dialogfeld **Domänen/E-Mail-Adressen hinzufügen** die E-Mail-Adressen der Covata-Benutzer an, die deaktiviert werden, wenn Sie den Vorgang fortsetzen.
+   - Wird bei der Validierung eine Fehlermeldung ausgegeben, klicken Sie auf die Schaltfläche **Zurück** und:
+
+     - klicken Sie entweder auf das Feld der fehlerhaften Regel (unter **Regel**), um ihren Wert zu bearbeiten/korrigieren oder
+     - klicken Sie auf den Link **Löschen** der fehlerhaften Regel, um sie zu entfernen.
+6. Klicken Sie auf die Schaltfläche **Anwenden**, um die Regel(n) für die Benutzer-Positivliste der Seite **Benutzer-Positivliste** hinzuzufügen. <br />
+    Den Covata-Benutzer-Accounts innerhalb Ihrer Organisation, die der/den oben definierten Regel(n) für die Benutzer-Positivliste (einschließlich auf der Seite **Benutzer-Positivliste** bereits bestehender Regeln) nicht entsprechen, können andere Covata-Benutzer keine Elemente mehr freigeben. Dies beinhaltet auch alle anderen Personen, die noch nicht über einen auf der Covata-Plattform registrierten Benutzer-Account verfügen.
+
+## Bearbeitung der Beschreibung einer bestehenden Regel für die Benutzer-Positivliste <a id="editing-an-existing-user-whitelist-rules-description" />
+
+Nur die **Beschreibung** einer bestehenden Regel für die Benutzer-Positivliste kann bearbeitet werden.
+
+**Bearbeitung der Beschreibung einer bestehenden Regel für die Benutzer-Positivliste in Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Suchen Sie die betreffende Regel für die Benutzer-Positivliste bzw. blättern Sie zur gewünschten Regel und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Beschreibung bearbeiten** die **Beschreibung** der Regel wie gewünscht.
+5. Klicken Sie auf den Link **Speichern**, um die Änderungen zu übernehmen (oder klicken Sie auf **Abbrechen**, um sie zu verwerfen).
+
+## Entfernen einer bestehenden Regel für die Benutzer-Positivliste <a id="removing-an-existing-user-whitelist-rule" />
+
+**Entfernen einer bestehenden Regel für die Benutzer-Positivliste aus Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.2/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.2/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Suchen Sie die betreffende Regel für die Benutzer-Positivliste bzw. blättern Sie zur gewünschten Regel und aktivieren Sie das Kontrollkästchen links daneben.
+4. Klicken Sie auf die Schaltfläche **Entfernen**. Eine Meldung wird angezeigt und fordert Sie auf, den Vorgang **Domäne/E-Mail löschen** zu bestätigen. Diese Meldung zeigt die von der Entfernung der entsprechenden Regel für die Benutzer-Positivliste betroffenen Covata-Benutzer-Accounts. Klicken Sie auf **Löschen**, um die Entfernung der Regel zu bestätigen. <br />
+   **Hinweis:** Entfernen der letzten Regel oder aller Regeln für die Benutzer-Positivliste deaktiviert die Funktion Benutzer-Positivliste. Für weitere Informationen siehe den Hinweis [oben](/3.2/de/admin-org/managing-user-whitelists#disabled-whitelist-note).
+
+<Tip>
+
+Um die E-Mail-Adresse oder Domäne einer Regel für die Benutzer-Positivliste zu ändern, entfernen Sie die Regel wie oben beschrieben und [fügen Sie die geänderte E-Mail-Adresse oder Domäne](/3.2/de/admin-org/managing-user-whitelists#adding-new-user-whitelist-rules) der Benutzer-Positivliste als neue Regel hinzu.
+
+</Tip>

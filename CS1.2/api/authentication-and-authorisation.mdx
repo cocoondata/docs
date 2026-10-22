@@ -1,0 +1,248 @@
+---
+title: "Authentication and authorization"
+---
+
+All core features of Cocoon Data technologies are accessed through a *Cocoon Data user* account, which is registered on the Cocoon Data Platform. For more information about Cocoon Data users, refer to the [Administering users within an organisation](/CS1.2/admin-org/administering-users-within-an-organisation) page of the [SafeShare Organisation Administrator's Guide](/CS1.2/admin-org/index).
+
+In almost all cases, accessing resources on the Cocoon Data Platform through its API requires a Cocoon Data user account that has been authenticated and authorized to the Cocoon Data Platform. 'Accessible resources' on the Cocoon Data Platform are resources:
+
+- to which a Cocoon Data user account is permitted to access, and
+- is represented by an *access token* <sup>(1)</sup> .
+
+## Working with OAuth 2.0 on the Cocoon Data Platform <a id="working-with-oauth-2-0-on-the-platform" />
+
+The Cocoon Data API utilizes the [OAuth 2.0 Authorization Framework](http://tools.ietf.org/html/rfc6749) to authenticate and authorize Cocoon Data user accounts securely to the Cocoon Data Platform.
+
+The OAuth 2.0 process (or 'dance') to obtain an *access token* <sup>(1)</sup> using the authorization code *grant type* <sup>(2)</sup> consists of the following steps:
+
+1. Your (client) application initiates a request for an authorization code from the Cocoon Data Platform. <br />
+   **Note:** The authorization code is a short string/code, typically alphanumeric, whose purpose is to ensure that this step (and especially the following 2) are connected.
+2. A Cocoon Data user authenticates themselves to the Cocoon Data Platform (directly) and if this is successful, the Cocoon Data Platform sends back an authorization code to your application.
+3. Your application makes a subsequent request to the Cocoon Data Platform to receive an access token. This 2nd request contains the authorization code *and* your application's client credentials.
+
+The *authorization code* grant type process for obtaining an access token provides the maximum security features offered by OAuth 2.0, since a Cocoon Data user's credentials are not specified directly through your client application and the *client credentials* <sup>(3)</sup> can be kept as secure as possible (on the proviso that your client application is a server-side web application and properly implements TLS).
+
+The Cocoon Data API also provides support for the *implicit* and *password* grant types, which are also part of the OAuth 2.0 Authorization Framework. These additional grant types provide authentication/authorization solutions for a wider range of client application types and are simpler processes than that for the authorization code grant type described above. However, both the implicit and password grant types do not possess all the security features provided by the authorization code grant type process.
+
+<sup>(1)</sup> An *access token* represents a set of accessible resources (available to a Cocoon Data user) on the Cocoon Data Platform. For more information about Cocoon Data Platform *access* and *refresh tokens*, refer to the description of the [Grant types](/CS1.2/admin-platform/configuring-client-applications#grant-types) field on the [Configuring client applications](/CS1.2/admin-platform/configuring-client-applications) page of the SafeShare Administrator's Guide.
+
+<sup>(2)</sup> An OAuth 2.0 *grant type* is a credential representing a Cocoon Data user's *authorization* to access that user's protected resources on the Cocoon Data Platform.
+
+<sup>(3)</sup> A set of *client credentials* is an identity for your client application and consists of both a [client ID](/CS1.2/admin-platform/configuring-client-applications#client-id) and a [client secret](/CS1.2/admin-platform/configuring-client-applications#client-secret). Client credentials are analogous to user credentials, whereby a username/email address and password (for identifying a person) are equivalent to the client ID and client secret, respectively.
+
+<a id="client-application-types-and-best-suited-oauth-2-0-grant-types" /> The following table lists different client application types and the corresponding OAuth grant types best suited for these application types:
+
+| Client application type | Recommended OAuth 2.0 grant types |
+| --- | --- |
+| Server-side web application | Authorization code |
+| Native desktop/laptop or mobile application | Authorization code <sup>&#42;</sup> <br />  or <br />  Password <sup>&#42;</sup> (if the client application was developed by Cocoon Data) |
+| User agent (e.g. client-side application running in a web browser) | Implicit <br />  or <br />  Authorization code (if you would like your application to use refresh tokens to obtain new access tokens) |
+| Administrator/system-run service (e.g. Java scheduled job) | Password |
+
+<sup>&#42;</sup> When deciding on which of these grant types to implement in your client application, the authorization code may provide more security or trust than password, in that a Cocoon Data user's credentials are not specified directly through your client application when the user authenticates to the Cocoon Data Platform. This grant type decision would most likely amount to the level of trust that parties outside your organisation have in your application.
+
+## Registering your application on the Cocoon Data Platform <a id="registering-your-application-on-the-platform" />
+
+Before developing your application, you should consult your SafeShare administrator to begin the process of registering your application on the Cocoon Data Platform.
+
+After agreeing on the grant type(s) that your application will implement, your SafeShare administrator can proceed with your application's registration process.
+
+Once your application is registered, your SafeShare administrator should securely issue you with client credentials (a client ID and client secret) to hard code into your application. These credentials are used to 'authenticate' your application to the Cocoon Data Platform.
+
+Be aware, however, that if your application is a native desktop/laptop, a mobile or a user agent-based application, then client credentials are less secure than they would be for a server-side web application (with properly implemented TLS). Therefore in these circumstances, your SafeShare administrator may allow you to generate your own client credentials.
+
+See [Configuring client applications](/CS1.2/admin-platform/configuring-client-applications) in the SafeShare Administrator's Guide for more information.
+
+## Overview of the OAuth 2.0 process <a id="overview-of-the-oauth-2-0-process" />
+
+The following steps outline the Cocoon Data API OAuth 2.0 process for authenticating and authorizing your application to access a Cocoon Data user's resources on the Cocoon Data Platform:
+
+1. [Initiating authentication and authorization](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) (initiate the process for obtaining an access token and optional refresh token from the Cocoon Data Platform)
+2. [Receiving the access token](/CS1.2/api/authentication-and-authorisation#receiving-the-access-token) (the Cocoon Data Platform responds with the access token)
+
+## Initiating authentication and authorization <a id="initiating-authentication-and-authorisation" />
+
+The authentication and authorization process begins by initiating appropriate requests to the Cocoon Data Platform to obtain an [access token](/CS1.2/admin-platform/configuring-client-applications#grant-types). The nature of these requests differs depending on one of the [three supported OAuth 2.0 grant types](/CS1.2/api/authentication-and-authorisation#client-application-types-and-best-suited-oauth-2-0-grant-types) your application has permission to use:
+
+- [Authorization code](/CS1.2/api/authentication-and-authorisation#using-the-authorization-code-grant-type)
+- [Implicit](/CS1.2/api/authentication-and-authorisation#using-the-implicit-grant-type)
+- [Password](/CS1.2/api/authentication-and-authorisation#using-the-password-grant-type)
+
+Once the authentication and authorization process is successful, an access token is returned to your application. Pass this token in subsequent requests to the Cocoon Data Platform to perform other interactions and activities through the Cocoon Data API.
+
+### Using the authorization code grant type
+
+**Step (1)**
+
+To obtain an access token from the Cocoon Data Platform using the authorization code grant type, make an initial `GET` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize)
+
+with the following URL parameters:
+
+- `response_type` - Use the value `code`
+- `client_id` - The client ID of your application's client credentials, which would have been generated when your application was [registered](/CS1.2/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Cocoon Data Platform.
+- `redirect_uri` - Your application's URL/URI, which will handle the initial response from the Cocoon Data Platform that contains the actual authorization code. This initial response is sent after the user has successfully authenticated.
+
+The purpose of this request is to begin the process of authenticating a user to the Cocoon Data Platform, by presenting the user with the Cocoon Data Sign-in page.
+
+**Example initial request:**
+
+```bash
+curl https://access-service.xy-company.com/api/oauth/authorize?response_type=code&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback \
+    -X GET
+```
+
+**Step (2)**
+
+Once the Cocoon Data user has successfully authenticated (and if required, has accepted the *application approval* step), the Cocoon Data Platform responds by redirecting to your application's URL/URI (i.e. the `redirect_uri` value above) to handle the authorization code, whose value is the `code` URL parameter.
+
+**For example:**
+
+```text
+https://my-application-url/authcallback?code=lEQmsFkB02NGPaB3YtaDnA
+```
+
+<a id="using-the-authorization-code-grant-type-step-3" />**Step (3)**
+
+To complete the authentication and authorization process, your application should make a 2nd request to the Cocoon Data Platform to this API endpoint (using the `POST` method):
+
+- [&lt;access-service&gt;/api/oauth/token](/CS1.2/api/access-service-api-oauth-token)
+
+with the following parameters sent as form URL-encoded (i.e. `application/x-www-form-urlencoded`) data in the request's body:
+
+- `grant_type` - Use the value `authorization_code`
+- `code` - The value of the authorization code returned by the the Cocoon Data Platform (and initially handled by your application through the redirect URI).
+- `redirect_uri` - Your application's URL/URI that handled the initial response from the Cocoon Data Platform that contained the actual authorization code.
+
+This 2nd request requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1) specified in its header, whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
+
+<Tip>
+
+The client ID and client secret values constitute your application's client credentials, which would have been generated when your application was [registered](/CS1.2/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Cocoon Data Platform.
+
+</Tip>
+
+For example, encoding:
+
+- `exampleClientApplication:exampleClientApplicationSecret` <br />
+   with Base64 results in the value:
+- `ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+**Example 2nd request:**
+
+```bash
+curl https://access-service.xy-company.com/api/oauth/token \
+    -H 'Authorization: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==' \
+    -d 'grant_type=authorization_code' \
+    -d 'code=lEQmsFkB02NGPaB3YtaDnA' \
+    -d 'redirect_uri=https://my-application-url/authcallback' \
+    -X POST
+```
+
+<Note>
+
+Submitting a cURL command like the one above with at least one `-d` option results in the following header: <br />
+`Content-Type: application/x-www-form-urlencoded` <br />
+ being automatically included in the request. Be aware that this header is required for the request to succeed.
+
+</Note>
+
+The Cocoon Data Platform responds with an access token. Continue on to [Receiving the access token](/CS1.2/api/authentication-and-authorisation#receiving-the-access-token) [from authorization code grant type requests](/CS1.2/api/authentication-and-authorisation#from-authorization-code-or-password-grant-type-requests) for details.
+
+### Using the implicit grant type
+
+To obtain an access token from the Cocoon Data Platform using the implicit grant type, make a single `GET` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize)
+
+with the following URL parameters:
+
+- `response_type` - Use the value `token`
+- `client_id` - The client ID of your application's client credentials, which would have been generated when your application was [registered](/CS1.2/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Cocoon Data Platform.
+- `redirect_uri` - Your application's URL/URI, which will handle the response from the Cocoon Data Platform that contains the access token itself. This response is sent after the user has successfully authenticated.
+
+The purpose of this request is to begin the process of authenticating a user to the Cocoon Data Platform, by presenting the user with the Cocoon Data Sign-in page, which if successful, results in the direct retrieval of the access token.
+
+**Example request:**
+
+```bash
+curl https://access-service.xy-company.com/api/oauth/authorize?response_type=token&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback \
+    -X GET
+```
+
+Once the Cocoon Data user has successfully authenticated, the Cocoon Data Platform responds with an access token. Continue on to [Receiving the access token](/CS1.2/api/authentication-and-authorisation#receiving-the-access-token) [from implicit grant type requests](/CS1.2/api/authentication-and-authorisation#from-implicit-grant-type-requests) for details.
+
+### Using the password grant type
+
+To obtain an access token from the Cocoon Data Platform using the password grant type, simply make a single `POST` method request to this API endpoint:
+
+- [&lt;access-service&gt;/api/oauth/token](/CS1.2/api/access-service-api-oauth-token)
+
+with the following parameters sent as form URL-encoded (i.e. `application/x-www-form-urlencoded`) data in the request's body:
+
+- `grant_type` - Use the value `password`
+- `username` - The email address of a Cocoon Data user's credentials (acquired through your application).
+- `password` - The password of a Cocoon Data user's credentials (acquired through your application).
+
+Like [above](/CS1.2/api/authentication-and-authorisation#using-the-authorization-code-grant-type), this request requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1) specified in its header, whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
+
+<Tip>
+
+The client ID and client secret values constitute your application's client credentials, which would have been generated when your application was [registered](/CS1.2/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Cocoon Data Platform.
+
+</Tip>
+
+For example, encoding:
+
+- `exampleClientApplication:exampleClientApplicationSecret` <br />
+   with Base64 results in the value:
+- `ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+
+**Example request:**
+
+```bash
+curl https://access-service.xy-company.com/api/oauth/token \
+    -H 'Authorization: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==' \
+    -d 'grant_type=password' \
+    --data-urlencode 'username=alex.originator@xy-company.com' \
+    --data-urlencode 'password=password1' \
+    -X POST
+```
+
+<Note>
+
+Submitting a cURL command like the one above with at least one `-d` option results in the following header: <br />
+`Content-Type: application/x-www-form-urlencoded` <br />
+ being automatically included in the request. Be aware that this header is required for the request to succeed.
+
+</Note>
+
+The Cocoon Data Platform responds with an access token. Continue on to [Receiving the access token](/CS1.2/api/authentication-and-authorisation#receiving-the-access-token) [from password grant type requests](/CS1.2/api/authentication-and-authorisation#from-authorization-code-or-password-grant-type-requests) for details.
+
+## Receiving the access token
+
+### From authorization code or password grant type requests
+
+Once the [authentication and authorization processes](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) for either the [authorization code](/CS1.2/api/authentication-and-authorisation#using-the-authorization-code-grant-type-step-3) or [password](/CS1.2/api/authentication-and-authorisation#using-the-password-grant-type) grant type above is successful (via the final `POST` method request to the [&lt;access-service&gt;/api/oauth/token](/CS1.2/api/access-service-api-oauth-token) API endpoint), the Cocoon Data Platform responds with an access token in the body of the response (as a [JSON](http://json.org/) object) as well as a refresh token (if your registered client application on the Cocoon Data Platform has been configured to issue one).
+
+**Example response:**
+
+```json
+{
+    "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub3JpZ2luYXRvckB4eS1jb21wYW55LmNvbSIsImF1dGhvcml0aWVzIjpbIlBFUk1fRklMRV9ERUxFVEUiLCJQRVJNX0FQUF9BUFBST1ZBTF9SRVZPS0UiLCJQRVJNX1ZJRVciLCJQRVJNX1VTRVJJTkZPX0dFVF9OT1RJRllfUFJFRiIsIlBFUk1fUFJJTlQiLCJQRVJNX0FQSV9WMV9BQ0NFU1MiLCJQRVJNX1NFTEZfUkVWT0tFX1RPS0VOUyIsIlBFUk1fTU9WRSIsIlBFUk1fVVNFUklORk9fR0VUU0VMRiIsIlBFUk1fUkVOQU1FIiwiUEVSTV9BUElfT0FVVEhfQUNDRVNTIiwiUEVSTV9WSUVXX09USEVSIiwiUEVSTV9ERVZJQ0VfQVVUSEVOVElDQVRJT04iLCJQRVJNX0ZJTEVfQUREIiwiUEVSTV9DT05UQUNUU19MSVNUIiwiUEVSTV9GT0xERVJfQUREIiwiUEVSTV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiUEVSTV9GT0xERVJfREVMRVRFIiwiUk9MRV9PUklHSU5BVE9SIiwiUEVSTV9PQVVUSF9UT0tFTl9SRVZPS0UiLCJQRVJNX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJQRVJNX1NIQVJFIiwiUEVSTV9BUElfQUNDT1VOVF9BQ0NFU1MiLCJQRVJNX0RPV05MT0FEIiwiUEVSTV9DT05UQUNUU19VUERBVEUiLCJQRVJNX0xBQkVMX0xJU1QiLCJQRVJNX0FQUF9BUFBST1ZBTF9MSVNUIiwiUEVSTV9PUkdBTklTQVRJT05fR0VUU0VMRiIsIlBFUk1fT0FVVEhfVE9LRU5fTElTVF9CWV9DTElFTlQiLCJQRVJNX0FQSUNMSUVOVF9BREQiLCJQRVJNX0FQSUNMSUVOVF9MSVNUIiwiUEVSTV9ERUxFVEVfT1RIRVIiLCJQRVJNX09BVVRIX1RPS0VOX0xJU1QiLCJQRVJNX0FERFJFU1NCT09LX0xJU1QiLCJQRVJNX0NPUFkiLCJQRVJNX0NPTlRBQ1RTX0NSRUFURSIsIlBFUk1fUkVNT1ZFX1NFTEYiLCJQRVJNX0NPTlRBQ1RTX0RFTEVURSIsIlBFUk1fVVNFUklORk9fVVBEQVRFIl0sImp0aSI6ImYxY2Q4NGVhLWM2ZTgtNDc4OC04NzliLTEzZDM0ZDQ0ZDUyNiIsImNsaWVudF9pZCI6ImV4YW1wbGVDbGllbnRBcHBsaWNhdGlvbiIsInNjb3BlIjpbIlNDT1BFX09BVVRIX1RPS0VOX0xJU1QiLCJTQ09QRV9DT05UQUNUU19MSVNUIiwiU0NPUEVfT0FVVEhfVE9LRU5fUkVWT0tFIiwiU0NPUEVfRklMRV9ERUxFVEUiLCJTQ09QRV9GSUxFX0FERCIsIlNDT1BFX0ZPTERFUl9BREQiLCJTQ09QRV9BUElfVjFfQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0FERCIsIlNDT1BFX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJTQ09QRV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiU0NPUEVfREVWSUNFX0FVVEhFTlRJQ0FUSU9OIiwiU0NPUEVfQ09OVEFDVFNfVVBEQVRFIiwiU0NPUEVfRk9MREVSX0RFTEVURSIsIlNDT1BFX01PVkUiLCJTQ09QRV9PQVVUSF9UT0tFTl9MSVNUX0JZX0NMSUVOVCIsIlNDT1BFX1JFTU9WRV9TRUxGIiwiU0NPUEVfU0VMRl9SRVZPS0VfVE9LRU5TIiwiU0NPUEVfVklFVyIsIlNDT1BFX0NPTlNPTEVfQURNSU5fQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0xJU1QiLCJTQ09QRV9BRERSRVNTQk9PS19MSVNUIiwiU0NPUEVfU0hBUkUiLCJTQ09QRV9VU0VSSU5GT19VUERBVEUiLCJTQ09QRV9BQ0xfQURNSU4iLCJTQ09QRV9DT05UQUNUU19ERUxFVEUiLCJTQ09QRV9BUFBfQVBQUk9WQUxfUkVWT0tFIiwiU0NPUEVfUFJJTlQiLCJTQ09QRV9VU0VSSU5GT19HRVRfTk9USUZZX1BSRUYiLCJTQ09QRV9WSUVXX09USEVSIiwiU0NPUEVfUkVOQU1FIiwiU0NPUEVfQ09OVEFDVFNfQ1JFQVRFIiwiU0NPUEVfREVMRVRFX09USEVSIiwiU0NPUEVfQVBJX09BVVRIX0FDQ0VTUyIsIlNDT1BFX0RPV05MT0FEIiwiU0NPUEVfQVBQX0FQUFJPVkFMX0xJU1QiLCJTQ09QRV9VU0VSSU5GT19HRVRTRUxGIiwiU0NPUEVfQ09QWSJdfQ.XMEGyBnYEfy8dAPnJhchYlSJGreBRYGN1KbSF4DZoM6aegIPuSd-hES-nDH56ErrY-xLoMnrWYNeBKEE-Z1eJ6Y2qTnUexebWe7FMcqlVDRSKKQHw2pvcchRMuET3DibxwMZv-JwYcgb1npOWQL5ESRD38k-4kKoVfLfmStkm3kGuPsOr7db2kj6mQF8eMuvXjplzUMU2o42YdgBxLQ0jPcN-FM9yGxFJhWqZ_u6J45Fjlcc1SNYtgQZbwdd4IhfuBtLXqfeEVnNA7gRuNBwsEgBqx3G-i1xtu7ibt8i382JBO0gNmkxxPEK-E5tys-0EwOEv1i42_EYX7nBKd5i5A",
+    "token_type": "bearer",
+    "refresh_token": "75605643-a194-4bfc-a379-0d0154ab9783",
+    "jti": "f1cd84ea-c6e8-4788-879b-13d34d44d526"
+}
+```
+
+### From implicit grant type requests
+
+Once the [authentication and authorization process](/CS1.2/api/authentication-and-authorisation#initiating-authentication-and-authorisation) for the [implicit grant type](/CS1.2/api/authentication-and-authorisation#using-the-implicit-grant-type) above is successful (via the `GET` method request to the [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) API endpoint), the Cocoon Data Platform responds by redirecting to your application's URL/URI (i.e. the `redirect_uri` value above) with an access token as a URL parameter (amongst other parameters).
+
+**Example response:**
+
+```text
+https://my-application-url/authcallback&access_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub3JpZ2luYXRvckB4eS1jb21wYW55LmNvbSIsImF1dGhvcml0aWVzIjpbIlBFUk1fRklMRV9ERUxFVEUiLCJQRVJNX0FQUF9BUFBST1ZBTF9SRVZPS0UiLCJQRVJNX1ZJRVciLCJQRVJNX1VTRVJJTkZPX0dFVF9OT1RJRllfUFJFRiIsIlBFUk1fUFJJTlQiLCJQRVJNX0FQSV9WMV9BQ0NFU1MiLCJQRVJNX1NFTEZfUkVWT0tFX1RPS0VOUyIsIlBFUk1fTU9WRSIsIlBFUk1fVVNFUklORk9fR0VUU0VMRiIsIlBFUk1fUkVOQU1FIiwiUEVSTV9BUElfT0FVVEhfQUNDRVNTIiwiUEVSTV9WSUVXX09USEVSIiwiUEVSTV9ERVZJQ0VfQVVUSEVOVElDQVRJT04iLCJQRVJNX0ZJTEVfQUREIiwiUEVSTV9DT05UQUNUU19MSVNUIiwiUEVSTV9GT0xERVJfQUREIiwiUEVSTV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiUEVSTV9GT0xERVJfREVMRVRFIiwiUk9MRV9PUklHSU5BVE9SIiwiUEVSTV9PQVVUSF9UT0tFTl9SRVZPS0UiLCJQRVJNX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJQRVJNX1NIQVJFIiwiUEVSTV9BUElfQUNDT1VOVF9BQ0NFU1MiLCJQRVJNX0RPV05MT0FEIiwiUEVSTV9DT05UQUNUU19VUERBVEUiLCJQRVJNX0xBQkVMX0xJU1QiLCJQRVJNX0FQUF9BUFBST1ZBTF9MSVNUIiwiUEVSTV9PUkdBTklTQVRJT05fR0VUU0VMRiIsIlBFUk1fT0FVVEhfVE9LRU5fTElTVF9CWV9DTElFTlQiLCJQRVJNX0FQSUNMSUVOVF9BREQiLCJQRVJNX0FQSUNMSUVOVF9MSVNUIiwiUEVSTV9ERUxFVEVfT1RIRVIiLCJQRVJNX09BVVRIX1RPS0VOX0xJU1QiLCJQRVJNX0FERFJFU1NCT09LX0xJU1QiLCJQRVJNX0NPUFkiLCJQRVJNX0NPTlRBQ1RTX0NSRUFURSIsIlBFUk1fUkVNT1ZFX1NFTEYiLCJQRVJNX0NPTlRBQ1RTX0RFTEVURSIsIlBFUk1fVVNFUklORk9fVVBEQVRFIl0sImp0aSI6ImYxY2Q4NGVhLWM2ZTgtNDc4OC04NzliLTEzZDM0ZDQ0ZDUyNiIsImNsaWVudF9pZCI6ImV4YW1wbGVDbGllbnRBcHBsaWNhdGlvbiIsInNjb3BlIjpbIlNDT1BFX09BVVRIX1RPS0VOX0xJU1QiLCJTQ09QRV9DT05UQUNUU19MSVNUIiwiU0NPUEVfT0FVVEhfVE9LRU5fUkVWT0tFIiwiU0NPUEVfRklMRV9ERUxFVEUiLCJTQ09QRV9GSUxFX0FERCIsIlNDT1BFX0ZPTERFUl9BREQiLCJTQ09QRV9BUElfVjFfQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0FERCIsIlNDT1BFX1NFTkRfSVRFTV9OT1RJRklDQVRJT04iLCJTQ09QRV9VU0VSSU5GT19FRElUX05PVElGWV9QUkVGIiwiU0NPUEVfREVWSUNFX0FVVEhFTlRJQ0FUSU9OIiwiU0NPUEVfQ09OVEFDVFNfVVBEQVRFIiwiU0NPUEVfRk9MREVSX0RFTEVURSIsIlNDT1BFX01PVkUiLCJTQ09QRV9PQVVUSF9UT0tFTl9MSVNUX0JZX0NMSUVOVCIsIlNDT1BFX1JFTU9WRV9TRUxGIiwiU0NPUEVfU0VMRl9SRVZPS0VfVE9LRU5TIiwiU0NPUEVfVklFVyIsIlNDT1BFX0NPTlNPTEVfQURNSU5fQUNDRVNTIiwiU0NPUEVfQVBJQ0xJRU5UX0xJU1QiLCJTQ09QRV9BRERSRVNTQk9PS19MSVNUIiwiU0NPUEVfU0hBUkUiLCJTQ09QRV9VU0VSSU5GT19VUERBVEUiLCJTQ09QRV9BQ0xfQURNSU4iLCJTQ09QRV9DT05UQUNUU19ERUxFVEUiLCJTQ09QRV9BUFBfQVBQUk9WQUxfUkVWT0tFIiwiU0NPUEVfUFJJTlQiLCJTQ09QRV9VU0VSSU5GT19HRVRfTk9USUZZX1BSRUYiLCJTQ09QRV9WSUVXX09USEVSIiwiU0NPUEVfUkVOQU1FIiwiU0NPUEVfQ09OVEFDVFNfQ1JFQVRFIiwiU0NPUEVfREVMRVRFX09USEVSIiwiU0NPUEVfQVBJX09BVVRIX0FDQ0VTUyIsIlNDT1BFX0RPV05MT0FEIiwiU0NPUEVfQVBQX0FQUFJPVkFMX0xJU1QiLCJTQ09QRV9VU0VSSU5GT19HRVRTRUxGIiwiU0NPUEVfQ09QWSJdfQ.XMEGyBnYEfy8dAPnJhchYlSJGreBRYGN1KbSF4DZoM6aegIPuSd-hES-nDH56ErrY-xLoMnrWYNeBKEE-Z1eJ6Y2qTnUexebWe7FMcqlVDRSKKQHw2pvcchRMuET3DibxwMZv-JwYcgb1npOWQL5ESRD38k-4kKoVfLfmStkm3kGuPsOr7db2kj6mQF8eMuvXjplzUMU2o42YdgBxLQ0jPcN-FM9yGxFJhWqZ_u6J45Fjlcc1SNYtgQZbwdd4IhfuBtLXqfeEVnNA7gRuNBwsEgBqx3G-i1xtu7ibt8i382JBO0gNmkxxPEK-E5tys-0EwOEv1i42_EYX7nBKd5i5A&token_type=bearer&scope=&jti=f1cd84ea-c6e8-4788-879b-13d34d44d526
+```

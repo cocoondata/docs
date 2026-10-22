@@ -1,0 +1,146 @@
+---
+title: "Managing secure content"
+---
+
+## Finding secure content
+
+Use Windows Explorer's search features to search for a specific item by its name.
+
+As mentioned earlier, within the `Safe Share` folder:
+
+- All items that you own are located inside the `My Secured Files` subfolder.
+- All [items owned by other people who have shared these items with you](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) as a collaborator are located inside the `Shared With Me` subfolder. Within this folder, items are grouped into subfolders based on the owners who shared these items with you. The names of these subfolders contain the email addresses of their owners and are based on the format: <br />
+  `Shared By <local-part-of-email-address> - <domain-part-of-email-address>`
+
+**To search for items that you have shared with other people:**
+
+1. [Access](/3.0/windows/starting-the-application-and-signing-in#accessing-the-web-application) Safe Share Web.
+2. On the left of the main Safe Share page, click **Sharing** to filter for all items that you have shared with other people. <br />
+    From this page, you can perform any of the following Safe Share web application functions:
+
+   - Further [search the subset of items](/3.0/user/managing-secure-content#finding-secure-content) (already filtered for those you have shared).
+   - Open the ['Share' dialog box](/3.0/user/uploading-storing-and-sharing-content-securely#opening-the-share-dialog-box) on an item to modify the item's [collaborators](/3.0/user/uploading-storing-and-sharing-content-securely#share-dialog-box) and/or their [permissions](/3.0/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set). <br />
+     **Tip:** You can also modify the permissions of existing collaborators on the item or remove existing collaborators from the item (without having to open this **Share** dialog box) via the **Sharing and Permissions** section of the **Details** tab to the right of the currently selected item.
+   - Unshare, rename or remove the item - see the [Managing secure content](/3.0/user/managing-secure-content) page of the [Safe Share User's Guide for the web application](/3.0/user/index) for more information.
+
+## Organizing content with folders <a id="organising-content-with-folders" />
+
+To help organize your files in storage (managed by the Covata Platform), in the `Safe Share` folder, you can create folders within the `My Secured Files` subfolder, which also facilitates the ability to [share multiple items of your securely stored content](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) with a group of people. (You can also create folders within the `Shared With Me` subfolder, assuming you have the appropriate permissions to do so.)
+
+These folders can be created using Windows Explorer's **New &gt; Folder** feature and added to either:
+
+- The `My Secured Files` subfolder for organizing your own content and also sharing it with groups of people.
+- A subfolder within the `Shared By ...` folder (of the `Shared With Me` subfolder), if the subfolder's owner granted you **Manage** permissions as a collaborator on this subfolder.
+
+## Unsharing secure content
+
+'Unsharing' an *item that you own* effectively removes all or specific collaborators from the item and its contents, so that only you as the owner of this item can control who can access it.
+
+Using Safe Share's **Unshare** feature on a folder removes all collaborators from not only this folder, but also all collaborators from every item contained within this folder (which had been set *explicitly* on these items). For more information about *explicit* versus *implicit* sharing, refer to the main **Note** towards the end of the step on [selecting permissions for a collaborator](/3.0/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) (of the [Sharing secure content](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) procedure).
+
+**To unshare your securely stored content:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder (for your/the required organization).
+2. Within the `My Secured Files` subfolder, locate to the file or folder to unshare.
+3. Do one of the following to begin unsharing this item:
+
+   - To remove *all* collaborators from a file or folder (including every item contained within this folder):
+
+     1. Right-click on the item and choose **Safe Share &gt; Unshare** from the pop-up menu.
+     2. Click **OK** on the confirmation message box to complete the change.
+
+     Alternatively,
+
+     1. Right-click on the item and choose **Safe Share &gt; Share** from the pop-up menu.
+     2. In the resulting **Safe Share** dialog box, click the **Unshare** button towards the lower left left.
+     3. Click **OK** on the confirmation message box to complete the change. (Be aware that the item is unshared immediately and there is no need to click the **Save** button on the **Safe Share** dialog box.)
+
+     If the item was a folder, *all* collaborators from *every* item contained within this folder are removed.
+   - To remove *specific* collaborators from a file or folder:
+
+     1. Right-click on the item and choose **Safe Share &gt; Share** from the pop-up menu.
+     2. In the resulting **Safe Share** dialog box, click the **x** button associated with the collaborators to remove them from this item.
+
+        ![Removing a collaborator](/images/13b4f3c5b223-added-collaborator.png)
+     3. Click the **Save** button to complete the change.
+
+     If the item was a folder, only the specific collaborators whose **x** buttons were clicked are removed from this folder. Any collaborators set *explicitly* on any other items contained within this folder remain unaltered.
+
+## Renaming an item
+
+An item can be renamed if:
+
+- you own the item or
+- a Covata user has shared the item with you (as a collaborator) with **Manage** permissions on the item.
+
+**To rename an item:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. [Locate](/3.0/windows/managing-secure-content#finding-secure-content) the item within the `My Secured Files` or `Shared With Me` subfolders to rename. <br />
+   **Note:** If you intend to rename an item within a subfolder of `Shared With Me`, then the item's owner must have granted you the **Manage** [permission set](/3.0/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) (which in turn grants you the individual *rename* permission) on the item. You can determine this by right-clicking the item and choosing **Safe Share &gt; Show permissions** from the resulting pop-up menu:
+
+   ![Identifying a folder's permissions](/images/992b67a76696-right-clicking-an-item-collaborator.png)
+
+   <br />
+    For more information about this process, see the procedure on [determining if you have permissions to upload content to another user's folder](/3.0/windows/uploading-storing-and-sharing-content-securely#determining-folder-permissions).
+3. Use Windows Explorer's file/folder renaming features to rename the item. <br />
+   **Notes:**
+
+   - Unlike the [Safe Share web application](/3.0/user/index), Safe Share for Windows permits changes to file name extensions. Be aware, however that changes to the file name extension of a viewable file may result in the file no longer being able to open in the [read-only content viewer](/3.0/windows/accessing-secure-content#read-only-content-viewer) (including the content viewers of any other Safe Share application).
+   - It may take some minutes for this change to be visible to all collaborators.
+   - If you are renaming an item within the `Shared With Me` folder and you receive the following message '*You do not have permission to rename this item*', then the owner of this item did not grant you **Manage** permissions when they [shared the item (or its parent folder)](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) with you. <br />
+     **Important:** An issue in this version of Safe Share for Windows results in a Windows **Rename** message box appearing with the message '*The file or folder does not exist.*' Ignore this message box and close it by clicking its **OK** button.
+
+## Removing personally owned content
+
+Removing personally owned secure content which [you](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) or a [collaborator](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) had previously stored/uploaded (using any Safe Share application), both:
+
+- Removes this content from storage managed by the Covata Platform and also
+- Prevents other people you have shared this content with from being able to access it.
+
+**To remove personally owned secure content:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. Within the `My Secured Files` subfolder, [locate](/3.0/windows/managing-secure-content#finding-secure-content) the personally owned file or folder (which [you](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) or a [collaborator](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) had previously stored/uploaded) to be removed.
+3. Right-click on the item (i.e. either a file or a folder) and choose **Safe Share &gt; Remove** from the pop-up menu:
+
+   ![Removing your own file](/images/d97316b6796d-right-clicking-an-item-owner.png)
+
+   <br />
+    Safe Share for Windows prompts you to confirm this removal and upon clicking **Yes**, your item and its content is removed from storage. Any people you shared this item's content with will no longer be able to access the item.
+
+## Removing content shared through another user's folder
+
+Removing secure content (you have **Manage** [permissions](/3.0/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) on), which either you or someone else had [previously uploaded to another user's folder](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) or created through any Safe Share application, both:
+
+- Removes this content from storage managed by the Covata Platform and also
+- Prevents other people who were collaborators on this content from being able to access it.
+
+**To remove secure content which you or someone else had uploaded to another user's folder through any Safe Share application:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. Within the relevant `Shared By ...` folder of the `Shared With Me` subfolder, [locate](/3.0/windows/managing-secure-content#finding-secure-content) the file (which you or someone else had [previously uploaded to another user's folder](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder)) or subfolder (created inside that other user's folder) to be removed. <br />
+   **Note:** To determine if you have the **Remove** permission on this item (which is required to remove the item and its content from storage), right-click the item and choose **Show permissions** from the pop-up menu. If you do not have this permission, proceeding with the next step instead will only [remove your access to this item and its content](/3.0/windows/managing-secure-content#removing-your-access-to-secure-content-shared-with-you). For more information about showing permissions on an item, see the procedure on [determining if you have permissions to upload content to another user's folder](/3.0/windows/uploading-storing-and-sharing-content-securely#determining-folder-permissions).
+3. Right-click on the item and choose **Safe Delete** from the pop-up menu. <br />
+    Safe Share for Windows prompts you to confirm this removal and upon clicking **Yes**, the item and its content is removed from storage. Any people who had access to this item's content will no longer have access to it.
+
+## Removing your access to secure content (shared with you)
+
+Removing your access to secure content which someone else had shared with you (through any Safe Share application):
+
+- Removes this content from your list of items only.
+- Is similar to the owner of this content removing you as a collaborator from it (see [Unsharing secure content](/3.0/windows/managing-secure-content#unsharing-secure-content) above for more information).
+
+**Note:** The owner of this content (and anyone else they have shared it with) can still access this content from storage managed by the Covata Platform.
+
+**To remove secure content which you or someone else had uploaded to another user's folder through any Safe Share application:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder.
+2. Within the relevant `Shared By ...` folder of the `Shared With Me` subfolder, [locate](/3.0/windows/managing-secure-content#finding-secure-content) the file or folder (which you or someone else had previously shared with you using Safe Share [for Windows](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) or the [web application](/3.0/user/uploading-storing-and-sharing-content-securely#sharing-secure-content)) from which to remove your access. <br />
+   **Note:** If you have the **Remove** permission on this item, which you can determine by right-clicking the item and choosing **Show permissions** from the pop-up menu, then proceeding with the next step will instead [remove this item and its content from storage](/3.0/windows/managing-secure-content#removing-content-shared-through-another-users-folder). For more information about showing permissions on an item, see the procedure on [determining if you have permissions to upload content to another user's folder](/3.0/windows/uploading-storing-and-sharing-content-securely#determining-folder-permissions).
+3. Right-click on the item and choose **Safe Delete** from the pop-up menu. <br />
+    Safe Share for Windows prompts you to confirm this removal and upon clicking **Yes**, your access to this item is removed, which also removes the item from within the relevant `Shared By ...` folder.
+
+---
+
+#### Please provide your feedback here

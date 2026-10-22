@@ -1,0 +1,58 @@
+---
+title: "<content-service>/api/v1/users"
+---
+
+## URL structure <a id="content-service-api-v1-users-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/users
+```
+
+## Supported methods and overview <a id="content-service-api-v1-users-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about the utilization of storage for all users who have ever uploaded content to storage (managed by the Covata Platform's Content Service).
+
+## Detailed description <a id="content-service-api-v1-users-detailed-description" />
+
+This API endpoint retrieve information about the utilization of storage for all users who have ever uploaded content to storage (managed by the Covata Platform's Content Service).
+
+The storage data values in the [response](/2.16/api/content-service-api-v1-users#content-service-api-v1-users-returns) are in bytes, which are separated into Secure Object data and *read-only view* data values.
+
+## Supported roles <a id="content-service-api-v1-users-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/content-service-api-v1-users#content-service-api-v1-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="content-service-api-v1-users-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - .
+- **offset** - .
+- **orderBy** - .
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns <a id="content-service-api-v1-users-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **userId** - .
+  - **total** - .
+  - **viewTotal** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

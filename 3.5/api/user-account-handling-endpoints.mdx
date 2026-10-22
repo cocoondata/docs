@@ -1,0 +1,32 @@
+---
+title: "User account handling endpoints"
+---
+
+The endpoints in this section handle user accounts registered on the Covata Platform.
+
+### Personal user account handling endpoints
+
+- [&lt;access-service&gt;/api/v1/users/me](/3.5/api/access-service-api-v1-users-me)
+- [&lt;access-service&gt;/api/v1/users/me/expire](/3.5/api/access-service-api-v1-users-me-expire)
+- [&lt;access-service&gt;/api/v1/users/me/applications/approvals](/3.5/api/access-service-api-v1-users-me-applications-approvals)
+- [&lt;access-service&gt;/api/v1/users/me/applications/approvals/\{approvalId\}](/3.5/api/access-service-api-v1-users-me-applications-approvals-approvalid)
+- [&lt;access-service&gt;/api/v1/users/me/contacts](/3.5/api/access-service-api-v1-users-me-contacts)
+- [&lt;access-service&gt;/api/v1/users/me/contacts/\{contactId\}](/3.5/api/access-service-api-v1-users-me-contacts-contactid)
+- [&lt;access-service&gt;/api/v1/users/me/notifications/email](/3.5/api/access-service-api-v1-users-me-notifications-email)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/history](/3.5/api/access-service-api-v1-users-userid-history) (Organisation administrators can also call this endpoint on users who are members of their organisation)
+
+### User account handling endpoints for Organisation administrators only
+
+- [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users](/3.5/api/access-service-api-v1-organisations-orggroupid-users)
+- [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users/\{userId\}](/3.5/api/access-service-api-v1-organisations-orggroupid-users-userid)
+- [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users/\{userId\}/itemCount](/3.5/api/access-service-api-v1-organisations-orggroupid-users-userid-itemcount)
+- [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users/import](/3.5/api/access-service-api-v1-organisations-orggroupid-users-import)
+
+### User account handling endpoints for SafeShare administrators only
+
+- [&lt;access-service&gt;/api/v1/users](/3.5/api/access-service-api-v1-users)
+
+### User account handling endpoints for both Organisation administrators and SafeShare administrators
+
+- [&lt;access-service&gt;/api/v1/users/\{userId\}](/3.5/api/access-service-api-v1-users-userid)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/unlock](/3.5/api/access-service-api-v1-users-userid-unlock)

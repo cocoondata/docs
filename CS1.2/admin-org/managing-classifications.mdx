@@ -1,0 +1,47 @@
+---
+title: "Managing classifications"
+---
+
+The **Classifications** page of Organisation Administration ([below](/CS1.2/admin-org/managing-ip-ranges#classifications-page)) allows the following within an organisation:
+
+- The [addition of new classifications](/CS1.2/admin-org/managing-classifications#adding-a-new-classification).
+- Existing classifications to be [removed](/CS1.2/admin-org/managing-classifications#removing-an-existing-classification).
+
+Organisation administrators can define a set of *classifications* from which [Cocoon Data users](/CS1.2/admin-org/administering-users-within-an-organisation) can choose when [sharing](/CS1.2/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) [files](/CS1.2/admin-org/administering-files) with other people using SafeShare applications, including other client applications utilising the Cocoon Data Platform's API.
+
+Classifications help Cocoon Data users ensure that classified files are only shareable with users who have the [clearance](/CS1.2/admin-org/managing-clearances) to access this content. If a classification is not associated with a Cocoon Data user (via this classification's association with any [clearance](/CS1.2/admin-org/managing-clearances) of which this user is a member), then that user cannot be shared any file when this classification is specified.
+
+<a id="classifications-page" />
+
+![Classifications page](/images/ff27df3d5a75-classifications-page.png)
+## Adding a new classification
+
+**To add a new classification to your organisation on the Cocoon Data Platform:**
+
+1. Ensure you are [signed in](/CS1.2/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **Classifications** option on the left of the [Organisation Administration interface](/CS1.2/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Classifications** page.
+3. Click the **Add New** button.
+4. In the **Add new classification** dialog box, specify the:
+
+   - **Name** - The value of this field is the name of the classification shown to Cocoon Data users of SafeShare applications (when sharing an item), including client applications utilising the Cocoon Data Platform's API.
+   - **Description ( *Optional* )** - A longer description to provide more information about the classification, such as the classification's purpose or which group of people it is intended for. The value of this field is only visible to Organisation administrators on this **Classifications** page.
+
+   **Note:** Before proceeding, please ensure that you are satisfied with the values above, since by design and for security reasons, it is not possible to edit any aspect of a classification once it has been added.
+5. Click **Save** and the new classification is added and will appear as a new entry on the **Classifications** page. <br />
+   **Notes:**
+
+   - To associate this classification with one or more Cocoon Data users (as a clearance group), which would allow this classification to restrict file sharing to these users, see [Managing clearances](/CS1.2/admin-org/managing-clearances).
+   - It is recommended that any [newly added classification be associated with at least one clearance group of Cocoon Data users](/CS1.2/admin-org/managing-clearances) as soon as possible, since a classification (which is not yet associated with any such clearance + users) and is then chosen when sharing a file, prevents that file from being shared.
+
+## Removing an existing classification
+
+Removing a classification removes that classification from all files it was applied to (when these files were shared), as well as removes all collaborators from these files.
+
+**To remove an existing classification from your organisation:**
+
+1. Ensure you are [signed in](/CS1.2/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **Classifications** option on the left of the [Organisation Administration interface](/CS1.2/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Classifications** page.
+3. Locate/scroll to the relevant classification and select its check box on the left.
+4. Click the **Remove** button. A **Delete Classification** message box appears, with a warning that the removal of this classification will remove the classification from any files it had been applied to (when the files were shared). <br />
+   **Note:** Before proceeding, be aware that this action removes all collaborators from these files too.
+5. Click **Yes** on this message box to proceed with the classification's removal.

@@ -1,0 +1,39 @@
+---
+title: "Transferring user ownership"
+---
+
+The **Transfer Ownership** page allows [User administrator](/3.1/admin/administering-users#user-administrator-role)s to transfer the ownership of a user's *entire secured content* to that of another user.
+
+When transferring ownership, a user's *entire secured content* consists of the user's entire set of Secure Objects and collections.
+
+<Note>
+
+It is only possible to transfer ownership from a user whose account is [disabled](/3.1/admin/administering-users#disabling-or-re-enabling-users) to another user whose account is [enabled](/3.1/admin/administering-users#disabling-or-re-enabling-users).
+
+</Note>
+
+![Transfer Ownership page](/images/c37cf68373e3-transfer-ownership-page.png)
+## Transferring ownership from one user to another
+
+**To transfer the ownership of Secure Objects and collections from one user to another:**
+
+1. [Sign in](/3.1/admin/accessing-administration#signing-in) to Covata Administration (as a Covata user with the [User administrator](/3.1/admin/administering-users#user-administrator-role) role) and ensure the **Transfer Ownership** page is displayed on the [Covata Administration interface](/3.1/admin/accessing-administration#the-administration-interface).
+2. Locate the [disabled](/3.1/admin/administering-users#disabling-or-re-enabling-users) user account whose entire secured content is to be transferred to another user account. <br />
+   **Tips:**
+
+   - If the list of disabled user accounts spans more than one page, use either of the following features to find a specific user account (or subset of these accounts):
+
+     - *Filter user accounts* - In the **Search by...** box (right of the **Users** page), begin typing a series of characters contained in any of the users' **Email**, **First Name** or **Last Name** [fields](/3.1/admin/administering-users#a-users-fields). This filters the list of users on the Covata Platform to those whose Email, First Name or Last Name contains the subset of characters entered into the **Search by...** box. <br />
+        By default, the **Email**, **First Name** or **Last Name** fields are used for filtering (i.e. **All**), although filtering can be restricted to just one of these fields using the adjacent drop-down.
+     - *Navigate to specific user accounts* - Use the page navigation buttons (lower-right of the **Users** page), which work in conjunction with the adjacent **25/50/75/100 items** (i.e. user accounts) per page dropdown.
+   - You can also sort user accounts on the **Users** page by clicking the linked name (in the column header) of the field by which you would like to sort your users:
+
+     - Clicking a linked field name multiple times toggles between sorting the users (according to that field) in ascending and descending order.
+     - To revert back to the natural ordering of users in the list, simply refresh the page.
+3. Click the **Transfer** link to the right of this user account.
+4. In the **Transfer to...** dialog box, select the [enabled](/3.1/admin/administering-users#disabling-or-re-enabling-users) user account who will become the new owner of the selected disabled user's secured content (above).
+5. Click **Continue** and the enabled user (selected in the previous step) becomes the new owner of this secured content. This results in the entire hierarchy of files (i.e. Secure Objects) and folders (collections) which was owned by the disabled user being transferred to the root location of the enabled user within a folder called 'Transferred from ...'.
+
+---
+
+#### Please provide your feedback here

@@ -1,0 +1,48 @@
+---
+title: "Managing SafeShare for iOS through MDM software"
+---
+
+If your organisation is an enterprise that manages (or intends to manage) the deployment of SafeShare for iOS through Mobile Device Management (MDM) software, then the information in this section can assist system administrators manage such a deployment scenario.
+
+## Step 1 - Install SafeShare for iOS via MDM software <a id="step-1-install-safe-share-for-ios-via-mdm-software" />
+
+There are two methods for deploying/installing the SafeShare for iOS application to mobile devices using MDM software:
+
+- If you have an enterprise build of SafeShare for iOS (i.e. an `.ipa` file), then select it within (and upload it to) your MDM software, which can then push the `.ipa` file out to the required mobile devices.
+- Otherwise, within your MDM software, choose the relevant option to install an 'external' or 'App Store' application (the exact terminology may differ depending on the particular MDM software you use). In such a scenario, you are likely to be asked to search for the SafeShare for iOS application, which can be found here: <br />
+  **SafeShare By Cocoon Data** (iTunes URL: [https://itunes.apple.com/au/app/safe-share/id874127973](https://itunes.apple.com/au/app/safe-share/id874127973))
+
+<Warning>
+
+Ensure that SafeShare for iOS is installed to the required mobile devices under the management of your MDM software before proceeding.
+
+</Warning>
+
+## Step 2 - Configure SafeShare for iOS via MDM software <a id="step-2-configure-safe-share-for-ios-via-mdm-software" />
+
+Within your MDM sofware, enter the SafeShare for iOS application's bundle ID, which is:
+
+- `com.covata.safeshare` (for the Apple App Store build of SafeShare for iOS) and
+- `com.covata.safeshare.enterprise` (for the enterprise build of the application).
+
+Configure an Apple Property List file (`mdm-configuration.plist`) for SafeShare for iOS:
+
+1. Create the `mdm-configuration.plist` file by doing either of the following:
+
+   - Use an appropriate software application to create this file for you (e.g. XCode); this file must contain the key `accessServiceUrl`
+   - Create your own `mdm-configuration.plist` file, by copying the code snippet below and pasting it into a text editor.
+2. Modify the value of the `accessServiceUrl` key to the URL of your Cocoon Data Platform's Access Service.
+3. Upload this modified `.plist` file using your MDM software.
+
+## The 'mdm-configuration.plist' file <a id="the-mdm-configuration-plist-file" />
+
+```text
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>accessServiceUrl</key>
+    <string>https://cocoondata-platform.xy-company.com</string>
+</dict>
+</plist>
+```

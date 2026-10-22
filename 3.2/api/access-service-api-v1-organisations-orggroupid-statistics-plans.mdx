@@ -1,0 +1,55 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/plans"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/plans
+```
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a summary of information about all [plans](/3.2/admin-org/managing-users-storage-quotas-through-plans) on the Covata Platform and [Covata users](/3.2/admin-org/administering-users-within-an-organisation) with the [Originator role](/3.2/admin-org/administering-users-within-an-organisation#originator-role) which have been assigned to each plan.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-detailed-description" />
+
+This API endpoint retrieves a summary of information about the numbers and percentages of Covata users with the [Originator role](/3.2/admin-org/administering-users-within-an-organisation#originator-role) assigned to each plan on the Covata Platform.
+
+All [current plans](/3.2/api/access-service-api-v1-plans) on the Covata Platform are returned in the [response](/3.2/api/access-service-api-v1-organisations-orggroupid-statistics-plans#access-service-api-v1-organisations-orggroupid-statistics-plans-returns) to this API endpoint.
+
+## Supported roles <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.2/admin-org/index)):
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orggroupid-statistics-plans#access-service-api-v1-organisations-orggroupid-statistics-plans-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-plans-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalStorageCapacity** - .
+- **storageCapacityMeasure** - .
+- **totalUsersWithOwnerRole** - .
+- **planBreakdown** - An array containing information about each existing plan on the Covata Platform. Each element of this array contains information about one of these plans and is represented as an object, containing the following members:
+
+  - **id** - .
+  - **name** - .
+  - **userCount** - .
+  - **percentOfTotalUsers** - .
+
+  **Example (response from ...):**

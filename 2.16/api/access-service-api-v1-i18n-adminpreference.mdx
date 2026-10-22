@@ -1,0 +1,59 @@
+---
+title: "<access-service>/api/v1/i18n/adminpreference"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-adminpreference-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/adminpreference
+```
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-adminpreference-supported-methods-and-overview" />
+
+- `PUT` - used to set the specified supported locale as the System administrator's default locale.
+
+## Detailed description <a id="access-service-api-v1-i18n-adminpreference-detailed-description" />
+
+This API endpoint sets the specified supported local as the System administrator's default locale.
+
+The System administrator's default locale serves a number of purposes:
+
+- This locale is used for the Sign-in page, Covata email notifications and the [Covata Administration](/2.16/admin/index) user interface.
+- This is the initial locale used for all newly created Covata users.
+- When a custom locale *without* an existing internationalization (i18n) bundle is [deleted](/2.16/api/access-service-api-v1-i18n-localecode-delete), any Covata users utilizing this locale (which they would have chosen through Safe Share) will automatically be reverted to use this System administrator's default locale.
+
+## Supported roles <a id="access-service-api-v1-i18n-adminpreference-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-i18n-adminpreference#access-service-api-v1-i18n-adminpreference-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-adminpreference-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-i18n-adminpreference-required-parameters" />
+
+The following required parameter must be sent in the body of the PUT request, as an individual member of a JSON object:
+
+- **i18nCode** - .
+
+  **Example:**
+
+  ```json
+  {
+    "i18nCode": "en_us"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-i18n-adminpreference-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,120 @@
+---
+title: "Verwaltung von Benutzer-Positivlisten"
+---
+
+Ein Covata-Plattform-Administrator kann die Benutzer-Positivliste konfigurieren und verwalten. Diese Liste definiert die Personen, die auf ihre Covata-Plattform-Instanz zugreifen können.
+
+Auf der Seite **Benutzer-Positivliste** können E-Mail-Adressen oder Domänen (zu der E-Mail-Adressen gehören) als individuelle *Regeln* für Benutzer-Positivlisten vorgegeben werden.
+
+Entsprechen die E-Mail-Adressen beliebiger Covata-Benutzer *keiner* auf dieser Seite für die Benutzer-Positivliste vorgegebenen Regel (und haben diese Benutzer nicht die [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) inne), werden die Accounts der betreffenden Benutzer automatisch [deaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users).[**](/2.16/de/admin/managing-user-whitelists#disabled-whitelist-description) Diese „nicht auf der Positivliste stehenden“ Covata-Benutzer sind daher an Folgendem gehindert:
+
+- Anmeldung bei der Covata-Plattform oder Nutzung jeglicher Aspekte der Covata-Technologien über ihren Account.
+- Erhalt von freigegebenen Dateien oder Ordnern (d. h. Hinzufügung als Mitwirkende von Elementen) anderer Covata-Benutzer. <br />
+  **Hinweis:** Dies beinhaltet auch alle anderen Personen, die noch nicht über einen Covata-Benutzer-Account verfügen und deren E-Mail-Adresse keiner bestehenden Regel für die Benutzer-Positivliste entspricht.
+
+Sobald ein Covata-Benutzer-Account anhand der Funktion Benutzer-Positivliste deaktiviert wurde, *kann er nur über die Seite **Benutzer** [reaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) werden*. Ausnahmen von dieser Regel sind [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts, die automatisch reaktiviert werden, wenn die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert.
+
+Die Covata-Plattform legt außerdem für Personen, deren E-Mail-Adresse nicht in der Benutzer-Positivliste enthalten ist, keine Benutzer-Accounts mit der [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) an. Die Funktion Benutzer-Positivliste kann daher verwendet werden, um die automatische Erstellung von Covata-Benutzer-Accounts auf Domänen auf der Positivliste zu beschränken.
+
+<a id="user-whitelist-page" />
+
+![Seite Benutzer-Positivliste](/images/7e1640329a43-user-whitelist-page.png)
+<a id="disabled-whitelist-description" />** Wenn die Seite **Benutzer-Positivliste** leer gelassen wird, ist die Funktion Benutzer-Positivliste deaktiviert. Ist die Funktion Benutzer-Positivliste deaktiviert, werden Interaktionen zwischen den Seiten **Benutzer-Positivliste** und **Benutzer** der Covata-Verwaltung voneinander getrennt. Dies bedeutet Folgendes:
+
+- Covata-Benutzer-Accounts werden *nicht* [deaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users), wenn für sie auf der Seite **Benutzer-Positivliste** *keine Regel* definiert ist.
+- Die [Deaktivierung oder Reaktivierung von Covata-Benutzer-Accounts](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) direkt auf der Seite **Benutzer** wirkt sich nicht auf die Seite **Benutzer-Positivliste** aus. Für Einzelheiten siehe den [wichtigen Hinweis](/2.16/de/admin/managing-user-whitelists#enabled-whitelist-important-note) im Abschnitt [Hinzufügen neuer Regeln für die Benutzer-Positivliste](/2.16/de/admin/managing-user-whitelists#adding-new-user-whitelist-rules).
+- Alle [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts, die (bei der Aktivierung der Funktion Benutzer-Positivliste) deaktiviert wurden, weil sie keiner Regel für die Benutzer-Positivliste entsprechen, werden automatisch reaktiviert, wenn die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert.
+
+## Verwaltung der Benutzer-Positivliste <a id="managing-the-user-whitelist" />
+
+Die Seite **Benutzer-Positivliste** der Covata-Verwaltung ([oben](/2.16/de/admin/managing-user-whitelists#user-whitelist-page)) ermöglicht Folgendes:
+
+- [Hinzufügen neuer Regeln für die Benutzer-Positivliste](/2.16/de/admin/managing-user-whitelists#adding-new-user-whitelist-rules)
+- [Bearbeitung](/2.16/de/admin/managing-user-whitelists#editing-an-existing-user-whitelist-rules-description) der Beschreibungen bestehender Regeln für die Benutzer-Positivliste
+- [Löschen](/2.16/de/admin/managing-user-whitelists#deleting-existing-user-whitelist-rules) bestehender Regeln für die Benutzer-Positivliste
+
+### Hinzufügen neuer Regeln für die Benutzer-Positivliste <a id="adding-new-user-whitelist-rules" />
+
+**Hinzufügen neuer Regeln für die Benutzer-Positivliste der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Klicken Sie im Dialogfeld **Domänen/E-Mail-Adressen hinzufügen** auf die Schaltfläche **Regel hinzufügen**:
+
+   1. Geben Sie unter **Regel** eine Domäne oder E-Mail-Adresse an. Geben Sie z. B. „`xyfirma.de`“ ein, um ausschließlich die Domäne „`xyfirma.de`“ auf die Positivliste zu setzen. <br />
+      **Hinweise:**
+
+      - Bei der Angabe einer Domäne kann der Platzhalter „`*`“ verwendet werden, um Variationen der Domäne zu erfassen. Geben Sie z. B. Folgendes an:
+
+        - `*.xyfirma.de`, um die Domänen `qa.xyfirma.de`, `abc.xyfirma.de` usw. auf die Positivliste zu setzen (aber nicht `xyfirma.de`).
+        - `*xyfirma.de`, um die Domänen `qa-xyfirma.de`, `abc-xyfirma.de` usw. (aber wiederum nicht `xyfirma.de`) auf die Positivliste zu setzen.
+        - `xyfirma.*`, um die Domänen `xyfirma.com`, `xyfirma.net`, `xyfirma.abc` usw. auf die Positivliste zu setzen.
+      - Bei der Vorgabe einer E-Mail-Adresse kann der Platzhalter „`*`“ nicht verwendet werden. Enthält eine Regel das Zeichen „`@`“, wird eine explizite E-Mail-Adresse erwartet, damit die Regel gültig ist, z. B. `Plattform.Administrator@xyfirma.de`.
+   2. ( *Optional* ) Klicken Sie auf **Beschreibung** (oder drücken Sie die „Tab“-Taste), um eine Beschreibung für die Regel für die Benutzer-Positivliste einzugeben.
+   3. Wiederholen Sie Schritt 4, um weitere Regeln zu definieren. <br />
+      **Hinweis:** Wenn Ihre Covata-Plattform-Instanz viele Benutzer beinhaltet, achten Sie darauf, genügend Regeln zu definieren (ehe Sie zum nächsten Schritt weitergehen), sodass keine Covata-Benutzer unbeabsichtigt von dieser Funktion deaktiviert werden. Für weitere Informationen siehe den [wichtigen Hinweis unten](/2.16/de/admin/managing-user-whitelists#enabled-whitelist-important-note).
+5. Klicken Sie auf die Schaltfläche **Weiter**, um die oben definierten Regeln für die Benutzer-Positivliste zu validieren:
+
+   - Bei erfolgreicher Validierung der Regel(n) zeigt das Dialogfeld **Domänen/E-Mail-Adressen hinzufügen** die E-Mail-Adressen der Covata-Benutzer an, die deaktiviert werden, wenn Sie den Vorgang fortsetzen.
+   - Wird bei der Validierung eine Fehlermeldung ausgegeben, klicken Sie auf die Schaltfläche **Zurück** und:
+
+     - klicken Sie entweder auf das Feld der fehlerhaften Regel (unter **Regel**), um ihren Wert zu bearbeiten/korrigieren oder
+     - klicken Sie auf den Link **Löschen** der fehlerhaften Regel, um sie zu entfernen.
+6. Klicken Sie auf die Schaltfläche **Anwenden**, um die Regel(n) für die Benutzer-Positivliste der Seite **Benutzer-Positivliste** hinzuzufügen. <br />
+    Alle Covata-Benutzer-Accounts, die der/den oben definierten Regel(n) für die Benutzer-Positivliste (einschließlich auf der Seite **Benutzer-Positivliste** bestehender Regeln) nicht entsprechen, werden deaktiviert.
+
+<a id="enabled-whitelist-important-note" />
+
+<Warning>
+
+Die Funktion Benutzer-Positivliste wird aktiviert, sobald auf der Seite **Benutzer-Positivliste** mindestens eine Regel hinzugefügt bzw. definiert wird. Ist die Funktion Benutzer-Positivliste aktiviert, werden Interaktionen zwischen den Seiten *Benutzer-Positivliste* und **Benutzer** der Covata-Verwaltung miteinander verknüpft. Beachten Sie hierbei jedoch Folgendes:
+
+- Covata-Plattform-Administrator-Accounts können anhand einer Regel für die Benutzer-Positivliste nicht deaktiviert werden. Sie brauchen daher keine Regeln für die Benutzer-Positivliste hinzufügen, um eine Deaktivierung von Covata-Plattform-Administratoren zu verhindern. Covata-Benutzer-Accounts mit der [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) können nur über die Seite **Benutzer** [deaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) werden.
+- Wird ein deaktivierter Covata-Benutzer-Account auf der Seite **Benutzer** (re)aktiviert, aber die betreffende E-Mail-Adresse entspricht keiner bestehenden Regel für die Benutzer-Positivliste, dann wird die E-Mail-Adresse dieses Accounts bei der (Re)Aktivierung des Accounts automatisch als neue Positivlisten-Regel hinzugefügt.
+- Alle [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts, die ursprünglich deaktiviert wurden, weil sie keiner bestehenden Regel für die Benutzer-Positivliste entsprachen (die aber jetzt einer neu hinzugefügten Regel entsprechen), werden automatisch reaktiviert, wenn die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert.
+
+</Warning>
+
+### Bearbeitung der Beschreibung einer bestehenden Regel für die Benutzer-Positivliste <a id="editing-an-existing-user-whitelist-rules-description" />
+
+Nur die **Beschreibung** einer bestehenden Regel für die Benutzer-Positivliste kann bearbeitet werden.
+
+**Bearbeitung der Beschreibung einer bestehenden Regel für die Benutzer-Positivliste der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Suchen Sie die betreffende Regel für die Benutzer-Positivliste bzw. blättern Sie zur gewünschten Regel und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Beschreibung bearbeiten** die **Beschreibung** der Regel wie gewünscht.
+5. Klicken Sie auf den Link **Speichern**, um die Änderungen zu übernehmen, oder klicken Sie auf **Abbrechen**, um sie zu verwerfen.
+
+### Löschen von Regeln für die Benutzer-Positivliste <a id="deleting-existing-user-whitelist-rules" />
+
+**Löschung bestehender Regeln für die Benutzer-Positivliste der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer-Positivliste** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer-Positivliste** aufzurufen.
+3. Für einzelne Regeln für die Benutzer-Positivliste:
+
+   - Suchen Sie die betreffende Regel für die Benutzer-Positivliste bzw. blättern Sie zur gewünschten Regel und klicken Sie auf den Link **Löschen**.
+
+   Für mehrere Regeln für die Benutzer-Positivliste:
+
+   1. Aktivieren Sie die entsprechenden Kontrollkästchen links oder wählen Sie das Kontrollkästchen oben in der Kopfzeile, um alle Kontrollkästchen der aktuell angezeigten Regeln für die Benutzer-Positivliste (d. h. Domänen/E-Mail-Adressen) auszuwählen.
+   2. Klicken Sie auf die Schaltfläche
+      ![Schaltfläche Domäne/E-Mail löschen](/images/c674696e0d9f-delete-users-button.png)
+
+       (Domäne/E-Mail löschen).
+
+   Dies ruft eine Meldung **Domäne/E-Mail löschen** auf, in der die E-Mail-Adressen der Benutzer-Accounts angezeigt sind, die aufgrund der Löschung der Benutzer-Positivlistenregel(n) deaktiviert werden. Klicken Sie in dieser Meldung auf **Löschen**, um den Vorgang fortzusetzen. <br />
+   **Hinweis:** Löschen der letzten Regel oder aller Regeln für die Benutzer-Positivliste deaktiviert die Funktion Benutzer-Positivliste und führt nicht zur Deaktivierung jeglicher Covata-Benutzer-Accounts. Für weitere Informationen siehe die Beschreibung [oben](/2.16/de/admin/managing-user-whitelists#disabled-whitelist-description).
+
+<Tip>
+
+Um die E-Mail-Adresse oder Domäne einer Regel für die Benutzer-Positivliste zu ändern, löschen Sie die Regel wie oben beschrieben und [fügen Sie die geänderte E-Mail-Adresse oder Domäne](/2.16/de/admin/managing-user-whitelists#adding-new-user-whitelist-rules) der Benutzer-Positivliste als neue Regel hinzu.
+
+</Tip>
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

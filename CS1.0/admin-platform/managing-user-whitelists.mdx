@@ -1,0 +1,81 @@
+---
+title: "Managing user whitelists"
+---
+
+The **User whitelist** page of Organisation Administration ([below](/CS1.0/admin-platform/managing-user-whitelists#user-whitelist-page)) allows the following within an organisation:
+
+- The [addition of new user whitelist rules](/CS1.0/admin-platform/managing-user-whitelists#adding-new-user-whitelist-rules).
+- The descriptions of existing user whitelist rules to be [edited](/CS1.0/admin-platform/managing-user-whitelists#editing-an-existing-user-whitelist-rules-description).
+- Existing user whitelist rules to be [removed](/CS1.0/admin-platform/managing-user-whitelists#removing-an-existing-user-whitelist-rule).
+
+The *user whitelist* feature allows Organisation administrators to define people that can be shared items by other Covata users within the organisation based on the users' email addresses or domains.
+
+An email address or a domain (to which an email address belongs) can be specified on this page as an individual user whitelist *rule*.
+
+If the email addresses of any Covata users *do not match/comply with* any user whitelist rule on this page, then these users cannot be shared items by other users within the organisation [**](/CS1.0/admin-platform/managing-user-whitelists#disabled-whitelist-note) . This also includes anyone else who does not yet have a user account registered on the Covata Platform, but whose email address does not match/comply with an existing user whitelist rule.
+
+Therefore, when the user whitelist feature is enabled, it can be used to restrict the automatic creation of Covata user accounts to whitelisted domains only, since the Covata Platform will not create user accounts (i.e. with the [Ad hoc role](/CS1.0/admin-platform/administering-users-within-an-organisation#adhoc-role)) for people whose email addresses have not been whitelisted.
+
+<a id="user-whitelist-page" />
+
+![User whitelist page](/images/4dbe8ade5985-user-whitelist-page.png)
+<a id="disabled-whitelist-note" />** When one or more user whitelist rules have been added to this page, the user whitelist feature is enabled. When the **User whitelist** page is empty or the last user whitelist rule is removed, the user whitelist feature is disabled.
+
+## Adding new user whitelist rules
+
+**To add new user whitelist rules to your organisation on the Covata Platform:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **User whitelist** option on the left of the [Organisation Administration interface](/CS1.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **User whitelist** page.
+3. Click the **Add New** button.
+4. In the **Add Domains/Email Addresses** dialog box, click the **Add Rule** button:
+
+   1. Specify a domain or email address under **Rule**. For example, specify `xy-company.com` to whitelist the domain `xy-company.com` only. <br />
+      **Notes:**
+
+      - When specifying a domain, the '`*`' wildcard character can be used to include variants of a domain. For example, specify:
+
+        - `*.xy-company.com` to whitelist domains `qa.xy-company.com`, `abc.xy-company.com`, etc. (but not `xy-company.com`).
+        - `*xy-company.com` to whitelist domains `xy-company.com`, `qa-xy-company.com`, `abc-xy-company.com`, etc.
+        - `xy-company.*` to whitelist domains `xy-company.com`, `xy-company.net`, `xy-company.abc`, etc.
+      - When specifying an email address, it is not possible to use the wildcard '`*`' character. If the '`@`' character is present in a rule, then an explicit email address is expected for the rule to be valid, for example `org.administrator@xy-company.com`.
+   2. ( *Optional* ) Click under **Description** (or press the 'Tab' key) to specify a description for the user whitelist rule.
+   3. Repeat the start of step 4 to specify more rules. <br />
+      **Note:** If your organisation has many user accounts, be sure to add as many rules as are necessary to prevent this feature denying any unintended Covata users the ability to be shared items as a result of enabling this feature.
+5. Click the **Next** button to validate the user whitelist rule/s specified above:
+
+   - If the rule/s validate/s successfully, the **Add Domains/Email Addresses** dialog box indicates the email addresses of the Covata users that will be disabled by proceeding.
+   - If a validation error message is shown, click the **Go Back** button and either:
+
+     - Click in the erroneous rule's field (under **Rule**) to edit + correct its value.
+     - Click the erroneous rule's **Delete** link to remove the rule.
+6. Click the **Apply** button to add the user whitelist rule(s) to the **User whitelist** page. <br />
+    Within your organisation, the accounts of Covata users whose email addresses do not match/comply with these user whitelist rule/s above (including any existing rules on the **User Whitelist** page) are denied the ability to be shared items by any other Covata users. This also applies to any people who do not yet have a user account registered on the Covata Platform.
+
+## Editing an existing user whitelist rule's description
+
+Only the **Description** of an existing user whitelist rule can be edited.
+
+**To edit the description of an existing user whitelist rule in your organisation:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **User whitelist** option on the left of the [Organisation Administration interface](/CS1.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **User whitelist** page.
+3. Locate/scroll to the relevant user whitelist rule and click its **Edit** link.
+4. In the **Edit Description** dialog box, modify the rule's **Description** as required.
+5. Click the **Save** link to save the modifications (or **Cancel** to discard them).
+
+## Removing an existing user whitelist rule
+
+**To remove an existing user whitelist rule from your organisation:**
+
+1. Ensure you are [signed in](/CS1.0/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **User Whitelist** option on the left of the [Organisation Administration interface](/CS1.0/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **User Whitelist** page.
+3. Locate/scroll to the relevant user whitelist rule and select its check box on the left.
+4. Click the **Remove** button. The **Delete Domain/Email** confirmation message appears, indicating the Covata user accounts that will be affected by the removal of this user whitelist rule; click **Delete** to confirm the removal of this rule. <br />
+   **Note:** Removing either the last user whitelist rule or all user whitelist rules disables the user whitelist feature. See the note [above](/CS1.0/admin-platform/managing-user-whitelists#disabled-whitelist-note) for more information.
+
+<Tip>
+
+To modify the email address or domain of a user whitelist rule, remove it using this procedure above and [add the modified email address or domain](/CS1.0/admin-platform/managing-user-whitelists#adding-new-user-whitelist-rules) as a new whitelist rule.
+
+</Tip>

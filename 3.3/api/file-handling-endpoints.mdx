@@ -1,0 +1,27 @@
+---
+title: "File handling endpoints"
+---
+
+The endpoints in this section are used for handling files (i.e. [Secure Objects](/3.3/api/working-with-files-and-folders-fundamentals#secure-object)) on the Covata Platform, including file versions.
+
+### File object handling (new file objects and active file versions)
+
+- **File object creation (including list retrieval for Organization administrators)**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.3/api/access-service-api-v1-organisations-orggroupid-objects)
+- **File object property retrieval and update, including file object removal**
+
+  - [&lt;access-service&gt;/api/v1/objects](/3.3/api/access-service-api-v1-objects)
+  - [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.3/api/access-service-api-v1-objects-objectid)
+- **Disabling/re-enabling file objects (for Organization administrators only)**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects/\{objectId\}/enable](/3.3/api/access-service-api-v1-organisations-orggroupid-objects-objectid-enable)
+
+### File version handling
+
+- **File version property retrieval**
+
+  - [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/3.3/api/access-service-api-v1-objects-itemid-versions)
+- **File version manipulation and removal**
+
+  - [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/3.3/api/access-service-api-v1-objects-objectid-versions-versionid)

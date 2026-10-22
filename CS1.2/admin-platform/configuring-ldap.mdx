@@ -1,0 +1,113 @@
+---
+title: "Configuring LDAP"
+---
+
+The **LDAP Connections** page of Organisation Administration ([below](/CS1.2/admin-platform/configuring-ldap#ldap-page)) allows:
+
+- The addition of new [LDAP](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) users to the Cocoon Data Platform through [new connections to LDAP servers/user directories](/CS1.2/admin-platform/configuring-ldap#adding-a-new-ldap-connection).
+- Existing LDAP connections to be [edited](/CS1.2/admin-platform/configuring-ldap#editing-an-existing-ldap-connection), as well as [disabled or re-enabled](/CS1.2/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection).
+
+A SafeShare administrator can add Cocoon Data users to their Cocoon Data Platform instance from an LDAP server/user directory by configuring an LDAP connection through SafeShare Administration.
+
+The Cocoon Data Platform permits the configuration of more than one LDAP connection, thereby allowing the addition of users from multiple LDAP servers/user directories.
+
+[LDAP](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) users have the following characteristics which are distinct from [Local and External](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) users (typically managed through [Organisation Administration](/CS1.2/admin-platform/administering-users-within-an-organisation)):
+
+- The authentication of an LDAP user on the Cocoon Data Platform is delegated to (and handled by) its respective LDAP server. Hence, changing or resetting the password of an LDAP user account is performed through the account's LDAP server/user directory.
+- An LDAP user account can be deleted, disabled or re-enabled through its LDAP server/user directory. However, deleting or disabling an LDAP user in this manner will result in either of the following actions:
+
+  - If the Cocoon Data user account owns no files, the user account will be disabled from the Cocoon Data Platform.
+  - If the Cocoon Data user account contains files, the [Organisation administrator](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) will receive the following notification: <br />
+    **The following users still have files in the Cocoon Data Platform but have been disabled/deleted from your Active Directory. Please login to the Cocoon Data Platform and transfer the ownership of their files(s) to another user.**
+- Modifications to the fields of an existing LDAP user on the Cocoon Data Platform are conducted through the account's respective LDAP server/user directory.
+
+  - These modifications are propagated through from the account's LDAP server/user directory to the Cocoon Data Platform when the Cocoon Data Platform next synchronises with the LDAP server. By default, the LDAP synchronisation frequency is five minutes.
+  - Therefore, other than the role-related fields of [Cocoon Data users within an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation), it is not possible to edit any of the other [fields](/CS1.2/admin-platform/administering-users-within-an-organisation#an-organisation-users-fields) of an LDAP user's account through the Cocoon Data Platform.
+  - To ensure that field modifications to LDAP user accounts are propagated through to the Cocoon Data Platform, verify that these accounts' respective LDAP connections have been [enabled](/CS1.2/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection).
+- The [roles](/CS1.2/admin-platform/administering-users-within-an-organisation#an-organisation-users-roles) of an LDAP user within an organisation cannot be modified. However, note that the [SafeShare administrator role] may also be granted to and removed from an LDAP user.
+- If an [Ad hoc](/CS1.2/admin-platform/administering-users-within-an-organisation#adhoc-role) user is created (by a Cocoon Data user sharing a file), they will remain within the system as Ad hoc. However, if the Ad hoc user is subsequently added as an [LDAP](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) user, their account will be upgrade to [Collaborator](/CS1.2/admin-platform/administering-users-within-an-organisation#collaborator-role).
+
+<Note>
+
+If using LDAP, a Cocoon Data user account should only be added to your organisation by updating Active Directory, and not via [Adding an organisation user account](/CS1.2/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account), as LDAP synchronisation will automatically remove these accounts.
+
+</Note>
+
+<a id="ldap-page" />
+
+![LDAP Connections page](/images/21861513c3bb-ldap-connections-page.png)
+## Adding a new LDAP connection
+
+**To add a new connection to an LDAP server/user directory on the Cocoon Data Platform:**
+
+1. Ensure you are [signed in](/CS1.2/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **LDAP** option on the left of the [Organisation Administration interface](/CS1.2/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **LDAP Connections** page.
+3. Click the **Add LDAP Connection** button.
+4. In the **Add LDAP connection** dialog box, complete the LDAP connection fields described in the [table](/CS1.2/admin-platform/configuring-ldap#ldap-connection-fields) (below).
+5. ( *Optional* ) Test the connection by clicking the **Test connection** button. <br />
+   **Note:** A message is displayed indicating whether or not the connection to the LDAP server was successful.
+6. Click **Save** and the LDAP connection will appear as a new entry on the **LDAP Connections** page. <br />
+   **Note:**
+
+   - All accounts in the LDAP user directory will appear as new user accounts in the one configured organisation when the Cocoon Data Platform next synchronises with the LDAP server.
+   - All new LDAP user accounts added to the Cocoon Data Platform from an LDAP server/user directory automatically have the [Originator role](/CS1.2/admin-platform/administering-users-within-an-organisation#originator-role) and are assigned the **default** [plan](/CS1.2/admin-platform/administering-users-within-an-organisation#plan).
+   - If the email address of an existing user account within an organisation on the Cocoon Data Platform matches that of the **Email field** of a user in the LDAP user directory, then a new account will not be added to the Cocoon Data Platform for that account in LDAP (during synchronisation).
+
+<a id="ldap-connection-fields" />The following table describes all LDAP-related fields which are required by the Cocoon Data Platform for a successful connection to an LDAP server/user directory. All of these fields are mandatory.
+
+<Note>
+
+The content of [the following table](/CS1.2/admin-platform/configuring-ldap#ldap-connection-fields) appears on the **Add/Edit LDAP Connection** dialog boxes. It is reiterated below for the convenience of LDAP server/user directory administrators who themselves are not a SafeShare administrator or Organisation administrator, but need to provide the values of these fields to their SafeShare administrator/Organisation administrator.
+
+</Note>
+
+| Field | Description | Maximum Length <br />  (where applicable) |
+| --- | --- | --- |
+| Server URL | The address of the server running [LDAP](http://tools.ietf.org/html/rfc4511). LDAP over [TLS](http://tools.ietf.org/html/rfc5246) is also supported. <br /> **Example:** `ldap://ldap.xy-company.com` |  |
+| Server Timeout | The amount of time (in milliseconds) that the Cocoon Data Platform will wait when attempting to connect to or read data from the LDAP server. |  |
+| Manager DN | The Distinguished Name (DN) of the 'manager' user who has privileges to perform LDAP authentication and synchronisation and browse the **Base DN**. | 512 |
+| Manager password | The password for the 'manager' user who has privileges to perform LDAP authentication and synchronisation and browse the **Base DN**. | 128 |
+| Base DN | The root node in LDAP from which the Cocoon Data Platform finds users and groups. <br /> **Example:** `ou=users,dc=xy-company,dc=com` | 512 |
+| Sync filter | The filter used to specify which Cocoon Data users will be synchronised based on their LDAP path and attributes. <br /> **Examples:**  <br />•  Syncrhonising users from a group: `(memberOf=CN=groupName,OU=users,DC=xy-company,DC=com)` <br />•  All users: `(&(objectclass=user)(objectcategory=person))` <br />•  Users whose email matches a domain: `(&(&(objectclass=user)(objectcategory=person))(mail=*@xy-company.com))`  | 512 |
+| Auth filter | The LDAP field against which the Cocoon Data Platform matches the email address of a Cocoon Data user when they authenticate. <br /> **Example:** `userPrincipalName={0}` | 512 |
+| Domain | The domain for the LDAP user directory. | 64 |
+| Account Name | The LDAP field used to specify an additional/other name for Cocoon Data users. <br /> **Example:** `sAMAccountName` <br />**Note:** This field is required for internal Cocoon Data Platform functionality.  | 64 |
+| Email Field | The LDAP field used to specify the email address for Cocoon Data users in Organisation Administration or [for an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-user-email). <br /> **Example:** `mail` <br />**Note:** Each email address from this field defines a Cocoon Data user's identity and forms part of the Cocoon Data user's sign-in credentials.  | 64 |
+| User Principal Name | The LDAP field used to specify the external user identifier for Cocoon Data users. <br /> **Example:** `userPrincipalName` <br />**Note:** This field is required for internal Cocoon Data Platform functionality.  | 64 |
+| Full name field | The LDAP field used to specify the first name for Cocoon Data users in Organisation Administration or [for an organisation](/CS1.2/admin-platform/administering-users-within-an-organisation#organisation-user-first-name). <br /> **Example:** `name` | 64 |
+| Status field | The LDAP field used by the Cocoon Data Platform to determine whether or not a user is disabled. <br /> **Example:** `userAccountControl` | 64 |
+| Status disabled | The value of the **Status field** (in the LDAP directory) to indicate that a user is disabled. | 64 |
+
+## Editing an existing LDAP connection
+
+**To edit an existing connection to an LDAP server/user directory on the Cocoon Data Platform:**
+
+1. Ensure you are [signed in](/CS1.2/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **LDAP** option on the left of the [Organisation Administration interface](/CS1.2/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **LDAP Connections** page.
+3. Scroll to the relevant LDAP connection and click its **Edit** link.
+4. In the **Edit LDAP connection** dialog box, modify the LDAP connection fields described in the [table](/CS1.2/admin-platform/configuring-ldap#ldap-connection-fields) (above).
+5. ( *Optional* ) Test the connection by clicking the **Test connection** button. <br />
+   **Note:** A message is displayed indicating whether or not the connection to the LDAP server was successful.
+6. Click **Save** and the LDAP connection will be updated. <br />
+   **Notes:**
+
+   - To ensure that any modifications to user accounts in the LDAP user directory are propagated through to the Cocoon Data Platform, verify that this LDAP connection has been [enabled](/CS1.2/admin-platform/configuring-ldap#disabling-or-re-enabling-an-ldap-connection).
+   - Since the **Email** address field of all user accounts on the Cocoon Data Platform is unique (because each account's Email address defines a user's unique identity and is also used for [auditing](/CS1.2/admin-platform/generating-reports) purposes), then:
+
+     1. If an LDAP account's email address is modified through its LDAP server/user directory, a new Cocoon Data user account will be created for that user upon next synchronisation (and their original Cocoon Data user account is no longer used). However, unlike disabling an LDAP account in the LDAP server/user directory, the original Cocoon Data user account (associated with that LDAP account) is not removed and the account's file objects and folders (including their content) remain available for ownership transferral.
+     2. If this LDAP account's email address is modified back to its original address, the user's original Cocoon Data user account will be used again upon next synchronisation (and their former Cocoon Data user account is no longer used).
+
+## Disabling or re-enabling an LDAP connection
+
+Disabling an LDAP connection stops the Cocoon Data Platform from synchronising with that LDAP connection's server/user directory. Once an LDAP connection has been disabled, however, the [LDAP](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) users (which had previously been added through this LDAP connection) can still sign in to the Cocoon Data Platform via delegated authentication. This is on the assumption that these user accounts have not been disabled or deactivated in their LDAP user directory.
+
+Disabling an LDAP connection is useful if synchronisation events between the Cocoon Data Platform and LDAP server impair network traffic. However, disabling an LDAP connection also prevents any updates (which have been made to [LDAP](/CS1.2/admin-platform/administering-users-within-an-organisation#account-type) accounts in their user directory) from being propagated through to the Cocoon Data Platform.
+
+**To disable, enable or re-enable an LDAP connection on the Cocoon Data Platform:**
+
+1. Ensure you are [signed in](/CS1.2/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+2. Click the **LDAP** option on the left of the [Organisation Administration interface](/CS1.2/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) to open the **LDAP Connections** page and scroll to the relevant LDAP connection.
+3. To:
+
+   - *Disable the LDAP connection* - click the (green) **Enabled** button of this LDAP connection (on the left of the page) until it reads **Disabled**.
+   - *Enable or re-enable the LDAP connection* - click the (red) **Disabled** button of this LDAP connection (on the left of the page) until it reads **Enabled**.

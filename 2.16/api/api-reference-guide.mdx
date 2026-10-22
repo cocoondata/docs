@@ -1,0 +1,189 @@
+---
+title: "API Reference Guide"
+---
+
+## About this Guide
+
+This guide describes each one of Covata's API endpoints, grouped according to the Covata Platform Service that exposes them.
+
+### Access Service
+
+**Authentication and authorization**
+
+- [&lt;access-service&gt;/api/oauth/token](/2.16/api/access-service-api-oauth-token)
+- [&lt;access-service&gt;/api/v1/auth/token/revoke](/2.16/api/access-service-api-v1-auth-token-revoke)
+
+**Discovery Service**
+
+- [&lt;access-service&gt;/api/v1](/2.16/api/access-service-api-v1-discovery)
+
+**Secure Object handling**
+
+- [&lt;access-service&gt;/api/v1/keys](/2.16/api/access-service-api-v1-keys)
+- [&lt;access-service&gt;/api/v1/keys/\{keyId\}](/2.16/api/access-service-api-v1-keys-keyid)
+- [&lt;access-service&gt;/api/v1/objects](/2.16/api/access-service-api-v1-objects)
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/2.16/api/access-service-api-v1-objects-objectid)
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/enable](/2.16/api/access-service-api-v1-objects-objectid-enable)
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/2.16/api/access-service-api-v1-objects-objectid-keys)
+- [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys/view](/2.16/api/access-service-api-v1-objects-objectid-keys-view)
+- [&lt;access-service&gt;/api/v1/objects/bulk](/2.16/api/access-service-api-v1-objects-bulk)
+- [&lt;access-service&gt;/api/v1/permissions/sets](/2.16/api/access-service-api-v1-permissions-sets)
+
+**Collection handling**
+
+- [&lt;access-service&gt;/api/v1/collections](/2.16/api/access-service-api-v1-collections)
+- [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/2.16/api/access-service-api-v1-collections-collectionid)
+- [&lt;access-service&gt;/api/v1/collections/\{collectionId\}/collections](/2.16/api/access-service-api-v1-collections-collectionid-collections)
+
+**Item handling (i.e. both Secure Objects and collections)**
+
+- [&lt;access-service&gt;/api/v1/collaborations/items/\{itemId\}](/2.16/api/access-service-api-v1-collaborations-items-itemid)
+- [&lt;access-service&gt;/api/v1/items](/2.16/api/access-service-api-v1-items)
+- [&lt;access-service&gt;/api/v1/items/\{itemId\}](/2.16/api/access-service-api-v1-items-itemid)
+- [&lt;access-service&gt;/api/v1/items/\{itemId\}/ancestry](/2.16/api/access-service-api-v1-items-itemid-ancestry)
+- [&lt;access-service&gt;/api/v1/items/\{itemId\}/history](/2.16/api/access-service-api-v1-items-itemid-history)
+- [&lt;access-service&gt;/api/v1/items/\{itemId\}/unshare](/2.16/api/access-service-api-v1-items-itemid-unshare)
+- [&lt;access-service&gt;/api/v1/items/delta](/2.16/api/access-service-api-v1-items-delta)
+- [&lt;access-service&gt;/api/v1/items/status](/2.16/api/access-service-api-v1-items-status)
+
+**Covata Administration dashboard handling**
+
+- [&lt;access-service&gt;/api/v1/dashboard/clients](/2.16/api/access-service-api-v1-dashboard-clients)
+- [&lt;access-service&gt;/api/v1/dashboard/groups](/2.16/api/access-service-api-v1-dashboard-groups)
+- [&lt;access-service&gt;/api/v1/dashboard/items](/2.16/api/access-service-api-v1-dashboard-items)
+- [&lt;access-service&gt;/api/v1/dashboard/items/activity](/2.16/api/access-service-api-v1-dashboard-items-activity)
+- [&lt;access-service&gt;/api/v1/dashboard/items/extensions](/2.16/api/access-service-api-v1-dashboard-items-extensions)
+- [&lt;access-service&gt;/api/v1/dashboard/items/shared](/2.16/api/access-service-api-v1-dashboard-items-shared)
+- [&lt;access-service&gt;/api/v1/dashboard/ldap](/2.16/api/access-service-api-v1-dashboard-ldap)
+- [&lt;access-service&gt;/api/v1/dashboard/plans](/2.16/api/access-service-api-v1-dashboard-plans)
+- [&lt;access-service&gt;/api/v1/dashboard/plans/usage](/2.16/api/access-service-api-v1-dashboard-plans-usage)
+- [&lt;access-service&gt;/api/v1/dashboard/users](/2.16/api/access-service-api-v1-dashboard-users)
+- [&lt;access-service&gt;/api/v1/dashboard/users/activity](/2.16/api/access-service-api-v1-dashboard-users-activity)
+- [&lt;access-service&gt;/api/v1/dashboard/users/roles](/2.16/api/access-service-api-v1-dashboard-users-roles)
+- [&lt;access-service&gt;/api/v1/dashboard/whitelist](/2.16/api/access-service-api-v1-dashboard-whitelist)
+
+**User handling**
+
+- [&lt;access-service&gt;/api/v1/users](/2.16/api/access-service-api-v1-users)
+- [&lt;access-service&gt;/api/v1/users/\{userid\}](/2.16/api/access-service-api-v1-users-userid)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/enable](/2.16/api/access-service-api-v1-users-userid-enable)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/expire](/2.16/api/access-service-api-v1-users-userid-expire)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/items/count](/2.16/api/access-service-api-v1-users-userid-items-count)
+- [&lt;access-service&gt;/api/v1/users/\{userId\}/unlock](/2.16/api/access-service-api-v1-users-userid-unlock)
+- [&lt;access-service&gt;/api/v1/users/bulk](/2.16/api/access-service-api-v1-users-bulk)
+- [&lt;access-service&gt;/api/v1/users/import](/2.16/api/access-service-api-v1-users-import)
+- [&lt;access-service&gt;/api/v1/users/me](/2.16/api/access-service-api-v1-users-me)
+- [&lt;access-service&gt;/api/v1/users/me/applications/approvals](/2.16/api/access-service-api-v1-users-me-applications-approvals)
+- [&lt;access-service&gt;/api/v1/users/me/applications/approvals/\{approvalId\}](/2.16/api/access-service-api-v1-users-me-applications-approvals-approvalid)
+- [&lt;access-service&gt;/api/v1/users/me/contacts](/2.16/api/access-service-api-v1-users-me-contacts)
+- [&lt;access-service&gt;/api/v1/users/me/contacts/\{contactId\}](/2.16/api/access-service-api-v1-users-me-contacts-contactid)
+- [&lt;access-service&gt;/api/v1/users/me/items/count](/2.16/api/access-service-api-v1-users-me-items-count)
+- [&lt;access-service&gt;/api/v1/users/me/notifications/email](/2.16/api/access-service-api-v1-users-me-notifications-email)
+
+**User whitelist handling**
+
+- [&lt;access-service&gt;/api/v1/userwhitelist](/2.16/api/access-service-api-v1-userwhitelist)
+- [&lt;access-service&gt;/api/v1/userwhitelist/\{userwhitelistId\}](/2.16/api/access-service-api-v1-userwhitelist-userwhitelistid)
+- [&lt;access-service&gt;/api/v1/userwhitelist/bulk](/2.16/api/access-service-api-v1-userwhitelist-bulk)
+- [&lt;access-service&gt;/api/v1/userwhitelist/check](/2.16/api/access-service-api-v1-userwhitelist-check)
+
+**LDAP handling**
+
+- [&lt;access-service&gt;/api/v1/ldap](/2.16/api/access-service-api-v1-ldap)
+- [&lt;access-service&gt;/api/v1/ldap/\{ldapconnectionId\}](/2.16/api/access-service-api-v1-ldap-ldapconnectionid)
+- [&lt;access-service&gt;/api/v1/ldap/\{ldapconnectionId\}/enable](/2.16/api/access-service-api-v1-ldap-ldapconnectionid-enable)
+- [&lt;access-service&gt;/api/v1/ldap/verifyconnection](/2.16/api/access-service-api-v1-ldap-verifyconnection)
+
+**Label handling**
+
+- [&lt;access-service&gt;/api/v1/labels](/2.16/api/access-service-api-v1-labels)
+- [&lt;access-service&gt;/api/v1/labels/\{labelId\}](/2.16/api/access-service-api-v1-labels-labelid)
+- [&lt;access-service&gt;/api/v1/labels/\{labelId\}/priority](/2.16/api/access-service-api-v1-labels-labelid-priority)
+
+**Group handling**
+
+- [&lt;access-service&gt;/api/v1/groups](/2.16/api/access-service-api-v1-groups)
+- [&lt;access-service&gt;/api/v1/groups/\{groupId\}](/2.16/api/access-service-api-v1-groups-groupid)
+- [&lt;access-service&gt;/api/v1/groups/\{groupId\}/labels](/2.16/api/access-service-api-v1-groups-groupid-labels)
+- [&lt;access-service&gt;/api/v1/groups/\{groupId\}/users](/2.16/api/access-service-api-v1-groups-groupid-users)
+
+**Plan handling**
+
+- [&lt;access-service&gt;/api/v1/plans](/2.16/api/access-service-api-v1-plans)
+- [&lt;access-service&gt;/api/v1/plans/\{planId\}](/2.16/api/access-service-api-v1-plans-planid)
+
+**Client Application handling**
+
+- [&lt;access-service&gt;/api/v1/clientapps](/2.16/api/access-service-api-v1-clientapps)
+- [&lt;access-service&gt;/api/v1/clientapps/\{clientInfoId\}](/2.16/api/access-service-api-v1-clientapps-clientinfoid)
+- [&lt;access-service&gt;/api/v1/clientapps/\{clientInfoId\}/enable](/2.16/api/access-service-api-v1-clientapps-clientinfoid-enable)
+
+**Audit/report handling**
+
+- [&lt;access-service&gt;/api/v1/audit](/2.16/api/access-service-api-v1-audit)
+- [&lt;access-service&gt;/api/v1/audit/exportReport](/2.16/api/access-service-api-v1-audit-exportreport)
+
+**Configuration handling**
+
+- [&lt;access-service&gt;/api/v1/config](/2.16/api/access-service-api-v1-config)
+- [&lt;access-service&gt;/api/v1/config/server](/2.16/api/access-service-api-v1-config-server)
+- [&lt;access-service&gt;/api/v1/config/server/\{configId\}](/2.16/api/access-service-api-v1-config-server-configid)
+
+**Theme handling**
+
+- [&lt;access-service&gt;/api/v1/config/theme/adminHelpUrl](/2.16/api/access-service-api-v1-config-theme-adminhelpurl)
+- [&lt;access-service&gt;/api/v1/config/theme/applicationName](/2.16/api/access-service-api-v1-config-theme-applicationname)
+- [&lt;access-service&gt;/api/v1/config/theme/companyName](/2.16/api/access-service-api-v1-config-theme-companyname)
+- [&lt;access-service&gt;/api/v1/config/theme/copyright](/2.16/api/access-service-api-v1-config-theme-copyright)
+- [&lt;access-service&gt;/api/v1/config/theme/emailHeaderDividerColor](/2.16/api/access-service-api-v1-config-theme-emailheaderdividercolor)
+- [&lt;access-service&gt;/api/v1/config/theme/headerPrimaryColor](/2.16/api/access-service-api-v1-config-theme-headerprimarycolor)
+- [&lt;access-service&gt;/api/v1/config/theme/headerTextColor](/2.16/api/access-service-api-v1-config-theme-headertextcolor)
+- [&lt;access-service&gt;/api/v1/config/theme/img/\{imageLocationToOverride\}](/2.16/api/access-service-api-v1-config-theme-img-imagelocationtooverride)
+- [&lt;access-service&gt;/api/v1/config/theme/legalUrl](/2.16/api/access-service-api-v1-config-theme-legalurl)
+- [&lt;access-service&gt;/api/v1/config/theme/supportLink](/2.16/api/access-service-api-v1-config-theme-supportlink)
+- [&lt;access-service&gt;/api/v1/config/theme/versionUrl](/2.16/api/access-service-api-v1-config-theme-versionurl)
+- [&lt;access-service&gt;/api/v1/config/theme/webappHelpUrl](/2.16/api/access-service-api-v1-config-theme-webapphelpurl)
+- [&lt;access-service&gt;/api/v1/config/theme/...](/2.16/api/access-service-api-v1-config-theme-reset)
+
+**Internationalization (I18n)**
+
+- [&lt;access-service&gt;/api/v1/i18n/adminpreference](/2.16/api/access-service-api-v1-i18n-adminpreference)
+- [&lt;access-service&gt;/api/v1/i18n/bundles](/2.16/api/access-service-api-v1-i18n-bundles)
+- [&lt;access-service&gt;/api/v1/i18n/bundles/\{localeCode\}](/2.16/api/access-service-api-v1-i18n-bundles-localecode)
+- [&lt;access-service&gt;/api/v1/i18n/\{localeCode\}/delete](/2.16/api/access-service-api-v1-i18n-localecode-delete)
+- [&lt;access-service&gt;/api/v1/i18n/\{localeCode\}/download](/2.16/api/access-service-api-v1-i18n-localecode-download)
+- [&lt;access-service&gt;/api/v1/i18n/\{localeCode\}/reset](/2.16/api/access-service-api-v1-i18n-localecode-reset)
+- [&lt;access-service&gt;/api/v1/i18n/localedetails](/2.16/api/access-service-api-v1-i18n-localedetails)
+- [&lt;access-service&gt;/api/v1/i18n/reload](/2.16/api/access-service-api-v1-i18n-reload)
+
+### Content Service
+
+**Discovery Service**
+
+- [&lt;content-service&gt;/api/v1](/2.16/api/content-service-api-v1-discovery)
+
+**Secure Object handling**
+
+- [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/2.16/api/content-service-api-v1-objects-objectid-contents)
+- [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/2.16/api/content-service-api-v1-objects-objectid-view)
+
+**Collection handling**
+
+- [&lt;content-service&gt;/api/v1/collections/\{collectionId\}/contents](/2.16/api/content-service-api-v1-collections-collectionid-contents)
+
+**Item handling (i.e. both Secure Objects and collections)**
+
+- [&lt;content-service&gt;/api/v1/items/transfer](/2.16/api/content-service-api-v1-items-transfer)
+
+**User handling**
+
+- [&lt;content-service&gt;/api/v1/users](/2.16/api/content-service-api-v1-users)
+- [&lt;content-service&gt;/api/v1/users/\{userid\}/contents](/2.16/api/content-service-api-v1-users-userid-contents)
+- [&lt;content-service&gt;/api/v1/users/me](/2.16/api/content-service-api-v1-users-me)
+
+**Plan handling**
+
+- [&lt;content-service&gt;/api/v1/plans/usage](/2.16/api/content-service-api-v1-plans-usage)
+- [&lt;content-service&gt;/api/v1/plans/usage/\{userid\}](/2.16/api/content-service-api-v1-plans-usage-userid)
+
+For an overview on how to use these programming points throughout this client library, refer to the [Getting Started Guide](/2.16/api/getting-started-guide).

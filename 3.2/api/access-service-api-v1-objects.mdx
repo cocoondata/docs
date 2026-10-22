@@ -1,0 +1,177 @@
+---
+title: "<access-service>/api/v1/objects"
+---
+
+## URL structure <a id="access-service-api-v1-objects-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects
+```
+
+## Supported methods and overview <a id="access-service-api-v1-objects-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a file object/[Secure Object](/3.2/api/creating-files-and-folders#secure-object) using the SHA-512 value of its encrypted data.
+
+## Detailed description <a id="access-service-api-v1-objects-detailed-description" />
+
+This API endpoint retrieves information about a file object using the [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of its encrypted data (i.e. matching the SHA-512 value recorded in the file object upon its completion).
+
+<Note>
+
+- This API endpoint is only available if the Covata user (whose account's access token is being used to make the request) has access to this file object (as either the owner of or a collaborator on this file).
+- The SHA-512 value specified in the request must match that of SHA-512 value recorded in the file object (upon the file object's completion), because for every time a given piece of data is encrypted (i.e. using AES), the SHA-512 of the encrypted data will be different.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-objects-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.2/admin-org/index)) and conditions:
+
+- [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role) - if this user owns the file object.
+- **Originator**, [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.2/admin-org/administering-users-within-an-organisation#adhoc-role) - if this user is a collaborator on the file object. <br />
+  **Note:** If this user also has the **View Other** [permission](/3.2/api/access-service-api-v1-permissions-sets) on the file object, additional information is returned in the response.
+
+The Covata Platform's resources available to Covata users meeting the criteria above is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-objects#access-service-api-v1-objects-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-objects-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Required parameters <a id="access-service-api-v1-objects-required-parameters" />
+
+The following required parameter must be sent in the URL of the GET request:
+
+- **sha512** - The unique [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of the encrypted data associated with the file object, which the Covata user (whose account's access token was used to call this API endpoint) owns or is a collaborator on. See [Supported roles and conditions](/3.2/api/access-service-api-v1-objects#access-service-api-v1-objects-supported-roles-and-conditions) above for details. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/objects?sha512=0X3iJ2keHhOBzrdJmUCw2QO0r7OOAwtaWDHGKU5cnkHVhdjeWtyvQAjjwAigT2dakgtM/BeZ/qvjuwAUtG9FdA==
+  ```
+
+## Returns <a id="access-service-api-v1-objects-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - The ID value of the file object.
+- **shareStartTime** - The date and time from which collaborators on this file object can begin accessing the file's content. This value is `null` if the **shareStartTime** was never specified when the file object was [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), or [last updated](/3.2/api/access-service-api-v1-objects-objectid).
+- **shareEndTime** - The date and time from which collaborators' access to this file object's content ceases. This value is `null` if the **shareEndTime** was never specified when the file object was initialized or created, or last updated.
+- **shared** - A boolean value that indicates whether or not the file object has been shared with any collaborators.
+- **name** - The name of the file object, which was set when the file object was [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), or [last updated](/3.2/api/access-service-api-v1-objects-objectid). This value is `null` if the **name** was never specified.
+- **sha512** - The unique [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of the encrypted data associated with this *Created*/complete file object. This value should match that of the **sha512** parameter value submitted in the request to this API endpoint.
+- **owner** - A member containing information about the Covata user who is the current owner of the file object. This member contains the following sub-members:
+
+  - **email** - This email address of the Covata user who owns this file object.
+  - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.2/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.2/user/managing-your-account) feature of the Covata Safe Share web application.
+  - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of the Safe Share web application.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Covata user on their own account, or enforced for all members of the organization (by an Organization administrator).
+  - **id** - The ID of this Covata user's account.
+  - **accountType** - A member containing the internationalization (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+    - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
+
+      - **code** - The I18N code for the account type's value. This I18N code could include the substring `local`, `ldap` or `external`.
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+    - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+    <sup>&#42;</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.2/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+    **Note:** For more information about account types, see the description for [Account Type](/3.2/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.2/admin-org/index).
+- **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage. <br />
+  **Notes:**
+
+  - The Content Service automatically sets this value to `true` *after* it sets the value of **canGenerateView** (below) to `true` *and* the Content Service has successfully generated and stored a read-only view of the file object's data.
+  - If your client application is managing its own file data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **canGenerateView** - A boolean value that indicates whether or not the Content Service is capable of generating a read-only view of the file object's data, which is based on the file name extension of the original file that was encrypted (as specified in **name**). For more information, see [File formats supported by the content viewer](/3.2/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the Safe Share web application User's Guide. <br />
+  **Notes:**
+
+  - Assuming the file name extension is one that supports a view being generated, the Content Service then automatically sets this value to `true` *after* the file object's data has been successfully [uploaded and stored](/3.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) *and* the size of this data is less than the maximum configured file size for generating a view (i.e. 20 MB by default).
+  - If your client application is managing its own file object data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **extension** - The file name extension which appears after the final period/full-stop of the file object's **name**.
+- **organisation** - A member containing information about the organization in which this file object was created. This member contains the following sub-members:
+
+  - **name** - The name of the organization.
+  - **description** - The description of the organization, which can be set by Organization administrators.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has been enforced for all members of the organization.
+  - **id** - The ID of the organization.
+- **permissions** - An array listing the individual [permissions](/3.2/api/access-service-api-v1-permissions-sets) that the **owner** above or **collaborator** below (whose access token was used in the request to this endpoint), has inherited from the location represented by **parentId**. <br />
+  **Note:** A bug in this version of the Covata Platform results in this property always returning an empty array in any requests to this endpoint.
+- **mimeType** - The MIME type of the data associated with the file object, which was set when the file object was [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), or [last updated](/3.2/api/access-service-api-v1-objects-objectid). This value is `null` if the **mimeType** was never specified on this file object.
+- **contentSize** - The amount of space (in bytes) of the file object's data (as recorded by the Covata Platform's Access Service).
+- **parentId** - The ID of the [folder/collection](/3.2/api/folder-handling-endpoints) that contains the file object. A value of `0` indicates that this file object is located at the logical root location.
+- **originator** - A member containing information about the Covata user whose account was used to create this file object. This member contains the equivalent **email** and **id** sub-members only of either the **owner** member (above) or a **collaborators** array element (below). If these sub-members originally match those of the file's initial **owner** member and then the file's ownership changes to that of another Covata user, the **owner** member's **email** and **id** values will change while the equivalent sub-member values of this **originator** member will remain unchanged.
+- **state** - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or `deleted` for a deleted file.
+- **modifiedAt** - The date and time when the file object was last modified. When a file object is [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), this date and time should match (or be close to) that of the `createdAt` value below. Otherwise, if the file object has since been [modified](/3.2/api/access-service-api-v1-objects-objectid), this date and time should reflect when the file object was last modified.
+- **createdAt** - The date and time when the file object was first initialized or created, either in its *Incomplete* or *Created* states.
+- **labelName** - The name of the classification applied to the file object. Like **labelId** below, if this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), or [last updated](/3.2/api/access-service-api-v1-objects-objectid). This means that no classification restrictions (i.e. checks on Covata users' group membership and the association of these groups with individual classifications - see [User group endpoints](/3.2/api/user-group-endpoints) for more information) have been placed on collaborators added to this file object.
+- **type** - Indicates `object`, which in turn indicates that information about item returned from this request is about a file object.
+- **labelId** - The ID of the classification applied to the file object. If this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/3.2/api/access-service-api-v1-organisations-orggroupid-objects), or [last updated](/3.2/api/access-service-api-v1-objects-objectid).
+- **collaborators** - An array containing information about each Covata user who is currently a collaborator on this file object. Each element of this array contains information about one of these Covata users and is represented as an object, containing the following members:
+
+  - **shareParentId** - Indicates either a value of `null` or `0`. A value of `null` indicates that the file object's location in its hierarchy of [folders](/3.2/api/folder-handling-endpoints) (e.g. as indicated in a Safe Share application's list of items) are equivalent between this collaborator (i.e. another Covata user account) and the current owner of this file object. A value of `0` indicates that the file object is being shared from the logical root file area/location of this collaborator's account. In Safe Share applications, this occurs when the owner of this file object has shared the file object with this collaborator, but the file object's parent folder has not also been shared with this collaborator.
+  - **shareName** - Reserved for future use. Currently, this returns the value `null`.
+  - **permissions** - An array listing the [permission set](/3.2/api/access-service-api-v1-permissions-sets) applied to this **collaborator** (or inherited by them from the location represented by **parentId**) on this file object, along with the individual permissions that constitue this permission set.
+  - **email** - The collaborator's email address.
+  - **firstName** - The collaborator's first name. This is the first name that appears on the [Users](/3.2/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.2/user/managing-your-account) feature of the Covata Safe Share web application.
+  - **lastName** - The collaborator's last name. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of the Safe Share web application.
+  - **id** - The ID of the collaborator's Covata user account.
+
+  **Note:** Only an empty array is returned from Covata user accounts who are collaborators on this file object *and* do not have the **View Other** [permission](/3.2/api/access-service-api-v1-permissions-sets) on it. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "id": "734242448553197568",
+      "shareStartTime": null,
+      "shareEndTime": null,
+      "shared": true,
+      "name": "Executive Report.pdf",
+      "sha512": "0X3iJ2keHhOBzrdJmUCw2QO0r7OOAwtaWDHGKU5cnkHVhdjeWtyvQAjjwAigT2dakgtM/BeZ/qvjuwAUtG9FdA==",
+      "owner": {
+          "email": "alex.originator@xy-company.com",
+          "firstName": "Alex",
+          "lastName": "Originator",
+          "mfaEnabled": false,
+          "id": "732856217122553856",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      },
+      "hasView": false,
+      "canGenerateView": true,
+      "extension": "pdf",
+      "organisation": {
+          "name": "XY Company",
+          "description": "",
+          "mfaEnabled": false,
+          "id": "732855142835470336"
+      },
+      "permissions": [],
+      "mimeType": null,
+      "contentSize": "3596924",
+      "parentId": "0",
+      "originator": {
+          "email": "alex.originator@xy-company.com",
+          "id": "732856217122553856"
+      },
+      "state": "server.object.states.created",
+      "modifiedAt": "2016-07-19T02:58:55.534Z",
+      "createdAt": "2016-07-19T02:57:21.300Z",
+      "labelName": null,
+      "type": "object",
+      "labelId": null,
+      "collaborators": [{
+          "shareParentId": null,
+          "shareName": null,
+          "permissionSet": null,
+          "email": "chris.collaborator@xy-company.com",
+          "firstName": "Chris",
+          "lastName": "Collaborator",
+          "id": "732856277868658688"
+      }]
+  }
+  ```

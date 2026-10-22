@@ -1,0 +1,162 @@
+---
+title: "<access-service>/api/v1/collections"
+---
+
+## URL structure <a id="access-service-api-v1-collections-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collections
+```
+
+## Supported methods and overview <a id="access-service-api-v1-collections-supported-methods-and-overview" />
+
+- `POST` - used to create a new [collection](/3.0/api/creating-secure-objects-and-collections#collection), which involves specifying the following attributes/metadata on the resulting collection:
+
+  - The collection's location and name.
+  - ( *Optionally* ) Collaborators (as well as their [permission sets](/3.0/api/access-service-api-v1-permissions-sets)).
+
+## Detailed description <a id="access-service-api-v1-collections-detailed-description" />
+
+This API endpoint creates a new collection, which can be used to organize [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) and other collections.
+
+A collection is analogous to an operating system's folders/directories on a file system. Collections are used for organizing Secure Objects and other collections logically in storage. The Covata Platform's Content Service uses collections for this purpose.
+
+The [Covata user](/3.0/admin/administering-users) whose account creates a new collection becomes the *owner*<sup>1</sup> of this collection. When creating the new collection, apart from setting the required name and parent attributes/metadata for the collection (through the **name** and **parentId** [parameters](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-required-parameters) respectively), this Covata user can optionally add collaborators and their [permission sets](/3.0/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** [parameter](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-optional-parameters)) - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following four *permission sets* can be applied:
+
+- **Download** - grants the collaborator the following [permissions](/3.0/api/access-service-api-v1-permissions-sets) on any Secure Objects<sup>2</sup> subsequently contained within this new collection:
+
+  - **Download** the Secure Object's content (by calling the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint).
+  - **Print** and **View** the Secure Object's content from a Safe Share application's [content viewer](/3.0/user/accessing-secure-content#viewing-and-printing-secure-content). The **View** *permission* also allows the Secure Object's *read-only view* to be downloaded (by calling the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/3.0/api/content-service-api-v1-objects-objectid-view) endpoint).
+- **Manage** - grants the collaborator the following *permissions* to perform any of the following actions on any Secure Objects<sup>2</sup> subsequently contained within this new collection and/or the content of these Secure Objects in the owner's storage space:
+
+  - **Download** the Secure Object's content.
+  - Delete the Secure Object and its content (by calling the `DELETE` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.0/api/content-service-api-v1-objects-objectid-contents) endpoint followed by the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint), through the **Remove (File)** *permission*.
+  - **Move** the Secure Object to a different collection *within* a *common collection hierarchy* (by calling the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint). A *common collection hierarchy* is a collection hierarchy that contains either this new collection or the Secure Object (subsequently contained within this new collection), where the owner of this item has also added the same collaborator (with the **Manage** *permission set*) to the collection hierarchy's parent (i.e. the root-level) collection.
+  - **Print** the Secure Object's content from the Safe Share web application's content viewer.
+  - **Rename** the Secure Object (by calling the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.0/api/access-service-api-v1-objects-objectid) endpoint).
+  - **View** the Secure Object's content in a Safe Share application's content viewer, which also allows the Secure Object's *read-only view* to be downloaded.
+
+  The **Manage** *permission set* also grants the collaborator the ability to perform the following within this new collection (as the parent collection), once its has been created:
+
+  - Initialize a new *Incomplete* Secure Object or create a new completed Secure Object (whose state is *Created*) within this parent collection, through the **Upload File** *permission*. This is achieved by calling the `POST` method on the [&lt;access-service&gt;/api/v1/objects](/3.0/api/access-service-api-v1-objects) endpoint with the **parentId** parameter value being that of this parent collection *and* either with or without the Secure Object's SHA512 value.
+  - Create a new child collection within this parent collection, through the **Create Folder** *permission*. This is achieved by calling this endpoint with the **parentId** parameter value being that of this parent collection.
+  - Delete a child collection and its content within this parent collection, through the **Remove (Folder)** *permission*. This is achieved by calling the `DELETE` method on the [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.0/api/access-service-api-v1-collections-collectionid) endpoint with the **parentId** parameter value being that of this parent collection and the child collection specified in the `{collectionId}` part of the request's URL. <br />
+    **Important:** Be aware that a more restrictive *permission set* applied to any items contained within this child collection being deleted are ignored and as such, these items will also be deleted.
+- **Upload** - grants the collaborator the following *permissions* to perform any of the following actions on any Secure Objects<sup>2</sup> subsequently contained within this new collection and/or the content of these Secure Objects in the owner's storage space:
+
+  - **Download** the Secure Object's content.
+  - **Print** and **View** the Secure Object's content from a Safe Share application's content viewer, which also allows the Secure Object's *read-only view* to be downloaded.
+
+  The **Upload** *permission set* (which grants the **Upload File** *permission*) also grants the collaborator the ability to initialize a new *Incomplete* Secure Object or create a new completed Secure Object (whose state is *Created*) within this new collection (as a parent collection), once this collection has been created.
+- **View** - grants the collaborator the **View** *permission* on any Secure Objects<sup>2</sup> subsequently contained within this new collection, which allows these Secure Objects':
+
+  - content to be viewed from a Safe Share application's content viewer, as well as
+  - *read-only views* to be downloaded.
+
+<sup>1</sup> Be aware that the ownership of a collection [can be changed](/3.0/api/content-service-api-v1-items-transfer) to that of another Covata user.
+
+<sup>2</sup> If any of these Secure Objects are subsequently contained within a nested (i.e. child) collection to which a more restrictive *permission set* (listed above) has been applied for a given collaborator, then that collaborator will only possess the relevant *permissions* (granted by this more restrictive *permission set*) on this child collection and any other items contained within it. The exceptions are the **Remove (File)** and **Remove (Folder)** *permissions*, which are propagated down through a collection hierarchy, regardless of whether or not a more restrictive *permission set* has been applied to an item further down the hierarchy.
+
+## Supported roles and conditions <a id="access-service-api-v1-collections-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)), conditions and [permissions](/3.0/api/access-service-api-v1-permissions-sets) (where applicable):
+
+- [Originator](/3.0/admin/administering-users#originator-role) - a Covata user with this role can call this endpoint on a collection they intend to create and own.
+- **Originator**, [Collaborator](/3.0/admin/administering-users#collaborator-role) and [Ad hoc](/3.0/admin/administering-users#adhoc-role) - a Covata user with any of these roles can call this endpoint, specifying the **parentId** [parameter](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-required-parameters) of any collection that this user has the **Create Folder** *permission* on. Be aware however that in such a request, this user cannot specify the **collaborators** [parameter](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-optional-parameters), since the user will not own the resulting child collection created.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-collections-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-collections-required-parameters" />
+
+The following required parameters must be sent in the body of the POST request, as individual members of a JSON object:
+
+- **name** - The name to apply to the collection (i.e. the name of the logical folder/directory in storage).
+- **parentId** - The ID of an existing collection that will contain this new collection. Specifying a value of `0` results in the new collection being created at the logical root location in storage.
+
+  **Example (creating a collection at the root location in storage):**
+
+  ```json
+  {
+    "name": "Scenery",
+    "parentId": "0"
+  }
+  ```
+
+## Optional parameters <a id="access-service-api-v1-collections-optional-parameters" />
+
+The following optional parameters can also be sent in the body of the POST request, each as individual members of the JSON object that includes the [Required parameters](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-required-parameters) above:
+
+- **collaborators** - A parameter containing the following optional sub-element parameters, relating to the collaborators being applied to this collection:
+
+  - **list** - An array of elements about each collaborator, where each element of this array contains the following optional sub-elements:
+
+    - **email** - The email address of the person to add as a collaborator to the collection. (Although this sub-element is optional, omitting it serves no purpose.)
+    - **permissionSet** - The [permission set](/3.0/api/access-service-api-v1-permissions-sets) to apply to this collaborator. This is done by specifying the ID of the permission set as a sub-element parameter of this parameter:
+
+      - **id** - The ID of the permission set to apply to this collaborator. This ID can be obtained by calling the [&lt;access-service&gt;/api/v1/permissions/sets](/3.0/api/access-service-api-v1-permissions-sets) API endpoint.
+
+      **Note:** If this sub-element is omitted, then the **View** permission set is automatically applied to this collaborator.
+  - **note** - A custom message to send as part of an email notification to collaborators (in the **list** above) once the request is sent.
+
+  **Tip:** It is worthwhile your client application storing these set of collaborators and their respective permission sets (e.g. in an object) because [any modifications to one or more collaborators on an existing collection](/3.0/api/access-service-api-v1-collections-collectionid) requires all collaborators and their permission sets to be [specified in the collection modification request](/3.0/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters).
+
+  **Example (creating a collection within an existing collection, while adding new collaborators each with different sets of permissions to this new collection):**
+
+  ```json
+  {
+    "name": "Large Files",
+    "parentId": "876543210987654321"
+    "collaborators": {
+      "list": [
+        {
+          "email": "chris.collaborator@xy-company.com",
+          "permissionSet": {
+            "id": 5
+          }
+        },
+        {
+          "email": "olly.originator@xy-company.com",
+          "permissionSet": {
+            "id": 3
+          }
+        },
+        {
+          "email": "adhoc.user@another-xy-company.com"
+        }
+      ],
+      "note": "I'm adding you as a collaborator to this folder."
+    }
+  }
+  ```
+
+   **Note:** The permission set with an ID of 5 is **Upload** and with an ID of 3 is **Manage**. See [&lt;access-service&gt;/api/v1/permissions/sets](/3.0/api/access-service-api-v1-permissions-sets) for more information about permission sets.
+
+## Returns <a id="access-service-api-v1-collections-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - The ID value of the created collection.
+- **name** - The name of the collection, which was set when the collection was [created](/3.0/api/access-service-api-v1-collections#access-service-api-v1-collections-required-parameters).
+- **createdAt** - The date and time when the collection was created.
+- **modifiedAt** - In responses from POST requests to this API endpoint, this date and time should be the same as (or close to) that of `createdAt` above. Otherwise, if the collection has been modified (see [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.0/api/access-service-api-v1-collections-collectionid) for more information), this date and time should reflect when this collection was last modified.
+- **shared** - A boolean value that indicates whether or not the collection has been shared with any collaborators.
+- **parentId** - The ID of the collection that contains the Secure object. A value of `0` indicates that this collection is located at the default logical root storage location.
+
+  **Example (response from creating a collection within an existing collection):**
+
+  ```json
+  {
+    "id": "876543210191817161",
+    "name": "Large Files",
+    "createdAt": "2014-10-15T01:19:08.294Z",
+    "modifiedAt": "2014-10-15T01:19:08.294Z",
+    "shared": true,
+    "parentId": "876543210987654321"
+  }
+  ```

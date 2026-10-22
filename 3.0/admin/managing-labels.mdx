@@ -1,0 +1,46 @@
+---
+title: "Managing labels"
+---
+
+The **Labels** page allows Covata Platform administrators to define a set of labels from which [Covata users](/3.0/admin/administering-users) can choose when sharing files with other people using Safe Share applications, including other client applications utilizing the Covata Platform's API.
+
+Labels allow Covata users to restrict the ability to share files to a specific [group of Covata users](/3.0/admin/managing-groups). If a label is not associated with a Covata user (by virtue of the label being associated with any [group](/3.0/admin/managing-groups) to which that user belongs), then the user cannot be shared any file when this label is set.**
+
+![Labels page](/images/350bb7cef5ca-labels-page.png)
+** 'Files' in this context can also refer to Secure Objects.
+
+## Adding a new label
+
+**To add a new label to the Covata Platform:**
+
+1. [Sign in](/3.0/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Labels** option on the left of the [Covata Administration interface](/3.0/admin/accessing-administration#the-administration-interface) to open the **Labels** page.
+3. Click the **Add New** button.
+4. In the **Add new** dialog box, specify the:
+
+   - **Name** - The value of this field is the name of the label exposed to Covata users of Safe Share applications (when sharing an item), including client applications utilizing the Covata Platform's API.
+   - **Description ( *Optional* )** - A longer description to provide more information about the label, such as the label's purpose or which group of people it is intended for. The value of this field is only visible to Covata Platform administrators on this **Labels** page.
+
+   **Note:** Before proceeding, please ensure that you are satisfied with the values above, since by design and for security reasons, it is not possible to edit any aspect of a label once it has been added.
+5. Click **Save** and the new label is added and will appear as a new entry on the **Labels** page. <br />
+   **Notes:**
+
+   - To associate this label with one or more Covata users (as a group), which would allow this label to restrict file sharing to these users, see [Managing groups](/3.0/admin/managing-groups).
+   - It is recommended that any [newly added label be associated with at least one group of Covata users](/3.0/admin/managing-groups) as soon as possible, since a label (which is not yet associated with any such group + users) and is then chosen when sharing a file/Secure Object, prevents that file/Secure Object from being shared.
+
+## Deleting an existing label
+
+Deleting a label removes that label from all files it was applied to (when these files were shared), as well as removes all collaborators from these files.
+
+**To delete an existing label from the Covata Platform:**
+
+1. [Sign in](/3.0/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Labels** option on the left of the [Covata Administration interface](/3.0/admin/accessing-administration#the-administration-interface) to open the **Labels** page.
+3. Locate/scroll to the relevant label and click its **Delete** link.
+4. A **Delete** message box appears, with a warning that the deletion of this label will remove the label from any files it had been applied to (when the files were shared). <br />
+   **Note:** Before proceeding, be aware that this action removes all collaborators from these files too.
+5. Click **Yes** on this message box to proceed with the label deletion.
+
+---
+
+#### Please provide your feedback here

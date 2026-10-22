@@ -1,0 +1,379 @@
+---
+title: "<access-service>/api/v1/collections/{collectionId}"
+---
+
+## URL structure <a id="access-service-api-v1-collections-collectionid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collections/{collectionId}
+```
+
+where `{collectionId}` is the ID of a folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-collections-collectionid-supported-methods-and-overview" />
+
+- `GET` - retrieves information about a folder/[collection](/3.4/api/working-with-files-and-folders-fundamentals#collection) (specified by `collectionId`).
+- `PUT` - modifies the properties of a folder (specified by `collectionId`). This involves the folder's owner or a collaborator with sufficient permissions on the folder <sup>1</sup> , performing *any combination* of the following:
+
+  - Modifying the collaborators (as well as their [permission sets](/3.4/api/access-service-api-v1-permissions-sets)) on a folder. <br />
+    **Note:** A collaborator with the **Share** *permission* on the folder (applied via the **Manage** *permission set*) can perform this action.
+  - Renaming and/or moving the folder. <br />
+    **Note:** A collaborator with the **Rename** and **Move** permission on the folder (applied via the **Modify** and **Manage** permission set) can perform these actions.
+- `DELETE` - removes a folder (specified by `collectionId`) to its owner's [Recycle Bin](/3.4/user/managing-secure-content#accessing-the-recycle-bin) (known as 'recycling'), which changes the folder's state to *Recycled*. This can be performed by the folder's owner or a collaborator with sufficient permissions on the folder <sup>1</sup> . <br />
+  **Note**: A collaborator with the **Remove (Folder)** permission on the folder (applied via the **Modify** or **Manage** permission sets) can perform these actions.
+
+<Note>
+
+Both the `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-collections-collectionid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+**GET method requests:**
+
+- Retrieves information about a folder (specified by `collectionId`). A folder's ID can be obtained using the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with folders in an organization that can be filtered using a variety of search criteria.
+
+**PUT method requests:**
+
+- Allows the folder's owner or a collaborator with sufficient permissions on the folder <sup>1</sup> to modify *any combination* of the following properties of the folder (specified by `collectionId`):
+
+  - Collaborators and their [permission sets](/3.4/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters)) - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following five *permission sets* can be applied:
+
+    - **View** - grants the collaborator the individual **View** [permission](/3.4/api/access-service-api-v1-permissions-sets) on any files contained within this folder, which allows these files':
+
+      - content to be viewed from a Safe Share application's [content viewer](/3.4/user/accessing-secure-content#viewing-and-printing-content), as well as their
+      - *read-only views* to be downloaded (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/view](/3.4/api/content-service-api-v1-objects-objectid-view) endpoint).
+    - **Download** - grants the collaborator the individual **View** permission (provided by the **View** permission set), as well as the following additional permissions on any files contained within this folder <sup>2</sup> :
+
+      - **Download** the file's actual content <sup>3</sup> (via the `GET` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint).
+      - **Print** the file's content <sup>3</sup> from a Safe Share application's content viewer.
+    - **Upload** - grants the collaborator the individual permissions provided by the **Download** permission set, as well as the following permissions to perform these additional actions within this folder <sup>2</sup> (in the owner's storage space):
+
+      - Initialize a new *Incomplete* file object within this folder <sup>2</sup> (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.4/api/access-service-api-v1-organisations-orggroupid-objects) endpoint), through the **Upload File** permission.
+      - Upload this *Incomplete* file object's data, which changes the file object's state to *Created* (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) endpoint), again through the **Upload File** permission.
+      - Upload a new version of a file (and its actual content) within this folder (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/versions](/3.4/api/content-service-api-v1-objects-objectid-versions) endpoint), through the **Upload File** permission.
+      - Create a new folder within this folder <sup>2</sup> (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections) endpoint), through the **Create Folder** permission.
+    - **Modify** - grants the collaborator the individual permissions provided by the **Upload** permission set, as well as the following permissions to perform these additional actions on this folder itself (or any files/subfolders contained within this folder) <sup>2</sup> in the owner's storage space:
+
+      - **Rename** the item (via the `PUT` method on either the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint or this endpoint's **name** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters)). The **Rename** permission also provides access to a file's other versions, which includes the ability to perform any of the following actions:
+
+        - Retrieve information about all existing versions of the file (via the `GET` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/3.4/api/access-service-api-v1-objects-itemid-versions) endpoint).
+        - Download the *read-only view* of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/view](/3.4/api/content-service-api-v1-versions-versionid-view) endpoint).
+        - Download the actual content of any version of the file (via the `GET` method on the [&lt;content-service&gt;/api/v1/versions/\{versionId\}/contents](/3.4/api/content-service-api-v1-versions-versionid-contents) endpoint).
+        - Set another version of the file to be active (via the `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/3.4/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+        - Permanently delete any version of the file other than the active one (via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/3.4/api/access-service-api-v1-objects-objectid-versions-versionid) endpoint).
+      - Remove the file (including all of its versions) or folder (including all of its content) to the [Recycle Bin](/3.4/user/managing-secure-content#accessing-the-recycle-bin), via the `DELETE` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint (through the **Remove (File)** permission) or this endpoint itself (through the **Remove (Folder)** permission), respectively. <br />
+        **Important:** Be aware that a more restrictive permission set applied to any items contained within this child folder being deleted are ignored and as such, these items will also be removed to the Recycle Bin.
+      - **Move** the item to a different folder within a common folder hierarchy (via the `PUT` method on either the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) or this endpoint's **parentId** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters)). A *common folder hierarchy* is a folder hierarchy that contains this new folder (including items subsequently contained within it), in which the same collaborator has also been added (with either the **Modify** or **Manage** permission set) to a higher level (i.e. a common) folder, such that this higher level folder forms the top of the folder's hierarchy.
+    - **Manage** - grants the collaborator the individual permissions provided by the **Modify** permission set, as well as the following permissions to perform these additional actions on this folder itself (or any files/subfolders contained within this folder) <sup>2</sup> in the owner's storage space:
+
+      - **Share** the item with other collaborators, for:
+
+        - files, via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.4/api/access-service-api-v1-organisations-orggroupid-objects) endpoint or `PUT` method on the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint, or
+        - folders, via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections) endpoint or this endpoint's **collaborators** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters).
+  - Name (specified through this endpoint's **name** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters)) - the new name of this folder.
+  - Parent folder (specified through this endpoint's **parentId** parameter) - the parent folder (specified through **parentId**) to which this folder (specified by `collectionId`) will be moved.
+
+<sup>1</sup> This owner or collaborator is a [Covata user](/3.4/admin-org/administering-users-within-an-organisation), whose [access token is submitted in the request to this endpoint](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-supported-roles-and-conditions). A folder's:
+
+- Owner is a Covata user whose account's access token was used in account was used to [create the folder](/3.4/api/access-service-api-v1-organisations-orgid-collections) (bearing in mind that a folder's ownership [can subsequently be changed](/3.4/api/access-service-api-v1-organisations-orgid-items-transfer) to that of another Covata user).
+- Collaborator is a Covata user whose account has already been added as a collaborator to this folder (with a given [permission set](/3.4/api/access-service-api-v1-permissions-sets)).
+
+<sup>2</sup> If any of these items are subsequently moved to a child folder on which a more restrictive permission set (listed above) has been applied for a given collaborator, then that collaborator will only possess the relevant permissions (granted by this more restrictive permission set) on this child folder and any other items contained within it. The exceptions are the **Remove (File)** and **Remove (Folder)** permissions, which are propagated down through a folder hierarchy, regardless of whether or not a more restrictive permission set has been applied to an item further down the hierarchy.
+
+<sup>3</sup> Relates to the active version of the file.
+
+**DELETE method requests:**
+
+- Removes a folder to its owner's Recycle Bin (known as 'recycling'), which changes the folder's state to *Recycled*.
+
+## Supported roles and conditions <a id="access-service-api-v1-collections-collectionid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - using the `GET`, `PUT` and `DELETE` methods, when this user owns the folder whose ID is specified by `{collectionId}` in the request's URL.
+- **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - using the:
+
+  - `GET` and `PUT` methods, when this user is a collaborator on the folder whose ID is specified by `{collectionId}` in the URL. For the `PUT` method, such a collaborator user can set the:
+
+    - **name** [parameter](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-optional-parameters), when this user has the **Rename** [permission](/3.4/api/access-service-api-v1-permissions-sets) on this folder.
+    - **parentId** parameter, when this user has the **Move** permission on this folder.
+    - **collaborators** parameter, when this user has the **Share** permission on this folder.
+  - `DELETE` method, when this user is a collaborator with the **Remove (Folder)** permission on the folder whose ID is specified by `{collectionId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-collections-collectionid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-collections-collectionid-optional-parameters" />
+
+The following optional parameters can be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **collaborators** ( *For collaborator users, requires the **Share** [permission](/3.4/api/access-service-api-v1-permissions-sets) on `collectionId`* ) - A parameter containing the following optional sub-element parameters that relate to the collaborators being applied to this folder:
+
+  - **list** - An array of elements about each collaborator, where each element of this array contains the following optional sub-elements:
+
+    - **email** - The email address of the person to add as a collaborator to the folder. (Although this sub-element is optional, omitting it serves no purpose.)
+    - **permissionSet** - The [permission set](/3.4/api/access-service-api-v1-permissions-sets) to apply to this collaborator. This is done by specifying the ID of the permission set as a sub-element parameter of this parameter:
+
+      - **id** - The ID of the permission set to apply to this collaborator. This ID can be obtained by calling the [&lt;access-service&gt;/api/v1/permissions/sets](/3.4/api/access-service-api-v1-permissions-sets) API endpoint.
+
+      **Note:** If this sub-element is omitted, then the **View** permission set is automatically applied to this collaborator.
+
+  **Tip:** It is worthwhile your client application storing these set of collaborators and their respective permission sets (e.g. in its own object) because any modifications to one or more collaborators on an existing folder (through this parameter) requires all collaborators and their permission sets to be specified in the request to modify the folder (via this endpoint).
+- **name** ( *For collaborator users, requires the **Rename** permission on `collectionId`* ) - The name to apply to the folder. For example, any new name for the folder.
+- **parentId** ( *For collaborator users, requires the **Move** permission on `collectionId`* ) - The ID of the [folder](/3.4/api/folder-handling-endpoints) that will contain this folder (specified `collectionId`). This is the folder to which the `collectionId`. Specifying a value of `0` results in the folder (`collectionId`) being located at/moved to the default logical root storage location. <br />
+  **Notes:**
+
+  - Omitting this property (or not changing its existing value) results in the folder remaining at its current location.
+  - The folder represented by **parentId** must be within the same organization as that of the folder represented by `collectionId`.
+  - If the Covata user (whose access token is submitted in the [header](/3.4/api/access-service-api-v1-collections-collectionid#access-service-api-v1-collections-collectionid-required-headers) of the request) is a collaborator on both folders represented by **parentId** and `collectionId`, then this user must have the **Move** permission (on both of these folders) *inherited* from a common parent folder, where **parentId** could also be the common parent folder itself.
+  - If the Covata user is a collaborator on the **parentId** folder but is the owner of the `collectionId` folder (or vice versa), then it is not possible to move the `collectionId` folder into the **parentId** folder.
+
+  **Example (PUT request parameters - modifying a folder):**
+
+  ```json
+  {
+    "name": "Large Files",
+    "collaborators": {
+      "list": [{
+        "email": "chris.collaborator@xy-company.com",
+          "permissionSet": {
+            "id": 5
+          }
+        },
+        {
+          "email": "adhoc.user@xy-company.com"
+        }
+      ]
+    }
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-collections-collectionid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` and `PUT` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the folder.
+- **name** - The name of the folder.
+- **modifiedAt** - The date and time when the folder was last modified. When a folder is created (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections) endpoint), this date and time should match (or be close to) that of the **createdAt** value below. Otherwise, if the folder has since been modified (e.g. via a `PUT` method request to this endpoint), this date and time should reflect when the folder was last modified.
+- **createdAt** - The date and time when the folder was created.
+- **shared** - A boolean value that indicates whether or not the folder has been shared with any collaborators. <br />
+  **Note:** If the request was made using the access token of an authenticated collaborator user (without the **View Other** [permission](/3.4/api/access-service-api-v1-permissions-sets)) on the file object, then the value returned will be `false`.
+- **owner** - A member containing information about the Covata user who is the current owner of the folder. This member contains the following sub-members:
+
+  - **email** - The email address of the Covata user who owns this folder.
+  - **firstName** - The first name set by this Covata user.
+  - **lastName** - The last name set by this Covata user.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Covata user on their own account, or enforced for all members of the organization (by an Organization administrator).
+  - **id** - The ID of this Covata user's account.
+  - **accountType** - A member containing the internationalization (I18N) property key/code <sup>4</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+    - **i18n** - A member containing the I18N code <sup>4</sup> for the account type as sub-members:
+
+      - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+    - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+    <sup>4</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.4/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.4/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+    **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org/index).
+- **organisation** - A member containing information about the organization in which this folder was created. This member contains the following sub-members:
+
+  - **name** - The name of the organization.
+  - **description** - The description of the organization, which can be set by Organization administrators.
+  - **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has been enforced for all members of the organization.
+  - **id** - The ID of the organization.
+- **permissions** - An array listing the individual [permissions](/3.4/api/access-service-api-v1-permissions-sets) that the **owner** above or one of the **collaborators** below (whose access token was used in the request to this endpoint), has inherited from the location represented by **parentId**.
+- **type** - Indicates `collection`, which in turn indicates that information about item returned from this request is about a folder.
+- **collaborators** - An array containing information about each Covata user who is currently a collaborator on this folder. Each element of this array contains information about one of these Covata users and is represented as an object, containing the following members:
+
+  - **shareParentId** - Indicates either a value of `null` or `0`. A value of `null` indicates that the folder's location in its hierarchy of [folders](/3.4/api/folder-handling-endpoints) (e.g. as indicated in a Safe Share application's list of items) are equivalent between this collaborator and the current owner of this folder. A value of `0` indicates that the folder is being shared from the logical root file area/location of this collaborator's account. In Safe Share applications, this occurs when the owner of this folder has shared the folder with this collaborator, but the folder's parent folder has not also been shared with this collaborator.
+  - **shareName** - Reserved for future use. Currently, this returns the value `null`.
+  - **permissions** - An array listing the [permission set](/3.4/api/access-service-api-v1-permissions-sets) applied to this collaborator (or inherited by them from the location represented by **parentId**) on this folder, along with the individual permissions that constitue this permission set.
+  - **email** - The collaborator's email address.
+  - **firstName** - The collaborator's first name. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+  - **lastName** - The collaborator's last name. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **id** - The ID of the collaborator's Covata user account.
+
+  **Note:** Only an empty array is returned from Covata user accounts who are collaborators on this file object *and* do not have the **View Other** [permission](/3.4/api/access-service-api-v1-permissions-sets) on it.
+- **parentId** - The ID of the [folder/collection](/3.4/api/folder-handling-endpoints) that contains the folder. A value of `0` indicates that this folder is located at the logical root location.
+- **originator** - A member containing information about the Covata user whose account was used to create this folder. This member contains the equivalent **email** and **id** sub-members only of either the **owner** member (above) or a **collaborators** array element (above). If these sub-members originally match those of the folder's initial **owner** member and then the folder's ownership changes to that of another Covata user, the **owner** member's **email** and **id** values will change while the equivalent sub-member values of this **originator** member will remain unchanged. <br />
+  **Example (response from a GET request - using the access token of an authenticated owner of the folder):**
+
+  ```json
+  {
+      "id": "751980834491527168",
+      "name": "Large Files",
+      "createdAt": "2016-09-06T01:43:22.071Z",
+      "modifiedAt": "2016-09-06T06:09:26.962Z",
+      "shared": true,
+      "owner": {
+          "email": "alex.originator@xy-company.com",
+          "firstName": "Alex",
+          "lastName": "Originator",
+          "mfaEnabled": false,
+          "id": "749419842687528960",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      },
+      "organisation": {
+          "name": "XY Company",
+          "description": "",
+          "mfaEnabled": false,
+          "id": "749418071827214336"
+      },
+      "permissions": [{
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.file.delete",
+          "id": "66"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.folder.delete",
+          "id": "67"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.download",
+          "id": "62"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.move",
+          "id": "69"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.view",
+          "id": "60"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.delete.other",
+          "id": "72"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.copy",
+          "id": "63"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.print",
+          "id": "61"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.share",
+          "id": "73"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.rename",
+          "id": "68"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.view.other",
+          "id": "71"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.folder.create",
+          "id": "65"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.file.upload",
+          "id": "64"
+      }],
+      "type": "collection",
+      "collaborators": [{
+          "shareParentId": null,
+          "shareName": null,
+          "userId": 752045983411793920,
+          "permissionSet": {
+              "id": "1",
+              "permissions": [{
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view",
+                  "id": "60"
+              }],
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permissionset.name.view"
+          },
+          "email": "adhoc.user@xy-company.com",
+          "firstName": null,
+          "lastName": null,
+          "id": "752045983411793920"
+      }, {
+          "shareParentId": null,
+          "shareName": null,
+          "userId": 750613175405441024,
+          "permissionSet": {
+              "id": "5",
+              "permissions": [{
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.print",
+                  "id": "61"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.download",
+                  "id": "62"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view",
+                  "id": "60"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view.other",
+                  "id": "71"
+              }, {
+                  "scopes": ["collection"],
+                  "nameI18nCode": "server.permission.name.folder.create",
+                  "id": "65"
+              }, {
+                  "scopes": ["collection"],
+                  "nameI18nCode": "server.permission.name.file.upload",
+                  "id": "64"
+              }],
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permissionset.name.upload"
+          },
+          "email": "chris.collaborator@xy-company.com",
+          "firstName": "Chris",
+          "lastName": "Collaborator",
+          "id": "750613175405441024"
+      }],
+      "parentId": "0",
+      "originator": {
+          "email": "alex.originator@xy-company.com",
+          "id": "749419842687528960"
+      }
+  }
+  ```
+
+   **Example (response from a PUT request - modifying a folder):**
+
+  ```json
+  {
+      "id": "751980834491527168",
+      "name": "Scenery",
+      "createdAt": "2016-09-06T01:43:22.071Z",
+      "modifiedAt": "2016-09-06T01:43:22.127Z",
+      "shared": false,
+      "organisation": {
+          "name": "XY Company",
+          "description": "",
+          "mfaEnabled": false,
+          "id": "749418071827214336"
+      },
+      "parentId": "0"
+  }
+  ```

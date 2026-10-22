@@ -1,0 +1,148 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}
+```
+
+where `{orgGroupId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-supported-methods-and-overview" />
+
+- `GET` - retrieves information about an organisation (specified by `orgGroupId`) configured on the Cocoon Data Platform.
+- `PUT` - updates one or more organisation-specific properties for an organisation (specified by `orgGroupId`), which can also be set through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration and the [Organisations](/CS1.2/admin-platform/administering-organisations#administering-an-organisation) page of SafeShare Administration.
+
+<Note>
+
+The `GET` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an organisation (specified by `orgGroupId`) configured on the Cocoon Data Platform - available to Cocoon Data users who are members of this organisation (except users with the [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) role).
+- Updates one or more organisation-specific properties for an organisation (specified by `orgGroupId`). These properties can also be set through:
+
+  - The [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration by an [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) of this organisation.
+  - The [Organisations](/CS1.2/admin-platform/administering-organisations#administering-an-organisation) page of SafeShare Administration by a [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `GET` method, when this user is a member of the organisation whose ID is specified by `{orgGroupId}` in the request's URL.
+- **Organisation administrator** - using the `PUT` method, when this user is a member of the organisation whose ID is specified by `{orgGroupId}` in the URL. Such a user can set any of these [parameters](/CS1.2/api/access-service-api-v1-organisations-orggroupid#access-service-api-v1-organisations-orggroupid-put-request-parameters):
+
+  - **adminEmail**, **addressbookEnabled**, **description**, **contactEmail**, **watermarkingEnabled**, **i18nDefaultAsString**, **enforceMfa**,
+  - **supportUrl**, **companyName**, **legalUrl**, **webappHelpUrl**, **orgAdminHelpUrl**, **privacyUrl** and **userMessage**.
+- [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the `PUT` method. Such a user can set the **name** and/or **quota** parameters.
+
+The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-organisations-orggroupid#access-service-api-v1-organisations-orggroupid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## PUT-request parameters <a id="access-service-api-v1-organisations-orggroupid-put-request-parameters" />
+
+At least one of the following parameters must be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- *For Organisation administrators who are a members of the organisation specified by `orgGroupId`*:
+
+  - **adminEmail** - The email address of the **Organisation Admin Email** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then the [Admin Email](/CS1.2/api/access-service-api-v1-config-theme-adminemail) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **addressbookEnabled** - A boolean value determining if the **Is the address book feature enabled?** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration) is `true` (i.e. enabled) or `false`.
+  - **description** - The value of the **A brief description of the organisation** property (accessible through the **Configuration** page of Organisation Administration).
+  - **contactEmail** - The value of **The email address of the organisation's contact person** property (accessible through the **Configuration** page of Organisation Administration and for the benefit of SafeShare administrators), which appears in the **Contact Person** column on the [Organisations](/CS1.2/admin-platform/administering-organisations) page of SafeShare Administration.
+  - **watermarkingEnabled** - A boolean value determining if the **Is watermarking of viewed files enabled?** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration) is `true` (i.e. enabled) or `false`.
+  - **i18nDefaultAsString** - The **I18n Code** of the **Default i18n setting for new users and email notifications** property (accessible through the **Configuration** page of Organisation Administration). Valid **I18n Code** values can be found on the Internationalization page of SafeShare Administration.
+  - **enforceMfa** - A boolean value determining if the **Enforce two-factor authentication for organisation members** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration) is `true` (i.e. enabled) or `false`.
+  - **supportUrl** - The URL value of the **Support URL** property (accessible through the **Configuration** page of Organisation Administration). If this value is `null` or an empty string, then the [Support URL](/CS1.2/api/access-service-api-v1-config-theme-supportlink) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **companyName** - The **Company Name** property value (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then the [Company Name](/CS1.2/api/access-service-api-v1-config-theme-companyname) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **legalUrl** - The URL value of the **Legal URL** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then the [Legal URL](/CS1.2/api/access-service-api-v1-config-theme-legalurl) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **webappHelpUrl** - The URL value of the **Web Application Help URL** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then the [Web Application Help URL](/CS1.2/api/access-service-api-v1-config-theme-webapphelpurl) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **orgAdminHelpUrl** - The URL value of the **Organisation Administration Help URL** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then the [Organisation Administration Help URL](/CS1.2/api/access-service-api-v1-config-theme-orgadminhelpurl) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **privacyUrl** - The value of **The URL of the privacy statement** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration). If this value is `null` or an empty string, then [The URL of the privacy statement](/CS1.2/api/access-service-api-v1-config-theme-privacyurl) property value (accessible through the [System Details](/CS1.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/CS1.2/admin-platform/configuring-platform-administration-properties) page of SafeShare Administration) is used as the fallback.
+  - **userMessage** - The value of the **Custom message to appear on the 'Share' dialog box** property (accessible through the [Configuration](/CS1.2/admin-org/configuring-organisation-administration-properties) page of Organisation Administration).
+
+  **Note:** With the exception of the **contactEmail** and **i18nDefaultAsString** properties above (including all other properties above that require a boolean value), a property value can be 'cleared' by submitting an empty string value for that property in the request. Be aware that properties whose values are initially not defined are returned with `null` values in responses to this endpoint. However, once a property's value is cleared, it is subsequently returned with empty string values (in responses to this endpoint).
+- *For SafeShare administrators only*:
+
+  - **name** - The name of the organisation.
+  - **quota** - The organisation's quota (in [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)).
+
+  **Example (request - changing the 'Contact Person's email address and clearing 'The URL of the privacy statement' as an Organisation administrator):**
+
+  ```json
+  {
+    "contactEmail": "anotherorg.administrator@xy-company.com",
+    "privacyUrl": ""
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the organisation.
+- **name** - The name of the organisation as specified by a SafeShare administrator.
+- **description** - .
+- **bytesUploaded** - .
+- **contactEmail** - .
+- **quota** - .
+- **newAccountBaseItem** - .
+- **addressbookEnabled** - .
+- **watermarkingEnabled** - .
+- **mfaEnabled** - .
+- **i18nDefault** - .
+- **adminEmail** - .
+- **organisationAlias** - .
+- **userMessage** - .
+- **supportUrl** - .
+- **companyName** - .
+- **legalUrl** - .
+- **webappHelpUrl** - .
+- **orgAdminHelpUrl** - .
+- **privacyUrl** - .
+- **modifiedAt** - .
+- **createdAt** - . <br />
+  **Example (response from either a GET or PUT request):**
+
+  ```json
+  {
+      "id": "760756644367081472",
+      "name": "XY Company",
+      "description": "",
+      "bytesUploaded": "549744",
+      "contactEmail": "org.administrator@xy-company.com",
+      "quota": 4194304,
+      "newAccountBaseItem": null,
+      "addressbookEnabled": false,
+      "watermarkingEnabled": false,
+      "mfaEnabled": false,
+      "i18nDefault": "en_us",
+      "adminEmail": null,
+      "organisationAlias": null,
+      "userMessage": null,
+      "supportUrl": null,
+      "companyName": null,
+      "legalUrl": null,
+      "webappHelpUrl": null,
+      "orgAdminHelpUrl": null,
+      "privacyUrl": null,
+      "modifiedAt": "2016-09-30T06:55:18.192Z",
+      "createdAt": "2016-09-30T06:55:18.192Z"
+  }
+  ```

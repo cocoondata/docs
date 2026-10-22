@@ -1,0 +1,38 @@
+---
+title: "Organization Administrator's Guide for Safe Share 3.4"
+---
+
+This documentation is for 3.4.x versions of *Safe Share* and the *Covata Platform*.
+
+Please refer to our [important notice](/3.4/admin-org/important-notice) for information that relates to this documentation.
+
+## Overview of Safe Share and the Covata Platform
+
+Covata provides a complete solution and platform for securely protecting and sharing encrypted files and folders which can be stored and accessed anywhere (within an organization, outside the domain and from mobile devices).
+
+Covata's technologies provide this solution through the *Covata Platform* (upon which Safe Share is built), whose *Access Service* centrally manages cryptographic *keys* (used to encrypt/decrypt content) and *access controls* (which define who can access/decrypt content and when).
+
+The Covata Platform's Access Service handles its *key* management and *access controls* separately from cryptography and user content. This separation helps ensure that encrypted content is only able to be decrypted by the people it's intended for.
+
+Users of *Covata technologies* <sup>&#42;</sup> can share their secured content with others through Covata's Safe Share applications, which integrate with the Covata Platform to ensure that critical key management and access controls are adhered to.
+
+The Covata Platform provides an application programming interface (API), which allows integrators to develop their own applications that leverage Covata's powerful data-centric security features.
+
+<a id="organisation-administration" />
+
+## Safe Share Organization Administration
+
+*Safe Share Organization Administration* is a web-based interface for administering an organization's access to resources on a Covata Platform instance. This interface also provides access to a number of configurable features of Covata technologies <sup>&#42;</sup> that apply to the organization *and* Covata users who are members of the organization.
+
+![Organization Administration dashboard page](/images/2b7356978b16-organisation-administration-dashboard-page.png)
+*Organization administrators* are users who, once [signed in](/3.4/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Safe Share Organization Administration, can access its [dashboard](/3.4/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) (depicted above) and have the ability to perform the following administration activities within their organization on their Covata Platform instance:
+
+- Configure [users](/3.4/admin-org/administering-users-within-an-organisation) (also known as 'Covata users') who are members of their organization by initially adding new or pre-registered user accounts on the Covata Platform.
+- Configure and manage their organization's [user whitelist](/3.4/admin-org/managing-user-whitelists), defining which people can be shared items within the organization, including people who are not organization members.
+- Manage [classifications](/3.4/admin-org/managing-classifications) and [groups](/3.4/admin-org/managing-groups), both of which are used in conjunction to help restrict the people with whom content can be shared.
+- Manage [plans](/3.4/admin-org/managing-users-storage-quotas-through-plans) that define storage quotas, which define the amount of storage (ultimately managed by the Covata Platform's Content Service) available to individual Covata user accounts.
+- Disable or re-enable access to any [files](/3.4/admin-org/administering-files) encrypted using Covata technologies on the Covata Platform, as well as view all recorded activities on these files.
+- Generate [reports](/3.4/admin-org/generating-reports) on requests made by client applications to the Covata Platform's API.
+- Change the [configuration](/3.4/admin-org/configuring-organisation-administration-properties) of Safe Share Organization Administration properties.
+
+<sup>&#42;</sup> *Covata technologies* refers to all features and functionality provided by (and made available through) the Covata Platform, including Covata's Safe Share applications, the Covata Platform's API and the Covata Platform itself.

@@ -1,0 +1,50 @@
+---
+title: "<access-service>/api/v1/i18n/bundles/{localeCode}/reset"
+---
+
+## URL structure <a id="access-service-api-v1-i18n-bundles-localecode-reset-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/i18n/bundles/{localeCode}/reset
+```
+
+where `{localeCode}` is a supported locale code.
+
+## Supported methods and overview <a id="access-service-api-v1-i18n-bundles-localecode-reset-supported-methods-and-overview" />
+
+- `PUT` - resets a locale from a custom internationalization (i18n) bundle (specified by `{localCode}` and which had been uploaded to the Covata Platform's Access Service) back to its built in version.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-i18n-bundles-localecode-reset-detailed-description" />
+
+This API endpoint resets a locale from a custom i18n bundle (specified by `{localCode}` and which had been uploaded to the Covata Platform's Access Service) back to its built in version.
+
+<Note>
+
+- This endpoint can only be called on locales *with* existing i18n bundles that are built in to the Covata Platform.
+- Any Covata users utilizing the locale of this custom i18n bundle (which they would have chosen through Safe Share) will automatically be reverted to use the existing i18n bundle of the same locale, when the bundle is reset.
+
+</Note>
+
+## Supported roles <a id="access-service-api-v1-i18n-bundles-localecode-reset-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.4/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.4/admin-platform/index)):
+
+- [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-i18n-bundles-localecode-reset#access-service-api-v1-i18n-bundles-localecode-reset-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-i18n-bundles-localecode-reset-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-i18n-bundles-localecode-reset-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

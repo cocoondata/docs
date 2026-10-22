@@ -1,0 +1,390 @@
+---
+title: "Sicheres Upload, Speichern und Freigeben von Inhalten"
+---
+
+Die sichere Speicherung und Freigabe von Inhalten mit Safe Share for Windows wird direkt über den „Safe Share“-Ordner vorgenommen, auf den Sie bequem über den Windows Explorer (in Ihrem Windows-Basisordner) zugreifen können.
+
+## Zugriff auf den „Safe Share“-Ordner <a id="accessing-the-applications-folder" />
+
+**Zugriff auf den „Safe Share“-Ordner:**
+
+1. Vergewissern Sie sich, dass Safe Share for Windows [gestartet](/3.3/de/windows/starting-the-application-and-signing-in#starting-the-application) wurde und Sie angemeldet sind.
+2. Klicken Sie auf das Symbol
+   ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    der Anwendung im Infobereich der Taskleiste, um den *Anwendungsbereich* von Safe Share for Windows zu öffnen (der rechts unten auf dem Bilschirm erscheint).
+
+   ![Zugriff auf den Safe Share-Anwendungsbereich](/images/94fb0f60f5d3-application-pane-signed-in.png)
+3. Wenn das Symbol Home/Organisationsauswahl
+   ![Symbol Organisationsauswahl im Anwendungsbereich](/images/f2c45dd4db1a-application-pane-organisation-chooser-icon.png)
+
+    nicht neben dem Symbol
+
+   ![Symbol Anwendungsbereich-Einstellungen](/images/5d9feb547c51-application-pane-settings-icon.png)
+
+    rechts oben im Anwendungsbereich angezeigt wird, gehen Sie weiter zum [nächsten Schritt](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-application-folders). (Dies zeigt an, dass Sie Mitglied nur einer Organisation sind.) <br />
+   *Andernfalls* ist Ihr Covata-Benutzer-Account auf Ihrer Instanz der Covata-Plattform Mitglied mehrerer Organisationen, und der Name Ihrer aktuellen Organisation (die für [den Upload und die Speicherung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content), die [Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content), den [Zugriff](/3.3/de/windows/accessing-secure-content) und die [Verwaltung](/3.3/de/windows/managing-secure-content) von Inhalten in Ihrem persönlichen Besitz verwendet wird) wird in der Dropdown-Liste, die Sie durch Anklicken des Symbols Organisationsauswahl erreichen, durch ein Häkchen angezeigt:
+
+   ![Auswahl einer Organisation](/images/abd68f6c22f0-application-pane-choosing-an-organisation.png)
+
+   <br />
+    Wenn Sie für den Upload und die Speicherung Ihrer Inhalte eine andere Organisation auswählen möchten (bei der Sie Mitglied sind), wählen Sie die betreffende Organisation aus diesem Dropdown-Menü.
+4. <a id="accessing-the-application-folders" />Klicken Sie auf das Symbol „Safe Share-Ordner“
+   ![Symbol Safe Share-Ordner im Anwendungsbereich](/images/120fb449a330-application-pane-access-application-folders-icon.png)
+
+    links unten im Anwendungsbereich, und der Windows Explorer öffnet im „Safe Share“-Ordner in Ihrem Windows-Basisordner und zeigt die beiden Unterordner für Ihre aktuelle Organisation:
+
+   - `Meine sicheren Dateien` - mit allen Elementen in Ihrem Besitz. Beachten Sie, dass dieser Ordner nicht erscheint, wenn Ihrem Account für Ihre Organisation nicht die **Ersteller**-Rolle zugewiesen ist. <br />
+     **Hinweis:** Dieser Ordner stellt in der Anwendung [Safe Share for Web](/3.3/de/user/index) den Stammspeicherort Ihres Elementebereichs auf der Safe Share-Hauptseite dar.
+   - `Mir freigegeben` - mit allen Elementen, die andere Covata-Benutzer Ihnen als Mitwirkenden freigegeben haben. Die Dateien/Ordner der einzelnen Covata-Benutzer, die Ihnen Inhalte freigegeben haben, erscheinen innerhalb von `Mir freigegeben` in separaten Ordnern. Die Namen dieser Ordner haben das folgende Format: <br />
+     `Freigegeben von <lokaler-Teil-der-E-Mail-Adresse> - <Domänen-Teil-der-E-Mail-Adresse>`
+
+   ![Safe Share-Ordner im Windows Explorer](/images/d63e5466e8ea-windows-explorer.png)
+
+<Note>
+
+- Safe Share for Windows beginnt nach der erfolgreichen Anmeldung mit der Synchronisierung aller Dateien und Ordner (in Ihrer aktuellen Organisation), die:
+
+  - im Remotespeicher kürzlich über Ihren Covata-Benutzer-Account (anhand einer anderen Safe Share-Anwendung) geändert wurden), mit den Dateien und Ordnern in Ihrem lokalen Ordner „Meine sicheren Dateien“.
+  - andere Covata-Benutzer Ihnen kürzlich freigegeben haben, mit den Dateien und Ordnern in Ihrem lokalen Ordner „Mir freigegeben“.
+- Wenn auf Ihrem Computer Drittanwendungen ausgeführt werden, die so konfiguriert sind, dass sie verschlüsselte Inhalte im „Safe Share“-Ordner kopieren und anderswo speichern (z. B. Anwendungen zur Datensicherung), kann dies dazu führen, dass entschlüsselte Kopien der betreffenden Inhalte von solchen Anwendungen an ihren jeweiligen Ziel-Speicherorten gespeichert werden. Beachten Sie, dass Safe Share for Windows verschlüsselte Inhalte automatisch (im „Safe Share“-Ordner) im Remotespeicher synchronisiert und speichert. Wenn Sie daher nicht wünschen, dass Drittanwendungen zusätzliche Kopien dieser Inhalte (in entschlüsselter Form) anfertigen, stellen Sie sicher, dass diese Anwendungen so konfiguriert sind, dass sie Inhalte der „Safe Share“-Ordner nicht kopieren bzw. sichern.
+
+</Note>
+
+## Änderung von Organisationen <a id="changing-organisations" />
+
+- Wenn rechts oben im Anwendungsbereich (den Sie nach Ihrer [Anmeldung](/3.3/de/windows/starting-the-application-and-signing-in#signing-in-manually) durch Anklicken des Symbols Safe Share for Windows
+  ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   erreichen) das Symbol Home/Organisationsauswahl
+
+  ![Symbol Organisationsauswahl im Anwendungsbereich](/images/f2c45dd4db1a-application-pane-organisation-chooser-icon.png)
+
+   angezeigt wird, ist Ihr Covata-Benutzer-Account auf Ihrer Instanz der Covata-Plattform Mitglied mehrerer Organisationen.
+
+Der Name Ihrer aktuellen Organisation (die für [den Upload und die Speicherung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content), die [Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content), den [Zugriff](/3.3/de/windows/accessing-secure-content) und die [Verwaltung](/3.3/de/windows/managing-secure-content) Ihrer Inhalte verwendet wird) wird in der Dropdown-Liste, die Sie durch Anklicken des Symbols Organisationsauswahl erreichen, durch ein Häkchen angezeigt:
+
+![Auswahl einer Organisation](/images/abd68f6c22f0-application-pane-choosing-an-organisation.png)
+
+Wenn Sie eine andere Organisation auswählen möchten (bei der Sie Mitglied sind), wählen Sie die betreffende Organisation aus diesem Dropdown-Menü.
+
+<Note>
+
+Eine Änderung Ihrer Stamm-/Standardorganisation anhand von [Safe Share for Web](/3.3/de/user/index) (d. h. über den [Abschnitt Organisationen](/3.3/de/user/managing-your-account#viewing-your-storage-usages-and-quotas) der Funktion **Mein Account**) hat keine Auswirkung auf Ihre aktuelle/ausgewählte Organisation, wenn Safe Share for Windows [startet](/3.3/de/windows/starting-the-application-and-signing-in#starting-the-application) und Sie angemeldet sind. Diese Trennung von Funktionalitäten ist beabsichtigt um zu verhindern, dass Safe Share for Windows (aufgrund eines Wechsels der Organisation) Dateien ohne explizite Änderung der Organisation in Safe Share for Windows in potenziell großer Zahl synchronisiert und so die Leistung des Windows-Betriebssystems beeinträchtigt. Ihre (anhand von Safe Share for Web vorgegebene) Stamm-/Standardorganisation wirkt sich nur auf die in Safe Share for Windows ausgewählte Organisation aus, wenn Ihr Covata-Benutzer-Account zum ersten Mal zur Anmeldung bei Safe Share for Windows verwendet wird.
+
+</Note>
+
+## Upload und Speichern von Inhalten im persönlichen Besitz <a id="uploading-and-storing-personally-owned-content" />
+
+Dieser Ablauf erklärt, wie Sie Ihre eigenen, von der Covata-Plattform verwalteten Inhalte hochladen und speichern können.
+
+<Tip>
+
+Sie können Inhalte in Ihrem persönlichen Besitz auch in nur einem Schritt sicher speichern und [freigeben (siehe unten)](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content). Siehe [Upload, Speichern und Freigeben von Inhalten „in einem Schritt“](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-storing-and-sharing-content-in-one-go) für weitere Informationen.
+
+</Tip>
+
+**Sicheres Hochladen und Speichern von Inhalten im persönlichen Besitz:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Wählen Sie auf Ihrem Computer eine(n) oder mehrere Datei(en) oder Ordner und kopieren oder verschieben Sie sie an einen der folgenden Speicherorte:
+
+   - den Unterordner „Meine sicheren Dateien“ (wie Sie es normalerweise über den Windows Explorer tun würden) oder
+   - einen beliebigen anderen Unterordner in „Meine sicheren Dateien“
+
+   Ziehen Sie Ihr(e) Element(e) zum Beispiel direkt in den Unterordner „Meine sicheren Dateien“:
+
+   ![Sicherung einer Datei durch Drag&Drop](/images/fbf763a6b728-dragging-a-file-to-secure-by-moving.png)
+
+   <br />
+    Ihre Elemente werden von Safe Share for Windows im Ordner „Meine sicheren Dateien“ lokal verschlüsselt und anschließend sicher in den von der Covata-Plattform verwalteten Remotespeicher hochgeladen. Ihre ursprünglichen Inhalte können an ihrem ursprünglichen Speicherort verbleiben, unabhängig davon, ob Sie Ihre Elemente kopiert oder verschoben haben. Siehe die [Hinweise](/3.3/de/windows/uploading-storing-and-sharing-content-securely#item-storing-behavior) unten für weitere Informationen über dieses Verhalten. <br />
+   **Tipps:**
+
+   - Der Bereich **NEUESTE AKTUALISIERUNGEN** im Anwendungsbereich zeigt die letzte(n) Datei(en), die verschlüsselt bzw. hochgeladen wurde(n) in umgekehrter chronologischer Reihenfolge. Anklicken einer Datei in diesem Abschnitt öffnet den Windows Explorer im Unterordner `Meine sicheren Dateien`, der die betreffende Datei enthält. Der Bereich **NEUESTE AKTUALISIERUNGEN** zeigt auch die letzte(n) Datei(en), die entschlüsselt bzw. heruntergeladen wurde(n) wurden oder auf die nur zugegriffen wurde (d. h. die angezeigt wurden).
+   - Sie können auch eine(n) oder mehrere Dateien oder Ordner sicher hochladen und speichern, indem Sie das/die gewünschte(n) Element(e) auf Ihrem Computer auswählen und anschließend eine der folgenden Aktionen ausführen:
+
+     - Direktes *Verschieben* des Elements/der Elemente in den `Safe Share`-Ordner. Dies ist mit dem direkten *Kopieren oder Verschieben* dieser Elemente in den Ordner `Meine sicheren Dateien` identisch. Beachten Sie, dass direktes *Kopieren* von Elementen in den `Safe Share`-Ordner selbst nicht unterstützt wird.
+     - Kopieren oder Verschieben des Elements/der Elemente in die Verknüpfung für den Ordner `Meine sicheren Dateien` (d. h. den Ordner `Meine sicheren Dateien` auf Ihrem Desktop), sofern diese Verknüpfung verfügbar ist
+   - Sie können auch eine oder mehrere Ihrer Dateien sicher hochladen und speichern, indem Sie im Anwendungsbereich auf das Symbol „Auswahl der zu sichernden Dateien“
+     ![Upload-Symbol im Anwendungsbereich](/images/847b49707d71-application-pane-upload-icon.png)
+
+      klicken. Dies ruft das Dialogfeld **Auswahl der zu sichernden Dateien** auf, in dem Sie eine oder mehrere Dateien von ihren Speicherorten auswählen können. Klicken Sie anschließend auf die Schaltfläche **Öffnen**, um die Datei(en) direkt in den Ordner `Meine sicheren Dateien` hochzuladen. Beachten Sie, dass diese Funktion im Gegensatz zu den oben beschriebenen Optionen Drag & Drop/Kopieren/Verschieben auch den Upload und die Speicherung von Dateien über ihre jeweiligen Windows-Verknüpfungen ermöglicht.
+   - Wenn Sie versuchen, eine Datei hochzuladen und zu speichern, deren Namen mit dem einer am jeweiligen Speicherort bereits vorhandenen Datei übereinstimmt, zeigt Safe Share for Windows in der Taskleiste die Meldung **Datei existiert bereits - neue Version wird hinzugefügt** und beginnt automatisch mit dem Upload einer neuen Version dieser Datei. Andere Versionen einer Datei sind aktuell nur über [Safe Share for Web](/3.3/de/user/index) zugänglich und können dort verwaltet werden. Für weitere Informationen siehe [Verwaltung von Dateiversionen](/3.3/de/user/managing-file-versions) in der Benutzeranleitung für Safe Share for Web.
+   - Sie können hier jederzeit Folgendes tun:
+
+     - Klicken Sie auf das Symbol „Minimieren“
+       ![Symbol Minimieren im Anwendungsbereich](/images/bd00acdca7e9-application-pane-minimise-icon.png)
+
+        um den Anwendungsbereich auszublenden.
+     - Klicken Sie auf das Symbol für Safe Share for Windows
+       ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+        im Infobereich der Taskleiste, um zwischen dem offenen und ausgeblendeten Anwendungsbereich umzuschalten.
+
+   **Hinweise:**
+
+   - Die maximal zulässige Größe einer hochzuladenden Datei hängt von den auf der Covata-Plattform konfigurierten Eigenschaften ab. Ihre Covata-Plattform-Safe Share-Administratoren können Ihnen diese Größe mitteilen. Beachten Sie jedoch, dass Safe Share for Windows selbst für den Upload von Dateien standardmäßig ein Größenlimit von 20 GB vorsieht, das deutlich geringer ist als das Limit der Covata-Plattform und gegenüber diesem Vorrang hat. Dieser Standardwert kann jedoch anhand einer Einstellung in der Windows-Registrierung überschrieben werden.
+   - Beim Kopieren (nicht Verschieben) einer großen Datei (im Allgemeinen mit mehreren hundert MB) kann Safe Share for Windows die Meldung *„Verschlüsselung ist nicht möglich - Windows hat den Zugriff auf dieses Element verhindert.“* ausgeben. Safe Share for Windows beginnt jedoch automatisch mit der Verschlüsselung dieses Inhalts, sobald der Kopiervorgang abgeschlossen ist. Sie können diese Meldung in diesem Szenario daher ignorieren.
+   - Safe Share for Windows unterstützt das Kopieren von Dateien zwischen Ordnern innerhalb des `Safe Share`-Ordners nicht, auch nicht zwischen Ordnern in `Meine sicheren Dateien`. Alle kopierten Dateien werden nach der nächsten Synchronisierung (mit von der Covata-Plattform verwaltetem Remotespeicher) automatisch gelöscht.
+   - <a id="item-storing-behavior" />Wenn Sie wissen möchten, wie Safe Share for Windows Ihre Quellinhalte handhabt, finden Sie in der folgenden Tabelle Informationen, wie die Anwendung Ihre Elemente verarbeitet, wenn Sie in den Unterordner `Meine sicheren Dateien` kopiert oder verschoben werden:
+
+   <table> <tr> <th>Aktion</th><th>Quellinhalt stammt von einem lokalen Laufwerk (z. B. C:)</th><th>Quellinhalt stammt von einem Netzlaufwerk</th></tr> <tr> <td><p><b>Verschieben</b></p> <p></p> <p>Ausschneiden und Einfügen ausgewählter Elemente in <code>Meine sicheren Dateien</code> mittels</p><ul> <li>des betreffenden Rechtsklick-Kontextmenüs oder</li> <li>der Tastenkombinationen Strg-X/Strg-V.</li> </ul></td><td><p>Diese Aktion kann auch einfach durch Drag&amp;Drop ausgewählter Elemente in <code>Meine sicheren Dateien</code> ausgeführt werden.</p> <p></p> <p><b>Verarbeitung Ihrer Elemente:</b></p><ol> <li>Alle Ordner und Ordnerstrukturen unter Ihren ausgewählten Elementen werden im Ordner <code>Meine sicheren Dateien</code> neu erstellt.</li> <li>Alle Dateien unter Ihren ausgewählten Elementen werden in separate, von <em>Covata gesicherte Dateien</em> mit der Erweiterung <code>.covl</code> verschlüsselt und in <code>Meine sicheren Dateien</code> gespeichert (in denselben Ordnerstrukturen, die Ihren ausgewählten Elementen entsprechen). <br /> <b>Hinweis:</b> Die Quellinhalte <em>bleiben</em> an ihrem ursprünglichen Speicherort. Der Windows Explorer muss manchmal aktualisiert werden, damit die Quellinhalte angezeigt werden.</li> </ol></td><td><p>Diese Aktion kann auch ausgeführt werden, indem Sie die Umschalt-Taste gedrückt halten, während Sie die ausgewählten Elemente in <code>Meine sicheren Dateien</code> ziehen.</p> <p></p> <p><b>Verarbeitung Ihrer Elemente:</b></p><ol> <li>Ihre ausgewählten Elemente werden zunächst mit allen Ordnern und Ordnerstrukturen in <code>Meine sicheren Dateien</code> kopiert.</li> <li>Diese kopierten Dateien (in <code>Meine sicheren Dateien</code>) werden in separate, von <em>Covata gesicherte Dateien</em> mit der Erweiterung <code>.covl</code> verschlüsselt, die anschließend an denselben Speicherorten gespeichert werden wie die kopierten Dateien, von denen sie erstellt wurden.</li> <li>Die kopierten/unverschlüsselten Dateien in <code>Meine sicheren Dateien</code> (aus Schritt 1 oben) werden in den Papierkorb verschoben. <br /> <b>Hinweis:</b> Die Quellinhalte werden von ihrem ursprünglichen Speicherort <em>gelöscht</em>.</li> </ol></td></tr> <tr> <td rowSpan="2"><p><b>Kopieren</b></p> <p></p> <p>Kopieren und Einfügen ausgewählter Elemente in <code>Meine sicheren Dateien</code> mittels</p><ul> <li>des betreffenden Rechtsklick-Kontextmenüs oder</li> <li>der Tastenkombinationen Strg-C/Strg-V.</li> </ul></td><td>Diese Aktion kann auch ausgeführt werden, indem Sie die Strg-Taste gedrückt halten, während Sie die ausgewählten Elemente in <code>Meine sicheren Dateien</code> ziehen.</td><td>Diese Aktion kann auch einfach durch Drag&amp;Drop ausgewählter Elemente in <code>Meine sicheren Dateien</code> ausgeführt werden.</td></tr> <tr> <td colSpan="2"><p><b>Verarbeitung Ihrer Elemente:</b></p> <p></p> <p>Das Verarbeitungsverhalten ist identisch zum Verschieben der ausgewählten Elemente von einem Netzlaufwerk (rechts oben). Die Quellinhalte <em>bleiben</em> jedoch an ihrem ursprünglichen Speicherort.</p></td></tr> </table>
+
+## Freigabe sicherer Inhalte <a id="sharing-secure-content" />
+
+Dieser Ablauf erklärt die folgenden Möglichkeiten für die Freigabe:
+
+- die Freigabe sicherer Inhalte in Ihrem persönlichen Besitz, die [Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder eine [andere Person](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) hochgeladen haben, an andere Personen und
+- die Freigabe sicherer Inhalte im Besitz eines anderen Covata-Benutzers, die Ihnen mit **Verwaltungs**-Berechtigung freigegeben wurden.
+
+Hier finden Sie auch Informationen, wie Sie den Kreis der Personen, die auf diese Inhalte zugreifen können, (so genannte „Mitwirkende“) und/oder die Zugriffsberechtigungen dieser Mitwirkenden auf diese Inhalte ändern können.
+
+<Note>
+
+Berechtigungen sind im folgenden Ablauf ([unten](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set)) detailliert erklärt.
+
+- Sie können Ihre eigenen Inhalte auch wie im Abschnitt [Upload, Speichern und Freigeben von Inhalten „in einem Schritt“](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-storing-and-sharing-content-in-one-go) unten beschrieben in nur einem Schritt sicher speichern und freigeben.
+
+</Note>
+
+**Freigabe sicher gespeicherter Inhalte an andere Personen (oder Änderung vorhandener Freigaben dieser Inhalte):**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Freigabe:
+
+   - Von *Inhalten in Ihrem persönlichen Besitz*: Klicken Sie mit der rechten Maustaste im Unterordner „Meine sicheren Dateien“ auf die Datei oder den Ordner, die/den Sie einer oder mehreren Personen freigeben oder deren/dessen vorhandene Mitwirkenden Sie ändern möchten, und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigeben**, um das Dialogfeld **Safe Share** zu öffnen:
+
+     ![Freigabe einer Datei in Ihrem Besitz](/images/f4ab52f1daa8-right-clicking-an-item-owner.png)
+   - Von *Inhalten im Besitz eines anderen Covata-Benutzers*: Klicken Sie mit der rechten Maustaste im Ordner „Freigegeben von ...“ des anderen Benutzers (im Unterordner „Mir freigegeben“) auf die Datei oder den Ordner (für die/den Sie **Verwaltungs**-Berechtigung haben), die/den Sie Anderen freigeben oder deren/dessen vorhandene Mitwirkende Sie ändern möchten. Wählen Sie anschließend aus dem Popup-Menü **Safe Share &gt; Freigeben**, um das Dialogfeld **Safe Share** zu öffnen:
+
+     ![Freigabe eines Ordners im Besitz eines anderen Benutzers](/images/55d4f0ef0554-right-clicking-an-item-collaborator.png)
+3. <a id="share-dialog-box" />Führen Sie im Dialogfeld **Safe Share** einen der folgenden Schritte aus:
+
+   - *Geben Sie zur Freigabe des Elements an eine Person* die E-Mail-Adresse dieser Person (d. h. dieses „Mitwirkenden“) im Textfeld **Freigeben an** ein und gehen Sie weiter zum [nächsten Schritt](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set), um die Berechtigungen dieses Mitwirkenden festzulegen. (Lesen Sie davor die **Hinweise über ...** unten, die wichtige Informationen über die Funktionalitäten des Dialogfelds **Safe Share** enthalten.)
+
+     ![Safe Share-Dialogfeld](/images/b8ca343e3ed0-share-dialog-box.png)
+
+     <br />
+     **Hinweise über das Dialogfeld Safe Share:**
+
+     - Wenn die von Ihnen eingegebene E-Mail-Adresse in einer Dropdown-Liste zur Auswahl angezeigt wird, *ehe* Sie sie fertig eingegeben haben:
+
+       - haben Sie:
+
+         - diese E-Mail-Adresse bereits verwendet, um Elemente freizugeben (und die Adresse wurde Ihrer Kontaktliste damit automatisch hinzugefügt - für weitere Informationen siehe [Verwaltung Ihrer Kontakte](/3.3/de/windows/managing-your-account#managing-your-contacts)) <br />
+            oder
+         - diese E-Mail-Adresse Ihrer Kontaktliste bereits manuell hinzugefügt.
+       - hat ein Organisations-Administrator (Ihrer aktuellen Organisation) die Adressbuch-Funktion aktiviert, anhand der die E-Mail-Adressen aller Mitglieder Ihrer aktuellen Organisation automatisch vervollständigt werden. Für weitere Informationen über diese [Funktion](/3.3/de/admin-org/configuring-organisation-administration-properties#address-book-feature) der Safe Share-Organisationsverwaltung siehe [Konfiguration von Eigenschaften der Safe Share-Organisationsverwaltung](/3.3/de/admin-org/configuring-organisation-administration-properties) in der [Organisations-Administratorenanleitung](/3.3/de/admin-org/index).
+     - Sie können Mitwirkende auch anhand des [Dialogfelds „Kontakte“](/3.3/de/windows/managing-your-account#adding-multiple-contacts-from-the-contacts-dialog-box) hinzufügen.
+     - Wenn Sie einen Ordner freigeben, erscheint ein etwas anderes Dialogfeld. (Die Unterschiede sind unten erläutert.)
+   - *Wenn Sie die Berechtigungen eines vorhandenen Mitwirkenden am betreffenden Element ändern möchten*, suchen Sie die E-Mail-Adresse dieses Mitwirkenden in der Liste der Mitwirkenden (in diesem Dialogfeld) und gehen Sie direkt zum [nächsten Schritt](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) zur Auswahl der Berechtigungen für diesen Mitwirkenden.
+   - *Wenn Sie vorhandene Mitwirkende vom betreffenden Element entfernen möchten*, suchen Sie die E-Mail-Adressen dieser Mitwirkenden in der Liste der Mitwirkenden (in diesem Dialogfeld) und klicken Sie auf die Schaltfläche **x** neben den jeweiligen E-Mail-Adressen. Wenn Sie dem Element weitere Mitwirkende hinzufügen oder die Berechtigungen vorhandener Mitwirkender ändern möchten, führen Sie die entsprechenden Schritte/Optionen in diesem Schritt (siehe oben) aus. Gehen Sie andernfalls weiter zu Schritt 7 ([unten](/3.3/de/windows/uploading-storing-and-sharing-content-securely#choosing-a-classification)), nachdem Sie die gewünschten Mitwirkenden von diesem Element entfernt haben.
+4. <a id="selecting-a-permission-set" />Wählen Sie aus der Dropdown-Liste eine der folgenden Berechtigungen (die auch jeweils als Berechtigungssatz bezeichnet werden, da sie individuelle Berechtigungen beinhalten), um den Zugriff des betreffenden Mitwirkenden auf das Element zu definieren:
+
+   - **Anzeige** - gewährt die individuelle Berechtigung zur *Anzeige* der Datei (aus dem [schreibgeschützten Content-Viewer in Safe Share for Windows](/3.3/de/windows/accessing-secure-content#read-only-content-viewer) heraus, der auch als *Safe Share-Content-Viewer* bezeichnet wird) bzw., wenn es sich um einen Ordner handelt <sup>&#42;</sup> , dieselbe individuelle Berechtigung zur *Anzeige* aller Dateien im betreffenden Ordner (und in seinen Unterordnern). <br />
+     **Tipps:**
+
+     - Der Safe Share-Content-Viewer unterstützt dieselben Dateitypen wie der [Content-Viewer](/3.3/de/user/accessing-secure-content#content-viewer) von Safe Share for Web. Für weitere Informationen siehe [Vom Content-Viewer unterstützte Dateiformate](/3.3/de/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in der Benutzeranleitung für [Safe Share for Web](/3.3/de/user/index).
+     - Wird für ein Element die **Anzeige**-Berechtigung gewährt, kann der Inhalt des Elements auch in den entsprechenden schreibgeschützten Content-Viewern von [Safe Share for Web](/3.3/de/user/accessing-secure-content#content-viewer), Safe Share for iOS und Safe Share for Android angezeigt werden.
+   - **Download** - gewährt die individuellen Berechtigungen zur *Anzeige* und zum *Ausdruck* der Datei (ebenfalls aus dem Safe Share-Content-Viewer heraus) sowie zu ihrem *Download* bzw., wenn es sich um einen Ordner handelt <sup>&#42;</sup> , dieselben individuellen Berechtigungen für alle Dateien im betreffenden Ordner (und in dessen Unterordnern). <br />
+     **Tipp:** Wird für ein Element die **Download**-Berechtigung gewährt, kann der Inhalt des Elements auch über die entsprechenden schreibgeschützten Content-Viewer von [Safe Share for Web](/3.3/de/user/accessing-secure-content#content-viewer), Safe Share for iOS und Safe Share for Android ausgedruckt werden.
+   - **Hochladen** - gewährt die individuellen Berechtigungen zur *Anzeige*, zum *Ausdruck* und zum *Download* vorhandener Dateien sowie zum *Upload* neuer Dateien (einschließlich neuer Versionen von Dateien) und zur *Erstellung neuer Unterordner* innerhalb des betreffenden Ordners <sup>&#42;</sup> und seiner Unterordner.
+   - **Änderung** - gewährt die individuellen Berechtigungen zur *Anzeige*, zum *Ausdruck*, zum *Download*, zur *Umbenennung* und zum *Entfernen* der betreffenden Datei. Wenn es sich bei dem Element um einen Ordner handelt, gilt Folgendes <sup>&#42;</sup> :
+
+     - Dieselben individuellen Berechtigungen werden auch für alle Dateien und Unterordner innerhalb des Ordners gewährt.
+     - Die individuellen Berechtigungen zum *Umbenennen* und *Entfernen* werden für den Ordner selbst gewährt.
+     - Die individuellen Berechtigungen zum *Upload* neuer Dateien und ihrer Versionen, *Erstellen neuer Unterordner* und *Entfernen vorhandener Unterordner* (innerhalb des betreffenden Ordners) werden gewährt.
+     - Die individuelle Berechtigung zum *Verschieben* einer Datei oder eines Unterordners in einen anderen Unterordner (innerhalb desselben Ordners) wird ebenfalls gewährt.
+     - Die Berechtigungen zum [Bearbeiten](/3.3/de/windows/accessing-secure-content#editing-files) und/oder Speichern/Upload neuer Dateiversionen sowie zum [Zugriff auf die anderen Versionen einer Datei](/3.3/de/user/managing-file-versions) über [Safe Share for Web](/3.3/de/user/index) werden ebenfalls gewährt, d. h. andere Versionen einer Datei können angezeigt, ausgedruckt, heruntergeladen oder als **aktive** Version festgelegt werden.
+   - **Verwalten** - gewährt die individuellen Berechtigungen zur *Anzeige*, zum *Ausdruck*, zum *Download*, zur *Umbenennung*, zur *Freigabe* und zum *Entfernen* der betreffenden Datei. Wenn es sich bei dem Element um einen Ordner handelt, gilt Folgendes <sup>&#42;</sup> :
+
+     - Dieselben individuellen Berechtigungen werden auch für alle Dateien und Unterordner innerhalb des Ordners gewährt.
+     - Die individuellen Berechtigungen zum *Umbenennen*, zur *Freigabe* und zum *Entfernen* werden für den Ordner selbst gewährt.
+     - Die individuellen Berechtigungen zum *Upload* neuer Dateien und ihrer Versionen, *Erstellen neuer Unterordner* und *Entfernen vorhandener Unterordner* (innerhalb des betreffenden Ordners) werden gewährt.
+     - Die individuelle Berechtigung zum *Verschieben* einer Datei oder eines Unterordners in einen anderen Unterordner (innerhalb desselben Ordners) wird ebenfalls gewährt.
+     - Die Berechtigungen zum [Bearbeiten](/3.3/de/windows/accessing-secure-content#editing-files) und/oder Speichern/Upload neuer Dateiversionen sowie zum [Zugriff auf die anderen Versionen einer Datei](/3.3/de/user/managing-file-versions) über [Safe Share for Web](/3.3/de/user/index) werden ebenfalls gewährt, d. h. andere Versionen einer Datei können angezeigt, ausgedruckt, heruntergeladen oder als **aktive** Version festgelegt werden.
+
+     Beachten Sie hierbei Folgendes: Wenn Ihr Covata-Benutzer-Account im Dialogfeld **Safe Share** als Mitwirkender (mit **Verwaltungs**-Berechtigung) aufgeführt ist und Sie diese Berechtigung auf eine andere Ebene herunterstufen, verlieren Sie die Möglichkeit, für die betreffenden Inhalte auf dieses Dialogfeld zuzugreifen, sobald Sie **Freigeben/Aktualisieren** angeklickt und den Vorgang so abgeschlossen haben. Um diese Möglichkeit wieder zu erhalten, müssen Sie den Besitzer der Inhalte (oder einen anderen Mitwirkenden mit **Verwaltungs**-Berechtigung) bitten, Ihre Berechtigung an den betreffenden Inhalten wieder zu **Verwaltung** zu ändern.
+
+   Wenn Sie dem Element keine neuen Mitwirkenden hinzufügen, gehen Sie weiter zu Schritt 6 ([unten](/3.3/de/windows/uploading-storing-and-sharing-content-securely#share-dialog-box-again)). <br />
+   <sup>&#42;</sup> **Hinweis:** Bei der Freigabe eines Ordners gilt Folgendes:
+
+   - Mitwirkende und ihre Berechtigungen (zum Zugriff auf Inhalte innerhalb des Ordners) werden *implizit* an alle im betreffenden Ordner enthaltenen Elemente weitergegeben (d. h. auf sie angewendet).
+   - Wenn Mitwirkende an einem Unterordner (in diesem Ordner) und/oder ihre Berechtigungen geändert werden, werden diese Änderungen *explizit* für den betreffenden Unterordner festgelegt und von dort aus *implizit* über die Elementehierarchie des betreffenden Unterordners weitergegeben.
+   - Die Berechtigungen eines Mitwirkenden, die für den betreffenden Unterordner *explizit* vorgegeben wurden, haben Vorrang gegenüber Berechtigungen, die der Mitwirkende eventuell *implizit* von einem übergeordneten Ordner übernommen hat.
+5. <a id="adding-collaborator-to-list" />Wenn die E-Mail-Adresse des Mitwirkenden (in diesem Dialogfeld) nicht in der Liste der Mitwirkenden erscheint, klicken Sie auf die Schaltfläche **Mitwirkende hinzufügen** (oder drücken Sie zur Auswahl der standardmäßigen **Anzeige**-Berechtigung nach der Eingabe der E-Mail-Adresse einfach die Eingabe-/Return-Taste), und die E-Mail-Adresse und gewählten Zugriffsberechtigungen des Mitwirkenden werden der Liste der Mitwirkenden hinzugefügt.
+
+   ![Safe Share-Dialogfeld](/images/f6d9465d20f6-added-collaborator.png)
+
+   <br />
+   **Tipp:** Sie können im Textfeld **Freigeben an** auch mehrere E-Mail-Adressen/Mitwirkende eingeben und diese in einem Zug hinzufügen. Dies geschieht folgendermaßen:
+
+   - Geben Sie nach der E-Mail-Adresse jedes Mitwirkenden ein Komma (,) ein. Damit ist die aktuelle E-Mail-Adresse abgeschlossen, und Sie können im Textfeld weitere Adressen eingeben. Alle eingegebenen E-Mail-Adressen werden der Liste der Mitwirkenden hinzugefügt, wenn Sie die Schaltfläche **Mitwirkende hinzufügen** anklicken.
+   - Kopieren Sie eine mit Trennzeichen strukturierte Zeichenfolge von E-Mail-Adressen Ihrer Mitwirkenden und fügen Sie sie in dieses Textfeld ein (ohne Leerzeichen). Safe Share for Windows erkennt die einzelnen E-Mail-Adressen im Textfeld automatisch und fügt der Liste der Mitwirkenden alle Adressen hinzu, sobald Sie die Schaltfläche **Mitwirkende hinzufügen** anklicken.
+
+   Beachten Sie, dass bei beiden Methoden die in der daneben (unmittelbar unter dem Textfeld **Freigeben an**) gezeigten Dropdown-Liste aktuell gewählte Berechtigung auf alle hinzugefügten Mitwirkenden angewendet wird.
+6. <a id="share-dialog-box-again" />Wiederholen Sie diesen Vorgang ab Schritt 3 ([oben](/3.3/de/windows/uploading-storing-and-sharing-content-securely#share-dialog-box)), um der Liste *weitere Mitwirkende hinzuzufügen* oder die *Berechtigungen vorhandener Mitwirkender am Element zu ändern*. Setzen Sie den Vorgang andernfalls fort.
+7. <a id="choosing-a-classification" />( *Optional und nur bei der Freigabe einer Datei verfügbar, **sofern** Ihr Organisations-Administrator für Ihre aktuelle Organisation [Klassifikationen](/3.3/de/admin-org/managing-classifications) konfiguriert hat* ) Wählen Sie im Dropdown-Menü „Klassifikationen“ eine vordefinierte Klassifikation. Die Standardeinstellung lautet **Keine Klassifikation**. (Klassifikationen ermöglichen es Ihnen, die Freigabe von Dateien auf bestimmte Gruppen von Covata-Benutzer zu beschränken.) <br />
+   **Hinweise:**
+
+   - Wenn die Richtlinien Ihrer Organisation es verlangen, dass Sie bei der Freigabe einer Datei eine bestimmte Klassifikation zuweisen, wählen Sie die für die freizugebenden Inhalte geeignete Klassifikation. Ein Organisations-Administrator kann für Ihre aktuelle Organisation zum Beispiel die folgenden Klassifikationen konfiguriert haben: **Vertraulich**, **Beschränkt/geschützt** und **Keine Klassifikation**. Die Standardeinstellung **Keine Klassifikation** (die keinerlei Klassifikationen anwendet) ist bei der Freigabe von Dateien ebenfalls verfügbar.
+   - Für weitere Informationen über Klassifikationen und Gruppen siehe **Verwaltung** von [Klassifikationen](/3.3/de/admin-org/managing-classifications) / [Gruppen](/3.3/de/admin-org/managing-groups) in der [Organisations-Administratorenanleitung](/3.3/de/admin-org/index).
+
+   **Tipp:** Wenn Sie lediglich die Klassifikation einer Datei ändern möchten, können Sie dies folgendermaßen schnell und einfach tun (ohne das Dialogfeld **Freigeben** zu öffnen):
+
+   1. Wählen Sie die Datei im Elementebereich der Safe Share-Hauptseite aus.
+   2. Wählen Sie im Abschnitt **Dateidetails** im Register **Details** rechts im Elementebereich die gewünschte Klassifikation aus dem Dropdown-Menü **Klassifikation**. Beachten Sie hierbei Folgendes: Ist ein vorhandener Mitwirkender der Datei nicht (aufgrund der von einem Organisations-Administrator definierten Zugehörigkeit zu einer Gruppe) mit der von Ihnen gewählten Klassifikation verknüpft, erhalten Sie eine entsprechende Warnung und können die betreffende Klassifikation nicht wählen.
+8. ( *Optional und ebenfalls nur bei der Freigabe einer Datei* verfügbar) Definieren Sie, ab *wann* auf Ihre Datei zugegriffen werden kann:
+
+   - Aktivieren Sie hierzu das Kontrollkästchen **Zugriff ermöglichen ab** und legen Sie in den Feldern rechts das Datum und den Zeitpunkt fest, ab dem Ihre Mitwirkenden auf die Datei zugreifen können. Lassen Sie das Kästchen leer, um die Datei unmittelbar zur Verfügung zu stellen.
+   - Aktivieren Sie das Kontrollkästchen **Zugriff widerrufen nach** und legen Sie in den Feldern rechts das Datum und den Zeitpunkt fest, ab dem Ihre Mitwirkenden nicht mehr auf die Datei zugreifen können. Lassen Sie das Kästchen leer, um die Datei unbefristet zur Verfügung zu stellen.
+
+   ![Datums-/Zeit-Steuerelemente](/images/bcca8fc4d0ba-date-time-controls.png)
+9. Klicken Sie auf **Freigeben/Aktualisieren** oder drücken Sie die Eingabe-/Return-Taste, um Ihr Element an Ihre Mitwirkenden freizugeben und das Dialogfeld **Safe Share** zu schließen. Alle in diesem Dialogfeld *neu hinzugefügten* Mitwirkenden erhalten eine E-Mail-Benachrichtigung. <br />
+   **Hinweise:**
+
+   - Wenn Sie Ihr Element aufgrund einer der folgenden Warnungen nicht freigeben können:
+
+     - *„Die Positivlistenfunktion verweigert Ihnen die Freigabe dieses Elements an eine oder mehrere der gewählten Personen. Bitte wenden Sie sich an Ihren Administrator.“* - Dies bedeutet, dass Ihr Organisations-Administrator die Funktion Benutzer-Positivliste Ihrer Organisation aktiviert hat, die den Kreis der (auf Ihre Organisation auf der Covata-Plattform zugriffsberechtigten) Personen auf diejenigen Benutzer beschränkt, deren E-Mail-Adressen (oder E-Mail-Domänen) der Positivliste hinzugefügt wurden. Sie müssen sich eventuell an Ihren Organisations-Administrator wenden um zu klären, welche E-Mail-Adressen und -Domänen auf der Positivliste stehen, und so sicherzustellen, dass nicht auf der Positivliste stehende Mitwirkende bei der Freigabe von Elementen (siehe oben) entweder entfernt oder Ihrer Liste von Mitwirkenden nicht hinzugefügt werden.
+     - *„Die folgenden Benutzer haben keinen Zugriff auf mit KLASSIFIKATION markierte Dateien:“* („KLASSIFIKATION“ ist hier der Name der von Ihnen [oben](/3.3/de/windows/uploading-storing-and-sharing-content-securely#choosing-a-classification) gewählten Klassifikation) - Dies bedeutet, dass Ihr Organisations-Administrator den in der Warnung aufgeführten Benutzern keinen Zugriff auf mit der betreffenden KLASSIFIKATION markierte Inhalte gewährt. Entfernen Sie entweder die Benutzer, die zum Zugriff auf Inhalte mit der betreffenden KLASSIFIKATION nicht berechtigt sind, oder wählen Sie eine andere Klassifikation.
+
+     Klicken Sie in beiden Fällen auf die Nachricht selbst, um zum Dialogfeld **Safe Share** zurückzukehren.
+   - Weitere Informationen über die Benutzer-Positivliste und Klassifikationen (und Gruppen) finden Sie in der Organisations-Administratorenanleitung.
+   - Sie können die Freigabe Ihrer sicheren Inhalte auch aufheben (d. h. Mitwirkende von diesen Inhalten entfernen). Für weitere Informationen siehe [Aufhebung der Freigabe sicherer Inhalte](/3.3/de/windows/managing-secure-content#unsharing-secure-content).
+
+<Info>
+
+**Zusätzliche Tipps und Hinweise:**
+
+- Um einer oder mehreren Personen mehrere Dateien freizugeben, [erstellen Sie einen Ordner](/3.3/de/windows/managing-secure-content#organising-content-with-folders) im Unterordner `Meine sicheren Dateien` und geben Sie diesen neuen Ordner anhand des (oben) beschriebenen Verfahrens an einen oder mehrere Mitwirkende frei. Alle Elemente, die Sie (oder ein Mitwirkender mit **Upload**-, **Änderungs**- oder **Verwaltungs**-Berechtigung für den betreffenden Ordner) anschließend in diesen Ordner (von außerhalb des `Safe Share`-Ordnerbereichs) kopieren oder verschieben, werden sofort an alle aktuellen Mitwirkenden des Ordners freigegeben. Wenn jedoch Mitwirkende eines Elements im betreffenden Ordner (d. h. Mitwirkende eines Unterordners oder einer Datei in diesem Ordner) und deren Berechtigungen geändert werden, haben diese Änderungen *Vorrang* gegenüber den Mitwirkenden und Berechtigungen, die für den ursprünglichen Ordner festgelegt waren. Beachten Sie, dass Mitwirkende (mit **Upload**-, **Änderungs**- oder**Verwaltungs**-Berechtigung für den betreffenden Ordner) im Gegensatz zum Besitzer des Ordners den Ordner in ihrem Unterordner `Mir freigegeben` sehen.
+- Sie können allen (oder bestimmten) aktuellen Mitwirkenden Ihres Elements eine Safe Share-E-Mail-Benachrichtigung senden: Sie haben hierfür die folgenden Optionen:
+
+  1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner zu. Klicken Sie im Unterordner „Meine sicheren Dateien“ Ihrer aktuellen Organisation mit der rechten Maustaste auf das gewünschte Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Mitwirkende benachrichtigen**, um das Dialogfeld **Mitwirkende benachrichtigen** aufzurufen. <br />
+     **Hinweise:**
+
+     - Deaktivieren Sie in diesem Dialogfeld das Kontrollkästchen **Alle Mitwirkenden benachrichtigen** (d. h. die Standardoption), um einzelne Mitwirkende (anhand ihrer E-Mail-Adressen) auswählen zu können, denen Sie eine Safe Share-E-Mail-Benachrichtigung senden.
+     - Sie können eine Safe Share-E-Mail-Benachrichtigung auch an (bestimmte) Mitwirkende eines Elements im Besitz eines anderen Covata-Benutzers senden, der Ihnen das betreffende Element (mit **Upload**-, **Änderungs**- oder **Verwaltungs**-Berechtigung freigegeben hat). Klicken Sie hierzu im Ordner „Freigegeben von...“ dieses anderen Benutzers in „Mir freigegeben“ mit der rechten Maustaste auf das gewünschte Element und wählen Sie aus dem Popup-Menü wieder die Option **Safe Share &gt; Mitwirkende benachrichtigen**.
+
+       - In diesen Fällen ist (für Mitwirkende des betreffenden Elements) der Besitzer des Elements auch als „Mitwirkender“ aufgeführt.
+       - Wenn Sie für ein Element lediglich **Anzeige**- oder **Download**-Berechtigung innehaben, können Sie ebenfalls die Funktion Safe Share-E-Mail-Benachrichtigung verwenden, aber die Benachrichtigung kann nur an den Besitzer des Elements gesendet werden.
+  2. Geben Sie im Feld **Nachricht (optional)** eine optionale Nachricht ein.
+  3. Klicken Sie auf die Schaltfläche **Senden**, um die E-Mail-Benachrichtigung an alle gewählten Mitwirkenden zu senden. Diese Benachrichtigung enthält einen Link zum Element sowie Anweisungen über den Zugriff auf das Element.
+- Sie können über Safe Share for Web eine URL für den direkten Zugriff auf Ihre Datei oder Ihren Ordner abrufen, die Sie dann Ihren Mitwirkenden, denen Sie das Element freigegeben haben, per E-Mail oder über eine Instant-Messenger-Anwendung senden können. Sie erhalten diese Direkt-URL folgendermaßen:
+
+  1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den `Safe Share`-Ordner zu.
+  2. Klicken Sie im Unterordner `Meine sicheren Dateien` Ihrer aktuellen Organisation mit der rechten Maustaste auf das gewünschte Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigabe-Link abrufen**.
+
+  *ODER*
+
+  1. Öffnen Sie das Dialogfeld **Safe Share** für das betreffende Element (siehe Beschreibung am Anfang dieses Ablaufs [oben](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content)).
+  2. Klicken Sie im Dialogfeld **Safe Share** auf die Schaltfläche **Freigabe-Link abrufen**, um den Link in Ihre Zwischenablage zu kopieren. Diese Schaltfläche ist nur verfügbar, wenn das Element mindestens einen Mitwirkenden hat.
+
+  Für Dateiformate, die vom [Content-Viewer einer beliebigen Safe Share-Anwendung unterstützt werden](/3.3/de/user/accessing-secure-content#file-formats-supported-by-the-content-viewer), öffnet diese URL das Element im [Content-Viewer](/3.3/de/user/accessing-secure-content#content-viewer) von Safe Share for Web und nicht auf der Hauptseite von Safe Share , auf der das Element aufgeführt ist. <br />
+  **Hinweis:** Sie können auch eine URL für den Zugriff auf ein Element im Besitz eines anderen Covata-Benutzers abrufen, der Ihnen das betreffende Element (mit **Verwaltungs**-Berechtigung) freigegeben hat, indem Sie einen dieser Abläufe an einem Element im Ordner „Freigegegeben von ...“ dieses anderen Benutzers in „Mir freigegeben“ ausführen.
+- Wenn Sie ein Element einem oder mehreren Mitwirkenden freigeben *und* das Element in einem Ordner gespeichert ist, der den betreffenden Mitwirkenden nicht freigegeben ist, können die Mitwirkenden bei ihrer Anmeldung:
+
+  - bei Safe Share for Windows auf das Element vom Stamm des Unterordners „Freigegeben von“ Ihres Covata-Benutzer-Accounts (in ihrem Unterordner „Mir freigegeben“) zugreifen. Für weitere Informationen über „Freigegeben von“-Unterordner siehe [Anzeige, Ausdruck und Download von (Ihnen freigegebenen) Inhalten](/3.3/de/windows/accessing-secure-content#viewing-printing-downloading-content-shared-with-you).
+  - bei [Safe Share for Web](/3.3/de/user/index) auf das Element vom Stammspeicherort ihrer Safe Share -Hauptseite zugreifen.
+- Wenn Sie Elemente von einem Unterordner in einen anderen innerhalb von „Meine sicheren Dateien“ verschieben, werden die betreffenden Elemente allen weiteren Mitwirkenden zugänglich gemacht, denen der betreffende Unterordner bereits *explizit* freigegeben wurde. Dieser Zugriff gilt auch für andere Mitwirkende, die *explizit* für übergeordnete Ordner (innerhalb des Ordners „Meine sicheren Dateien“) eingerichtet sind; diese erhalten dann *implizit* Zugriff auf diese verschobenen Elemente (an ihrem neuen Speicherort). Der Zugriff jedes dieser anderen Mitwirkenden auf die verschobenen Elemente hängt von den Berechtigungen ab, die für den betreffenden übergeordneten Ordner vorgegeben wurden. Beachten Sie jedoch, dass solche Mitwirkende für Elemente, die in einen Ordner verschoben wurden, auf den sie bereits Zugriff haben, keine E-Mail-Benachrichtigung erhalten.
+
+</Info>
+
+## Upload, Speichern und Freigeben von Inhalten „in einem Schritt“ <a id="uploading-storing-and-sharing-content-in-one-go" />
+
+**Sicheres Hochladen, Speichern und Freigeben Ihrer eigenen Inhalte an andere Personen in einem Schritt (von allen über den Windows Explorer zugänglichen Speicherorten):**
+
+1. Vergewissern Sie sich, dass Safe Share for Windows [gestartet](/3.3/de/windows/starting-the-application-and-signing-in#starting-the-application) ist, Sie angemeldet sind und (sofern Ihr Covata-Benutzer-Account Mitglied mehrerer Organisationen ist) Ihre [aktuelle Organisation](/3.3/de/windows/uploading-storing-and-sharing-content-securely#changing-organisations) die gewünschte Organisation ist, über die Sie die betreffenden Inhalte hochladen und freigeben möchten.
+2. Klicken Sie mit der rechten Maustaste auf eine Datei oder einen Ordner auf Ihrem Desktop oder anderswo im Windows Explorer und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigeben**:
+
+   ![Freigabe einer Datei vom Desktop](/images/13c433c91531-sharing-a-file-from-desktop.jpg)
+
+   <br />
+    Safe Share for Windows beginnt, den Inhalt Ihres Elements zu verschlüsseln und lädt den verschlüsselten Inhalt in den Remotespeicher hoch. Dies wird von einer Benachrichtigung im Anwendungsbereich angezeigt:
+
+   ![Upload-Benachrichtigung](/images/d7dfe7d3be38-uploading-notification.png)
+
+   <br />
+   **Hinweise:**
+
+   - Wenn Sie nicht angemeldet sind, öffnet Safe Share for Windows das [Dialogfeld Anmeldung](/3.3/de/windows/starting-the-application-and-signing-in#sign-in-dialog-box), um Sie zur Anmeldung aufzufordern.
+   - Wenn Sie eine große Datenmenge sicher speichern, kann die Verschlüsselung etwas Zeit in Anspruch nehmen. Beachten Sie, dass Sie jederzeit das Symbol „Minimieren“
+     ![Symbol Minimieren im Anwendungsbereich](/images/bd00acdca7e9-application-pane-minimise-icon.png)
+
+      im Anwendungsbereich anklicken können, um den Anwendungsbereich auszublenden und den Verschlüsselungsvorgang im Hintergrund fortzusetzen.
+   - Die maximale unterstützte Dateigröße hängt von einem in der Covata-Plattform konfigurierten Parameter ab. Einer Ihrer Safe Share-Administratoren kann Ihnen den Wert dieses Parameters mitteilen. Safe Share for Windows definiert standardmäßig eine maximale Dateigröße von 20 GB, die zwar Vorrang hat, aber (nur für Uploads) von einer Einstellung in der Windows-Registrierung überschrieben werden kann.
+3. Sobald die Verschlüsselung abgeschlossen ist, wird das Dialogfeld **Safe Share** geöffnet. Setzen Sie den Vorgang ab [Schritt 3 in „Freigabe sicherer Inhalte“](/3.3/de/windows/uploading-storing-and-sharing-content-securely#share-dialog-box) oben fort.
+
+## Upload von Inhalten zur Freigabe über den Ordner eines anderen Benutzers <a id="uploading-content-to-share-through-another-users-folder" />
+
+Wenn ein Covata-Benutzer, der [einen Ordner besitzt](/3.3/de/windows/managing-secure-content#organising-content-with-folders):
+
+- Ihnen als Mitwirkenden [diesen Ordner freigegeben hat](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) und
+- Ihnen für den Zugriff auf diesen Ordner **Upload**-, **Änderungs**- oder **Verwaltungs**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) (d. h. einen Berechtigungssatz) erteilt hat,
+
+können Sie Inhalte über diesen Ordner des anderen Covata-Benutzers sicher speichern und freigeben. Sobald der Inhalt verschlüsselt ist, wird er in von der Covata-Plattform verwalteten Remotespeicher hochgeladen.
+
+Für alle Inhalte, die Sie in diesen Ordner hochladen und dort speichern, gilt Folgendes:
+
+- Sie übernehmen implizit dieselben Berechtigungen, die Ihnen für den Ordner erteilt wurden.
+- Sie werden für andere Covata-Benutzer verfügbar, die ebenfalls Mitwirkende des betreffenden Ordners sind.
+- Sie werden Besitz des Benutzers, der Ihnen den Ordner freigegeben hat.
+
+<a id="determining-folder-permissions" />**Feststellung Ihrer Berechtigung, Inhalte im Ordner eines anderen Benutzers zu speichern (d. h. sie hochzuladen) (oder Inhalte dort zu ändern/verwalten):**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Suchen bzw. identifizieren Sie im Unterordner „Mir freigegeben“ den Ordner dieses anderen Covata-Benutzers, der Ihnen Inhalte freigegeben hat.
+3. Klicken Sie im Ordner „Freigegeben von...“ des anderen Benutzers mit der rechten Maustaste auf einen Unterordner und wählen Sie aus dem Popup-Menü **Safe Share &gt; Berechtigungen anzeigen**:
+
+   ![Feststellung der Berechtigungen an einem Ordner](/images/55d4f0ef0554-right-clicking-an-item-collaborator.png)
+
+   - Eine Meldung **Berechtigungen** erscheint und zeigt den Berechtigungssatz sowie die individuellen Berechtigungen an, die Sie für den betreffenden Unterordner innehaben. Für diesen Unterordner gilt Folgendes:
+   - Der **Upload**-Berechtigungssatz ermöglicht es Ihnen, Dateien und neue Versionen von Dateien in den Ordner selbst sowie seine Unterordner, für die Sie ebenfalls den **Upload**-Berechtigungssatz innehaben, *hochzuladen* und innerhalb dieser Ordner Unterordner [zu erstellen](/3.3/de/windows/managing-secure-content#organising-content-with-folders).
+   - Der **Änderungs**-Berechtigungssatz gibt Ihnen für den Ordner und seine Inhalte dieselben Berechtigungen wie der **Upload**-Berechtigungssatz sowie zusätzlich die folgenden Möglichkeiten:
+
+     - *[Umbenennen](/3.3/de/windows/managing-secure-content#renaming-an-item)* und *[Entfernen](/3.3/de/windows/managing-secure-content#removing-content-shared-through-another-users-folder)* von Elementen innerhalb des betreffenden Ordners sowie des Ordners selbst und aller Unterordner, für die Sie ebenfalls **Änderungs**-Berechtigung besitzen
+     - *Verschieben* von Dateien innerhalb des betreffenden Ordners zwischen Unterordnern, für die Sie ebenfalls den **Änderungs**-Berechtigungssatz innehaben
+   - Der **Verwaltungs**-Berechtigungssatz gibt Ihnen für den Ordner dieselben Berechtigungen wie der **Änderungs**-Berechtigungssatz sowie zusätzlich die Möglichkeit zur *[Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content)* des Ordners und aller seiner Elemente, für die Sie ebenfalls **Verwaltungs**-Berechtigung besitzen.
+
+**Identifizierung der Mitwirkenden des Ordners dieses anderen Benutzers (d. h. des Besitzers):**
+
+Als Mitwirkender mit dem Berechtigungssatz **Upload** oder **Verwaltung** für den Ordner eines anderen Covata-Benutzers möchten Sie vielleicht feststellen, welche anderen Personen Mitwirkende des betreffenden Ordners sind, ehe Sie Dateien in diesen Ordner hochladen und Inhalte freigeben. Zur Identifizierung aller dieser Mitwirkender:
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Suchen bzw. identifizieren Sie im Unterordner „Mir freigegeben“ den Ordner dieses anderen Covata-Benutzers, der Ihnen Inhalte freigegeben hat.
+3. Klicken Sie im Ordner „Freigegeben von...“ des anderen Benutzers mit der rechten Maustaste auf einen Unterordner und wählen Sie aus dem Popup-Menü **Safe Share &gt; Mitwirkende benachrichtigen**, um das Dialogfeld **Mitwirkende benachrichtigen** aufzurufen. <br />
+    Alle Mitwirkenden und der Besitzer des betreffenden Unterordners werden im Abschnitt **Zu benachrichtigende Mitwirkende auswählen** dieses Dialogfelds angezeigt.
+4. Klicken Sie auf **Abbrechen**, um dieses Dialogfeld zu schließen.
+
+Alternativ lassen sich die einzelnen Mitwirkenden des Ordners eines anderen Benutzers (einschließlich ihrer Berechtigungen am betreffenden Ordner) auch anhand der Safe Share-Webfunktion feststellen:
+
+1. [Greifen Sie](/3.3/de/windows/starting-the-application-and-signing-in#accessing-the-web-application) auf Safe Share Web zu.
+2. Suchen Sie in Safe Share Web den Ordner (eines anderen Benutzers), für den Sie **Upload**- oder **Verwaltungs**-Berechtigung haben. Für weitere Informationen siehe [Suchen sicherer Inhalte](/3.3/de/user/managing-secure-content#finding-secure-content) und [Upload von Inhalten zur Freigabe über den Ordner eines anderen Benutzers](/3.3/de/user/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) in der Safe Share for Web-Benutzeranleitung. <br />
+    Im Bereich **Freigabe und Berechtigungen** des Registers **Details** werden alle anderen Covata-Benutzer, die aktuell Mitwirkende des Ordners sind, mit ihren aktuellen Berechtigungssätzen angezeigt (einschließlich des Besitzers aber ausschließlich Ihrer selbst).
+
+**Sicherer Upload von Inhalten für die Freigabe über den Ordner dieses anderen Benutzers:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre/die gewünschte Organisation zu und identifizieren Sie den Ordner des anderen Covata-Benutzers, dessen Mitwirkender Sie sind und in den Sie Inhalte hochladen dürfen (siehe Beschreibung [oben](/3.3/de/windows/uploading-storing-and-sharing-content-securely#determining-folder-permissions)).
+2. Wählen Sie eine(n) oder mehrere Datei(en) und/oder Ordner auf Ihrem Computer und kopieren oder verschieben Sie sie in diesen Ordner (wie Sie dies normalerweise im Windows Explorer tun würden). <br />
+    Ihre Elemente werden von Safe Share for Windows in diesem Ordner lokal verschlüsselt und anschließend sicher in den von der Covata-Plattform verwalteten Remotespeicher hochgeladen. <br />
+   **Hinweise:**
+
+   - Diese Inhalte werden nach ihrem Upload im Remotespeicher des Covata-Benutzers gespeichert, in dessen Ordner Sie Inhalte kopiert/verschoben haben.
+   - Ihre hochgeladenen Inhalte erscheinen daher im Ordner „Meine sicheren Dateien“ des Besitzers, wenn sich dieser das nächste Mal bei Safe Share for Windows anmeldet.
+   - Alle (vom Besitzer des Ordners festgelegten) Mitwirkenden des Ordners erhalten auf die von Ihnen hochgeladenen Inhalte Zugriff, abhängig von den Berechtigungen der einzelnen Mitwirkenden hinsichtlich des Ordners.
+   - Wenn Sie versuchen, eine Datei hochzuladen und zu speichern, deren Namen mit dem einer am jeweiligen Speicherort bereits vorhandenen Datei (für die Sie **Änderungs**- oder **Verwaltungs**-Berechtigung haben) übereinstimmt, zeigt Safe Share for Windows in der Taskleiste die Meldung **Datei existiert bereits - neue Version wird hinzugefügt** und beginnt automatisch mit dem Upload einer neuen Version dieser Datei. Andere Versionen einer Datei sind aktuell nur über [Safe Share for Web](/3.3/de/user/index) zugänglich und können dort verwaltet werden. Für weitere Informationen siehe [Verwaltung von Dateiversionen](/3.3/de/user/managing-file-versions) in der Benutzeranleitung für Safe Share for Web.
+   - Wenn Sie die Meldung *„Aktion konnte nicht ausgeführt werden - Das Element existiert im Ordner oder Remotespeicher bereits.“* erhalten, existiert im Ordner des Benutzers bereits mindestens ein Element mit demselben Namen. Sie sehen diese Elemente jedoch nicht, weil Sie aus einem der folgenden Gründe kein Mitwirkender daran sind:
+
+     - Sie haben [Ihren Zugriff auf diese Elemente](/3.3/de/windows/managing-secure-content#removing-your-access-to-content-shared-with-you) entfernt.
+     - Sie wurden als Mitwirkender dieser Elemente entfernt (für weitere Informationen siehe [Aufhebung der Freigabe sicherer Inhalte](/3.3/de/windows/managing-secure-content#unsharing-secure-content)) oder
+     - Die Elemente wurden Ihnen nie freigegeben.
+
+<Info>
+
+**Zusätzlicher Tipp:** Sie können als Mitwirkender eines Elements (einschließlich Inhalte, die Sie in den Ordner eines anderen Benutzers hochgeladen haben) allen (oder bestimmten) aktuellen Mitwirkenden des Elements (einschließlich seines Besitzers) eine Safe Share-E-Mail-Benachrichtigung senden. Sie haben hierfür die folgenden Optionen:
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre bzw. die gewünschte Organisation zu. Klicken Sie im Unterordner „Freigegeben von ...“ dieses anderen Benutzers (im Ordner „Mir freigegeben“) mit der rechten Maustaste auf das gewünschte Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Mitwirkende benachrichtigen**, um das Dialogfeld **Mitwirkende benachrichtigen** aufzurufen. <br />
+   **Hinweis:** Deaktivieren Sie in diesem Dialogfeld das Kontrollkästchen **Alle Mitwirkenden benachrichtigen** (d. h. die Standardoption), um einzelne Mitwirkende (anhand ihrer E-Mail-Adressen) auswählen zu können, denen Sie eine Safe Share-E-Mail-Benachrichtigung senden.
+2. Geben Sie im Feld **Nachricht (optional)** eine optionale Nachricht ein.
+3. Klicken Sie auf die Schaltfläche **Senden**, um die E-Mail-Benachrichtigung (gegebenenfalls mit einer optionalen Nachricht) an alle gewählten Mitwirkenden zu senden. Diese Benachrichtigung enthält einen Link zum Element sowie Anweisungen über den Zugriff auf das Element.
+
+</Info>

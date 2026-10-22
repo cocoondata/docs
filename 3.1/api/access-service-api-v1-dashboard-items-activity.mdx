@@ -1,0 +1,71 @@
+---
+title: "<access-service>/api/v1/dashboard/items/activity"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-items-activity-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/items/activity
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-items-activity-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total number of [Secure Objects](/3.1/api/creating-secure-objects-and-collections#secure-object) in the *Created* state and [collections](/3.1/api/creating-secure-objects-and-collections#collection) which have recently been created on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-dashboard-items-activity-detailed-description" />
+
+This API endpoint retrieves the total numbers of completed Secure Objects (i.e. in the *Created* state) and collections which have recently been created on the Covata Platform.
+
+By default, the numbers of completed Secure Objects and collections created in the last 24 hours are returned in the [response](/3.1/api/access-service-api-v1-dashboard-items-activity#access-service-api-v1-dashboard-items-activity-returns) from this API endpoint. However, the numbers of these items which have been created in the last 1 or more hours (up to the last week, i.e. 168 hours) can be retrieved.
+
+<Note>
+
+This feature is not used on the ['Dashboard' page](/3.1/admin/accessing-administration#the-dashboard) of [Covata Administration](/3.1/admin/index).
+
+</Note>
+
+## Supported roles <a id="access-service-api-v1-dashboard-items-activity-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-dashboard-items-activity#access-service-api-v1-dashboard-items-activity-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-items-activity-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-dashboard-items-activity-optional-parameters" />
+
+The following optional parameter can be sent in the URL of the GET request:
+
+- **lastHours** - An integer value representing the number of hours back from the current time through which to calculate the total numbers of completed Secure Objects and collections that were created. <br />
+  **Notes:**
+
+  - If this parameter is not specified, then a default value of `24` hours is assumed.
+  - If a parameter value is specified which is outside the permitted range of `1` to `168` hours, then the default of `24` hours is assumed.
+
+  **Example:**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/dashboard/items/activity?lastHours=48
+  ```
+
+## Returns <a id="access-service-api-v1-dashboard-items-activity-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **objectsCreated** - The total number of completed Secure Objects which were created in the last **lastHours** number of hours.
+- **collectionsCreated** - The total number of collections which were created in the last **lastHours** number of hours.
+
+  **Example:**
+
+  ```json
+  {
+    "objectsCreated": 6,
+    "collectionsCreated": 2
+  }
+  ```

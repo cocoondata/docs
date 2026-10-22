@@ -1,0 +1,64 @@
+---
+title: "<access-service>/api/v1/users/bulk"
+---
+
+## URL structure <a id="access-service-api-v1-users-bulk-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/bulk
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-bulk-supported-methods-and-overview" />
+
+- `POST` - used to perform a specific action on one or more [Covata users](/2.16/admin/administering-users) (i.e. [disable, enable](/2.16/admin/administering-users#disabling-or-re-enabling-users), [expire tokens/sessions](/2.16/admin/administering-users#expiring-users-tokens-sessions), [force passwords to be reset](/2.16/admin/administering-users#forcing-users-to-reset-their-passwords) or [delete](/2.16/admin/administering-users#deleting-users)).
+
+## Detailed description <a id="access-service-api-v1-users-bulk-detailed-description" />
+
+This API endpoint performs any one of the following actions on one or more Covata users (each of which is specified by their Covata user ID):
+
+- Disable or (re-)enable the account(s) of one or more Covata user(s). This can also be performed for an individual Covata user by calling the [&lt;access-service&gt;/api/v1/users/\{userId\}/enable](/2.16/api/access-service-api-v1-users-userid-enable) API endpoint.
+- Expire (i.e. invalidate) all access/refresh tokens associated with the Covata user(s). This can also be performed for an individual:
+
+  - Covata user by calling the [&lt;access-service&gt;/api/v1/users/\{userId\}/expire](/2.16/api/access-service-api-v1-users-userid-expire) API endpoint.
+  - Access token (and its associated refresh token) by calling the [&lt;access-service&gt;/api/v1/auth/token/revoke](/2.16/api/access-service-api-v1-auth-token-revoke) API endpoint.
+- Force the Covata user(s) password(s) to be reset. This can also be performed for an individual Covata user by calling the `PUT` method of the [&lt;access-service&gt;/api/v1/users/\{userid\}](/2.16/api/access-service-api-v1-users-userid) API endpoint.
+- Delete the Covata user(s). This can also be performed for an individual Covata user by calling the `DELETE` method of the [&lt;access-service&gt;/api/v1/users/\{userid\}](/2.16/api/access-service-api-v1-users-userid) API endpoint. <br />
+  **Important:** It is *strongly advised* that you first explicitly delete these users' entire Secure Object content in storage (that will require multiple calls to the [&lt;content-service&gt;/api/v1/users/\{userid\}/contents](/2.16/api/content-service-api-v1-users-userid-contents) API endpoint - one for each user being deleted) *before* calling this API endpoint (with the **action** parameter value of `delete`), which changes the state of all Secure Objects that these users currently own to *Deleted*. If you call this endpoint first, then the available storage space reported by the Covata Platform is likely to remain significantly lower and will continue to do so, since the Covata Platform can no longer authenticate these users to obtain the appropriate access tokens required to manipulate these Secure Objects' data in storage through the Covata API.
+
+## Supported roles <a id="access-service-api-users-bulk-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-users-bulk#access-service-api-v1-users-bulk-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-bulk-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-users-bulk-required-parameters" />
+
+The following required parameter must be sent in the URL of the POST request:
+
+- **action** - disable, enable, expire, resetPassword or delete.
+
+  **Example ():**
+
+## Optional parameters <a id="access-service-api-v1-users-bulk-optional-parameters" />
+
+The following optional parameter can be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **ids** - An array of Covata user IDs.
+
+  **Example ():**
+
+Although omitting the **ids** parameter above in a request serves no purpose, an empty JSON object must at least be passed in the body of POST requests to this endpoint for a successful response:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-users-bulk-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

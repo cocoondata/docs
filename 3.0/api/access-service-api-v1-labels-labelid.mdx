@@ -1,0 +1,65 @@
+---
+title: "<access-service>/api/v1/labels/{labelId}"
+---
+
+## URL structure <a id="access-service-api-v1-labels-labelid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/labels/{labelId}
+```
+
+where `{labelId}` is the ID of a label.
+
+## Supported methods and overview <a id="access-service-api-v1-labels-labelid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about an existing [label](/3.0/admin/managing-labels), based on the label's ID.
+- `DELETE` - used to delete an exiting label.
+
+<Note>
+
+Both of these methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-labels-labelid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about an existing label, using the label's ID. A label's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/labels](/3.0/api/access-service-api-v1-labels) API endpoint, which retrieves a list of field information for all existing labels on the Covata Platform. <br />
+  **Tip:** All information (except the **description** member) returned in the [response](/3.0/api/access-service-api-v1-labels-labelid#access-service-api-v1-labels-labelid-returns-from-a-GET-request) from a `GET` method call to this API endpoint is also returned in the [response](/3.0/api/access-service-api-v1-labels#access-service-api-v1-labels-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/labels](/3.0/api/access-service-api-v1-labels) endpoint. Therefore, if you do not require a label's **description** when retrieving information about the label, there is no need to call the `GET` method on this API endpoint.
+- Deletes an existing label from the Covata Platform. <br />
+  **Important:** Deleting a label from the Covata Platform also removes:
+
+  - this label from all [new](/3.0/api/access-service-api-v1-objects) and [existing](/3.0/api/access-service-api-v1-objects-objectid) [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) it had been applied to and more importantly,
+  - removes all current collaborators from these Secure Objects.
+
+Be aware that by design and for security reasons, it is not possible to edit any aspect of a label.
+
+## Supported roles <a id="access-service-api-labels-labelid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-labels-labelid#access-service-api-v1-labels-labelid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-labels-labelid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns from a GET request <a id="access-service-api-v1-labels-labelid-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+- **priority** - .
+
+  **Example (response from ...):**
+
+## Returns from a DELETE request <a id="access-service-api-v1-labels-labelid-returns-from-a-DELETE-request" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

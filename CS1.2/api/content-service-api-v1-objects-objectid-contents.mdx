@@ -1,0 +1,381 @@
+---
+title: "<content-service>/api/v1/objects/{objectId}/contents"
+---
+
+## URL structure <a id="content-service-api-v1-objects-objectid-contents-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/objects/{objectId}/contents
+```
+
+where `{objectId}` is the ID of a file object/Secure Object.
+
+## Supported methods and overview <a id="content-service-api-v1-objects-objectid-contents-supported-methods-and-overview" />
+
+- `POST` - uploads the data of a new file object/[Secure Object](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object) (specified by `objectId`) to storage via the Cocoon Data Platform's Content Service. <br />
+  **Note:** If uploading locally encrypted data, this process completes an *Incomplete* file object (which changes its state to *Created*).
+- `GET` - downloads the data of the active version of a file object (specified by `objectId`) from storage via the Content Service.
+- `DELETE` ( *Deprecated* ) - deletes a file object's data from storage (managed by the Content Service).
+
+<Note>
+
+The `DELETE` method on this endpoint is deprecated and should no longer be used. Instead, the deletion of file object data (including file object versions) from storage is now automatically handled through `DELETE` method requests to the following endpoints:
+
+- [&lt;access-service&gt;/api/v1/recycle-bin/items/\{itemId\}](/CS1.2/api/access-service-api-v1-recycle-bin-items-itemid)
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/recycle-bin/items](/CS1.2/api/access-service-api-v1-organisations-orgid-recycle-bin-items)
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-objects-objectid-contents-detailed-description" />
+
+This API endpoint serves a number of purposes, all of which are managed by the Cocoon Data Platform's Content Service:
+
+- Uploads the data associated with a new file object (either in its unencrypted or encrypted form) to storage. <br />
+  **Note:** If uploading locally encrypted data, this process completes an *Incomplete* file object, changing its state to *Created*, by associating the SHA-512 value of the file's encrypted data (specified through this endpoint's **sha512** [parameter](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-additional-post-request-parameters)). (Be aware that this data must have been encrypted locally - i.e. not via server-side encryption by the Content Service). For more information about initializing an *Incomplete* file object, see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects).
+- Downloads the data associated with a file object's active version (either in its unencrypted or encrypted form) from storage. <br />
+  **Note:** If downloading the file object's data in its encrypted form, the key required to decrypt this data can be obtained by calling the [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/CS1.2/api/access-service-api-v1-objects-objectid-keys) API endpoint.
+
+The maximum amount of data that can be uploaded in any one request is defined on the Cocoon Data Platform. The default value of this maximum amount (known as the *chunk size*) is 10 MiB. Therefore, if the total amount of data you are uploading is greater than the permitted chunk size, then the data must be uploaded as a series of chunks, each as an individual upload request to this API endpoint.
+
+<Note>
+
+- A *MiB* is a [mebibyte](http://physics.nist.gov/cuu/Units/binary.html), where one MiB = 1 x 1024 x 1024 bytes = 1048576 bytes.
+- Data is only stored (via the Content Service) in its encrypted form.
+- Whenever data is uploaded to or downloaded from the Content Service in unencrypted form, the data is respectively encrypted (before being sent to storage) or decrypted (after being retrieved from storage) through a separate Content Service process.
+
+</Note>
+
+## Supported roles and conditions <a id="content-service-api-v1-objects-objectid-contents-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org/index)) and conditions:
+
+- [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - using the:
+
+  - `POST` method, when this user has [initialized/created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) the file object whose ID is specified by `{objectId}` in the request's URL.
+  - `GET` and `DELETE` methods - when this user owns the file object whose ID is specified by `{objectId}` in the URL.
+- **Originator**, [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role), when this user is a collaborator on the file object whose ID is specified by `{objectId}` in the URL. Such a collaborator user can utilize the:
+
+  - `POST` method, with the **Upload File** [permission](/CS1.2/api/access-service-api-v1-permissions-sets) on this file object.
+  - `GET` method, with the **Download** permission on this file object.
+  - `DELETE` method, with the **Remove (File)** permission on this file object.
+
+The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-objects-objectid-contents-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is also required in a POST request to allow multi-part (including binary) form data elements to be uploaded through the request:
+
+- `Content-Type: multipart/form-data; boundary=-----------------------------12345678901234567890123456`
+
+<Note>
+
+The `boundary` component's value is a unique string value used to demarcate each multi-part form data element in the body of the request. <br />
+ Based on the example above, the following string value is used to demarcate each multi-part form data element in the body of the request: <br />
+`-----------------------------12345678901234567890123456`
+
+</Note>
+
+## Required POST-request parameters <a id="content-service-api-v1-objects-objectid-contents-required-post-request-parameters" />
+
+The following required parameter must be sent in the **URL** of a POST request:
+
+- **format** - Specify either the value `plaintext` if uploading unencrypted data to the Cocoon Data Platform's Content Service or `encrypted` if the data was pre-encrypted before uploading; e.g. encryption was conducted locally by the client application. <br />
+  **Notes:**
+
+  - If you are uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) below for details) then this parameter must be specified in each request.
+  - If you are pre-encrypting your data before uploading it to storage via the Content Service, then ensure that this data is encrypted using:
+
+    - The AES algorithm (in CBC mode) with [PKCS #7 padding](http://tools.ietf.org/html/rfc2315) (see [Optional parameters](/CS1.2/api/access-service-api-v1-keys#access-service-api-v1-keys-optional-parameters) of [&lt;access-service&gt;/api/v1/keys](/CS1.2/api/access-service-api-v1-keys) for more information), as well as
+    - The cryptographic key and initialization vector ([returned](/CS1.2/api/access-service-api-v1-keys#access-service-api-v1-keys-returns) by calling the [&lt;access-service&gt;/api/v1/keys](/CS1.2/api/access-service-api-v1-keys) API endpoint) for the key associated with this file object.
+
+    If you do not follow these encryption guidelines, then either your attempt to upload your encrypted data may fail or if successful, any attempt to [download](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-get-request-parameters) the file object's data in its decrypted form will result in the retrieval of garbled data.
+
+  **Example:**
+
+  ```text
+  https://content-service.xy-company.com/api/v1/objects/987654321098765432/contents?format=encrypted
+  ```
+
+<a id="content-service-api-v1-objects-objectid-contents-additional-post-request-parameters" />Additionally, the following required parameters must be sent in the **body** of a POST request, each as individual **multi-part form data** elements and if uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) below for details) then the following parameters must be specified in each request, unless otherwise indicated:
+
+- **sha512** ( *Only required if uploading locally encrypted data - i.e. if the **format** parameter above is `encrypted`* ) - The [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) value of the new file object's encrypted data. <br />
+  **Notes:**
+
+  - If you are uploading data in more than one *chunk upload request* (see [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) below for details), then this parameter only needs to be specified in the final chunk upload request, at which point the Content Service accepts this value. The **sha512** value can only be set once on a new file object, at which point this property becomes immutable.
+  - If you are uploading the file version's *unencrypted* data to storage via the Content Service, then the Content Service automatically assigns this **sha512** value (after performing server-side encryption) once all upload requests to this endpoint are complete.
+- **totalFileSizeBytes** - The size (in bytes) of the total amount of unencrypted or encrypted data to be uploaded.
+- **data** - The actual unencrypted or encrypted data to be uploaded to the Cocoon Data Platform's Content Service. <br />
+  **Notes:**
+
+  - If the total amount of data you are uploading is greater than the *chunk size* permitted by the Cocoon Data Platform (e.g. 10 MiB), then you must upload this data as part of a multi-chunk upload and more parameters are required with each *chunk upload request*; see [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (below) for details. Your client application will be responsible for extracting the appropriately-sized data chunks sequentially (for submission with each chunk upload request) from the total amount of data to be uploaded.
+  - The default `Content-Type` for this parameter is `application/octet-stream` <br />
+     (Use this `Content-Type` for any multi-chunk upload.)
+
+  **<a id="content-service-api-v1-objects-objectid-contents-single-request" />Example (uploading data less than or equal to the *chunk size* permitted by the Cocoon Data Platform in a single request):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  549732
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="paraglider.jpg"
+  Content-Type: image/jpeg
+
+  {YOUR ACTUAL UNENCRYPTED OR ENCRYPTED DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Required parameters for multi-chunk uploads <a id="content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads" />
+
+If the total amount of data being uploaded is greater than the *chunk size* permitted by the Cocoon Data Platform, then divide this amount of data by this chunk size. The data must then be uploaded chunk-by-chunk in a series of POST requests to this API endpoint (each of which is referred to as a *chunk upload request*), until all data has been uploaded.
+
+In addition to the parameters [above](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters), the following parameters must also be sent in the **body** of each chunk upload request. Each of these parameters must be sent as individual **multi-part form data** elements:
+
+- **chunkSize** - The size (in bytes) of the unencrypted or encrypted data being uploaded to the Cocoon Data Platform's Content Service (for storage) in this *chunk upload request*. <br />
+   Assuming the default Cocoon Data Platform upload limit of 10 MiB, specify a value of `10485760` (bytes) for the first chunk upload request. Then continue specifying this value in subsequent upload requests (each containing a subsequent 10 MiB chunk of the data being uploaded) until the following upload request of 10 MiB (which is the final one) exceeds the remainder of the total amount of data being uploaded. For this final upload request, specify the remaining amount of the total data instead. <br />
+   For example, if you are uploading 48 MiB file, you would send four chunk upload requests of 10 MiB (each of whose **chunkSize** value would be `10485760`) followed by a final chunk upload request of 8 MiB (whose **chunkSize** value would be `8388608`).
+- **partIndex** - The index number for the chunk of data being submitted in this *chunk upload request*, starting from `0`. For example, for the first chunk upload request, **partIndex** would be `0`; for the second chunk upload request, **partIndex** would be `1`; for the third, **partIndex** would be `2` and so on.
+- **partByteOffset** - The number of bytes from the beginning of the total amount of data, where the start of the actual data being uploaded (in this *chunk upload request*) commences. <br />
+   For example, following on from the 48 MiB file example (above), the value of this **partByteOffset** parameter's value would be `0` in the first chunk upload request. In the second chunk upload request, this parameter's value would be `10485760`. In the third request, this parameter's value would be `20971520` (i.e. `10485760` + `10485760`) and so on.
+- **totalParts** - The total number of *chunk upload requests* required to upload the total amount of unencrypted or encrypted data. <br />
+   Following on from the 48 MiB file example (above), **totalParts** would be `5`.
+- **uploadId** ( *Only used after the first 'chunk upload request'* ) - Specify the value of the **uploadId** member returned in response to the previous chunk upload request.
+- **bucket** ( *Only used after the first 'chunk upload request'* ) - Specify the value of the **bucket** member returned in response to the previous chunk upload request.
+- **etags[X]** ( *Only used in the final 'chunk upload request'* ) - Specify the value of each **etags** member returned in all previous *chunk upload requests*. A given **etags** parameter in the final chunk upload request has a value of **X** and an associated alphanumeric string value, which corresponds respectively to the **X** sub-member (and its associated value) of the **etags** member returned in the [response](/CS1.2/api/content-service-api-v1-objects-objectid-contents#response-from-an-intermediate-post-request) from a respective chunk upload request. <br />
+   Following on from the 48 MiB file example (above), the final chunk upload request would contain four **etags** parameters. <br />
+  **<a id="content-service-api-v1-objects-objectid-contents-first-chunk-upload-request" />Example (uploading data greater than the *chunk size* permitted by the Cocoon Data Platform - first *chunk upload request*):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  0
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  0
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-chunk-1.jpg"
+  Content-Type: image/jpeg
+
+  {FIRST CHUNK OF YOUR ACTUAL UNENCRYPTED OR ENCRYPTED DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+   <br />
+  **<a id="content-service-api-v1-objects-objectid-contents-second-chunk-upload-request" />Example (second *chunk upload request* - based on the example [response](/CS1.2/api/content-service-api-v1-objects-objectid-contents#response-from-an-intermediate-post-request) below from the [first](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-first-chunk-upload-request) request above):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="uploadId"
+
+  749427370888589312
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="bucket"
+
+  987654321019181716
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  1
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  10485760
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-chunk-2.jpg"
+  Content-Type: image/jpeg
+
+  {SECOND CHUNK OF YOUR ACTUAL DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+   <br />
+  **<a id="content-service-api-v1-objects-objectid-contents-final-chunk-upload-request" />Example (final *chunk upload request* - based on the example [response](/CS1.2/api/content-service-api-v1-objects-objectid-contents#response-from-an-intermediate-post-request) below from the [second](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-second-chunk-upload-request) request above):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="etags[1]"
+
+  1
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="etags[2]"
+
+  2
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="uploadId"
+
+  749427370888589312
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="bucket"
+
+  987654321019181716
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="chunkSize"
+
+  8388608
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partIndex"
+
+  2
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="partByteOffset"
+
+  20971520
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalParts"
+
+  3
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="totalFileSizeBytes"
+
+  29360128
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="data"; filename="large-image-chunk-5.jpg"
+  Content-Type: image/jpeg
+
+  {FINAL CHUNK OF YOUR ACTUAL DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Required GET-request parameters <a id="content-service-api-v1-objects-objectid-contents-required-get-request-parameters" />
+
+The following required parameter must be sent in the **URL** of a GET request:
+
+- **format** - Specify either the value `plaintext` to download the file object's data in its decrypted form or `encrypted` to download the file object's encrypted data 'as is'; e.g. decryption will be conducted locally by the client application. <br />
+  **Example:**
+
+  ```text
+  https://content-service.xy-company.com/api/v1/objects/987654321098765432/contents?format=encrypted
+  ```
+
+## Optional GET-request parameters <a id="content-service-api-v1-objects-objectid-contents-optional-get-request-parameters" />
+
+The following optional parameter can be sent in the **URL** of a GET request:
+
+- **encoding** - Specify the value `base64` to download the file object's data as [Base64](https://tools.ietf.org/html/rfc4648)-encoded data. Otherwise, omit this parameter to download the file object's data as raw/binary data. In both cases, the `Content-Type` in the response is `application/octet-stream`. <br />
+  **Example:**
+
+  ```text
+  https://content-service.xy-company.com/api/v1/objects/987654321098765432/contents?format=encrypted&encoding=base64
+  ```
+
+## Returns <a id="content-service-api-v1-objects-objectid-contents-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `POST` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **objectId** - The ID value of the file object. This value should match the `{objectId}` value specified specified in the [URL of this request](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-url-structure).
+- **success** - A boolean value that indicates `true` if the request succeeded or `false` if the request failed.
+- **uploadId** - An ID value returned after the first *chunk upload request* of a multi-chunk upload. This value:
+
+  - Is an ID for the total amount of data (associated with the new file object) to be uploaded to storage via the Cocoon Data Platform's Content Service,
+  - Is returned in every response to every request throughout a multi-chunk upload. This value must be included in all requests (following the initial request) of a multi-chunk upload. See [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (above) for more information.
+
+  **Note:** This value is `null` in responses from requests to upload data which is either less than or equal to the *chunk size* permitted by the Cocoon Data Platform.
+
+<a id="response-from-single-or-final-post-request" />**Additional members returned from a *single* or *final* `POST` request**
+
+In a response from either:
+
+- A request to upload data which is either less than or equal to the *chunk size* permitted by the Cocoon Data Platform, or
+- The final request to upload data which is greater than the *chunk size* permitted by the Cocoon Data Platform (i.e. the final request of a multi-chunk upload),
+
+the following members are also returned:
+
+- **sha512** - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with the created/complete file object.
+- **contentSize** - The amount of space (in bytes) of the file object's data (as recorded by the Cocoon Data Platform's Access Service).
+- **uploadedAs** - Indicates `plaintext` if unencrypted data was uploaded to storage, or `encrypted` if pre-encrypted data was uploaded. <br />
+  **Note:** This value should match the value of the **format** [URL parameter](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) submitted in each POST request to this API endpoint. <br />
+  **Example (uploading data less than or equal to the *chunk size* permitted by the Cocoon Data Platform - response from the [single](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-single-request) request above):**
+
+  ```json
+  {
+      "objectId": "987654321098765432",
+      "success": true,
+      "uploadId": null,
+      "sha512": "mDxrkb0Nj5m44ZPYxgIJOvHckXHr577f8Ww4VGxssQ60yv5pyhtrrlepL2ZNCNytLRdwcY4CrwRQmiEG\/0y5Mw==",
+      "contentSize": 549732,
+      "uploadedAs": "encrypted"
+  }
+  ```
+
+   <br />
+  **Example (uploading data greater than the *chunk size* permitted by the Cocoon Data Platform - response from the [final](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-final-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "objectId": "987654321012345678",
+      "success": true,
+      "uploadId": "749427370888589312",
+      "sha512": "Ii5TdQLLK7s4KjWmAWrHGVf6UFOHR8f3BHnYgzu5w+RVHdDS+hhGT0z2Hxo8xyvVUcfhGBiWi9pXuQa+LHOjag==",
+      "contentSize": 12582912,
+      "uploadedAs": "encrypted"
+  }
+  ```
+
+<a id="response-from-an-intermediate-post-request" />**Additional members returned from an *intermediate* `POST` request**
+
+In a response from a multi-chunk upload request (except for the final response), the following members are also returned:
+
+- **bucket** - A unique identifier for the location in storage where the encrypted data of a multi-chunk upload is held. This value is returned in every response to every request throughout a multi-chunk upload and must be included in all requests (following the initial request) of a multi-chunk upload. See [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (above) for more information.
+- **etags** - A member containing the sub-member **X** (a number representing the sequential index number of this request in a multi-chunk upload, starting from `1`), whose value is an alphanumeric string value. <br />
+  **Important:** Your client application needs to collate the **etags** sub-members of each multi-chunk upload request, since each one of these needs to be included in the final *chunk upload request*. See [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (above) for more information. <br />
+  **Example (uploading data greater than the *chunk size* permitted by the Cocoon Data Platform - response from the [first](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-first-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "objectId": "987654321012345678",
+      "bucket": "987654321019181716",
+      "success": true,
+      "etags": {
+          "1": "1"
+      },
+      "uploadId": "749427370888589312"
+  }
+  ```
+
+   <br />
+  **Example (response from the [second](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-second-chunk-upload-request) *chunk upload request* above):**
+
+  ```json
+  {
+      "objectId": "987654321012345678",
+      "bucket": "987654321019181716",
+      "success": true,
+      "etags": {
+          "2": "2"
+      },
+      "uploadId": "749427370888589312"
+  }
+  ```

@@ -1,0 +1,53 @@
+---
+title: "<access-service>/api/v1/collaborations/items/{itemId}"
+---
+
+## URL structure <a id="access-service-api-v1-collaborations-items-itemid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collaborations/items/{itemId}
+```
+
+where `{itemId}` is the ID of a file object/Secure Object or folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-collaborations-items-itemid-supported-methods-and-overview" />
+
+- `DELETE` - used to allow a Covata user (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-collaborations-items-itemid#access-service-api-v1-collaborations-items-itemid-supported-roles-and-conditions) to this endpoint) to remove themselves as a collaborator from a file object/[Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) or folder/[collection](/3.3/api/working-with-files-and-folders-fundamentals#collection) (i.e. [item](/3.3/api/working-with-files-and-folders-fundamentals#item)), specified by `itemId`.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-collaborations-items-itemid-detailed-description" />
+
+This API endpoint allows a Covata user (whose access token is submitted in the request to this endpoint) to remove themselves as a collaborator from either a file object or folder, specified by `itemId`.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.3/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with the file objects and folders that can be filtered using various 'search' criteria.
+
+If the item's ID is that of a folder, then this user (whose access token is submitted in the request) is removed from all items contained within this folder.
+
+<Note>
+
+This functionality is equivalent to a Covata user either removing their access to secure content (shared with them) through Safe Share for [Web](/3.3/user/managing-secure-content#removing-your-access-to-content-shared-with-you), [Windows](/3.3/windows/managing-secure-content#removing-your-access-to-content-shared-with-you), iOS or Android.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-collaborations-items-itemid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator on the item whose ID is specified by `{itemId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-collaborations-items-itemid#access-service-api-v1-collaborations-items-itemid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-collaborations-items-itemid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-collaborations-items-itemid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

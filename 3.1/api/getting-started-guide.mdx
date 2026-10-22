@@ -1,0 +1,46 @@
+---
+title: "Getting Started Guide"
+---
+
+## What the Covata API can do
+
+The Covata API allows your application to:
+
+- [Authenticate and authorize](/3.1/api/authentication-and-authorization) a Covata user to the Covata Platform,
+- [Obtain a cryptographic key](/3.1/api/creating-secure-objects-and-collections#obtaining-a-cryptographic-key) from the Covata Platform's Access Service, which is required for encrypting or decrypting a [Secure Object](/3.1/api/creating-secure-objects-and-collections#secure-object)'s data,
+- [Initialize a new 'Incomplete' Secure Object](/3.1/api/creating-secure-objects-and-collections#initializing-a-new-incomplete-secure-object) by associating the cryptographic key with this new Secure Object,
+- [Create a completed Secure Object by encrypting its data locally](/3.1/api/creating-secure-objects-and-collections#creating-a-completed-secure-object-data-encrypted-locally), either for:
+
+  - [Remote storage uploaded](/3.1/api/creating-secure-objects-and-collections#uploading-a-completed-secure-objects-encrypted-data) to and handled by the Covata Platform's Content Service, or
+  - Storage handled independently by your application,
+- [Create a completed Secure Object by uploading its unencrypted data](/3.1/api/creating-secure-objects-and-collections#creating-a-completed-secure-object-uploading-unencrypted-data) to the Content Service for encryption, then storage and
+- [Create a 'collection'](/3.1/api/creating-secure-objects-and-collections#creating-a-collection-for-managing-secure-objects) for managing groups of Secure Objects.
+- Retrieve a list of information about:
+
+  - All immediate Secure Objects and [collections](/3.1/api/creating-secure-objects-and-collections#collection) (i.e. [items](/3.1/api/creating-secure-objects-and-collections#item)) [of a common parent](/3.1/api/retrieving-information-about-items-from-the-covata-platform#retrieving-info-about-all-immediate-items-of-a-common-parent),
+  - All items [filtered by text search](/3.1/api/retrieving-information-about-items-from-the-covata-platform#retrieving-info-about-all-items-filtered-by-text-search),
+  - All items [based on ownership or sharing status](/3.1/api/retrieving-information-about-items-from-the-covata-platform#retrieving-info-about-items-based-on-ownership-or-sharing-status), or
+  - All [ancestral collections](/3.1/api/retrieving-information-about-items-from-the-covata-platform#retrieving-info-about-all-ancestral-collections-of-an-item) of a specific Secure Object or collection.
+
+The Covata Platform keeps a record of all Secure Objects and collections created, as well as information about which users are collaborators on each Secure Object or collection.
+
+To perform the activities above, a [Covata user](/3.1/api/authentication-and-authorization) is required to authenticate to the Covata Platform, which permits access to the Covata Platform's resources (i.e. through Covata API endpoints) that are available to this user.
+
+## Tools for accessing the Covata API
+
+### cURL
+
+Example API calls used throughout this Getting Started Guide are based on the standard command line tool [cURL](http://curl.haxx.se/), which allows you to construct API requests at the command line to submit to the appropriate endpoints of either the Covata Platform's Access or Content Services.
+
+### Postman - REST Client
+
+The Google Chrome tool [Postman - REST Client](https://chrome.google.com/webstore/search/postman?hl=en), provides a graphical user interface (GUI) that allows you to construct and save a set of API endpoint requests to submit to the Covata Platform. Postman also allows you to upload data files to submit as part of a request (e.g. binary data as part of a multi-part form data element).
+
+## Getting Started Guide contents
+
+This Getting Started Guide consists of the following sections:
+
+- [Authentication and authorization](/3.1/api/authentication-and-authorization)
+- [Creating Secure Objects and collections](/3.1/api/creating-secure-objects-and-collections)
+- [Retrieving information about items from the Covata Platform](/3.1/api/retrieving-information-about-items-from-the-covata-platform)
+- [Sharing items](/3.1/api/sharing-items)

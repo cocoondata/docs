@@ -1,0 +1,47 @@
+---
+title: "<access-service>/api/v1/config/theme/versionUrl"
+---
+
+## URL structure <a id="access-service-api-v1-config-theme-versionurl-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/theme/versionUrl
+```
+
+## Supported methods and overview <a id="access-service-api-v1-config-theme-versionurl-supported-methods-and-overview" />
+
+- `PUT` - used to set (or clear) the **Version URL** property (accessible through the [System Details](/3.3/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the [Configuration](/3.3/admin-platform/configuring-platform-administration-properties) page of Safe Share Administration).
+
+## Detailed description <a id="access-service-api-v1-config-theme-versionurl-detailed-description" />
+
+This API endpoint sets (or clears) the **Version URL** property (accessible through the **System Details** section of the **Configuration** page of Safe Share Administration).
+
+## Supported roles <a id="access-service-api-v1-config-theme-versionurl-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-config-theme-versionurl#access-service-api-v1-config-theme-versionurl-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-theme-versionurl-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required body <a id="access-service-api-v1-config-theme-versionurl-required-body" />
+
+Specify the the **Version URL** property value (i.e. the full URL for this property) in the **body** of the request as **plain text**.
+
+To clear this property's value, specify an empty **JSON object** in the **body** of the request:
+
+- `{}`
+
+## Returns <a id="access-service-api-v1-config-theme-versionurl-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

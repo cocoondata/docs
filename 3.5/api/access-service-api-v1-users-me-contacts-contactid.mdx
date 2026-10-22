@@ -1,0 +1,109 @@
+---
+title: "<access-service>/api/v1/users/me/contacts/{contactId}"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-contacts-contactid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/contacts/{contactId}
+```
+
+where `{contactId}` is the ID of a Covata user's contact.
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-contacts-contactid-supported-methods-and-overview" />
+
+- `PUT` - modifies the an existing [contact](/3.5/user/managing-your-account#managing-your-contacts) (specified by `contactId`) for a [Covata user](/3.5/api/authentication-and-authorisation) (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts-contactid#access-service-api-v1-users-me-contacts-contactid-supported-roles-and-conditions) to this endpoint).
+- `DELETE` - removes an existing contact (specified by `contactId`) or the Covata user (whose access token is submitted in the request to this endpoint).
+
+<Note>
+
+The `DELETE` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-contacts-contactid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Modifies the email address, first name and/or last name of an existing contact (specified by `contactId`) that belongs to the Covata user (whose access token is submitted in the request to this endpoint). <br />
+   A contact's ID is obtained via the `GET` method on the [&lt;access-service&gt;/api/v1/users/me/contacts](/3.5/api/access-service-api-v1-users-me-contacts) endpoint, which retrieves a list of information for all contacts of the Covata user (whose access token is submitted in the request). <br />
+  **Note:** A contact's email address can be modified to one which does not match a registered Covata user account. However, if the Covata user successfully shares an item with this contact, then a new Covata user account is automatically created for this modified contact (with the [Ad hoc role](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)).
+- Removes an existing contact (specified by `contactId`) that belongs to a Covata user (whose access token is submitted in the request to this endpoint).
+
+<Note>
+
+A contact can also be modified or removed through the [Contacts](/3.5/user/managing-your-account#managing-your-contacts) feature of [SafeShare for Web](/3.5/user/index).
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-users-me-contacts-contactid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) and [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) - when the contact (specified by `{contactId}` in the request's URL) belongs to this user.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-users-me-contacts-contactid#access-service-api-v1-users-me-contacts-contactid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-contacts-contactid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required PUT-request parameters <a id="access-service-api-v1-users-me-contacts-contactid-required-put-request-parameters" />
+
+The following required parameters must be sent in the **body** of the PUT request, as individual members of a **JSON object**:
+
+- **email** - The email address of the contact (specified by `{contactId}` in the URL and belonging to the Covata user whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts-contactid#access-service-api-v1-users-me-contacts-contactid-supported-roles-and-conditions) to this endpoint) to be modified. <br />
+  **Example (PUT request):**
+
+  ```json
+  {
+    "email": "christina.collaborator@xy-company.com"
+  }
+  ```
+
+## Optional PUT-request parameters <a id="access-service-api-v1-users-me-contacts-contactid-optional-put-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the PUT request, each as individual members of the **JSON object** that includes the [Required PUT-request parameters](/3.5/api/access-service-api-v1-users-me-contacts-contactid#access-service-api-v1-users-me-contacts-contactid-required-put-request-parameters) above:
+
+- **firstName** - The first name of the contact (specified by `{contactId}` in the URL and belonging to the Covata user whose [access token is submitted in the request](/3.5/api/access-service-api-v1-users-me-contacts-contactid#access-service-api-v1-users-me-contacts-contactid-supported-roles-and-conditions) to this endpoint) to be modified. Omitting this value in the request clears this property's value to `null` .
+- **lastName** - The last name of this contact to be modified. Omitting this value in the request clears this property's value to `null` . <br />
+  **Example (PUT request with optional parameters):**
+
+  ```json
+  {
+    "email": "christina.collaborator@xy-company.com",
+    "firstName": "Christina",
+    "lastName": "Collaborator"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-users-me-contacts-contactid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `PUT` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the contact.
+- **email** - The email address of the contact.
+- **firstName** - The optional first name of the contact. If this value was not specified when the contact was created and/or last modified, then its value is `null`.
+- **lastName** - The optional last name of the contact. If this value was not specified when the contact was created and/or last modified, then its value is also `null`.
+- **createdAt** - The date and time when the contact was created.
+- **modifiedAt** - The date and time when the contact was last modified. <br />
+  **Example (response from a PUT request):**
+
+  ```json
+  {
+      "id": "762179066710499328",
+      "email": "christina.collaborator@xy-company.com",
+      "firstName": "Christina",
+      "lastName": "Collaborator",
+      "modifiedAt": "2016-10-05T05:38:24.931Z",
+      "createdAt": "2016-10-04T05:07:30.106Z"
+  }
+  ```

@@ -1,0 +1,73 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}/removalRequest"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-removalrequest-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}/removalRequest
+```
+
+where `{organisationId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-removalrequest-supported-methods-and-overview" />
+
+- `POST` - initiates a request to remove an organization (specified by `organisationId`) configured on the Covata Platform.
+- `DELETE` - cancels or declines an existing request to remove an organization (specified by `organisationId`).
+
+<Note>
+
+The `DELETE` method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-removalrequest-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Initiates a request to remove an organization (specified by `organisationId`) configured on the Covata Platform.
+- Either cancels an existing request (initiated by the same Safe Share administrator) to remove an organization specified by `organisationId`, or declines such an existing request (i.e. initiated by another Safe Share administrator).
+
+<Tip>
+
+To determine if an organization has an existing request for its removal, use the [&lt;access-service&gt;/api/v1/organisations](/3.4/api/access-service-api-v1-organisations) API endpoint to retrieve information about organizations configured on the Covata Platform and if the required organization's `organisationRemovalRequest` member is not `null` and contains sub-members, then the organization has an existing request for its removal.
+
+</Tip>
+
+## Supported roles <a id="access-service-api-v1-organisations-organisationid-removalrequest-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.4/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.4/admin-platform/index)):
+
+- [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-organisations-organisationid-removalrequest#access-service-api-v1-organisations-organisationid-removalrequest-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-removalrequest-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-organisationid-removalrequest-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **notificationEnabled** - A boolean value specifying whether (`true`) or not (`false`) the contact person of the organization (specified by `organisationId`) will be sent an email notification informing them that a Safe Share administrator had initiated a request to remove their organization from the Covata Platform. <br />
+  **Note:** If the **Days to action organization removal** property value (accessible through the [&lt;access-service&gt;/api/v1/config/theme/orgRemovalActionDays](/3.4/api/access-service-api-v1-config-theme-orgremovalactiondays) API endpoint) is cleared, then no email notification is sent, regardless of the **notificationEnabled** property value submitted in the request. Since this property is required, however, if the **Days to action organization removal** property value is cleared/not set, it is recommended submitting this **notificationEnabled** property's value as `false` to ensure correct system behavior. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "notificationEnabled": "true"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-removalrequest-returns" />
+
+If the `POST` request succeeded, then an HTTP response status `201 Created` is returned.
+
+If the `DELETE` request succeeded, then an HTTP response status `204 No Content` is returned.

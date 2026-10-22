@@ -1,0 +1,122 @@
+---
+title: "Zugriff auf die Safe Share-Verwaltung"
+---
+
+Die Funktionen der [Safe Share-Verwaltung](/3.3/de/admin-platform/index#platform-administration) stehen nur Safe Share-Administratoren zur Verfügung, wobei *Safe Share-Administratoren* alle [Covata-Benutzer](/3.3/de/admin-platform/administering-platform-administrator-users) sind, die die [Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) eines [Safe Share-Administrators](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) innehaben.
+
+## Anmeldung bei der Safe Share-Verwaltung <a id="signing-in-to-platform-administration" />
+
+Für die Anmeldung bei der Safe Share-Verwaltung muss einem Covata-Benutzer-Account die [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) zugewiesen sein, um auf alle Funktionen der Safe Share-Verwaltung der Covata-Plattform zugreifen zu können <sup>&#42;</sup> .
+
+<Note>
+
+Wenn Sie erstmals auf die Safe Share-Verwaltung zugreifen, lesen Sie bitte zunächst den Abschnitt [Erster Zugriff auf die Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time) (unten).
+
+</Note>
+
+**Anmeldung bei der Safe Share-Verwaltung:**
+
+1. Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Instanz der Covata-Plattform (gefolgt von `/#/admin`) im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://covata-plattform.xy-firma.de/#/admin` <br />
+   **Tipp:** Es könnte praktisch sein, für diese URL ein Lesezeichen zu setzen.
+2. Geben Sie auf der Anmeldeseite für Covata die **E-Mail-Adresse** und das **Passwort** für Ihren Covata-Benutzer-Account mit der [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) ein. <br />
+   *Passwort vergessen?* Wenn ja, lassen Sie das Feld **Passwort** leer und klicken Sie stattdessen auf den Link **Passwort vergessen?**. Folgen Sie den Anweisungen auf der aufgerufenen Seite und anschließend in Ihrer E-Mail-Benachrichtigung, um Ihr Passwort zurückzusetzen.
+3. Klicken Sie auf die Schaltfläche **ANMELDEN** (oder drücken Sie die Eingabe-/Return-Taste). Bei erfolgreicher Anmeldung wird jetzt die [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-interface) angezeigt. <br />
+   **Hinweise:**
+
+   - Die E-Mail-Adresse des aktuell angemeldeten Benutzers erscheint in der rechten oberen Ecke der Oberfläche Safe Share-Verwaltung.
+   - Erscheint statt der Oberfläche Safe Share-Verwaltung die Hauptseite für Covata in [Safe Share for Web](/3.3/de/user/index), klicken Sie auf Ihre E-Mail-Adresse rechts oben und wählen Sie aus dem Dropdown-Menü **Verwaltung**.
+
+<Note>
+
+<sup>&#42;</sup> **Hinweise:**
+
+- Alle Covata-Benutzer (einschließlich Safe Share-Administratoren), deren Account für eine bestimmte [Organisation](/3.3/de/admin-platform/administering-organisations) die [Organisations-Administrator-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) zugewiesen ist, können die betreffende Organisation *verwalten*. Weitere Informationen über die Organisations-Administrator-Rolle finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+- Ein Safe Share-Administrator (zumeist ein Covata-Benutzer-Account mit nur der [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role)) kann sich für eine Organisation die [Organisations-Administrator-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) selbst zuweisen, indem er sich zum Administrator der betreffenden Organisation macht, *wenn er* [die Organisation hinzufügt/erstellt](/3.3/de/admin-platform/administering-organisations#adding-a-new-organisation). Dieser Benutzer (der jetzt für die betreffende Organisation sowohl die Safe Share-Administrator- als auch die Organisations-Administrator-Rolle innehat) kann anschließend anderen Covata-Benutzern die Organisations-Administrator-Rolle für seine Organisation zuweisen. Andernfalls (was wohl häufiger der Fall ist), kann ein Safe Share-Administrator eine seiner Instanz der Covata-Plattform hinzugefügte Organisation nur verwalten, wenn der für die betreffende Organisation anfänglich definierte Organisations-Administrator (oder jemand, den dieser Organisations-Administrator anschließend als Organisations-Administrator der Organisation definiert hat) dem Safe Share-Administrator für diese Organisation die Rolle eines Organisations-Administrators erteilt, wenn der [Safe Share-Administrator der Organisation hinzugefügt wird](/3.3/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account).
+
+</Note>
+
+## Die Oberfläche Safe Share-Verwaltung <a id="the-platform-administration-interface" />
+
+Die Oberfläche Safe Share-Verwaltung umfasst eine Reihe von Konfigurationsseiten, die jeweils über die Optionen am linken Seitenrand zugänglich sind (siehe unten). Beachten Sie bitte:
+
+- Covata-Benutzer mit [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) haben auf alle diese Optionen am linken Seitenrand der Oberfläche Safe Share-Verwaltung Zugriff.
+- Covata-Benutzer, die für eine oder mehrere Organisationen sowohl die Safe Share-Administrator-Rolle als auch die [Organisations-Administrator-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) innehaben, können (nur) für die betreffenden Organisationen auf die Oberfläche [Organisationsverwaltung](/3.3/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) sowie auf alle Optionen der Safe Share-Verwaltung am linken Seitenrand zugreifen. Weitere Informationen über die Verwaltung von Organisationen finden Sie im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.
+
+Die **Dashboard**-[Seite](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) wird nach der erfolgreichen [Anmeldung bei der Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) eines Safe Share-Administrators (siehe oben) zuerst aufgerufen.
+
+<Note>
+
+Wenn Sie von einem Tablet oder Mobiltelefon aus auf die Safe Share-Verwaltung zugreifen, tippen Sie auf das „Menü“-Symbol in der linken oberen Ecke Ihres Displays, um auf diese Optionen zuzugreifen.
+
+</Note>
+
+![Seite Dashboard](/images/fb7e437ebb65-platform-administration-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Seiten der Safe Share-Verwaltung. Sie erreichen diese durch Anklicken der jeweiligen Option am linken Seitenrand.
+
+| Seite Safe Share-Verwaltung | Beschreibung |
+| --- | --- |
+| [Dashboard](/3.3/de/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) | Bietet auf einer Seite eine klare Übersicht über verschiedene Aspekte Ihrer Covata-Plattform: aktuelle Status (in Bereichen dargestellt), jüngste Anmeldeversuche (in Grafiken dargestellt) sowie verschiedene Nutzungsmetriken für die einzelnen Organisationen, u. a. bezüglich Rollen der Covata-Benutzer-Accounts und Speichernutzung bzw. -verfügbarkeit. |
+| [Organisationen](/3.3/de/admin-platform/administering-organisations) | Gibt auf Safe Share-Administrator-Ebene Zugriff auf alle für Ihre Instanz der Covata-Plattform konfigurierten Organisationen. Von dieser Seite aus haben Safe Share-Administratoren die folgenden Möglichkeiten:  <br />•  Erstellen einer neuen Organisation <br />•  Umbenennen einer Organisation, wobei der geänderte Name allen Covata-Benutzern dargestellt wird, die Mitglieder der betreffenden Organisation sind <br />•  Änderung des (vom Inhaltsdienst der Covata-Plattform verwalteten) begrenzten Speicherkontingents, das einer Organisation verfügbar ist <br />•  Unter bestimmten Bedingungen Entfernen einer Organisation  |
+| [Administratoren](/3.3/de/admin-platform/administering-platform-administrator-users) | Gibt Zugriff auf alle Covata-Benutzer, die gleichzeitig Safe Share-Administratoren sind. Von hier aus haben alle Safe Share-Administratoren folgende Möglichkeiten:  <br />•  Hinzufügen von Safe Share-Administrator-Benutzer-Accounts, d. h. entweder Erstellen neuer Covata-Benutzer-Accounts mit der [Safe Share-Administrator-Rolle](/3.3/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) oder Zuweisung dieser Rolle an bereits vorhandene Covata-Benutzer-Accounts oder <br />•  Entfernen von Safe Share-Administrator-Accounts, d. h. Entfernen der Safe Share-Administrator-Rolle von Covata-Benutzer-Accounts  |
+| [Client-Anwendungen](/3.3/de/admin-platform/configuring-client-applications) | Ermöglicht die Registrierung und Konfiguration von Anwendungen (z. B. von Integratoren mithilfe der API der Covata-Plattform entwickelte Apps), die Covata-Technologien verwenden, um Dateien (auch als Dateiobjekte oder sichere Objekte bezeichnet) zu erstellen und/oder auf sie zuzugreifen. Die Konfigurationen dieser „Client“-Anwendungen innerhalb der Covata-Plattform definieren Folgendes:  <br />•  die von der Anwendung zur Authentifizierung bei der Covata-Plattform nutzbaren OAuth 2.0-Erteilungstypen <br />•  die Client-ID und den geheimen Client-Schlüssel (d. h. die Anmeldeinformationen der Anwendung selbst, die auch die Anwendung gegenüber der Covata-Plattform identifizieren) <br />•  die Gültigkeit der Zugriffs- und Aktualisierungs-Token der Anwendung, von denen die Dauer der Sitzung eines Benutzers bei der Covata-Plattform bei seiner Nutzung der Anwendung bestimmt wird <br />•  die „Weiterleitungs-URI(s)“ der Anwendung, der/denen die Covata-Plattform ihre Anforderungen sendet (und die von der Anwendung gehandhabt wird/werden), um das OAuth 2.0-Autorisierungsverfahren abzuschließen <br />•  die Aktivierung bzw. Deaktivierung des Zugriffs der Anwendung auf die Covata-Plattform  |
+| [LDAP](/3.3/de/admin-platform/configuring-ldap) | Ermöglicht die Konfiguration von Verbindungen zu einem oder mehreren LDAP-Benutzerverzeichnis(sen), das/die verwendet werden kann/können, um auf der Covata-Plattform [Covata-Benutzer-Accounts](/3.3/de/admin-platform/administering-users-within-an-organisation) anzulegen. |
+| [SAML](/3.3/de/admin-platform/configuring-single-sign-on-using-an-idp) | Ermöglicht die Konfiguration eines SAML-basierten IdP-Service (Identitätsanbieter-Service), bei dem sich Covata-Benutzer authentifizieren können, um über Einzelanmeldung Zugriff auf die Covata-Plattform und Safe Share for Web zu erhalten. |
+| [Konfiguration](/3.3/de/admin-platform/configuring-platform-administration-properties) | Ermöglicht die Änderung von Eigenschaften, die bestimmte Funktionsbereiche der Covata-Plattform beeinflussen (einschließlich aller dort konfigurierten Organisationen). |
+| [Internationalisierung](/3.3/de/admin-platform/managing-internationalization) | Ermöglicht den Upload von benutzerdefinierten/externen Sprachpaketen, um innerhalb der Covata-Plattform umfangreichere Unterstützung für Internationalisierung und weitere Sprachen bereitzustellen. Die Option ermöglicht es Safe Share-Administratoren weiter, die Sprache der Benutzeroberfläche für die Anmeldeseite sowie die Standardsprache für die Safe Share-Verwaltung, Safe Share-Organisationsverwaltung und (zunächst) Safe Share for Web für neu hinzugefügte Covata-Benutzer zu ändern. |
+
+## Das Dashboard der Safe Share-Verwaltung <a id="the-platform-administration-dashboard" />
+
+Die Seite **Dashboard** wird nach der erfolgreichen [Anmeldung](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) eines Safe Share-Administrators bei der Safe Share-Verwaltung zuerst aufgerufen.
+
+![Seite Dashboard](/images/fb7e437ebb65-platform-administration-dashboard-page.png)
+Die folgende Tabelle beschreibt die einzelnen Komponenten der Seite **Dashboard** von links nach rechts und oben nach unten.
+
+| Komponente der Dashboard-Seite | Beschreibung |
+| --- | --- |
+| Maximal erforderlicher Speicherplatz | Dieser Bereich zeigt den gesamten (über den Inhaltsdienst verwalteten) Speicherplatz an, den die Covata-Plattform benötigt, um für alle Covata-Benutzer mit [Ersteller-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#originator-role) in allen auf den Covata-Plattform konfigurierten Organisationen Inhalte zu speichern (d. h. für Benutzer mit einem [Plan](/3.3/de/admin-platform/managing-users-storage-quotas-through-plans)). Anklicken dieses Bereichs öffnet die [Seite](/3.3/de/admin-platform/administering-organisations) **Organisationen**. <br /> **Hinweise:**  <br />•  Diese Gesamtkapazität wird berechnet, indem die Kontingente aller Organisationen addiert werden. <br />•  Weitere Einzelheiten über die Ersteller-Rolle und Pläne finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung.  |
+| Client-Anwendungen | Dieser Bereich zeigt die Gesamtzahl der aktuell auf der Covata-Plattform registrierten [Client-Anwendungen](/3.3/de/admin-platform/configuring-client-applications). Anklicken dieses Bereichs öffnet die [Seite](/3.3/de/admin-platform/configuring-client-applications) **Client-Anwendungen**. |
+| LDAP-Verbindungen | Dieser Bereich zeigt die Gesamtzahl der aktuell auf der Covata-Plattform konfigurierten [LDAP-Verbindungen](/3.3/de/admin-platform/configuring-ldap). Anklicken dieses Bereichs öffnet die [Seite](/3.3/de/admin-platform/configuring-ldap) **LDAP-Verbindungen**. |
+| Anmeldeversuche der Benutzer | Diese Grafik zeigt die Anmeldeversuche der Covata-Benutzer in der vergangenen Woche. Jeder Punkt entlang einer Kurve stellt für die betreffende Kurve am gegebenen Tag relevante Aktivität dar. Jede Kurve in der Grafik stellt die Zahl der erfolgreichen Anmeldeversuche eines der [drei verschiedenen Typen von Covata-Benutzer-Accounts](/3.3/de/admin-platform/administering-users-within-an-organisation#account-type) dar. Die verschiedenen Account-Typen sind detaillierter unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung beschrieben. Die vierte Kurve stellt die Gesamtzahl der fehlgeschlagenen Anmeldeversuche dar. |
+| Organisationen | Dieser Bereich des Dashboards zeigt jede auf der Covata-Plattform konfigurierte [Organisation](/3.3/de/admin-platform/administering-organisations). Für jede dieser Organisationen werden die folgenden Informationen dargestellt:  <br />•  Name der Organisation oben <br />•  Gesamtzahl der Covata-Benutzer (innerhalb der Organisation) mit [Ersteller-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#originator-role) und [Mitwirkender-Rolle](/3.3/de/admin-platform/administering-users-within-an-organisation#collaborator-role). Jeder Benutzer mit Ersteller-Rolle verfügt über einen [Plan](/3.3/de/admin-platform/managing-users-storage-quotas-through-plans), der ihm ein bestimmtes Speicherkontingent bereitstellt. <br />•  Ein Kreisdiagramm zur Darstellung des freien und genutzten Speicherkontingents der Organisation in Prozent <br />•  Der tatsächlich genutzte (orange) und freie Speicherplatz (in Bytes/MB/GB) sowie das Speicherkontingent selbst (schwarzer Fettdruck) <br />**Hinweis:** Weitere Einzelheiten über die Ersteller- und Mitwirkender-Rolle sowie Pläne finden Sie unter [Verwaltung von Benutzern innerhalb einer Organisation](/3.3/de/admin-platform/administering-users-within-an-organisation) im Abschnitt [Safe Share-Organisationsverwaltung](/3.3/de/admin-platform/organisation-administration) dieser Anleitung. |
+
+## Abmeldung von der Safe Share-Verwaltung <a id="signing-out-of-platform-administration" />
+
+**Abmeldung von der Safe Share-Verwaltung:**
+
+- Klicken Sie auf Ihre E-Mail-Adresse rechts oben auf der [Oberfläche Safe Share-Verwaltung](/3.3/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) und wählen Sie aus dem Dropdown-Menü **Abmelden**. <br />
+   Die Seite Covata-Anmeldung wird erneut angezeigt.
+
+<Warning>
+
+Vergewissern Sie sich nach dem Abschluss Ihrer Verwaltungsaufgaben auf der Covata-Plattform bitte, dass Sie sich wie oben beschrieben explizit von der Safe Share-Verwaltung abmelden. Wenn Sie lediglich das entsprechende Register oder Fenster in Ihrem Browser schließen, in dem Sie Ihre Safe Share-Verwaltung abgewickelt haben, werden Sie *nicht abgemeldet*, d. h. es besteht das Risiko, dass Ihre Sitzung von einer anderen Person, die Ihren Computer nach Ihnen verwendet, kompromittiert wird.
+
+</Warning>
+
+## Erster Zugriff auf die Safe Share-Verwaltung <a id="accessing-platform-administration-for-the-first-time" />
+
+Neue Covata-Plattform-Instanzen haben einen Standard-Benutzer-Account für Administratoren mit der E-Mail-Adresse `admin@default.com`.
+
+Dieser Benutzer-Account existiert, sodass ein Safe Share-Administrator sich erstmals bei der Safe Share-Verwaltung anmelden und dort für sich selbst sowie gegebenenfalls für Andere einen neuen Safe Share-Administrator-Account erstellen kann.
+
+<Warning>
+
+Dieser Standard-Administrator-Account sollte aus Sicherheitsgründen nach seiner Erstellung *entfernt werden*, sobald diese neuen Safe Share-Administrator-Accounts angelegt wurden.
+
+</Warning>
+
+**Zugriff auf eine neue Covata-Plattform-Instanz und erste Erstellung von Safe Share-Verwaltung-Benutzern:**
+
+1. Öffnen Sie einen kompatiblen Webbrowser und geben Sie die Basis-URL Ihrer Covata-Plattform-Instanz (gefolgt von `/#/admin`) im URL-Feld Ihres Browsers ein, z. B.: <br />
+   `https://covata-plattform.xy-firma.de/#/admin`
+2. Geben Sie auf der Covata-Anmeldeseite Folgendes an:
+
+   - **E-Mail-Adresse** `admin@default.com` und
+   - **Passwort**, das einfach `password` lautet
+
+   **Hinweis:** Wenn das Dialogfeld **Safe Share personalisieren!** erscheint, klicken Sie auf die Schaltfläche **Abbrechen**, da dieser Account nur vorübergehend angelegt wird.
+3. Erstellen Sie für den Safe Share-Administrator einen neuen Benutzer-Account für die Safe Share-Verwaltung der Covata-Plattform. Für weitere Informationen über diesen Schritt siehe [Hinzufügen eines Safe Share-Administrator-Accounts](/3.3/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account).
+4. ( *Optional* ) Erstellen Sie gegebenenfalls Benutzer-Accounts für weitere Safe Share-Administratoren.
+5. [Melden Sie sich ab](/3.3/de/admin-platform/accessing-platform-administration#signing-out-of-platform-administration) und [melden Sie sich wieder an](/3.3/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) als der neu angelegte Safe Share-Administrator-Benutzer. <br />
+   **Hinweis:** Sie erhalten Ihr erstes (von der Covata-Plattform automatisch generiertes) Passwort in einer E-Mail-Benachrichtigung **Covata-Account erstellt**.
+6. [Entfernen Sie](/3.3/de/admin-platform/administering-platform-administrator-users#removing-platform-administrators) den Benutzer `admin@default.com`.

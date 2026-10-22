@@ -1,0 +1,75 @@
+---
+title: "<access-service>/api/v1/audit"
+---
+
+## URL structure <a id="access-service-api-v1-audit-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/audit
+```
+
+## Supported methods and overview <a id="access-service-api-v1-audit-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of field information for all API-based requests made to the Covata Platform's Access Service.
+
+## Detailed description <a id="access-service-api-v1-audit-detailed-description" />
+
+This API endpoint retrieves a list of field information for all API-based requests made to the Covata Platform's Access Service.
+
+## Supported roles <a id="access-service-api-v1-audit-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-audit#access-service-api-v1-audit-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-audit-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-audit-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - .
+- **offset** - .
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **searchText** - Specify a string of 'sub-parameters' and their values, where each sub-parameter and its value is separated by an escaped '`=`' sign (`%3D`) and each sub-parameter + value pair is separated from the next by an escaped '`&`' sign (`%26`). One or more of the following sub-parameters can be specified:
+
+  - **startTime** - Specify a date in the format `DD/MM/YYYY`, where each '`/`' sign is escaped (`%2F`).
+  - **endTime** - Specify a later date in the same format as that used for **startTime**.
+  - **clientId** - .
+  - **email** - .
+  - **action** - CREATED, DELETED, RETRIEVED, UPDATED.
+  - **apiType** - AUTH, COLLABORATIONS, COLLECTIONS, CONTACTS, KEYS, NOTIFICATIONS, OBJECTS, USERS.
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-audit-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **created** - .
+  - **ipAddress** - .
+  - **username** - .
+  - **action** - .
+  - **resource** - .
+  - **queryString** - .
+  - **eventInfo** - .
+  - **status** - .
+  - **clientInfo** - .
+  - **actionString** - .
+  - **eventInfoAsPlainText** - .
+  - **statusDescription** - .
+  - **clientIdString** - .
+  - **id** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

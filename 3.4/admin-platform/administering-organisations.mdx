@@ -1,0 +1,169 @@
+---
+title: "Administering organizations"
+---
+
+An 'organization' is a self-contained unit representing an organization's (or a department's) access to resources on a Covata Platform instance.
+
+- An organization is a *self-contained unit*, meaning that the creation, sharing and manipulation of files <sup>&#42;</sup> and folders (also known as collections) is handled solely within the scope of the organization itself. Organizations provide the Covata Platform with *multitenancy* capabilities, whereby each organization represents an individual 'tenant'.
+- A Covata user within an organization has access to files / folders based on whether the user either owns these items or is a collaborator on them. For more information about Covata users within an organization, see [Administering users within an organization](/3.4/admin-platform/administering-users-within-an-organisation) in the [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration) section of this guide.
+- Any Covata user may be a member of multiple organizations on a Covata Platform instance. In such cases, the Covata user's account is re-used across all these organizations. However, the Covata Platform treats all files and folders within one organization (and any Covata user's access to these items) *completely independently* of the files and folders within another organization.
+
+<sup>&#42;</sup> A file (also known as a file object or a Secure Object) is defined as Covata-encrypted data that has been registered on the Covata Platform, along with the properties associated with this encrypted data. For more information about file objects, see [Administering files](/3.4/admin-platform/administering-files) in the [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration) section of this guide.
+
+<a id="organisations-page" />
+
+![Organizations page](/images/b6dc12134c63-organisations-page.png)
+When first using Safe Share Administration on either a newly-installed Covata Platform instance, one organization is present:
+
+- On *newly-installed* Covata Platform instances, this organization:
+
+  - is initially named **Default** without any Covata users or files / folders, and
+  - has no Organization administrator set.
+- On *upgraded* Covata Platform instances:
+
+  - This organization is also initially named **Default** but instead has all Covata users and their files / folders from the previous Covata Platform version.
+  - Any Covata users who had the System administrator role in the previous Covata Platform version will have this role replaced by both:
+
+    - the [Safe Share administrator role](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role) to access the [Safe Share Administration](/3.4/admin-platform/index#platform-administration) features of their Covata Platform instance and
+    - the [Organization administrator role](/3.4/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) in this **Default** organization (to access its [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration) features).
+  - No contact person is set for the **Default** organization.
+
+The name of an organization can be [changed/edited](/3.4/admin-platform/administering-organisations#editing-an-existing-organisation) as well as the organization's initial Organization administrator/contact person. However, once the Organization administrator/contact person has been set, it is no longer possible to change this value from within Safe Share Administration.
+
+## Administering an organization <a id="administering-an-organisation" />
+
+The **Organizations** page of Safe Share Administration ([above](/3.4/admin-platform/administering-organisations#organisations-page)) allows:
+
+- The [addition of new organizations to the Covata Platform](/3.4/admin-platform/administering-organisations#adding-a-new-organisation).
+- Existing organizations to be [located](/3.4/admin-platform/administering-organisations#finding-existing-organisations), [edited](/3.4/admin-platform/administering-organisations#editing-an-existing-organisation) or [removed](/3.4/admin-platform/administering-organisations#removing-an-organisation).
+
+## Adding a new organization <a id="adding-a-new-organisation" />
+
+<Warning>
+
+Before continuing ...
+
+- If you intend to add users to your Covata Platform instance from an [LDAP server/user directory](/3.4/admin-platform/configuring-ldap), then *do not* add any organizations. If more than one organization is present - for example, any more organizations than the one initially named **Default** on newly-installed or upgraded Covata Platform instances, then the LDAP configuration feature is disabled.
+- Similarly, if you [add an LDAP connection](/3.4/admin-platform/configuring-ldap#adding-a-new-ldap-connection) or one or more LDAP connections already exist, then the ability to add any new organizations to your Covata Platform instance becomes *permanently disabled* - i.e. the presence of any configured LDAP connection permanently disables the ability to add new organizations (when one existing organization such as **Default** is configured on the Covata Platform).
+
+</Warning>
+
+**To add a new organization to the Covata Platform:**
+
+1. [Sign in](/3.4/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **Organizations** option on the left of the [Safe Share Administration interface](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organizations** page.
+3. Click the **Add New** button.
+4. <a id="add-new-organisation-dialog-box" />In the **Add new organization** dialog box, specify the:
+
+   - **Organization Name** - The value of this field is the name of the organization shown to Covata users in Safe Share applications.
+   - **Quota (GB)** - The value of the quota (in gigabytes) granted to this organization. <br />
+     **Note:** The total quota for all Covata users in this organization (who have a quota) is restricted by the value specified here. For more information about Covata user's storage quotas, see [Managing users' storage quotas through plans](/3.4/admin-platform/managing-users-storage-quotas-through-plans) in the [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration) section of this guide.
+   - **Administrator** - The email address of the initial Organization administrator of this organization. To make yourself the Organization administrator of this organization, specify your Safe Share administrator account's email address here. Once this email address has been set:
+
+     - it cannot be changed by *any* Safe Share administrator (unless they are also an Organization administrator of this organization) and
+     - after adding this organization, upon subsequently [editing](/3.4/admin-platform/administering-organisations#editing-an-existing-organisation) it, this field's label indicates **Contact Person** and its value cannot be modified through Safe Share Administration. Only an Organization administrator of this organization can later [change this value](/3.4/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) through the [properties](/3.4/admin-platform/configuring-organisation-administration-properties) page of [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration).
+5. Click **Save** and the new organization will appear as a new entry on the **Organizations** page. <br />
+   **Tips:**
+
+   - If you made yourself the Organization administrator of this organization, you can access its [Safe Share Organization Administration interface](/3.4/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) by clicking the organization's **Manage** button (in the **Manage** column).
+   - If you have added this organization by mistake, it can be [removed](/3.4/admin-platform/administering-organisations#removing-an-organisation) (below).
+
+## Finding existing organizations <a id="finding-existing-organisations" />
+
+As more organizations are added to the Covata Platform, it can become difficult to locate specific organizations through the **Organizations** page of Safe Share Administration. The **Organizations** page therefore offers features to help you locate specific organizations more rapidly.
+
+**To locate specific organizations on the Covata Platform:**
+
+1. [Sign in](/3.4/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **Organizations** option on the left of the [Safe Share Administration interface](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organizations** page.
+3. Use either of the following features to find a specific organization (or subset of these organizations):
+
+   - *Filter organizations* - In the **Search By** box (right of the **Organizations** page), begin typing a series of characters contained in any of the organizations' **Name** or **Contact Person** fields, followed by the 'Enter/Return' key. This filters the list of organizations on the Covata Platform to those whose Name or Contact Person contains the subset of characters entered into the **Search By** box. <br />
+      By default, the **Name** or **Contact Person** fields fields are used for filtering (i.e. **All**), although filtering can be restricted to just one of these fields using the adjacent drop-down.
+   - *Navigate to specific organizations* - If available, use the page navigation buttons (lower-right of the **Organizations** page).
+
+<Tip>
+
+You can also sort organizations on the **Organizations** page by clicking the linked name (in the column header) of the field by which you would like to sort your organizations:
+
+- Clicking a linked field name multiple times toggles between sorting the organizations (according to that field) in ascending and descending order.
+- To revert back to the natural ordering of organizations in the list, simply refresh the page.
+
+</Tip>
+
+## Editing an existing organization <a id="editing-an-existing-organisation" />
+
+<Note>
+
+Follow this procedure to specify an Organization administrator for the initially-named **Default** organization, which must be conducted using the default administrator user account `admin@default.com`. For more information about this account, see [Accessing Safe Share Administration for the first time](/3.4/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time).
+
+</Note>
+
+**To edit an existing organization:**
+
+1. [Sign in](/3.4/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration. <br />
+   **Note:** Use the account `admin@default.com` if editing the **Default** organization.
+2. Click the **Organizations** option on the left of the [Safe Share Administration interface](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organizations** page.
+3. Select the left check box of the organization to be edited and click the **Edit** button.
+4. In the **Edit organization** dialog box, modify the:
+
+   - **Organization Name** - The value of this field is the name of the organization shown to Covata users in Safe Share (and other client) applications.
+   - **Quota (GB)** - The value of the quota (in gigabytes) granted to this organization. <br />
+     **Note:** The total quota for all Covata users in this organization (who have a quota) is restricted by the value specified here. For more information about Covata user's storage quotas, see [Managing users' storage quotas through plans](/3.4/admin-platform/managing-users-storage-quotas-through-plans) in the [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration) section of this guide.
+
+   The last field on this dialog box may differ depending on the organization you are editing and its current state:
+
+   - If you are editing any organization whose Organization administrator has already been specified (i.e. every organization other than the initially-named **Default** one), then this field (labeled **Contact Person**) indicates a *non-editable* email address, which is either:
+
+     - the Organization administrator's, specified when a Safe Share administrator initially [added the organization](/3.4/admin-platform/administering-organisations#adding-a-new-organisation), or
+     - that of the contact person, [subsequently specified](/3.4/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) by any Organization administrator of this organization (through the [properties](/3.4/admin-platform/configuring-organisation-administration-properties) page of [Safe Share Organization Administration](/3.4/admin-platform/organisation-administration)).
+   - If you are editing the **Default** organization, then this *editable* field is labeled either of the following:
+
+     - **Administrator** on newly-installed Covata Platform instances, where an email address must be specified to save your changes to the other fields (above). Unlike setting the **Administrator** field when [Adding a new organization](/3.4/admin-platform/administering-organisations#adding-a-new-organisation) (see [step 4](/3.4/admin-platform/administering-organisations#add-new-organisation-dialog-box) of this procedure above for details), specifying the **Administrator** value for the **Default** organization only sets [The email address of the organization's contact person](/3.4/admin-platform/configuring-organisation-administration-properties#organisations-contact-person) and [Organization Admin Email](/3.4/admin-platform/configuring-organisation-administration-properties#org-admin-email) property values. To set the Organization administrator for this organization, continue this procedure after clicking **Save** ([below](/3.4/admin-platform/administering-organisations#editing-the-default-organisation-continuation)).
+     - **Contact Person** on upgraded Covata Platform instances. You must specify the email address of a contact person, for example, that of one of the existing Organization administrators in **Default** to save your changes to the other fields (above). Be aware that the contact person's email address does not have to be that of an Organization administrator or any other Covata user in this organization.
+5. Click **Save** and the organization's details are updated.
+
+<a id="editing-the-default-organisation-continuation" />If you are editing the initially-named **Default** organization, continue on:
+
+1. Click the **Default** organization's **Manage** button (in the **Manage** column) to access the [Organization Administration interface](/3.4/admin-platform/accessing-organisation-administration#the-organisation-administration-interface) for **Default**.
+2. Follow the [Adding an organization user account](/3.4/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) procedure to add an Organization administrator user account to the **Default** organization. <br />
+   **Notes:**
+
+   - You can make yourself the Organization administrator of the initially-named **Default** organization by specifying your Safe Share administrator account's email address when adding the Organization administrator user account.
+   - If you are an Organization administrator of the **Default** organization:
+
+     1. [Sign out](/3.4/admin-platform/accessing-organisation-administration#signing-out-of-organisation-administration) and [sign in](/3.4/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) again with your Organization administrator / Safe Share administrator user account.
+     2. [Remove](/3.4/admin-platform/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) the `admin@default.com` user account (from Organization Administration).
+   - If you are not an Organization administrator of the **Default** organization, contact the relevant person in that organization to remove the `admin@default.com` user account.
+
+## Removing an organization <a id="removing-an-organisation" />
+
+Removing an organization is a non-reversible action, whose process ideally requires relevant stakeholders to be given sufficient notice and time to agree on the organization's removal before the organization (along with all of its data) is permanently removed from the Covata Platform.
+
+To help ensure this notice and time is provided, removing an organization requires two Safe Share administrators to action - one Safe Share administrator to [initiate the removal request](/3.4/admin-platform/administering-organisations#initiating-an-organisations-removal) and another to [approve this request](/3.4/admin-platform/administering-organisations#approving-an-organisations-removal).
+
+Removing organizations can be useful:
+
+- If you have accidentally disabled the LDAP configuration feature (by [adding new organizations](/3.4/admin-platform/administering-organisations#adding-a-new-organisation) resulting in two or more organizations configured on the Covata Platform); you can regain access to [LDAP configuration](/3.4/admin-platform/configuring-ldap) by removing all organizations except the one you wish to use (e.g. **Default**).
+- For de-cluttering the **Organizations** page.
+
+<a id="initiating-an-organisations-removal" />**To initiate an organization's removal:**
+
+1. [Sign in](/3.4/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration.
+2. Click the **Organizations** option on the left of the [Safe Share Administration interface](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organizations** page.
+3. Select the left check box of the organization whose removal is to be initiated and click the **Remove** button. You are prompted on the **Request to remove organization** dialog box to confirm this action and upon clicking **Initiate removal**, the organization removal request is initiated. <br />
+   **Notes:**
+
+   - On the **Request to remove organization** dialog box, if the **Send notification to contact person** check box was:
+
+     - *selected* (i.e. default behavior) before clicking **Initiate removal**, then an email notification is sent to the organization's contact person, informing them that their organization's removal may be actioned in the number of days specified by the [Days to action organization removal](/3.4/admin-platform/configuring-platform-administration-properties#days-to-action-organisation-removal) property value. The **Removal Status** column on the **Organizations** page then indicates **Action in X days** for this organization, where X is a daily countdown whose value is initially the **Days to action organization removal** value minus one.
+     - *cleared* before clicking **Initiate removal** (or this option was not available on this dialog box), then no notification is sent to the organization's contact person. The **Removal Status** column on the **Organizations** page then indicates **Pending** (for Safe Share administrators who initiated an organization's removal request) or **Awaiting approval** (if an organization's removal request was initiated by another Safe Share administrator).
+   - If the **Send notification to contact person** option is not available on this dialog box, then the [Days to action organization removal](/3.4/admin-platform/configuring-platform-administration-properties#days-to-action-organisation-removal) property value has been cleared.
+   - At any time after initiating an organization's removal, you can subsequently cancel this removal request by selecting the left check box of the relevant organization (whose **Removal Status** indicates either **Pending** or **Action in X days**) and clicking the **Cancel** button. If the **Cancel** button is not available, then another Safe Share administrator initiated that organization's removal. In such a scenario, clicking the **Decline** button achieves the same result as clicking the **Cancel** button. Once an organization's removal request is canceled/declined, its **Removal Status** is cleared.
+
+<a id="approving-an-organisations-removal" />**To approve an organization's removal:**
+
+1. [Sign in](/3.4/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration using a different account to the one who [initiated the organization's removal (above)](/3.4/admin-platform/administering-organisations#initiating-an-organisations-removal).
+2. Click the **Organizations** option on the left of the [Safe Share Administration interface](/3.4/admin-platform/accessing-platform-administration#the-platform-administration-interface) to open the **Organizations** page.
+3. Select the left check box of the organization whose **Removal Status** indicates **Awaiting approval** and click the **Approve** button. You are prompted to confirm this removal and upon clicking **Approve** (on the message box), the organization (along with all of its data) is permanently removed. <br />
+   **Note:** After another Safe Share administrator initiates an organization's removal, you can decline this removal request *at any time* by selecting the left check box of the relevant organization (whose **Removal Status** indicates **Awaiting approval** or **Action in X days**) and clicking the **Decline** button. If the **Decline** button is not available, then you initiated that organization's removal. In such a scenario, clicking the **Cancel** button achieves the same result as clicking the **Decline** button. Once an organization's removal request is declined/canceled, its **Removal Status** is cleared.

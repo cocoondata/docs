@@ -1,0 +1,98 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/labels"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-labels-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/labels
+```
+
+where `{orgId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-labels-supported-methods-and-overview" />
+
+- `POST` - used to add a new [classification](/3.2/admin-org/managing-classifications) to an organization.
+- `GET` - used to retrieve a list of information for all classifications defined within an organization.
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-labels-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new classification to an organization. <br />
+  **Notes:**
+
+  - Associating this new classification with one or more [Covata users](/3.2/admin-org/administering-users-within-an-organisation) (through a [group](/3.2/admin-org/managing-groups)) allows this classification to restrict file sharing to these users. For more information about associating Covata users with groups, see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups/\{groupId\}](/3.2/api/access-service-api-v1-organisations-orgid-groups-groupid). Also see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups](/3.2/api/access-service-api-v1-organisations-orgid-groups) for more information about adding new groups to an organization.
+  - Therefore, is recommended that any [newly added classification be associated with at least one group of Covata users](/3.2/api/access-service-api-v1-organisations-orgid-groups-groupid) as soon as possible, since a classification (not yet associated with any group of users) which is specified when sharing (i.e. modifying collaborators on) a [new](/3.2/api/access-service-api-v1-organisations-orggroupid-objects) or [existing](/3.2/api/access-service-api-v1-objects-objectid) file object, prevents that file from being shared.
+  - Be aware that by design and for security reasons, it is not possible to edit any aspect of a classification once it has been added to an organization.
+- Retrieves a list of information for all classifications in an organization.
+
+## Supported roles and conditions <a id="access-service-api-labels-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides) and conditions:
+
+- [Organization administrator](/3.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `POST` method, if this user is a member of the organization specified by the `{orgId}` of the request's URL.
+- **Organization administrator**, [Originator](/3.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Ad hoc](/3.2/admin-org/administering-users-within-an-organisation#adhoc-role) - using the `GET` method, if this user is a member of the organization specified by the `{orgId}` of the request's URL.
+- [Safe Share administrator](/3.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the `GET` method.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-labels-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-organisations-orgid-labels-required-parameters-on-POST" />
+
+The following required parameter must be sent in the body of the POST request, as an individual member of a JSON object:
+
+- **name** - .
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-organisations-orgid-labels-optional-parameters-on-POST" />
+
+The following optional parameter can also be sent in the body of the POST request, as an individual member of the JSON object that includes the [Required parameters on POST](/3.2/api/access-service-api-v1-organisations-orgid-labels#access-service-api-v1-organisations-orgid-labels-required-parameters-on-POST) above:
+
+- **description** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-organisations-orgid-labels-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 0).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-organisations-orgid-labels-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+- **priority** - .
+
+  **Example (response from ...):**
+
+## Returns from a GET request <a id="access-service-api-v1-organisations-orgid-labels-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **id** - .
+  - **name** - .
+  - **priority** - .
+
+  **Example (response from ...):**

@@ -1,0 +1,50 @@
+---
+title: "Developer's Guide"
+---
+
+## What the Cocoon Data API can do <a id="what-the-cocoondata-api-can-do" />
+
+The Cocoon Data API allows your application to:
+
+- [Authenticate and authorize](/CS1.2/api/authentication-and-authorisation) a Cocoon Data user to the Cocoon Data Platform.
+- Work with files and folders (i.e. the fundamentals), by:
+
+  - [Obtaining a cryptographic key](/CS1.2/api/working-with-files-and-folders-fundamentals#obtaining-a-cryptographic-key) from the the Cocoon Data Platform's Access Service (required for encrypting or decrypting a [file's/Secure Object's](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object) data).
+  - [Initializing a new 'Incomplete' file object](/CS1.2/api/working-with-files-and-folders-fundamentals#initialising-a-new-incomplete-file-object) within an [organisation](/CS1.2/api/working-with-files-and-folders-fundamentals#organisation) by associating the cryptographic key with this new file.
+  - [Completing a file object (uploading its locally-encrypted data)](/CS1.2/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-locally-encrypted-data), which involves your client application encrypting the file object's data first, then uploading this encrypted data to the Cocoon Data Platform's Content Service for storage.
+  - [Completing a file object (uploading its unencrypted data)](/CS1.2/api/working-with-files-and-folders-fundamentals#completing-a-file-object-uploading-its-unencrypted-data) to the Content Service for encryption, then storage.
+  - [Downloading a file object's data](/CS1.2/api/working-with-files-and-folders-fundamentals#downloading-a-file-objects-data) for local decryption if required.
+  - [Creating a folder](/CS1.2/api/working-with-files-and-folders-fundamentals#creating-a-folder-to-manage-items) to manage files and other folders.
+  - [Moving items to other folders](/CS1.2/api/working-with-files-and-folders-fundamentals#moving-items-to-other-folders).
+- Retrieve a list of information about:
+
+  - All immediate files and folders (i.e. [items](/CS1.2/api/working-with-files-and-folders-fundamentals#item)) [of a common parent folder](/CS1.2/api/retrieving-information-about-items#retrieving-info-about-all-immediate-items-of-a-common-parent-folder).
+  - All items [filtered by text search](/CS1.2/api/retrieving-information-about-items#retrieving-info-about-all-items-filtered-by-text-search).
+  - All items [based on ownership or sharing status](/CS1.2/api/retrieving-information-about-items#retrieving-info-about-items-based-on-ownership-or-sharing-status).
+  - All [ancestral folders](/CS1.2/api/retrieving-information-about-items#retrieving-info-about-all-ancestral-folders-of-an-item) of a specific file or folder.
+- Allow other people (known as 'collaborators') to access an item, each with their own level of permissions on the item. This involves:
+
+  - [Sharing](/CS1.2/api/sharing-items) a [file](/CS1.2/api/sharing-items#sharing-a-file-with-collaborators) or a [folder](/CS1.2/api/sharing-items#sharing-a-folder-with-collaborators) with other people.
+  - [Identifying existing collaborators](/CS1.2/api/sharing-items#determining-existing-collaborators-on-an-item) on a file or folder.
+  - [Modifying (i.e. removing or adding)](/CS1.2/api/sharing-items#modifying-existing-collaborators-on-an-item) collaborators on a file or folder.
+
+To perform the activities above, a [Cocoon Data user](/CS1.2/api/authentication-and-authorisation) account is required to be authenticated to the Cocoon Data Platform, which permits access to the Cocoon Data Platform's resources (i.e. through Cocoon Data API endpoints) that are available to this user.
+
+## Tools for accessing the Cocoon Data API <a id="tools-for-accessing-the-product-api" />
+
+### cURL
+
+Example API calls used throughout this Developer's Guide are based on the standard command line tool [cURL](http://curl.haxx.se/), which allows you to construct API requests at the command line to submit to the appropriate endpoints of either the Cocoon Data Platform's Access or Content Services.
+
+### Postman - REST Client
+
+The Google Chrome tool [Postman - REST Client](https://chrome.google.com/webstore/search/postman?hl=en), provides a graphical user interface (GUI) that allows you to construct and save a set of API endpoint requests to submit to the Cocoon Data Platform. Postman also allows you to upload data files to submit as part of a request (e.g. binary data as part of a multi-part form data element).
+
+## Developer's Guide contents
+
+This Developer's Guide consists of the following sections:
+
+- [Authentication and authorization](/CS1.2/api/authentication-and-authorisation)
+- [Working with files and folders (fundamentals)](/CS1.2/api/working-with-files-and-folders-fundamentals)
+- [Retrieving information about items](/CS1.2/api/retrieving-information-about-items)
+- [Sharing items](/CS1.2/api/sharing-items)

@@ -1,0 +1,56 @@
+---
+title: "<access-service>/api/v1/collaborations/items/{itemId}"
+---
+
+## URL structure <a id="access-service-api-v1-collaborations-items-itemid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/collaborations/items/{itemId}
+```
+
+where `{itemId}` is the ID of a Secure Object or collection.
+
+## Supported methods and overview <a id="access-service-api-v1-collaborations-items-itemid-supported-methods-and-overview" />
+
+- `DELETE` - used to allow a Covata user to remove themselves as a collaborator from a [Secure Object](/3.1/api/creating-secure-objects-and-collections#secure-object) or [collection](/3.1/api/creating-secure-objects-and-collections#collection) (i.e. [item](/3.1/api/creating-secure-objects-and-collections#item)), based on the item's ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-collaborations-items-itemid-detailed-description" />
+
+This API endpoint allows the currently authenticated Covata user<sup>&#42;</sup> to remove themselves as a collaborator from either a Secure Object or a collection, based on this item's ID.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/items](/3.1/api/access-service-api-v1-items) API endpoint, which retrieves a list of information associated with Secure Objects and collections that can be filtered using various 'search' criteria.
+
+If the item's ID is that of a collection, then the currently authenticated user is removed from all items contained within this collection.
+
+<Note>
+
+This functionality is equivalent to a Covata user either removing their access to secure content (shared with them) through the [Safe Share web application](/3.1/user/managing-secure-content#removing-your-access-to-secure-content-shared-with-you) as well as Safe Share for [Windows](/3.1/windows/index) or iOS.
+
+</Note>
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-collaborations-items-itemid#access-service-api-v1-collaborations-items-itemid-required-headers) of requests to this endpoint.
+
+## Supported roles and conditions <a id="access-service-api-v1-collaborations-items-itemid-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)) and conditions:
+
+- [Originator](/3.1/admin/administering-users#originator-role) - a Covata user with this role can call this endpoint for an item they are a collaborator on.
+- [Collaborator](/3.1/admin/administering-users#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/access-service-api-v1-collaborations-items-itemid#access-service-api-v1-collaborations-items-itemid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-collaborations-items-itemid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-collaborations-items-itemid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

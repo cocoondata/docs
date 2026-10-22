@@ -1,0 +1,119 @@
+---
+title: "<access-service>/api/v1/clientapps/{clientInfoId}"
+---
+
+## URL structure <a id="access-service-api-v1-clientapps-clientinfoid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/clientapps/{clientInfoId}
+```
+
+where `{clientInfoId}` is the ID for the client application's configuration information.
+
+## Supported methods and overview <a id="access-service-api-v1-clientapps-clientinfoid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a registered [client application](/3.3/admin-platform/configuring-client-applications) (specified by `clientInfoId`). <br />
+  **Note:** The `clientInfoId` value is an ID that relates to the client application's configuration information/details on the Covata Platform and *should not* be confused with the [client ID](/3.3/admin-platform/configuring-client-applications#client-id) value.
+- `PUT` - used to modify the fields of a registered client application (specified by `clientInfoId`).
+- `DELETE` - used to delete a client application (specified by `clientInfoId`).
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-clientapps-clientinfoid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves a list of field information about the [OAuth 2.0](http://tools.ietf.org/html/rfc6749) configuration of a registered client application (specified by `clientInfoId`). <br />
+   The configuration information ID of the required client application can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/clientapps](/3.3/api/access-service-api-v1-clientapps) API endpoint, which retrieves a list of field information for all client applications on the Covata Platform. <br />
+  **Tip:** All information returned in the [response](/3.3/api/access-service-api-v1-clientapps-clientinfoid#access-service-api-v1-clientapps-clientinfoid-returns) from a `GET` method call to this API endpoint is also returned in the [response](/3.3/api/access-service-api-v1-clientapps#access-service-api-v1-clientapps-returns) from a `GET` method call to the [&lt;access-service&gt;/api/v1/clientapps](/3.3/api/access-service-api-v1-clientapps) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the client application's configuration information ID).
+- Modifies the fields of a registered client application (specified by `clientInfoId`). Only certain fields are required/used based on the values specified for the **authorizedGrantTypes** field.
+- Deletes a registered client application (specified by `clientInfoId`) from the Covata Platform. A [Covata user](/3.3/api/authentication-and-authorisation) account with the [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role) role would need to re-register this client application again (using the [&lt;access-service&gt;/api/v1/clientapps](/3.3/api/access-service-api-v1-clientapps) API endpoint) to allow this client application to access the Covata Platform's resources again. <br />
+  **Note:** This feature is not available in [Safe Share Administration](/3.3/admin-platform/index) (i.e. through the ['Client Applications' configuration page](/3.3/admin-platform/configuring-client-applications)).
+
+## Supported roles <a id="access-service-api-v1-clientapps-clientinfoid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-clientapps-clientinfoid#access-service-api-v1-clientapps-clientinfoid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-clientapps-clientinfoid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-clientapps-clientinfoid-optional-parameters" />
+
+The following optional parameters can also be sent in the **body** of the PUT request, each as individual members of a **JSON object**:
+
+- **appName** - The updated name for the client application which will appear to Covata users (when they attempt to authenticate to the Covata Platform from this client application).
+- **clientId** - The updated [client ID](/3.3/admin-platform/configuring-client-applications#client-id) for this client application.
+- **clientSecret** - The updated [client secret](/3.3/admin-platform/configuring-client-applications#client-secret) for this client application.
+- **accessTokenValiditySeconds** - The updated number of seconds that an access token issued by the Covata Platform to this client application is valid for.
+- **authorizedGrantTypes** - An array of elements, each of which is an enumeration (enum) value representing a [grant type](/3.3/admin-platform/configuring-client-applications#grant-types) (also known as [*authorization grant*](http://tools.ietf.org/html/rfc6749#section-1.3)) that the Covata Platform will permit this client application to use to issue the application with an [*access token*](http://tools.ietf.org/html/rfc6749#section-1.4). Valid values include:
+
+  - `authorization_code` - An OAuth 2.0 grant type best suited for client applications that are server-side web applications, native desktop/laptop or mobile device applications. See [Authorization Code](/3.3/admin-platform/configuring-client-applications#authorization-code-characteristics) in the [Grant type details](/3.3/admin-platform/configuring-client-applications#grant-type-details) section/table of the Safe Share Administrator's Guide for more information.
+  - `implicit` - An OAuth 2.0 grant type best suited for client applications that are user agent-based applications, such as one that runs client-side in a web browser. However, this grant type does not support the use of refresh tokens. See [Implicit](/3.3/admin-platform/configuring-client-applications#implicit-characteristics) in the Grant type details section/table of the Safe Share Administrator's Guide for more information.
+  - `password` - An OAuth 2.0 grant type best suited for client applications that are native desktop/laptop or mobile device applications, or administrator/system-run services, such as a scheduled job. See [Password](/3.3/admin-platform/configuring-client-applications#password-characteristics) in the Grant type details section/table of the Safe Share Administrator's Guide for more information.
+  - `refresh_token` - An option (supporting the OAuth 2.0 grant types above) that determines if the Covata Platform can issue refresh tokens to this client application, which the application can then use to request for new access tokens.
+  - `mfa` - An option (supporting the OAuth 2.0 grant types above) that determines if the Covata Platform will permit this client application to support Covata users authenticating with 2FA enabled. <br />
+    **Note:** This feature is not available for selection in [Safe Share Administration](/3.3/admin-platform/index) (i.e. through the ['Client Applications' configuration page](/3.3/admin-platform/configuring-client-applications)) and does not appear anywhere throughout the user interface of Safe Share Administration. However, when configuring a client application through Safe Share Administration, this option is always automatically chosen.
+  - `device` - An option (supporting the OAuth 2.0 grant types above) that determines if the client application (running on a specific device - typically on a mobile device platform such as iOS or Android) can authenticate a specific Covata user with a passcode.
+- **refreshTokenValiditySeconds** ( only required when **authorizedGrantTypes** includes `refresh_token` ) - The updated number of seconds that a refresh token issued by the Covata Platform to a client application is valid for. This value must be greater than the **accessTokenValiditySeconds** value above.
+- **registeredRedirectUris** ( only required when **authorizedGrantTypes** includes `authorization_code` and/or `password` ) - An updated list of one or more valid Uniform Resource Identifiers (URIs) which the Covata Platform uses to verify the value of the [*redirect URI*](http://tools.ietf.org/html/rfc6749#section-3.1.2) (also known as a *redirection endpoint*) parameter sent by the client application to the Covata Platform (during an OAuth 2.0 authentication and authorization request to obtain an access token). <br />
+  **Example (request):**
+
+  ```json
+  {
+    "appName": "Example Client Application",
+    "clientId": "exampleClientApplication",
+    "clientSecret": "exampleClientApplicationSecret",
+    "accessTokenValiditySeconds": 2419200,
+    "authorizedGrantTypes": [ "authorization_code", "password", "refresh_token", "mfa", "device" ],
+    "refreshTokenValiditySeconds": 4838400,
+    "registeredRedirectUris": "https://callback"
+  }
+  ```
+
+## Returns <a id="access-service-api-v1-clientapps-clientinfoid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful `GET` and `PUT` requests only, a JSON-formatted response containing the following members is also returned:
+
+- **clientSecret** - .
+- **appName** - .
+- **authorizedGrantTypes** - .
+- **registeredRedirectUris** - .
+- **accessTokenValiditySeconds** - .
+- **refreshTokenValiditySeconds** - .
+- **enabled** - .
+- **idAsString** - .
+- **id** - .
+- **clientId** - . <br />
+  **Example (response):**
+
+  ```json
+  {
+      "clientSecret": "exampleClientApplication",
+      "appName": "Example Client Application",
+      "authorizedGrantTypes": ["authorization_code", "password", "refresh_token", "mfa", "device"],
+      "registeredRedirectUris": "https://callback",
+      "accessTokenValiditySeconds": 2419200,
+      "refreshTokenValiditySeconds": 4838400,
+      "enabled": true,
+      "idAsString": "772622283570610176",
+      "id": "772622283570610176",
+      "clientId": "exampleClientApplication"
+  }
+  ```

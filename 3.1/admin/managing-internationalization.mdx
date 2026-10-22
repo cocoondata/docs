@@ -1,0 +1,112 @@
+---
+title: "Managing internationalization"
+---
+
+The **Internationalization** (aka I18n) page allows Covata Platform administrators to:
+
+- Change the [System Default](/3.1/admin/managing-internationalization#changing-the-system-default-language) language, which is the language for text used:
+
+  - on the Covata Sign-in page,
+  - throughout the interfaces of the Safe Share web application<sup>&#42;</sup> and Covata Administration <br />
+     and
+  - Covata notification email messages.
+- Allows a built in or custom language bundle to be [exported, translated](/3.1/admin/managing-internationalization#exporting-a-language-bundle) and then [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle) (as a custom/external language bundle) to the Covata Platform, thereby providing a Covata Platform instance with greater i18n support for more languages.
+
+<sup>&#42;</sup> Modifying the **System Default** text language affects only the default language setting for the Safe Share web application. A [Covata user](/3.1/admin/administering-users) can override this setting by choosing their own language preference through the [My Account](/3.1/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.1/user/index).
+
+![Internationalization page](/images/88ba912a4d28-i18n-page.png)
+**Available Bundles** on the **Internationalization** page (above) is an important column that indicates:
+
+- **Built In** - for languages which are pre-packaged into a Covata Platform instance.
+- **Custom** - for any supported language which has an [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle) custom/external language bundle. This can include either **Built In** and non-**Built In** languages.
+
+Currently, the Covata Platform only provides support for the languages listed on the **Internationalization** page. However, these languages only become available for selection by Covata users if:
+
+- The languages are **Built In** to the Covata Platform, which could be overridden by an [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle) custom/external language bundle, <br />
+   or
+- For a non-**Built In** languages, a **Custom** bundle (i.e. a custom/external language bundle) has been [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle).
+
+## Changing the 'System Default' language
+
+The **System Default** language is the language used throughout the Covata Administration interface (amongst other [areas](/3.1/admin/managing-internationalization)) and is indicated on the **Internationalization** page by the **Enabled** label in the **System Default** column.
+
+**To change the 'System Default' language:**
+
+1. [Sign in](/3.1/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Internationalization** option on the left of the [Covata Administration interface](/3.1/admin/accessing-administration#the-administration-interface) to open the **Internationalization** page.
+3. Click the **Enable** link of the language to become the new **System Default** language. <br />
+   **Notes:**
+
+   - The **Enable** link is not available for languages which are not **Built In** or have an [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle) **Custom** language bundle available.
+   - The **System Default** language is the default language which new [Covata users](/3.1/admin/administering-users) observe upon signing in to Covata for the first time.
+
+## Exporting a language bundle
+
+Exporting an existing **Built In** or **Custom** language bundle allows that language bundle to be translated into another language *supported* by the Covata Platform (i.e. a language listed on the **Internationalization** page) and then [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle), which then provides the Safe Share web application and Covata Administration with support for that other language.
+
+**To export a language bundle:**
+
+1. [Sign in](/3.1/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Internationalization** option on the left of the [Covata Administration interface](/3.1/admin/accessing-administration#the-administration-interface) to open the **Internationalization** page.
+3. Click the **Export** link of an **Available Bundle** (listed under this column with either the **Built In** or **Custom** labels) for the language from which the translation will be made. The language bundle is downloaded immediately in [JSON-format](http://json.org/). <br />
+   **Notes:**
+
+   - When translating the exported JSON-formatted language bundle file, bear the following in mind:
+
+     - Change the value of the `i18nCode` member to the appropriate **I18n Code** (shown on the **Internationalization** page) for its *target language*. The target language is the language that the file's content will be translated into.
+     - Within the `bundle` member:
+
+       - Do not modify the property names to the left of each colon. These property names must remain unedited and untranslated.
+       - The property values to the right of each colon is the content to be translated. However, be aware that some of this content contains HTML elements and/or variables, the latter of which should not be modified in their own right. (Variables appear within curly braces.) Nevertheless, the placement of variables within sentences can be altered to suit the target language.
+   - After translating the contents of an exported language bundle file into its target language (supported by the Covata Platform), this translated file can then be [uploaded to the appropriate supported language](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle) as a custom/external language bundle.
+
+## Uploading a custom/external language bundle <a id="uploading-a-custom-external-language-bundle" />
+
+Once an [exported](/3.1/admin/managing-internationalization#exporting-a-language-bundle) language bundle has been translated to its target language supported by the Covata Platform, it can uploaded using the following procedure.
+
+**To upload a custom/external language bundle:**
+
+1. [Sign in](/3.1/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Internationalization** option on the left of the [Covata Administration interface](/3.1/admin/accessing-administration#the-administration-interface) to open the **Internationalization** page.
+3. Click the **Upload** link of the target language whose custom/eternal language bundle is to be uploaded.
+4. In the **Upload Language Bundle** dialog box, click the **Choose a file** button.
+5. Navigate to and select your translated JSON-formatted language bundle to upload to the Covata Platform. <br />
+   **Notes:**
+
+   - The Covata Platform now supports the target language, which:
+
+     - A Covata Platform administrator can be set as the [System Default](/3.1/admin/managing-internationalization#changing-the-system-default-language) language.
+     - Becomes available as a **Default Language** option from the [My Account](/3.1/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.1/user/index), which a [Covata user](/3.1/admin/administering-users) can then choose to override the **System Default** language setting.
+   - If the target language was **Built In**, then the translations in the uploaded custom/external language bundle override those in the **Built In** language bundle.
+   - Regardless of whether the target language is either **Built In** or not **Built In** to the Covata Platform, the label in the **Available Bundles** column now displays **Custom** to indicate that the custom/external language bundle is now being used (for that target language).
+
+## Deleting or resetting a language bundle
+
+Once a custom/external language bundle has been [uploaded](/3.1/admin/managing-internationalization#uploading-a-custom-external-language-bundle), it can then be either:
+
+- **Delete**d from a non-**Built In** language, or
+- **Reset** to a **Built In** language (i.e. the language's default translations).
+
+**To delete or reset a language bundle:**
+
+1. [Sign in](/3.1/admin/accessing-administration#signing-in) to Covata Administration.
+2. Click the **Internationalization** option on the left of the [Covata Administration interface](/3.1/admin/accessing-administration#the-administration-interface) to open the **Internationalization** page.
+3. Identify a language to be deleted/reset (with the **Custom** label in the **Available Bundle** column) and click either its:
+
+   - **Delete** link to delete the custom/external language bundle for a non-**Built In** language. <br />
+     **Notes:**
+
+     - This action removes this language as a selectable **Default Language** option from the [My Account](/3.1/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.1/user/index).
+     - Any Covata users who had selected this language as their **Default Language** preference (through the Safe Share web application's **My Account** feature) will automatically be switched over to the [System Default](/3.1/admin/managing-internationalization#changing-the-system-default-language) language.
+   - **Reset** link to delete the overriding custom/external language bundle and reset this language back to its **Built In** default translations. <br />
+     **Note:** Although this action does not remove this language as a selectable **Default Language** option from the [My Account](/3.1/user/managing-your-account#updating-your-account-details) feature of the [Safe Share web application](/3.1/user/index), any Covata users who had selected this language as their **Default Language** preference will automatically be switched over to this language's **Built In** default translations.
+
+<Note>
+
+It is not possible to delete or reset a language which is currently set as the [System Default](/3.1/admin/managing-internationalization#changing-the-system-default-language) language.
+
+</Note>
+
+---
+
+#### Please provide your feedback here

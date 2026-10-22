@@ -1,0 +1,436 @@
+---
+title: "Verwaltung von Benutzern"
+---
+
+Alle Funktionen der Covata-Technologien sind über *Covata-Benutzer* zugänglich. Diese Funktionen umfassen im Wesentlichen die folgenden Möglichkeiten:
+
+- Erstellen verschlüsselter Dateien (d. h. sicherer Objekte <sup>(1)</sup> )
+- Zugriff auf und Entschlüsselung von Daten in verschlüsselten Dateien/sicheren Objekten
+- Nutzung der Covata Safe Share-Anwendungen
+- Verwaltung der Covata-Plattform (über die [Covata-Verwaltung](/2.16/de/admin/index#administration))
+
+Ein Covata-Benutzer:
+
+- ist im Rahmen seiner [Rollen](/2.16/de/admin/administering-users#a-users-roles) berechtigt, auf diese Funktionen zuzugreifen,
+- wird von einem Account vertreten, der von einem Covata-Plattform-Administrator über die Seite **Benutzer** [hinzugefügt](/2.16/de/admin/administering-users#adding-a-new-user), [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) sowie [deaktiviert und reaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) werden kann. <br />
+  **Hinweis:** Benutzer können auch über eine [LDAP-Verbindung](/2.16/de/admin/configuring-ldap) hinzugefügt und aktualisiert werden. Über die Covata-Verwaltung können jedoch nur die [Rollen](/2.16/de/admin/administering-users#a-users-roles) und [gültigen Zugriffs-/Aktualisierungs-Token (d. h. Sitzungen)](/2.16/de/admin/administering-users#expiring-users-tokens-sessions) eines [LDAP-Benutzers](/2.16/de/admin/administering-users#account-type) verwaltet werden.
+
+<sup>(1)</sup> Ein sicheres Objekt wird von den folgenden Parametern definiert:
+
+- Von Covata verschlüsselte, auf der Covata-Plattform registrierte Daten. <br />
+  **Hinweis:** Von Covata verschlüsselte Daten sind Daten aus einer Datei oder einem Datenstrom, die auf einem der folgenden Wege verschlüsselt wurden:
+
+  - durch Covata-Technologien (d. h. mittels eines Covata Safe Share-Produkts oder einer anderen Client-Anwendung, die zur Verschlüsselung über den Inhaltsdienst mit der Covata-Plattform-API arbeitet) oder
+  - gemäß den Covata-Verschlüsselungsanforderungen (d. h. eine Client-Anwendung mit ihrer eigenen Implementierung der Verschlüsselung). Für weitere Informationen über die Covata-Verschlüsselungsanforderungen siehe bitte den Abschnitt [Erforderliche Parameter für POST](/2.16/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-on-POST) der `<content-service>/api/v1/objects/{objectId}/contents`-Seite der [Covata-API-Dokumentation](/2.16/api/index) .
+- die diesen verschlüsselten Daten zugeordneten Metadaten. Manche dieser Metadaten können vom Ersteller/Besitzer des sicheren Objekts bestimmt werden.
+
+![Seite Benutzer](/images/b2e90e95f5fa-users-page.png)
+## Felder eines Benutzers <a id="a-users-fields" />
+
+Der Account jedes Covata-Benutzers wird von einer Gruppe von Feldern definiert (von denen lediglich ein Teil erforderlich ist, um einen gültigen Benutzer anzulegen). Ein Covata-Plattform-Administrator kann diese Felder konfigurieren, wenn er:
+
+- der Covata-Plattform einen neuen [lokalen](/2.16/de/admin/administering-users#account-type) Benutzer [hinzufügt](/2.16/de/admin/administering-users#adding-a-new-user) oder
+- einen [lokalen oder externen](/2.16/de/admin/administering-users#account-type) Benutzer [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user).
+
+| Feld | Beschreibung | Pflichtfeld? |
+| --- | --- | --- |
+| E-Mail | <a id="email" />Die E-Mail-Adresse, die Teil der Anmeldeinformationen des Benutzers bildet und die der Benutzer benötigt, um sich gegenüber der Covata-Plattform zu authentifizieren. Diese E-Mail-Adresse:  <br />•  definiert die Identität des Benutzers und muss daher in Beziehung auf alle Benutzer-Accounts auf der Covata-Plattform eindeutig sein, <br />•  ist die E-Mail-Adresse, an die die Covata-Plattform Benachrichtigungen sendet.  | Ja |
+| Vorname <sup>(2)</sup> | <a id="first-name" />Der Vorname des Benutzers (d. h. ein Vor- oder Spitzname) | Nein |
+| Familienname <sup>(2)</sup> | Der Familienname des Benutzers (d. h. ein Nach- oder Familienname) | Nein |
+| Mobiltelefonnummer <sup>(2)</sup> | Die Mobiltelefonnummer des Benutzers <br />**Hinweis:** Diese Nummer muss die Ländervorwahl und das Pluszeichen (+) als Präfix enthalten. <br />  (z. B. +1 234 567 8910 für eine US-amerikanische Nummer)  | Nein |
+| Rolle | <a id="role" />Die dem Benutzer zugeteilten Rollen, die jeweils die zentralen Funktionen der Covata-Technologien definieren (siehe [oben](/2.16/de/admin/administering-users)), auf die der Benutzer zugreifen kann. Für weitere Informationen siehe [Rollen eines Benutzers](/2.16/de/admin/administering-users#a-users-roles). <br />Die [Rolle des Systemadministrators](/2.16/de/admin/administering-users#system-administrator-role) wird durch Aktivieren des Kontrollkästchens([is-system-admin](/2.16/de/admin/administering-users#is-system-admin)) **Ist Systemadmin?** unten zugewiesen. <br />Die [Rolle des Benutzer-Administrators](/2.16/de/admin/administering-users#user-administrator-role) wird entsprechend durch Aktivieren des Kontrollkästchens([is-user-admin](/2.16/de/admin/administering-users#is-user-admin)) **Ist der Benutzer Admin?** unten zugewiesen. <br />**Hinweise:** <br />•  Dieses Feld muss nicht ausgefüllt werden, wenn ein lokaler Benutzer mit lediglich der [Rolle eines Systemadministrators](/2.16/de/admin/administering-users#system-administrator-role) [hinzugefügt](/2.16/de/admin/administering-users#adding-a-new-user) oder [bearbeitet](/2.16/de/admin/administering-users#editing-an-existing-user) wird. <br />•  Rollen können nur erweitert werden. Es ist z. B. nur möglich, die [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) auf die Rolle eines [Mitwirkenden](/2.16/de/admin/administering-users#collaborator-role) oder [Erstellers](/2.16/de/admin/administering-users#originator-role) zu erweitern, oder die Rolle eines Mitwirkenden auf die eines Erstellers. <br />•  Der Wert dieses Felds darf leer sein, da für einen Benutzer-Account nur die Rolle(n) Systemadministrator und/oder Benutzer-Administrator angegeben werden dürfen. Sobald diesem Feld **Rolle** jedoch ein Wert zugewiesen wurde, kann es nicht mehr geleert werden.  | Ja <br />  (wenn keine Covata-Verwaltung-Rollen gewählt sind) |
+| Ist Systemadmin? | <a id="is-system-admin" />Die Aktivierung dieses Kontrollkästchens gewährt dem Benutzer die [Rolle eines Systemadministrators](/2.16/de/admin/administering-users#system-administrator-role). <br /> **Hinweis:** Diese Option steht weder dem aktuell angemeldeten Benutzer zur Verfügung noch Benutzern mit einem [externen](/2.16/de/admin/administering-users#account-type) Account-Typ oder der [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role). | Nein |
+| Ist der Benutzer Admin? | <a id="is-user-admin" />Die Aktivierung dieses Kontrollkästchens gewährt dem Benutzer die [Rolle eines Benutzer-Administrators](/2.16/de/admin/administering-users#user-administrator-role). <br /> **Hinweis:** Diese Option steht Benutzern mit einem [externen](/2.16/de/admin/administering-users#account-type) Account-Typ oder der [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) nicht zur Verfügung. | Nein |
+| Account-Typ | <a id="account-type" />Der Account-Typ des Benutzers, der den Ursprung des Benutzer-Accounts widerspiegelt. Die Covata-Plattform definiert die folgenden Account-Typen:  <br />•  **Lokal:**  <br />•  Der Benutzer wurde angelegt, indem ein Covata-Plattform-Administrator ihn direkt über die Covata-Verwaltung [hinzugefügt hat](/2.16/de/admin/administering-users#adding-a-new-user). <br />•  Der Account-Typ eines bestehenden Benutzers mit einem externen Account (siehe unten) wird zu einem lokalen Account, wenn die Rolle des betreffenden Benutzers von einer [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) auf die eines [Mitwirkenden](/2.16/de/admin/administering-users#collaborator-role) erweitert wird *und anschließend* ein Covata-Plattform-Administrator die Rolle dieses Benutzers in die eines [Erstellers](/2.16/de/admin/administering-users#originator-role) ändert. <br />•  **Extern** - Der Benutzer-Account wurde von der Covata-Plattform implizit angelegt, als ein Covata-Benutzer mit Ersteller-Rolle einer Person ohne registrierten Covata-Benutzer-Account [Inhalte freigab](/2.16/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content). Diese Benutzer-Accounts (mit Ad-hoc-Rolle oder von Ad-hoc-Rolle erweiterter Mitwirkenden-Rolle) gelten als „externen Ursprungs“ (d. h. ihr Ursprung liegt außerhalb einer Organisation oder Domäne), verglichen mit lokalen oder LDAP-Benutzer-Accounts auf der Covata-Plattform. <br />•  **LDAP** - Der Benutzer-Account wurde von einem LDAP-Server/-Benutzerverzeichnis über eine [LDAP-Verbindung](/2.16/de/admin/configuring-ldap) angelegt. Diese Arten Benutzer-Accounts werden auf der Covata-Plattform während der Synchronisierung mit ihren jeweiligen LDAP-Servern angelegt und aktualisiert. <br />**Hinweis:** Der Wert dieses Felds wird von der Covata-Plattform automatisch bei der Erstellung des Benutzer-Accounts bestimmt und kann nicht bearbeitet werden. | Nicht anwendbar |
+| Plan | <a id="plan" />Der (ein Speicherkontingent definierende) einem Benutzer zugewiesene Plan, der den Speicher begrenzt, auf den dieser Benutzer beim Upload von Daten auf den Inhaltsdienst der Covata-Plattform über ein Covata Safe Share-Produkt oder eine Client-Anwendung, die mit der API der Covata-Plattform arbeitet, Zugriff hat. <br /> **Hinweise:**  <br />•  Dieses Feld ist nur sichtbar, wenn die [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) festgelegt ist (siehe [oben](/2.16/de/admin/administering-users#role)). <br />•  Wird ein neuer [lokaler](/2.16/de/admin/administering-users#account-type) Benutzer mit der Ersteller-Rolle hinzugefügt (auch über einen LDAP-Server/ein LDAP-Benutzerverzeichnis) oder die Rolle eines bestehenden Benutzers auf Ersteller erweitert, wird automatisch der **Standardplan** gewählt. Für weitere Informationen siehe [Verwaltung der Speicherkontingente von Benutzern anhand von Plänen](/2.16/de/admin/managing-users-storage-quotas-through-plans). <br />•  Überschreitet der von einem bestehenden Benutzer beanspruchte Speicher bereits das von einem Plan definierte Kontingent, das dann auf den Account des betreffenden Benutzers anwendbar ist, kann der Benutzer keine weiteren Daten hochladen, ehe:  <br />•  der Benutzer entweder ausreichend eigene Inhalte entfernt, um seine Nutzung von Speicherkapazitäten (unter die Quote seines Plans) zu reduzieren, <br />•  oder dem Benutzer-Account ein Plan zugewiesen wird, der ein höheres Kontingent vorsieht als der aktuell genutzte Speicher.  | Ja <br />  (für einen Covata-Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role); andernfalls nicht anwendbar) |
+| Genutztes Kontingent | Der (vom Inhaltsdienst der Covata-Plattform verwaltete) Speicher in Bytes, den der Benutzer aktuell nutzt. <br /> **Hinweis:** Dieses Feld ist nur sichtbar, wenn die [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) festgelegt ist (siehe [oben](/2.16/de/admin/administering-users#role)). | Nicht anwendbar |
+| Passwortrücksetzung erzwingen | Die Aktivierung dieses Kontrollkästchens, sofern vorhanden, zwingt [lokale](/2.16/de/admin/administering-users#account-type) Benutzer, ihr Passwort bei ihrer nächsten Anmeldung über die Covata-Anmeldeseite zurückzusetzen, sofern ihrem Account nicht die [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) zugewiesen ist. Für weitere Informationen siehe [Verpflichtung von Benutzern, ihr Passwort zurückzusetzen](/2.16/de/admin/administering-users#forcing-users-to-reset-their-passwords). | Nein |
+
+<sup>(2)</sup> Covata-Benutzer können diese Werte selbst ändern, wenn sie ihre Account-Details über die [Funktion](/2.16/de/user/managing-your-account#updating-your-account-details) **Mein Account** der Covata &lt;a href="../user/" target="_blank“&gt;Safe Share-Webanwendung aktualisieren.
+
+## Rollen eines Benutzers <a id="a-users-roles" />
+
+Jedem Covata-Benutzer muss eine Rolle zugewiesen werden, die dem Benutzer Zugriff auf verschiedene, über die Covata-Technologien bereitgestellte Funktionen gewährt. Die Rollen eines Covata-Benutzers lassen sich durch [Bearbeitung](/2.16/de/admin/administering-users#editing-an-existing-user) seines Benutzer-Accounts ändern.
+
+<Note>
+
+Manche Benutzer können mehr als eine Rolle haben:
+
+- Einem Benutzer mit der [Systemadministrator-](/2.16/de/admin/administering-users#system-administrator-role) und/oder [Benutzer-Administrator](/2.16/de/admin/administering-users#user-administrator-role)-Rolle kann auch die [Ersteller-](/2.16/de/admin/administering-users#originator-role) oder [Mitwirkender](/2.16/de/admin/administering-users#collaborator-role)-Rolle zugewiesen werden.
+- Einem Benutzer mit Ersteller- oder Mitwirkender-Rolle kann entsprechend auch die Systemadministrator- und/oder Benutzer-Administrator-Rolle zugeteilt werden.
+
+</Note>
+
+| Rolle | Beschreibung |
+| --- | --- |
+| Ersteller | <a id="originator-role" />Ein Covata-Benutzer mit Ersteller-Rolle kann Covata-Technologien über die Covata-Plattform für folgende Zwecke verwenden:  <br />•  Erstellung *eigener* verschlüsselter Dateien (d. h. sicherer Objekte), einschließlich Ordner für verschlüsselte Dateien (d. h. Sammlungen) anhand von:  <br />•  jeder Covata Safe Share-Anwendung oder <br />•  einer anderen Client-Anwendung, die mit der API der Covata-Plattform interagiert. <br />•  Sichere Speicherung verschlüsselter Dateien in vom Inhaltsdienst der Covata-Plattform verwaltetem Speicher. Der Benutzern verfügbare Speicher hängt von ihrem [Plan](/2.16/de/admin/administering-users#plan) ab. Da Speicher mit einem Covata-Benutzer (mit Ersteller-Rolle) verknüpft ist, sind alle in diesem Speicher gespeicherten verschlüsselten Dateien *Besitz* des betreffenden Benutzers. <br /> **Hinweis:** Je nach den [Formaten dieser verschlüsselten Dateien](/2.16/de/user/accessing-secure-content#file-formats-supported-by-the-content-viewer), können für sie auch schreibgeschützte Anzeigen erstellt werden, die weniger Speicherplatz in Anspruch nehmen und die im [Content Viewer](/2.16/de/user/accessing-secure-content#content-viewer) von Safe Share dargestellt werden. <br />•  Freigabe ihrer gesicherten Dateien oder Ordner (d. h. *Elemente* im *Besitz* des Benutzers) an andere Covata-Benutzer mit Ersteller-, [Mitwirkender-](/2.16/de/admin/administering-users#collaborator-role) oder [Ad-hoc](/2.16/de/admin/administering-users#adhoc-role)-Rolle, einschließlich Personen, die noch nicht als Covata-Benutzer registriert sind. Außerdem die Festlegung der Covata-Benutzer und anderen Personen, die zur *Anzeige*, zum *Download*, zum *Upload* (nur für Ordner) oder zur *Verwaltung* dieser ihnen freigegebenen Elemente berechtigt sind. <br /> **Hinweise:**  <br />•  Covata-Benutzer, denen ein Element (von seinem Besitzer) freigegeben wurde, werden als *Mitwirkende* des betreffenden Elements bezeichnet. Dieser Begriff ist nicht mit der *Mitwirkenden-Rolle* zu verwechseln, die einem Covata-Benutzer zugewiesen werden kann. <br />•  Diese Abläufe werden über das Dialogfeld **(Sichere) Freigabe** jeder Covata Safe Share-Anwendung abgewickelt, oder wenn Mitwirkende eines sicheren Objekts oder einer sicheren Sammlung über eine mit der API der Covata-Plattform arbeitende Client-Anwendung definiert werden. <br />•  Festlegung sonstiger Zugriffssteuerungen hinsichtlich ihrer Dateien, z. B.:  <br />•  Datum und Zeit, ab wann Mitwirkende auf den Inhalt einer Datei zugreifen können, und Datum und Zeit, wann dieser Zugriff endet <br />•  Bezeichnungen, die definieren, an welche Covata-Benutzer-Gruppen eine Datei freigegeben werden kann. <br />Diese Abläufe werden über das Dialogfeld **(Sichere) Freigabe** jeder Covata Safe Share-Anwendung abgewickelt, oder wenn Mitwirkende eines sicheren Objekts über eine mit der API der Covata-Plattform arbeitende Client-Anwendung definiert werden. <br />Benutzer mit Ersteller-Rolle können auch Covata Safe Share-Anwendungen (oder Anwendungen, die mit der API der Covata-Plattform arbeiten) für folgende Zwecke verwenden:  <br />•  Verwaltung ihrer Liste von Kontakten (z. B. Covata-Benutzer, denen sie häufig gesicherte Dateien/Ordner freigeben), <br />•  Anzeige/Zugriff auf/Aktualisierung ihre/r Account-Details, <br />•  Verwaltung ihrer E-Mail-Benachrichtigungen und <br />•  Widerruf der Berechtigung, die Benutzer [Client-Anwendungen](/2.16/de/admin/configuring-client-applications) ursprünglich über ihren Benutzer-Account zum Zugriff auf Ressourcen der Covata-Plattform erteilt haben. <br />**Hinweise:**  <br />•  Ein Benutzer mit Ersteller-Rolle *hat Zugriff auf alle Funktionen der Covata-Technologien, die einem Benutzer mit Mitwirkender-Rolle* verfügbar sind. <br />•  Alle Covata-Benutzer, die über eine [Verbindung mit einem LDAP-Server](/2.16/de/admin/configuring-ldap) hinzugefügt wurden, haben automatisch die Ersteller-Rolle.  |
+| Mitwirkender | <a id="collaborator-role" />Ein Covata-Benutzer mit Mitwirkender-Rolle kann Covata-Technologien über die Covata-Plattform für folgende Zwecke verwenden:  <br />•  Als *Mitwirkender* einer Datei (d. h. eines sicheren Objekts) oder eines Ordners (d. h. einer Sammlung) im Besitz eines anderen Covata-Benutzers (für weitere Informationen siehe Freigabe von Elementen in der [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) oben): Freigabe und Entschlüsselung von Daten einer verschlüsselten Datei (oder Dateien innerhalb des Ordners) anhand von:  <br />•  jeder Covata Safe Share-Anwendung oder <br />•  einer anderen Client-Anwendung, die mit der API der Covata-Plattform interagiert. <br />•  Als *Mitwirkender* mit *Upload-* oder *Verwaltungs*-Berechtigung für einen Ordner im Besitz eines anderen Covata-Benutzers: Erstellung verschlüsselter Dateien und Unterordner für verschlüsselte Dateien innerhalb des Ordners des betreffenden anderen Benutzers anhand von:  <br />•  jeder Covata Safe Share-Anwendung oder <br />•  einer anderen Client-Anwendung, die mit der API der Covata-Plattform interagiert. <br />Benutzer mit Mitwirkender-Rolle können auch Covata Safe Share-Anwendungen (oder Anwendungen, die mit der API der Covata-Plattform arbeiten) für folgende Zwecke verwenden:  <br />•  Anzeige/Zugriff auf/Aktualisierung ihre/r Account-Details, <br />•  Verwaltung ihrer E-Mail-Benachrichtigungen und <br />•  Widerruf der Berechtigung, die Benutzer [Client-Anwendungen](/2.16/de/admin/configuring-client-applications) ursprünglich über ihren Benutzer-Account zum Zugriff auf Ressourcen der Covata-Plattform erteilt haben. <br />**Hinweis:** Wenn ein Covata-Benutzer (der ursprünglich die [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) innehatte) seinen Account auf einen vollen Account erweitert (und damit seine Rolle zu der eines Mitwirkenden ändert), bleibt sein [Account-Typ](/2.16/de/admin/administering-users#account-type) weiterhin Extern. Sein Account-Typ wird jedoch zu Lokal geändert, sobald ein Covata-Plattform-Administrator diesem Benutzer-Account die Ersteller-Rolle zuweist. |
+| Ad-hoc | <a id="adhoc-role" />Ein Covata-Benutzer mit Ad-hoc-Rolle besitzt einen Account, der von der Covata-Plattform in folgenden Fällen automatisch angelegt wird:  <br />•  Ein Benutzer mit [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) gibt eine gesicherte Datei (d. h. ein sicheres Objekt) oder einen sicheren Ordner (d. h. eine Sammlung) einer anderen Person (anhand ihrer E-Mail-Adresse) entweder über eine beliebige Covata Safe Share-Anwendung oder eine andere Client-Anwendung, die mit der API der Covata-Plattform interagiert, frei <br /> *und* <br />•  die betreffende E-Mail-Adresse stimmt nicht mit der eines bestehenden Covata-Benutzers überein. <br />Benutzer mit dieser Rolle sind im Allgemeinen Personen außerhalb einer Organisation oder Domäne, die Covata-Technologien über die Covata-Plattform für folgende Zwecke nutzen können:  <br />•  Als *Mitwirkender* einer Datei oder eines Ordners (d. h. von Elementen) im Besitz eines anderen Covata-Benutzers (für weitere Informationen siehe Freigabe von Elementen in der *Ersteller-Rolle* oben): Freigabe und Entschlüsselung von Daten einer verschlüsselten Datei (oder Dateien innerhalb des Ordners) anhand von:  <br />•  jeder Covata Safe Share-Anwendung oder <br />•  einer anderen Client-Anwendung, die mit der API der Covata-Plattform interagiert. <br />•  Als *Mitwirkender* mit *Upload-* oder *Verwaltungs*-Berechtigung für einen Ordner im Besitz eines anderen Covata-Benutzers: Erstellung verschlüsselter Dateien und Unterordner für verschlüsselte Dateien innerhalb des Ordners des betreffenden anderen Benutzers anhand von:  <br />•  jeder Covata Safe Share-Anwendung oder <br />•  einer anderen Client-Anwendung, die mit der API der Covata-Plattform interagiert. <br />Sobald ein Ad-hoc-Account erstellt wurde, wird er immer wieder verwendet, wenn dem betreffenden Covata-Benutzer von einem anderen Benutzer (mit Ersteller-Rolle) Elemente freigegeben werden. <br />  Ad-hoc-Accounts haben kein fest zugeordnetes Passwort. Sobald ein anderer Benutzer (mit Ersteller-Rolle) einem Ad-hoc-Benutzer ein Element freigibt, wird eine E-Mail-Benachrichtigung an die E-Mail-Adresse des Ad-hoc-Benutzers geschickt. Diese Benachrichtigung informiert den Benutzer, wie er einen Link/ein Passwort für einen einmaligen Zugriff erhält, um sich automatisch bei der [Safe Share-Webanwendung](/2.16/de/user/index) anzumelden und dort auf die freigegebenen Elemente zuzugreifen. <br /> **Hinweise:**  <br />•  Die Ad-hoc-Rolle kann nicht vorgegeben werden, wenn ein Covata-Plattform-Administrator der Covata-Plattform einen neuen Benutzer [lokal](/2.16/de/admin/administering-users#adding-a-new-user) oder [über LDAP](/2.16/de/admin/configuring-ldap) hinzufügt. <br />•  Benutzer mit dieser Rolle können ihren Account nur auf einen vollen Account erweitern, wenn sie mit einem Link/Password für einmaligen Zugriff bei der Safe Share-Webanwendung angemeldet sind. Sie müssen hierfür ein Passwort festlegen, wodurch ihre Benutzer-Rolle in die eines [Mitwirkenden](/2.16/de/admin/administering-users#collaborator-role) geändert wird. Sobald ihr Account erweitert wurde, können Benutzer Covata Safe Share-Anwendungen (oder Anwendungen, die mit der API der Covata-Plattform arbeiten) für folgende Zwecke verwenden:  <br />•  Anzeige/Zugriff auf/Aktualisierung ihre/r Account-Details, <br />•  Verwaltung ihrer E-Mail-Benachrichtigungen und <br />•  Widerruf der Berechtigung, die Benutzer [Client-Anwendungen](/2.16/de/admin/configuring-client-applications) ursprünglich über ihren Benutzer-Account zum Zugriff auf Ressourcen der Covata-Plattform erteilt haben.  |
+| Systemadministrator | <a id="system-administrator-role" />Ein Covata-Benutzer mit der Systemadministrator-Rolle (d. h. ein „Covata-Plattform-Administrator“) hat über die Covata-Verwaltung-Oberfläche Zugriff auf alle Verwaltungsfunktionen der betreffenden Covata-Plattform-Instanz. Für weitere Informationen siehe [Die Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface). <br />**Hinweise:** <br />•  Abgesehen von der Fähigkeit, die Covata-Plattform zu verwalten, hat ein Covata-Benutzer, der *nur* die Rolle eines Systemadministrators innehat, keinen Zugriff auf Funktionen der Covata-Technologie, die Benutzern mit den Rollen [Ersteller](/2.16/de/admin/administering-users#originator-role), [Mitwirkender](/2.16/de/admin/administering-users#collaborator-role)/[Ad-hoc](/2.16/de/admin/administering-users#adhoc-role) oder [Benutzer-Administrator](/2.16/de/admin/administering-users#user-administrator-role) verfügbar sind. Covata-Plattform-Administratoren, die Covata-Technologien ihrer Covata-Plattform-Instanz wahrscheinlich für über die reine Verwaltung hinausgehende Zwecke verwenden werden, sollten sich nach Bedarf die Ersteller-, Mitwirkender- oder Benutzer-Administrator-Rolle(n) zuteilen. <br />•  Nur Covata-Plattform-Administratoren können einem anderen Covata-Benutzer die Systemadministrator-Rolle hinzufügen. <br />•  Gemeinsam mit der [Benutzer-Administrator-Rolle](/2.16/de/admin/administering-users#user-administrator-role) ist die Systemadministrator-Rolle eine der *Covata-Verwaltung-Rollen*.  |
+| Benutzer-Administrator | <a id="user-administrator-role" />Ein Covata-Benutzer mit der Rolle eines Benutzer-Administrators hat Zugriff auf die Seite **Besitz übertragen** der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), die Zugriff auf die Funktion [Übertragung des Besitzes eines Benutzers](/2.16/de/admin/transferring-user-ownership) der Covata-Plattform gibt. <br />**Hinweise:** <br />•  Abgesehen von der Fähigkeit, auf die Funktion [Übertragung des Besitzes eines Benutzers](/2.16/de/admin/transferring-user-ownership) der Covata-Plattform zuzugreifen, hat ein Covata-Benutzer, der *nur* die Rolle eines Benutzer-Administrators innehat, keinen Zugriff auf Funktionen der Covata-Technologie, die Benutzern mit den Rollen [Ersteller](/2.16/de/admin/administering-users#originator-role), [Mitwirkender](/2.16/de/admin/administering-users#collaborator-role)/[Ad-hoc](/2.16/de/admin/administering-users#adhoc-role) oder [Systemadministrator](/2.16/de/admin/administering-users#system-administrator-role) verfügbar sind. <br />•  Covata-Plattform-Administratoren sollten einem Benutzer-Administrator gemäß den Covata-Technologien, die er wahrscheinlich nutzen wird, weitere Rollen zuweisen. <br />•  Gemeinsam mit der [Systemadministrator-Rolle](/2.16/de/admin/administering-users#system-administrator-role) ist die Benutzer-Administrator-Rolle eine der *Covata-Verwaltung-Rollen*.  |
+
+## Hinzufügen eines neuen Benutzers <a id="adding-a-new-user" />
+
+Dieser Abschnitt beschreibt, wie man der Covata-Plattform einen neuen [lokalen](/2.16/de/admin/administering-users#account-type) Benutzer-Account hinzufügt.
+
+<Note>
+
+- Mehrere [lokale](/2.16/de/admin/administering-users#account-type) Benutzer-Accounts lassen sich auch von einer CSV-Datei [in einem Schritt hinzufügen](/2.16/de/admin/administering-users#adding-new-users-in-bulk-from-csv).
+- Für weitere Informationen über das Hinzufügen von Benutzern von einem LDAP-Server/-Benutzerverzeichnis siehe [LDAP-Konfiguration](/2.16/de/admin/configuring-ldap).
+
+</Note>
+
+**Hinzufügen eines lokalen Benutzers zur Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Füllen Sie im Dialogfeld **Benutzer hinzufügen** die ([oben detailliert beschriebenen](/2.16/de/admin/administering-users#a-users-fields)) Benutzerfelder aus. <br />
+   **Tipp:** Für weitere Informationen über die für den betreffenden Benutzer zu definierenden Rolle(n) siehe [Rollen eines Benutzers](/2.16/de/admin/administering-users#a-users-roles).
+5. Die Covata-Plattform verlangt standardmäßig, dass neue Benutzer ihr Passwort bei der ersten Anmeldung zurücksetzen. Neue Benutzer benötigen hierzu das von der Covata-Plattform automatisch generierte Passwort, das sie per E-Mail erhalten, sobald ihre Accounts angelegt wurden. Deaktivieren Sie das Kontrollkästchen **Passwortrücksetzung erzwingen**, um Benutzer nicht zu zwingen, ihr Passwort für die Covata-Plattform zurückzusetzen.
+6. Klicken Sie auf **Speichern**, und der neue Benutzer erscheint als neue Eintragung auf der Seite **Benutzer**. <br />
+   **Hinweis:** Der neue Benutzer erhält eine E-Mail-Benachrichtigung mit Informationen, wie er sich bei der [Safe Share-Webanwendung](/2.16/de/user/index) anmelden kann.
+
+## Hinzufügen neuer Benutzer in einem Schritt (von einer CSV-Datei) <a id="adding-new-users-in-bulk-from-csv" />
+
+Mehrere neue [lokale](/2.16/de/admin/administering-users#account-type) Benutzer lassen sich in einem Schritt hinzufügen, indem ihre Details von einer [CSV-Datei](http://tools.ietf.org/html/rfc4180) importiert werden.
+
+**Vorbereitung der CSV-Datei und Anforderungen**
+
+- Die Importfunktion der Covata-Plattform für Benutzer aus einer CSV-Datei geht davon aus, dass jede Zeile der CSV-Datei (außer der ersten verpflichtenden Kopfzeile) Felddaten für einen spezifischen Benutzer enthält. (Die erste Zeile wird nicht als Benutzer importiert.)
+- Die Reihenfolge der Felddaten jedes Benutzers in der CSV-Datei (die in der Kopfzeile definiert sein sollten) muss folgendermaßen lauten: <br />
+  `E-Mail, Vorname, Familienname, Mobilnummer, Rolle, Kennzeichen für Passwortrücksetzung erzwingen` <br />
+  **Hinweise:**
+
+  - Es sind keine Leerstellen um die einzelnen Trennkommas erforderlich.
+  - Sie können für die Kopfzeile in Ihrer CSV-Datei beliebige Feldnamen oder -bezeichnungen angeben. Die Reihenfolge der Felddaten für die einzelnen Benutzer (in den folgenden Zeilen Ihrer CSV-Datei) muss jedoch der oben angegebenen entsprechen.
+- Benutzer können nur unter den folgenden Bedingungen erfolgreich aus einer CSV-Datei importiert werden:
+
+  1. Die [Felder](/2.16/de/admin/administering-users#a-users-fields) `E-Mail` und `Rolle` müssen Datenwerte beinhalten. Alle sonstigen Felder sind optional.
+  2. Der Wert im Feld `Rolle` kann nur exakt `Ersteller` oder `Mitwirkender` lauten (d. h. ein Großbuchstabe, gefolgt von Kleinbuchstaben). Covata-Benutzer mit der [Ad-hoc-](/2.16/de/admin/administering-users#adhoc-role), [Systemadministrator-](/2.16/de/admin/administering-users#system-administrator-role) oder [Benutzer-Administrator](/2.16/de/admin/administering-users#user-administrator-role)-Rolle können nicht importiert werden.
+  3. Die Werte für die Felder `E-Mail` und `Mobiltelefonnummer` müssen gültig sein und den entsprechenden [Feldanforderungen](/2.16/de/admin/administering-users#a-users-fields) entsprechen.
+  4. Um für ein optionales Feld keinen Wert anzugeben, lassen Sie es einfach leer, gefolgt von einem Komma um anzuzeigen, dass sich das nächste Feld anschließt. Wenn Sie also z. B. für den Covata-Benutzer `hans.schmidt@firma-xy.de` mit der Rolle [Ersteller](/2.16/de/admin/administering-users#originator-role) lediglich die Felder `E-Mail` und `Rolle` definieren möchten, sähe Ihre CSV-Zeile für diesen Benutzer folgendermaßen aus: <br />
+     `hans.schmidt@firma-xy.de,,,,Ersteller,`
+  5. Ein gültiger Wert für das Feld `Kennzeichen Passwortrücksetzung erzwingen` ist ein boolescher Wert in GROSSBUCHSTABEN, kleinbuchstaben oder mit großem Anfangsbuchstaben, d. h. `WAHR`, `Wahr`, `wahr`, `FALSCH`, usw. Ist kein Wert angegeben, geht die Anwendung vom Wert `falsch` aus.
+
+  Trifft die Importfunktion für Benutzer aus einer CSV-Datei beim Parsing einer Zeile auf ein Problem (aufgrund eines Fehlers bei einer der oben beschriebenen Bedingungen), wird der betreffende Benutzer nicht importiert. Die Importfunktion meldet in diesem Fall lediglich jeden eindeutigen ungültigen Datenwert.
+
+**Hinzufügen neuer Benutzer in einem Schritt von einer CSV-Datei:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. Klicken Sie auf die Schaltfläche
+   ![Schaltfläche Von CSV importieren](/images/8dbfd36a6de4-import-from-csv-button.png)
+
+    (Von CSV importieren).
+4. Klicken Sie im Dialogfeld **Von CSV importieren** auf die Schaltfläche **Datei auswählen**.
+5. Navigieren Sie zur betreffenden CSV-Datei mit den in die Covata-Plattform zu importierenden Benutzern und wählen Sie sie aus. <br />
+    Die CSV-Importfunktion importiert anschließend Ihre Benutzer. Sobald der Vorgang abgeschlossen ist, wird die Zahl der erfolgreich importierten Covata-Benutzer angezeigt, und es werden gegebenenfalls alle eindeutigen ungültigen Datenwerte gemeldet.
+6. Klicken Sie auf **Schließen**, um das Dialogfeld **Von CSV importieren** zu schließen.
+
+<Note>
+
+- Die Zahl der Benutzer, die aus einer CSV-Datei importiert werden können, ist durch das Timeout bei der Antwort des Lastenausgleichs der Covata-Plattform beschränkt. Gemäß unseren Erfahrungen ermöglicht ein Timeout von 60 Sekunden bei der Antwort unseres Lastenausgleichs den Import von bis zu 1000 Benutzern aus einer CSV-Datei. Wenn Sie die Covata-Plattform vor Ort installiert haben, können Sie das Timeout bei der Antwort Ihres Lastenausgleichs anpassen, um den Import von mehr Benutzern aus einer CSV-Datei zu ermöglichen.
+- Wird ein neuer [lokaler](/2.16/de/admin/administering-users#account-type) Benutzer-Account angelegt, generiert die Covata-Plattform automatisch ein Passwort, das dem betreffenden Benutzer per E-Mail geschickt wird. Das Passwort wird, sobald es generiert wurde, für maximale Sicherheit anhand des PBKDF2-Algorithmus 64.000 Mal gehasht, ehe es von der Covata-Plattform gespeichert wird. Da dieser Vorgang einen Aufwand von etwa 300 Millisekunden bedeutet und die Zahl der anhand der CSV-Importfunktion importierten Benutzer sehr groß sein könnte, werden die automatisch generierten Passwörter der aus CSV importierten Covata-Benutzer nur 100 Mal anhand des PBKDF2-Algorithmus gehasht (ehe sie von der Covata-Plattform gespeichert werden). Wenn Sie daher hinsichtlich der Sicherheit dieser gespeicherten Passwörter Bedenken haben, sollten Sie eventuell darauf achten, dass der Wert für das Kennzeichen „Passwortrücksetzung erzwingen“ in der Zeile jedes Benutzers in Ihrer CSV-Datei auf `wahr` gesetzt ist.
+
+</Note>
+
+## Auffinden bestehender Benutzer <a id="finding-existing-users" />
+
+Wenn der Covata-Plattform im Lauf der Zeit mehr Benutzer hinzugefügt werden, kann es schwierig werden, bestimmte Benutzer in der Covata-Verwaltung über die Seite **Benutzer** zu finden. Die Seite **Benutzer** bietet daher Funktionen, die es Ihnen erleichtern, bestimmte Benutzer-Accounts schneller zu finden.
+
+**Auffinden spezifischer Benutzer-Accounts auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. Verwenden Sie eine der folgenden Funktionen, um einen bestimmten Benutzer-Account (oder eine Untergruppe der betreffenden Accounts) zu finden:
+
+   - *Benutzer-Accounts filtern* - fangen Sie im Feld **Suche nach...** (rechts auf der Seite **Benutzer**) an, eine Reihe von Zeichen einzugeben, die in den [Feldern](/2.16/de/admin/administering-users#a-users-fields) **E-Mail**, **Vorname**, **Familienname**, **Rolle** oder **(System-)Admin** der Benutzer enthalten sind. Dies filtert die Liste der Benutzer der Covata-Plattform nach denen, deren E-Mail-Adresse, Vorname, Familienname, Rolle oder (System-)Admin (d. h. „ja“ oder „nein“) die im Feld **Suche nach...** eingegebene Zeichenfolge enthält. <br />
+      Standardmäßig werden für den Filter die Felder **E-Mail**, **Vorname**, **Familienname**, **Rolle** oder **(System-)Admin** verwendet (d. h. **Alle**), aber Sie können den Filter anhand des Dropdown-Menüs auch auf eines dieser Felder beschränken.
+   - *Zu spezifischen Benutzer-Accounts navigieren* - verwenden Sie die Schaltflächen zur Seitennavigation (rechts unten auf der Seite **Benutzer**), die Sie zusammen mit dem Dropdown-Menü **25/50/75/100 Elemente** (d. h. Benutzer-Accounts) pro Seite einsetzen können.
+
+<Tip>
+
+Sie können Benutzer-Accounts auch auf der Seite **Benutzer** sortieren, indem Sie auf den verknüpften Namen (im Spaltenkopf) des betreffenden Felds klicken, nach dem Sie Ihre Benutzer sortieren möchten:
+
+- Mehrfaches Anklicken eines verknüpften Feldnamens schaltet zwischen einer Sortierung der Benutzer in aufsteigender und absteigender Reihenfolge (gemäß dem betreffenden Feld) um.
+- Aktualisieren Sie einfach die Seite, um zur normalen Sortierung der Benutzer in der Liste zurückzukehren.
+
+</Tip>
+
+## Bearbeiten eines bestehenden Benutzers <a id="editing-an-existing-user" />
+
+Dieser Abschnitt beschreibt, wie Sie die [Felder](/2.16/de/admin/administering-users#a-users-fields) eines bestehenden [lokalen oder externen (d. h. Ad-hoc)](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts auf der Covata-Plattform bearbeiten. Derselbe Ablauf gilt auch für die Änderung der [Rollen](/2.16/de/admin/administering-users#a-users-roles) eines [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts.
+
+<Note>
+
+Die weiteren Felder von LDAP-Benutzer-Accounts können nur über die Benutzerverzeichnisse ihrer jeweiligen LDAP-Server bearbeitet werden. Diese Benutzer-Accounts werden auf der Covata-Plattform während der Synchronisierung mit dem LDAP-Server aktualisiert. Für weitere Informationen siehe [LDAP-Konfiguration](/2.16/de/admin/configuring-ldap).
+
+</Note>
+
+**Bearbeitung der Felder eines lokalen oder externen/Ad-hoc-Benutzer-Accounts:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den lokalen oder externen/Ad-hoc-Benutzer-Account, dessen Felder Sie bearbeiten möchten.
+4. Klicken Sie auf den Link **Bearbeiten** des betreffenden Benutzers (am rechten Seitenrand).
+5. Aktualisieren Sie im Dialogfeld **Benutzer bearbeiten** die ([oben detailliert beschriebenen](/2.16/de/admin/administering-users#a-users-fields)) Felder des betreffenden Benutzers. <br />
+   **Hinweise:**
+
+   - Die **E-Mail-Adressen** aller Benutzer auf der Covata-Plattform sind eindeutig, und da dieses Feld für [Prüfzwecke](/2.16/de/admin/generating-reports) verwendet wird, kann es nicht bearbeitet werden. Um die E-Mail-Adresse eines [lokalen](/2.16/de/admin/administering-users#account-type) Benutzers zu bearbeiten, müssen Sie für den Benutzer zunächst [einen neuen Account hinzufügen](/2.16/de/admin/administering-users#adding-a-new-user) und anschließend seinen alten Benutzer-Account entweder [deaktivieren](/2.16/de/admin/administering-users#disabling-or-re-enabling-users) oder [löschen](/2.16/de/admin/administering-users#deleting-users).
+   - Für weitere Informationen über das Kontrollkästchen **Passwortrücksetzung erzwingen** siehe [Verpflichtung von Benutzern, ihr Passwort zurückzusetzen](/2.16/de/admin/administering-users#forcing-users-to-reset-their-passwords).
+6. Klicken Sie auf **Speichern**, und die Felder des Benutzers werden aktualisiert.
+
+## Änderung Ihres Passworts <a id="changing-your-password" />
+
+Nur ein [lokaler](/2.16/de/admin/administering-users#account-type), bei der [Safe Share-Webanwendung](/2.16/de/user/index) oder Covata-Verwaltung angemeldeter Benutzer kann sein Passwort selbst ändern.
+
+<Note>
+
+Die Authentifizierung eines [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzers bei der Covata-Plattform ist an den betreffenden LDAP-Server delegiert. Wenn Sie einen LDAP-Benutzer-Account haben und dessen Passwort ändern möchten, müssen Sie sich an Ihren LDAP-Administrator wenden, der Ihnen mitteilen kann, wie Sie hierfür vorgehen müssen (z. B. über den Benutzer-Account auf Ihrem LDAP-Server/in Ihrem LDAP-Benutzerverzeichnis). Für weitere Informationen siehe [LDAP-Konfiguration](/2.16/de/admin/configuring-ldap).
+
+</Note>
+
+**Änderung Ihres Passworts:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf Ihre E-Mail-Adresse rechts oben auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface) und wählen Sie aus dem Dropdown-Menü **Passwort ändern**.
+3. Geben Sie auf der Seite **Passwort festlegen** Ihr altes Passwort und dann zwei Mal Ihr neues Passwort ein (das zweite Mal zur Bestätigung).
+4. Klicken Sie auf die Schaltfläche **Ändern**. Das Passwort für Ihren Covata-Benutzer-Account ist jetzt geändert.
+
+## Löschen von Benutzern <a id="deleting-users" />
+
+Beim Löschen eines Covata-Benutzer-Accounts wird der betreffende Benutzer mit den folgenden Daten aus der Covata-Plattform entfernt:
+
+- Alle [verschlüsselten Dateien/sicheren Objekte](/2.16/de/admin/administering-files) und Ordner/Sammlungen, die der betreffende Benutzer aktuell besitzt. Alle [Berichtsdaten](/2.16/de/admin/generating-reports) zum betreffenden Benutzer-Account.
+
+<Note>
+
+- Die Protokolldateien der Covata-Plattform enthalten weiterhin Aufzeichnungen über die Aktivitäten der Covata-Benutzer, deren Accounts gelöscht wurden.
+- Möchten Sie einen Covata-Benutzer daran hindern, über seinen Benutzer-Account auf Covata-Technologien zuzugreifen, (aber alle Aspekte der verschlüsselten Dateien, Ordner und Berichtsdaten des betreffenden Benutzers bewahren) müssen Sie den Benutzer deaktivieren. Für weitere Informationen hierzu siehe [Deaktivierung und Reaktivierung von Benutzern](/2.16/de/admin/administering-users#disabling-or-re-enabling-users).
+
+</Note>
+
+Ein Covata-Plattform-Administrator kann alle Benutzer-Accounts löschen außer:
+
+- den Benutzer-Account, mit dem er aktuell bei der Covata-Verwaltung angemeldet ist
+- [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts (siehe **Hinweise** [unten](/2.16/de/admin/administering-users#deleted-user-notes)).
+
+**Löschung von Benutzer-Accounts von der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Accounts gelöscht werden soll(en).
+4. Aktivieren Sie die entsprechenden Kontrollkästchen links (oder wählen Sie das Kontrollkästchen oben in der Kopfzeile der Benutzerliste, um alle Kontrollkästchen der aktuell angezeigten Benutzer-Accounts auszuwählen).
+5. Klicken Sie auf die Schaltfläche
+   ![Schaltfläche Benutzer löschen](/images/c674696e0d9f-delete-users-button.png)
+
+    (Benutzer löschen) und anschließend in der Bestätigung auf **Ja**, um den Vorgang fortzusetzen. <br />
+    Die gewählten Benutzer-Accounts werden zusammen mit den verschlüsselten Dateien, Ordnern und Berichtsdaten, die zu diesen Accounts gehörten, entfernt.
+
+<a id="deleted-user-notes" />
+
+<Note>
+
+Wird ein LDAP-Benutzer-Account (anhand dieses Vorgangs [oben](/2.16/de/admin/administering-users#deleting-users)) gelöscht, wird der Account selbst vorübergehend gelöscht, bis die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert. Der Account erscheint anschließend wieder in der Liste der Covata-Benutzer. Die verschlüsselten Dateien, Ordner und Berichtsdaten des betreffenden LDAP-Benutzers werden allerdings entfernt. Zur permanenten „Löschung“ eines LDAP-Benutzer-Accounts von der Covata-Plattform ist daher der folgende Vorgang erforderlich:
+
+1. Deaktivieren Sie den LDAP-Benutzer über den LDAP-Server/das LDAP-Benutzerverzeichnis des Accounts.
+2. Löschen Sie den LDAP-Benutzer-Account über die Covata-Verwaltung (anhand des [oben](/2.16/de/admin/administering-users#deleting-users) beschriebenen Vorgangs).
+3. ( *Optional* ) Löschen Sie den LDAP-Benutzer über den LDAP-Server/das LDAP-Benutzerverzeichnis des Accounts. Wenn Sie den Account nicht über den LDAP-Server/das LDAP-Benutzerverzeichnis löschen, erscheint der Benutzer-Account wieder unter der Liste der Covata-Benutzer, wenn die Covata-Plattform das nächste Mal mit dem LDAP-Server synchronisiert. Der Account ist dann jedoch [deaktiviert](/2.16/de/admin/administering-users#disabling-or-re-enabling-users).
+
+</Note>
+
+## Ablauf der Token/Sitzungen von Benutzern <a id="expiring-users-tokens-sessions" />
+
+Wenn man Zugriffs-/Aktualisierungs-Token von Benutzern ablaufen lässt, werden die Sitzungen aller betreffenden aktuell angemeldeten Benutzer sofort beendet. Die Benutzer müssen sich dann erneut anmelden, um wieder Zugriff auf [Safe Share](/2.16/de/user/index) und/oder ihre Covata-Plattform-Ressourcen zu erhalten.
+
+Diese Funktion ist hilfreich, wenn ein Risiko erkannt wurde, dass ein oder mehrere Covata-Benutzer-Accounts kompromittiert sein könnten, z. B. wenn diese Covata-Benutzer vergessen haben, sich von einem von mehreren Personen genutzten Computer abzumelden oder wenn ihr Laptop verloren ging oder gestohlen wurde, während sie angemeldet waren.
+
+**Ablauf der Zugriffs-/Aktualisierungs-Token von Benutzern:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Zugriffs-/Aktualisierungs-Token ablaufen sollen.
+4. Aktivieren Sie die entsprechenden Kontrollkästchen links (oder wählen Sie das Kontrollkästchen oben in der Kopfzeile der Benutzerliste, um alle Kontrollkästchen der aktuell angezeigten Benutzer-Accounts auszuwählen).
+5. Klicken Sie auf die Schaltfläche
+   ![Schaltfläche Benutzer-Token ablaufen lassen](/images/21009e8a3fb9-expire-users-tokens-button.png)
+
+    (Benutzer-Token ablaufen lassen) und anschließend in der Bestätigung auf **Ja**, um den Vorgang fortzusetzen. <br />
+    Alle mit dem gewählten Benutzer-Account verbundenen Zugriffs-/Aktualisierungs-Token laufen sofort ab.
+
+## Deaktivierung und Reaktivierung von Benutzern <a id="disabling-or-re-enabling-users" />
+
+Die Deaktivierung von Covata-Benutzer-Accounts verhindert den Zugriff auf die Covata-Plattform über diese Accounts. Dies ist hilfreich, wenn z. B. eine oder mehrere Personen eine Organisation verlassen und nicht mehr berechtigt sind, eine [Ersteller-Rolle](/2.16/de/admin/administering-users#originator-role) innezuhaben oder über die Benutzer-Accounts ihrer Organisation auf Covata-Technologien zuzugreifen. Es kann jedoch erforderlich sein, Folgendes beizubehalten:
+
+- alle [verschlüsselten Dateien/sicheren Objekte](/2.16/de/admin/administering-files) und Ordner/Sammlungen, die von den Benutzer-Accounts der betreffenden Personen erstellt wurden.
+- alle [Berichtsdaten](/2.16/de/admin/generating-reports) zu den betreffenden Benutzer-Accounts.
+- die Covata-Benutzer-Accounts selbst, falls ein oder mehrere der betreffenden Personen später zur Organisation zurückkehren - ihre ursprünglichen Accounts können dann reaktiviert werden.
+
+<Tip>
+
+- Möchten Sie einen Covata-Benutzer mit allen Aspekten der verschlüsselten Dateien, Ordner und Berichtsdaten des betreffenden Benutzers entfernen, siehe [Löschen von Benutzern](/2.16/de/admin/administering-users#deleting-users).
+- Möchten Sie mehrere Covata-Benutzer deaktivieren (z. B. anhand ihrer E-Mail-Adress-Domänen), siehe [Verwaltung von Benutzer-Positivlisten](/2.16/de/admin/managing-user-whitelists).
+
+</Tip>
+
+Ein Covata-Plattform-Administrator kann alle Benutzer-Accounts deaktivieren außer:
+
+- den Benutzer-Account, mit dem er aktuell bei der Covata-Verwaltung angemeldet ist
+- [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts (siehe **Hinweis** [unten](/2.16/de/admin/administering-users#disabled-re-enabled-user-notes)).
+
+**Deaktivierung, Aktivierung und Reaktivierung von Benutzer-Accounts auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Accounts deaktiviert, aktiviert oder reaktiviert werden soll(en).
+4. Für einzelne Benutzer-Accounts:
+
+   - *Zur Deaktivierung* - klicken Sie auf die grüne Schaltfläche **Aktiviert** des Accounts (in der Spalte **Aktiviert**), sodass die Schaltfläche auf rot wechselt und **Deaktiviert** anzeigt.
+   - *Zur Aktivierung oder Reaktivierung* - klicken Sie auf die rote Schaltfläche **Deaktiviert** des Accounts (in der Spalte **Aktiviert**), sodass die Schaltfläche auf grün wechselt und **Aktiviert** anzeigt.
+
+   Für mehrere Benutzer-Accounts:
+
+   1. Aktivieren Sie die entsprechenden Kontrollkästchen links (oder wählen Sie das Kontrollkästchen oben in der Kopfzeile der Benutzerliste, um alle Kontrollkästchen der aktuell angezeigten Benutzer-Accounts zu aktivieren).
+   2. Anschließend:
+
+      - *Zur Deaktivierung dieser Accounts* - klicken Sie auf die Schaltfläche
+        ![Schaltfläche Benutzer deaktivieren](/images/955e2fbb777e-disable-users-button.png)
+
+         (Benutzer deaktivieren) und anschließend in der Bestätigung auf **Ja**, um den Vorgang fortzusetzen. <br />
+         Die Benutzer-Accounts werden deaktiviert und ihre grünen Schaltflächen **Aktiviert** (in der Spalte **Aktiviert**) wechseln auf rote Schaltflächen **Deaktiviert**.
+      - *Zur Aktivierung oder Reaktivierung dieser Accounts* - klicken Sie auf die Schaltfläche
+        ![Schaltfläche Benutzer aktivieren](/images/b6ed030756c9-enable-users-button.png)
+
+         (Benutzer aktivieren) und anschließend in der Bestätigung auf **Ja**, um den Vorgang fortzusetzen. <br />
+         Die Benutzer-Accounts werden aktiviert/reaktiviert und ihre roten Schaltflächen **Deaktiviert** (in der Spalte **Aktiviert**) wechseln auf grüne Schaltflächen **Aktiviert**.
+
+      **Hinweise:**
+
+      - Waren ausgewählte Benutzer-Accounts bereits deaktiviert oder aktiviert, ehe die Schaltflächen Benutzer deaktivieren bzw. Benutzer aktivieren angeklickt wurden, wird diese Aktion für die betreffenden Accounts ignoriert.
+      - Verschiedene Gruppen von Benutzer-Accounts können nicht in einem Schritt deaktiviert und aktiviert/reaktiviert werden.
+
+<a id="disabled-re-enabled-user-notes" />
+
+<Note>
+
+[LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer-Accounts können über die Covata-Verwaltung nicht aktiviert oder reaktiviert werden, da der Status dieser Accounts über ihren LDAP-Server/ihr LDAP-Benutzerverzeichnis gesteuert wird. Wenn ein LDAP-Benutzer z. B. über sein LDAP-Benutzerverzeichnis deaktiviert wurde, erscheint sein Account auf der Seite **Benutzer** als **Deaktiviert** und kann über diese Seite nicht aktiviert oder reaktiviert werden.
+
+</Note>
+
+## Verpflichtung von Benutzern, ihr Passwort zurückzusetzen <a id="forcing-users-to-reset-their-passwords" />
+
+[Lokale](/2.16/de/admin/administering-users#account-type) Benutzer können gezwungen werden, ihr Passwort zurückzusetzen (z. B. weil Sie die [Passwort-Komplexität](/2.16/de/admin/configuring-administration-properties#number-of-character-type-categories-that-must-appear-in-a-password) erhöht haben oder Bedenken haben, dass die Passwörter eines oder mehrerer Benutzer kompromittiert sein könnten).
+
+**Verpflichtung lokaler Benutzer, ihr Passwort zurückzusetzen:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen Passwort/deren Passwörter geändert werden soll(en).
+4. Für einzelne Benutzer-Accounts:
+
+   1. Klicken Sie auf den Link **Bearbeiten** des betreffenden Benutzers (am rechten Rand der Seite **Benutzer**).
+   2. Aktivieren Sie im Dialogfeld **Benutzer bearbeiten** das Kontrollkästchen **Passwortrücksetzung erwzingen** und klicken Sie auf **Speichern**.
+
+   Für mehrere Benutzer-Accounts:
+
+   1. Aktivieren Sie die entsprechenden Kontrollkästchen links (oder wählen Sie das Kontrollkästchen oben in der Kopfzeile der Benutzerliste, um alle Kontrollkästchen der aktuell angezeigten Benutzer-Accounts zu aktivieren).
+   2. Klicken Sie auf die Schaltfläche
+      ![Schaltfläche Benutzer-Passwörter zurücksetzen](/images/0b85fbfe4559-reset-users-passwords-button.png)
+
+       (Benutzer-Passwörter zurücksetzen) und anschließend in der Bestätigung auf **Ja**, um den Vorgang fortzusetzen. <br />
+       Alle Passwörter der betreffenden Benutzer-Accounts werden zurückgesetzt.
+
+   Wenn sich die Benutzer das nächste Mal mit ihren bestehenden/alten Passwörtern anmelden, werden sie auf einer neuen Seite **Passwort festlegen** aufgefordert, ihr altes Passwort und zwei Mal ihr neues Passwort (einmal zur Bestätigung) einzugeben.
+
+<Note>
+
+- Der Wert des Kontrollkästchens **Passwortrücksetzung erzwingen** wird effektiv ignoriert, wenn Sie einen Benutzer-Account mit der [Ad-hoc-Rolle](/2.16/de/admin/administering-users#adhoc-role) bearbeiten, da diese Benutzer sich nur mit einem Einmal-Zugangslink/-Passwort authentifizieren können.
+- [LDAP](/2.16/de/admin/administering-users#account-type)-Benutzer können ihr Passwort nur über den LDAP-Server/das LDAP-Benutzerverzeichnis ihres Accounts zurücksetzen.
+
+</Note>
+
+## Entsperren von Benutzer-Accounts <a id="unlocking-users-accounts" />
+
+Wenn ein Covata-Benutzer sein Passwort öfter als das für die Covata-Plattform [konfigurierte Maximum](/2.16/de/admin/configuring-administration-properties#maximum-number-of-password-retries) falsch eingibt, wird der Account dieses Benutzers gesperrt. Der Benutzer bekommt dann eine E-Mail mit Anweisungen, wie er seinen Account entsperren und wieder nutzen kann.
+
+Gesperrte Covata-Benutzer-Accounts haben auf der Seite **Benutzer** eine rote Schaltfläche **Entsperren** (in der Spalte **Gesperrt**), anhand der Covata-Plattform-Administratoren die Accounts anderer Benutzer manuell entsperren können.
+
+<Note>
+
+Ein Covata-Plattform-Administrator kann nur Covata-Benutzer-Accounts entsperren, die aufgrund einer Überschreitung der [konfigurierten Höchstzahl an Versuchen, „Mein Passwort per E-Mail senden“ zu lassen](/2.16/de/admin/configuring-administration-properties#maximum-number-of-email-my-password-retries), gesperrt wurden.
+
+</Note>
+
+**Entsperren des Accounts von Benutzern:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Accounts entsperrt werden soll(en).
+4. Klicken Sie auf die rote Schaltfläche **Entsperren** (in der Spalte **Gesperrt**) des/der betreffenden Benutzer/s. Dies entsperrt diese(n) Benutzer-Account(s) sofort.
+
+## Aktivierung von 2FA für Benutzer-Accounts <a id="enabling-2fa-on-a-user-account" />
+
+Jeder Covata-Benutzer-Account kann bei Bedarf mit Zwei-Faktor-Authentifizierung (2FA) konfiguriert werden, indem diese Funktion für den betreffenden Account aktiviert wird.
+
+Wenn für einen Benutzer-Account 2FA aktiviert ist, muss der betreffende Benutzer für eine erfolgreiche Anmeldung über die Covata-Anmeldeseite sowohl sein Passwort (d. h. den ersten Authentifizierungsfaktor) als auch einen Authentifizierungscode (den zweiten Authentifizierungsfaktor) eingeben. Dieser Code wird von einer auf seinem Mobilgerät ausgeführten Authentifizierungsanwendung erzeugt.
+
+Die 2FA-Funktion unterstützt die folgenden Mobilgeräte und Authentifizierungs-Apps:
+
+- Android-gestützte Geräte mit der Google Authenticator-App,
+- Apple iPhone, iPad oder iPod Touch mit der Google Authenticator-App und
+- Microsoft Windows-gestützte Geräte mit der Microsoft Authenticator-App.
+
+<Note>
+
+- Ehe Sie für einen Covata-Benutzer-Account 2FA aktivieren, ist es empfehlenswert sich zunächst zu vergewissern, ob der betreffende Benutzer eines dieser unterstützten Mobilgeräte (siehe oben) besitzt, oder ihn zu informieren, dass er Zugang zu einem solchen Gerät benötigen wird, um sich weiterhin über die Covata-Anmeldeseite anmelden zu können.
+- URLs, von denen die betreffenden Authentifizierungs-Apps heruntergeladen werden können, sind über die **Design**-[Seite](/2.16/de/admin/re-theming-the-application-and-administration) verfügbar (und können dort konfiguriert werden).
+
+</Note>
+
+**Aktivierung der Zwei-Faktor-Authentifizierung für einen Covata-Benutzer-Account:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Accounts für 2FA konfiguriert werden soll(en).
+4. Aktivieren Sie das Kontrollkästchen (in der Spalte **2FA aktiviert**) des/der betreffenden Benutzer/s. 2FA wird für diese/n Benutzer-Account/s sofort aktiviert. <br />
+    Jeder Benutzer, für den 2FA auf diese Weise aktiviert wird, erhält eine E-Mail-Benachrichtigung, dass 2FA für seinen Account aktiviert wurde. Diese Benachrichtigung enthält einen befristet gültigen Link zu den folgenden detaillierten Anweisungen für den Benutzer:
+
+   1. Konfiguration seines Mobilgeräts mit der entsprechenden Authentifizierungs-App.
+   2. Konfiguration der Authenticator-App (nach ihrer Installation) für den Covata-Benutzer-Account, sodass die Authenticator-App die entsprechenden Authentifizierungscodes für den zweiten Authentifizierungsfaktor erzeugen kann.
+
+## Neukonfiguration von 2FA für Benutzer-Accounts <a id="re-configuring-2fa-for-a-user-account" />
+
+Wenn die Zwei-Faktor-Authentifizierung (2FA) für einen Benutzer-Account aktiviert ist, kann ein Benutzer aus den folgenden Gründen nicht in der Lage sein, Authentifizierungscodes für seinen zweiten Authentifizierungsfaktor zu erzeugen (für weitere Erklärungen siehe [oben](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account)):
+
+- Der Benutzer hat die Konfiguration für seinen Covata-Benutzer-Account aus der Authenticator-App auf seinem Mobilgerät gelöscht.
+- Der befristet gültige Link für die 2FA-Konfiguration ist abgelaufen, ehe der Benutzer die 2FA-Konfiguration abschließen konnte. Dies ist der Link in der E-Mail-Benachrichtigung des Benutzers, dass für seinen Account 2FA aktiviert wurde.
+- Der Benutzer hat sein Mobilgerät verloren. Der Benutzer benötigt in diesem Fall ein Ersatzgerät, um sich weiterhin über die Covata-Anmeldeseite bei seinem Account anmelden zu können, solange 2FA aktiviert ist.
+
+Tritt eines dieser Szenarien ein, kann sich der Benutzer nicht weiter über die Covata-Anmeldeseite anmelden. Der Benutzer informiert Sie oder einen anderen Covata-Plattform-Administrator dann wahrscheinlich per E-Mail, dass eines dieser Szenarien eingetreten ist (dies ist über die Funktion "Wenden Sie sich an Ihren Administrator" auf der Anforderungsseite für einen **Authentifizierungscode** möglich, wenn der Benutzer versucht, sich über die Covata-Anmeldeseite anzumelden).
+
+Zur Behebung des Problems muss 2FA für den betreffenden Benutzer neu konfiguriert (mit einem neuen Seed versehen) werden.
+
+**Neukonfiguration der 2FA für einen Covata-Benutzer-Account:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. [Suchen Sie](/2.16/de/admin/administering-users#finding-existing-users) den/die Benutzer, dessen/deren Accounts für 2FA neu konfiguriert werden soll(en).
+4. Klicken Sie auf die Schaltfläche **Neuen Seed erstellen** (in der Spalte **Neuen 2FA-Seed erstellen**) des/der betreffenden Benutzer/s, um 2FA für diese Accounts neu zu konfigurieren. <br />
+    Jeder Benutzer, für den 2FA auf diese Weise neu konfiguriert wird, erhält eine E-Mail-Benachrichtigung, dass 2FA für seinen Account aktiviert wurde, ähnlich der Benachrichtigung, die er erhielt, als [2FA ursprünglich für seinen Account aktiviert wurde](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account). Diese Benachrichtigung enthält einen neuen befristet gültigen Link zu den folgenden detaillierten Anweisungen für den Benutzer:
+
+   1. (Neu-)Konfiguration seines Mobilgeräts mit der entsprechenden Authentifizierungs-App (falls der Benutzer diesen Schritt erneut ausführen muss).
+   2. (Neu-)Konfiguration der Authenticator-App (nach ihrer Installation) für den Covata-Benutzer-Account, sodass die Authenticator-App die entsprechenden Authentifizierungscodes für den zweiten Authentifizierungsfaktor erzeugen kann.
+
+## Konfiguration von Spalten auf der Seite 'Benutzer' <a id="configuring-columns-on-the-users-page" />
+
+Standardmäßig sind auf der Seite **Benutzer** alle Spalten sichtbar. Mit Ausnahme der Spalte **E-Mail**, die immer angezeigt wird, können andere Spalten, die bei der Verwaltung von Benutzern Ihrer Covata-Plattform-Instanz nicht sichtbar sein brauchen, selektiv von der Seite **Benutzer** ausgeblendet werden.
+
+**Aus- und Wiedereinblenden einer oder mehrerer Spalten auf der Seite Benutzer:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Benutzer** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Benutzer** aufzurufen.
+3. Klicken Sie auf das Dropdown-Menü **Spalten auswählen** und deaktivieren Sie die Kontrollkästchen neben den auszublendenden Spalten. Aktivieren Sie umgekehrt die Kontrollkästchen neben den wieder einzublendenden Spalten.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

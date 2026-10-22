@@ -1,0 +1,47 @@
+---
+title: "<access-service>/api/v1/organisations/{organisationId}"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-organisationid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{organisationId}
+```
+
+where `{organisationId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-organisationid-supported-methods-and-overview" />
+
+- `DELETE` - used to remove an organization (specified by `organisationId`) configured on the Covata Platform (available to Safe Share administrators only).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-organisationid-detailed-description" />
+
+This API endpoint removes an organization (specified by `organisationId`) configured on the Covata Platform by a Safe Share administrator. <br />
+**Note:** If this organization contains at least one Covata user with the [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) role, then requests to this endpoint will fail. To remove such an organization:
+
+1. All Covata users with the **Originator** role must first be removed from this organization (see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users/\{userId\}](/3.3/api/access-service-api-v1-organisations-orggroupid-users-userid)).
+2. Make a request to this API endpoint.
+
+## Supported roles <a id="access-service-api-v1-organisations-organisationid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (as described in the [Safe Share Administrator's Guide](/3.3/admin-platform/index)):
+
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-organisationid#access-service-api-v1-organisations-organisationid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-organisationid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-organisationid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

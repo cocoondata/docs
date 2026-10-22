@@ -1,0 +1,53 @@
+---
+title: "<access-service>/api/v1/dashboard/items"
+---
+
+## URL structure <a id="access-service-api-v1-dashboard-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/dashboard/items
+```
+
+## Supported methods and overview <a id="access-service-api-v1-dashboard-items-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the total number and average size of all [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) in the *Created* state on the Covata Platform.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-dashboard-items-detailed-description" />
+
+This API endpoint retrieves the total number and average size of all Secure Objects in the *Created* state on the Covata Platform.
+
+## Supported roles <a id="access-service-api-v1-dashboard-items-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-dashboard-items#access-service-api-v1-dashboard-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-dashboard-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-dashboard-items-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **totalObjects** - The total number of all Secure Objects in the *Created* state on the Covata Platform.
+- **averageObjectSize** - The average size (in bytes) of all Secure Objects in the *Created* state on the Covata Platform.
+
+  **Example:**
+
+  ```json
+  {
+    "totalObjects": 6,
+    "averageObjectSize": 7864320.0
+  }
+  ```

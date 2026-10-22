@@ -1,0 +1,47 @@
+---
+title: "<content-service>/api/v1/collections/{collectionId}/contents"
+---
+
+## URL structure <a id="content-service-api-v1-collections-collectionid-contents-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/collections/{collectionId}/contents
+```
+
+where `{collectionId}` is the ID of a folder/collection.
+
+## Supported methods and overview <a id="content-service-api-v1-collections-collectionid-contents-supported-methods-and-overview" />
+
+- `DELETE` ( *Deprecated* ) - returns an HTTP response status `200 OK` only. In earlier Covata Platform versions, this endpoint used to delete the encrypted data associated with all file objects/[Secure Objects](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) contained within a folder/[collection](/3.5/api/working-with-files-and-folders-fundamentals#collection) (specified by `collectionId`) from storage managed by the Covata Platform's Content Service.
+
+<Note>
+
+This endpoint is deprecated and should no longer be used. Instead, the deletion of all file object data within a folder (including all file object version data) from storage is now automatically handled through `DELETE` method requests to the following endpoints:
+
+- [&lt;access-service&gt;/api/v1/recycle-bin/items/\{itemId\}](/3.5/api/access-service-api-v1-recycle-bin-items-itemid)
+- [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/recycle-bin/items](/3.5/api/access-service-api-v1-organisations-orgid-recycle-bin-items)
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-collections-collectionid-contents-detailed-description" />
+
+This API endpoint deletes the encrypted data associated with all file objects contained within a folder (specified by `collectionId`) from storage managed by the Covata Platform's Content Service.
+
+## Supported roles and conditions <a id="content-service-api-v1-collections-collectionid-contents-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the folder whose ID is specified by `{collectionId}` in the request's URL.
+- **Originator**, [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Remove (Folder)** permission on the file object whose ID is specified by `{collectionId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/content-service-api-v1-collections-collectionid-contents#content-service-api-v1-collections-collectionid-contents-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-collections-collectionid-contents-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="content-service-api-v1-collections-collectionid-contents-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,55 @@
+---
+title: "<access-service>/api/v1/ldap/verifyconnection"
+---
+
+## URL structure <a id="access-service-api-v1-ldap-verifyconnection-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/ldap/verifyconnection
+```
+
+## Supported methods and overview <a id="access-service-api-v1-ldap-verifyconnection-supported-methods-and-overview" />
+
+- `POST` - used to verify the connection to an [LDAP user directory](/3.0/admin/configuring-ldap).
+
+## Detailed description <a id="access-service-api-v1-ldap-verifyconnection-detailed-description" />
+
+This API endpoint verifies the connection to an LDAP user directory.
+
+With this request, a core [subset of LDAP connection parameters must be submitted](/3.0/api/access-service-api-v1-ldap-verifyconnection#access-service-api-v1-ldap-verifyconnection-required-parameters), which includes the:
+
+- address of the server running LDAP (along with the connection timeout duration),
+- LDAP user directory's manager credentials (to perform LDAP authentication and synchronization),
+- root node in LDAP from which the Covata Platform finds users and groups and
+- LDAP field against which the Covata Platform matches the email address of a Covata user when they authenticate.
+
+## Supported roles <a id="access-service-api-v1-ldap-verifyconnection-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-ldap-verifyconnection#access-service-api-v1-ldap-verifyconnection-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-ldap-verifyconnection-required-headers" />
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6` <br />
+   where the `Bearer` token is the appropriate access token.
+- `Content-Type: application/json`
+
+## Required parameters <a id="access-service-api-v1-ldap-verifyconnection-required-parameters" />
+
+The following required parameters must be sent in the body of the POST request, each as individual members of a JSON object:
+
+- **authFilter** - .
+- **baseDN** - .
+- **managerDN** - .
+- **managerPassword** - .
+- **serverTimeout** - .
+- **serverUrl** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-ldap-verifyconnection-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

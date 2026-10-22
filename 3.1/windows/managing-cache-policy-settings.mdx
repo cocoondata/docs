@@ -1,0 +1,81 @@
+---
+title: "Managing cache policy settings"
+---
+
+To maximise data security, Safe Share for Windows always encrypts or decrypts files locally on a Covata user's computer. Therefore, encrypted content within a Covata user's ['Safe Share' folder](/3.1/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) *must be* either:
+
+- Generated locally within the `My Secured Files` subfolder whenever the user [stores personally owned content securely](/3.1/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content).
+- Present locally within the user's `Shared With Me` subfolder (for decryption) whenever another Covata user [shares secure content](/3.1/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) (through any Safe Share application) with the currently signed-in Covata user. If this encrypted content is not locally available, Safe Share for Windows first downloads the content from remote storage managed by the Covata Platform before decryption.
+
+Caching encrypted content locally bypasses the need for Safe Share for Windows to download a file's content from remote storage each time the file needs to be decrypted. On the other hand, this caching can consume a significant amount of local disk/drive space over time.
+
+Therefore, the Safe Share for Windows *cache policy* feature allows a user to define whether or not all encrypted content within the `Safe Share` folders will be retained and stored (i.e. cached) locally on the computer.
+
+By default, Safe Share for Windows does not cache encrypted content locally. This means that whenever encrypted content is either generated for upload to storage or downloaded for decryption, Safe Share for Windows automatically deletes its local encrypted content upon completing these actions (i.e. when the encrypted content is no longer required).
+
+<Tip>
+
+Within any ['Safe Share' folder](/3.1/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder), a *Covata-secured file* with the:
+
+- `.cov` file extension indicates a file whose content is cached locally and
+- `.covl` file extension indicates a file whose content is *not* cached locally. The size of any one of these files is &lt; 1 KB. Each time a `.covl` file is decrypted, Safe Share for Windows first downloads its encrypted content from remote storage.
+
+</Tip>
+
+## Accessing cache policy settings
+
+<Note>
+
+You do not need to be signed in to Safe Share for Windows to access this feature.
+
+</Note>
+
+**To access Safe Share for Windows' cache policy settings feature:**
+
+1. Ensure Safe Share for Windows has been [started](/3.1/windows/starting-the-application-and-signing-in#starting-the-application).
+2. Click the application's icon
+   ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    or
+
+   ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    in the taskbar notification area, then click the 'Settings' icon
+
+   ![Application pane settings icon](/images/bd516587c63f-application-pane-settings-icon.png)
+
+    at the top-right of the application pane ... :
+
+   ![Accessing the application pane settings icon](/images/22a1d0d9e006-application-pane-signed-in.png)
+
+   <br />
+    and choose **Settings** from this icon's pop-up menu to open the **Settings** dialog box (at the **General** tab): <br />
+   ![Settings dialog box - General tab](/images/bab4b8b8f698-settings-dialog-box-general-tab.png)
+3. Click the **Cache Policy** tab access the cache policy feature's current settings: <br />
+   ![Settings dialog box - Cache Policy tab](/images/8f811f19b9cb-settings-dialog-box-cache-policy-tab.png)
+   <br />
+    Since Safe Share for Windows does not to cache any encrypted content locally by default, the **Do not cache any encrypted content** option is selected upon first accessing this dialog box.
+
+## Modifying cache policy settings
+
+Cache policy settings are associated with (and tied to) the *Windows user account* with which you are currently signed in to Windows.
+
+<Note>
+
+This feature is independent of the Covata user account with which you are signed in to Safe Share for Windows. Therefore, [signing in](/3.1/windows/starting-the-application-and-signing-in#signing-in-manually) to Safe Share for Windows is not required when modifying these settings.
+
+</Note>
+
+**To modify Safe Share for Windows' cache policy settings:**
+
+1. [Access](/3.1/windows/managing-cache-policy-settings#accessing-cache-policy-settings) the cache policy settings feature.
+2. In the **Cache Policy** tab of the **Settings** dialog box, choose one of the following options:
+
+   - **Do not cache any encrypted content** - this is the default option, which results in all local encrypted content being automatically deleted after it is no longer required.
+   - **Cache all encrypted content (uses more disk space)** - this option results in all local encrypted content (i.e. within the `Safe Share` folders) being retained, such that whenever any file's encrypted content needs to be decrypted, its content does not need to be downloaded from remote storage. <br />
+     **Note:** Be aware that when this option is selected, the encrypted content of any file (within the `Safe Share` folders) whose encrypted content is not (yet) stored locally, will be downloaded and subsequently cached when you next decrypt that file.
+3. Click **Save** to save the updated cache policy settings.
+
+---
+
+#### Please provide your feedback here

@@ -1,0 +1,66 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/statistics/users"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-statistics-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/statistics/users
+```
+
+where `{orgGroupId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-statistics-users-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a summary of information about the numbers of [Covata users](/3.3/admin-org/administering-users-within-an-organisation) assigned to each [role](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (where one user may possess more than one role) within an organization (specified by `orgGroupId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-statistics-users-detailed-description" />
+
+This API endpoint retrieves a summary of information about the numbers of Covata users assigned to each role (where one user may possess more than one role) within an organization (specified by `orgGroupId`).
+
+<Note>
+
+Users with the [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) role are excluded from the statistics returned by this API endpoint.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-statistics-users-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)):
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization whose ID is specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orggroupid-statistics-users#access-service-api-v1-organisations-orggroupid-statistics-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-statistics-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-statistics-users-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **originatorCount** - The number of Covata user accounts within this organization (specified by `{orgGroupId}` in the request's URL) that has the [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) role.
+- **collaboratorCount** - The number of Covata user accounts within this organization that has the [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) role.
+- **organisationAdminCount** - The number of Covata user accounts within this organization that has the [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) role.
+- **totalCount** - The sum of the 'Count' values above - i.e. the total number of roles assigned to users within this organization. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "originatorCount": 1,
+      "collaboratorCount": 1,
+      "organisationAdminCount": 2,
+      "totalCount": 4
+  }
+  ```

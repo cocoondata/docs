@@ -1,0 +1,76 @@
+---
+title: "Erzeugung von Berichten"
+---
+
+Über die Seite **Berichte** können Organisations-Administratoren auf einen Verlauf der Aktivitäten von beliebigen Covata-Benutzer, die Mitglieder der Organisation sind, zugreifen.
+
+Die folgenden Arten von Aktivitäten <sup>&#42;</sup> werden aufgezeichnet:
+
+- Aktivitäten der Safe Share-Organisationsverwaltung, d. h. Aktivitäten im Zusammenhang mit folgenden Aspekten:
+
+  - [Benutzerverwaltung](/3.3/de/admin-org/administering-users-within-an-organisation), insbesondere das [Hinzufügen](/3.3/de/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account), [Importieren](/3.3/de/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) oder [Entfernen](/3.3/de/admin-org/administering-users-within-an-organisation#removing-a-user-account-from-your-organisation) von Benutzern
+  - [Hinzufügen](/3.3/de/admin-org/managing-classifications#adding-a-new-classification) von [Klassifikationen](/3.3/de/admin-org/managing-classifications)
+  - [Gruppenverwaltung](/3.3/de/admin-org/managing-groups), insbesondere:
+
+    - [Hinzufügen einer Gruppe](/3.3/de/admin-org/managing-groups#adding-a-new-group)
+    - Änderung der [Mitglieder](/3.3/de/admin-org/managing-groups#modifying-users-in-an-existing-group), der [Klassifikationen](/3.3/de/admin-org/managing-groups#modifying-classifications-on-an-existing-group) oder [Details](/3.3/de/admin-org/managing-groups#editing-an-existing-group) einer Gruppe oder
+    - [Entfernen einer Gruppe](/3.3/de/admin-org/managing-groups#removing-an-existing-group)
+  - [Verwaltung von Plänen und Benutzerkontingenten](/3.3/de/admin-org/managing-users-storage-quotas-through-plans), insbesondere das [Hinzufügen](/3.3/de/admin-org/managing-users-storage-quotas-through-plans#adding-a-new-plan) oder [Entfernen](/3.3/de/admin-org/managing-users-storage-quotas-through-plans#removing-an-existing-plan) eines Plans
+  - [Dateiverwaltung](/3.3/de/admin-org/administering-files), insbesondere die [Deaktivierung oder (Re-)Aktivierung](/3.3/de/admin-org/administering-files#disabling-or-re-enabling-a-file) von Dateien
+- Aktivitäten im Zusammenhang mit Benutzern innerhalb der Organisation, die [andere Rollen](/3.3/de/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) innehaben (diese werden im Allgemeinen über Safe Share Produkte ausgeführt), d. h. Aktivitäten im Zusammenhang mit folgenden Aspekten:
+
+  - Erstellung von Dateien
+  - Entschlüsselung von Dateien (einschließlich der Entschlüsselung der *schreibgeschützten Ansicht* einer Datei), bei der die hierfür benötigten Schlüssel von der Covata-Plattform abgerufen werden müssen
+  - Abruf der Details von Elementen; derartige Aktivitäten sind z. B. erforderlich, wenn Dateien und/oder Ordner über Safe Share Produkte aufgelistet werden
+  - Freigabe von Elementen (d. h. Dateien und/oder Ordner) an Mitwirkende
+  - Verwaltung von Elementen, z. B. Umbenennung, Verschiebung oder Entfernen eines Elements
+
+<sup>&#42;</sup> Alle dieser Aktivitäten beinhalten Anfragen an Endpunkte der API der Covata-Plattform. Für weitere Informationen über die API der Covata-Plattform und ihre Endpunkte siehe die Seite [API-Übersichtsleitfaden](/3.3/api/api-reference-guide) in der [Covata API-Dokumentation](/3.3/api/index) (nur in englischer Sprache verfügbar).
+
+![Seite Berichte](/images/f3a9f4e8563b-reports-page.png)
+## Aktivitätsfelder <a id="activity-fields" />
+
+Jede der Aktivitäten (d. h. „Aktivitätselemente“) auf der Seite **Berichte** stellt eine Anfrage an Endpunkte der API der Covata-Plattform dar. Jede Aktivität auf dieser Seite besteht aus den folgenden Feldern:
+
+| Berichtsfeld | Beschreibung |
+| --- | --- |
+| Datum/Zeit | Datum und Zeitpunkt der Aktivität |
+| E-Mail | Die E-Mail-Adresse des Covata-Benutzers innerhalb der Organisation, mit dessen Account die Aktivität ausgeführt (d. h. von dessen Account die Anfrage an die API der Covata-Plattform gestellt) wurde. |
+| Aktion | Der Typ der von der Aktivität ausgeführten Aktion. Die betreffenden Aktionstypen entsprechen den HTTP-basierten Methodentypen, die für Anfragen an Endpunkte der API der Covata-Plattform verwendet werden.  <br />•  **Erstellt** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `POST`-Methodenanforderung) - zeigt an, dass die Aktion die Erstellung von Inhalten/Daten auf der Covata-Plattform beinhaltete. <br />•  **Abgerufen** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `GET`-Anforderung) - zeigt an, dass die Aktion den Abruf von Daten von der Covata-Plattform beinhaltete. <br />•  **Aktualisiert** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `PUT`-Anforderung) - zeigt an, dass die Aktion die Aktualisierung bestehender Inhalte/Daten auf der Covata-Plattform beinhaltete. <br />•  **Gelöscht** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `DELETE`-Anforderung) - zeigt an, dass die Aktion die Entfernung bestehender Inhalte/Daten aus der Covata-Plattform beinhaltete.  |
+| Ressource | Der HTTP-basierte Endpunkt der API der Covata-Plattform, an den die Aktivitätsanforderung gerichtet wurde. |
+| Antwort | Der HTTP-basierte Status der Antwort auf die betreffende Aktivitätsanforderung (an die API der Covata-Plattform). <br />  Dieser Wert ist im Allgemeinen `Erfolgreich`, d. h. von der Covata-Plattform wird ein HTTP-Antwortstatus von `200 OK` zurückgegeben. Es sind jedoch für die Antwort auch andere Werte möglich (d. h. für fehlgeschlagene Anforderungen usw.). |
+| IP-Adresse | Die IP-Adresse des Computers oder Geräts, auf dem die Aktivität ausgeführt wurde. |
+| Client-ID | Der eindeutige Bezeichner einer (auf der Covata-Plattform-Instanz der Organisation konfigurierten) Client-Anwendung, über die die Aktivität ausgeführt wurde. <br />  Für weitere Informationen über Client-IDs siehe die Beschreibung von [Client-ID](/3.3/de/admin-platform/configuring-client-applications) in der [Safe Share-Administratorenanleitung](/3.3/de/admin-platform/index). <br />**Hinweis:** Bei allen über Safe Share for Web oder die Safe Share-Organisationsverwaltung ausgeführten Aktivitäten ist der Wert der Client-ID `covataWebApp`.  |
+| Ereignis-Info | Wichtige „Ereignisinformationen“, die von der Covata-Plattform aufgrund der Aktivität ausgegeben werden. <br />  Je nach der **Ressource** der Aktivität (d. h. einer Anforderung an einen API-Endpunkt der Covata-Plattform, siehe oben) können in der Antwort der Covata-Plattform Daten (in Form von Eigenschaften oder [JSON](http://json.org/)-Objektmembern) ausgegeben werden. <br />  Daher stehen auf der Seite **Berichte** verschiedene Aktivitäten mit Subsets solcher (in den Antworten der Covata-Plattform auf die Aktivitäten ausgegebenen) Daten in Zusammenhang. Diese stellen die mit den betreffenden Aktivitäten zusammenhängenden wichtigen „Ereignisinformationen“ dar. <br />**Hinweis:** Auf die Ereignis-Info kann nur zugegriffen werden, wenn [über die betreffenden Aktivitäten erzeugte Berichte](/3.3/de/admin-org/generating-reports#generating-a-report) in PDF- oder CSV-Format exportiert werden. Da die Ereignis-Info einer einzelnen Aktivität viele Datenmember enthalten kann, zeigt die Seite **Berichte** selbst dieses Feld nicht.  |
+
+## Erzeugung eines Berichts <a id="generating-a-report" />
+
+Bei jedem Zugriff auf die Seite **Berichte** werden die letzten 25 Aktivitäten (d. h. API-Anforderungen) in umgekehrter zeitlicher Reihenfolge angezeigt. Auf ältere Aktivitäten kann über die Schaltflächen zur Seitennavigation (rechts unten auf der Seite **Berichte**) zugegriffen werden.
+
+Die Aktivitäten auf dieser Seite können angezeigt und in PDF- oder [CSV](http://tools.ietf.org/html/rfc4180)-Format exportiert werden. Letztere Option ist hilfreich, wenn die Berichtsdaten anschließend weiter bearbeitet werden sollen.
+
+Aufgrund des großen Volumens an Aktivitäten, auf die über diese Seite zugegriffen werden kann, ist es hilfreich, die Aktivitäten nach Ihren Bedürfnissen entsprechenden Kriterien zu filtern, ehe Sie den Bericht konkret erzeugen.
+
+**Erzeugung eines Berichts über in Ihrer Organisation aufgezeichnete Benutzeraktivitäten:**
+
+1. [Melden Sie sich](/3.3/de/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Berichte** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.3/de/admin-org/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Berichte** aufzurufen, auf der die letzten 25 Aktivitäten in umgekehrter zeitlicher Reihenfolge aufgeführt sind.
+3. <a id="report-filter-fields" />Filtern Sie die Aktivitäten nach den folgenden, am oberen Seitenrand gezeigten Filter-Feldern:
+
+   | Filter-Feld | Beschreibung |
+   | --- | --- |
+   | Anfangsdatum | Geben Sie das *Anfangsdatum* ein, ab dem innerhalb Ihrer Organisation ausgeführte Aktivitäten für den Bericht abgerufen werden. |
+   | Enddatum | Geben Sie das *Enddatum* ein, bis zu dem innerhalb Ihrer Organisation ausgeführte Aktivitäten für den Bericht abgerufen werden. |
+   | Client-ID | Der eindeutige Bezeichner einer (auf der Covata-Plattform-Instanz Ihrer Organisation konfigurierten) Client-Anwendung, über die die Aktivität ausgeführt wurde. Für Client-Anwendungen außer Safe Share- Anwendungen wird der Wert der Client-ID von einem Safe Share-Administrator konfiguriert (und kann daher von ihm angefordert werden). Geben Sie den Wert der Client-ID der Client-Anwendung ein, um für den Bericht nur aus der betreffenden Anwendung stammende Aktivitäten abzurufen. <br />  Für weitere Informationen über Client-IDs siehe die Beschreibung von [Client-ID](/3.3/de/admin-platform/configuring-client-applications) in der [Safe Share-Administratorenanleitung](/3.3/de/admin-platform/index). <br />**Hinweis:** Bei allen von einem Covata-Benutzer über Safe Share for Web oder die Safe Share-Organisationsverwaltung ausgeführten Aktivitäten ist der Wert der Client-ID `covataWebApp`.  |
+   | E-Mail | Die E-Mail-Adresse des Covata-Benutzers innerhalb Ihrer Organisation, der die Aktivität ausgeführt hat. Geben Sie die E-Mail-Adresse des betreffenden Benutzers an, um für den Bericht nur mit diesem Benutzer zusammenhängende Aktivitäten abzurufen. |
+   | Aktion | Der Typ der von der Aktivität ausgeführten Aktion. Die betreffenden Aktionstypen entsprechen den HTTP-basierten Methodentypen, die für Anfragen an Endpunkte der API der Covata-Plattform verwendet werden. Wählen Sie einen der folgenden Aktionstypen, um für den Bericht nur mit diesem Aktionstyp zusammenhängende Aktivitäten abzurufen:  <br />•  **Erstellt** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `POST`-Methodenanforderung) - zeigt an, dass die Aktion die Erstellung von Inhalten/Daten auf der Covata-Plattform beinhaltete. <br />•  **Abgerufen** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `GET`-Anforderung) - zeigt an, dass die Aktion den Abruf von Daten von der Covata-Plattform beinhaltete. <br />•  **Aktualisiert** (entspricht einer an einen API-Endpunkt der Covata-Plattform gerichteten `PUT`-Anforderung) - zeigt an, dass die Aktion die Aktualisierung bestehender Inhalte/Daten auf der Covata-Plattform beinhaltete. <br />**Hinweis:** Aktivitäten auf der Seite **Berichte** können einen weiteren Aktionstyp haben (z. B. „Gelöscht“), der einer `DELETE`-Methodenanforderung an einen API-Endpunkt der Covata-Plattform entspricht. Bei der Erzeugung von Berichten anhand der Safe Share-Organisationsverwaltung ist es jedoch nicht möglich, nach Aktivitäten mit diesem Aktionstyp zu filtern. |
+   | Ressource | Der Typ (d. h. die Kategorie) der Ressource, mit der die Aktivität in Zusammenhang steht. Die betreffenden Ressourcentypen entsprechen den verschiedenen Kategorien von Endpunkten der API der Covata-Plattform. Wählen Sie einen der folgenden Ressourcentypen, um für den Bericht nur mit diesem Ressourcentyp zusammenhängende Aktivitäten abzurufen:  <br />•  **Objekte** - eine Aktivität hinsichtlich der Erstellung, Entschlüsselung, Freigabe und Verwaltung von Dateien <br />•  **Mitwirkung** - eine Aktivität hinsichtlich der Mitwirkung an einem Element. Die Auswahl dieser Option ruft derzeit allerdings keine Aktivitäten ab. <br />•  **Schlüssel** - eine Aktivität hinsichtlich der Entschlüsselung von Dateien (einschließlich der Entschlüsselung ihrer *schreibgeschützten Ansichten*)  |
+4. Führen Sie einen der folgenden Schritte aus:
+
+   - Klicken Sie auf die Schaltfläche **Anzeigen**, um auf der Seite **Berichte** Aktivitäten nach den Elementen zu filtern, die allen Kriterien für die Filter-Felder entsprechen (siehe oben).
+   - Klicken Sie auf das Dropdown-Menü **Exportieren** und wählen Sie eine der folgenden Optionen:
+
+     - **PDF** um ein Dokument der nach den gewählten Kriterien gefilterten Aktivitäten (siehe oben) im PDF-Format zu erzeugen
+     - **CSV** um eine Datei der nach den gewählten Kriterien gefilterten Aktivitäten (siehe oben) im CSV-Format zu erzeugen
+
+     Die PDF- und CSV-Exportformate enthalten zusätzlich die Daten für das [Feld](/3.3/de/admin-org/generating-reports#activity-fields) **Ereignis-Info** (die auf der Seite **Berichte** nicht gezeigt werden). Wie auf der Seite **Berichte** auch sind die Aktivitäten bei beiden Formaten in umgekehrter zeitlicher Reihenfolge geordnet.

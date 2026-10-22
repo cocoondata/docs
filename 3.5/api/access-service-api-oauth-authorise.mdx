@@ -1,0 +1,60 @@
+---
+title: "<access-service>/api/oauth/authorise"
+---
+
+## URL structure <a id="access-service-api-oauth-authorise-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/oauth/authorise
+```
+
+## Supported methods and overview <a id="access-service-api-oauth-authorise-supported-methods-and-overview" />
+
+- `GET` - [initiates the process for obtaining an access token](/3.5/api/authentication-and-authorisation#initiating-authentication-and-authorisation) (and optional refresh token) using either the *authorisation code* or *implicit* OAuth 2.0 grant types.
+
+## Detailed description <a id="access-service-api-oauth-authorise-detailed-description" />
+
+This API endpoint initiates the process for obtaining an [access token](/3.5/admin-platform/configuring-client-applications#grant-types) using either [authorisation code](/3.5/api/authentication-and-authorisation#using-the-authorisation-code-grant-type) or [implicit](/3.5/api/authentication-and-authorisation#using-the-implicit-grant-type) OAuth 2.0 grant types.
+
+When using the implicit grant type, the access token itself is returned in the [response](/3.5/api/access-service-api-oauth-authorise#access-service-api-authorise-token-returns) to this API endpoint. (All other grant types return their access tokens in calls to the [&lt;access-service&gt;/api/oauth/token](/3.5/api/access-service-api-oauth-token) endpoint.)
+
+If the [client application has been configured](/3.5/admin-platform/configuring-client-applications) on the Covata Platform to issue refresh tokens, then a refresh token will accompany the access token. However, regardless of this configuration, refresh tokens are never issued when using the implicit grant type.
+
+## Required parameters <a id="access-service-api-oauth-authorise-required-parameters" />
+
+The following required parameters must be sent in the **URL** of the request:
+
+- **response_type** - For the *authorisation code* grant type, specify the string value `code` or for the *implicit* grant type, specify `token`.
+- **client_id** - The client ID of your application's client credentials, which would have been generated when your application was [registered](/3.5/api/authentication-and-authorisation#registering-your-application-on-the-platform) on the Covata Platform.
+- **redirect_uri** - Your application's URL/URI, which for the:
+
+  - *authorisation code* grant type, will handle the initial response from the Covata Platform that contains the actual authorisation code. This initial response is sent after the user has successfully authenticated.
+  - *implicit* grant type, will handle the response from the Covata Platform that contains the access token itself. This response is sent after the user has successfully authenticated.
+
+  **Example (request - using the authorisation code grant type):**
+
+  ```text
+  https://access-service.xy-company.com/api/oauth/authorise?response_type=code&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback
+  ```
+
+This request results in the Covata Platform presenting the user with the Covata Sign-in page.
+
+If the client application requesting this API endpoint was developed by a third party (i.e. a non-Covata client application), then an additional page is presented requesting the user to approve the client application access to the user's resources on the Covata Platform. This step is known as the *application approval* step and only needs to be performed once (unless this approval is subsequently [revoked by the user](/3.5/api/access-service-api-v1-users-me-applications-approvals-approvalid)).
+
+## Returns <a id="access-service-api-authorise-token-returns" />
+
+Once the Covata user has successfully authenticated (and if required, has accepted the *application approval* step), the Covata Platform responds by redirecting to your application's URL/URI (i.e. the `redirect_uri` value above), whose following URL parameters depend on the grant type used:
+
+- **code** ( *Authorisation code grant type only* ) - The authorisation code value.
+- **access_token** ( *Implicit grant type only* ) - The access token itself, as a [JSON Web Token (JWT)](https://jwt.io/introduction/) value. The resources (i.e. API endpoints) of the Covata Platform that this access token grants permission to are based on the Covata user whose credentials were used for authentication, this user's [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (explained in more detail in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and if applicable to the API endpoint, the user's:
+
+  - membership of organisations and
+  - ownership or collaborator status on files or folders.
+- **token_type** ( *Implicit grant type only* ) - The brief description for the type of token (above) - i.e. usually `bearer`.
+- **scope** ( *Implicit grant type only* ) - .
+- **jti** ( *Implicit grant type only* ) - The UUID value for the returned JWT access token. This value is a unique ID for the returned JWT, which is also known as a JWT ID. <br />
+  **Example (response/redirect - using the authorisation code grant type):**
+
+  ```text
+  https://my-application-url/authcallback?code=lEQmsFkB02NGPaB3YtaDnA
+  ```

@@ -1,0 +1,104 @@
+---
+title: "<access-service>/api/v1/users/{userid}"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userid}
+```
+
+where `{userId}` is the ID of a Covata user.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-supported-methods-and-overview" />
+
+- `GET` - used to retrieve information about a [Covata user](/2.16/admin/administering-users), based on the user's ID.
+- `PUT` - used to [modify](/2.16/admin/administering-users#editing-an-existing-user) the fields of a Covata user.
+- `DELETE` - used to [delete](/2.16/admin/administering-users#deleting-users) a Covata user.
+
+<Note>
+
+The `GET` and `DELETE` methods take no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-userid-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Retrieves information about a Covata user, based on the Covata user's ID. A Covata user's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/users](/2.16/api/access-service-api-v1-users) API endpoint, which retrieves a list of field information for all Covata Platform users who can be filtered through a variety of 'search' criteria. <br />
+  **Tip:** All information returned in the [response](/2.16/api/access-service-api-v1-users-userid#access-service-api-v1-users-userid-returns) from a `GET` method call to this API endpoint is also returned in the [response](/2.16/api/access-service-api-v1-users#access-service-api-v1-users-returns-from-a-GET-request) from a `GET` method call to the [&lt;access-service&gt;/api/v1/users](/2.16/api/access-service-api-v1-users) endpoint. Therefore, there is no need to call the `GET` method on this API endpoint (if you do not already have the Covata user's ID).
+- Modifies the fields of an existing Covata user, based on the Covata user's ID. These fields include the user's:
+
+  - first name, last name, other name and mobile number,
+  - roles and current plan, and
+  - flag which [forces the user to reset their password upon next their next sign-in attempt](/2.16/admin/administering-users#forcing-users-to-reset-their-passwords). It is also possible to force one or more Covata users to reset their passwords (upon their next sign-in attempt) in a single action by calling the [&lt;access-service&gt;/api/v1/users/bulk](/2.16/api/access-service-api-v1-users-bulk) API endpoint.
+- Deletes a Covata user (based on its ID), which removes this user from the Covata Platform, as well as:
+
+  - changes the state of all Secure Objects which the user currently owns to *Deleted*,
+  - deletes all collections which the user currently owns, and
+  - deletes all reporting data associated with this user account.
+
+  **Important:**
+
+  - It is *strongly advised* that you first explicitly [delete the user's entire Secure Object content in storage](/2.16/api/content-service-api-v1-users-userid-contents) *before* calling the `DELETE` method of this API endpoint (which changes the state of all Secure Objects that the user currently owns to *Deleted*). If not, then the available storage space reported by the Covata Platform may remain significantly lower and will continue to do so, since the Covata Platform can no longer authenticate this user to obtain an access token required to manipulate these Secure Objects' data in storage through the Covata API.
+  - It is also possible to delete one or more Covata users in a single action by calling the [&lt;access-service&gt;/api/v1/users/bulk](/2.16/api/access-service-api-v1-users-bulk) endpoint.
+
+## Supported roles <a id="access-service-api-users-userid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-users-userid#access-service-api-v1-users-userid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-users-userid-optional-parameters" />
+
+The following optional parameters can be sent in the body of the PUT request, each as individual members of a JSON object:
+
+- **firstName** - .
+- **forceResetPassword** - true or false.
+- **lastName** - .
+- **mobileNumber** - .
+- **otherName** - .
+- **planId** - .
+- **resetFailedLogins** - true or false.
+- **roles** - ROLE_SYSTEM_ADMIN, ROLE_COLLABORATOR, ROLE_ORIGINATOR, ROLE_ADHOC_COLLABORATOR or ROLE_USER_ADMIN.
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-users-userid-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **email** - .
+- **firstName** - .
+- **lastName** - .
+- **otherName** - .
+- **mobileNumber** - .
+- **plan** - .
+
+  - **id** - .
+  - **name** - .
+  - **description** - .
+  - **quota** - .
+  - **default** - .
+- **enabled** - .
+- **accountNonLocked** - .
+- **numFailedLogins** - .
+- **id** - .
+- **accountType** - .
+- **roles** - .
+- **planId** - .
+
+  **Example (response from ...):**

@@ -1,0 +1,50 @@
+---
+title: "Covata-Plattform 2.16 Administratorenhandbuch"
+---
+
+Diese Dokumentation gilt für die 2.16.x-Versionen der *Covata-Plattform*.
+
+Informationen zu dieser Dokumentation entnehmen Sie bitte unserem [wichtigen Hinweis](/2.16/de/admin/important-notice).
+
+## Übersicht über die Covata-Plattform
+
+Covata beinhaltet eine komplette Lösung und Plattform für den zuverlässigen Schutz und die sichere Freigabe verschlüsselter Dateien und Ordner, die (innerhalb einer Organisation, außerhalb der Domäne und von Mobilgeräten aus) ortsunabhängig gespeichert und zugänglich gemacht werden können.
+
+Covata-Technologien stellen diese Lösung über die *Covata-Plattform* zur Verfügung, deren *Zugriffsdienst* kryptografische *Schlüssel* (zur Ver- bzw. Entschlüsselung von Inhalten) und *Zugriffssteuerungen* (die definieren, wer Inhalte wann entschlüsseln und auf sie zugreifen kann) zentral verwaltet.
+
+Der Zugriffsdienst der Covata-Plattform wickelt die Verwaltung der *Schlüssel* und die *Zugriffssteuerungen* separat von der Kryptografie und den Benutzerinhalten ab. Diese Trennung hilft gewährleisten, dass verschlüsselte Inhalte nur von den definierten Zugriffsberechtigten entschlüsselt werden können, selbst wenn sie in die falschen Hände geraten sollten.
+
+Benutzer von *Covata-Technologien* <sup>(1)</sup> können ihre sicheren Inhalte mit anderen Personen über Covatas Safe Share-Anwendungen freigeben. Diese sind mit der Covata-Plattform integriert um sicherzustellen, dass kritische Schlüsselverwaltung und Zugriffssteuerungen angemessen gehandhabt werden.
+
+Die Covata-Plattform stellt eine Programmierschnittstelle (Application Programming Interface/API) zur Verfügung, anhand der Integratoren ihre eigenen Anwendungen entwickeln können, um die leistungsstarken, datenzentrierten Sicherheitsfunktionen von Covata optimal nutzen zu können.
+
+<a id="administration" />
+
+## Covata-Verwaltung
+
+*Covata-Verwaltung*, eine webbasierte Oberfläche für die Verwaltung der Covata-Plattform, bietet umfassende Steuermöglichkeiten für die Umsetzung der Covata-Technologien in einer Organisation.<sup>(1)</sup>
+
+![Dashboard-Seite](/images/994372e007c6-dashboard-page.png)
+*Covata-Plattform-Administratoren* sind Benutzer, die (nach ihrer [Anmeldung](/2.16/de/admin/accessing-administration#signing-in) beim oben gezeigten [Dashboard](/2.16/de/admin/accessing-administration#the-dashboard) der Covata-Verwaltung) Zugriff auf alle <sup>(2)</sup> Verwaltungsfunktionen ihrer Covata-Plattform haben, u. a. die Möglichkeit zur:
+
+- Konfiguration aller [Benutzer](/2.16/de/admin/administering-users) der Covata-Plattform (die auch als „Covata-Benutzer“ bezeichnet werden)
+- Konfiguration und Verwaltung ihrer [Benutzer-Positivliste](/2.16/de/admin/managing-user-whitelists), in der die zum Zugriff auf die Covata-Plattform berechtigten Personen (aufgrund ihrer E-Mail-Adresse oder Domäne) definiert sind
+- Konfiguration der Covata-Benutzer über [LDAP](/2.16/de/admin/configuring-ldap)-Verbindungen
+- Konfiguration der Einzelanmeldung (single sign-on/SSO) über einen [SAML](/2.16/de/admin/configuring-single-sign-on-using-an-idp)-basierten Identitätsanbieter (IdP)
+- Verwaltung von [Bezeichnungen](/2.16/de/admin/managing-labels) und [Gruppen](/2.16/de/admin/managing-groups), die beide verwendet werden, um den Personenkreis einzuschränken, dem sichere Inhalte freigegeben werden können
+- Verwaltung von [Plänen](/2.16/de/admin/managing-users-storage-quotas-through-plans), die Speicherkontingente definieren und so den Covata-Benutzer-Accounts verfügbaren (vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen
+- [Übertragung des Besitzes](/2.16/de/admin/transferring-user-ownership) an sicheren Inhalten eines Covata-Benutzers an einen anderen Benutzer <sup>(2)</sup>
+- Deaktivierung bzw. Reaktivierung des Zugriffs auf beliebige, mit Covata-Technologien verschlüsselte [Dateien](/2.16/de/admin/administering-files) auf der Covata-Plattform und Anzeige aller hinsichtlich dieser Dateien aufgezeichneten Aktivitäten
+- Erstellung von [Berichten](/2.16/de/admin/generating-reports) über alle von Client-Anwendungen an die API der Covata-Plattform gerichteten Anforderungen
+- Registrierung von [Client-Anwendungen](/2.16/de/admin/configuring-client-applications) (d. h. von Integratoren entwickelte Anwendungen, die Covata-Technologien nutzen, um sichere Inhalte zu erstellen und/oder auf diese zuzugreifen)
+- Änderung der [Konfiguration](/2.16/de/admin/configuring-administration-properties) von Eigenschaften der Covata-Verwaltung
+- Anpassung der Darstellung der Safe Share-Webanwendung und Covata-Verwaltung mithilfe eines [Designs](/2.16/de/admin/re-theming-the-application-and-administration)
+- Anpassung der auf der Benutzeroberfläche der Covata-Verwaltung verfügbaren Sprachen und der Standardsprache der Safe Share-Webanwendung sowie Upload/Löschen von Sprachpaketen mithilfe der Funktion [Internationalisierung](/2.16/de/admin/managing-internationalization)
+
+<sup>(1)</sup> Der Begriff *Covata-Technologien* beinhaltet alle Funktionen, die über die Covata-Plattform bereitgestellt werden, u. a. die Covata Safe Share-Anwendungen, die API der Covata-Plattform sowie die Covata-Plattform selbst.
+
+<sup>(2)</sup> Wie auf der folgenden Seite [Zugriff auf die Covata-Verwaltung](/2.16/de/admin/accessing-administration) detaillierter erläutert, benötigt ein Covata-Plattform-Administrator zusätzlich die *Benutzer-Administrator*-Rolle (die er sich selbst zuweisen kann), um Zugriff auf die Funktion **Besitz übertragen** zu erhalten. Ein Benutzer, der lediglich die Benutzer-Administrator-Rolle (der *Rollen innerhalb der Covata-Verwaltung*) hat, hat dementsprechend nur Zugriff auf die Funktion **Besitz übertragen** der Covata-Verwaltung.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

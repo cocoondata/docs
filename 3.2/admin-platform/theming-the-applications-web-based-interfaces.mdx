@@ -1,0 +1,81 @@
+---
+title: "Theming Safe Share's web-based interfaces"
+---
+
+Themes allow the color schemes and logos utilized throughout the [Safe Share web application](/3.2/user/index) user interface to be customized for individual [organizations](/3.2/user/index#organisations), where each individual organization is associated with its own theme. (For more information about adding/configuring organizations through [Safe Share Administration](/3.2/admin-platform/index#platform-administration), see [Administering organizations](/3.2/admin-platform/administering-organisations).)
+
+In this version of Safe Share and the Covata Platform, themes are generated using an separate tool (the [Covata/WebApp Theme Builder](https://www.npmjs.com/package/covata-theme-builder)), which is developed by Covata and is available as a locally executable [npm package](https://www.npmjs.com/).
+
+These color scheme and logo customizations are also utilized throughout:
+
+- the [Organization Administration](/3.2/admin-platform/organisation-administration) interface,
+- the [Safe Share Administration](/3.2/admin-platform/index#platform-administration) interface, as well as
+- email notifications sent out by the Covata Platform.
+
+Newly installed instances of Safe Share are pre-packaged with the *Covata default theme*. This theme is initially used for all organizations' Safe Share web application and Organization Administration interfaces, email notifications, as well as the Safe Share Administration interface.
+
+Using the WebApp Theme Builder tool, you can generate different themes - one for each organization - as well as your own default theme (aka the 'system' theme), which is used for:
+
+- any organization that does not have a theme defined for it,
+- the Safe Share Administration interface,
+- the [My Account](/3.2/user/managing-your-account) feature and
+- all email notifications.
+
+Visit the [covata-theme-builder page](https://www.npmjs.com/package/covata-theme-builder) (on the npm web site) for more information about obtaining and using the WebApp Theme Builder tool, as well as deploying themes to a Covata Platform instance.
+
+<Note>
+
+Other customizable aspects of Safe Share, such as the Application Name, as well as the Company Name and Copyright Notice that appear in email notifications, are configurable through the [System details properties](/3.2/admin-platform/configuring-platform-administration-properties#system-details-properties) section of the **Configuration** [page](/3.2/admin-platform/configuring-platform-administration-properties) of Safe Share Administration.
+
+</Note>
+
+## Themable areas of the Safe Share web application <a id="themable-areas-of-the-web-application" />
+
+The following diagrams indicate the *themable components* of the Safe Share web application's user interface that can be customized using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+**The main Safe Share page**
+
+![Themable areas of the main application page](/images/e80f2c848523-themable-areas-of-the-main-application-page.jpg)
+
+<Note>
+
+The `primary-color` is also used for 'waiting' / 'processing' animations, which appear for example when a file's view is being downloaded.
+
+</Note>
+
+**Dialog boxes**
+
+![Themable areas of a dialog box](/images/d358a2274572-themable-areas-of-a-dialog-box.jpg)
+
+## Themable web-based administration areas
+
+The following diagrams indicate the *themable components* of Safe Share's web-based administration pages that can be customized using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+**The Organization Administration interface**
+
+For a given organization, any of its organization-specific components of the main Safe Share page ([illustrated above](/3.2/admin-platform/theming-the-applications-web-based-interfaces#themable-areas-of-the-web-application)) that have a specific property value, also affects the equivalent component in this organization's Organization Administration interface. The following diagram shows additional components, which do not have an equivalent in the main Safe Share page/interface, but are also customized using the WebApp Theme Builder tool.
+
+![Themable areas of the Organization Administration interface](/images/fc4e6dd13e5c-themable-areas-of-the-org-admin-interface.jpg)
+## Other themable Safe Share areas <a id="other-themable-application-areas" />
+
+The following diagrams indicate the *themable components* of other areas and aspects of Safe Share (i.e. not covered above) that can be customized using the WebApp Theme Builder tool. These themeable components include images/logos and other properties whose values determine color-usage, each of which is indicated below by its property name in the `theme.properties` file.
+
+<Note>
+
+Only the logos/images and property values (of the `theme.properties` file) located inside the system theme's directory are used for the following areas.
+
+</Note>
+
+**The sign-in page**
+
+![Themable areas of the sign-in page](/images/22f1a50ca1ed-themable-areas-of-the-sign-in-page.jpg)
+
+**Email notifications**
+
+![Themable areas of an email notification](/images/ec25458b1725-themable-areas-of-an-email-notification.jpg)
+
+<Note>
+
+It is currently not possible to theme email notifications on an organization-specific basis.
+
+</Note>

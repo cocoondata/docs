@@ -1,0 +1,144 @@
+---
+title: "<access-service>/api/v1/versions/{versionId}/viewKey"
+---
+
+## URL structure <a id="access-service-api-v1-versions-versionid-viewkey-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/versions/{versionId}/viewKey
+```
+
+where `{versionId}` is the ID of a file object's/Secure Object's version.
+
+## Supported methods and overview <a id="access-service-api-v1-versions-versionid-viewkey-supported-methods-and-overview" />
+
+- `GET` - used to retrieve the cryptographic key required to decrypt the *read-only view* of a file object/[Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) version (specified by `versionId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-versions-versionid-viewkey-detailed-description" />
+
+This API endpoint retrieves the cryptographic key required to decrypt the *read-only view* of a file object version (specified by `versionId`).
+
+This key is automatically generated after uploading a file version's data to storage (via the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/versions](/3.3/api/content-service-api-v1-objects-objectid-versions) API endpoint) *and* both of the following criteria have been met:
+
+- The file object's file name (i.e. its **name** value) contains an [extension](/3.3/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) which is supported by the Safe Share [content viewer](/3.3/user/accessing-secure-content#content-viewer).
+- The size of the file in its unencrypted form (i.e. its **contentSize** value) is less than the default of 20,000,000 bytes.
+
+A file object's version ID can be obtained by calling the [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/3.3/api/access-service-api-v1-objects-itemid-versions) API endpoint, which retrieves a list of information associated with a file object's versions that can be filtered using various 'search' criteria.
+
+## Supported roles and conditions <a id="access-service-api-v1-versions-versionid-viewkey-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object associated with the version whose ID is specified by `{versionId}` in the request's URL.
+- **Originator**, [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Rename** [permission](/3.3/api/access-service-api-v1-permissions-sets) on the file object associated with the version whose ID is specified by `{versionId}` in the URL. (The **Rename** permission restricts access to collaborators who have been applied either the **Modify** or **Manage** *permission set* on this file object.)
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-versions-versionid-viewkey#access-service-api-v1-versions-versionid-viewkey-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-versions-versionid-viewkey-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-versions-versionid-viewkey-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **created** - A member containing detailed information about when the key was created. (This member, along with its contents, can be ignored and will be removed in a future Covata Platform version.)
+- **modified** - A member containing detailed information about when the key was modified. (This member's sub-members should match the equivalent sub-members of the **created** member. However, like the **created** member, this **modified** member, along with its contents, can be ignored and will be removed in a future Covata Platform version.)
+- **keyValue** - The cryptographic key value itself.
+- **cryptographicAlgorithm** - The cryptographic algorithm supported by the Covata Platform. This should be `AES`.
+- **keyLength** - The bit length of the cryptographic key value returned above.
+- **initializationVector** - The initialization vector required to begin local/client-side encryption using the AES algorithm (in CBC mode).
+- **modifiedinISODateTimeFormat** - The date and time (in ISO format) when the key was modified. (This value should match that of the **createdinISODateTimeFormat** value below. This member can be ignored and will be removed in a future Covata Platform version.)
+- **createdinISODateTimeFormat** - The date and time (in ISO format) when the key was created. (This member can be ignored and will be removed in a future Covata Platform version.)
+- **id** - The ID value associated with this cryptographic key. <br />
+  **Example:**
+
+  ```json
+  {
+      "created": {
+          "era": 1,
+          "dayOfYear": 250,
+          "dayOfWeek": 2,
+          "dayOfMonth": 6,
+          "year": 2016,
+          "weekyear": 2016,
+          "monthOfYear": 9,
+          "yearOfEra": 2016,
+          "yearOfCentury": 16,
+          "centuryOfEra": 20,
+          "millisOfSecond": 250,
+          "millisOfDay": 22168250,
+          "secondOfMinute": 28,
+          "secondOfDay": 22168,
+          "minuteOfHour": 9,
+          "minuteOfDay": 369,
+          "hourOfDay": 6,
+          "weekOfWeekyear": 36,
+          "zone": {
+              "fixed": true,
+              "id": "UTC"
+          },
+          "millis": 1473142168250,
+          "chronology": {
+              "zone": {
+                  "fixed": true,
+                  "id": "UTC"
+              }
+          },
+          "equalNow": false,
+          "beforeNow": true,
+          "afterNow": false
+      },
+      "modified": {
+          "era": 1,
+          "dayOfYear": 250,
+          "dayOfWeek": 2,
+          "dayOfMonth": 6,
+          "year": 2016,
+          "weekyear": 2016,
+          "monthOfYear": 9,
+          "yearOfEra": 2016,
+          "yearOfCentury": 16,
+          "centuryOfEra": 20,
+          "millisOfSecond": 250,
+          "millisOfDay": 22168250,
+          "secondOfMinute": 28,
+          "secondOfDay": 22168,
+          "minuteOfHour": 9,
+          "minuteOfDay": 369,
+          "hourOfDay": 6,
+          "weekOfWeekyear": 36,
+          "zone": {
+              "fixed": true,
+              "id": "UTC"
+          },
+          "millis": 1473142168250,
+          "chronology": {
+              "zone": {
+                  "fixed": true,
+                  "id": "UTC"
+              }
+          },
+          "equalNow": false,
+          "beforeNow": true,
+          "afterNow": false
+      },
+      "keyValue": "NtbyhzqoO+KOuUKX5Tr0pIMm78kp5Ot4M3bZ1KXz10w=",
+      "cryptographicAlgorithm": "AES",
+      "keyLength": 256,
+      "initializationVector": "poZVvQbfVeiEVU61FkNfnA==",
+      "modifiedinISODateTimeFormat": "2016-09-06T06:09:28.250Z",
+      "createdinISODateTimeFormat": "2016-09-06T06:09:28.250Z",
+      "id": "752047801499971584"
+  }
+  ```

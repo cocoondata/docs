@@ -1,0 +1,52 @@
+---
+title: "<content-service>/api/v1/collections/{collectionId}/contents"
+---
+
+## URL structure <a id="content-service-api-v1-collections-collectionid-contents-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1/collections/{collectionId}/contents
+```
+
+where `{collectionId}` is the ID of a collection.
+
+## Supported methods and overview <a id="content-service-api-v1-collections-collectionid-contents-supported-methods-and-overview" />
+
+- `DELETE` - used to explicitly delete the encrypted data (associated with all [Secure Objects](/3.0/api/creating-secure-objects-and-collections#secure-object) contained within a [collection](/3.0/api/creating-secure-objects-and-collections#collection)) from storage managed by the Covata Platform's Content Service.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-collections-collectionid-contents-detailed-description" />
+
+This API endpoint deletes the encrypted data (associated with all Secure Objects contained within a collection) from storage managed by the Covata Platform's Content Service.
+
+The collection is specified by the `{collectionId}` value in the URL.
+
+<Note>
+
+If you intend to [delete a collection](/3.0/api/access-service-api-v1-collections-collectionid) and change the state of all Secure Objects contained within the collection to *Deleted*, then call this API endpoint on this collection *first*. This avoids problems where a Covata user's actual quota differs from the quota reported by the Covata Platform (until this data is automatically deleted by the Content Service). See [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.0/api/access-service-api-v1-collections-collectionid) for more information.
+
+</Note>
+
+## Supported roles and conditions <a id="content-service-api-v1-collections-collectionid-contents-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)), conditions and [permissions](/3.0/api/access-service-api-v1-permissions-sets) (where applicable):
+
+- [Originator](/3.0/admin/administering-users#originator-role) - a Covata user with this role can call this endpoint on a collection they own.
+- **Originator**, [Collaborator](/3.0/admin/administering-users#collaborator-role) and [Ad hoc](/3.0/admin/administering-users#adhoc-role) - a Covata user with any of these roles can call this endpoint for a collection they are a collaborator on (with the **Remove (Folder)** *permission*).
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/content-service-api-v1-collections-collectionid-contents#content-service-api-v1-collections-collectionid-contents-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-collections-collectionid-contents-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="content-service-api-v1-collections-collectionid-contents-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

@@ -1,0 +1,395 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/items"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-items-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/items
+```
+
+where `{orgId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-items-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information associated with file objects/[Secure Objects](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) and folders/[collections](/3.3/api/working-with-files-and-folders-fundamentals#collection) (i.e. [items](/3.3/api/working-with-files-and-folders-fundamentals#item)) within a given organization (specified by `orgId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-items-detailed-description" />
+
+This API endpoint retrieves a list of information associated with files and folders within a given organization (specified by `orgId`).
+
+- The items retrieved in the [response](/3.3/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-returns) are those to which a given Covata user (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-supported-roles-and-conditions) to this endpoint) can access - i.e. as the owner of (or a collaborator on) these items.
+
+The items returned in a response to this API endpoint can also be filtered either according to those:
+
+- whose name, or whose owner's email address, first name or last name contains a string specified in the request, <br />
+  *OR*
+- which are immediate children of those contained within a folder whose ID is specified in the request.
+
+In addition to this filtering, further filtering can be performed, based on the ownership or sharing status on these items, where 'sharing status' means items that a Covata user either has shared or is a collaborator on.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-items-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a member of the organization whose ID is specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-items-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-organisations-orgid-items-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **collectionId** - The ID of a (parent) folder. Specifying this value filters for items (in the response) which are only immediate children of this folder. Explicitly specifying this parameter's value as `0` forces the filtering of items to those at the root level only. The default value of this parameter is `null` (by omitting this parameter in the request). Omitting this parameter *as well as*:
+
+  - Omitting the **view** parameter (below) *or* specifying the **view** parameter with a valid value other than `sharing` is equivalent to specifying this **collectionId** parameter with a value of `0`, which filters for items at the root level only.
+  - Specifying the **searchText** parameter and/or the **view** parameter with a value of `sharing` does not result in items being filtered to those located only at the root level (or immediately within any parent folder).
+
+    - If the **searchText** parameter is specified, filtering is conducted on *all* items (regardless of their location or ownership).
+    - Regardless of whether or not the **searchText** parameter is specified, specifying the **view** parameter with a value of `sharing` filters for *all* items (regardless of their location) which are owned and currently shared by the Covata user whose access token is passed in the header of the request.
+
+  **Note:** This parameter cannot be specified in conjunction with **searchText**. Doing so will cause the request to fail.
+- **incomplete** - A boolean value that indicates whether (i.e. `true`) or not (`false`) file objects whose state is *Incomplete* should also be retrieved in the response. If this parameter is omitted, then its value is `false` by default.
+- **limit** - A value from `0` to `100` indicating the maximum number of items to be returned in the response. If this parameter is omitted, then its value is `10` by default.
+- **offset** - A value representing the count order of *all* retrievable items (i.e. files objects and folders) from the Covata Platform returned in the response. Calls to this API endpoint with URL parameters that:
+
+  - widen (i.e. **incomplete**) or filter (i.e. **collectionId**, **searchText** and **view**) the *scope* of items, and/or
+  - modify the *ordering* (i.e. **orderBy** and **sortBy**) of items
+
+  retrieved from the Covata Platform, may amount to more than 100 retrievable items (based on the scope) which could differ (based on the ordering). Since the maximum number of items in a response can be no greater than 100 (i.e. the maximum allowed in the **limit** parameter), this **offset** parameter provides pagination for item results, allowing items to be retrieved from any count greater than `0`. If this parameter is omitted, then its value is `0` by default, which results in items being retrieved for the response from its starting item/count (based on the scope and ordering of all retrievable items from the Covata Platform).
+- **orderBy** - An enumeration (enum) value representing the order in which items are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (i.e. where this parameter's enum value is `ASC`) or descending order (`DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **searchText** - Any text substring used to filter for *all* items (in the response), regardless of their location or ownership, where any of the **name**, or the owner's **email**, **firstName** or **lastName** properties' values of these items must contain the text substring specified in this parameter. If this parameter is omitted, then no text substring filtering is performed in the request. <br />
+  **Note:** This parameter cannot be specified in conjunction with **collectionId**. Doing so will cause the request to fail.
+- **sortBy** - An enum value representing the property (i.e. member) of a retrieved item by which items returned in the response will be sorted. These enum values are:
+
+  - `NAME` - sorts by the value of the item's **name** property.
+  - `OWNER` - sorts by the value of the item's **owner** property.
+  - `MODIFIED` - sorts by the value of the item's **modifiedAt** property.
+  - `CREATED` - sorts by the value of the item's **createdAt** property.
+
+  These enum values can also be specified using lowercase characters. If this parameter is omitted, then its value is `NAME` by default.
+- **view** - Specify one of the following string values, which filters/retrieves only items in the response according to the Covata user whose [access token is submitted in the request](/3.3/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-supported-roles-and-conditions) to this endpoint:
+
+  - `owned-by-me` - retrieves only items that this user currently owns.
+  - `shared-with-me` - retrieves only items that this user is a collaborator on (i.e. other people have shared these items with this user).
+  - `sharing` - retrieves only items that this user has shared with other people.
+  - `all` - retrieves all items that this user has access to.
+
+  If this parameter is omitted, then its value is `all` by default. If `sharing` is specified for this parameter's value *and* **collectionId** is omitted, then *all* items currently owned and shared by this Covata user are returned in the response (i.e. there is no additional filtering to items only located at the root level or immediately within any parent folder). <br />
+  **Example (retrieving information about an organization's items whose name contains 'jpg'):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/722338038193385472/items?searchText=jpg
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-items-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - Currently, this value is always `null`.
+- **count** - The maximum number of items (i.e. files and/or folders) that can be returned in the response. <br />
+  **Note:** If the **searchText** and **searchColumn** [parameters](/3.3/api/access-service-api-v1-organisations-orgid-items#access-service-api-v1-organisations-orgid-items-optional-parameters) were specified in the request, then this value represents the total number of items (below) returned in the response.
+- **offset** - The value of the **offset** which had been used in the request to this endpoint.
+- **items** - An array containing information about the items returned in the response to this endpoint. Each element of this array contains information about one of these items, represented as an object containing the following members.
+
+  - **id** - The ID of the item (which could be a file object or a folder).
+  - **name** - The name of this item.
+  - **sha512** ( *for file object items only* ) - The unique [SHA-512](http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf) hash value of the encrypted data associated with this file object.
+  - **parentId** - The ID of the folder/location that contains this item. A value of `0` indicates that this item is located at the logical root location.
+  - **parentName** - The name of the folder/location that contains this item. A value of `null` indicates that this item is located at the logical root location.
+  - **createdAt** - The date and time when this item was created.
+  - **modifiedAt** - The date and time when this item was last modified. When a file or folder is created (via the `POST` method on the respective [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.3/api/access-service-api-v1-organisations-orggroupid-objects) or [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.3/api/access-service-api-v1-organisations-orgid-collections) endpoints), this date and time should match (or be close to) that of the **createdAt** value above. Otherwise, if the folder has since been modified (via the `PUT` method on the respective [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.3/api/access-service-api-v1-objects-objectid) or [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.3/api/access-service-api-v1-collections-collectionid) endpoints), this date and time should reflect when the folder was last modified.
+  - **extension** ( *for file object items only* ) - The file object's file name extension.
+  - **type** - The type of this item - i.e. indicates `object` if the item is a file object or `collection` if the item is a folder.
+  - **contentSize** ( *for file object items only* ) - The amount of space (in bytes) of the (active version of the) file object's data (as recorded by the Covata Platform's Access Service). For initialized/*Incomplete* file objects, this value is `null`.
+  - **totalVersionSize** ( *for file object items only* ) - The amount of space (in bytes) of all versions of the file object's data (as recorded by the Access Service). For file objects with only one version (which would also be the active version), this value should match (or be close to) that of the **contentSize** value above.
+  - **shared** - A boolean value that indicates whether or not this item has been shared with any collaborators.
+  - **hasView** ( *for file object items only* ) - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage.
+  - **state** ( *for file object items only* ) - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or `deleted` for a deleted file.
+  - **labelId** ( *for file object items only* ) - The ID of the classification applied to the file object.
+  - **labelName** ( *for file object items only* ) - The name of the classification applied to the file object.
+  - **owner** - A member containing information about the Covata user who is the current owner of the item. This member contains the following sub-members:
+
+    - **id** - The ID of this Covata user's account.
+    - **email** - The email address of the Covata user who owns this item.
+    - **firstName** - The first name set by this Covata user.
+    - **lastName** - The last name set by this Covata user.
+  - **permissions** - An array listing the individual [permissions](/3.3/api/access-service-api-v1-permissions-sets) that the owner above or a collaborator on (whose access token was used in the request to this endpoint), either has on the item or has inherited from the location represented by **parentId**.
+
+  <br />
+  **Example (retrieving a list of items owned by a Covata user, where the item's name contains 'jpg'):**
+
+  ```json
+  {
+      "id": null,
+      "count": "2",
+      "offset": "0",
+      "items": [{
+          "id": "752047795879604224",
+          "name": "paraglider.jpg",
+          "sha512": "GylRBgVahdyp2YeWE4k3LncB0zLA8AXd42wgDjRthHrcjOm9PpVKEaDe6HwgD3uFgBDBjuxtxsgBTHd+HK+Jhg==",
+          "parentId": "751980834491527168",
+          "parentName": "Shared Folder",
+          "createdAt": "2016-09-06T06:09:26.910Z",
+          "modifiedAt": "2016-09-09T03:49:34.592Z",
+          "extension": "jpg",
+          "type": "object",
+          "contentSize": "634183",
+          "totalVersionSize": "634192",
+          "shared": true,
+          "hasView": true,
+          "state": "server.object.states.created",
+          "labelId": null,
+          "labelName": null,
+          "owner": {
+              "id": "749419842687528960",
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "permissions": [{
+              "id": "66",
+              "nameI18nCode": "server.permission.name.file.delete"
+          }, {
+              "id": "67",
+              "nameI18nCode": "server.permission.name.folder.delete"
+          }, {
+              "id": "62",
+              "nameI18nCode": "server.permission.name.download"
+          }, {
+              "id": "69",
+              "nameI18nCode": "server.permission.name.move"
+          }, {
+              "id": "60",
+              "nameI18nCode": "server.permission.name.view"
+          }, {
+              "id": "72",
+              "nameI18nCode": "server.permission.name.delete.other"
+          }, {
+              "id": "63",
+              "nameI18nCode": "server.permission.name.copy"
+          }, {
+              "id": "61",
+              "nameI18nCode": "server.permission.name.print"
+          }, {
+              "id": "73",
+              "nameI18nCode": "server.permission.name.share"
+          }, {
+              "id": "68",
+              "nameI18nCode": "server.permission.name.rename"
+          }, {
+              "id": "71",
+              "nameI18nCode": "server.permission.name.view.other"
+          }, {
+              "id": "65",
+              "nameI18nCode": "server.permission.name.folder.create"
+          }, {
+              "id": "64",
+              "nameI18nCode": "server.permission.name.file.upload"
+          }]
+      }, {
+          "id": "753099535735386112",
+          "name": "Shrub species for identification.jpg",
+          "sha512": "h5ZU32Q3toozDfKAXvLQnc0q27GGDjTCJxzqpHuk9mASXr/PCmo8mqIAMWdU/++/pQZKudldfM2a2W950HIu7A==",
+          "parentId": "751980834491527168",
+          "parentName": "Shared Folder",
+          "createdAt": "2016-09-09T03:48:41.232Z",
+          "modifiedAt": "2016-09-09T03:48:53.685Z",
+          "extension": "jpg",
+          "type": "object",
+          "contentSize": "2369719",
+          "totalVersionSize": "2369728",
+          "shared": false,
+          "hasView": true,
+          "state": "server.object.states.created",
+          "labelId": null,
+          "labelName": null,
+          "owner": {
+              "id": "749419842687528960",
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "permissions": [{
+              "id": "66",
+              "nameI18nCode": "server.permission.name.file.delete"
+          }, {
+              "id": "67",
+              "nameI18nCode": "server.permission.name.folder.delete"
+          }, {
+              "id": "62",
+              "nameI18nCode": "server.permission.name.download"
+          }, {
+              "id": "69",
+              "nameI18nCode": "server.permission.name.move"
+          }, {
+              "id": "60",
+              "nameI18nCode": "server.permission.name.view"
+          }, {
+              "id": "72",
+              "nameI18nCode": "server.permission.name.delete.other"
+          }, {
+              "id": "63",
+              "nameI18nCode": "server.permission.name.copy"
+          }, {
+              "id": "61",
+              "nameI18nCode": "server.permission.name.print"
+          }, {
+              "id": "73",
+              "nameI18nCode": "server.permission.name.share"
+          }, {
+              "id": "68",
+              "nameI18nCode": "server.permission.name.rename"
+          }, {
+              "id": "71",
+              "nameI18nCode": "server.permission.name.view.other"
+          }, {
+              "id": "65",
+              "nameI18nCode": "server.permission.name.folder.create"
+          }, {
+              "id": "64",
+              "nameI18nCode": "server.permission.name.file.upload"
+          }]
+      }]
+  }
+  ```
+
+   <br />
+  **Example (retrieving a list of items that a Covata user is a collaborator on):**
+
+  ```json
+  {
+      "id": null,
+      "count": "3",
+      "offset": "0",
+      "items": [{
+          "id": "753099536981094400",
+          "name": "Executive Report.pdf",
+          "sha512": "xdT9FocmKIV9Le1XsA1RxSCx/CLpGPMro7J5QCv+EMXngahg5utXmdjvp2w/btXFrUTDXJeZ0HelvC7NkAfRvA==",
+          "parentId": "0",
+          "parentName": null,
+          "createdAt": "2016-09-09T03:48:41.529Z",
+          "modifiedAt": "2016-09-09T03:50:03.754Z",
+          "extension": "pdf",
+          "type": "object",
+          "contentSize": "3596924",
+          "totalVersionSize": "3596928",
+          "shared": true,
+          "hasView": true,
+          "state": "server.object.states.created",
+          "labelId": null,
+          "labelName": null,
+          "owner": {
+              "id": "749419842687528960",
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "permissions": [{
+              "id": "61",
+              "nameI18nCode": "server.permission.name.print"
+          }, {
+              "id": "62",
+              "nameI18nCode": "server.permission.name.download"
+          }, {
+              "id": "60",
+              "nameI18nCode": "server.permission.name.view"
+          }, {
+              "id": "71",
+              "nameI18nCode": "server.permission.name.view.other"
+          }, {
+              "id": "65",
+              "nameI18nCode": "server.permission.name.folder.create"
+          }, {
+              "id": "64",
+              "nameI18nCode": "server.permission.name.file.upload"
+          }]
+      }, {
+          "id": "752389961810243584",
+          "name": "Other",
+          "parentId": "0",
+          "parentName": null,
+          "createdAt": "2016-09-07T04:49:05.625Z",
+          "modifiedAt": "2016-09-09T07:10:59.041Z",
+          "type": "collection",
+          "shared": true,
+          "owner": {
+              "id": "749419842687528960",
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "permissions": [{
+              "id": "60",
+              "nameI18nCode": "server.permission.name.view"
+          }],
+          "organisation": {
+              "name": "XY Company",
+              "description": "",
+              "id": "749418071827214336"
+          }
+      }, {
+          "id": "752047795879604224",
+          "name": "paraglider.jpg",
+          "sha512": "GylRBgVahdyp2YeWE4k3LncB0zLA8AXd42wgDjRthHrcjOm9PpVKEaDe6HwgD3uFgBDBjuxtxsgBTHd+HK+Jhg==",
+          "parentId": "0",
+          "parentName": null,
+          "createdAt": "2016-09-06T06:09:26.910Z",
+          "modifiedAt": "2016-09-09T03:49:34.592Z",
+          "extension": "jpg",
+          "type": "object",
+          "contentSize": "634183",
+          "totalVersionSize": "634192",
+          "shared": true,
+          "hasView": true,
+          "state": "server.object.states.created",
+          "labelId": null,
+          "labelName": null,
+          "owner": {
+              "id": "749419842687528960",
+              "email": "alex.originator@xy-company.com",
+              "firstName": "Alex",
+              "lastName": "Originator"
+          },
+          "permissions": [{
+              "id": "66",
+              "nameI18nCode": "server.permission.name.file.delete"
+          }, {
+              "id": "61",
+              "nameI18nCode": "server.permission.name.print"
+          }, {
+              "id": "67",
+              "nameI18nCode": "server.permission.name.folder.delete"
+          }, {
+              "id": "62",
+              "nameI18nCode": "server.permission.name.download"
+          }, {
+              "id": "69",
+              "nameI18nCode": "server.permission.name.move"
+          }, {
+              "id": "60",
+              "nameI18nCode": "server.permission.name.view"
+          }, {
+              "id": "68",
+              "nameI18nCode": "server.permission.name.rename"
+          }, {
+              "id": "71",
+              "nameI18nCode": "server.permission.name.view.other"
+          }, {
+              "id": "65",
+              "nameI18nCode": "server.permission.name.folder.create"
+          }, {
+              "id": "64",
+              "nameI18nCode": "server.permission.name.file.upload"
+          }]
+      }]
+  }
+  ```

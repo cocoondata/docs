@@ -1,0 +1,192 @@
+---
+title: "Starting Safe Share for Windows and signing in"
+---
+
+## Starting Safe Share for Windows <a id="starting-the-application" />
+
+Safe Share for Windows automatically starts when Windows boots up or restarts.
+
+- When Safe Share for Windows is running, its icon appears in the Windows taskbar notification area (either
+  ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+   or
+
+  ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   ).
+
+After starting, Safe Share for Windows automatically prompts you to sign in by opening the ['Sign In' dialog box](/2.16/windows/starting-the-application-and-signing-in#sign-in-dialog-box). Otherwise, you can [sign in manually](/2.16/windows/starting-the-application-and-signing-in#signing-in-manually).
+
+<a id="starting-the-application-manually" />**To start Safe Share for Windows manually:**
+
+- If you happen to [exit Safe Share for Windows](/2.16/windows/starting-the-application-and-signing-in#exiting-the-application) or the application does not start after Windows boots up/restarts, you can manually start Safe Share for Windows by double-clicking the **Covata Safe Share** icon on the desktop or choosing **Covata Safe Share** from the Windows start menu. When running, the application's icon appears in the Windows taskbar notification area (either
+  ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+   or
+
+  ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   ).
+
+## Signing in manually
+
+If you are:
+
+- *Not yet* signed in to Safe Share for Windows, its taskbar notification area icon appears as
+  ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+   - i.e. a gray Safe Share icon with a red **x** sign.
+- *Already* signed in to Safe Share for Windows, its taskbar icon appears as
+  ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   .
+
+Once you are signed in, any Covata-secured files and folders associated with your Covata user account in remote storage (managed by the Covata Platform) are synchronized with your computer and can be accessed locally.
+
+**To sign in to Safe Share for Windows manually:**
+
+1. Ensure Safe Share for Windows has been [started](/2.16/windows/starting-the-application-and-signing-in#starting-the-application).
+2. Right-click its
+   ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    taskbar notification area icon and choose **Sign in** from the pop-up menu:
+
+   ![Signing in](/images/a4e691224983-taskbar-popup-menu-signed-out.jpg)
+3. <a id="sign-in-dialog-box" />In the **Sign in to Safe Share** dialog box, enter your **Email address** and **Your password** into the relevant fields:
+
+   ![Sign-in dialog box](/images/b1bf1cf687e8-signin-dialog-box.jpg)
+
+   <br />
+   **Forgotten your password?** If you have, then:
+
+   1. Close this **Sign in to Safe Share** dialog box.
+   2. Right-click the
+      ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+       taskbar notification area icon and choose **Open Safe Share Web** from the pop-up menu.
+   3. Once the sign-in page for the Safe Share web application has opened, click the **Forgot your password** button and follow the instructions in your email notification to reset your password. <br />
+      **Note:** If your Safe Share for Windows installation has been configured to use the application's own embedded web browser (see [Accessing the web application](/2.16/windows/starting-the-application-and-signing-in#accessing-the-web-application) for more information about this feature), then Safe Share for Windows' own sign-in page is shown (which does not provide this password resetting functionality). If this is the case, access the [Safe Share web application](/2.16/user/index) (independently through your web browser), click the **Forgot your password** button and follow the instructions in your email notification to reset your password. If you do not know the URL of the Safe Share web application, it is the same as the Covata Platform URL, which you may have configured after installing Safe Share for Windows. You can obtain this URL by following the [Modifying the Covata Platform URL](/2.16/windows/installing-and-upgrading-the-application#modifying-the-server-url) procedure (without actually modifying the registry key's value). Otherwise, contact your administrator for this information.
+4. Click the **Sign in** button (or type 'Enter'/'Return').
+
+   - If the **Sign in to Safe Share** dialog box requests you to enter your **Authentication code**, then your Covata Platform administrator has configured your Covata user account with two-factor authentication (2FA).
+
+     ![Safe Share 2FA authentication code](/images/eaf56727f4c6-2fa-authentication-code.png)
+
+     1. If you have not yet configured a mobile device with your Covata user account for 2FA, then refer to the [Configuring a mobile device for 2FA](/2.16/windows/starting-the-application-and-signing-in#configuring-a-mobile-device-for-2fa) procedure below before continuing on.
+     2. <a id="entering-your-authentication-code" />Open the authenticator app on your mobile device.
+     3. In the **Authentication code** field, enter the code from the authenticator app that relates to your Covata user account.
+     4. Click the **Authenticate** button to complete the authentication process.
+
+   To verify that you are signed in to Safe Share for Windows, a balloon notification indicating that you have been signed in is initially displayed and the taskbar notification area icon changes to
+
+   ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    . Right-clicking this icon reveals the currently signed in user:
+
+   ![Checking your sign-in status](/images/595b81c242ad-taskbar-popup-menu-signed-in.jpg)
+
+<Note>
+
+- After signing in to Safe Share for Windows for the very first time after [installing](/2.16/windows/installing-and-upgrading-the-application#installing) or [upgrading](/2.16/windows/installing-and-upgrading-the-application#upgrading) the application, the **Welcome to Safe Share for Windows** web page is shown, containing a short tutorial of basic operation.
+- If you signed in to Safe Share for Windows either for the first time or with a different Covata user account to the one used previously, then the following [Safe Share folders](/2.16/windows/storing-and-sharing-content-securely#accessing-the-applications-folder) are (re)created within the `Safe Share` folder (which in turn is contained within your Windows home folder):
+
+  - `My Secured Files`
+  - `Shared With Me`
+- If the `My Secured Files` folder does not appear, then your account does not have the **Originator** role. This role can be granted to your account by your Covata Platform administrator.
+- Each time you sign in to Safe Share for Windows as a different Covata user (on the same computer), the `My Secured Files` and `Shared With Me` folders of the previous Covata user are moved to the Recycle Bin and the contents of the newly recreated `My Secured Files` and `Shared With Me` folders are updated to reflect the items in remote storage of this different Covata user.
+- Once you are signed in, Safe Share for Windows immediately begins synchronizing any files and folders in remote storage (associated with your Covata user account and accessible through the [Safe Share web application](/2.16/user/index)), with those in the `My Secured Files` and `Shared With Me` folders. If the *Covata-secured files* within these folders appear with a size of 1 KB (or less) and have the extension `.covl` as opposed to `.cov`, then the file's content has not been cached. For more information about this file caching feature, see [Managing cache policy settings](/2.16/windows/managing-cache-policy-settings).
+- A shortcut to the `My Secured Files` subfolder (above) as well as a shortcut to start the Safe Share for Windows application itself (called *Covata Safe Share*) are automatically created on your desktop. Be aware that if you initially signed in as a Covata user without the **Originator** role, then the `My Secured Files` shortcut is not created.
+
+</Note>
+
+## Configuring a mobile device for 2FA
+
+If your Covata Platform administrator has configured your Covata user account with two-factor authentication (2FA), then you require a mobile device (i.e. Android-based, iPhone, iPad, iPod Touch or Microsoft Windows-based) running an authenticator application (from Google or Microsoft) to be able to sign in to Safe Share for Windows.
+
+This authenticator application (aka authenticator app) that runs on your mobile device provides the 2nd authentication factor for your account, where your password is the 1st authentication factor.
+
+**To configure your mobile device with your Covata user account for two-factor authentication:**
+
+1. Open your Covata Notification email message containing the subject line '*Two-factor authentication has been enabled for your account*'.
+2. Follow the instructions in this email message - i.e. click the link to open the two-factor authentication configuration pages. <br />
+    Follow the remaining instructions on these pages to complete the process for configuring your mobile device and then continue with [entering your authentication code](/2.16/windows/starting-the-application-and-signing-in#entering-your-authentication-code) to sign in to Safe Share for Windows.
+
+## Accessing the web application
+
+Safe Share for Windows provides easy access to the [Safe Share web application](/2.16/user/index) for better integration between these two products.
+
+**To access the Safe Share web application:**
+
+1. Ensure Safe Share for Windows has been [started](/2.16/windows/starting-the-application-and-signing-in#starting-the-application) and that you are signed in.
+2. Right-click its
+   ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    or
+
+   ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    taskbar notification area icon and choose **Open Safe Share Web** from the pop-up menu:
+
+   ![Opening the web application](/images/595b81c242ad-taskbar-popup-menu-signed-in.jpg)
+
+   <br />
+    The Safe Share web application opens at the main Safe Share page in your default web browser (configured in Windows), as the Covata user with which you are signed in to Safe Share for Windows.
+
+<Note>
+
+**Notes about using this feature:**
+
+- The [Safe Share web application](/2.16/user/index) is a complementary product to Safe Share for Windows. For example:
+
+  - The Safe Share web application allows you to [manage your Covata user account](/2.16/windows/managing-your-account) through Safe Share for Windows and access some file/folder information features of this web application which are not accessible through Windows Explorer.
+  - Microsoft imposes a file and path size limit of 260 characters. Hence, if you need to work with secure content in a heavily-nested folder hierarchy, the Safe Share web application can be used to provide access to this content.
+- If you are not signed in before accessing this feature, then the Safe Share Sign-in page is displayed. Be aware, however, that signing in through this page does not sign you in to Safe Share for Windows.
+- It is possible that your Covata Platform instance may have been configured to support older web browsers such as Internet Explorer 9. If this is the case, then accessing the Safe Share web application (through this Safe Share for Windows feature) will instead open the *Safe Share compatibility mode web application*. For more information about using this limited version of the web application, see the [Safe Share compatibility mode web application User's Guide](/2.16/compatweb/index).
+- Your Safe Share for Windows installation may have been configured (typically by a systems administrator) to open the *Safe Share Web window*, which is an embedded web browser that provides access to a feature-restricted version of the Safe Share web application. For example:
+
+  - The **Download** feature in the Safe Share Web window is not supported. This feature is only supported natively (i.e. with a compatible web browser) through either the [Safe Share web application](/2.16/user/index) or the [compatibility mode web application](/2.16/compatweb/index).
+  - When using the Safe Share Web window, it is not possible to navigate back and forward through pages. You can only navigate using the Safe Share web application's own navigation features.
+
+</Note>
+
+## Signing out
+
+**To sign out of Safe Share for Windows:**
+
+- Right-click its
+  ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   taskbar notification area icon and choose **Sign out** from the pop-up menu:
+
+  ![Signing out](/images/595b81c242ad-taskbar-popup-menu-signed-in.jpg)
+
+<Note>
+
+Once you are signed out of Safe Share for Windows, any files or folders in the `My Secured Files` and `Shared With Me` subfolders of the `Safe Share` folder on your computer will no longer be synchronized with items in remote storage managed by the Covata Platform.
+
+</Note>
+
+## Exiting Safe Share for Windows <a id="exiting-the-application" />
+
+**To exit Safe Share for Windows:**
+
+- Right-click its
+  ![Safe Share for Windows - signed in](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+   or
+
+  ![Safe Share for Windows - signed out](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+   taskbar notification area icon and choose **Exit Safe Share** from the pop-up menu:
+
+  ![Exiting Safe Share](/images/a4e691224983-taskbar-popup-menu-signed-out.jpg)
+
+<Note>
+
+To sign in to Safe Share for Windows again, [restart the application](/2.16/windows/starting-the-application-and-signing-in#starting-the-application) and if you are not automatically signed in, [sign in manually](/2.16/windows/starting-the-application-and-signing-in#signing-in-manually).
+
+</Note>
+
+---
+
+#### Please provide your feedback here

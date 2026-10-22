@@ -1,0 +1,68 @@
+---
+title: "<access-service>/api/v1/objects/{objectId}/keys/view"
+---
+
+## URL structure <a id="access-service-api-v1-objects-objectid-keys-view-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/objects/{objectId}/keys/view
+```
+
+where `{objectId}` is the ID of a file object/Secure Object.
+
+## Supported methods and overview <a id="access-service-api-v1-objects-objectid-keys-view-supported-methods-and-overview" />
+
+- `GET` - retrieves the cryptographic key required to decrypt the *read-only view* of the active version of a file object/[Secure Object](/3.4/api/working-with-files-and-folders-fundamentals#secure-object) (specified by `objectId`).
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-objects-objectid-keys-view-detailed-description" />
+
+This API endpoint retrieves the cryptographic key required to decrypt the *read-only view* of the active version of a file object (specified by `objectId`).
+
+This key is automatically generated after uploading a file object's data to storage (via the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/3.4/api/content-service-api-v1-objects-objectid-contents) API endpoint) *and* both of the following criteria have been met:
+
+- The file object's file name (i.e. its **name** value) contains an [extension](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) which is supported by the Safe Share [content viewer](/3.4/user/accessing-secure-content#content-viewer).
+- The size of the file in its unencrypted form (i.e. its **contentSize** value) is less than the default of 20,000,000 bytes.
+
+A file object's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with file objects that can be filtered using various 'search' criteria.
+
+## Supported roles and conditions <a id="access-service-api-v1-objects-objectid-keys-view-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)) and conditions:
+
+- [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object whose ID is specified by `{objectId}` in the request's URL.
+- **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **View** [permission](/3.4/api/access-service-api-v1-permissions-sets) on the file object whose ID is specified by `{objectId}` in the URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-objects-objectid-keys-view#access-service-api-v1-objects-objectid-keys-view-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-objects-objectid-keys-view-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-objects-objectid-keys-view-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **keyValue** - The cryptographic key value itself.
+- **cryptographicAlgorithm** - The cryptographic algorithm supported by the Covata Platform. This should be `AES`.
+- **keyLength** - The bit length of the cryptographic key value returned above.
+- **initializationVector** - The initialization vector required to begin local/client-side encryption using the AES algorithm (in CBC mode). <br />
+  **Example:**
+
+  ```json
+  {
+      "keyValue": "2VCZkPeYPhvL4VkzrEqIVGaW2AGmRM1uwuXiPRbe8NU=",
+      "cryptographicAlgorithm": "AES",
+      "keyLength": 256,
+      "initializationVector": "fpEIYIk+dnMw7rgFA+Bz8g=="
+  }
+  ```

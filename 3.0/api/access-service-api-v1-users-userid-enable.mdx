@@ -1,0 +1,49 @@
+---
+title: "<access-service>/api/v1/users/{userId}/enable"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-enable-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userId}/enable
+```
+
+where `{userId}` is the ID of a Covata user.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-enable-supported-methods-and-overview" />
+
+- `PUT` - used to [disable or (re-)enable](/3.0/admin/administering-users#disabling-or-re-enabling-users) a [Covata user](/3.0/admin/administering-users), based on their ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-userid-enable-detailed-description" />
+
+This API endpoint disables or (re-)enables a single Covata user, based on the Covata user's ID.
+
+Calling this endpoint on a given Covata user successively toggles between disabling and (re-)enabling this user.
+
+A Covata user's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/users](/3.0/api/access-service-api-v1-users) API endpoint, which retrieves a list of field information for all Covata Platform users who can be filtered through a variety of 'search' criteria.
+
+It is also possible to disable or (re-)enable one or more Covata users in a single action by calling the [&lt;access-service&gt;/api/v1/users/bulk](/3.0/api/access-service-api-v1-users-bulk) API endpoint.
+
+## Supported roles <a id="access-service-api-v1-users-userid-enable-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-users-userid-enable#access-service-api-v1-users-userid-enable-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-enable-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-users-userid-enable-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

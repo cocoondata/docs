@@ -1,0 +1,56 @@
+---
+title: "<content-service>/api/v1"
+---
+
+## URL structure <a id="content-service-api-v1-discovery-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1
+```
+
+## Supported methods and overview <a id="content-service-api-v1-discovery-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of callable API endpoints on the Covata Platform's Content Service, which are available to integrators.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-discovery-detailed-description" />
+
+<Note>
+
+The content in this section of the page (and after **Required Headers** below) is incomplete and will be completed in due course.
+
+</Note>
+
+## Supported roles <a id="content-service-api-discovery-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.1/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.1/admin/index)):
+
+- [Originator](/3.1/admin/administering-users#originator-role)
+- [Collaborator](/3.1/admin/administering-users#collaborator-role)
+- [System administrator](/3.1/admin/administering-users#system-administrator-role)
+- [User administrator](/3.1/admin/administering-users#user-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.1/api/content-service-api-v1-discovery#content-service-api-v1-discovery-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-discovery-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="content-service-api-v1-discovery-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **services** - An array containing information about each callable API endpoint on the Covata Platform's Content Service. Each element of this array contains information about one of these endpoints and is represented as an object, containing the following members:
+
+  - **name** - .
+  - **link** - .
+  - **httpMethod** - .
+
+  **Example:**

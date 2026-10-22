@@ -1,0 +1,90 @@
+---
+title: "<access-service>/api/v1/items/delta"
+---
+
+## URL structure <a id="access-service-api-v1-items-delta-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/delta
+```
+
+## Supported methods and overview <a id="access-service-api-v1-items-delta-supported-methods-and-overview" />
+
+- `GET` - retrieves lists of file objects/[Secure Objects](/3.5/api/working-with-files-and-folders-fundamentals#secure-object) and folders/[collections](/3.5/api/working-with-files-and-folders-fundamentals#collection) (i.e. [items](/3.5/api/working-with-files-and-folders-fundamentals#item)), upon which a specifiable range of consecutive changes/activities have been conducted by a Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-supported-roles-and-conditions) to this endpoint).
+
+## Detailed description <a id="access-service-api-v1-items-delta-detailed-description" />
+
+This API endpoint retrieves lists of file objects and folders (i.e. items), upon which a specifiable range of consecutive changes/activities have been conducted by the Covata user (whose access token is submitted in the request to this endpoint).
+
+This endpoint is useful for client applications (such as [SafeShare for Windows](/3.5/windows/index)) that need to scan for item changes between those recorded on the Covata Platform and those conducted locally on the client application's file system (for a given Covata user). This scanning process is required to allow the client application to selectively synchronise items with any changes between those in remote storage and those locally on the file system (e.g. inside SafeShare for Windows' `SafeShare` folders).
+
+Using this endpoint, client applications can avoid the need to scan every item (accessible to a user) on the Covata Platform to identify such differences, by only retrieving items that have changed across a limited (time) range of consecutive item-based changes/activities.
+
+Items returned by this endpoint are grouped according the types of activities conducted on them:
+
+- *added* - items that have been created or shared,
+- *removed* - items that have been:
+
+  - deleted from the [Recycle Bin](/3.5/user/managing-secure-content#accessing-the-recycle-bin), or
+  - unshared,
+- *modified* - items that have:
+
+  - been removed to (or restored from) the Recycle Bin,
+  - been moved to a different location,
+  - been renamed,
+  - had a collaborator's permission set changed,
+  - been disabled and re-enabled (for Organisation administrators only).
+
+<Note>
+
+- For a Covata user who is a member of multiple organisations, the response from this API endpoint reflects (and includes) changes to all items across all organisations the user is a member of.
+- Changes are reflected/paginated in the response in chronological order.
+
+</Note>
+
+## Supported roles and conditions <a id="access-service-api-v1-items-delta-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user has this role only, then only disabling and re-enabling activities on file objects are reflected in responses to this endpoint.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-delta-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Optional parameters <a id="access-service-api-v1-items-delta-optional-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **cursor** - The ID of the chronologically next activity entry, retrieved in the [response](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-returns) (below) from a request to this endpoint. This ID value relates to the activity entry continuing on from this response's last activity entry (reflected in the response), which in turn is based on the combination of the values for **cursor** and **pageSize** (below) that had been submitted in the request for this response. The combination of these **cursor** and **pageSize** parameters provides a mechanism for paginating the results. If this **cursor** parameter is omitted, then its value is `0` by default, which is the earliest item-based activity entry recorded for this Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-supported-roles-and-conditions) to this endpoint).
+- **pageSize** - A value from `1` to `100`, indicating the number of activities on items (i.e. activity entries) to be reflected in the response. If this parameter is omitted, then its value is `10` by default. <br />
+  **Note:** Avoid confusing this value with the number of items returned in the response (below). Since the **pageSize** value refers to numbers of individual *activities* on items, whereas the response (below) returns individual *items* themselves (as their IDs), then multiple (chronologically close) activities conducted on a single item are likely to result in fewer items appearing in the response than the actual value specified for **pageSize**. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/items/749866326952308736/history?pageSize=30
+  ```
+
+## Returns <a id="access-service-api-v1-items-delta-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **added** - An array of individual items (across one or more organisations) upon which the Covata user (whose [access token is submitted in the request](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-supported-roles-and-conditions) to this endpoint) has performed any of the **added** activities described in the [Detailed description](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-detailed-description) section (above), after the activity entry reflected by the **cursor** value submitted in the request.
+- **removed** - An array of individual items (across one or more organisations) upon which this Covata user has performed any of the **removed** activities described in the [Detailed description](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-detailed-description) section (above), after the activity entry reflected by the **cursor** value submitted in the request.
+- **modified** - An array of individual items (across one or more organisations) upon which this Covata user has performed any of the **modified** activities described in the [Detailed description](/3.5/api/access-service-api-v1-items-delta#access-service-api-v1-items-delta-detailed-description) section (above), after the activity entry reflected by the **cursor** value submitted in the request.
+- **cursor** - The ID of the activity entry following the last of this Covata user's activities (based on the **cursor** and **pageSize** values submitted in the request to this API endpoint), reflected in this response. This is the *chronologically next* activity entry (after the last one reflected in this response). <br />
+  **Example (response):**
+
+  ```json
+  {
+      "added": [752047795879604224, 749883721599217664, 752389961810243584, 754515061074448384, 751980834491527168, 753099535735386112, 753099536981094400, 749866326952308736, 752389806390308864, 753099532388331520],
+      "removed": [749428714470961152, 749866151802368000, 749425267889729536],
+      "modified": [],
+      "cursor": "754583406708674560"
+  }
+  ```

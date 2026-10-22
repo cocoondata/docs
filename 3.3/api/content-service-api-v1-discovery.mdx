@@ -1,0 +1,105 @@
+---
+title: "<content-service>/api/v1"
+---
+
+## URL structure <a id="content-service-api-v1-discovery-url-structure" />
+
+```text
+https://content-service.xy-company.com/api/v1
+```
+
+## Supported methods and overview <a id="content-service-api-v1-discovery-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of callable API endpoints on the Covata Platform's Content Service, which are available to integrators.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="content-service-api-v1-discovery-detailed-description" />
+
+This API endpoint retrieves a list of every callable API endpoint on the the Covata Platform's Content Service that are available to integrators.
+
+Regardless of the Covata user's [role](/3.3/api/content-service-api-v1-discovery#content-service-api-v1-discovery-supported-roles) associated with the [access token](/3.3/api/access-service-api-v1-discovery#access-service-api-v1-discovery-required-headers) submitted with this request, all callable API endpoints are retrieved. However, each of these API endpoints has their own **Supported roles**.
+
+## Supported roles <a id="content-service-api-v1-discovery-supported-roles" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.3/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [Safe Share administrator](/3.3/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to Covata users meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/content-service-api-v1-discovery#content-service-api-v1-discovery-required-headers) of requests to this endpoint.
+
+## Required headers <a id="content-service-api-v1-discovery-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="content-service-api-v1-discovery-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **services** - An array containing information about each callable API endpoint on the Covata Platform's Content Service. Each element of this array contains information about one of these endpoints (represented as an object containing the following members):
+
+  - **httpMethod** - The method supported by the API endpoint URL (below).
+  - **link** - The format of the API endpoint's URL, excluding the base URL component (i.e. **contentServiceURL**, as described in [&lt;access-service&gt;/api/v1](/3.3/api/access-service-api-v1-discovery)).
+  - **name** - The internal name given to the API endpoint.
+
+  **Example (response):**
+
+  ```json
+  {
+      "services": [{
+          "httpMethod": "GET",
+          "link": "/api/v1/config",
+          "name": "getConfig"
+      }, {
+          "httpMethod": "GET",
+          "link": "/api/v1/versions/{versionId}/contents",
+          "name": "getVersionContents"
+      }, {
+          "httpMethod": "DELETE",
+          "link": "/api/v1/collections/{collectionId}/contents",
+          "name": "deleteCollectionContents"
+      }, {
+          "httpMethod": "DELETE",
+          "link": "/api/v1/objects/{objectId}/contents",
+          "name": "deleteContents"
+      }, {
+          "httpMethod": "GET",
+          "link": "/api/v1/objects/{objectId}/view",
+          "name": "getView"
+      }, {
+          "httpMethod": "PUT",
+          "link": "/api/v1/objects/{objectId}/view",
+          "name": "convertContents"
+      }, {
+          "httpMethod": "POST",
+          "link": "/api/v1/objects/{objectId}/versions",
+          "name": "updateContents"
+      }, {
+          "httpMethod": "POST",
+          "link": "/api/v1/objects/{objectId}/contents",
+          "name": "addContents"
+      }, {
+          "httpMethod": "GET",
+          "link": "/api/v1/objects/{objectId}/contents",
+          "name": "getContents"
+      }, {
+          "httpMethod": "POST",
+          "link": "/api/v1/auth",
+          "name": "getCookie"
+      }, {
+          "httpMethod": "GET",
+          "link": "/api/v1/versions/{versionId}/view",
+          "name": "getVersionView"
+      }]
+  }
+  ```

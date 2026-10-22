@@ -1,0 +1,114 @@
+---
+title: "Accessing Organisation Administration"
+---
+
+The features of [Organisation Administration](/CS1.0/admin-org/index#organisation-administration) are only available to Organisation administrators, where an *Organisation administrator* is any [Covata user](/CS1.0/admin-org/administering-users-within-an-organisation) who has the [Organisation administrator](/CS1.0/admin-org/administering-users-within-an-organisation#organisation-administrator-role) [role](/CS1.0/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) for one or more organisation/s.
+
+## Signing in to Organisation Administration
+
+When signing in to Organisation Administration for one or more organisations, a Covata user's account must have the [Organisation administrator role](/CS1.0/admin-org/administering-users-within-an-organisation#organisation-administrator-role) (for each organisation managed through this account) to access all Organisation Administration features for these organisations.
+
+**To sign in to Organisation Administration:**
+
+1. Open a compatible web browser and enter the base URL of your Covata Platform instance in your browser's URL field - e.g: <br />
+   `https://covata-platform.xy-company.com`
+2. On the Covata Sign-in page, enter the **Email address** and **Password** associated with your Covata user account which has the [Organisation administrator role](/CS1.0/admin-org/administering-users-within-an-organisation#organisation-administrator-role). <br />
+   *Forgotten your password?* If you have, then leave the **Password** field blank but click the **Forgot your password** link instead. Follow the instructions on the page and then in your email notification to reset your password.
+3. Click the **SIGN IN** button (or type 'Enter'/'Return'). If successful, one of the following will appear:
+
+   - The [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) (for the only organisation you have permission to manage).
+   - The **Select Your Organisation** page (because you have permission to manage more than one organisation). If this page appears:
+
+     - Choose the organisation to administer and click the **Select** button. The [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) for the selected organisation is displayed. <br />
+       **Tip:** If you manage multiple organisations, you may wish to bookmark this URL (i.e. appended by `/#/selectOrganisation`) before clicking **Select**, since this URL may provide faster/more direct access to Organisation Administration than simply specifying the base URL of your Covata Platform instance <sup>&#42;</sup> .
+   - The main Covata [SafeShare for Web](/CS1.0/user/index) page (because your Covata user account also has either the [Originator](/CS1.0/admin-org/administering-users-within-an-organisation#originator-role) or [Collaborator](/CS1.0/admin-org/administering-users-within-an-organisation#collaborator-role) roles). If this page appears:
+
+     - Click your email address at the top-right and choose **Administration** from the drop-down menu. Then:
+
+       - If the **Select Your Organisation** page then appears, choose the organisation to administer and click the **Select** button. The [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) (for the selected organisation) is displayed.
+       - If the SafeShare Administration interface appears, then your account also has the SafeShare administrator role. Follow the substeps in the next bullet point to access Organisation Administration.
+   - The [SafeShare Administration interface](/CS1.0/admin-platform/accessing-platform-administration#the-platform-administration-interface) (because your Covata user account also has the [SafeShare administrator role](/CS1.0/admin-platform/administering-platform-administrator-users#platform-administrator-role)). If this interface appears:
+
+     1. Click the **Organisations** option on the left of the SafeShare Administration interface to open the **Organisations** page.
+     2. If necessary, locate the organisation to administer.
+     3. In the **Manage** column, click the organisation's **Manage** button. The [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) for this organisation is displayed.
+
+     For more information about SafeShare Administration, refer to the [SafeShare Administrator's Guide](/CS1.0/admin-platform/index).
+
+   **Notes:**
+
+   - The email address of the currently signed in user appears at the top right-hand corner of the Organisation Administration interface.
+   - If, instead, you see 'Two-factor authentication is enabled on your account...' on the page with a field requesting you to enter your **Authentication code** (for the first time), then:
+
+     1. Check for a Covata Notification email message containing the subject line '*Two-factor authentication has been enabled for your account*'.
+     2. Open this email message and follow its instructions to configure your mobile device with your Covata user account for 2FA. For more information, see [Enabling or disabling 2FA on Organisation user accounts](/CS1.0/admin-org/administering-users-within-an-organisation#enabling-or-disabling-2fa-on-organisation-user-accounts).
+     3. Sign in [again](/CS1.0/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration).
+
+<Tip>
+
+<sup>&#42;</sup> **Additional tip:** If you manage multiple organisations but you would prefer to access a specific organisation *directly* by URL, enter/bookmark the base URL of your Covata Platform instance (appended by `/#/orgAdmin/{orgGroupId}/dashboard`) - e.g:
+
+- `https://covata-platform-web.xy-company.com/#/orgAdmin/{orgGroupId}/dashboard` <br />
+   where `{orgGroupId}` is the numeric ID of the specific organisation to access directly. <br />
+   This URL and ID value can be obtained from your browser's URL field after successfully [signing in](/CS1.0/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to the organisation's [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) (using the procedure above).
+
+Upon entering this URL in your browser's URL field and successfully signing in, the Organisation Administration interface for this organisation is displayed immediately.
+
+</Tip>
+
+## The Organisation Administration interface
+
+The Organisation Administration interface consists of a set of configuration pages, each of which is accessible from the options on the left (below).
+
+The **My Organisation/Dashboard** [page](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) for an Organisation administrator's (chosen) organisation is initially displayed upon this Covata user successfully [signing in to Organisation Administration](/CS1.0/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) (above).
+
+<Note>
+
+If accessing Organisation Administration from a tablet or phone, tap the 'menu' icon in the top left hand corner of the screen to access these options.
+
+</Note>
+
+![Organisation Administration dashboard page](/images/e1ab2bf2c0bd-organisation-administration-dashboard-page.png)
+The table below describes each of these Organisation Administration pages, which can be accessed by clicking its option on the left of the interface.
+
+| Organisation Administration page | Description |
+| --- | --- |
+| [My Organisation/Dashboard](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-dashboard) | Provides a single-page graphical overview of various aspects of your organisation's current statuses (presented in panels) as well as a variety of system usage metrics involving user accounts, files and storage (presented in pie charts). |
+| [Configuration](/CS1.0/admin-org/configuring-organisation-administration-properties) | Allows the modification of Organisation Administration properties that affect specific functional areas of your organisation on the Covata Platform. |
+| [LDAP](/CS1.0/admin-org/configuring-ldap) | Allows the configuration of connections to one or more LDAP user directories, which can be used to populate the Covata Platform with [Covata user accounts](/CS1.0/admin-org/administering-users-within-an-organisation). |
+| [Users](/CS1.0/admin-org/administering-users-within-an-organisation) | Allows access to all Covata users who are members of your organisation, from which any of these Covata users can be configured, including the ability to modify the roles of these users, which permits what the users in your organisation can do with Covata technologies. |
+| [Contact groups](/CS1.0/admin-org/managing-contact-groups) | Allows the creation of contact groups, which define groups of Covata users with whom items can be shared. |
+| [User Whitelist](/CS1.0/admin-org/managing-user-whitelists) | Allows the management and configuration of the user whitelist, which defines the people (based on their email address or domain) that can be shared items by other Covata users within your organisation. Any users whose email addresses do not match a user whitelist rule can no longer be shared files or folders (i.e. added as a collaborator to items) by other people. |
+| [Files](/CS1.0/admin-org/administering-files) | Allows any files encrypted using Covata technologies within your organisation to be searched and filtered. From this filtered list, individual files can:  <br />•  Be disabled (which prevents any access to their unencrypted data) or re-enabled, as well as <br />•  Have all their recorded activities inspected.  |
+| [Clearances](/CS1.0/admin-org/managing-clearances) | Allows the creation of clearances (i.e. groups) of Covata users, which in turn can be used in conjunction with classifications to help ensure that classified content is only shareable with users who have clearance to access this content. |
+| [Classifications](/CS1.0/admin-org/managing-classifications) | Allows the definition of classifications that:  <br />•  can be selected by Covata users when sharing files and <br />•  once applied to clearances/groups of users, <br />helps ensure that classified content is only shareable with users who have clearance to access this content. |
+| [Plans](/CS1.0/admin-org/managing-users-storage-quotas-through-plans) | Allows the definition of plans, each of which defines a storage quota that is used to restrict the amount of storage (managed by the Covata Platform's Content Service) available to Covata user accounts. |
+| [Reports](/CS1.0/admin-org/generating-reports) | Allows the generation of reports on activities (i.e. requests) within your organisation made by client applications to the Covata Platform's API, which can be exported to either PDF or CSV formats. The activities for these reports can be filtered by a range of different criteria. <br />**Note:** In this context, 'client applications' includes SafeShare Administration and Organisation Administration (and the relevant administrators of these interfaces performing actions through them).  |
+
+## The Organisation Administration dashboard
+
+The **My Organisation/Dashboard** page is initially displayed upon a Organisation administrator successfully [signing in](/CS1.0/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
+
+![Organisation Administration dashboard page](/images/e1ab2bf2c0bd-organisation-administration-dashboard-page.png)
+The following table describes each component of the **My Organisation/Dashboard** page from left to right/top to bottom.
+
+| Dashboard page component | Description |
+| --- | --- |
+| Total Users | This panel shows the total number of Covata users within your organisation, including the numbers of these users with each of the [roles](/CS1.0/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) that can be assigned through Organisation Administration. Clicking this panel opens the **Users** [page](/CS1.0/admin-org/administering-users-within-an-organisation). |
+| Files | This panel shows the total number of encrypted files which have been created through the Covata Platform, including the number of these files which have either been shared or not been shared. Clicking this panel opens the **Files** [page](/CS1.0/admin-org/administering-files). |
+| Organisation Total Quota | This panel shows the total amount of storage space that a SafeShare administrator for your Covata Platform instance has granted to your organisation, which the Covata Platform's Content Service utilises to store content for all Covata users with the [Originator role](/CS1.0/admin-org/administering-users-within-an-organisation#originator-role) (i.e. users who have a [plan](/CS1.0/admin-org/managing-users-storage-quotas-through-plans)) within your organisation. <br />  This panel also indicates the amounts of storage currently allocated to these users (i.e. the sum of their plans' quotas) and the amount of storage space currently consumed. Clicking this panel opens the **Plans** [page](/CS1.0/admin-org/managing-users-storage-quotas-through-plans). <br />**Note:** For more information about SafeShare Administration, refer to the [SafeShare Administrator's Guide](/CS1.0/admin-platform/index).  |
+| Plans | This section of the dashboard shows each plan configured in your organisation. For each of these plans, the following information is indicated:  <br />•  The plan's name at the top. <br />•  A pie chart of all Covata users with the Originator role in your organisation assigned to this plan, which represents the percentages of these users who are either within their plan's quota, or at/have exceeded their plan's quota. <br />•  The actual numbers of all Covata users (with the Originator role) in your organisation assigned to this plan, along with the percentage of all Covata users in your organisation (with this role) who are assigned to this plan (in brackets).  |
+| File Extension Breakdown | This section of the dashboard shows a pie chart of all files in your organisation, indicating the percentages of different file types (based on file name extensions). |
+
+## Signing out of Organisation Administration
+
+**To sign out of Organisation Administration:**
+
+- Click your email address at the top right-hand corner of the [Organisation Administration interface](/CS1.0/admin-org/accessing-organisation-administration#the-organisation-administration-interface) and choose **Sign Out** from the drop-down menu. <br />
+   The Covata Sign-in page is redisplayed.
+
+<Warning>
+
+After administering your organisation through Organisation Administration, please ensure that you explicitly sign out using this procedure (above). If you just close the browser tab or window that contained your Organisation Administration session, then you will *not be signed out*, leading to the risk that your session may be compromised by someone else subsequently using your computer.
+
+</Warning>

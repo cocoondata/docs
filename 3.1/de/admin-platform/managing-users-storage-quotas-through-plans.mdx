@@ -1,0 +1,71 @@
+---
+title: "Verwaltung der Speicherkontingente von Benutzern anhand von Plänen"
+---
+
+Über die Seite **Pläne** können Organisations-Administratoren Speicherkontingente definieren und so den Covata-Benutzer-Accounts verfügbaren (vom Inhaltsdienst der Covata-Plattform verwalteten) Speicher begrenzen, auf den Benutzer folgendermaßen zugreifen können:
+
+- über Covata Safe Share-Anwendungen oder
+- über andere Client-Anwendungen unter Verwendung der API der Covata-Plattform.
+
+Speicherkontingente werden von einem *Plan* definiert, der wiederum auf einen Covata-Benutzer-Account mit [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) (über die [Seite](/3.1/de/admin-platform/administering-users-within-an-organisation) **Benutzer**) angewendet werden kann, wenn der Account (der Organisation) [hinzugefügt](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) oder [bearbeitet](/3.1/de/admin-platform/administering-users-within-an-organisation#editing-an-organisation-user-account) wird.
+
+![Seite Pläne](/images/0d38c32e2357-plans-page.png)
+## Hinzufügen eines neuen Plans <a id="adding-a-new-plan" />
+
+Ihrer Organisation muss mindestens ein Plan hinzugefügt werden (wobei der erste Plan der anfängliche **Standardplan** wird), ehe Ihrer Organisation ein Covata-Benutzer mit der [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) hinzugefügt werden kann.
+
+**Hinzufügen eines neuen Plans zu Ihrer Organisation auf der Covata-Plattform:**
+
+1. [Melden Sie sich](/3.1/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Pläne** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neuen Plan hinzufügen** Folgendes an:
+
+   - **Planname** - der Wert dieses Felds ist der Name des Plans, wie er in der Liste verfügbarer Pläne angezeigt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) über die [Seite](/3.1/de/admin-platform/administering-users-within-an-organisation) **Benutzer** (der Organisation) [hinzugefügt](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) oder [bearbeitet](/3.1/de/admin-platform/administering-users-within-an-organisation#editing-an-organisation-user-account) wird.
+   - **Kontingent (MB)** - der vom betreffenden Plan definierte Wert des Kontingents (in Megabytes).
+   - **Beschreibung** - eine längere Beschreibung für mehr Informationen über den Plan, z. B. seinen Zweck oder die beabsichtigte Covata-Benutzer-Zielgruppe. Der Wert dieses Felds ist nur für Organisations-Administratoren auf dieser Seite **Pläne** sichtbar.
+5. ( *Optional* ) Aktivieren Sie das Kontrollkästchen **Standardplan** um zu gewährleisten, dass *dieser* Plan (den Sie eben hinzufügen möchten) standardmäßig ausgewählt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) (der Organisation) [hinzugefügt wird](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account).
+6. Klicken Sie auf **Speichern**, und der neue Plan erscheint als neue Eintragung auf der Seite **Pläne**. <br />
+   **Hinweis:** Wurde das Kontrollkästchen **Standardplan** aktiviert, wechselt die **Standard**-Anzeige auf der Seite **Pläne** zum von Ihnen eben hinzugefügten Plan.
+
+## Bearbeitung eines bestehenden Plans <a id="editing-an-existing-plan" />
+
+Bei der Bearbeitung eines bestehenden Plans können alle seine Felder geändert werden. Dies ist hilfreich, wenn das Speicherkontingent eines Plans geändert werden muss oder der betreffende Plan zum **Standardplan** gemacht werden soll.
+
+**Bearbeitung eines bestehenden Plans in Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.1/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Pläne** aufzurufen.
+3. Suchen Sie den betreffenden Plan bzw. blättern Sie zu ihm und klicken Sie auf den Link **Bearbeiten**.
+4. Ändern Sie im Dialogfeld **Plan bearbeiten** Folgendes wie gewünscht:
+
+   - **Planname** - der Wert dieses Felds ist der Name des Plans, wie er in der Liste verfügbarer Pläne angezeigt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) über die [Seite](/3.1/de/admin-platform/administering-users-within-an-organisation) **Benutzer** (der Organisation) [hinzugefügt](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) oder [bearbeitet](/3.1/de/admin-platform/administering-users-within-an-organisation#editing-an-organisation-user-account) wird.
+   - **Kontingent (MB)** - der vom betreffenden Plan definierte Wert des Kontingents (in Megabytes).
+   - **Beschreibung** - eine längere Beschreibung für mehr Informationen über den Plan, z. B. seinen Zweck oder die beabsichtigte Covata-Benutzer-Zielgruppe. Der Wert dieses Felds ist nur für Organisations-Administratoren auf dieser Seite **Plan-Verwaltung** sichtbar.
+5. ( *Optional* ) Aktivieren Sie das Kontrollkästchen **Standardplan** um zu gewährleisten, dass *dieser* Plan (den Sie bearbeiten) standardmäßig ausgewählt wird, wenn ein Covata-Benutzer mit [Ersteller-Rolle](/3.1/de/admin-platform/administering-users-within-an-organisation#originator-role) (der Organisation) [hinzugefügt wird](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) oder [bearbeitet](/3.1/de/admin-platform/administering-users-within-an-organisation#editing-an-organisation-user-account) wird.
+6. Klicken Sie auf **Speichern**, und die Felder des Plans werden entsprechend aktualisiert. <br />
+   **Hinweis:** Wurde das Kontrollkästchen **Standardplan** aktiviert, wechselt die **Standard**-Anzeige auf der Seite **Pläne** zum von Ihnen eben bearbeiteten Plan.
+
+## Entfernen eines bestehenden Plans <a id="removing-an-existing-plan" />
+
+Wird ein bestehender Plan entfernt, kann er nicht mehr ausgewählt werden, wenn ein Covata-Benutzer über die [Seite](/3.1/de/admin-platform/administering-users-within-an-organisation) **Benutzer** (einer Organisation) [hinzugefügt](/3.1/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) oder [bearbeitet](/3.1/de/admin-platform/administering-users-within-an-organisation#editing-an-organisation-user-account) wird.
+
+Sobald ein Plan entfernt wird, werden alle ihm ursprünglich zugewiesenen Benutzer automatisch auf den **Standardplan** übertragen. Beachten Sie hierbei Folgendes: Wenn dieser **Standardplan** ein Kontingent beinhaltet, das geringer ist als der von beliebigen der betreffenden Benutzer beanspruchte, vom Inhaltsdienst verwaltete Speicher, können diese Benutzer über Safe Share (sowie sonstige Client-Anwendungen, die mit der API der Covata-Plattform arbeiten) keine Daten mehr hochladen, bis ihre Speichernutzung unter das Kontingent des **Standardplans** fällt.
+
+<Note>
+
+Der als **Standardplan** bezeichnete Plan kann nicht entfernt werden. Wenn Sie einen als **Standardplan** gekennzeichneten Plan löschen möchten, [bearbeiten Sie erst einen anderen Plan](/3.1/de/admin-platform/managing-users-storage-quotas-through-plans#editing-an-existing-plan), aktivieren Sie dessen Kontrollkästchen **Standardplan** und klicken Sie auf **Speichern**. Damit wird die **Standard**-Anzeige von dem Plan entfernt, den Sie entfernen möchten.
+
+</Note>
+
+**Entfernen eines bestehenden Plans aus Ihrer Organisation:**
+
+1. [Melden Sie sich](/3.1/de/admin-platform/accessing-organisation-administration#signing-in-to-organisation-administration) bei der Safe Share-Organisationsverwaltung an.
+2. Klicken Sie auf die Option **Pläne** links auf der [Oberfläche Safe Share-Organisationsverwaltung](/3.1/de/admin-platform/accessing-organisation-administration#the-organisation-administration-interface), um die Seite **Plan-Verwaltung** aufzurufen.
+3. Suchen Sie die betreffende Gruppe bzw. blättern Sie zur gewünschten Gruppe und aktivieren Sie das Kontrollkästchen links daneben.
+4. Klicken Sie auf die Schaltfläche **Entfernen**.
+5. Klicken Sie in der Meldung **Plan löschen** auf **Ja**, um den Plan zu entfernen.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

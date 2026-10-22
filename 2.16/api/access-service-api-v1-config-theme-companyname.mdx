@@ -1,0 +1,42 @@
+---
+title: "<access-service>/api/v1/config/theme/companyName"
+---
+
+## URL structure <a id="access-service-api-v1-config-theme-companyname-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/theme/companyName
+```
+
+## Supported methods and overview <a id="access-service-api-v1-config-theme-companyname-supported-methods-and-overview" />
+
+- `PUT` - used to set a new company name for Covata Safe Share, which appears in Covata Notification email messages.
+- `DELETE` - see [&lt;access-service&gt;/api/v1/config/theme/...](/2.16/api/access-service-api-v1-config-theme-reset) for more information.
+
+## Detailed description <a id="access-service-api-v1-config-theme-companyname-detailed-description" />
+
+This API endpoint sets a new company name for Covata Safe Share, which appears in Covata Notification email messages.
+
+To reset this company name back to its default value (i.e. Covata), see [&lt;access-service&gt;/api/v1/config/theme/...](/2.16/api/access-service-api-v1-config-theme-reset) for more information.
+
+## Supported roles <a id="access-service-api-v1-config-theme-companyname-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/2.16/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/2.16/admin/index)):
+
+- [System administrator](/2.16/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/2.16/api/access-service-api-v1-config-theme-companyname#access-service-api-v1-config-theme-companyname-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-theme-companyname-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Required body <a id="access-service-api-v1-config-theme-companyname-required-body" />
+
+Specify the new company name for Covata Safe Share (which appears in Covata Notification email messages), in the body of the request as plain text.
+
+## Returns <a id="access-service-api-v1-config-theme-companyname-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.

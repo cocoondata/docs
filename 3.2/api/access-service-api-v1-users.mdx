@@ -1,0 +1,137 @@
+---
+title: "<access-service>/api/v1/users"
+---
+
+## URL structure <a id="access-service-api-v1-users-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users
+```
+
+## Supported methods and overview <a id="access-service-api-v1-users-supported-methods-and-overview" />
+
+- `POST` - used to add a new Covata user.
+- `GET` - used to retrieve a list of field information for all existing users on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-users-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new Covata user to the Covata Platform. <br />
+  **Note:** Use this endpoint to add a new Covata user with any valid (combination of) role(s), with the exception of Covata users with the [Ad hoc role](/3.2/admin-org/administering-users-within-an-organisation#adhoc-role) (whose accounts are created when a user with the [Originator role](/3.2/admin-org/administering-users-within-an-organisation#originator-role) shares their content with someone whose email address has not yet been registered with an existing user account on the Covata Platform).
+- Retrieves a list of field information for all existing users on the Covata Platform. The list of users returned in the [response](/3.2/api/access-service-api-v1-users#access-service-api-v1-users-returns-from-a-POST-request) can be filtered according to users:
+
+  - whose email address, first name or last name contains the string specified in the request,
+  - with a specific role, and/or
+  - whose accounts are either enabled or disabled.
+
+## Supported roles and conditions <a id="access-service-api-v1-users-supported-roles-and-conditions" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)) and conditions:
+
+- System administrator
+- User administrator - a Covata user with this role can call the `GET` method only.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-users#access-service-api-v1-users-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-users-required-parameters-on-POST" />
+
+The following required parameters must be sent in the body of the POST request, as individual members of a JSON object:
+
+- **email** - .
+- **roles** - ROLE_SYSTEM_ADMIN, ROLE_COLLABORATOR, ROLE_ORIGINATOR, ROLE_ADHOC_COLLABORATOR or ROLE_USER_ADMIN
+
+  **Example ():**
+
+## Optional parameters on POST <a id="access-service-api-v1-users-optional-parameters-on-POST" />
+
+The following optional parameters can also be sent in the body of the POST request, each as individual members of the JSON object that includes the [Required parameters on POST](/3.2/api/access-service-api-v1-users#access-service-api-v1-users-required-parameters-on-POST) above:
+
+- **firstName** - .
+- **forceResetPassword** - true or false.
+- **lastName** - .
+- **mobileNumber** - .
+- **otherName** - .
+- **planId** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-users-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **enabled** - true or false.
+- **limit** - 0 to 100 (default is 10).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **searchColumn** - all, email, firstName, lastName, roles or admin.
+- **searchText** - when searchColumn is admin, specify yes or no. Otherwise, search on any text value in the column(s) specified by searchColumn.
+- **sortBy** - default is userId.
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-users-returns-from-a-POST-request" />
+
+A JSON-formatted response containing the following members:
+
+- **email** - .
+- **firstName** - .
+- **lastName** - .
+- **otherName** - .
+- **mobileNumber** - .
+- **plan** - .
+
+  - **id** - .
+  - **name** - .
+  - **description** - .
+  - **quota** - .
+  - **default** - .
+- **enabled** - .
+- **accountNonLocked** - .
+- **accountType** - .
+- **numFailedLogins** - .
+- **roles** - .
+- **id** - .
+- **planId** - .
+
+  **Example (response from ...):**
+
+## Returns from a GET request <a id="access-service-api-v1-users-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **email** - .
+  - **firstName** - .
+  - **lastName** - .
+  - **otherName** - .
+  - **mobileNumber** - .
+  - **plan** - .
+
+    - **id** - .
+    - **name** - .
+    - **description** - .
+    - **quota** - .
+    - **default** - .
+  - **enabled** - .
+  - **accountNonLocked** - .
+  - **numFailedLogins** - .
+  - **id** - .
+  - **accountType** - .
+  - **roles** - .
+  - **planId** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

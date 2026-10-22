@@ -1,0 +1,70 @@
+---
+title: "<access-service>/api/v1/config/server"
+---
+
+## URL structure <a id="access-service-api-v1-config-server-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/config/server
+```
+
+## Supported methods and overview <a id="access-service-api-v1-config-server-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information for all configurable [Covata Administration properties](/3.2/admin/configuring-administration-properties).
+
+## Detailed description <a id="access-service-api-v1-config-server-detailed-description" />
+
+This API endpoint retrieves a list of information for all configurable properties which are accessible through Covata Administration.
+
+<Note>
+
+From a security perspective, with the exception of the current values of the following few Covata Administration properties returned by this API endpoint's [response](/3.2/api/access-service-api-v1-config-server#access-service-api-v1-config-server-returns), no information about any of the other properties (returned in this response) are contained within the [&lt;access-service&gt;/api/v1/config](/3.2/api/access-service-api-v1-config) endpoint's [response](/3.2/api/access-service-api-v1-config#access-service-api-v1-config-returns):
+
+- **analytics.google.trackingCode**
+- **analytics.google.trackingDomain**
+- **require.login.on.launch**
+
+</Note>
+
+## Supported roles <a id="access-service-api-config-server-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin/index)):
+
+- System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-config-server#access-service-api-v1-config-server-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-config-server-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Optional parameters <a id="access-service-api-v1-config-server-optional-parameters" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+- **limit** - 0 to 100 (default is 0).
+- **offset** - default is 0.
+- **orderBy** - `ASC` or `DESC` (default is `ASC`).
+- **sortBy** - .
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-config-server-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **items** - .
+
+  - **modified** - .
+  - **id** - .
+  - **propertyName** - .
+  - **propertyValue** - .
+  - **grouping** - .
+  - **propertyDescription** - .
+  - **configGroup** - .
+- **count** - .
+- **offset** - .
+
+  **Example (response from ...):**

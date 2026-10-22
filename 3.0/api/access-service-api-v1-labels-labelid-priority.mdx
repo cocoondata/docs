@@ -1,0 +1,61 @@
+---
+title: "<access-service>/api/v1/labels/{labelId}/priority"
+---
+
+## URL structure <a id="access-service-api-v1-labels-labelid-priority-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/labels/{labelId}/priority
+```
+
+where `{labelId}` is the ID of a label.
+
+## Supported methods and overview <a id="access-service-api-v1-labels-labelid-priority-supported-methods-and-overview" />
+
+- `PUT` - used to shift the priority of a [label](/3.0/admin/managing-labels) either up or down, based on that label's ID.
+
+## Detailed description <a id="access-service-api-v1-labels-labelid-priority-detailed-description" />
+
+This API endpoint shifts the priority of a label either up or down, using that label's ID. The label's ID can be obtained by calling the `GET` method of the [&lt;access-service&gt;/api/v1/labels](/3.0/api/access-service-api-v1-labels) API endpoint, which retrieves a list of field information for all existing labels on the Covata Platform.
+
+A priority is defined by a series of consecutive positive integer numbers called *priority integer values*. These values are used for sorting labels from the highest priority (i.e. a priority integer value of `1`) through to the lowest priority (i.e. the highest priority integer value, which equals the total number of all existing labels on the Covata Platform).
+
+When a new label is [added](/3.0/api/access-service-api-v1-labels), it is automatically given the lowest priority (i.e. the highest priority integer number). When any label (except for the label with the lowest priority) is [deleted](/3.0/api/access-service-api-v1-labels-labelid), then the priority integer numbers of all other labels with a lower priority are automatically decreased by a value of `1`.
+
+When a label's priority is shifted:
+
+- `up` - then the priority integer values of this label and its neighboring label (i.e. with the next lowest priority integer value) switch their priority values.
+- `down` - then the priority integer values of this label and its neighboring label (i.e. with the next highest priority integer value) switch their priority values.
+
+## Supported roles <a id="access-service-api-labels-labelid-priority-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [System administrator](/3.0/admin/administering-users#system-administrator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-labels-labelid-priority#access-service-api-v1-labels-labelid-priority-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-labels-labelid-priority-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Required parameters <a id="access-service-api-v1-labels-labelid-priority-required-parameters" />
+
+The following required parameters must be sent in the URL of the PUT request:
+
+- **direction** - up or down
+
+  **Example ():**
+
+## Returns <a id="access-service-api-v1-labels-labelid-priority-returns" />
+
+A JSON-formatted response containing the following members:
+
+- **id** - .
+- **name** - .
+- **description** - .
+- **priority** - .
+
+  **Example (response from ...):**

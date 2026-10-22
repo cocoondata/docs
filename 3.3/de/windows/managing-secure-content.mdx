@@ -1,0 +1,245 @@
+---
+title: "Verwaltung sicherer Inhalte"
+---
+
+## Suchen sicherer Inhalte <a id="finding-secure-content" />
+
+Verwenden Sie die Suchfunktionen im Windows Explorer, um spezifische Elemente nach ihrem Namen zu suchen.
+
+Wie bereits oben erwähnt, gilt innerhalb des „Safe Share“-Ordners Folgendes:
+
+- Alle Elemente in Ihrem Besitz befinden sich im Unterordner „Meine sicheren Dateien“.
+- Ihnen als Mitwirkenden [freigegebene Elemente](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) im Besitz anderer Personen befinden sich im Unterordner „Mir freigegeben“. Innerhalb dieses Ordners sind Elemente nach den Besitzern, die Ihnen die betreffenden Elemente freigegeben haben, in Unterordner gruppiert. Die Namen dieser Unterordner enthalten die E-Mail-Adressen ihrer Besitzer im folgenden Format: <br />
+   „Freigegeben von &lt;lokaler-Teil-der-E-Mail-Adresse&gt; - &lt;Domänen-Teil-der-E-Mail-Adresse&gt;“
+
+**Suche nach Elementen, die Sie anderen Personen freigegeben haben:**
+
+1. [Greifen Sie](/3.3/de/windows/starting-the-application-and-signing-in#accessing-the-web-application) auf Safe Share Web zu.
+2. Klicken Sie links auf der Safe Share -Hauptseite auf **Freigabe**, um nach allen Elementen zu filtern, die Sie anderen Personen freigegeben haben. <br />
+    Von dieser Seite aus können Sie alle der folgenden Funktionen von Safe Share for Web ausführen:
+
+   - Weitere [Suche in der Untergruppe von Elementen](/3.3/de/user/managing-secure-content#finding-secure-content) (die bereits nach von Ihnen freigegebenen Elementen gefiltert ist).
+   - Öffnen des [Dialogfelds "Freigeben"](/3.3/de/user/uploading-storing-and-sharing-content-securely#opening-the-share-dialog-box) für ein Element, um seine [Mitwirkenden](/3.3/de/user/uploading-storing-and-sharing-content-securely#share-dialog-box) und/oder ihre [Berechtigungen](/3.3/de/user/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) zu ändern. <br />
+     **Tipp:** Im Abschnitt **Freigabe und Berechtigungen** im Register **Details** rechts vom aktuell gewählten Element können Sie auch die Berechtigungen vorhandener Mitwirkender an einem Element ändern oder vorhandene Mitwirkende von einem Element entfernen (ohne zunächst das Dialogfeld **Freigeben** öffnen zu müssen).
+   - Aufhebung der Freigabe, Umbenennen oder Entfernen des Elements - für weitere Informationen siehe die Seite [Verwaltung sicherer Inhalte](/3.3/de/user/managing-secure-content) in der [Benutzeranleitung für Safe Share for Web](/3.3/de/user/index).
+
+## Organisation von Inhalten in Ordnern <a id="organising-content-with-folders" />
+
+Zur besseren Organisation Ihrer Dateien im „Safe Share“-Ordner in (von der Covata-Plattform verwaltetem) Speicher können Sie innerhalb des Unterordners „Meine sicheren Dateien“ weitere Ordner anlegen, die Ihnen auch die Möglichkeit geben, [mehrere Elemente Ihrer sicher gespeicherten Inhalte](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) an eine Gruppe von Personen freizugeben. (Sie können außerdem innerhalb des Unterordners „Mir freigegeben“ Ordner anlegen, sofern Sie über die entsprechenden [selecting-a-permission-set](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) verfügen. "Berechtigungen"
+
+Diese Ordner können mithilfe der Funktion **Neu &gt; Ordner** im Windows Explorer an den folgenden Speicherorten erstellt werden:
+
+- im Unterordner „Meine sicheren Dateien“, um Ihre eigenen Inhalte zu ordnen und sie an Gruppen von Personen freizugeben
+- in einem Ziel-Unterordner innerhalb des Ordners „Freigegeben von ...“ im Unterordner „Mir freigegeben“, wenn Sie als Mitwirkender des Ziel-Unterordners die **Upload**-, **Änderungs**- oder **Verwaltungs**-Berechtigung innehaben <br />
+  **Hinweis:** Wenn Sie innerhalb eines Ziel-Unterordners, für den Sie **Upload**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) innehaben, einen Ordner erstellen, legen Sie diesen Ordner zunächst außerhalb des „Safe Share“-Ordners mit seinem Namen an und kopieren oder verschieben Sie ihn erst dann in den Ziel-Unterordner. <br />
+   Ordner werden im Windows Explorer in zwei Schritten angelegt:
+
+  1. Erstellung eines Ordners mit dem Namen `Neuer Ordner`
+  2. Umbenennung des Ordners mit dem gewünschten Namen
+
+  Safe Share gestattet es Windows allerdings nicht, diesen zweiten Schritt auszuführen. Wenn Sie daher einen neuen Ordner direkt in einem solchen Ziel-Unterordner erstellen, heißt Ihr neuer Ordner „Neuer Ordner“, und Sie sind nicht zur Änderung dieses Namens berechtigt. Sie erhalten stattdessen die folgenden Meldungen:
+
+  - „*Sie sind nicht berechtigt, dieses Element umzubenennen*“ von Safe Share for Windows und
+  - „*Die Datei oder der Ordner ist nicht vorhanden*“ in einer von Windows bei der **Umbenennung** selbst ausgegebenen Meldung. Ignorieren und schließen Sie diese Meldung, indem Sie auf die Schaltfläche **OK** klicken.
+
+## Aufhebung der Freigabe sicherer Inhalte <a id="unsharing-secure-content" />
+
+Die „Aufhebung“ der Freigabe eines Elements, das Sie besitzen oder an dem Sie Mitwirkender (mit **Verwaltungs**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set)) sind, entfernt alle oder nur bestimmte Mitwirkende vom betreffenden Element und seinen Inhalten.
+
+Wenn die Safe Share-Funktion **Freigabe aufheben** auf einen Ordner angewendet wird, werden nicht nur alle Mitwirkenden des betreffenden Ordners, sondern auch alle Mitwirkenden aller Elemente innerhalb dieses Ordners (die *explizit* für diese Elemente festgelegt wurden) entfernt. Für weitere Informationen zur *expliziten* bzw. *impliziten* Freigabe siehe den **Hinweis** am Ende von [Schritt 4](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) zur Auswahl von Berechtigungen für einen Mitwirkenden (im Ablauf [Freigabe sicherer Inhalte](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content)).
+
+**Aufhebung der Freigabe sicher gespeicherter Inhalte, die Sie besitzen oder an denen Sie Mitwirkender sind:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Aufhebung der Freigabe:
+
+   - Von *Inhalten in Ihrem persönlichen Besitz*: [Suchen Sie](/3.3/de/windows/managing-secure-content#finding-secure-content) im Unterordner „Meine sicheren Dateien“ die Datei oder den Ordner, deren/dessen Freigabe Sie aufheben möchten.
+   - Von *Inhalten im Besitz eines anderen Covata-Benutzers*: Suchen Sie im Ordner „Freigegeben von ...“ des anderen Benutzers (im Unterordner „Mir freigegeben“) die Datei oder den Ordner (für die/den Sie **Verwaltungs**-Berechtigung haben) und deren/dessen Freigabe Sie aufheben möchten.
+3. Führen Sie zur Aufhebung der Freigabe dieses Elements zunächst einen der folgenden Schritte aus:
+
+   - Entfernen *aller* Mitwirkenden der Datei oder des Ordners (einschließlich aller im Ordner enthaltenen Elemente):
+
+     1. Klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigabe aufheben**.
+     2. Klicken Sie in der Bestätigungsmeldung auf **OK**, um die Änderung zu übernehmen.
+
+     Alternativ:
+
+     1. Klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigeben**.
+     2. Klicken Sie anschließend im Dialogfeld **Safe Share** links unten auf die Schaltfläche **Freigabe aufheben**.
+     3. Klicken Sie in der Bestätigungsmeldung auf **OK**, um die Änderung zu übernehmen. (Beachten Sie hierbei, dass die Freigabe des Elements sofort aufgehoben wird, ohne dass Sie im Dialogfeld **Safe Share** die Schaltfläche **Speichern** anklicken müssen.)
+
+     Wenn es sich bei dem Element um einen Ordner handelt, werden *alle* Mitwirkenden *aller* im Ordner enthaltenen Elemente entfernt.
+   - Entfernen *bestimmter* Mitwirkender von einer Datei oder einem Ordner:
+
+     1. Klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Freigeben**.
+     2. Klicken Sie anschließend im Dialogfeld **Safe Share** auf die Schaltfläche **x** neben den betreffenden Mitwirkenden, um sie von diesem Element zu entfernen.
+
+        ![Entfernen eines Mitwirkenden](/images/f6d9465d20f6-added-collaborator.png)
+     3. Klicken Sie auf die Schaltfläche **Speichern**, um die Änderung zu übernehmen.
+
+     Wenn es sich bei dem Element um einen Ordner handelt, werden nur diejenigen Mitwirkenden von diesem Ordner entfernt, bei denen das **x** angeklickt wurde. Alle *explizit* für andere Elemente im selben Ordner festgelegten Mitwirkenden bleiben unverändert.
+
+<Note>
+
+Wenn Sie die Freigabe von Inhalten im Besitz eines anderen Benutzers aufheben und *alle* Mitwirkenden (anhand der Option **Safe Share &gt; Freigabe aufheben** im Kontextmenü) oder Ihren eigenen Covata-Benutzer-Account anhand des Dialogfelds **Safe Share** entfernen (was dazu führt, dass [Ihr Zugriff auf Ihnen freigegebene Inhalte entfernt wird](/3.3/de/windows/managing-secure-content#removing-your-access-to-content-shared-with-you)), haben Sie anschließend für die betreffenden Inhalte keinen Zugriff mehr auf das Dialogfeld **Safe Share**. Um diese Möglichkeit wieder zu erhalten, müssen Sie den Besitzer der Inhalte (oder einen anderen Mitwirkenden mit **Verwaltungs**-Berechtigung) bitten, Ihnen diese Inhalte wieder (mit **Verwaltungs**-Berechtigung) freizugeben.
+
+</Note>
+
+## Umbenennung von Elementen <a id="renaming-an-item" />
+
+Elemente können umbenannt werden, wenn:
+
+- Sie Besitzer des Elements sind oder
+- ein Covata-Benutzer Ihnen das Element (als Mitwirkenden) mit **Änderungs**- oder **Verwaltungs**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) [freigegeben](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) (und Ihnen so die individuelle Berechtigung zur *Umbenennung* des Elements erteilt) hat.
+
+**Umbenennung von Elementen:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. [Suchen Sie](/3.3/de/windows/managing-secure-content#finding-secure-content) im Unterordner „Meine sicheren Dateien“ oder „Mir freigegeben“ das Element, das Sie umbenennen möchten. <br />
+   **Hinweis:** Wenn Sie ein Element in einem Unterordner von „Mir freigegeben“ umbenennen möchten, muss Ihnen bei der [Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) der Datei (oder eines ihrer übergeordneten Ordner) entweder die **Änderungs**- oder **Verwaltungs**-Berechtigung erteilt worden sein (die wiederum die individuelle Berechtigung zur *Umbenennung* beinhaltet). Sie können dies feststellen, indem Sie das Element mit der rechten Maustaste anklicken und aus dem Popup-Menü anschließend **Safe Share &gt; Berechtigungen anzeigen** auswählen:
+
+   ![Feststellung der Berechtigungen an einem Ordner](/images/55d4f0ef0554-right-clicking-an-item-collaborator.png)
+
+   <br />
+    Für weitere Informationen über diesen Ablauf siehe die Hinweise zur [Feststellung Ihrer Berechtigung, Inhalte in den Ordner eines anderen Benutzers hochzuladen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#determining-folder-permissions).
+3. Verwenden Sie die Umbenennungsfunktionen für Dateien/Ordner im Windows Explorer, um das Element umzubenennen. <br />
+   **Hinweise:**
+
+   - Im Gegensatz zu [Safe Share for Web](/3.3/de/user/index) lässt Safe Share for Windows Änderungen an Erweiterungen von Dateinamen zu. Beachten Sie jedoch, dass die Änderung der Erweiterung einer anzeigbaren Datei dazu führen kann, dass die Datei im [schreibgeschützten Content-Viewer](/3.3/de/windows/accessing-secure-content#read-only-content-viewer) (sowie im Content-Viewer von anderen Safe Share-Anwendungen) nicht mehr geöffnet werden kann.
+   - Es kann einige Minuten dauern, bis eine solche Änderung für alle Mitwirkenden sichtbar ist.
+   - Wenn Sie ein Element innerhalb des Ordners „Mir freigegeben“ umbenennen und die Meldung *“Sie sind nicht berechtigt, diese Datei umzubenennen“* erhalten, wurde Ihnen bei der [Freigabe des Elements (oder seines übergeordneten Ordners)](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) keine **Änderungs**- oder **Verwaltungs**-Berechtigung gewährt. <br />
+     **Hinweis:** Ein Problem mit dieser Version von Safe Share for Windows führt dazu, dass bei der **Umbenennung** die Windows-Meldung *„Die Datei oder der Ordner ist nicht vorhanden“* erscheinen kann. Ignorieren und schließen Sie diese Meldung, indem Sie auf die Schaltfläche **OK** klicken.
+
+## Entfernen von Inhalten im persönlichen Besitz <a id="removing-personally-owned-content" />
+
+Entfernen eines Elements im persönlichen Besitz, das [Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder ein [Mitwirkender](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) über eine beliebige Safe Share-Anwendung hochgeladen und gespeichert haben:
+
+- entfernt dieses Element von seinem aktuellen Speicherort und verschiebt es in den [Safe Share-Papierkorb](/3.3/de/windows/managing-secure-content#accessing-the-recycle-bin), von wo es letztendlich automatisch gelöscht wird, und
+- beendet den Zugriff aller Mitwirkenden des betreffenden Elements (sofern Sie das Element nicht wiederherstellen).
+
+**Entfernen eines Elements in Ihrem persönlichen Besitz:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. [Suchen Sie](/3.3/de/windows/managing-secure-content#finding-secure-content) im Unterordner „Meine sicheren Dateien“ die/den von [Ihnen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder einem [Mitwirkenden](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) gespeicherte(n) bzw. hochgeladene(n) Datei oder Ordner in Ihrem persönlichen Besitz, die/den Sie entfernen möchten.
+3. Klicken Sie mit der rechten Maustaste auf das Element (d. h. eine Datei oder einen Ordner) und wählen Sie aus dem Popup-Menü **Safe Share &gt; Entfernen**:
+
+   ![Entfernen Ihrer eigenen Datei](/images/f4ab52f1daa8-right-clicking-an-item-owner.png)
+
+   <br />
+    Safe Share for Windows fordert Sie auf, die Entfernung zu bestätigen. Ihr Element und seine Inhalte werden vom aktuellen Speicherort entfernt und in den [Safe Share-Papierkorb](/3.3/de/windows/managing-secure-content#accessing-the-recycle-bin) verschoben, sobald Sie **Ja** angeklickt haben. Personen, denen Sie die Inhalte des Elements freigegeben haben, können auf das Element nicht weiter zugreifen (sofern es nicht wiederhergestellt wird). <br />
+   **Tipp:** Sie können auch mehrere Elemente zugleich entfernen, indem Sie im Windows Explorer zwei oder mehr Elemente (am betreffenden Speicherort im Unterordner „Meine sicheren Dateien“) auswählen und anschließend im Popup-Menü die Option **Safe Share &gt; Entfernen** wählen.
+
+## Entfernen über Ordner anderer Benutzer freigegebener Inhalte <a id="removing-content-shared-through-another-users-folder" />
+
+Sie können ein Element (d. h. eine Datei, einen Ordner oder ein oder mehrere Elemente in einem Ordner) entfernen, das Ihnen von einem anderen Covata-Benutzer [freigegeben wurde](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content), der Ihnen für das betreffende Element die **Änderungs**- oder **Verwaltungs**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) erteilt hat. Ein solches Element kann vom [Besitzer selbst hochgeladen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder von [Ihnen oder einer anderen Person hochgeladen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) und/oder anhand von [Ordnern](/3.3/de/windows/managing-secure-content#organising-content-with-folders) (über eine beliebige Safe Share -Anwendung) erstellt worden sein.
+
+Wenn Sie für ein Element die **Änderungs**- oder **Verwaltungs**-Berechtigung besitzen, haben Sie auch die individuelle Berechtigung zum *Entfernen* des Elements selbst sowie - falls es sich bei dem Element um einen Ordner handelt - aller im betreffenden Ordner enthaltenen Elemente (sofern nicht Ihre Berechtigungen an dort enthaltenen Elementen explizit geändert wurden).
+
+Wird ein solches Element entfernt, wird es vom aktuellen Speicherort des Besitzers in dessen [Safe Share-Papierkorb](/3.3/de/windows/managing-secure-content#accessing-the-recycle-bin) verschoben, von wo es letztendlich automatisch gelöscht wird. Auf in den Papierkorb verschobenen Elemente kann effektiv nicht zugegriffen werden, bis ihr Besitzer sie wiederherstellt.
+
+**Entfernen eines über den Ordner eines anderer Benutzers freigegebenen Elements:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Suchen bzw. identifizieren Sie im Unterordner „Mir freigegeben“ den Ordner dieses anderen Covata-Benutzers, der Ihnen Inhalte freigegeben hat.
+3. Suchen Sie im Ordner „Freigegeben von ...“ dieses anderen Benutzers die (von [ihrem Besitzer](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder [Ihnen oder einer anderen Person](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) in den Ordner eines anderen Benutzers hochgeladene) Datei oder den ([innerhalb des Ordners eines anderen Benutzers](/3.3/de/windows/managing-secure-content#organising-content-with-folders) erstellten) Unterordner, die/den Sie entfernen möchten. <br />
+   **Hinweis:** Wenn Sie feststellen möchten, ob Sie das ausgewählte Element entfernen können (d. h. ob Sie für das Element die individuelle Berechtigung zum *Entfernen* haben), klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Berechtigungen anzeigen**.
+
+   ![Feststellung der Berechtigungen an einem Ordner](/images/55d4f0ef0554-right-clicking-an-item-collaborator.png)
+
+   <br />
+    Wenn Sie die individuelle Berechtigung zum *Entfernen* des betreffenden Elements *nicht haben*, wurde Ihnen bei der [Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) des Elements (bzw. eines übergeordneten Ordners) nicht die **Änderungs**- oder **Verwaltungs**-Berechtigung erteilt. Wenn Sie diesen Vorgang in dieser Situation fortsetzen, wird stattdessen nur [Ihr Zugriff auf diese Inhalte](/3.3/de/windows/managing-secure-content#removing-your-access-to-content-shared-with-you) entfernt.
+4. Klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Entfernen**. <br />
+    Safe Share for Windows fordert Sie auf, die Entfernung zu bestätigen. Das Element und seine Inhalte werden vom aktuellen Speicherort entfernt und in den [Safe Share-Papierkorb](/3.3/de/windows/managing-secure-content#accessing-the-recycle-bin) des Besitzers verschoben, sobald Sie **Ja** angeklickt haben. Alle Personen, die auf die Inhalte des Elements Zugriff hatten, können nicht mehr auf diese Inhalte zugreifen (sofern der Besitzer es nicht wiederherstellt).
+
+## Entfernen Ihres Zugriffs auf (Ihnen freigegebene) Inhalte <a id="removing-your-access-to-content-shared-with-you" />
+
+Sie können Ihren Zugriff auf ein Element (d. h. eine Datei, einen Ordner oder ein oder mehrere Elemente in einem Ordner) entfernen, das Ihnen von einem anderen Covata-Benutzer [freigegeben wurde](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content), der Ihnen für das betreffende Element die **Anzeige**-, **Download**- oder **Upload**-[Berechtigung](/3.3/de/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) erteilt hat. Ein solches Element kann vom [Besitzer selbst hochgeladen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder von Ihnen oder einer anderen Person [hochgeladen](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) und/oder anhand von [Ordnern](/3.3/de/windows/managing-secure-content#organising-content-with-folders) (über eine beliebige Safe Share- Anwendung) erstellt worden sein.
+
+Im Gegensatz zur **Änderungs**- oder **Verwaltungs**-Berechtigung gibt Ihnen die **Anzeige**-, **Download**- oder **Upload**-Berechtigung alleine *nicht* die individuelle Berechtigung zum *Entfernen* des Elements selbst sowie - falls es sich bei dem Element um einen Ordner handelt - aller im betreffenden Ordner enthaltenen Elemente (sofern nicht Ihre Berechtigungen an dort enthaltenen Elementen explizit geändert wurden).
+
+Das Entfernen eines solchen Elements widerruft daher nur Ihren Zugriff auf das Element und entfernt es aus Ihren „Safe Share“-Ordnern. Die Wirkung entspricht derjenigen, wenn der Besitzer des Elements (oder ein Mitwirkender mit **Verwaltungs**-Berechtigung) die [Freigabe an Sie aufhebt oder Sie als Mitwirkenden entfernt](/3.3/de/windows/managing-secure-content#unsharing-secure-content).
+
+<Note>
+
+Nach dem Entfernen Ihres Zugriffs auf Ihnen freigegebene Elemente können der Besitzer der Elemente und alle Personen, denen sie freigegeben wurden, auf die Elemente nach wie vor über von der Covata-Plattform verwalteten Speicher Zugriff zugreifen.
+
+</Note>
+
+**Entfernen Ihres Zugriffs auf ein Element, das eine andere Person Ihnen über eine beliebige Safe Share-Anwendung freigegeben hat:**
+
+1. [Greifen Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) auf den „Safe Share“-Ordner für Ihre Organisation zu.
+2. Suchen bzw. identifizieren Sie im Unterordner „Mir freigegeben“ den Ordner dieses anderen Covata-Benutzers, der Ihnen Inhalte freigegeben hat.
+3. Suchen Sie im Ordner „Freigegeben von“ des anderen Benutzers die (Ihnen zuvor von einer anderen Person über Safe Share [for Windows](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) oder [for Web](/3.3/de/user/uploading-storing-and-sharing-content-securely#sharing-secure-content)) freigegebene Datei oder den entsprechenden Ordner, für die/den Sie Ihren Zugriff beenden möchten. <br />
+   **Hinweis:** Wenn Sie feststellen möchten, ob Sie damit Ihren Zugriff auf das ausgewählte Element entfernen (weil Sie für das Element *nicht* die individuelle Berechtigung zum *Entfernen* haben), klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Berechtigungen anzeigen**.
+
+   ![Feststellung der Berechtigungen an einem Ordner](/images/55d4f0ef0554-right-clicking-an-item-collaborator.png)
+
+   <br />
+    Wenn Sie die individuelle Berechtigung zum *Entfernen* des betreffenden Elements *haben*, wurde Ihnen bei der [Freigabe](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) des Elements (bzw. eines übergeordneten Ordners) die **Änderungs**- oder **Verwaltungs**-Berechtigung erteilt. Der nächste Schritt führt daher dazu, dass die [betreffenden Inhalte entfernt werden](/3.3/de/windows/managing-secure-content#removing-content-shared-through-another-users-folder).
+4. Klicken Sie mit der rechten Maustaste auf das Element und wählen Sie aus dem Popup-Menü **Safe Share &gt; Entfernen**. <br />
+    Safe Share for Windows fordert Sie auf, die Entfernung zu bestätigen. Ihr Zugriff auf das betreffende Element wird entfernt, und es erscheint nicht mehr in Ihren „Safe Share“-Ordnern, sobald Sie **Ja** angeklickt haben.
+
+## Zugriff auf den Safe Share-Papierkorb <a id="accessing-the-recycle-bin" />
+
+Der Safe Share-*Papierkorb* ist im Wesentlichen ein besonderer Speicherort, in den Dateien oder Ordner in Ihrem Besitz von [Ihnen selbst](/3.3/de/windows/managing-secure-content#removing-personally-owned-content) oder von einem [Mitwirkenden](/3.3/de/windows/managing-secure-content#removing-content-shared-through-another-users-folder) der Elemente verschoben werden.
+
+Elemente werden durch *Verschieben in den Safe Share-Papierkorb* entfernt.
+
+Der Zugriff von Mitwirkenden auf [freigegebene Elemente](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) endet, sobald ein Element in den Papierkorb verschoben wird. Wird ein Element jedoch aus dem Safe Share-Papierkorb wiederhergestellt, erhalten alle Personen, die vor dem Verschieben des Elements in den Papierkorb Mitwirkende waren, wieder die gleichen Zugriffsberechtigungen wie zuvor <sup>&#42;</sup> .
+
+**Zugriff auf den Safe Share-Papierkorb:**
+
+1. Vergewissern Sie sich, dass Safe Share for Windows [gestartet](/3.3/de/windows/starting-the-application-and-signing-in#starting-the-application) ist, Sie angemeldet sind und (sofern Ihr Covata-Benutzer-Account Mitglied mehrerer Organisationen ist) Ihre [aktuelle Organisation](/3.3/de/windows/uploading-storing-and-sharing-content-securely#changing-organisations) die gewünschte Organisation ist, über die Sie auf Inhalte im Safe Share-Papierkorb zugreifen und diese verwalten möchten.
+2. Rechtsklicken Sie auf das Symbol
+   ![Safe Share for Windows - Angemeldet](/images/91b3a11c5563-taskbar-icon-signed-in.png)
+
+    oder
+
+   ![Safe Share for Windows - Abgemeldet](/images/4565af3abf9f-taskbar-icon-signed-out.png)
+
+    der Anwendung im Infobereich der Taskleiste. Klicken Sie dann auf das Symbol „Papierkorb“
+
+   ![Symbol Papierkorb im Anwendungsbereich](/images/d4786d8b3786-application-pane-recycle-bin-icon.png)
+
+    links unten im Anwendungsbereich, um das Dialogfeld für den Safe Share-Papierkorb zu öffnen: <br />
+   <a id="recycle-bin-dialog-box" />
+
+   ![Dialogfeld Papierkorb](/images/b8ca343e3ed0-share-dialog-box.png)
+
+   <br />
+3. In diesem Dialogfeld können Sie Elemente [löschen und wiederherstellen](/3.3/de/windows/managing-secure-content#deleting-and-restoring-content-in-the-recycle-bin).
+
+## Löschen und Wiederherstellen von Inhalten im Safe Share-Papierkorb <a id="deleting-and-restoring-content-in-the-recycle-bin" />
+
+Löschen von Elementen im Papierkorb, die [Sie](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) oder ein [Mitwirkender](/3.3/de/windows/uploading-storing-and-sharing-content-securely#uploading-content-to-share-through-another-users-folder) über eine beliebige Safe Share-Anwendung hochgeladen haben:
+
+- löscht diese Elemente (einschließlich [aller Versionen](/3.3/de/user/managing-file-versions) jeder gelöschten Datei) aus von der Covata-Plattform verwaltetem Speicher und
+- beendet dauerhaft den Zugriff anderer Personen, denen Sie diese Elemente freigegeben haben
+
+Die Wiederherstellung eines Elements aus dem Papierkorb stellt das Element an seinem ursprünglichen Speicherort (von dem aus es in den Papierkorb verschoben wurde) zusammen mit seinen Mitwirkenden und Klassifikationen wieder her, so wie diese vor dem Verschieben in den Papierkorb definiert waren <sup>&#42;</sup> . Alle Mitwirkenden, denen das Element freigegeben war (ehe es in den Papierkorb verschoben wurde), erhalten wieder Zugriff auf das Element.
+
+<Note>
+
+Alle Elemente im Papierkorb werden automatisch nach 30 Tagen gelöscht.
+
+</Note>
+
+**Löschen und/oder Wiederherstellen von Elementen im Papierkorb:**
+
+1. [Greifen Sie](/3.3/de/windows/managing-secure-content#accessing-the-recycle-bin) auf den Safe Share-Papierkorb zu.
+2. In diesem Dialogfeld können Sie für einzelne Dateien die folgenden Schaltflächen anklicken:
+
+   - **Endgültig löschen** - zum (dauerhaften) Löschen der Datei. Safe Share for Windows fordert Sie auf, den Löschvorgang zu bestätigen. Sobald Sie **Ja** anklicken, werden die gewählten Elemente (sowie [alle Versionen](/3.3/de/user/managing-file-versions) der einzelnen gelöschten Dateien) aus dem Remotespeicher gelöscht.
+   - **Wiederherstellen** - zum Wiederherstellen des Elements mit seinem gesamten Inhalt (sofern das Element ein Ordner war) an seinem ursprünglichen Speicherort. Wenn dem Element selbst oder einem seiner Inhalte Mitwirkende und Klassifikationen zugewiesen waren, ehe das Element in den Papierkorb verschoben wurde, werden auch diese Mitwirkenden und Klassifikationen wiederhergestellt <sup>&#42;</sup> , sodass alle Mitwirkenden, denen das Element [freigegeben war](/3.3/de/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) (ehe es in den Papierkorb verschoben wurde), wieder auf das Element Zugriff erhalten.
+
+   Sie können im Dialogfeld auch die Schaltfläche **Papierkorb leeren** anklicken, um dieselbe Funktion wie die Schaltfläche **Endgültig löschen** (oben) für alle im Dialogfeld aufgeführten Elemente auszuführen. <br />
+   **Hinweise:**
+
+   - Wenn Sie sehen möchten, wie viel des Remotespeichers Ihrer (aktuellen) Organisation von Elementen im Papierkorb beansprucht wird, fahren Sie den Cursor über das Symbol „Papierkorb“
+     ![Symbol Papierkorb im Anwendungsbereich](/images/d4786d8b3786-application-pane-recycle-bin-icon.png)
+
+      .
+   - Der Löschvorgang setzt im Remotespeicher Speicherplatz frei, unabhängig, ob er manuell (siehe oben) oder automatisch nach 30 Tagen ausgeführt wird. Der (für Ihre aktuelle Organisation) genutzte Speicherplatz im Remotespeicher Ihres Accounts wird im Feld **Nutzung** links unten im Anwendungsbereich als Balken zusammen mit dem beanspruchten Prozentsatz Ihres Account-Kontingents und dem Kontingent selbst (im Allgemeinen in Gigabytes) rechts neben diesem Balken angezeigt. Informationen über Ihre Speichernutzung in anderen Organisationen ist über die Funktion [Account-Verwaltung](/3.3/de/windows/managing-your-account) verfügbar.
+   - Das Dialogfeld Safe Share-Papierkorb ([oben](/3.3/de/windows/managing-secure-content#recycle-bin-dialog-box)) zeigt für jedes Element die verbleibenden Tage bis zum Zeitpunkt an, an dem das Element automatisch gelöscht wird, d. h. 30 Tage nachdem es entfernt wurde).
+
+<sup>&#42;</sup> Wenn eine mit definierten **Datums-/Zeit-Steuerelementen** freigegebene, anschließend in den Papierkorb verschobene Datei wiederhergestellt werden soll, werden bei der Wiederherstellung alle Mitwirkenden und Klassifikationen entfernt. Dies ist auch der Fall, wenn sich die Datei in einem Ordner befindet, der in den Papierkorb verschoben wurde und wiederhergestellt wird.

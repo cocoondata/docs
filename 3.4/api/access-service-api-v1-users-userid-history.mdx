@@ -1,0 +1,155 @@
+---
+title: "<access-service>/api/v1/users/{userId}/history"
+---
+
+## URL structure <a id="access-service-api-v1-users-userid-history-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/{userId}/history
+```
+
+where `{userId}` is the ID of a Covata user account.
+
+## Supported methods and overview <a id="access-service-api-v1-users-userid-history-supported-methods-and-overview" />
+
+- `GET` - retrieves history information about account-related activities which have been performed on a Covata user account (specified by `userId`).
+
+## Detailed description <a id="access-service-api-v1-users-userid-history-detailed-description" />
+
+This API endpoint retrieves history information about account-related activities which have been performed on a Covata user account (specified by `userId`). Activities are retrieved in reverse chronological order.
+
+The user's ID can be obtained by calling the `GET` method on either the [&lt;access-service&gt;/api/v1/users/me](/3.4/api/access-service-api-v1-users-me) or [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/users](/3.4/api/access-service-api-v1-organisations-orggroupid-users) endpoints, which retrieves a list of information associated with either the user whose access token is submitted in the request, or all users in the organization specified by `orgGroupId`, respectively.
+
+The extent of history information retrieved in a [response](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-returns) depends on the role of the Covata user (whose [access token is submitted in the request](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-supported-roles-and-conditions) to this endpoint) and the user's organization membership.
+
+If this user is an Organization administrator in the same organization as that of the user represented by `{userId}` in the request's URL, then more information about the Organization administrator who performed actions on the user account (represented by `{userId}`) can be returned in the response.
+
+## Supported roles and conditions <a id="access-service-api-v1-users-userid-history-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following roles (as described in the [Safe Share Administrator's](/3.4/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organization Administrator's](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Safe Share administrator](/3.4/admin-platform/administering-platform-administrator-users#platform-administrator-role) - when this user's account is the same as the one whose ID is specified by `{userId}` in the request's URL.
+- [Organization administrator](/3.4/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this Organization administrator and the user whose ID is specified by `{userId}` in the URL are members of the same organization.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-userid-history-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Optional parameters <a id="access-service-api-v1-users-userid-history-optional-parameters" />
+
+The following optional parameters can also be sent in the **URL** of the GET request:
+
+- **organisationId** - The ID of the organization from which to obtain more information about Organization administrator activities on the user's account (specified by `{userId}` in the request's URL). <br />
+  **Note:** This parameter is only utilized by the Covata Platform when the Organization administrator (whose [access token is submitted in the request](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-supported-roles-and-conditions) to this endpoint) is a member of the organization represented by this **organisationId** parameter.
+- **cursor** - The ID for an activity entry (typically the *chronologically previous* one), retrieved in the [response](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-returns) (below) from a request to this endpoint. This ID value relates to the activity entry that continues on from this response's last activity entry, which in turn was based on the combination of the values for **cursor** and **pageSize** (below) submitted in this response's request. The combination of these two parameters provides a mechanism for paginating activity entry results. If this **cursor** parameter is omitted, then its value is `0` by default, which is the most recent activity entry recorded on the item.
+- **pageSize** - A value from `1` to `100` indicating the number of activity entries to be returned in the response. If this parameter is omitted, then its value is `10` by default. <br />
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/users/783190841862012928/history?pageSize=20
+  ```
+
+## Returns <a id="access-service-api-v1-users-userid-history-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **nextCursor** - The ID for the activity entry following the last element of the **activities** array (below) retrieved in the response. This is the *chronologically previous* activity entry (after the last one retrieved in this response).
+- **previousCursor** - The ID for the activity entry preceding the first element of the **activities** array (below) retrieved in the response. This is the *chronologically next* activity entry (before the first one retrieved in this response). <br />
+  **Note:** If the first activity entry is the most recent activity entry recorded on the item, then this value is `0`.
+- **activities** - An array of individual activity entries on the Covata user account (represented by `{userId}` in the request's URL), listed in reverse chronological order. Each element of this array contains information about one of these activity entries and is represented as an object, containing the following members:
+
+  - **actor** - A member containing information about the Covata user account that performed the **action** (below). This member contains the following sub-members:
+
+    - **type** - Should be `USER`, indicating that this member contains information about a Covata user account.
+    - **id** - The ID of the Covata user's account. If the actor is an Organization administrator and the Covata user whose [access token is submitted in the request](/3.4/api/access-service-api-v1-users-userid-history#access-service-api-v1-users-userid-history-supported-roles-and-conditions) to this endpoint (i.e. the 'requestor') is not an Organization administrator of the organization specified by **organisationId** in the request to this API endpoint, then this value will be `-1`.
+    - **email** - The email address of this Covata user. If the actor is an Organization administrator and the requestor is not an Organization administrator of the organization specified by **organisationId** in this endpoint's request, then this value will be an empty string.
+    - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web. If the actor is an Organization administrator and the requestor is not an Organization administrator of the organization specified by **organisationId** in this endpoint's request, then this value will be '`An`'.
+    - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web. If the actor is an Organization administrator and the requestor is not an Organization administrator of the organization specified by **organisationId** in this endpoint's request, then this value will be '`Administrator`'.
+  - **action** - A string/enumeration (enum) value representing the individual action performed on the Covata user account (represented by `{userId}` in the request's URL).
+
+    - *User account modification through the **My Account** feature of Safe Share for Web* (i.e. when the user themselves modifies their own account) - `CHANGE_PROFILE`, `EXPIRE_ACCOUNT` (a user's active sessions are terminated), `CHANGE_PASSWORD`, `RESET_PASSWORD`, `ENABLE_MFA` (two-factor authentication) and `DISABLE_MFA`.
+    - *Addition, modification or removal of a user account through the **User** page of Safe Share Organization Administration* (i.e. when an Organization administrator adds, modifies or removes the account of a user who is a member of their organization) - `CREATE_ACCOUNT`, `CHANGE_ACCOUNT` (e.g. a user account's plan is modified), `UPGRADE_ACCOUNT` (a user account's role is upgraded), `TRANSFER_SUCCEEDED` (a user's items were successfully transferred to another user within the same organization), `TRANSFER_FAILED` and `REMOVE_FROM_ORG`.
+    - `UNKNOWN` - Anything else that is not covered by an existing action (above).
+  - **severity** - .
+  - **target** - A member containing information about the Covata user account (i.e. `{userId}` in the request's URL) to which the **action** (above) was directed. This member contains the following sub-members:
+
+    - **type** - Should be `USER`, indicating that this member contains information about a Covata user account.
+    - **id** - The ID of the Covata user's account.
+    - **email** - The email address of this Covata user.
+    - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+    - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **timestamp** - .
+
+  **Example (response):**
+
+  ```json
+  {
+      "nextCursor": "0",
+      "previousCursor": "0",
+      "activities": [{
+          "actor": {
+              "type": "USER",
+              "id": 783190841862012928,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "action": "CHANGE_PASSWORD",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 783190841862012928,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-12-01T04:42:57.630Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": 783190841862012928,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "action": "CHANGE_PROFILE",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 783190841862012928,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-12-01T04:42:35.312Z"
+      }, {
+          "actor": {
+              "type": "USER",
+              "id": -1,
+              "email": "",
+              "firstName": "An",
+              "lastName": "Administrator"
+          },
+          "action": "CREATE_ACCOUNT",
+          "severity": "INFO",
+          "target": {
+              "type": "USER",
+              "id": 783190841862012928,
+              "email": "chris.collaborator@xy-company.com",
+              "firstName": "Chris",
+              "lastName": "Collaborator"
+          },
+          "timestamp": "2016-12-01T04:40:47.762Z"
+      }]
+  }
+  ```

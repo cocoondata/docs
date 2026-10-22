@@ -1,0 +1,82 @@
+---
+title: "Änderung des Designs von Safe Share und der Covata-Verwaltung"
+---
+
+Anhand der Seite **Design** können Covata-Plattform-Administratoren Folgendes ändern:
+
+- Design-Eigenschaftswerte für [Text und URLs](/2.16/de/admin/re-theming-the-application-and-administration#modifying-a-theme-property-value), mit denen die folgenden Aspekte angepasst werden können:
+
+  - Namen der Anwendung und des Unternehmens sowie Support- und Hilfe-URLs für:
+
+    - die [Safe Share-Webanwendung](/2.16/de/user/index) (und Covata-Verwaltung) und
+    - E-Mail-Benachrichtigungen von Covata,
+
+    sowie
+  - den Urheberrechtsvermerk am Ende von E-Mail-Benachrichtigungen von Covata
+
+  und
+- [Logos auf der Benutzeroberfläche](/2.16/de/admin/re-theming-the-application-and-administration#modifying-a-logo) der Safe Share-Webanwendung und Covata-Verwaltung sowie das für E-Mail-Benachrichtigungen von Covata verwendete Logo.
+
+![Seite Design](/images/a64dff880fb3-theme-page.png)
+## Änderung eines Design-Eigenschaftswerts <a id="modifying-a-theme-property-value" />
+
+**Änderung eines Design-Eigenschaftswerts:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Design** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Design** aufzurufen.
+3. Ändern Sie die Werte der betreffenden Eigenschaften unten. <br />
+   **Hinweise:**
+
+   - Klicken Sie auf die Schaltfläche **Speichern** neben einer Eigenschaft, nachdem Sie ihren Wert geändert haben, um den neuen Wert zu übernehmen, ehe Sie den Wert einer anderen Eigenschaft bearbeiten.
+   - Klicken Sie auf die Schaltfläche **Zurücksetzen** neben einer Eigenschaft, um sie auf den Standardwert zurückzusetzen.
+
+   | Eigenschaft | Detaillierte Beschreibung |
+   | --- | --- |
+   | Anwendungsname | <a id="application-name" />Der Name der Anwendung, der rechts neben dem Kopfzeilen-Logo der [Safe Share-Webanwendung](/2.16/de/user/index) (für Einzelheiten siehe [Logos, Name und Farbe der Safe Share-Webanwendung](/2.16/de/admin/re-theming-the-application-and-administration#the-web-application-logos-name-and-color)) sowie in E-Mail-Benachrichtigungen von Covata angezeigt wird. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist „Safe Share“.  |
+   | Firma | Der Name des Unternehmens/der Organisation, der in E-Mail-Benachrichtigungen von Covata angezeigt wird. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist „Covata“.  |
+   | Urheberrechtsvermerk in E-Mail-Benachrichtigungen | <a id="email-copyright" />Der Urheberrechtsvermerk am Ende von E-Mail-Benachrichtigungen von Covata. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist „&lt;year&gt; Covata“.  |
+   | Support-URL | Die URL für die Support-Seite des Unternehmens/der Organisation, die über den Link **Support** in der Fußzeile der [Safe Share-Webanwendung](/2.16/de/user/index) und Covata-Verwaltung sowie in E-Mail-Benachrichtigungen von Covata aufgerufen werden kann. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die [Support-Seite](https://support.covata.com) auf der Covata-Website.  |
+   | Hilfe-URL der Webanwendung <br />  (Hilfe-URL für \{applicationName\}) | Die URL der Hilfe-Dokumentation für die Covata Safe Share-Webanwendung, die über die Option/den Link **Hilfe** im Dropdown-Menü mit der E-Mail-Adresse des Benutzers rechts oben in der Safe Share-Webanwendung (und in der Fußzeile) aufgerufen werden kann. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die [Safe Share-Benutzeranleitung](/2.16/de/user/index) auf der Covata-Website.  |
+   | Hilfe-URL für die Verwaltung <br />  (Hilfe-URL der Covata-Verwaltung) | Die URL der Hilfe-Dokumentation für die Covata-Verwaltung, die über die Option/den Link **Hilfe** im Dropdown-Menü mit der Covata-Plattform-Administrator-E-Mail-Adresse rechts oben in der Covata-Verwaltung (und in der Fußzeile) aufgerufen werden kann. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist das Administratorenhandbuch für die Covata-Plattform (d. h. dieses Handbuch) auf der Covata-Website.  |
+   | Admin-E-Mail | Die Kontakt-E-Mail-Adresse für den Covata-Plattform-Administrator, die über den Link **Brauchen Sie Hilfe? ...** auf der Startseite für den **Authentifizierungscode** für die Zwei-Faktor-Authentifizierung (2FA) zugänglich ist, wenn sich ein Covata-Benutzer (für dessen [Account 2FA aktiviert ist](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account)) über die Covata-Anmeldeseite [anmeldet](/2.16/de/user/signing-in). <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist `admin@default.com`.  |
+   | URL mit rechtlichen Informationen | Die URL für die Seite mit rechtlichen Informationen des Unternehmens/der Organisation, die über den Link **Rechtliche Informationen** in der Fußzeile der [Safe Share-Webanwendung](/2.16/de/user/index) und Covata-Verwaltung aufgerufen werden kann. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die Covata-Endnutzer-Lizenzvereinbarung.  |
+   | Versions-URL | Eine weitere (benutzerdefinierte) URL, die über den Link Versionsnummer des Produkts in der Fußzeile der [Safe Share-Webanwendung](/2.16/de/user/index) und Covata-Verwaltung aufgerufen werden kann. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die Seite [Covata-Versionshinweise](https://www.covata.com/product-releasenotes/) auf der Covata-Website.  |
+   | Authenticator-URL für iPhone | Die URL der Authentifizierungs-Anwendung (Authenticator App) für iOS-Geräte, die über den Link **Installieren** in **Schritt 1** der Anweisungen enthalten ist, wie Covata-Benutzer ein [Mobilgerät für 2FA konfigurieren](/2.16/de/user/signing-in#configuring-a-mobile-device-for-2fa), wenn 2FA für ihren Account [aktiviert](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account) oder [neu konfiguriert](/2.16/de/admin/administering-users#re-configuring-2fa-for-a-user-account) ist. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die Seite [Google Authenticator App für iOS](https://itunes.apple.com/au/app/google-authenticator/id388497605?mt=8) auf der iTunes-Website.  |
+   | Authenticator-URL für Windows-Handy | Die URL der Authentifizierungs-App für Windows-basierte Mobilgeräte, die über den Link **Installieren** in **Schritt 1** der Anweisungen enthalten ist, wie Covata-Benutzer ein [Mobilgerät für 2FA konfigurieren](/2.16/de/user/signing-in#configuring-a-mobile-device-for-2fa), wenn 2FA für den Account dieses Benutzers [aktiviert](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account) oder [neu konfiguriert](/2.16/de/admin/administering-users#re-configuring-2fa-for-a-user-account) ist. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die Seite [Authenticator-App für Windows-Mobilgeräte](https://www.windowsphone.com/en-au/store/app/authenticator/021dd79f-0598-e011-986b-78e7d1fa76f8) auf der Microsoft-Website.  |
+   | Authenticator-URL für Android-Handy | Die URL der Authentifizierungs-App für Android-basierte Mobilgeräte, die über den Link **Installieren** in **Schritt 1** der Anweisungen enthalten ist, wie Covata-Benutzer ein [Mobilgerät für 2FA konfigurieren](/2.16/de/user/signing-in#configuring-a-mobile-device-for-2fa), wenn 2FA für den Account dieses Benutzers [aktiviert](/2.16/de/admin/administering-users#enabling-2fa-on-a-user-account) oder [neu konfiguriert](/2.16/de/admin/administering-users#re-configuring-2fa-for-a-user-account) ist. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist die Seite [Google Authenticator-App für Android-Geräte](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2) auf der Google Play-Website.  |
+   | Primäre Farbe der Kopfzeile | <a id="header-primary-color" />Die für die Kopfzeile der [Safe Share-Webanwendung](/2.16/de/user/index) und Covata-Verwaltung sowie in E-Mail-Benachrichtigungen von Covata verwendete Hintergrundfarbe. Für Einzelheiten siehe [Logos, Name und Farbe der Safe Share-Webanwendung](/2.16/de/admin/re-theming-the-application-and-administration#the-web-application-logos-name-and-color). <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist Dunkelgrau.  |
+   | Farbe des Kopfzeilentexts | Die für die Kopfzeile der [Safe Share-Webanwendung](/2.16/de/user/index) und Covata-Verwaltung sowie in E-Mail-Benachrichtigungen von Covata verwendete Textfarbe. In der Kopfzeile der Webanwendung legt diese Option die Farbe des **Anwendungsnamens** (oben), des Dropdown-Menüs mit der E-Mail-Adresse und des Symbols [Uploads im Gang](/2.16/de/user/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) rechts oben fest. Für Einzelheiten siehe [Logos, Name und Farbe der Safe Share-Webanwendung](/2.16/de/admin/re-theming-the-application-and-administration#the-web-application-logos-name-and-color). <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist Weiß.  |
+   | Farbe der E-Mail-Trennline | Die Farbe der Trennlinie zwischen der Kopfzeile und dem Textkörper der E-Mail-Benachrichtigungen von Covata. <br />**Hinweis:** Der Standardwert für diese Eigenschaft ist Rot.  |
+
+## Änderung eines Logos <a id="modifying-a-logo" />
+
+**Änderung des Logos der Safe Share-Webanwendung/Covata-Verwaltung oder der E-Mail-Benachrichtigungen von Covata:**
+
+1. [Melden Sie sich](/2.16/de/admin/accessing-administration#signing-in) bei der Covata-Verwaltung an.
+2. Klicken Sie auf die Option **Design** links auf der [Covata-Verwaltung-Oberfläche](/2.16/de/admin/accessing-administration#the-administration-interface), um die Seite **Design** aufzurufen.
+3. Klicken Sie auf die entsprechende Schaltfläche **Bild hochladen**, um mit der Auswahl eines alternativen Logos für die Safe Share-Webanwendung/Benutzeroberfläche der Covata-Verwaltung (d. h. die [Anmeldeseite](/2.16/de/admin/re-theming-the-application-and-administration#sign-in-page-logo) und [Kopf- und Fußzeile](/2.16/de/admin/re-theming-the-application-and-administration#the-web-application-logos-name-and-color)) und/oder die E-Mail-Benachrichtigungen von Covata (d. h. das **E-Mail-Logo**) zu beginnen.
+4. Klicken Sie im Dialogfeld **Bild hochladen** auf **Datei auswählen**, um eine lokale Bilddatei hochzuladen. <br />
+   **Hinweis:** Beachten Sie die Obergrenzen für die Abmessungen und Dateigröße. Bilddateien, die diese Obergrenzen überschreiten, können nicht hochgeladen werden.
+5. Klicken Sie auf **Schließen** und aktualisieren Sie die Seite manuell. <br />
+   **Hinweise:**
+
+   - Das Logo wird mit sofortiger Wirkung geändert.
+   - Wenn Sie die Schaltfläche **Zurücksetzen** eines Logos anklicken, wird das hochgeladene, benutzerdefinierte Bild entfernt und das Logo wie unten gezeigt auf das Standardbild zurückgesetzt.
+
+## Logo der Anmeldeseite <a id="sign-in-page-logo" />
+
+Wenn Sie das **Logo der Anmeldeseite** ([oben](/2.16/de/admin/re-theming-the-application-and-administration#modifying-a-logo)) ändern, wird das folgende Logo geändert, das auf der Anmeldeseite über den Feldern **E-Mail-Adresse** und **Ihr Passwort** gezeigt wird:
+
+![Design der Anmeldeseite](/images/314b87c50922-theming-sign-in-page.png)
+
+## Logos, Name und Farbe der Safe Share-Webanwendung <a id="the-web-application-logos-name-and-color" />
+
+Wenn Sie das **Kopfzeilen-Logo** und **Fußzeilen-Logo** ([oben](/2.16/de/admin/re-theming-the-application-and-administration#modifying-a-logo)) ändern, werden die betreffenden Kopf- und Fußzeilen-Logos der Safe Share-Webanwendung (einschließlich der Covata-Verwaltung) geändert:
+
+![Design der Safe Share-Hauptseite](/images/542c5e473d7a-theming-the-web-application.jpg)
+
+Die Farbe von Hintergrund und Text der Kopfzeile (der Safe Share-Webanwendung/Covata-Verwaltung) werden über die [Eigenschaften](/2.16/de/admin/re-theming-the-application-and-administration#header-primary-color) **Primäre Farbe der Kopfzeile** bzw. **Farbe des Kopfzeilentexts** geändert.
+
+---
+
+#### Bitte hinterlassen Sie uns hier Ihr Feedback.

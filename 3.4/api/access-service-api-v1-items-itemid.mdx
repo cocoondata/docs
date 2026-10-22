@@ -1,0 +1,302 @@
+---
+title: "<access-service>/api/v1/items/{itemId}"
+---
+
+## URL structure <a id="access-service-api-v1-items-itemid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/{itemId}
+```
+
+where `{itemId}` is the ID of a file object/Secure Object or folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-items-itemid-supported-methods-and-overview" />
+
+- `GET` - retrieves information about a file object/[Secure Object](/3.4/api/working-with-files-and-folders-fundamentals#secure-object) or folder/[collection](/3.4/api/working-with-files-and-folders-fundamentals#collection) (i.e. [item](/3.4/api/working-with-files-and-folders-fundamentals#item)), specified by `itemId`.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-items-itemid-detailed-description" />
+
+This API endpoint retrieves information about a file object or folder, specified by `itemId`.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.4/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with file objects and folders that can be filtered using various 'search' criteria.
+
+## Supported roles and conditions <a id="access-service-api-v1-items-itemid-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.4/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.4/admin-org/index)):
+
+- [Originator](/3.4/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the item whose ID is specified by `{itemId}` in the request's URL.
+- **Originator**, [Collaborator](/3.4/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.4/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator on the item whose ID is specified by `{itemId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.4/api/access-service-api-v1-items-itemid#access-service-api-v1-items-itemid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-itemid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-items-itemid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **id** - The ID of the item (which could be a file object or a folder). If the item is a file object, then the relevant properties in this response relate to the active version of this file.
+- **shareStartTime** - The date and time from which collaborators on this item can begin accessing its content. <br />
+  **Note:** If the item is either a folder or a file object with no **shareStartTime** specified through the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint, then this value is `null`.
+- **shareEndTime** - The date and time from which collaborators' access to this item's content ceases. <br />
+  **Note:** If the item is either a folder or a file object with no **shareEndTime** specified through the [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) endpoint, then this value is `null`.
+- **versionId** - The ID of the active version of the file object. <br />
+  **Note:** If this item is a folder, then this value is `null`.
+- **name** - The name of this item.
+- **sha512** - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with this file object. <br />
+  **Note:** If this item is a folder, then this value is `null`.
+- **owner** - A member containing information about the Covata user who is the current owner of the item. This member contains the following sub-members:
+
+  - **email** - This email address of the Covata user who owns this item.
+  - **firstName** - The first name set by this Covata user. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+  - **lastName** - The last name set by this Covata user. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Covata user on their own account, or enforced for all members of the organization (by an Organization administrator).
+  - **id** - The ID of this Covata user's account.
+  - **accountType** - A member containing the internationalization (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Covata Platform), as sub-members:
+
+    - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
+
+      - **code** - The I18N code for the account type's value, beginning with `server.useraccounttype.` This I18N code could include the substring `local`, `ldap` or `external`.
+      - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
+    - **value** - The value of **accountType** as it is hard-coded in the Covata Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
+
+    <sup>&#42;</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.4/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.4/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+    **Note:** For more information about account types, see the description for [Account Type](/3.4/admin-org/administering-users-within-an-organisation#account-type) in the [Organization Administrator's Guide](/3.4/admin-org/index).
+- **hasView** - A boolean value that indicates whether or not the Covata Platform's Content Service has generated a read-only view of the file object's data in storage. <br />
+  **Note:** If this item is a folder, then this value is `false`.
+- **canGenerateView** - A boolean value that indicates whether or not the Content Service is capable of generating a read-only view of the file object's data, which is based on the file name extension of the original file that was encrypted (as specified in **name**). For more information, see [File formats supported by the content viewer](/3.4/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in Safe Share for Web User's Guide. <br />
+  **Notes:**
+
+  - If this item is a folder, then this value is `null`.
+  - Assuming the file name extension is one that supports a view being generated, the Content Service then automatically sets this value to `true` *after* the file object's data has been successfully [uploaded and stored](/3.4/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters) *and* the size of this data is less than the maximum configured file size for generating a view (i.e. 20 MB by default).
+  - If your client application is managing its own file object data (i.e. the data is not being uploaded to the Content Service), then your application can exploit this element's value for any purpose.
+- **organisation** - A member containing information about the organization in which this item was created. This member contains the following sub-members:
+
+  - **name** - The name of the organization.
+  - **description** - The description of the organization, which can be set by Organization administrators.
+  - **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has been enforced for all members of the organization.
+  - **id** - The ID of the organization.
+- **permissions** - An array listing the individual [permissions](/3.4/api/access-service-api-v1-permissions-sets) that the owner above or a collaborator on (whose access token was used in the request to this endpoint), either has on the item or has inherited from the location represented by **parentId** (below).
+- **keyId** ( *for file object items only* ) - The ID value associated with the cryptographic key used to encrypt the (active version of this) file object.
+- **viewKeyId** ( *for file object items only with a 'read-only view'* ) - The ID value associated with the cryptographic key used to encrypt the (active version of this) file object's *read-only view*.
+- **contentSize** ( *for file object items only* ) - The amount of space (in bytes) of the (active version of the) file object's data (as recorded by the Covata Platform's Access Service). For initialized/*Incomplete* file objects, this value is `null`.
+- **totalVersionSize** ( *for file object items only* ) - The amount of space (in bytes) of all versions of the file object's data (as recorded by the Access Service). For file objects with only one version (which would also be the active version), this value should match (or be close to) that of the **contentSize** value above.
+- **shared** - A boolean value that indicates whether or not this item has been shared with any collaborators.
+- **parentId** - The ID of the folder/location that contains this item. A value of `0` indicates that this item is located at the logical root location.
+- **originator** - A member containing information about the Covata user whose account was used to create this item. This member contains the equivalent **email** and **id** sub-members only of either the **owner** member (above) or a **collaborators** array element (below). If these sub-members originally match those of the item's initial **owner** member and then the item's ownership changes to that of another Covata user, the **owner** member's **email** and **id** values will change while the equivalent sub-member values of this **originator** member will remain unchanged.
+- **state** - The I18N code for the current state of the item. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or folder. <br />
+  **Note:** It is not possible to call this endpoint on an item which is currently in the Recycle Bin or whose state is `deleted`. Doing so results in an error.
+- **modifiedAt** - The date and time when this item was last modified. When a file or folder is created (via the `POST` method on the respective [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/3.4/api/access-service-api-v1-organisations-orggroupid-objects) or [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/3.4/api/access-service-api-v1-organisations-orgid-collections) endpoints), this date and time should match (or be close to) that of the **createdAt** value below. Otherwise, if the folder has since been modified (via the `PUT` method on the respective [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/3.4/api/access-service-api-v1-objects-objectid) or [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/3.4/api/access-service-api-v1-collections-collectionid) endpoints), this date and time should reflect when the folder was last modified.
+- **createdAt** - The date and time when this item was created.
+- **type** - The type of this item - i.e. indicates `object` if the item is a file object or `collection` if the item is a folder.
+- **labelId** - The ID of the classification applied to the file object. <br />
+  **Note:** If this item is a folder, then this value is `null`.
+- **labelName** - The name of the classification applied to the file object. <br />
+  **Note:** If this item is a folder, then this value is `null`.
+- **collaborators** - An array containing information about each Covata user who is currently a collaborator on this item. Each element of this array contains information about one of these Covata users and is represented as an object, containing the following members:
+
+  - **shareParentId** - Indicates either a value of `null` or `0`. A value of `null` indicates that the item's location in its hierarchy of [folders](/3.4/api/folder-handling-endpoints) (e.g. as indicated in a Safe Share application's list of items) are equivalent between this collaborator and the current owner of this item. A value of `0` indicates that the item is being shared from the logical root file area/location of this collaborator's account. In Safe Share applications, this occurs when the owner of this item has shared the item with this collaborator, but the item's parent folder has not also been shared with this collaborator.
+  - **shareName** - Reserved for future use. Currently, this returns the value `null`.
+  - **permissions** - An array listing the [permission set](/3.4/api/access-service-api-v1-permissions-sets) applied to this collaborator (or inherited by them from the location represented by **parentId**) on this item, along with the individual permissions that constitue this permission set.
+  - **email** - The collaborator's email address.
+  - **firstName** - The collaborator's first name. This is the first name that appears on the [Users](/3.4/admin-org/administering-users-within-an-organisation) page of Safe Share Organization Administration and the [My Account](/3.4/user/managing-your-account) feature of Covata Safe Share for Web.
+  - **lastName** - The collaborator's last name. Like the first name (above), this appears on the **User** page of Organization Administration and the **My Account** feature of Safe Share for Web.
+  - **id** - The ID of the collaborator's Covata user account.
+
+  **Note:** Only an empty array is returned from Covata user accounts who are collaborators on this file object *and* do not have the **View Other** [permission](/3.4/api/access-service-api-v1-permissions-sets) on it. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "id": "752047795879604224",
+      "shareStartTime": null,
+      "shareEndTime": null,
+      "versionId": "752047798526210048",
+      "name": "paraglider.jpg",
+      "sha512": "GylRBgVahdyp2YeWE4k3LncB0zLA8AXd42wgDjRthHrcjOm9PpVKEaDe6HwgD3uFgBDBjuxtxsgBTHd+HK+Jhg==",
+      "owner": {
+          "email": "alex.originator@xy-company.com",
+          "firstName": "Alex",
+          "lastName": "Originator",
+          "mfaEnabled": false,
+          "id": "749419842687528960",
+          "accountType": {
+              "i18n": {
+                  "code": "server.useraccounttype.local",
+                  "arguments": []
+              },
+              "value": "LOCAL"
+          }
+      },
+      "hasView": true,
+      "canGenerateView": true,
+      "organisation": {
+          "name": "XY Company",
+          "description": "",
+          "mfaEnabled": false,
+          "id": "749418071827214336"
+      },
+      "permissions": [{
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.file.delete",
+          "id": "66"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.folder.delete",
+          "id": "67"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.download",
+          "id": "62"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.move",
+          "id": "69"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.view",
+          "id": "60"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.delete.other",
+          "id": "72"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.copy",
+          "id": "63"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.print",
+          "id": "61"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.share",
+          "id": "73"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.rename",
+          "id": "68"
+      }, {
+          "scopes": ["object", "collection"],
+          "nameI18nCode": "server.permission.name.view.other",
+          "id": "71"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.folder.create",
+          "id": "65"
+      }, {
+          "scopes": ["collection"],
+          "nameI18nCode": "server.permission.name.file.upload",
+          "id": "64"
+      }],
+      "keyId": "752047793853755392",
+      "viewKeyId": "752047801499971584",
+      "contentSize": "634183",
+      "totalVersionSize": "634192",
+      "shared": true,
+      "parentId": "751980834491527168",
+      "originator": {
+          "email": "alex.originator@xy-company.com",
+          "id": "749419842687528960"
+      },
+      "state": "server.object.states.created",
+      "modifiedAt": "2016-09-09T03:49:34.592Z",
+      "createdAt": "2016-09-06T06:09:26.910Z",
+      "type": "object",
+      "labelId": null,
+      "labelName": null,
+      "collaborators": [{
+          "shareParentId": 0,
+          "shareName": null,
+          "userId": 752045983411793920,
+          "permissionSet": {
+              "id": "2",
+              "permissions": [{
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.print",
+                  "id": "61"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.download",
+                  "id": "62"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view",
+                  "id": "60"
+              }],
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permissionset.name.download"
+          },
+          "email": "adhoc.user@xy-company.com",
+          "firstName": null,
+          "lastName": null,
+          "id": "752045983411793920"
+      }, {
+          "shareParentId": 0,
+          "shareName": null,
+          "userId": 750613175405441024,
+          "permissionSet": {
+              "id": "3",
+              "permissions": [{
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.file.delete",
+                  "id": "66"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.print",
+                  "id": "61"
+              }, {
+                  "scopes": ["collection"],
+                  "nameI18nCode": "server.permission.name.folder.delete",
+                  "id": "67"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.download",
+                  "id": "62"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view",
+                  "id": "60"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.move",
+                  "id": "69"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.rename",
+                  "id": "68"
+              }, {
+                  "scopes": ["object", "collection"],
+                  "nameI18nCode": "server.permission.name.view.other",
+                  "id": "71"
+              }, {
+                  "scopes": ["collection"],
+                  "nameI18nCode": "server.permission.name.folder.create",
+                  "id": "65"
+              }, {
+                  "scopes": ["collection"],
+                  "nameI18nCode": "server.permission.name.file.upload",
+                  "id": "64"
+              }],
+              "scopes": ["object", "collection"],
+              "nameI18nCode": "server.permissionset.name.modify"
+          },
+          "email": "chris.collaborator@xy-company.com",
+          "firstName": "Chris",
+          "lastName": "Collaborator",
+          "id": "750613175405441024"
+      }]
+  }
+  ```

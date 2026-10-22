@@ -1,0 +1,44 @@
+---
+title: "Covata Platform 3.0 Safe Share Administrator's Guide"
+---
+
+This documentation is for 3.0.x versions of the *Covata Platform* and *Safe Share Administration*.
+
+Please refer to our [important notice](/3.0/admin-platform/important-notice) for information that relates to this documentation.
+
+## Overview of the Covata Platform
+
+Covata provides a complete solution and platform for securely protecting and sharing encrypted files and folders which can be stored and accessed anywhere (within an organization, outside the domain and from mobile devices).
+
+Covata's technologies provide this solution through the *Covata Platform*, whose *Access Service* centrally manages cryptographic *keys* (used to encrypt/decrypt content) and *access controls* (which define who can access/decrypt content and when).
+
+The Covata Platform's Access Service handles its *key* management and *access controls* separately from cryptography and user content. This separation helps ensure that regardless of whether or not encrypted content gets into the wrong hands, it can only be decrypted by the people it's intended for.
+
+Users of *Covata technologies* <sup>&#42;</sup> can share their secured content with others through Covata's Safe Share applications, which integrate with the Covata Platform to ensure that critical key management and access controls are adhered to.
+
+The Covata Platform provides an application programming interface (API) that allows integrators to develop their own applications that leverage Covata's powerful data-centric security features.
+
+<a id="platform-administration" />
+
+## Safe Share Administration
+
+*Safe Share Administration* is a web-based interface for administering organizations on a Covata Platform instance. This interface also provides access to a number of configurable features of Covata technologies <sup>&#42;</sup> that apply to all organizations configured on the Covata Platform.
+
+![Dashboard page](/images/d0bb71e52136-platform-administration-dashboard-page.png)
+*Safe Share administrators* are users who, once [signed in](/3.0/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) to Safe Share Administration and can access its [dashboard](/3.0/admin-platform/accessing-platform-administration#the-platform-administration-dashboard) (depicted above) have the ability to perform the following administration activities on their Covata Platform instance:
+
+- Administer all [Safe Share administrator users](/3.0/admin-platform/administering-platform-administrator-users) on the Covata Platform. <br />
+  **Note:** Any user who has an account registered on the Covata Platform is known as a Covata user. A Safe Share administrator is one type of Covata user. For more information about other types of Covata users, please refer to [Administering users within an organization](/3.0/admin-platform/administering-users-within-an-organisation) in the [Safe Share Organization Administration](/3.0/admin-platform/organisation-administration) section of this guide.
+- Administer all [organizations](/3.0/admin-platform/administering-organisations) on the Covata Platform.
+- Configure Covata users through [LDAP](/3.0/admin-platform/configuring-ldap) connections (for Covata Platform instances with a single organization only).
+- Configure single sign-on (SSO) using a [SAML](/3.0/admin-platform/configuring-single-sign-on-using-an-idp)-based Identity Provider (IdP).
+- Register [client apps](/3.0/admin-platform/configuring-client-applications), which are integrator-developed applications that utilize any aspect of Covata technologies made available through the Covata Platform's API.
+- Change the [configuration](/3.0/admin-platform/configuring-platform-administration-properties) of Safe Share Administration properties.
+- Customize the appearance of the Safe Share web application, Safe Share Administration and Safe Share Organization Administration through a [theme](/3.0/admin-platform/re-theming-the-application-and-administration).
+- Adjust the user interface languages of Safe Share Administration, Safe Share Organization Administration and the default used for the Safe Share web application, as well as upload/delete language bundles using [internationalization](/3.0/admin-platform/managing-internationalization).
+
+<sup>&#42;</sup> *Covata technologies* refers to all features and functionality provided by (and made available through) the Covata Platform, including Covata's Safe Share applications, the Covata Platform's API and the Covata Platform itself.
+
+---
+
+#### Please provide your feedback here

@@ -1,0 +1,149 @@
+---
+title: "<access-service>/api/v1/organisations/{orgId}/groups"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orgid-groups-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgId}/groups
+```
+
+where `{orgId}` is the ID of an organisation.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orgid-groups-supported-methods-and-overview" />
+
+- `POST` - adds a new [clearance](/3.5/admin-org/managing-clearances) to an organisation (specified by `orgId`).
+- `GET` - retrieves a list of information for all clearances defined within an organisation (specified by `orgId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orgid-groups-detailed-description" />
+
+This API endpoint serves a number of purposes:
+
+- Adds a new clearance to an organisation (specified by `orgId`). <br />
+  **Notes:**
+
+  - Associating this new clearance with one or more [classifications](/3.5/admin-org/managing-classifications) would allow these classifications to restrict file sharing to any Covata users who are members of this clearance.
+  - For more information about adding one or more [Covata users](/3.5/api/authentication-and-authorisation) [in an organisation](/3.5/admin-org/administering-users-within-an-organisation) to a clearance, see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/groups/\{groupId\}](/3.5/api/access-service-api-v1-organisations-orgid-groups-groupid). Also see [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/labels](/3.5/api/access-service-api-v1-organisations-orgid-labels) for more information about adding new classifications to an organisation.
+- Retrieves a list of information for all clearances defined within an organisation (specified by `orgId`).
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-groups-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilising Covata user accounts with the following [roles](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/3.5/admin-org/index)) and conditions:
+
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgId}` in the request's URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orgid-groups-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is required if the body of the request has a JSON object:
+
+- `Content-Type: application/json`
+
+## Required POST-request parameters <a id="access-service-api-v1-organisations-orgid-groups-required-post-request-parameters" />
+
+The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
+
+- **name** - The name of the new clearance to be added to the organisation specified by `{orgId}` in the request's URL. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Staff with security clearance"
+  }
+  ```
+
+## Optional POST-request parameters <a id="access-service-api-v1-organisations-orgid-groups-optional-post-request-parameters" />
+
+The following optional parameters can also be sent in the **body** of the POST request, each as individual members of the **JSON object** that includes the [Required POST-request parameters](/3.5/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-required-post-request-parameters) above:
+
+- **description** - The description of the new clearance to be added to the organisation specified by `{orgId}` in the URL. <br />
+  **Example (request):**
+
+  ```json
+  {
+    "name": "Staff with security clearance",
+    "description": "XY Company staff members who have security clearance."
+  }
+  ```
+
+## Optional GET-request parameters <a id="access-service-api-v1-organisations-orgid-groups-optional-get-request-parameters" />
+
+The following optional parameters can be sent in the **URL** of the GET request:
+
+- **limit** - An integer value from `0` to `100`, representing the maximum number of items to be returned in the response, where an individual item is information about a clearance defined in the organisation (specified by `{orgId}` in the request's URL). If this parameter is omitted, then its value is `0` by default, which does not apply restrictions to the number of items returned in the response.
+- **offset** - A value representing the count order of all retrievable items (i.e. clearances in the organisation specified by `{orgId}` in the URL) returned in the response. Calls to this API endpoint may amount to potentially large numbers of items being returned from the Covata Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **orderBy** - An enumeration (enum) value representing the order in which items (i.e. clearances in the organisation specified by `{orgId}` in the URL) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `ASC` by default.
+- **sortBy** - A value representing the field (i.e. member) of a retrieved item by which items (i.e. clearances in the organisation specified by `{orgId}` in the URL) returned in the response will be sorted. Valid field values for this parameter include:
+
+  - `name` - the name of the clearance and
+  - `description` - the description of the clearance.
+
+  **Example (request):**
+
+  ```text
+  https://access-service.xy-company.com/api/v1/organisations/760756644367081472/groups?sortBy=name
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orgid-groups-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **items** ( *from GET requests only* ) - An array containing information about all existing clearances defined in the organisation (specified by `{orgId}` in the request's URL), where these clearances have been filtered by any [parameters](/3.5/api/access-service-api-v1-organisations-orgid-groups#access-service-api-v1-organisations-orgid-groups-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these clearances (represented as an object containing the following members unless otherwise stated).
+- **id** - The ID of the (new) clearance.
+- **labelCount** ( *from GET requests only* ) - The number of classifications which are currently associated with the clearance.
+- **memberCount** ( *from GET requests only* ) - The number of Covata user accounts which are currently members of the clearance.
+- **description** - The description of the (new) clearance.
+- **name** - The name of the (new) clearance.
+- **count** ( *from GET requests only* ) - The total number of items (i.e. clearances defined in the organisation specified by `{orgId}` in the request's URL) that can be returned in the response.
+- **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this API endpoint. <br />
+  **Example (response from a POST request - adding a new clearance to an organisation):**
+
+  ```json
+  {
+      "description": {
+          "value": "XY Company staff members who have security clearance."
+      },
+      "name": {
+          "value": "Staff with security clearance"
+      },
+      "id": "767238352499154944"
+  }
+  ```
+
+   <br />
+  **Example (response from a GET request):**
+
+  ```json
+  {
+      "items": [{
+          "id": "766891761892368384",
+          "labelCount": "2",
+          "memberCount": "3",
+          "description": {
+              "value": "XY Company staff members who do not have security clearance."
+          },
+          "name": {
+              "value": "Staff"
+          }
+      }, {
+          "id": "767238352499154944",
+          "labelCount": "0",
+          "memberCount": "0",
+          "description": {
+              "value": "XY Company staff members who have security clearance."
+          },
+          "name": {
+              "value": "Staff with security clearance"
+          }
+      }],
+      "count": "2",
+      "offset": "0"
+  }
+  ```

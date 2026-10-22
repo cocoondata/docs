@@ -1,0 +1,231 @@
+---
+title: "Verwaltung von Safe Share-Administrator-Benutzern"
+---
+
+Alle Funktionen der Covata-Technologien sind über *Covata-Benutzer*-Accounts zugänglich. Diese Funktionen umfassen im Wesentlichen die folgenden Möglichkeiten:
+
+- Verwaltung der Covata-Plattform (über die [Safe Share-Verwaltung](/3.4/de/admin-platform/index#platform-administration) und/oder die [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration)) sowie
+- Erstellen verschlüsselter Dateien (d. h. Dateiobjekte/sichere Objekte <sup>(1)</sup> ) innerhalb einer Organisation
+- Zugriff auf und Entschlüsselung von Daten in verschlüsselten Dateien und
+- Nutzung der Covata Safe Share-Anwendungen
+
+Für Covata-Benutzer mit der [Safe Share-Administrator-Rolle](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) (d. h. „Safe Share-Administratoren“) gilt Folgendes:
+
+- Sie sind zur Verwaltung von Organisationen berechtigt, die die Covata-Plattform sowie ihre dazugehörigen Covata-Technologien nutzen.
+- Sie werden von Benutzer-Accounts vertreten, die über die Seite **Administratoren** (vom Benutzer selbst) [hinzugefügt](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) und [bearbeitet](/3.4/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) sowie von einem anderen Safe Share-Administrator [entfernt](/3.4/de/admin-platform/administering-platform-administrator-users#removing-platform-administrators) (und [wieder hinzugefügt](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account)) werden können.
+
+<sup>(1)</sup> Ein Dateiobjekt/sicheres Objekt ist definiert als von Covata verschlüsselte, auf der Covata-Plattform registrierte Daten sowie die zu diesen verschlüsselten Daten gehörigen Eigenschaften. Weitere Informationen über Dateiobjekte finden Sie unter [Verwaltung von Dateien](/3.4/de/admin-platform/administering-files) im Abschnitt [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) dieser Anleitung.
+
+![Seite Administratoren](/images/114f55b6c6cf-administrators-page.png)
+## Felder eines Safe Share-Administrator-Benutzers <a id="a-platform-administrator-users-fields" />
+
+Jeder Account eines Covata-Benutzers wird von einer Reihe Feldern definiert, die in der folgenden Tabelle beschrieben sind. Beim [Hinzufügen eines Safe Share-Administrator-Accounts über die Safe Share-Verwaltung](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) kann nur das Feld **E-Mail** angegeben werden.
+
+Ein Safe Share-Administrator-Benutzer kann die Felder für seinen eigenen Benutzer-Account bei der [Bearbeitung seines eigenen Accounts](/3.4/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) konfigurieren.
+
+Sofern nicht in der folgenden Tabelle anders angegeben, werden diese Felder und ihre Werte auf der Seite **Administratoren** der Safe Share-Verwaltung angezeigt.
+
+| Feld | Beschreibung | Pflichtfeld? |
+| --- | --- | --- |
+| E-Mail | <a id="platform-administrator-email" />Die E-Mail-Adresse, die Teil der Anmeldeinformationen eines Benutzers bildet und die der Benutzer benötigt, um sich gegenüber der Covata-Plattform zu authentifizieren. Diese E-Mail-Adresse:  <br />•  definiert die Identität des Benutzers und muss daher in Beziehung auf alle Benutzer-Accounts auf der Covata-Plattform eindeutig sein <br />•  ist die E-Mail-Adresse, an die die Covata-Plattform Benachrichtigungen sendet <br />•  kann nicht mehr bearbeitet werden, nachdem ein Account angelegt wurde  | Ja |
+| Vorname <sup>(2)</sup> | <a id="platform-administrator-first-name" />Der Vorname eines Benutzers (z. B. ein Vorname oder Spitzname). Dieses Feld kann nur über die Funktion **Mein Account** des Benutzers selbst bearbeitet werden. | Nein |
+| Familienname <sup>(2)</sup> | Der Familienname eines Benutzers (z. B. ein Nach- oder Familienname). Dieses Feld kann nur über die Funktion **Mein Account** des Benutzers selbst bearbeitet werden. | Nein |
+| Anderer Name <sup>(2)</sup> | Der Mittelname eines Benutzers (z. B. ein oder mehrere Vornamen). Dieses Feld kann nur über die Funktion **Mein Account** des Benutzers selbst angezeigt und bearbeitet werden. | Nein |
+| Mobiltelefonnummer <sup>(2)</sup> | Die Mobiltelefonnummer eines Benutzers. Dieses Feld kann nur über die Funktion **Mein Account** des Benutzers selbst angezeigt und bearbeitet werden. <br />**Hinweis:** Diese Nummer muss die Ländervorwahl und das Pluszeichen (+) als Präfix enthalten. <br />  (z. B. +1 234 567 8910 für eine US-amerikanische Nummer)  | Nein |
+| Standardsprache <sup>(2)</sup> | Die bevorzugte Sprache/Einstellung eines Benutzers. Etwaige Änderungen dieses Felds werden sofort auf die Benutzeroberflächen der Safe Share-Verwaltung, von [Safe Share for Web](/3.4/de/user/index) und der [Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) angewendet (wenn der Benutzer auf diese Funktionen Zugriff hat). <br />  Dieses Feld kann nur über die Funktion **Mein Account** des Benutzers selbst angezeigt und bearbeitet werden. <br />**Hinweis:** Diese Einstellung hat gegenüber der **Systemstandard**-Sprache (die anhand der [Seite](/3.4/de/admin-platform/managing-internationalization) **Internationalisierung** definiert wird) Vorrang.  | Nein |
+| Gesperrt | Dieses Feld zeigt „Ja“, wenn ein Covata-Benutzer-Account gesperrt ist, weil der betreffende Benutzer sein Passwort mehr als die maximal zulässige Anzahl von Malen falsch eingegeben hat. Diese Zahl wird von einem Safe Share-Administrator konfiguriert. Der Benutzer muss den betreffenden Account selbst entsperren, indem er die Anweisungen in der Benachrichtigung über die *Account-Sperrung* befolgt (oder sein Passwort anhand einer der auf der Covata-Anmeldeseite verfügbaren Optionen zurücksetzt). <br />  Ist ein Benutzer-Account nicht gesperrt, ist dieses Feld leer. Die Werte dieses nicht bearbeitbaren Felds sind nur auf der Seite **Administratoren** und/or [Benutzer](/3.4/de/admin-platform/administering-users-within-an-organisation) sichtbar. | Nicht anwendbar |
+| 2FA Aktiviert <sup>(2)</sup> und<br /> Neuen 2FA-Seed erstellen | Das Kontrollkästchen für das Feld **2FA Aktiviert** eines Safe Share-Administrators-Accounts ist aktiviert, wenn für den Account des betreffenden Benutzers Zwei-Faktor-Authentifizierung (2FA) [aktiviert ist](/3.4/de/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator). (Dieses Feld kann auch über die Funktion **Mein Account** des Benutzers selbst bearbeitet werden.) <br />  Wenn dieses Kontrollkästchen für den Account eines Safe Share-Administrators aktiviert ist, wird für den betreffenden Account die Schaltfläche **Neuen Seed erstellen** in der Spalte/im Feld **Neuen 2FA-Seed erstellen** verfügbar. <br />  Ist 2FA für den Account eines Safe Share-Administrators nicht aktiviert, ist das Kontrollkästchen für dieses Feld für den betreffenden Account leer. Der 2FA-Status, d. h. aktiviert oder deaktiviert, ist für Safe Share-Administrator-Accounts außer Ihrem eigenen Account nur über die Seite **Administratoren** sichtbar. | Nein |
+
+<sup>(2)</sup> Während ein Safe Share-Administrator [die Werte dieser Felder für seinen jeweiligen Covata-Benutzer-Account ändern kann](/3.4/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) (dies geschieht über die Funktion **Mein Account** in der Safe Share-Verwaltung), können Benutzer diese Werte anhand äquivalenter Funktionen in [Safe Share for Web](/3.4/de/user/managing-your-account#updating-your-account-details) und anderen Safe Share-Produkten sowie in der [Organisationsverwaltung](/3.4/de/admin-platform/administering-users-within-an-organisation#editing-your-organisation-administrator-account) ändern (sofern sie Mitglied mindestens einer Organisation sind und die für den Zugriff auf diese Funktionen erforderlichen Rollen innehaben). Safe Share-Administratoren werden Mitglied einer Organisation, wenn:
+
+- sie anhand der Safe Share-Verwaltung [eine neue Organisation erstellen](/3.4/de/admin-platform/administering-organisations#adding-a-new-organisation) und sich zum Administrator dieser Organisation machen oder
+- ein vorhandener Organisations-Administrator der betreffenden Organisation [diesen Benutzer-Account eines Safe Share-Administrators seiner Organisation hinzufügt](/3.4/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account).
+
+<Note>
+
+Mit dem Benutzer-Account eines Safe Share-Administrators sind andere Felder verbunden. Diese Felder sind jedoch entweder:
+
+- nur über die [Seite „Benutzer“](/3.4/de/admin-platform/administering-users-within-an-organisation) der [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) sichtbar oder
+- werden intern von der Covata-Plattform genutzt und sind daher nur in begrenztem Umfang über Benutzeroberflächen (oder überhaupt nicht) sichtbar.
+
+</Note>
+
+## Safe Share-Administratoren und Benutzerrollen <a id="platform-administrators-and-user-roles" />
+
+Jedem Covata-Benutzer muss eine Rolle zugewiesen werden, die dem Benutzer Zugriff auf verschiedene, über die Covata-Plattform und Covata-Technologien bereitgestellte Funktionen gewährt. Einem Covata-Benutzer wird automatisch die *Safe Share-Administrator-Rolle* zugewiesen, wenn sein Benutzer-Account über die Safe Share-Verwaltung [hinzugefügt wird](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account).
+
+<Note>
+
+Benutzer können (wie in der folgenden Tabelle detaillierter erklärt) mehr als eine Rolle haben:
+
+- Einem Benutzer mit der [Safe Share-Administrator-Rolle](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) kann für eine beliebige Organisation auch die [Organisations-Administrator-Rolle](/3.4/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) zugewiesen werden.
+- Einem Benutzer mit einer dieser Administratoren-Rollen kann für beliebige Organisationen auch die [Ersteller-](/3.4/de/admin-platform/administering-users-within-an-organisation#originator-role) oder [Mitwirkender](/3.4/de/admin-platform/administering-users-within-an-organisation#collaborator-role)-Rolle zugewiesen werden.
+- Ein Benutzer mit Ersteller- oder Mitwirkender-Rolle in einer beliebigen Organisation kann entsprechend auch die Safe Share-Administrator- und/oder Organisations-Administrator-Rolle innehaben.
+
+</Note>
+
+| Rolle | Beschreibung |
+| --- | --- |
+| Safe Share-Administrator | <a id="platform-administrator-role" />Ein Covata-Benutzer mit der Safe Share-Administrator-Rolle hat Zugriff auf alle Verwaltungsfunktionen seiner Covata-Plattform-Instanz, die über die [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface) bereitgestellt werden. <br />  Ein Covata-Benutzer-Account erhält diese Rolle zugeteilt, wenn der Benutzer entweder:  <br />•  der Safe Share-Verwaltung (von einem anderen, bereits angelegten Safe Share-Administrator) [hinzugefügt wird](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) oder <br />•  auf einer neuen Instanz der Covata-Plattform [die erste Person ist, die auf die Safe Share-Verwaltung zugreift](/3.4/de/admin-platform/accessing-platform-administration#accessing-platform-administration-for-the-first-time). <br />**Hinweise:**  <br />•  Abgesehen von der Fähigkeit, die Covata-Plattform zu verwalten, hat ein Covata-Benutzer, der *nur* die Rolle eines Safe Share-Administrators innehat, *keinen Zugriff* auf Funktionen der Covata-Technologien, die Covata-Benutzern mit anderen Rollen verfügbar sind. Für diese anderen (in der folgenden Zeile beschriebenen) Rollen gilt Folgendes:  <br />•  Sie werden einem Covata-Benutzer von den Organisations-Administratoren von Organisationen zugeteilt, die auf der Covata-Plattform konfiguriert sind. <br />•  Sie sind für jede Organisation spezifisch. <br />Ein Covata-Benutzer mit nur der Safe Share-Administrator-Rolle kann sich jedoch für eine Organisation die Organisations-Administrator-Rolle selbst zuweisen, indem er sich zum Administrator der betreffenden Organisation macht, *wenn er* [die Organisation hinzufügt/erstellt](/3.4/de/admin-platform/administering-organisations#adding-a-new-organisation). <br />•  Nur Safe Share-Administratoren können die Safe Share-Administrator-Rolle einem anderen Covata-Benutzer zuteilen, indem sie den Account des betreffenden Benutzers über die Safe Share-Verwaltung [hinzufügen](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account).  |
+| Andere Covata-Benutzer-Rollen | <a id="other-covata-user-roles" />Covata-Benutzer mit Rollen außer der [Safe Share-Administrator-Rolle](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) können im Zusammenhang mit der Bearbeitung und Handhabung von Dateien für den Zugriff ihrer jeweiligen Organisationen auf die Covata-Plattform auch andere Funktionen nutzen. Weitere Informationen über diese anderen Covata-Benutzer-Rollen finden Sie unter [Die Benutzerrollen einer Organisation](/3.4/de/admin-platform/administering-users-within-an-organisation#an-organisation-users-roles) im Abschnitt [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) dieser Anleitung.  <br />•  Ein Safe Share-Administrator kann jedem Covata-Benutzer (auch sich selbst) für eine Organisation die [Organisations-Administrator-Rolle](/3.4/de/admin-platform/administering-users-within-an-organisation#organisation-administrator-role) zuteilen, wenn er [die Organisation erstellt](/3.4/de/admin-platform/administering-organisations#adding-a-new-organisation). <br />•  Ein Organisations-Administrator kann alle Aspekte des Zugriffs seiner Organisationen auf die Covata-Plattform über Safe Share-Produkte und die API der Covata-Plattform verwalten. <br />•  Ein Organisations-Administrator kann sich oder anderen Covata-Benutzern für die Bearbeitung und Handhabung von Dateien innerhalb der jeweiligen Organisationen die [Ersteller-Rolle](/3.4/de/admin-platform/administering-users-within-an-organisation#originator-role) oder [Mitwirkender-Rolle](/3.4/de/admin-platform/administering-users-within-an-organisation#collaborator-role) zuteilen. <br />•  Nur Organisations-Administratoren innerhalb einer Organisation können beliebigen anderen Covata-Benutzern die Organisations-Administrator-Rolle für die jeweilige Organisation zuteilen.  |
+
+## Hinzufügen eines Safe Share-Administrator-Accounts <a id="adding-a-platform-administrator-account" />
+
+Dieser Abschnitt beschreibt, wie man der Covata-Plattform einen neuen Benutzer-Account für einen Safe Share-Administrator hinzufügt. Anhand dieses Verfahrens erhält der betreffende Covata-Benutzer die [Rolle eines Safe Share-Administrators](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrator-role).
+
+**Hinzufügen eines Safe Share-Administrator-Benutzers zur Covata-Plattform:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Administratoren** links auf der [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Administratoren** aufzurufen.
+3. Klicken Sie auf die Schaltfläche **Neue hinzufügen**.
+4. Geben Sie im Dialogfeld **Neuen Safe Share-Administrator hinzufügen** die E-Mail-Adresse des betreffenden Benutzers an.
+5. Klicken Sie auf **Speichern**, und der Benutzer (der jetzt Safe Share-Administrator ist) erscheint als neue Eintragung auf der Seite **Administratoren**. <br />
+   **Hinweise:**
+
+   - Wenn die E-Mail-Adresse des Benutzers auf der Covata-Plattform noch nicht registriert ist, wird für ihn automatisch ein *neuer* Covata-Benutzer-Account angelegt. Für diesen Benutzer gilt Folgendes:
+
+     - Sein Covata-Benutzer-Account hat den Account-Typ [Lokal](/3.4/de/admin-platform/administering-users-within-an-organisation#account-type), der nur über die [Seite „Benutzer“](/3.4/de/admin-platform/administering-users-within-an-organisation) der [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) sichtbar ist.
+     - An seine E-Mail-Adresse wird eine E-Mail-Benachrichtigung über die *Erstellung des Accounts* gesendet, die Anweisungen enthält, wie er sich [bei der Safe Share-Verwaltung anmelden](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) kann. Beim ersten Anmeldevorgang muss der Safe Share-Administrator im Allgemeinen unmittelbar nach der Anmeldung sein Passwort zurücksetzen.
+   - Wenn dieser Benutzer auf der Covata-Plattform bereits einen Benutzer-Account hat, wird diesem Account die Rolle eines Safe Share-Administrators zugeteilt (und wenn der Benutzer-Account noch kein [Mitglied](/3.4/de/admin-platform/administering-users-within-an-organisation#adding-an-organisation-user-account) einer [Organisation](/3.4/de/admin-platform/administering-organisations) war, wird sein Account aktiviert). Dieser Benutzer erhält zwar keine E-Mail-Benachrichtigung, dass ihm die Rolle eines Safe Share-Administrators zugeteilt wurde, aber er kann bei seiner nächsten Anmeldung [auf die Safe Share-Verwaltung zugreifen](/3.4/de/admin-platform/accessing-platform-administration).
+
+## Entfernen von Safe Share-Administratoren <a id="removing-platform-administrators" />
+
+Entfernen eines Covata-Benutzer-Accounts aus der Safe Share-Verwaltung:
+
+- entfernt die [Safe Share-Administrator-Rolle](/3.4/de/admin-platform/administering-platform-administrator-users#platform-administrator-role) vom Benutzer-Account und
+- verhindert den Zugriff des Benutzers (über diesen Account) auf die [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface) und ihre Funktionen.
+
+<Note>
+
+Entfernen eines Covata-Benutzer-Accounts aus der Safe Share-Verwaltung *löscht diesen Account nicht* aus der Covata-Plattform. Wenn ein (zuvor aus der Safe Share-Verwaltung entfernter) Covata-Benutzer [wieder hinzugefügt wird](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) oder [andere Benutzer-Rollen](/3.4/de/admin-platform/administering-platform-administrator-users#other-covata-user-roles) zugeteilt erhält (die dem Benutzer Zugriff auf Funktionen wie die Bearbeitung und Handhabung von Dateien innerhalb seiner Organisation(en) auf der Covata-Plattform geben würden), wird derselbe Benutzer-Account wieder genutzt. Alle [vom Benutzer zuvor bearbeiteten/individuell eingestellten Felder](/3.4/de/admin-platform/administering-platform-administrator-users#editing-your-platform-administrator-account) werden beibehalten.
+
+</Note>
+
+**Entfernen eines Covata-Benutzer-Accounts aus der Safe Share-Verwaltung:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Administratoren** links auf der [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Administratoren** aufzurufen.
+3. Suchen Sie den Safe Share-Administrator, dessen Account Sie aus der Safe Share-Verwaltung entfernen möchten, und aktivieren Sie das Kontrollkästchen links neben dessen Namen.
+4. Klicken Sie am oberen Seitenrand auf die Schaltfläche
+   ![Schaltfläche Benutzer entfernen](/images/a90a4ab88674-remove-user-button.png)
+
+    (Benutzer entfernen) und in der Bestätigungsmeldung anschließend auf **Ja**, um den Vorgang fortzusetzen. <br />
+    Die gewählten Benutzer-Accounts werden aus der Safe Share-Verwaltung entfernt und haben keinen Zugriff mehr auf die [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface) oder ihre Funktionen.
+
+## Bearbeitung Ihres Safe Share-Administrator-Accounts <a id="editing-your-platform-administrator-account" />
+
+Dieser Abschnitt beschreibt, wie Sie die [Felder](/3.4/de/admin-platform/administering-platform-administrator-users#a-platform-administrator-users-fields) Ihres (Safe Share-Administrator-)Benutzer-Accounts auf der Covata-Plattform bearbeiten.
+
+**Bearbeitung Ihres Safe Share-Administrator-Benutzer-Accounts:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf Ihre E-Mail-Adresse am rechten oberen Seitenrand und wählen Sie aus dem Dropdown-Menü **Mein Account**.
+3. Aktualisieren Sie auf der nächsten Seite im Abschnitt **Account-Details** die gewünschten Felder für Ihren Benutzer-Account ([die oben detailliert beschrieben sind](/3.4/de/admin-platform/administering-platform-administrator-users#a-platform-administrator-users-fields)). <br />
+   **Hinweis:** Die **E-Mail-Adressen** aller Covata-Benutzer-Accounts auf der Covata-Plattform sind eindeutig, und da dieses Feld eventuell für [Prüfzwecke](/3.4/de/admin-platform/generating-reports) verwendet wird, kann das Feld E-Mail-Adresse für keinen Covata-Benutzer-Account bearbeitet werden. Zur Aktualisierung der E-Mail-Adresse Ihres Benutzer-Accounts und/oder der E-Mail-Adressen anderer Safe Share-Administratoren können Sie jeweils wie folgt vorgehen:
+
+   1. [Fügen Sie einen neuen Safe Share-Administrator-Account hinzu](/3.4/de/admin-platform/administering-platform-administrator-users#adding-a-platform-administrator-account) (mit der neuen E-Mail-Adresse). Beziehen Sie für jeden Account mit dem [Account-Typ](/3.4/de/admin-platform/administering-users-within-an-organisation#account-type) **LDAP** die neue E-Mail-Adresse von Ihrem Administrator für den LDAP-Server-/das LDAP-Benutzerverzeichnis, um den betreffenden Account (mit dieser E-Mail-Adresse) der Safe Share-Verwaltung hinzufügen zu können.
+   2. [Entfernen Sie](/3.4/de/admin-platform/administering-platform-administrator-users#removing-platform-administrators) den alten Covata-Benutzer-Account des betreffenden Benutzers.
+4. Klicken Sie auf **Speichern**, und die Felder des Benutzer-Accounts werden aktualisiert. <br />
+   **Hinweise:**
+
+   - Wenn Sie die Felder Ihres Benutzer-Accounts nicht bearbeiten können, ist Ihr [Account-Typ](/3.4/de/admin-platform/administering-users-within-an-organisation#account-type) wahrscheinlich **LDAP**. (Beachten Sie, dass zusätzliche Feldinformationen wie z. B. der **Account-Typ** nur über die [Seite Benutzer](/3.4/de/admin-platform/administering-users-within-an-organisation) der [Safe Share-Organisationsverwaltung](/3.4/de/admin-platform/organisation-administration) sichtbar sind.) Die Felder für LDAP-Benutzer-Accounts werden über die jeweiligen Benutzerverzeichnisse ihrer LDAP-Server bearbeitet und während der Synchronisierung mit diesen Benutzerverzeichnissen auf der Covata-Plattform aktualisiert. Für weitere Informationen siehe [LDAP-Konfiguration](/3.4/de/admin-platform/configuring-ldap).
+   - Sie können die ([oben beschriebenen](/3.4/de/admin-platform/administering-platform-administrator-users#a-platform-administrator-users-fields)) Felder nur für Ihren eigenen Covata-Benutzer-Account und nicht für andere Covata-Benutzer-Accounts bearbeiten.
+
+## Änderung des Passworts für Ihren Safe Share-Administrator-Account <a id="changing-your-platform-administrator-account-password" />
+
+Nur ein bei [Safe Share for Web](/3.4/de/user/index) oder der Safe Share-Verwaltung angemeldeter Covata-Benutzer mit einem **lokalen** [Account-Typ](/3.4/de/admin-platform/administering-users-within-an-organisation#account-type) kann sein Passwort selbst ändern.
+
+<Note>
+
+Die Authentifizierung eines [LDAP](/3.4/de/admin-platform/administering-users-within-an-organisation#account-type)-Benutzers bei der Covata-Plattform ist an den betreffenden LDAP-Server delegiert. Wenn Sie einen LDAP-Benutzer-Account haben und dessen Passwort ändern möchten, müssen Sie sich an Ihren LDAP-Administrator wenden, der Ihnen mitteilen kann, wie Sie hierfür vorgehen müssen (z. B. über den Benutzer-Account auf Ihrem LDAP-Server/in Ihrem LDAP-Benutzerverzeichnis). Für weitere Informationen siehe [LDAP-Konfiguration](/3.4/de/admin-platform/configuring-ldap).
+
+</Note>
+
+**Änderung Ihres Passworts:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf Ihre E-Mail-Adresse am rechten oberen Seitenrand und wählen Sie aus dem Dropdown-Menü **Mein Account**.
+3. Klicken Sie auf der nächsten Seite im Abschnitt **Sicherheit** auf die Schaltfläche **Passwort ändern**.
+4. Geben Sie auf der Seite **Passwort festlegen...** Ihr altes Passwort und dann zwei Mal Ihr neues Passwort ein (das zweite Mal zur Bestätigung).
+5. Klicken Sie auf die Schaltfläche **Ändern**. Das Passwort für Ihren Covata-Benutzer-Account ist jetzt geändert.
+
+## Beendigung von Sitzungen Ihres Safe Share-Administrator-Accounts <a id="terminating-your-platform-administrator-accounts-sessions" />
+
+Bei der Beendigung der Sitzungen Ihres Safe Share-Administrator-Accounts werden alle Ihre aktuell gültigen Aktualisierungs-Token sofort ungültig. Mit dieser Aktion werden Sie von Ihrer aktuellen Sitzung der Safe Share-Verwaltung sofort abgemeldet und von *jeder anderen* Safe Share-Anwendung, bei der Sie eine aktive Sitzung haben, sobald die Zugriffs-Token für diese Sitzungen ablaufen. Hierzu gehören auch alle anderen Client-Anwendungen, die Ressourcen der Covata-Plattform anhand von über Ihren Account bereitgestellten Zugriffs-Token nutzen.
+
+Diese Funktion ist hilfreich, wenn ein Risiko erkannt wurde, dass Ihr Safe Share-Administrator-Account kompromittiert sein könnte, z. B. wenn Sie glauben, Sie könnten vergessen haben, sich von einem von mehreren Personen genutzten Computer abzumelden, oder wenn Ihr Laptop verloren ging oder gestohlen wurde, während Sie angemeldet waren.
+
+**Beendigung von Sitzungen Ihres Safe Share-Administrator-Accounts:**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf Ihre E-Mail-Adresse am rechten oberen Seitenrand und wählen Sie aus dem Dropdown-Menü **Mein Account**.
+3. Klicken Sie auf der nächsten Seite im Abschnitt **Sicherheit** auf die Schaltfläche **Beenden**. <br />
+    Ihre aktuelle Sitzung der Safe Share-Verwaltung bei der Covata-Plattform wird sofort beendet, d. h. Sie werden auch von Ihrer aktuellen Sitzung abgemeldet. Sie müssen sich anschließend erneut anmelden, um wieder Zugriff auf [Safe Share for Web](/3.4/de/user/index) und Ihre Covata-Plattform-Ressourcen zu erhalten. <br />
+   **Hinweis:** Jede andere Safe Share- Anwendung, bei der Sie eine aktive Sitzung haben, einschließlich anderer Client-Anwendungen, die Ressourcen der Covata-Plattform anhand von über Ihren Account bereitgestellten Zugriffs-Token nutzen, wird beendet, sobald die Zugriffs-Token für diese Sitzungen ablaufen.
+
+## Aktivierung und Deaktivierung von 2FA für einen Safe Share-Administrator <a id="enabling-or-disabling-2fa-for-a-platform-administrator" />
+
+Jeder Safe Share-Administrator-Account (einschließlich Ihres eigenen Accounts) kann bei Bedarf mit Zwei-Faktor-Authentifizierung (2FA) konfiguriert werden, indem diese Funktion für den betreffenden Account aktiviert wird.
+
+Wenn für einen Benutzer-Account 2FA aktiviert ist, muss der betreffende Benutzer für eine erfolgreiche Anmeldung über die Covata-Anmeldeseite sowohl sein Passwort (d. h. den ersten Authentifizierungsfaktor) als auch einen Authentifizierungscode (den zweiten Authentifizierungsfaktor) eingeben. Dieser Code wird von einer auf seinem Mobilgerät ausgeführten Authentifizierungsanwendung erzeugt.
+
+Die 2FA-Funktion unterstützt die folgenden Mobilgeräte und Authentifizierungs-Apps:
+
+- Android-gestützte Geräte mit der Google Authenticator-App,
+- Apple iPhone, iPad oder iPod Touch mit der Google Authenticator-App und
+- Microsoft Windows-gestützte Geräte mit der Microsoft Authenticator-App.
+
+<Note>
+
+- Ehe Sie für einen Safe Share-Administrator-Account 2FA aktivieren, ist es empfehlenswert sich zunächst zu vergewissern, ob der betreffende Benutzer eines dieser unterstützten Mobilgeräte (siehe oben) besitzt, oder ihn zu informieren, dass er Zugang zu einem solchen Gerät benötigen wird, um sich weiterhin über die Covata-Anmeldeseite anmelden zu können.
+- URLs, von denen die betreffenden Authentifizierungs-Apps für unterstützte Geräte heruntergeladen werden können, stehen Benutzern über die [Seite](/3.4/de/admin-platform/configuring-platform-administration-properties) **Konfiguration** zur Verfügung, wenn sie für ihre Accounts 2FA konfigurieren (und können dort konfiguriert werden).
+
+</Note>
+
+**Aktivierung bzw. Deaktivierung von 2FA für Ihren und/oder andere Safe Share-Administrator-Account(s):**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Administratoren** links auf der [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Administratoren** aufzurufen.
+3. Suchen Sie den/die Safe Share-Administrator-Account(s), für den/die 2FA-Einstellungen aktiviert bzw. deaktiviert werden sollen.
+4. Sie haben die folgenden Optionen:
+
+   - Aktivieren Sie zur *Aktivierung von 2FA für den/die Account(s)* das/die Kontrollkästchen (in der Spalte **2FA aktiviert**) des/der betreffenden Benutzer-Accounts. 2FA wird für diese(n) Account(s) sofort aktiviert. <br />
+      Jeder Safe Share-Administrator, für den 2FA auf diese Weise aktiviert wird, erhält eine E-Mail-Benachrichtigung, dass 2FA für seinen Account aktiviert wurde. Diese Benachrichtigung enthält einen befristet gültigen Link zu den folgenden detaillierten Anweisungen für den Benutzer:
+
+     1. Konfiguration seines Mobilgeräts mit der entsprechenden Authentifizierungs-App
+     2. Konfiguration der Authenticator-App (nach ihrer Installation) für den Covata-Benutzer-Account, sodass die Authenticator-App die entsprechenden Authentifizierungscodes für den zweiten Authentifizierungsfaktor erzeugen kann
+   - Deaktivieren Sie zur *Deaktivierung von 2FA für den/die Account(s)* das/die Kontrollkästchen (in der Spalte **2FA aktiviert**) des/der betreffenden Benutzer-Accounts. 2FA wird für diese(n) Account(s) deaktiviert. <br />
+      Jeder Safe Share-Administrator, für den 2FA auf diese Weise deaktiviert wird, erhält eine E-Mail-Benachrichtigung, dass 2FA für seinen Account deaktiviert wurde.
+
+<Tip>
+
+Sie können 2FA für Ihren eigenen Safe Share-Administrator-Account auch auf die folgende Weise aktivieren bzw. deaktivieren:
+
+1. Vergewissern Sie sich, dass Sie bei der Safe Share-Verwaltung [angemeldet sind](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration).
+2. Klicken Sie auf Ihre E-Mail-Adresse am rechten oberen Seitenrand und wählen Sie aus dem Dropdown-Menü **Mein Account**:
+3. Klicken Sie auf der nächsten Seite im Abschnitt **Sicherheit** auf die Schaltfläche **Aktivieren/Deaktivieren** rechts neben **Zwei-Faktor-Authentifizierung**.
+
+</Tip>
+
+## Neukonfiguration von 2FA für einen Safe Share-Administrator <a id="re-configuring-2fa-for-a-platform-administrator" />
+
+Wenn die Zwei-Faktor-Authentifizierung (2FA) für einen Safe Share-Administrator-Account [aktiviert ist](/3.4/de/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator), kann ein Benutzer aus den folgenden Gründen nicht in der Lage sein, Authentifizierungscodes für seinen zweiten Authentifizierungsfaktor zu erzeugen (für weitere Erklärungen siehe [oben](/3.4/de/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator)):
+
+- Der Safe Share-Administrator hat die Konfiguration für den Covata-Benutzer-Account des Benutzers aus der Authenticator-App auf seinem Mobilgerät gelöscht.
+- Der befristet gültige Link für die 2FA-Konfiguration ist abgelaufen, ehe der Safe Share-Administrator die 2FA-Konfiguration abschließen konnte. Dies ist der Link in der E-Mail-Benachrichtigung des Safe Share-Administrators, dass für seinen Account 2FA aktiviert wurde.
+- Der Safe Share-Administrator hat sein Mobilgerät verloren. Der Benutzer benötigt in diesem Fall ein Ersatzgerät, um sich weiterhin über die Covata-Anmeldeseite bei seinem Account anmelden zu können, solange 2FA aktiviert ist.
+
+Wenn eines dieser Szenarien eintritt, kann sich der Safe Share-Administrator nicht mehr über die Covata-Anmeldeseite anmelden und informiert Sie oder einen anderen Safe Share-Administrator dann wahrscheinlich per E-Mail, dass eines dieser Szenarien eingetreten ist (dies ist über die Funktion „Wenden Sie sich an Ihren Administrator“ auf der Anforderungsseite für einen **Authentifizierungscode** möglich, wenn der Benutzer versucht, sich über die Covata-Anmeldeseite anzumelden).
+
+Zur Behebung des Problems muss 2FA für den betreffenden Safe Share-Administrator neu konfiguriert (mit einem neuen Seed versehen) werden.
+
+**Neukonfiguration von 2FA für einen oder mehrere Safe Share-Administrator-Account(s):**
+
+1. [Melden Sie sich](/3.4/de/admin-platform/accessing-platform-administration#signing-in-to-platform-administration) bei der Safe Share-Verwaltung an.
+2. Klicken Sie auf die Option **Administratoren** links auf der [Oberfläche Safe Share-Verwaltung](/3.4/de/admin-platform/accessing-platform-administration#the-platform-administration-interface), um die Seite **Administratoren** aufzurufen.
+3. Suchen Sie den Safe Share-Administrator bzw. die Safe Share-Administratoren, dessen/deren Benutzer-Account(s) neu für 2FA konfiguriert werden soll(en).
+4. Klicken Sie auf die Schaltfläche **Neuen Seed erstellen** (in der Spalte **Neuen 2FA-Seed erstellen**) des/der betreffenden Account(s). Diese Schaltfläche ist nur für Safe Share-Administrator-Accounts verfügbar, für die 2FA bereits [aktiviert ist](/3.4/de/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator). <br />
+    Jeder Safe Share-Administrator, für den 2FA auf diese Weise neu konfiguriert wird, erhält eine E-Mail-Benachrichtigung, dass 2FA für seinen Account aktiviert wurde, ähnlich der Benachrichtigung, die er erhielt, als [2FA für seinen Account aktiviert wurde](/3.4/de/admin-platform/administering-platform-administrator-users#enabling-or-disabling-2fa-for-a-platform-administrator). Diese Benachrichtigung enthält einen neuen befristet gültigen Link zu den folgenden detaillierten Anweisungen für den Benutzer:
+
+   1. (Neu-)Konfiguration seines Mobilgeräts mit der entsprechenden Authentifizierungs-App (falls der Benutzer diesen Schritt erneut ausführen muss)
+   2. (Neu-)Konfiguration der Authenticator-App (nach ihrer Installation) für den Covata-Benutzer-Account, sodass die Authenticator-App die entsprechenden Authentifizierungscodes für den zweiten Authentifizierungsfaktor erzeugen kann

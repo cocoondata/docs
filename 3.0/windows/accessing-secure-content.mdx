@@ -1,0 +1,186 @@
+---
+title: "Accessing secure content"
+---
+
+To access secure content, you can:
+
+- [View, print and/or download/decrypt](/3.0/windows/accessing-secure-content#viewing-printing-downloading-your-own-secure-content) personally owned files you have previously uploaded and stored securely with [Safe Share for Windows](/3.0/windows/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content), including the [Safe Share web application](/3.0/user/uploading-storing-and-sharing-content-securely#uploading-and-storing-personally-owned-content) as well as Safe Share for OS X, iOS and Android applications. These actions can also be performed on files that you had uploaded to share through another user's folder with any of these Safe Share applications.
+- [View](/3.0/windows/accessing-secure-content#viewing-printing-downloading-secure-content-shared-with-you) files which someone else has stored securely and shared with you using [Safe Share for Windows](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content), including the [Safe Share web application](/3.0/user/uploading-storing-and-sharing-content-securely#sharing-secure-content) as well as Safe Share for OS X, iOS and Android applications. You can only [print or download/decrypt](/3.0/windows/accessing-secure-content#viewing-printing-downloading-secure-content-shared-with-you) these files if the owners who shared the files have granted permission to perform these actions.
+
+## Viewing/printing/downloading your own secure content <a id="viewing-printing-downloading-your-own-secure-content" />
+
+**To view/print/download/decrypt content which you have previously stored securely:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder (for your/the required organization).
+2. Within the `My Secured Files` subfolder, locate to the file/s or folder/s whose content you wish to view/print/download/decrypt.
+3. Do one of the following based on the action to be performed:
+
+   - *To begin viewing/printing your own secure content*, either:
+
+     - For a single viewable file, double-click it to open Safe Share for Windows' read-only content viewer window (i.e. the [Safe Share Content Viewer](/3.0/windows/accessing-secure-content#read-only-content-viewer)). <br />
+       **Note:** If the file you double-clicked is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/3.0/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/3.0/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/3.0/user/index) for more information. <br />
+       *OR*
+     - For one or more file/s, select and right-click on the file/s and choose **Safe Share &gt; View**. A separate [Safe Share Content Viewer](/3.0/windows/accessing-secure-content#read-only-content-viewer) window opens for each viewable file of your selected content.
+
+       ![Viewing my own files using the pop-up menu](/images/d97316b6796d-right-clicking-an-item-owner.png)
+
+       <br />
+       **Notes:**
+
+       - If one of the files you selected is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/3.0/user/accessing-secure-content#content-viewer).
+       - The **View** menu item is disabled if the selected items *only consist* of folders and/or non-viewable files. Although this menu option is available if one or more folders have been selected *in addition* to viewable files, any content within these folders is ignored (and not opened in the Safe Share Content Viewer).
+   - *To begin downloading/decrypting your own secure content*, either:
+
+     - Select the item/s and drag/copy/move them to a location outside the `Safe Share` folder; for example, dragging them to your desktop: <br />
+       ![Downloading my own files to desktop by drag and drop](/images/ca880cbed00c-downloading-my-own-files-to-desktop-by-drag-and-drop.jpg)
+       <br />
+       **Note:** Regardless of whether you copy or move items from `My Secured Files`, the secured items will remain in the `My Secured Files` subfolder. <br />
+       *OR*
+     - Alternatively, select and right-click on one or more file/s and/or folder/s and choose **Safe Share &gt; Download** from the pop-up menu:
+
+       ![Downloading my own files to desktop using the pop-up menu](/images/d97316b6796d-right-clicking-an-item-owner.png)
+
+       <br />
+        The **Browse For Folder** dialog box opens, prompting you to specify a location where your selected content will be download.
+
+     Safe Share for Windows downloads/saves the content (decrypting it on your computer) at the target location (e.g. your desktop). <br />
+     **Note:** If the Safe Share for Windows [cache policy](/3.0/windows/managing-cache-policy-settings) settings are active and the files you are downloading are already cached locally on your computer (i.e. with `.cov` file extensions), then Safe Share for Windows only decrypts these files from locally cached content (as opposed to downloading the content first).
+
+## Viewing/printing/downloading secure content (shared with you) <a id="viewing-printing-downloading-secure-content-shared-with-you" />
+
+The ability to view and/or print + download/decrypt files is based on the [permissions](/3.0/windows/uploading-storing-and-sharing-content-securely#selecting-a-permission-set) that the owners of these files granted their collaborators (i.e. you) when the files were [shared](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content). The content viewer is useful when the owner of a file wants to share the file's content but not allow the content to be printed and downloaded.
+
+**To view/print/download/decrypt secure content which someone else has securely shared with you:**
+
+1. [Access](/3.0/windows/uploading-storing-and-sharing-content-securely#accessing-the-applications-folder) the `Safe Share` folder (for your/the required organization).
+2. Within the `Shared With Me` subfolder, locate the folder of the Covata user who shared content with you. <br />
+   **Notes:**
+
+   - The files/folders of each Covata user who shares content with you appears in its own folder within `Shared With Me`. The names of these folders have the format: <br />
+     `Shared By <local-part-of-email-address> - <domain-part-of-email-address>`
+   - You can only download/decrypt a file within these types of folders if the owner of this file granted you the **Download** permissions (or a greater one that grants the individual *download* permission) when they [shared the file (or one of its ancestral folders)](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) with you. If you do not have the individual *download* permission on a file, then you can only view its content.
+3. Within this Covata user's folder, locate the file/s or folder/s whose content you wish to view/print/download/decrypt. <br />
+   **Note:** To determine if you can view or print the content of a file or folder (i.e. by having the individual *view* or *print* permissions respectively on the item), right-click the item and choose **Safe Share &gt; Show permissions** from the pop-up menu:
+
+   ![Identifying a item's permissions](/images/992b67a76696-right-clicking-an-item-collaborator.png)
+4. Do one of the following based on the action to be performed:
+
+   - <a id="to-begin-viewing-printing-secure-content-shared-with-you" />*To begin viewing/printing secure content which someone else has securely shared with you*, either:
+
+     - For a single viewable file, double-click it to open Safe Share for Windows' read-only content viewer window (i.e. the [Safe Share Content Viewer](/3.0/windows/accessing-secure-content#read-only-content-viewer)). <br />
+       **Note:** If the file you double-clicked is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/3.0/user/accessing-secure-content#content-viewer). See [File formats supported by the content viewer](/3.0/user/accessing-secure-content#file-formats-supported-by-the-content-viewer) in the [Safe Share User's Guide for the web application](/3.0/user/index) for more information. <br />
+       *OR*
+     - For one or more file/s, select and right-click on these file/s and choose **Safe Share &gt; View**. A separate [Safe Share Content Viewer](/3.0/windows/accessing-secure-content#read-only-content-viewer) window opens for each viewable item of your selected content. <br />
+       **Notes:**
+
+       - If one of the files you selected is not viewable, a message is shown indicating that the file's type is not supported by the Safe Share Content Viewer. File types which are supported are equivalent to those in the Safe Share web application's [content viewer](/3.0/user/accessing-secure-content#content-viewer).
+       - The **View** menu item is disabled if the selected item/s *only consist* of folders and/or non-viewable files. Although this menu option is available if one or more folders have been selected *in addition* to viewable files, any content within these folders is ignored (and not opened in the Safe Share Content Viewer).
+   - *To begin downloading/decrypting secure content which someone else has securely shared with you*, either:
+
+     - Select the item/s and drag/copy/move them to a location outside the `Safe Share` folder - e.g. dragging them to your desktop:
+
+       ![Downloading a shared file to desktop by drag and drop](/images/5b3afb2741dc-downloading-a-shared-file-to-desktop-by-drag-and-drop.jpg)
+       <br />
+       **Note:** Regardless of whether you copy or move items from `Shared With Me`, the secured items will remain in the `Shared With Me` subfolder. <br />
+       *OR*
+     - Alternatively, select and right-click on one or more file/s and/or folder/s and choose a **Safe Share &gt; Download** option from the pop-up menu:
+
+       ![Identifying a item's permissions](/images/992b67a76696-right-clicking-an-item-collaborator.png)
+
+       <br />
+        The **Browse For Folder** dialog box opens, prompting you to specify a location where your selected content will be download.
+
+     Safe Share for Windows downloads/saves the content (decrypting it on your computer) at the target location (e.g. your desktop).
+
+<Note>
+
+- If you downloaded a folder, either by dragging/copying/moving the folder to a location outside the `Safe Share` folder (or via the **Safe Share &gt; Download** right-click option), then all files within the folder (including its subfolders) are downloaded/decrypted, with the exception of subfolders on which you only have **View** permissions. If such a subfolder were to contain its own folder on which you had the individual *download* permission, then you would need to download this subfolder in a separate action.
+- If the Safe Share for Windows [cache policy](/3.0/windows/managing-cache-policy-settings) settings are active and the files you are downloading are already cached locally on your computer (i.e. with `.cov` file extensions), then Safe Share for Windows only decrypts these files from locally cached content (as opposed to downloading the content from remote storage first).
+- If files were *moved out* of any `Safe Share` folder to a network drive location, then these files will only reappear in the source `Safe Share` folder following a subsequent Safe Share for Windows synchronization event (with remote storage managed by the Covata Platform). Regardless of the `Safe Share` folder's [cache policy settings](/3.0/windows/managing-cache-policy-settings), these files will always reappear as `.covl` files and their encrypted content will only be downloaded the next time the files are decrypted (using Safe Share for Windows).
+- If Safe Share for Windows experiences delays in network communication, you may notice the following behavior:
+
+  1. The encrypted files are temporarily copied to their target location.
+  2. Safe Share for Windows decrypts these files from their temporary copies (created in the previous step) and saves them to the same location as their temporary copies.
+  3. The temporary copies are deleted.
+
+</Note>
+
+## Safe Share for Windows' read-only content viewer <a id="read-only-content-viewer" />
+
+Safe Share for Windows' read-only content viewer (also known as the *Safe Share Content Viewer* within the application) and the [content viewer](/3.0/user/accessing-secure-content#content-viewer) of the Safe Share web application are equivalent features.
+
+The Safe Share Content Viewer opens when you view [your own](/3.0/windows/accessing-secure-content#viewing-printing-downloading-your-own-secure-content) or [someone else's](/3.0/windows/accessing-secure-content#viewing-printing-downloading-secure-content-shared-with-you) file with Safe Share for Windows.
+
+**Safe Share for Windows' content viewer for image files:**
+
+![Safe Share for Windows' content viewer for image files](/images/57616f5f97e5-content-viewer-image.jpg)
+
+**Safe Share for Windows' content viewer for document files:**
+
+![Safe Share for Windows' content viewer for document files](/images/17e067b781f6-content-viewer-document.png)
+
+**Tips on using the Safe Share Content Viewer:**
+
+- Click the 'Print' icon
+  ![Print icon](/images/542362c4400f-content-viewer-print-icon.png)
+
+   to print the file's content. <br />
+  **Note:** This icon will not be available if the file you are viewing was [shared with you](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) *and* the owner of that file did not grant you (as a collaborator) **Download** permissions, which in addition to [downloading the file's content](/3.0/windows/accessing-secure-content#viewing-printing-downloading-secure-content-shared-with-you), allows you to print it directly from the content viewer.
+- If you are viewing an image file, click the 'Print preview' icon
+  ![Print preview icon](/images/82d155c1cb3c-content-viewer-print-preview-icon.png)
+
+   to view a preview of the file's content (before printing it). <br />
+  **Notes:**
+
+  - Like the 'Print' icon, this icon will also not be available if the file you are viewing was [shared with you](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) *and* the owner of that file did not grant you (as a collaborator) **Download** permissions.
+  - The print preview feature has its own functional icons for printing and zooming.
+  - Print previews can only be generated in portrait orientation. Landscape-oriented previews are not available through this feature.
+- Click the 'Actual size'
+  ![Actual size icon](/images/c7fb2a958546-content-viewer-actual-size-icon.png)
+
+   and 'Fit to viewer'
+
+  ![Fit to viewer icon](/images/5f7586e7fcce-content-viewer-fit-to-viewer-icon.png)
+
+   icons zoom to the native size of the content or the size that fits the viewer, respectively.
+- Click the 'Zoom In'
+  ![Zoom in icon](/images/a05b11f7e533-content-viewer-zoom-in-icon.png)
+
+   and 'Zoom Out'
+
+  ![Zoom out icon](/images/bc37dc77ad28-content-viewer-zoom-out-icon.png)
+
+   icons to zoom in and out of the content view, respectively. The adjacent drop-down can also be used to select an appropriate zoom level.
+- Click the 'Download' icon
+  ![Download icon](/images/8308c7d856aa-content-viewer-download-icon.png)
+
+   on the content viewer to download the content of a file (belonging to [you](/3.0/windows/accessing-secure-content#viewing-printing-downloading-your-own-secure-content) or [someone else](/3.0/windows/accessing-secure-content#viewing-printing-downloading-secure-content-shared-with-you)). <br />
+  **Note:** This icon will not be available if the file you are viewing was [shared with you](/3.0/windows/uploading-storing-and-sharing-content-securely#sharing-secure-content) *and* the owner of that file did not grant you (as a collaborator) **Download** permissions.
+- If you are the owner of the file you are currently viewing, click the 'Share' icon
+  ![Share icon](/images/3297efd51c26-content-viewer-share-icon.png)
+
+   to [open the 'Share' dialog box](/3.0/windows/uploading-storing-and-sharing-content-securely#share-dialog-box), which allows you to add new collaborators and/or modify existing collaborators (including their permissions) on this file. <br />
+  **Note:** This icon will not be visible if you are not the owner of this file.
+- If your content consists of multiple pages, you can navigate to different pages by:
+
+  - Clicking the 'Next Page'
+    ![Next page icon](/images/9be40c24a983-content-viewer-next-page-icon.png)
+
+     and 'Previous Page'
+
+    ![Previous page icon](/images/a94611939a2e-content-viewer-previous-page-icon.png)
+
+     icons to respectively move forward and back one page at a time.
+  - Clicking the 'First Page'
+    ![First page icon](/images/eaaccbd77a31-content-viewer-first-page-icon.png)
+
+     and 'Last Page'
+
+    ![Last page icon](/images/899b6e64b831-content-viewer-last-page-icon.png)
+
+     icons to respectively jump/go to the first and last pages of content.
+  - Typing a page number in the 'Current Page' field (followed by the 'return/enter' key).
+
+---
+
+#### Please provide your feedback here

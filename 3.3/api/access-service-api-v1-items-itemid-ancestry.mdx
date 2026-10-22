@@ -1,0 +1,71 @@
+---
+title: "<access-service>/api/v1/items/{itemId}/ancestry"
+---
+
+## URL structure <a id="access-service-api-v1-items-itemid-ancestry-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/items/{itemId}/ancestry
+```
+
+where `{itemId}` is the ID of a file object/Secure Object or folder/collection.
+
+## Supported methods and overview <a id="access-service-api-v1-items-itemid-ancestry-supported-methods-and-overview" />
+
+- `GET` - used to retrieve a list of information about the ancestral folders/[collection](/3.3/api/working-with-files-and-folders-fundamentals#collection)s of a specified file object/[Secure Object](/3.3/api/working-with-files-and-folders-fundamentals#secure-object) or folder (i.e. [item](/3.3/api/working-with-files-and-folders-fundamentals#item)), specified by `itemId`.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-items-itemid-ancestry-detailed-description" />
+
+This API endpoint retrieves a list of information about the ancestral folders of a file object or folder, specified by `itemId`.
+
+The item's ID can be obtained by calling the [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/items](/3.3/api/access-service-api-v1-organisations-orgid-items) API endpoint, which retrieves a list of information associated with file objects and folders that can be filtered using various 'search' criteria.
+
+The list of folder information returned is ordered from the root location (whose ID is `0`) first, through to the immediate parent folder last.
+
+## Supported roles and conditions <a id="access-service-api-v1-items-itemid-ancestry-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)):
+
+- [Originator](/3.3/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the item whose ID is specified by `{itemId}` in the request's URL.
+- **Originator**, [Collaborator](/3.3/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/3.3/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator on the item whose ID is specified by `{itemId}` in the URL.
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-items-itemid-ancestry#access-service-api-v1-items-itemid-ancestry-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-items-itemid-ancestry-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-items-itemid-ancestry-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing an array of objects with the following members is also returned:
+
+- **id** - The ID of the location/folder represented by this JSON object. For the root location, this value is `0`. For a folder location, this value is the folder's ID.
+- **name** - The name of the folder represented by this JSON object. For the root location, this value is an empty string. For a folder location, this value is the folder's name.
+- **parentId** - The ID of the parent location of the folder represented by this JSON object. For the root location, this value is `0`. For a folder location, this value is the immediate parent folder's ID (or `0` if the immediate parent location is the root location). <br />
+  **Example (response):**
+
+  ```json
+  [{
+      "id": "0",
+      "name": "",
+      "parentId": "0"
+  }, {
+      "id": "751980834491527168",
+      "name": "Shared Folder",
+      "parentId": "0"
+  }, {
+      "id": "752389961810243584",
+      "name": "Other",
+      "parentId": "751980834491527168"
+  }]
+  ```

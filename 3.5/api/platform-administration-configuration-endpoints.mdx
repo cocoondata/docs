@@ -1,0 +1,35 @@
+---
+title: "SafeShare Administration configuration endpoints"
+---
+
+The endpoints in this section are used for handling properties that are configurable through SafeShare Administration.
+
+### SafeShare Administration property-handling endpoints (configurable through SafeShare Administration only)
+
+- [&lt;access-service&gt;/api/v1/config/server](/3.5/api/access-service-api-v1-config-server)
+- [&lt;access-service&gt;/api/v1/config/server/\{configId\}](/3.5/api/access-service-api-v1-config-server-configid)
+
+### SafeShare Administration property-handling endpoints related to theming SafeShare's interfaces
+
+Many of these properties can be overridden through Organisation Administration. For more information, see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}](/3.5/api/access-service-api-v1-organisations-orggroupid) in [Organisation configuration and information retrieval endpoints](/3.5/api/organisation-configuration-and-information-retrieval-endpoints).
+
+- [&lt;access-service&gt;/api/v1/config/theme/adminEmail](/3.5/api/access-service-api-v1-config-theme-adminemail)
+- [&lt;access-service&gt;/api/v1/config/theme/adminHelpUrl](/3.5/api/access-service-api-v1-config-theme-adminhelpurl)
+- [&lt;access-service&gt;/api/v1/config/theme/androidAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-androidauthenticatorurl)
+- [&lt;access-service&gt;/api/v1/config/theme/applicationName](/3.5/api/access-service-api-v1-config-theme-applicationname)
+- [&lt;access-service&gt;/api/v1/config/theme/companyName](/3.5/api/access-service-api-v1-config-theme-companyname)
+- [&lt;access-service&gt;/api/v1/config/theme/copyright](/3.5/api/access-service-api-v1-config-theme-copyright)
+- [&lt;access-service&gt;/api/v1/config/theme/iphoneAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-iphoneauthenticatorurl)
+- [&lt;access-service&gt;/api/v1/config/theme/legalUrl](/3.5/api/access-service-api-v1-config-theme-legalurl)
+- [&lt;access-service&gt;/api/v1/config/theme/orgAdminHelpUrl](/3.5/api/access-service-api-v1-config-theme-orgadminhelpurl)
+- [&lt;access-service&gt;/api/v1/config/theme/orgRemovalActionDays](/3.5/api/access-service-api-v1-config-theme-orgremovalactiondays)
+- [&lt;access-service&gt;/api/v1/config/theme/privacyUrl](/3.5/api/access-service-api-v1-config-theme-privacyurl)
+- [&lt;access-service&gt;/api/v1/config/theme/supportLink](/3.5/api/access-service-api-v1-config-theme-supportlink)
+- [&lt;access-service&gt;/api/v1/config/theme/versionUrl](/3.5/api/access-service-api-v1-config-theme-versionurl)
+- [&lt;access-service&gt;/api/v1/config/theme/webappHelpUrl](/3.5/api/access-service-api-v1-config-theme-webapphelpurl)
+- [&lt;access-service&gt;/api/v1/config/theme/windowsAuthenticatorUrl](/3.5/api/access-service-api-v1-config-theme-windowsauthenticatorurl)
+
+### SafeShare Administration property-handling endpoints accessible publicly (without authentication)
+
+- [&lt;access-service&gt;/api/v1/config](/3.5/api/access-service-api-v1-config)
+- [&lt;access-service&gt;/theme...](/3.5/api/access-service-theme) (use this endpoint to reveal information about the current values for the properties above)

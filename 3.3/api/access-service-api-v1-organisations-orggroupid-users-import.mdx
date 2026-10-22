@@ -1,0 +1,153 @@
+---
+title: "<access-service>/api/v1/organisations/{orgGroupId}/users/import"
+---
+
+## URL structure <a id="access-service-api-v1-organisations-orggroupid-users-import-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/organisations/{orgGroupId}/users/import
+```
+
+where `{orgGroupId}` is the ID of an organization.
+
+## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-users-import-supported-methods-and-overview" />
+
+- `POST` - used to add new [Covata user](/3.3/api/authentication-and-authorisation) accounts <sup>1</sup> [in bulk from a CSV file](/3.3/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) to an organization (specified by `orgGroupId`).
+
+## Detailed description <a id="access-service-api-v1-organisations-orggroupid-users-import-detailed-description" />
+
+This API endpoint adds new Covata user accounts <sup>1</sup> in bulk from a CSV file to an organization (specified by `orgGroupId`).
+
+<sup>1</sup> If a Covata user account is not already registered on the Covata Platform, then making this request automatically creates this user account.
+
+## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-users-import-supported-roles-and-conditions" />
+
+This API endpoint supports requests utilizing Covata user accounts with the following [roles](/3.3/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organization Administrator's Guide](/3.3/admin-org/index)) and conditions:
+
+- [Organization administrator](/3.3/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organization specified by `{orgGroupId}` in the request's URL.
+
+The Covata Platform's resources available to a Covata user meeting the criteria above is determined by the access token submitted in the [header](/3.3/api/access-service-api-v1-organisations-orggroupid-users-import#access-service-api-v1-organisations-orggroupid-users-import-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-organisations-orggroupid-users-import-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+The following header is also required in the request to allow multi-part (including binary) form data elements to be uploaded through the request:
+
+- `Content-Type: multipart/form-data`
+
+<Note>
+
+It is also worth appending to this header a `boundary` parameter, whose string value is used to demarcate each multi-part form data element of the request (i.e. this string is not used for any other purpose throughout the entire request). <br />
+ For example, to use the following string to demarcate each multi-part form data element: <br />
+`-----------------------------12345678901234567890123456` <br />
+ assign this string value to the `boundary` parameter, which in turn is appended to the `Content-Type: multipart/form-data` header, such that this header will be: <br />
+`Content-Type: multipart/form-data; boundary=-----------------------------12345678901234567890123456`
+
+</Note>
+
+## Required parameters <a id="access-service-api-v1-organisations-orggroupid-users-import-required-parameters" />
+
+The following required parameter must be sent in the **body** of the POST request, as an individual **multi-part form data element**:
+
+- **file** - The actual data of the CSV file containing Covata user accounts to be added to the organization. See [Adding new users in bulk (from CSV)](/3.3/admin-org/administering-users-within-an-organisation#adding-organisation-user-accounts-in-bulk-from-csv) in the Organization Administrator's Guide for more information about the preparation and requirements for your CSV file. <br />
+  **Example (uploading a CSV file containing user accounts):**
+
+  ```text
+  -----------------------------12345678901234567890123456
+  Content-Disposition: form-data; name="file"; filename="UsersToImport.csv"
+  Content-Type: text/csv
+
+  {YOUR ACTUAL CSV DATA HERE}
+  -----------------------------12345678901234567890123456
+  ```
+
+## Returns <a id="access-service-api-v1-organisations-orggroupid-users-import-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **success** - A boolean value that indicates whether (`true`) or not (`false`) any of the user accounts specified in the CSV file were successfully imported into the organization specified by `{orgGroupId}` in the URL.
+- **message** - An member containing the internationalization (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organization (i.e. hard-coded in the Covata Platform), as the sub-member:
+
+  - **i18n** - A member containing the I18N code <sup>2</sup> for the message indicating the number of user accounts successfully imported into this organization, as sub-members:
+
+    - **message** - The message itself, in the language that the user account (whose [access token is submitted in the request](/3.3/api/access-service-api-v1-organisations-orggroupid-users-import#access-service-api-v1-organisations-orggroupid-users-import-supported-roles-and-conditions) to this endpoint) is configured for (via their I18N settings).
+    - **code** - The I18N code for this message's value, beginning with `server.userimportjob.imported.` This I18N code could include the substring `plural`, `single` or `none`.
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N **code** for use in the **message**'s value above. When the I18N substring is `plural`, this array contains a sub-array whose values are the argument **usernumber**, followed by the number of users who were successfully imported into the organization.
+- **errors** - An array of strings, each one describing an error encountered when importing a new Covata user to the Covata Platform from the CSV file. An member containing the internationalization (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organization (i.e. hard-coded in the Covata Platform), as the sub-member:
+
+  - **i18n** - A member containing the I18N code <sup>2</sup> for the message indicating the number of user accounts successfully imported into this organization, as sub-members:
+
+    - **message** - The message itself, in the language that the user account (whose access token is submitted in the request to this endpoint) is configured for (via their I18N settings).
+    - **code** - The I18N code for this message's value, beginning with `server.userimportjob.` This I18N code could include one of these substrings:
+
+      - `invaliduserrole.exclusionviolation`
+      - `invaliduserrole.cannotdowngrade`
+      - `invaliduserrole.toofewroles`
+      - `invaliduserrole.toomanyroles`
+      - `invaliduserrole.invalidrole`
+      - `invaliduserrole.missing`
+      - `invaliduserrole.unsupported`
+      - `invaliduserrole.mappingerror`
+      - `invaliduserrole.badcsvformat`
+      - `invaliduserrole.savefailed`
+      - `formaterrors`
+      - `formaterrors.validatedrowcontent`
+      - `bizlogicerrors`
+      - `defaultplan.missing`
+      - `orgquotaexceeded`
+      - `createuser.failed`
+    - **arguments** - An array containing any arguments/variables that constitute the value of the I18N **code** used in the **message**'s value above. When the I18N substring is:
+
+      - `invaliduserrole.exclusionviolation` - this array contains a sub-array whose values are the argument **exclusionViolations**.
+      - `invaliduserrole.cannotdowngrade` - this array contains a sub-array whose values are the arguments **originalrole** and **downgraderole**, whose respective values are strings representing the role the user originally had in this organization, followed by the new (i.e. downgraded) role being applied to this user.
+      - `invaliduserrole.toofewroles` - this array contains a sub-array whose values are the argument **min**, followed by the minimum number of roles that must to be applied to the user.
+      - `invaliduserrole.toomanyroles` - this array contains a sub-array whose values are the argument **max**, followed by the maximum number of roles that can to be applied to the user.
+      - `invaliduserrole.missing` - this array contains a sub-array whose values are the argument **useremail**, followed by the email address of the user to be imported into the organization, who did not have a role specified in the CSV file.
+      - `invaliduserrole.unsupported` - this array contains a sub-array whose values are the arguments **rolename** and **useremail**, whose respective values are strings representing the unsupported role for the user (represented by their email address) in the CSV file.
+      - `invaliduserrole.mappingerror` - this array contains a sub-array whose values are the arguments **role** and **email**, whose respective values are strings representing role being applied to the user (represented by their email address) in the CSV file.
+      - `defaultplan.missing` - this array contains a sub-array whose values are the argument **orgGrpName**, followed by the name of the organization which does yet not have a default plan configured.
+      - `createuser.failed` - this array contains a sub-array whose values are the argument **useremail**, followed by the email address of the user which the Covata Platform failed to create for an unknown reason.
+
+  <sup>2</sup> Your client application can exploit the Covata Platform's I18N features, by initially [downloading the relevant language bundles](/3.3/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Covata Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Covata Platform's I18N features, see [Managing internationalization](/3.3/admin-platform/managing-internationalization) in the Safe Share Administrator's Guide. <br />
+  **Example (response):**
+
+  ```json
+  {
+      "success": true,
+      "message": {
+          "i18n": {
+              "message": "2 users successfully imported.",
+              "code": "server.userimportjob.imported.plural",
+              "arguments": [
+                  [
+                      "usernumber",
+                      "2"
+                  ]
+              ]
+          }
+      },
+      "errors": [
+          {
+              "i18n": {
+                  "message": "Role 'Ad hoc' is not supported in user import for 'adhoc.user@xy-company.com'",
+                  "code": "server.userimportjob.invaliduserrole.unsupported",
+                  "arguments": [
+                      [
+                          "rolename",
+                          "Ad hoc"
+                      ],
+                      [
+                          "useremail",
+                          "adhoc.user@xy-company.com"
+                      ]
+                  ]
+              }
+          }
+      ]
+  }
+  ```

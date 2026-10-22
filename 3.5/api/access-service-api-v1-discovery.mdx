@@ -1,0 +1,607 @@
+---
+title: "<access-service>/api/v1"
+---
+
+## URL structure <a id="access-service-api-v1-discovery-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1
+```
+
+## Supported methods and overview <a id="access-service-api-v1-discovery-supported-methods-and-overview" />
+
+- `GET` - retrieves a list of callable API endpoints on the Covata Platform's Access Service that are available to integrators.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-discovery-detailed-description" />
+
+This API endpoint retrieves a list of every callable API endpoint on the the Covata Platform's Access Service that are available to integrators.
+
+Regardless of the Covata user's [role](/3.5/api/access-service-api-v1-discovery#access-service-api-v1-discovery-supported-roles) associated with the [access token](/3.5/api/access-service-api-v1-discovery#access-service-api-v1-discovery-required-headers) submitted with this request, all callable API endpoints are retrieved. However, each of these API endpoints has their own **Supported roles**.
+
+## Supported roles <a id="access-service-api-v1-discovery-supported-roles" />
+
+This API endpoint supports requests utilising Covata user accounts with the following roles (as described in the [SafeShare Administrator's](/3.5/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/3.5/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+
+- [Originator](/3.5/admin-org/administering-users-within-an-organisation#originator-role)
+- [Collaborator](/3.5/admin-org/administering-users-within-an-organisation#collaborator-role)
+- [Ad hoc](/3.5/admin-org/administering-users-within-an-organisation#adhoc-role)
+- [SafeShare administrator](/3.5/admin-platform/administering-platform-administrator-users#platform-administrator-role)
+- [Organisation administrator](/3.5/admin-org/administering-users-within-an-organisation#organisation-administrator-role)
+
+The Covata Platform's resources available to Covata users meeting the criteria above is determined by the access token submitted in the [header](/3.5/api/access-service-api-v1-discovery#access-service-api-v1-discovery-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-discovery-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorisation: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NjcwMTY2NjYsInVzZXJfbmFtZSI6ImFsZXgub...`
+
+## Returns <a id="access-service-api-v1-discovery-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+For successful requests only, a JSON-formatted response containing the following members is also returned:
+
+- **contentServiceURL** - The base URL of the Covata Platform's Content Service.
+- **webappServiceURL** - The base URL of the SafeShare web-based interfaces - i.e. for SafeShare for Web, SafeShare Administration and Organisation Administration.
+- **services** - An array containing information about each callable API endpoint on the Covata Platform's Access Service. Each element of this array contains information about one of these endpoints (represented as an object containing the following members):
+
+  - **name** - The internal name given to the API endpoint.
+  - **link** - The format of the API endpoint's URL, excluding the base URL component.
+  - **httpMethod** - The method supported by the API endpoint URL (above).
+
+  **Example (response):**
+
+  ```json
+  {
+      "contentServiceURL": "https://content-service-content.xy-company.com",
+      "webappServiceURL": "https://access-service-staticassets.xy-company.com",
+      "services": [{
+          "name": "getOrganisationItemFileExtensionBreakdown",
+          "link": "/api/v1/organisations/{orgGroupId}/statistics/items/extensions",
+          "httpMethod": "GET"
+      }, {
+          "name": "getWhiteListing",
+          "link": "/api/v1/userwhitelist/{objectId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "revokeApplicationApproval",
+          "link": "/api/v1/users/me/applications/approvals/{approvalId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "bulkActionOnWhiteListing",
+          "link": "/api/v1/userwhitelist/bulk",
+          "httpMethod": "POST"
+      }, {
+          "name": "getOrganisationItemStorageBreakdown",
+          "link": "/api/v1/organisations/{orgGroupId}/statistics/items/storage",
+          "httpMethod": "GET"
+      }, {
+          "name": "downloadBundle",
+          "link": "/api/v1/i18n/bundles/{localeCode}/download",
+          "httpMethod": "GET"
+      }, {
+          "name": "getOrganisationsSummary",
+          "link": "/api/v1/dashboard/organisations",
+          "httpMethod": "GET"
+      }, {
+          "name": "getItemsByOrg",
+          "link": "/api/v1/organisations/{orgId}/items",
+          "httpMethod": "GET"
+      }, {
+          "name": "itemsAncestry",
+          "link": "/api/v1/items/{itemId}/ancestry",
+          "httpMethod": "GET"
+      }, {
+          "name": "getItemsDelta",
+          "link": "/api/v1/items/delta",
+          "httpMethod": "GET"
+      }, {
+          "name": "getServerConfig",
+          "link": "/api/v1/config/server/{configId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "getOrganisationPlanBreakdown",
+          "link": "/api/v1/organisations/{orgGroupId}/statistics/plans",
+          "httpMethod": "GET"
+      }, {
+          "name": "updateContact",
+          "link": "/api/v1/users/me/contacts/{contactId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateObject",
+          "link": "/api/v1/objects/{objectId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "deleteCollection",
+          "link": "/api/v1/collections/{collectionId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "listOrganisationGroups",
+          "link": "/api/v1/organisations",
+          "httpMethod": "GET"
+      }, {
+          "name": "checkWhitelists",
+          "link": "/api/v1/organisations/{orgId}/userwhitelist/check",
+          "httpMethod": "POST"
+      }, {
+          "name": "createKey",
+          "link": "/api/v1/keys",
+          "httpMethod": "POST"
+      }, {
+          "name": "toggleEnableObjects",
+          "link": "/api/v1/organisations/{orgGroupId}/objects/{objectId}/enable",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateClientApp",
+          "link": "/api/v1/clientapps/{clientInfoId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "transferItems",
+          "link": "/api/v1/organisations/{orgId}/items/transfer",
+          "httpMethod": "POST"
+      }, {
+          "name": "unregisterDevice",
+          "link": "/api/v1/revoke_device",
+          "httpMethod": "POST"
+      }, {
+          "name": "getCollection",
+          "link": "/api/v1/collections/{collectionId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "updateWhitelist",
+          "link": "/api/v1/organisations/{orgId}/userwhitelist/{whitelistId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "listSystemUsers",
+          "link": "/api/v1/users",
+          "httpMethod": "GET"
+      }, {
+          "name": "createOrganisationUser",
+          "link": "/api/v1/organisations/{orgGroupId}/users",
+          "httpMethod": "POST"
+      }, {
+          "name": "deleteCollaborations",
+          "link": "/api/v1/collaborations/items/{itemId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "createOrDeleteSystemUsers",
+          "link": "/api/v1/users",
+          "httpMethod": "PUT"
+      }, {
+          "name": "createOrganisationObject",
+          "link": "/api/v1/organisations/{orgGroupId}/objects",
+          "httpMethod": "POST"
+      }, {
+          "name": "getIdpMetadata",
+          "link": "/api/v1/saml/{id}/idp-metadata",
+          "httpMethod": "GET"
+      }, {
+          "name": "regenerateTrustedDeviceSecret",
+          "link": "/api/v1/devices",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getContacts",
+          "link": "/api/v1/users/me/contacts",
+          "httpMethod": "GET"
+      }, {
+          "name": "createGroup",
+          "link": "/api/v1/organisations/{orgId}/groups",
+          "httpMethod": "POST"
+      }, {
+          "name": "getMyNotificationPreference",
+          "link": "/api/v1/users/me/notifications/email",
+          "httpMethod": "GET"
+      }, {
+          "name": "verifyValidLdapConnection",
+          "link": "/api/v1/ldapconnections/availability",
+          "httpMethod": "POST"
+      }, {
+          "name": "deleteContact",
+          "link": "/api/v1/users/me/contacts/{contactId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "deleteGroup",
+          "link": "/api/v1/organisations/{orgId}/groups/{groupId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getSupportedLocales",
+          "link": "/api/v1/i18n/bundles",
+          "httpMethod": "GET"
+      }, {
+          "name": "getObject",
+          "link": "/api/v1/objects/{objectId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "getDashboardLdapSummary",
+          "link": "/api/v1/dashboard/ldap",
+          "httpMethod": "GET"
+      }, {
+          "name": "createAdminToken",
+          "link": "/api/oauth/admin_token",
+          "httpMethod": "POST"
+      }, {
+          "name": "updateOrganisationUsers",
+          "link": "/api/v1/organisations/{orgGroupId}/users/{userId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getAllLocales",
+          "link": "/api/v1/i18n/localedetails",
+          "httpMethod": "GET"
+      }, {
+          "name": "updateMyDetails",
+          "link": "/api/v1/users/me",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getCollectionsWithinACollection",
+          "link": "/api/v1/collections/{collectionId}/collections",
+          "httpMethod": "GET"
+      }, {
+          "name": "getLabel",
+          "link": "/api/v1/organisations/{orgId}/labels/{labelId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "createSamlConfig",
+          "link": "/api/v1/saml",
+          "httpMethod": "POST"
+      }, {
+          "name": "createOrganisationCollection",
+          "link": "/api/v1/organisations/{orgId}/collections",
+          "httpMethod": "POST"
+      }, {
+          "name": "createClientApp",
+          "link": "/api/v1/clientapps",
+          "httpMethod": "POST"
+      }, {
+          "name": "removeOrganisationUser",
+          "link": "/api/v1/organisations/{orgGroupId}/users/{userId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "themeUploadApplication",
+          "link": "/api/v1/config/theme/applicationName",
+          "httpMethod": "PUT"
+      }, {
+          "name": "deleteWhitelist",
+          "link": "/api/v1/organisations/{orgId}/userwhitelist/{whitelistId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getOrganisationUsers",
+          "link": "/api/v1/organisations/{orgGroupId}/users",
+          "httpMethod": "GET"
+      }, {
+          "name": "createLabel",
+          "link": "/api/v1/organisations/{orgId}/labels",
+          "httpMethod": "POST"
+      }, {
+          "name": "deleteKey",
+          "link": "/api/v1/keys/{keyId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getLdapConnections",
+          "link": "/api/v1/ldapconnections",
+          "httpMethod": "GET"
+      }, {
+          "name": "deletePlan",
+          "link": "/api/v1/organisations/{orgGroupId}/plans/{planId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "importOrganisationUsers",
+          "link": "/api/v1/organisations/{orgGroupId}/users/import",
+          "httpMethod": "POST"
+      }, {
+          "name": "createWebsocketToken",
+          "link": "/api/oauth/websocket_token",
+          "httpMethod": "POST"
+      }, {
+          "name": "getDashboardClientAppsSummary",
+          "link": "/api/v1/dashboard/clients",
+          "httpMethod": "GET"
+      }, {
+          "name": "getGrantTypesForClientApp",
+          "link": "/api/v1/clientapps/grants/{clientInfo}",
+          "httpMethod": "GET"
+      }, {
+          "name": "getGroupLabels",
+          "link": "/api/v1/organisations/{orgId}/groups/{groupId}/labels",
+          "httpMethod": "GET"
+      }, {
+          "name": "deleteSamlConfigCert",
+          "link": "/api/v1/saml/{id}/certificate",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getObjectViewKey",
+          "link": "/api/v1/objects/{objectId}/keys/view",
+          "httpMethod": "GET"
+      }, {
+          "name": "getServerConfigProperties",
+          "link": "/api/v1/config/server",
+          "httpMethod": "GET"
+      }, {
+          "name": "updateCollection",
+          "link": "/api/v1/collections/{collectionId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateLabelPriority",
+          "link": "/api/v1/organisations/{orgId}/labels/{labelId}/priority",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getPlans",
+          "link": "/api/v1/organisations/{orgGroupId}/plans",
+          "httpMethod": "GET"
+      }, {
+          "name": "getObjectByHash",
+          "link": "/api/v1/objects",
+          "httpMethod": "GET"
+      }, {
+          "name": "revokeAllMyTokens",
+          "link": "/api/v1/users/me/expire",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getOrganisationGroup",
+          "link": "/api/v1/organisations/{orgGroupId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "sendItemNotification",
+          "link": "/api/v1/items/{itemId}/notifications",
+          "httpMethod": "POST"
+      }, {
+          "name": "updateServerConfigProperty",
+          "link": "/api/v1/config/server/{configId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "deleteSamlConfig",
+          "link": "/api/v1/saml/{id}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "createPlan",
+          "link": "/api/v1/organisations/{orgGroupId}/plans",
+          "httpMethod": "POST"
+      }, {
+          "name": "getGroups",
+          "link": "/api/v1/organisations/{orgId}/groups",
+          "httpMethod": "GET"
+      }, {
+          "name": "createContacts",
+          "link": "/api/v1/users/me/contacts",
+          "httpMethod": "POST"
+      }, {
+          "name": "registerTrustedDevice",
+          "link": "/api/v1/devices",
+          "httpMethod": "POST"
+      }, {
+          "name": "getObjectKey",
+          "link": "/api/v1/objects/{objectId}/keys",
+          "httpMethod": "GET"
+      }, {
+          "name": "setAdminI18nPreference",
+          "link": "/api/v1/i18n/adminpreference",
+          "httpMethod": "PUT"
+      }, {
+          "name": "groupDetails",
+          "link": "/api/v1/organisations/{orgId}/groups/{groupId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "deleteCustomLocaleBundle",
+          "link": "/api/v1/i18n/bundles/{localeCode}/delete",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "resetCustomLocaleBundle",
+          "link": "/api/v1/i18n/bundles/{localeCode}/reset",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getMyOrganisationDetails",
+          "link": "/api/v1/users/me/organisations",
+          "httpMethod": "GET"
+      }, {
+          "name": "updatePlan",
+          "link": "/api/v1/organisations/{orgGroupId}/plans/{planId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getPlan",
+          "link": "/api/v1/organisations/{orgGroupId}/plans/{planId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "itemHistory",
+          "link": "/api/v1/items/{itemId}/history",
+          "httpMethod": "GET"
+      }, {
+          "name": "getClientApps",
+          "link": "/api/v1/clientapps",
+          "httpMethod": "GET"
+      }, {
+          "name": "createDownloadToken",
+          "link": "/api/oauth/download_token",
+          "httpMethod": "POST"
+      }, {
+          "name": "getSamlConfigList",
+          "link": "/api/v1/saml",
+          "httpMethod": "GET"
+      }, {
+          "name": "getLabels",
+          "link": "/api/v1/organisations/{orgId}/labels",
+          "httpMethod": "GET"
+      }, {
+          "name": "toggleStatusSamlConfig",
+          "link": "/api/v1/saml/{id}/status",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getItem",
+          "link": "/api/v1/items/{itemId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "enableClientApp",
+          "link": "/api/v1/clientapps/{clientInfoId}/enable",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateOrganisationGroup",
+          "link": "/api/v1/organisations/{orgGroupId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getSamlConfig",
+          "link": "/api/v1/saml/{id}",
+          "httpMethod": "GET"
+      }, {
+          "name": "deleteIdpMetadata",
+          "link": "/api/v1/saml/{id}/idp-metadata",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getOrganisationUserSummary",
+          "link": "/api/v1/organisations/{orgGroupId}/statistics/users",
+          "httpMethod": "GET"
+      }, {
+          "name": "getAddressbookEntries",
+          "link": "/api/v1/organisations/{orgGroupId}/addressbook",
+          "httpMethod": "GET"
+      }, {
+          "name": "getWhitelists",
+          "link": "/api/v1/organisations/{orgId}/userwhitelist",
+          "httpMethod": "GET"
+      }, {
+          "name": "getMyDetails",
+          "link": "/api/v1/users/me",
+          "httpMethod": "GET"
+      }, {
+          "name": "createWhitelists",
+          "link": "/api/v1/organisations/{orgId}/userwhitelist",
+          "httpMethod": "POST"
+      }, {
+          "name": "getClientApp",
+          "link": "/api/v1/clientapps/{clientInfoId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "deleteClientApp",
+          "link": "/api/v1/clientapps/{clientInfoId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getPermissionSets",
+          "link": "/api/v1/permissions/sets",
+          "httpMethod": "GET"
+      }, {
+          "name": "unshareItem",
+          "link": "/api/v1/items/{itemId}/unshare",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getStatusSamlConfig",
+          "link": "/api/v1/saml/{id}/status",
+          "httpMethod": "GET"
+      }, {
+          "name": "createOrganisationGroup",
+          "link": "/api/v1/organisations",
+          "httpMethod": "POST"
+      }, {
+          "name": "uploadCustomLocaleBundle",
+          "link": "/api/v1/i18n/bundles/{localeCode}",
+          "httpMethod": "POST"
+      }, {
+          "name": "updateLdapConnection",
+          "link": "/api/v1/ldapconnections/{ldapConnectionId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "getSamlConfigCert",
+          "link": "/api/v1/saml/{id}/certificate",
+          "httpMethod": "GET"
+      }, {
+          "name": "getLdapConnection",
+          "link": "/api/v1/ldapconnections/{ldapConnectionId}",
+          "httpMethod": "GET"
+      }, {
+          "name": "countItemsForOrganisationUser",
+          "link": "/api/v1/organisations/{orgGroupId}/users/{userId}/itemCount",
+          "httpMethod": "GET"
+      }, {
+          "name": "getObjects",
+          "link": "/api/v1/organisations/{orgGroupId}/objects",
+          "httpMethod": "GET"
+      }, {
+          "name": "updateMfa",
+          "link": "/api/v1/users/{userId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "deleteLabel",
+          "link": "/api/v1/organisations/{orgId}/labels/{labelId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getOrganisationItemSummary",
+          "link": "/api/v1/organisations/{orgGroupId}/statistics/items",
+          "httpMethod": "GET"
+      }, {
+          "name": "getOrganisationQuotas",
+          "link": "/api/v1/dashboard/quotas",
+          "httpMethod": "GET"
+      }, {
+          "name": "getDashboardUserActivitySummary",
+          "link": "/api/v1/dashboard/users/activity",
+          "httpMethod": "GET"
+      }, {
+          "name": "getGroupUsers",
+          "link": "/api/v1/organisations/{orgId}/groups/{groupId}/users",
+          "httpMethod": "GET"
+      }, {
+          "name": "uploadIdpMetadata",
+          "link": "/api/v1/saml/{id}/idp-metadata",
+          "httpMethod": "POST"
+      }, {
+          "name": "updateGroup",
+          "link": "/api/v1/organisations/{orgId}/groups/{groupId}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateMyNotificationPreference",
+          "link": "/api/v1/users/me/notifications/email",
+          "httpMethod": "PUT"
+      }, {
+          "name": "updateSamlConfigCert",
+          "link": "/api/v1/saml/{id}/certificate",
+          "httpMethod": "POST"
+      }, {
+          "name": "updateSamlConfig",
+          "link": "/api/v1/saml/{id}",
+          "httpMethod": "PUT"
+      }, {
+          "name": "deleteOrganisation",
+          "link": "/api/v1/organisations/{organisationId}",
+          "httpMethod": "DELETE"
+      }, {
+          "name": "getLocaleBundle",
+          "link": "/api/v1/i18n/bundles/{localeCode}",
+          "httpMethod": "GET"
+      }, {
+          "name": "createLdapConnection",
+          "link": "/api/v1/ldapconnections",
+          "httpMethod": "POST"
+      }, {
+          "name": "getOrganisationOriginators",
+          "link": "/api/v1/organisations/{orgGroupId}/users/originators",
+          "httpMethod": "GET"
+      }, {
+          "name": "listRegisteredDevices",
+          "link": "/api/v1/devices",
+          "httpMethod": "GET"
+      }, {
+          "name": "getAuditEntries",
+          "link": "/api/v1/organisations/{organisationId}/audit",
+          "httpMethod": "GET"
+      }, {
+          "name": "getModelBundle",
+          "link": "/api/v1/i18n/modelbundle",
+          "httpMethod": "GET"
+      }, {
+          "name": "getConfig",
+          "link": "/api/v1/config",
+          "httpMethod": "GET"
+      }, {
+          "name": "getApplicationApprovals",
+          "link": "/api/v1/users/me/applications/approvals",
+          "httpMethod": "GET"
+      }, {
+          "name": "deleteObject",
+          "link": "/api/v1/objects/{objectId}",
+          "httpMethod": "DELETE"
+      }]
+  }
+  ```

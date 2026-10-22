@@ -1,0 +1,56 @@
+---
+title: "<access-service>/api/v1/users/me/applications/approvals/{approvalId}"
+---
+
+## URL structure <a id="access-service-api-v1-users-me-applications-approvals-approvalid-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/users/me/applications/approvals/{approvalId}
+```
+
+where `{approvalId}` is an application's approval ID.
+
+## Supported methods and overview <a id="access-service-api-v1-users-me-applications-approvals-approvalid-supported-methods-and-overview" />
+
+- `DELETE` - used to revoke the access that a third party (i.e. non-Covata) client application has to resources on the Covata Platform (which are available to the currently authenticated [Covata user](/3.0/admin/administering-users)<sup>&#42;</sup>), based on the application's approval ID.
+
+<Note>
+
+This method takes no parameters.
+
+</Note>
+
+## Detailed description <a id="access-service-api-v1-users-me-applications-approvals-approvalid-detailed-description" />
+
+This API endpoint revokes the access that a third party (i.e. non-Covata) client application has to resources on the Covata Platform (which are available to the currently authenticated Covata user<sup>&#42;</sup>), based on this application's approval ID. This Covata user would have previously permitted the application access to their resources on the Covata Platform.
+
+An application's approval ID is obtained by calling the [&lt;access-service&gt;/api/v1/users/me/applications/approvals](/3.0/api/access-service-api-v1-users-me-applications-approvals) API endpoint, which retrieves a list of information about all client applications that the currently authenticated Covata user has approved access to their resources on the Covata Platform.
+
+Such a client application could be one that you or your organization is developing, where this application integrates with Covata technologies either using Covata's API or a Covata SDK.
+
+<Note>
+
+Before any client application can be granted access to a Covata user's resources, a Covata Platform administrator must first have [registered the client application](/3.0/api/access-service-api-v1-clientapps) on their Covata Platform.
+
+</Note>
+
+## Supported roles <a id="access-service-api-applications-approvals-approvalid-supported-roles" />
+
+This API endpoint supports the following Covata user [roles](/3.0/admin/administering-users#a-users-roles) (as described in the [Covata Platform Administrator's Guide](/3.0/admin/index)):
+
+- [Originator](/3.0/admin/administering-users#originator-role)
+- [Collaborator](/3.0/admin/administering-users#collaborator-role)
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-users-me-applications-approvals-approvalid#access-service-api-v1-users-me-applications-approvals-approvalid-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-users-me-applications-approvals-approvalid-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+- `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+## Returns <a id="access-service-api-v1-users-me-applications-approvals-approvalid-returns" />
+
+If the request succeeded, then an HTTP response status `200 OK` is returned.
+
+<sup>&#42;</sup> The currently authenticated user is determined by the access token passed in the [header](/3.0/api/access-service-api-v1-users-me-applications-approvals-approvalid#access-service-api-v1-users-me-applications-approvals-approvalid-required-headers) of requests to this endpoint.

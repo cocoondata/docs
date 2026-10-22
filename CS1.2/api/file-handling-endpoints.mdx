@@ -1,0 +1,27 @@
+---
+title: "File handling endpoints"
+---
+
+The endpoints in this section are used for handling files (i.e. [Secure Objects](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object)) on the Cocoon Data Platform, including file versions.
+
+### File object handling (new file objects and active file versions)
+
+- **File object creation (including list retrieval for Organisation administrators)**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects)
+- **File object property retrieval and update, including file object removal**
+
+  - [&lt;access-service&gt;/api/v1/objects](/CS1.2/api/access-service-api-v1-objects)
+  - [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid)
+- **Disabling/re-enabling file objects (for Organisation administrators only)**
+
+  - [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects/\{objectId\}/enable](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects-objectid-enable)
+
+### File version handling
+
+- **File version property retrieval**
+
+  - [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions](/CS1.2/api/access-service-api-v1-objects-itemid-versions)
+- **File version manipulation and removal**
+
+  - [&lt;access-service&gt;/api/v1/objects/\{itemId\}/versions/\{versionId\}](/CS1.2/api/access-service-api-v1-objects-objectid-versions-versionid)
