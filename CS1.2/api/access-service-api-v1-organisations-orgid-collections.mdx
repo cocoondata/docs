@@ -21,7 +21,7 @@ where `{orgId}` is the ID of an organisation.
 
 This API endpoint creates a new folder, which can be used to organize file objects/[Secure Objects](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object) and other folders.
 
-A folder/collection is analogous to an operating system's folders/directories on a file system. The Cocoon Data Platform's folders are used for organizing files and other folders logically in storage managed by the Content Service.
+A folder/collection is analogous to an operating system's folders/directories on a file system. The Cocoon Data Platform's folders are used for organising files and other folders logically in storage managed by the Content Service.
 
 The [Cocoon Data user](/CS1.2/admin-org/administering-users-within-an-organisation) whose account creates a new folder through this endpoint becomes the *owner* <sup>1</sup> of this folder. When creating this new folder, other than setting its required name and parent properties (through the **name** and **parentId** [parameters](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters) respectively), collaborators and their [permission sets](/CS1.2/api/access-service-api-v1-permissions-sets) (specified through this endpoint's **collaborators** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-optional-parameters)) can also be set - where a *permission set* is specific to each individual collaborator. For each collaborator, one of the following five permission sets can be applied:
 
@@ -35,7 +35,7 @@ The [Cocoon Data user](/CS1.2/admin-org/administering-users-within-an-organisati
   - **Print** the file's content <sup>3</sup> from a SafeShare application's content viewer.
 - **Upload** - grants the collaborator the individual permissions provided by the **Download** permission set, as well as the following permissions to perform these additional actions within this new folder <sup>2</sup> (in the owner's storage space):
 
-  - Initialize a new *Incomplete* file object within this folder <sup>2</sup> (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) endpoint), through the **Upload File** permission.
+  - Initialise a new *Incomplete* file object within this folder <sup>2</sup> (via the `POST` method on the [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) endpoint), through the **Upload File** permission.
   - Upload this *Incomplete* file object's data, which changes the file object's state to *Created* (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint), again through the **Upload File** permission.
   - Upload a new version of a file (and its actual content) within this folder (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/versions](/CS1.2/api/content-service-api-v1-objects-objectid-versions) endpoint), through the **Upload File** permission.
   - Create a new folder within this folder <sup>2</sup> (via this endpoint's **parentId** [parameter](/CS1.2/api/access-service-api-v1-organisations-orgid-collections#access-service-api-v1-organisations-orgid-collections-required-parameters)), through the **Create Folder** permission.
@@ -66,7 +66,7 @@ The [Cocoon Data user](/CS1.2/admin-org/administering-users-within-an-organisati
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-collections-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - when this user:
 
@@ -119,7 +119,7 @@ The following optional parameters can also be sent in the **body** of the POST r
   ```json
   {
     "name": "Large Files",
-    "parentId": "876543210987654321"
+    "parentId": "876543210987654321",
     "collaborators": {
       "list": [
         {

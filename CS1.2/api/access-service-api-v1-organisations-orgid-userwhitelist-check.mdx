@@ -25,7 +25,7 @@ Therefore, use this endpoint first to check which Cocoon Data user accounts will
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-userwhitelist-check-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgId}` in the request's URL.
 
@@ -97,7 +97,7 @@ For successful requests only, a JSON-formatted response containing the following
 - **lastName** - The last name set by this user, which is `null` if this value has not already been set via a `PUT` request to the [&lt;access-service&gt;/api/v1/users/me](/CS1.2/api/access-service-api-v1-users-me) endpoint. Like the first name (above), this appears on the **User** page of Organisation Administration and/or the **My Account** feature of SafeShare for Web.
 - **mfaEnabled** - A boolean value that indicates whether (`true`) or not (`false`) two-factor authentication has either been set by this user on their own account, or enforced for all members of the organisation (by any Organisation administrator of this organisation).
 - **id** - The ID of this Cocoon Data user account.
-- **accountType** - A member containing the internationalization (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Cocoon Data Platform), as sub-members:
+- **accountType** - A member containing the internationalisation (I18N) property key/code <sup>&#42;</sup> for the account type, including the account type's value (i.e. hard-coded in the Cocoon Data Platform), as sub-members:
 
   - **i18n** - A member containing the I18N code <sup>&#42;</sup> for the account type as sub-members:
 
@@ -105,7 +105,7 @@ For successful requests only, a JSON-formatted response containing the following
     - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
   - **value** - The value of **accountType** as it is hard-coded in the Cocoon Data Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
 
-  <sup>&#42;</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalization in the SafeShare Administrator's Guide. <br />
+  <sup>&#42;</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalisation in the SafeShare Administrator's Guide. <br />
   **Note:** For more information about account types, see the description for [Account Type](/CS1.2/admin-org/administering-users-within-an-organisation#account-type) in the [Organisation Administrator's Guide](/CS1.2/admin-org).
 - **count** - The total number of items returned in the response.
 - **offset** - This value should always be `0`. <br />

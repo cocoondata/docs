@@ -12,7 +12,7 @@ where `{orgGroupId}` is the ID of an organisation.
 
 ## Supported methods and overview <a id="access-service-api-v1-organisations-orggroupid-objects-supported-methods-and-overview" />
 
-- `POST` - initializes a new *Incomplete* file object (i.e. [Secure Object](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object)) within an organisation (specified by `orgGroupId`), along with the option to set any combination of the following properties on the resulting file:
+- `POST` - initialises a new *Incomplete* file object (i.e. [Secure Object](/CS1.2/api/working-with-files-and-folders-fundamentals#secure-object)) within an organisation (specified by `orgGroupId`), along with the option to set any combination of the following properties on the resulting file:
 
   - The file's name and location.
   - Collaborators (as well as their [permission sets](/CS1.2/api/access-service-api-v1-permissions-sets)).
@@ -25,7 +25,7 @@ This API endpoint serves a number of purposes:
 
 **POST method requests:**
 
-- Initializes a new *Incomplete* file object within an organisation (specified by `orgGroupId`), by associating the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/CS1.2/api/access-service-api-v1-keys) endpoint) with this new file object. This allows the file object's data to be either:
+- Initialises a new *Incomplete* file object within an organisation (specified by `orgGroupId`), by associating the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/CS1.2/api/access-service-api-v1-keys) endpoint) with this new file object. This allows the file object's data to be either:
 
   - Encrypted locally (by your client application) and then uploaded to the Cocoon Data Platform's Content Service in its encrypted form (via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint - in multiple requests if necessary). During the upload process, the file object is then completed (which changes its state from *Incomplete* to *Created*) using the [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value (calculated locally by your client application) of the locally-encrypted data.
   - Uploaded in its unencrypted form (also via the `POST` method on the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint - in multiple requests if necessary) for server-side encryption by the Content Service, then storage. This process automatically completes the file object because the Content Service associates its own calculated SHA-512 value of the server-side encrypted data, with the file object.
@@ -78,7 +78,7 @@ The [Cocoon Data user](/CS1.2/admin-org/administering-users-within-an-organisati
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-objects-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - using the `POST` method, when this user:
 
@@ -88,7 +88,7 @@ This API endpoint supports requests utilizing Cocoon Data user accounts with the
   **Note:** Such a collaborator user:
 
   - Automatically becomes a collaborator on the resulting file object.
-  - Cannot set this endpoint's (now deprecated) **sha512** parameter in the request. However, the user account utlized in creating a file object through this endpoint can also be utilized to set this file object's **sha512** parameter value via the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint.
+  - Cannot set this endpoint's (now deprecated) **sha512** parameter in the request. However, the user account utilised in creating a file object through this endpoint can also be utilised to set this file object's **sha512** parameter value via the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint.
   - Cannot set this endpoint's **collaborators** parameter, unless this user also has the **Share** permission on the folder represented by **parentId**.
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `GET` method, when this user is a member of the organisation specified by `{orgGroupId}` in the request's URL.
 
@@ -109,7 +109,7 @@ The following header is required if the body of the request has a JSON object (i
 The following required parameters must be sent in the **body** of the POST request, each as individual members of a **JSON object**:
 
 - **keyId** - The ID value associated with the cryptographic key (obtained through the [&lt;access-service&gt;/api/v1/keys](/CS1.2/api/access-service-api-v1-keys) endpoint). Specifying this parameter associates the cryptographic key with the new file object. <br />
-  **Example (POST request parameters - minimum required - initializing an *Incomplete* file object with a cryptographic key's ID only):**
+  **Example (POST request parameters - minimum required - initialising an *Incomplete* file object with a cryptographic key's ID only):**
 
   ```json
   { "keyId": "730248393980776448" }
@@ -154,12 +154,12 @@ The following optional parameters can also be sent in the **body** of the POST r
 
   - This parameter is deprecated on this endpoint. To set this value on a file object, do so through the [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) endpoint.
   - The **sha512** value can only be set once on a file object, at which point this property becomes immutable.
-  - Omitting this parameter results in the initialization of an *Incomplete* file object.
+  - Omitting this parameter results in the initialisation of an *Incomplete* file object.
   - Specifying this parameter and its value results in the creation of a completed file object, whose state is *Created*.
   - You can specify this parameter if you have encrypted the file object's data externally (e.g. locally by your client application) and intend to [upload](/CS1.2/api/content-service-api-v1-objects-objectid-contents) this *[encrypted data](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-post-request-parameters)* to storage via the Cocoon Data Platform's Content Service.
   - If you intend to upload the file object's *unencrypted* data to storage via the Content Service, then *omit this parameter*; the Content Service automatically assigns this **sha512** value (after performing server-side encryption) when you make the [upload](/CS1.2/api/content-service-api-v1-objects-objectid-contents) request.
 
-  **Example (POST request parameters - initializing an *Incomplete* file object with collaborators and a classification):**
+  **Example (POST request parameters - initialising an *Incomplete* file object with collaborators and a classification):**
 
   ```json
   {
@@ -193,7 +193,7 @@ The following optional parameters can also be sent in the **body** of the POST r
 
 The following optional parameters can be sent in the **URL** of the GET request:
 
-- **searchText** - Any text substring used to filter for *all* file objects which have been either initialized or created within the organisation, where this text substring must match that of the file object's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
+- **searchText** - Any text substring used to filter for *all* file objects which have been either initialised or created within the organisation, where this text substring must match that of the file object's field specified in **searchColumn** below (or any of these fields). If this parameter is omitted, then no filtering is performed.
 - **searchColumn** - The file object's field upon which the text substring (specified in **searchText** above) is used for filtering file objects returned in the response. The fields available to this text searching include:
 
   - `name` - the file object's name,
@@ -203,7 +203,7 @@ The following optional parameters can be sent in the **URL** of the GET request:
 
   If this parameter is omitted, then no filtering is performed.
 - **limit** - A value from `0` to any positive integer, representing the maximum number of items to be returned in the response from the Cocoon Data Platform, where an individual item is information about a file object within the organisation. If this parameter is omitted, then its value is `0` by default, which imposes no limit on the number of items returned.
-- **offset** - A value representing the count order of all retrievable items (i.e. file objects) from the Cocoon Data Platform returned in the response. Calls to this API endpoint are soon likely to amount to potentially unmanagable numbers of items being returned from the Cocoon Data Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
+- **offset** - A value representing the count order of all retrievable items (i.e. file objects) from the Cocoon Data Platform returned in the response. Calls to this API endpoint are soon likely to amount to potentially unmanageable numbers of items being returned from the Cocoon Data Platform. Since the order of these items in the response could differ significantly, based on the values of the **orderBy** and **sortBy** parameters below, this **offset** parameter provides pagination for items returned in responses, allowing items to be retrieved from any count greater than `0` (i.e. the first item returned in a response). If this parameter is omitted, then its value is `0` by default.
 - **orderBy** - An enumeration (enum) value representing the order in which items (i.e. file objects) are returned in the response. This parameter orders items according to the value of the **sortBy** parameter specified below. Ordering items can be in either ascending alphanumeric order (by specifying the value `ASC` for this parameter) or descending order (by specifying the value `DESC`). If this parameter is omitted, then its value is `DESC` by default.
 - **sortBy** - An enum value representing the field (i.e. member) of a retrieved item by which items (i.e. file objects) returned in the response will be sorted. Valid field values for this parameter include:
 
@@ -233,8 +233,8 @@ If the request succeeded, then an HTTP response status `200 OK` is returned.
 
 For successful requests only, a JSON-formatted response containing the following members is also returned:
 
-- **items** ( *from GET requests only* ) - An array containing information about all file objects that have been initialized or created on the Cocoon Data Platform, which have been filtered by any [parameters](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these file objects (represented as an object containing the following members unless otherwise stated).
-- **id** - The ID value of the initialized (i.e. *Incomplete*) or *Created* file object.
+- **items** ( *from GET requests only* ) - An array containing information about all file objects that have been initialised or created on the Cocoon Data Platform, which have been filtered by any [parameters](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters) submitted in the request. Each element of this array contains information about one of these file objects (represented as an object containing the following members unless otherwise stated).
+- **id** - The ID value of the initialised (i.e. *Incomplete*) or *Created* file object.
 - **shareStartTime** ( *from GET requests only* ) - The date and time from which collaborators on this file object can begin accessing the file's content. <br />
   **Note:** A bug in this version of the Cocoon Data Platform results in this property always returning the value of `null` in any requests to this endpoint.
 - **shareEndTime** ( *from GET requests only* ) - The date and time from which collaborators' access to this file object's content ceases. <br />
@@ -242,8 +242,8 @@ For successful requests only, a JSON-formatted response containing the following
 - **enabled** ( *from GET requests only* ) - A boolean value that indicates whether or not the file object is enabled (i.e. `true`) or disabled (`false`). For more information about disabling/re-enabling file objects, see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects/\{objectId\}/enable](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects-objectid-enable).
 - **shared** - A boolean value that indicates whether or not the file object has been shared with any collaborators. <br />
   **Note:** A bug in this version of the Cocoon Data Platform results in this property always returning the value of `false` in any requests to this endpoint.
-- **name** - The name of the file object, which was set when the file object was [initialized or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This value is `null` if the **name** was never specified.
-- **sha512** ( *from POST requests only* ) - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with the *Created*/complete file object. For initialized/*Incomplete* file objects, this value is `null`.
+- **name** - The name of the file object, which was set when the file object was [initialised or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This value is `null` if the **name** was never specified.
+- **sha512** ( *from POST requests only* ) - The unique [SHA-512](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) hash value of the encrypted data associated with the *Created*/complete file object. For initialised/*Incomplete* file objects, this value is `null`.
 - **owner** ( *from GET requests only* ) - A member containing information about the Cocoon Data user who is the current owner of the file object. This member contains the following sub-members:
 
   - **email** - This email address of the Cocoon Data user who owns this file object.
@@ -251,7 +251,7 @@ For successful requests only, a JSON-formatted response containing the following
   - **lastName** - The last name set by this Cocoon Data user. Like the first name (above), this appears on the **User** page of Organisation Administration and the **My Account** feature of SafeShare for Web.
   - **mfaEnabled** - A boolean value that indicates whether or not two-factor authentication has either been set by this Cocoon Data user on their own account, or enforced for all members of the organisation (by an Organisation administrator).
   - **id** - The ID of this Cocoon Data user's account.
-  - **accountType** - A member containing the internationalization (I18N) property key/code <sup>3</sup> for the account type, including the account type's value (i.e. hard-coded in the Cocoon Data Platform), as sub-members:
+  - **accountType** - A member containing the internationalisation (I18N) property key/code <sup>3</sup> for the account type, including the account type's value (i.e. hard-coded in the Cocoon Data Platform), as sub-members:
 
     - **i18n** - A member containing the I18N code <sup>3</sup> for the account type as sub-members:
 
@@ -259,7 +259,7 @@ For successful requests only, a JSON-formatted response containing the following
       - **arguments** - An array containing any arguments/variables that constitute the value of the I18N code above. Since none of the account types' values contain any variables, this array is always empty.
     - **value** - The value of **accountType** as it is hard-coded in the Cocoon Data Platform. Your client application can exploit this value (instead of **i18n** above) if I18N is not required.
 
-    <sup>3</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalization in the SafeShare Administrator's Guide. <br />
+    <sup>3</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalisation in the SafeShare Administrator's Guide. <br />
     **Note:** For more information about account types, see the description for [Account Type](/CS1.2/admin-org/administering-users-within-an-organisation#account-type) in the [Organisation Administrator's Guide](/CS1.2/admin-org).
 - **hasView** - A boolean value that indicates whether or not the Cocoon Data Platform's Content Service has generated a read-only view of the file object's data in storage. <br />
   **Notes:**
@@ -279,19 +279,19 @@ For successful requests only, a JSON-formatted response containing the following
   - **id** - The ID of the organisation.
 - **permissions** - An array listing the individual [permissions](/CS1.2/api/access-service-api-v1-permissions-sets) that the **owner** above or a collaborator (whose access token was used in the request to this endpoint), has inherited from the location represented by **parentId**. <br />
   **Note:** A bug in this version of the Cocoon Data Platform results in this property always returning an empty array in any requests to this endpoint.
-- **mimeType** - The MIME type of the data associated with the file object, which was set when the file object was [initialized or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This value is `null` if either the **mimeType** was never specified or this member is a response from a GET request. <br />
+- **mimeType** - The MIME type of the data associated with the file object, which was set when the file object was [initialised or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This value is `null` if either the **mimeType** was never specified or this member is a response from a GET request. <br />
   **Note:** A bug in this version of the Cocoon Data Platform results in this property always returning the value `null` in any GET requests to this endpoint.
-- **contentSize** - The amount of space (in bytes) of the file object's data (as recorded by the Cocoon Data Platform's Access Service). For initialized/*Incomplete* file objects, this value is `null`.
+- **contentSize** - The amount of space (in bytes) of the file object's data (as recorded by the Cocoon Data Platform's Access Service). For initialised/*Incomplete* file objects, this value is `null`.
 - **parentId** ( *from POST requests only* ) - The ID of the [folder/collection](/CS1.2/api/folder-handling-endpoints) that contains the file object. A value of `0` indicates that this file object is located at the logical root location.
-- **state** - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or `deleted` for a deleted file.
+- **state** - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialised file object, `created` for a completed file or `deleted` for a deleted file.
 - **modifiedAt** - The date and time when the file object was last modified. In responses from POST requests, this date and time should match (or be close to) that of the `createdAt` value below. Otherwise, if the file object has since been [modified](/CS1.2/api/access-service-api-v1-objects-objectid), this date and time should reflect when the file object was last modified.
 - **createdAt** - The date and time when the file object was first created, either in its *Incomplete* or *Created* states.
-- **labelName** ( *from POST requests only* ) - The name of the classification applied to the file object. Like **labelId** below, if this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This means that no classification restrictions (i.e. checks on Cocoon Data users' group membership and the association of these groups with individual classifications - see [User group endpoints](/CS1.2/api/user-group-endpoints) for more information) have been placed on collaborators added to this file object.
-- **labelId** ( *from POST requests only* ) - The ID of the classification applied to the file object. If this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialized or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid).
+- **labelName** ( *from POST requests only* ) - The name of the classification applied to the file object. Like **labelId** below, if this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialised or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid). This means that no classification restrictions (i.e. checks on Cocoon Data users' group membership and the association of these groups with individual classifications - see [User group endpoints](/CS1.2/api/user-group-endpoints) for more information) have been placed on collaborators added to this file object.
+- **labelId** ( *from POST requests only* ) - The ID of the classification applied to the file object. If this element's value is `null`, then no classification was specified (i.e. the **labelId** parameter was specified with an empty string or this parameter was omitted) when the file object was [initialised or created](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-post-request-parameters), or [last updated](/CS1.2/api/access-service-api-v1-objects-objectid).
 - **count** ( *from GET requests only* ) - The total number of file objects which have been created within the organisation (regardless of these file objects' **state**s). <br />
   **Note:** If the **searchText** and **searchColumn** [parameters](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects#access-service-api-v1-organisations-orggroupid-objects-optional-get-request-parameters) were specified in the request, then this value represents the number of items (above) returned in the response.
 - **offset** ( *from GET requests only* ) - The value of the **offset** which had been used in the request to this API endpoint. <br />
-  **Example (response from a POST request - initializing an *Incomplete* file object):**
+  **Example (response from a POST request - initialising an *Incomplete* file object):**
 
   ```json
   {

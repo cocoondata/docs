@@ -24,8 +24,8 @@ The Cocoon Data Platform permits the configuration of more than one LDAP connect
   - These modifications are propagated through from the account's LDAP server/user directory to the Cocoon Data Platform when the Cocoon Data Platform next synchronises with the LDAP server. By default, the LDAP synchronisation frequency is five minutes.
   - Therefore, other than the role-related fields of [Cocoon Data users within an organisation](/CS1.2/admin-org/administering-users-within-an-organisation), it is not possible to edit any of the other [fields](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-fields) of an LDAP user's account through the Cocoon Data Platform.
   - To ensure that field modifications to LDAP user accounts are propagated through to the Cocoon Data Platform, verify that these accounts' respective LDAP connections have been [enabled](/CS1.2/admin-org/configuring-ldap#disabling-or-re-enabling-an-ldap-connection).
-- The [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) of an LDAP user within an organisation cannot be modified. However, note that the [SafeShare administrator role] may also be granted to and removed from an LDAP user.
-- If an [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) user is created (by a Cocoon Data user sharing a file), they will remain within the system as Ad hoc. However, if the Ad hoc user is subsequently added as an [LDAP](/CS1.2/admin-org/administering-users-within-an-organisation#account-type) user, their account will be upgrade to [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role).
+- The [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) of an LDAP user within an organisation cannot be modified. However, note that the [SafeShare administrator role](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) may also be granted to and removed from an LDAP user.
+- If an [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) user is created (by a Cocoon Data user sharing a file), they will remain within the system as Ad hoc. However, if the Ad hoc user is subsequently added as an [LDAP](/CS1.2/admin-org/administering-users-within-an-organisation#account-type) user, their account will be upgraded to [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role).
 
 <Note>
 
@@ -36,6 +36,7 @@ If using LDAP, a Cocoon Data user account should only be added to your organisat
 <a id="ldap-page" />
 
 ![LDAP Connections page](/images/21861513c3bb-ldap-connections-page.png)
+
 ## Adding a new LDAP connection
 
 **To add a new connection to an LDAP server/user directory on the Cocoon Data Platform:**
@@ -68,7 +69,7 @@ The content of [the following table](/CS1.2/admin-org/configuring-ldap#ldap-conn
 | Manager DN | The Distinguished Name (DN) of the 'manager' user who has privileges to perform LDAP authentication and synchronisation and browse the **Base DN**. | 512 |
 | Manager password | The password for the 'manager' user who has privileges to perform LDAP authentication and synchronisation and browse the **Base DN**. | 128 |
 | Base DN | The root node in LDAP from which the Cocoon Data Platform finds users and groups. <br /> **Example:** `ou=users,dc=xy-company,dc=com` | 512 |
-| Sync filter | The filter used to specify which Cocoon Data users will be synchronised based on their LDAP path and attributes. <br /> **Examples:**  <br />•  Syncrhonising users from a group: `(memberOf=CN=groupName,OU=users,DC=xy-company,DC=com)` <br />•  All users: `(&(objectclass=user)(objectcategory=person))` <br />•  Users whose email matches a domain: `(&(&(objectclass=user)(objectcategory=person))(mail=*@xy-company.com))`  | 512 |
+| Sync filter | The filter used to specify which Cocoon Data users will be synchronised based on their LDAP path and attributes. <br /> **Examples:**  <br />•  Synchronising users from a group: `(memberOf=CN=groupName,OU=users,DC=xy-company,DC=com)` <br />•  All users: `(&(objectclass=user)(objectcategory=person))` <br />•  Users whose email matches a domain: `(&(&(objectclass=user)(objectcategory=person))(mail=*@xy-company.com))`  | 512 |
 | Auth filter | The LDAP field against which the Cocoon Data Platform matches the email address of a Cocoon Data user when they authenticate. <br /> **Example:** `userPrincipalName={0}` | 512 |
 | Domain | The domain for the LDAP user directory. | 64 |
 | Account Name | The LDAP field used to specify an additional/other name for Cocoon Data users. <br /> **Example:** `sAMAccountName` <br />**Note:** This field is required for internal Cocoon Data Platform functionality.  | 64 |

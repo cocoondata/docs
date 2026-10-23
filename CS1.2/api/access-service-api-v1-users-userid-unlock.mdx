@@ -28,7 +28,7 @@ A Cocoon Data user's account can be come locked if the user of this account had 
 
 ## Supported roles and conditions <a id="access-service-api-v1-users-userid-unlock-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+This API endpoint supports requests utilising Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
 
 - [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - when this user is another SafeShare administrator user to the one whose account (specified by `{userId}` in the request's URL) is being unlocked.
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - a bug currently exists, which prevents users with this role from being able to unlock other Cocoon Data users who are members of their organisation through this API endpoint.

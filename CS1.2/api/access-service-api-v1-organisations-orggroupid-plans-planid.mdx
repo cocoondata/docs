@@ -32,12 +32,12 @@ This API endpoint serves a number of purposes:
   **Notes:**
 
   - A *MiB* is a [mebibyte](http://physics.nist.gov/cuu/Units/binary.html), where one MiB = 1 x 1024 x 1024 bytes = 1048576 bytes.
-  - Any [Cocoon Data users](/CS1.2/api/authentication-and-authorisation) [in this organisation](/CS1.2/admin-org/administering-users-within-an-organisation) who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of remote storage (managed by the Content Service) utilized by any of these users, then those users will no longer be able to upload any data until their storage utilization drops below the **default** plan's quota.
+  - Any [Cocoon Data users](/CS1.2/api/authentication-and-authorisation) [in this organisation](/CS1.2/admin-org/administering-users-within-an-organisation) who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of remote storage (managed by the Content Service) utilised by any of these users, then those users will no longer be able to upload any data until their storage utilisation drops below the **default** plan's quota.
   - It is not possible delete the **default** plan.
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-plans-planid-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgGroupId}` in the request's URL.
 

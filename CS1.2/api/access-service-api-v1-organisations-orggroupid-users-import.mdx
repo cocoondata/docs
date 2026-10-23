@@ -22,7 +22,7 @@ This API endpoint adds new Cocoon Data user accounts <sup>1</sup> in bulk from a
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orggroupid-users-import-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by `{orgGroupId}` in the request's URL.
 
@@ -71,14 +71,14 @@ If the request succeeded, then an HTTP response status `200 OK` is returned.
 For successful requests only, a JSON-formatted response containing the following members is also returned:
 
 - **success** - A boolean value that indicates whether (`true`) or not (`false`) any of the user accounts specified in the CSV file were successfully imported into the organisation specified by `{orgGroupId}` in the URL.
-- **message** - An member containing the internationalization (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organisation (i.e. hard-coded in the Cocoon Data Platform), as the sub-member:
+- **message** - An member containing the internationalisation (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organisation (i.e. hard-coded in the Cocoon Data Platform), as the sub-member:
 
   - **i18n** - A member containing the I18N code <sup>2</sup> for the message indicating the number of user accounts successfully imported into this organisation, as sub-members:
 
     - **message** - The message itself, in the language that the user account (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-organisations-orggroupid-users-import#access-service-api-v1-organisations-orggroupid-users-import-supported-roles-and-conditions) to this endpoint) is configured for (via their I18N settings).
     - **code** - The I18N code for this message's value, beginning with `server.userimportjob.imported.` This I18N code could include the substring `plural`, `single` or `none`.
     - **arguments** - An array containing any arguments/variables that constitute the value of the I18N **code** for use in the **message**'s value above. When the I18N substring is `plural`, this array contains a sub-array whose values are the argument **usernumber**, followed by the number of users who were successfully imported into the organisation.
-- **errors** - An array of strings, each one describing an error encountered when importing a new Cocoon Data user to the Cocoon Data Platform from the CSV file. An member containing the internationalization (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organisation (i.e. hard-coded in the Cocoon Data Platform), as the sub-member:
+- **errors** - An array of strings, each one describing an error encountered when importing a new Cocoon Data user to the Cocoon Data Platform from the CSV file. An member containing the internationalisation (I18N) property key/code <sup>2</sup> for a message indicating the number of user accounts successfully imported into this organisation (i.e. hard-coded in the Cocoon Data Platform), as the sub-member:
 
   - **i18n** - A member containing the I18N code <sup>2</sup> for the message indicating the number of user accounts successfully imported into this organisation, as sub-members:
 
@@ -113,7 +113,7 @@ For successful requests only, a JSON-formatted response containing the following
       - `defaultplan.missing` - this array contains a sub-array whose values are the argument **orgGrpName**, followed by the name of the organisation which does yet not have a default plan configured.
       - `createuser.failed` - this array contains a sub-array whose values are the argument **useremail**, followed by the email address of the user which the Cocoon Data Platform failed to create for an unknown reason.
 
-  <sup>2</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalization in the SafeShare Administrator's Guide. <br />
+  <sup>2</sup> Your client application can exploit the Cocoon Data Platform's I18N features, by initially [downloading the relevant language bundles](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-download) (from the Cocoon Data Platform), then using the **i18n code** (and if applicable, **arguments**) values above to extract the property values derived from these language bundles for use in your client application. For more information about the Cocoon Data Platform's I18N features, see Managing internationalisation in the SafeShare Administrator's Guide. <br />
   **Example (response):**
 
   ```json

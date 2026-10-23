@@ -14,13 +14,13 @@ https://access-service.xy-company.com/api/v1/i18n/adminpreference
 
 ## Detailed description <a id="access-service-api-v1-i18n-adminpreference-detailed-description" />
 
-This API endpoint sets a supported locale as the SafeShare administrator's default locale. This is equivalent to setting the **System Default** language through the Internationalization page of SafeShare Administration.
+This API endpoint sets a supported locale as the SafeShare administrator's default locale. This is equivalent to setting the **System Default** language through the Internationalisation page of SafeShare Administration.
 
 The SafeShare administrator's default locale serves a number of purposes:
 
 - This locale (and language) is the default used for the Cocoon Data Sign-in page, Cocoon Data email notifications and the [SafeShare Administration](/CS1.2/admin-platform), [Organisation Administration](/CS1.2/admin-org) and [SafeShare for Web](/CS1.2/user) user interfaces.
 - This is the initial locale used for all newly created Cocoon Data users.
-- When a custom locale *without* an existing internationalization (i18n) bundle is [deleted](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-delete), any Cocoon Data users utilizing this locale (which they would have chosen through SafeShare) will automatically be reverted to use this SafeShare administrator's default locale.
+- When a custom locale *without* an existing internationalisation (i18n) bundle is [deleted](/CS1.2/api/access-service-api-v1-i18n-bundles-localecode-delete), any Cocoon Data users utilising this locale (which they would have chosen through SafeShare) will automatically be reverted to use this SafeShare administrator's default locale.
 
 ## Supported roles <a id="access-service-api-v1-i18n-adminpreference-supported-roles" />
 
@@ -45,7 +45,7 @@ The following header is required if the body of the request has a JSON object:
 The following required parameter must be sent in the **body** of the PUT request, as an individual member of a **JSON object**:
 
 - **i18nCode** - A supported i18n code, where *supported* refers to a locale/language which is available through a language bundle on the Cocoon Data Platform. <br />
-  **Tip:** Valid i18n codes values are listed in the **I18n Code** column on the Internationalization page of SafeShare Administration. <br />
+  **Tip:** Valid i18n codes values are listed in the **I18n Code** column on the Internationalisation page of SafeShare Administration. <br />
   **Example (request):**
 
   ```json

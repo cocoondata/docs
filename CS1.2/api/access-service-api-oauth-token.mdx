@@ -13,7 +13,7 @@ https://access-service.xy-company.com/api/oauth/token
 - `POST` - obtains an [access token](/CS1.2/admin-platform/configuring-client-applications#grant-types) (and optional refresh token) representing a [Cocoon Data user's](/CS1.2/api/authentication-and-authorisation) session and their access to resources on the Cocoon Data Platform. This access token can be obtained:
 
   - by the Cocoon Data user authenticating themselves via the *authorization code* or *password* OAuth 2.0 grant type flows,
-  - using a refesh token, or
+  - using a refresh token, or
   - using a two-factor authentication (2FA/MFA) code.
 
 ## Detailed description <a id="access-service-api-oauth-token-detailed-description" />
@@ -43,7 +43,7 @@ For example, encoding:
 
 Therefore, the HTTP Basic authentication header would be:
 
-- `Authentication: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
+- `Authorization: Basic ZXhhbXBsZUNsaWVudEFwcGxpY2F0aW9uOmV4YW1wbGVDbGllbnRBcHBsaWNhdGlvblNlY3JldA==`
 
 The request also requires form URL-encoded data in the body:
 
@@ -68,7 +68,7 @@ The following required parameters must be sent in the **body** of the request (a
 In addition to the [required parameters](/CS1.2/api/access-service-api-oauth-token#access-service-api-oauth-token-required-parameters) above, some of the following parameters are *also required* based on the **grant_type** value used ([above](/CS1.2/api/access-service-api-oauth-token#access-service-api-oauth-token-required-parameters)), and these must be included in the **body** of the request (as **form URL-encoded data**):
 
 - **code** ( *Required when using the authorization code grant type* ) - The authorization code itself, which is retrieved in the response from the Cocoon Data Platform (i.e. following an initial request to [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) to initiate the process for obtaining an access token).
-- **redirect_uri** ( *Required when using the authorization code grant type* ) - The redirect URI that was submitted in the initial request to [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) to retrieve an access token. The value specified here is only used validate that it matches the **redirect_uri** value specified in this initial request.
+- **redirect_uri** ( *Required when using the authorization code grant type* ) - The redirect URI that was submitted in the initial request to [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) to retrieve an access token. The value specified here is only used to validate that it matches the **redirect_uri** value specified in this initial request.
 - **username** ( *Required when using the password grant type* ) - The email address of a Cocoon Data user's credentials (acquired through your application).
 - **password** ( *Required when using the password grant type* ) - The password of a Cocoon Data user's credentials (acquired through your application).
 - **refresh_token** ( *Required when using a refresh token* ) - The value of the refresh token (returned by the Cocoon Data Platform in a previous request to this API endpoint).

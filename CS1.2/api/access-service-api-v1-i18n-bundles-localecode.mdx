@@ -12,7 +12,7 @@ where `{localeCode}` is a supported locale code.
 
 ## Supported methods and overview <a id="access-service-api-v1-i18n-bundles-localecode-supported-methods-and-overview" />
 
-- `GET` - retrieves the contents of an internationalization (i18n) bundle (specified by `localeCode`) as key/value pairs in [JSON format](http://json.org/).
+- `GET` - retrieves the contents of an internationalisation (i18n) bundle (specified by `localeCode`) as key/value pairs in [JSON format](http://json.org/).
 - `POST` - uploads a custom i18n locale bundle (for `localeCode`) to the Cocoon Data Platform's Access Service.
 
 <Note>
@@ -30,7 +30,7 @@ This API endpoint serves a number of purposes:
 
 ## Supported roles and conditions <a id="access-service-api-v1-i18n-bundles-localecode-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+This API endpoint supports requests utilising Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role), [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role), [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) and [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - using the `GET` method.
 - **SafeShare administrator** - using the `POST` method.
@@ -61,7 +61,7 @@ It is also worth appending to this header a `boundary` parameter, whose string v
 
 The following required parameter must be sent in the body of the POST request, as an individual multi-part form data elements:
 
-- **file** - The actual data of the custom i18n bundle (in [JSON format](http://json.org/)) to be uploaded to the the Cocoon Data Platform's Access Service. <br />
+- **file** - The actual data of the custom i18n bundle (in [JSON format](http://json.org/)) to be uploaded to the Cocoon Data Platform's Access Service. <br />
   **Example:**
 
   ```text

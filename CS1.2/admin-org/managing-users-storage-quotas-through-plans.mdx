@@ -17,6 +17,7 @@ A storage quota is specified as part of a plan, which in turn must be applied to
 <a id="plans-page" />
 
 ![Plans page](/images/10408bb19e0a-plans-page.png)
+
 ## Adding a new plan
 
 At least one plan must be added to your organisation (the first of which becomes the initial **default** plan) before a Cocoon Data user with the [Originator role](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) can be added to your organisation.
@@ -57,7 +58,7 @@ Editing an existing plan allows modification of all of its fields. This is usefu
 
 Removing an existing plan prevents this plan from being selected when [adding a Cocoon Data user account](/CS1.2/admin-org/administering-users-within-an-organisation#adding-an-organisation-user-account) (to an organisation) or [editing the account](/CS1.2/admin-org/administering-users-within-an-organisation#editing-an-organisation-user-account) through the **Users** [page](/CS1.2/admin-org/administering-users-within-an-organisation).
 
-When a plan is removed, any users who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of Content Service-managed storage utilised by any of these users, then these users will no longer be able to upload any data through SafeShare (including any other client applications that utilise the Cocoon Data Platform's API) until these users' storage utilization drops below the **default** plan's quota.
+When a plan is removed, any users who were assigned this plan are automatically switched over to the **default** plan. Be aware that if this **default** plan has a quota which is lower than the amount of Content Service-managed storage utilised by any of these users, then these users will no longer be able to upload any data through SafeShare (including any other client applications that utilise the Cocoon Data Platform's API) until these users' storage utilisation drops below the **default** plan's quota.
 
 <Note>
 
@@ -69,6 +70,6 @@ It is not possible to remove the plan marked **default**. To delete a plan marke
 
 1. Ensure you are [signed in](/CS1.2/admin-org/accessing-organisation-administration#signing-in-to-organisation-administration) to Organisation Administration.
 2. Click the **Plans** option on the left of the [Organisation Administration interface](/CS1.2/admin-org/accessing-organisation-administration#the-organisation-administration-interface) to open the **Plan Management** page.
-3. Locate/scroll to the relevant clearance and select its check box on the left.
+3. Locate/scroll to the relevant plan and select its check box on the left.
 4. Click the **Remove** button.
 5. On the **Delete Plan** message box, click **Yes** to proceed with the plan's removal.

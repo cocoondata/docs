@@ -1,0 +1,85 @@
+---
+title: "<access-service>/api/v1/userwhitelist"
+---
+
+## URL structure <a id="access-service-api-v1-userwhitelist-url-structure" />
+
+```text
+https://access-service.xy-company.com/api/v1/userwhitelist
+```
+
+## Supported methods and overview <a id="access-service-api-v1-userwhitelist-supported-methods-and-overview" />
+
+* `POST` - used to add one or more new [user whitelist rule(s)](/3.2/admin/managing-user-whitelists).
+* `GET` - used to retrieve a list of field information for all existing user whitelist rules on the Covata Platform.
+
+## Detailed description <a id="access-service-api-v1-userwhitelist-detailed-description" />
+
+This API endpoint servers a number of purposes:
+
+* Adds one or more new user whitelist rule(s) to the Covata Platform. <br />
+  **Note:** The user whitelist feature becomes enabled when at least one rule has been added to/is specified on the Covata Platform. When the user whitelist feature is enabled, be aware that:
+
+  * Adding one or more new user whitelist rule(s) may disable several Covata user accounts. Hence, before doing this, it is advisable to first check which Covata user accounts will be disabled by calling the [\<access-service>/api/v1/userwhitelist/check](/3.2/api/access-service-api-v1-userwhitelist-check) API endpoint with an **action** parameter value of **add** in the JSON object, along with each **pattern** (i.e. an individual rule to be added) as an array of **items**.
+  * Covata Platform administrator accounts cannot be disabled through a user whitelist rule. Therefore, there is no need to add any user whitelist rules to prevent Covata Platform administrators from being disabled. Covata user accounts with the System administrator role can only be disabled through the [\<access-service>/api/v1/users/\{userId}/enable](/3.2/api/access-service-api-v1-users-userid-enable) or [\<access-service>/api/v1/users/bulk](/3.2/api/access-service-api-v1-users-bulk) API endpoints.
+  * If a disabled Covata user account is [(re-)enabled](/3.2/api/access-service-api-v1-users-userid-enable) and its email address does not match that of an existing user whitelist rule, then that account's email address is automatically added as a new whitelist rule upon (re-)enabling the account.
+  * Any LDAP user accounts that were originally disabled by not matching/complying with an existing user whitelist rule (but now comply with a newly added rule) are automatically re-enabled when the Covata Platform next synchronizes with the LDAP server.
+* Retrieves a list of field information for all existing user whitelist rules on the Covata Platform. The list of user whitelist rules returned in the [response](/3.2/api/access-service-api-v1-userwhitelist#access-service-api-v1-userwhitelist-returns-from-a-GET-request) can be ordered, sorted and paginated.
+
+## Supported roles <a id="access-service-api-v1-userwhitelist-supported-roles" />
+
+This API endpoint supports the following Covata user roles (as described in the [Covata Platform Administrator's Guide](/3.2/admin)):
+
+* System administrator
+
+The Covata Platform's resources available to one of these Covata users (above) is determined by the access token passed in the [header](/3.2/api/access-service-api-v1-userwhitelist#access-service-api-v1-userwhitelist-required-headers) of requests to this endpoint.
+
+## Required headers <a id="access-service-api-v1-userwhitelist-required-headers" />
+
+The appropriate access token as the `Bearer` token:
+
+* `Authorization: Bearer a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6`
+
+The following header is required if the body of the request has a JSON object:
+
+* `Content-Type: application/json`
+
+## Required parameters on POST <a id="access-service-api-v1-userwhitelist-required-parameters-on-POST" />
+
+The following required parameters must be sent in the body of the POST request, each as individual members of a JSON object:
+
+* **items** - .
+
+  * **pattern** - .
+  * **description** - .
+
+  **Example ():**
+
+## Optional parameters on GET <a id="access-service-api-v1-userwhitelist-optional-parameters-on-GET" />
+
+The following optional parameters can be sent in the URL of the GET request:
+
+* **limit** - .
+* **offset** - .
+* **orderBy** - .
+* **sortBy** - .
+
+  **Example ():**
+
+## Returns from a POST request <a id="access-service-api-v1-userwhitelist-returns-from-a-POST-request" />
+
+A JSON-formmatted response consisting of an array containing information about each user whitelist rule (added to the user whitelist), where each element of the array contains the members: `id`, `pattern` and `description`. See [Returns from a GET request](/3.2/api/access-service-api-v1-userwhitelist#access-service-api-v1-userwhitelist-returns-from-a-GET-request) for details about these members.
+
+## Returns from a GET request <a id="access-service-api-v1-userwhitelist-returns-from-a-GET-request" />
+
+A JSON-formatted response containing the following members:
+
+* **items** - An array containing information about each user whitelist rule.
+
+  * **id** - .
+  * **pattern** - .
+  * **description** - .
+* **count** - .
+* **offset** - .
+
+  **Example (response from ...):**

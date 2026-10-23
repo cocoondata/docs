@@ -22,7 +22,7 @@ This method takes no parameters.
 
 This API endpoint retrieves a list of information about third party (i.e. non-Cocoon Data) client applications which the Cocoon Data user (whose access token is submitted in the request to this endpoint) has approved access to their resources on the Cocoon Data Platform.
 
-This *application approval* process is a step that occurs after the user signs in from a third party client application which utilizes the *authorization code* or *implicit* OAuth 2.0 grant types - i.e. via the [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) API endpoint.
+This *application approval* process is a step that occurs after the user signs in from a third party client application which utilises the *authorisation code* or *implicit* OAuth 2.0 grant types - i.e. via the [&lt;access-service&gt;/api/oauth/authorize](/CS1.2/api/access-service-api-oauth-authorize) API endpoint.
 
 Such a client application could be one that you or your organisation is developing, where this application integrates with Cocoon Data technologies using the Cocoon Data API.
 
@@ -34,7 +34,7 @@ Before any client application can be granted access to a Cocoon Data user's reso
 
 ## Supported roles <a id="access-service-api-v1-users-me-applications-approvals-supported-roles" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
+This API endpoint supports requests utilising Cocoon Data user accounts with the following roles (as described in the [SafeShare Administrator's](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrators-and-user-roles) and [Organisation Administrator's](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) Guides):
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role)
 - [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role)
@@ -56,7 +56,7 @@ If the request succeeded, then an HTTP response status `200 OK` is returned.
 
 For successful requests only, a JSON-formatted response containing the following members is also returned:
 
-- **applications** - An array containing information about all third party client applications which the Cocoon Data user (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-users-me-applications-approvals#access-service-api-v1-users-me-applications-approvals-supported-roles) to this endpoint) has approved access to their resources on the Cocoon Data Platform. One of this array's elements contains the member **id**, whose value is the application's approval ID, which can be utilized to [revoke the access that this application has to the user's resources](/CS1.2/api/access-service-api-v1-users-me-applications-approvals-approvalid).
+- **applications** - An array containing information about all third party client applications which the Cocoon Data user (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-users-me-applications-approvals#access-service-api-v1-users-me-applications-approvals-supported-roles) to this endpoint) has approved access to their resources on the Cocoon Data Platform. One of this array's elements contains the member **id**, whose value is the application's approval ID, which can be utilised to [revoke the access that this application has to the user's resources](/CS1.2/api/access-service-api-v1-users-me-applications-approvals-approvalid).
 
   **Example (response):**
 

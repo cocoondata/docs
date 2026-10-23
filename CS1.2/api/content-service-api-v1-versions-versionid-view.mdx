@@ -43,11 +43,11 @@ The appropriate access token as the `Bearer` token:
 
 The following parameter must be sent in the **URL** of the request:
 
-- **format** - Specify either the value `encrypted` to download the file version's encrypted *read-only view* data 'as is'; decryption must be conducted locally by your client application. <br />
+- **format** - Specify the value `encrypted` to download the file version's encrypted *read-only view* data 'as is'; decryption must be conducted locally by your client application. <br />
   **Example:**
 
   ```text
-  https://content-service.xy-company.com/api/v1/versions/987654321098765432/contents?format=encrypted
+  https://content-service.xy-company.com/api/v1/versions/987654321098765432/view?format=encrypted
   ```
 
 <Note>
@@ -65,7 +65,7 @@ The following optional parameter can be sent in the **URL** of the request:
   **Example:**
 
   ```text
-  https://content-service.xy-company.com/api/v1/versions/987654321098765432/contents?format=encrypted&encoding=base64
+  https://content-service.xy-company.com/api/v1/versions/987654321098765432/view?format=encrypted&encoding=base64
   ```
 
 ## Returns <a id="content-service-api-v1-versions-versionid-view-returns" />

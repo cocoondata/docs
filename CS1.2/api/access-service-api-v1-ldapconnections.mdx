@@ -28,7 +28,7 @@ This API endpoint serves a number of purposes:
 
   - Before calling this API endpoint:
 
-    - Be aware that adding at least one LDAP connection (through this API endpoint) *permanently disables* the ability to add more organisations to the Cocoon Data Platform - i.e. doing so permamently disables successful calls to the `POST` method on the [&lt;access-service&gt;/api/v1/organisations](/CS1.2/api/access-service-api-v1-organisations) endpoint.
+    - Be aware that adding at least one LDAP connection (through this API endpoint) *permanently disables* the ability to add more organisations to the Cocoon Data Platform - i.e. doing so permanently disables successful calls to the `POST` method on the [&lt;access-service&gt;/api/v1/organisations](/CS1.2/api/access-service-api-v1-organisations) endpoint.
     - Ensure that at least one plan has been configured in the one organisation configured on the Cocoon Data Platform instance. For more information see [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/plans](/CS1.2/api/access-service-api-v1-organisations-orggroupid-plans).
   - To test that the Cocoon Data Platform can successfully connect to the LDAP server/user directory first before adding the LDAP connection itself, call the [&lt;access-service&gt;/api/v1/ldapconnections/availability](/CS1.2/api/access-service-api-v1-ldapconnections-availability) API endpoint (before calling the `POST` method on this API endpoint).
   - All accounts in the LDAP user directory will appear as new user accounts in the one configured organisation when the Cocoon Data Platform next synchronizes with the LDAP server.
@@ -43,7 +43,7 @@ This API endpoint supports the following Cocoon Data user [roles](/CS1.2/admin-p
 - [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) - using the:
 
   - `POST` method, when only one organisation has been configured on the Cocoon Data Platform. To retrieve information about all configured organisations on the Cocoon Data Platform, see [&lt;access-service&gt;/api/v1/organisations](/CS1.2/api/access-service-api-v1-organisations).
-  - `GET` method, without any futher conditions.
+  - `GET` method, without any further conditions.
 
 The Cocoon Data Platform's resources available to a Cocoon Data user meeting the criteria above is determined by the access token submitted in the [header](/CS1.2/api/access-service-api-v1-ldapconnections#access-service-api-v1-ldapconnections-required-headers) of requests to this endpoint.
 

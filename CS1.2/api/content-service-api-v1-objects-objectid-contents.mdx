@@ -138,7 +138,7 @@ In addition to the parameters [above](/CS1.2/api/content-service-api-v1-objects-
 
 - **chunkSize** - The size (in bytes) of the unencrypted or encrypted data being uploaded to the Cocoon Data Platform's Content Service (for storage) in this *chunk upload request*. <br />
    Assuming the default Cocoon Data Platform upload limit of 10 MiB, specify a value of `10485760` (bytes) for the first chunk upload request. Then continue specifying this value in subsequent upload requests (each containing a subsequent 10 MiB chunk of the data being uploaded) until the following upload request of 10 MiB (which is the final one) exceeds the remainder of the total amount of data being uploaded. For this final upload request, specify the remaining amount of the total data instead. <br />
-   For example, if you are uploading 48 MiB file, you would send four chunk upload requests of 10 MiB (each of whose **chunkSize** value would be `10485760`) followed by a final chunk upload request of 8 MiB (whose **chunkSize** value would be `8388608`).
+   For example, if you are uploading a 48 MiB file, you would send four chunk upload requests of 10 MiB (each of whose **chunkSize** value would be `10485760`) followed by a final chunk upload request of 8 MiB (whose **chunkSize** value would be `8388608`).
 - **partIndex** - The index number for the chunk of data being submitted in this *chunk upload request*, starting from `0`. For example, for the first chunk upload request, **partIndex** would be `0`; for the second chunk upload request, **partIndex** would be `1`; for the third, **partIndex** would be `2` and so on.
 - **partByteOffset** - The number of bytes from the beginning of the total amount of data, where the start of the actual data being uploaded (in this *chunk upload request*) commences. <br />
    For example, following on from the 48 MiB file example (above), the value of this **partByteOffset** parameter's value would be `0` in the first chunk upload request. In the second chunk upload request, this parameter's value would be `10485760`. In the third request, this parameter's value would be `20971520` (i.e. `10485760` + `10485760`) and so on.
@@ -260,7 +260,7 @@ In addition to the parameters [above](/CS1.2/api/content-service-api-v1-objects-
 
   29360128
   -----------------------------12345678901234567890123456
-  Content-Disposition: form-data; name="data"; filename="large-image-chunk-5.jpg"
+  Content-Disposition: form-data; name="data"; filename="large-image-chunk-3.jpg"
   Content-Type: image/jpeg
 
   {FINAL CHUNK OF YOUR ACTUAL DATA HERE}
@@ -295,7 +295,7 @@ If the request succeeded, then an HTTP response status `200 OK` is returned.
 
 For successful `POST` requests only, a JSON-formatted response containing the following members is also returned:
 
-- **objectId** - The ID value of the file object. This value should match the `{objectId}` value specified specified in the [URL of this request](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-url-structure).
+- **objectId** - The ID value of the file object. This value should match the `{objectId}` value specified in the [URL of this request](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-url-structure).
 - **success** - A boolean value that indicates `true` if the request succeeded or `false` if the request failed.
 - **uploadId** - An ID value returned after the first *chunk upload request* of a multi-chunk upload. This value:
 

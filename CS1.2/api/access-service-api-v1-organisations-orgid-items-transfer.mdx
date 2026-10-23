@@ -27,7 +27,7 @@ This API endpoint transfers the ownership of all files/[Secure Objects](/CS1.2/a
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-items-transfer-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Organisation administrator](/CS1.2/admin-org/administering-users-within-an-organisation#organisation-administrator-role) - when this user is a member of the organisation specified by the `{orgId}` of the request's URL.
 
@@ -64,7 +64,7 @@ The following optional parameter can also be sent in the **body** of the POST re
 
 - **folderName** - The name of a new folder that will be created at the root location of the Cocoon Data user (represented by **to** above) to whom the complete hierarchy of items (belonging to the user represented by **from** above) will be transferred. <br />
   **Note:** If this parameter is omitted, then a new folder (like this) will automatically be created with a default name consisting of the email address of the Cocoon Data user (represented by **from**) followed by an underscore, followed by the current date.
-- **deleteUser** - A boolean value that indicates whether (`true`) or not (`false`) the Cocoon Data user specified in the `from` field above, whose items are being transfered to another user, will be removed from the organisation.
+- **deleteUser** - A boolean value that indicates whether (`true`) or not (`false`) the Cocoon Data user specified in the `from` field above, whose items are being transferred to another user, will be removed from the organisation.
 
   <br />
   **Example (request):**

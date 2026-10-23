@@ -29,7 +29,7 @@ This API endpoint serves a number of purposes:
 
 ## Supported roles <a id="access-service-api-v1-users-me-notifications-email-supported-roles" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role)
 - [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role)
@@ -53,7 +53,7 @@ The following parameters must be sent in the **body** of the PUT request, each a
 
 - **code** - Specify the enumeration (enum) value:
 
-  - `ITEM` - Sets the Cocoon Data user (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-supported-roles) to this endpoint) to receive email notifications (entitled '*New items have been shared with you*') each time an item is shared with them. These email notifications contain links to the items (which had been shared with this user since their previous such notification), that opens the items in SafeShare for Web. Bear in mind that multiple items may appear as a 'digest' in a single email notification based on the [Item shared noticication frequency in minutues](/CS1.2/admin-platform/configuring-platform-administration-properties#notifications-properties) property configured by a [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) (described in the SafeShare Administrator's Guide).
+  - `ITEM` - Sets the Cocoon Data user (whose [access token is submitted in the request](/CS1.2/api/access-service-api-v1-users-me-notifications-email#access-service-api-v1-users-me-notifications-email-supported-roles) to this endpoint) to receive email notifications (entitled '*New items have been shared with you*') each time an item is shared with them. These email notifications contain links to the items (which had been shared with this user since their previous such notification), that opens the items in SafeShare for Web. Bear in mind that multiple items may appear as a 'digest' in a single email notification based on the [Item shared notification frequency in minutes](/CS1.2/admin-platform/configuring-platform-administration-properties#notifications-properties) property configured by a [SafeShare administrator](/CS1.2/admin-platform/administering-platform-administrator-users#platform-administrator-role) (described in the SafeShare Administrator's Guide).
   - `DAILY` - Sets this Cocoon Data user to receive a '*New items have been shared with you*' email notification once a day, containing a digest of all items which had been shared with them since their previous such notification.
   - `WEEKLY` - Sets this user to receive a '*New items have been shared with you*' email notification once a week, containing a digest of all items which had been shared with them since their previous such notification.
   - `NONE` - Sets this user to receive no '*New items have been shared with you*' email notifications.

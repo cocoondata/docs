@@ -32,7 +32,7 @@ This API endpoint deletes the encrypted data associated with all file objects co
 This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the folder whose ID is specified by `{collectionId}` in the request's URL.
-- **Originator**, [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Remove (Folder)** permission on the file object whose ID is specified by `{collectionId}` in the URL.
+- **Originator**, [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Remove (Folder)** permission on the folder whose ID is specified by `{collectionId}` in the URL.
 
 The Cocoon Data Platform's resources available to one of these Cocoon Data users (above) is determined by the access token submitted in the [header](/CS1.2/api/content-service-api-v1-collections-collectionid-contents#content-service-api-v1-collections-collectionid-contents-required-headers) of requests to this endpoint.
 

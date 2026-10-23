@@ -30,7 +30,7 @@ In addition to this filtering, further filtering can be performed, based on the 
 
 ## Supported roles and conditions <a id="access-service-api-v1-organisations-orgid-items-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)):
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)):
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role), [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a member of the organisation whose ID is specified by `{orgId}` in the request's URL.
 
@@ -109,11 +109,11 @@ For successful requests only, a JSON-formatted response containing the following
   - **modifiedAt** - The date and time when this item was last modified. When a file or folder is created (via the `POST` method on the respective [&lt;access-service&gt;/api/v1/organisations/\{orgGroupId\}/objects](/CS1.2/api/access-service-api-v1-organisations-orggroupid-objects) or [&lt;access-service&gt;/api/v1/organisations/\{orgId\}/collections](/CS1.2/api/access-service-api-v1-organisations-orgid-collections) endpoints), this date and time should match (or be close to) that of the **createdAt** value above. Otherwise, if the folder has since been modified (via the `PUT` method on the respective [&lt;access-service&gt;/api/v1/objects/\{objectId\}](/CS1.2/api/access-service-api-v1-objects-objectid) or [&lt;access-service&gt;/api/v1/collections/\{collectionId\}](/CS1.2/api/access-service-api-v1-collections-collectionid) endpoints), this date and time should reflect when the folder was last modified.
   - **extension** ( *for file object items only* ) - The file object's file name extension.
   - **type** - The type of this item - i.e. indicates `object` if the item is a file object or `collection` if the item is a folder.
-  - **contentSize** ( *for file object items only* ) - The amount of space (in bytes) of the (active version of the) file object's data (as recorded by the Cocoon Data Platform's Access Service). For initialized/*Incomplete* file objects, this value is `null`.
+  - **contentSize** ( *for file object items only* ) - The amount of space (in bytes) of the (active version of the) file object's data (as recorded by the Cocoon Data Platform's Access Service). For initialised/*Incomplete* file objects, this value is `null`.
   - **totalVersionSize** ( *for file object items only* ) - The amount of space (in bytes) of all versions of the file object's data (as recorded by the Access Service). For file objects with only one version (which would also be the active version), this value should match (or be close to) that of the **contentSize** value above.
   - **shared** - A boolean value that indicates whether or not this item has been shared with any collaborators.
   - **hasView** ( *for file object items only* ) - A boolean value that indicates whether or not the Cocoon Data Platform's Content Service has generated a read-only view of the file object's data in storage.
-  - **state** ( *for file object items only* ) - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialized file object, `created` for a completed file or `deleted` for a deleted file.
+  - **state** ( *for file object items only* ) - The I18N code for the current state of the file object. This I18N code could include the substring `incomplete` for an initialised file object, `created` for a completed file or `deleted` for a deleted file.
   - **labelId** ( *for file object items only* ) - The ID of the classification applied to the file object.
   - **labelName** ( *for file object items only* ) - The name of the classification applied to the file object.
   - **owner** - A member containing information about the Cocoon Data user who is the current owner of the item. This member contains the following sub-members:

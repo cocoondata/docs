@@ -33,7 +33,7 @@ A file object's version ID can be obtained by calling the [&lt;access-service&gt
 
 ## Supported roles and conditions <a id="access-service-api-v1-versions-versionid-viewkey-supported-roles-and-conditions" />
 
-This API endpoint supports requests utilizing Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
+This API endpoint supports requests utilising Cocoon Data user accounts with the following [roles](/CS1.2/admin-org/administering-users-within-an-organisation#an-organisation-users-roles) (as described in the [Organisation Administrator's Guide](/CS1.2/admin-org)) and conditions:
 
 - [Originator](/CS1.2/admin-org/administering-users-within-an-organisation#originator-role) - when this user owns the file object associated with the version whose ID is specified by `{versionId}` in the request's URL.
 - **Originator**, [Collaborator](/CS1.2/admin-org/administering-users-within-an-organisation#collaborator-role) and [Ad hoc](/CS1.2/admin-org/administering-users-within-an-organisation#adhoc-role) - when this user is a collaborator with the **Rename** [permission](/CS1.2/api/access-service-api-v1-permissions-sets) on the file object associated with the version whose ID is specified by `{versionId}` in the URL. (The **Rename** permission restricts access to collaborators who have been applied either the **Modify** or **Manage** *permission set* on this file object.)
@@ -57,7 +57,7 @@ For successful requests only, a JSON-formatted response containing the following
 - **keyValue** - The cryptographic key value itself.
 - **cryptographicAlgorithm** - The cryptographic algorithm supported by the Cocoon Data Platform. This should be `AES`.
 - **keyLength** - The bit length of the cryptographic key value returned above.
-- **initializationVector** - The initialization vector required to begin local/client-side encryption using the AES algorithm (in CBC mode).
+- **initialisationVector** - The initialisation vector required to begin local/client-side encryption using the AES algorithm (in CBC mode).
 - **modifiedinISODateTimeFormat** - The date and time (in ISO format) when the key was modified. (This value should match that of the **createdinISODateTimeFormat** value below. This member can be ignored and will be removed in a future Cocoon Data Platform version.)
 - **createdinISODateTimeFormat** - The date and time (in ISO format) when the key was created. (This member can be ignored and will be removed in a future Cocoon Data Platform version.)
 - **id** - The ID value associated with this cryptographic key. <br />

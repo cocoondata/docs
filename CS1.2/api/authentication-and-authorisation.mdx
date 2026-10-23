@@ -89,7 +89,7 @@ The purpose of this request is to begin the process of authenticating a user to 
 **Example initial request:**
 
 ```bash
-curl https://access-service.xy-company.com/api/oauth/authorize?response_type=code&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback \
+curl 'https://access-service.xy-company.com/api/oauth/authorize?response_type=code&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback' \
     -X GET
 ```
 
@@ -112,7 +112,7 @@ To complete the authentication and authorization process, your application shoul
 with the following parameters sent as form URL-encoded (i.e. `application/x-www-form-urlencoded`) data in the request's body:
 
 - `grant_type` - Use the value `authorization_code`
-- `code` - The value of the authorization code returned by the the Cocoon Data Platform (and initially handled by your application through the redirect URI).
+- `code` - The value of the authorization code returned by the Cocoon Data Platform (and initially handled by your application through the redirect URI).
 - `redirect_uri` - Your application's URL/URI that handled the initial response from the Cocoon Data Platform that contained the actual authorization code.
 
 This 2nd request requires [HTTP Basic authentication](http://tools.ietf.org/html/rfc1945#section-11.1) specified in its header, whose value is the string value of your application's client ID and client secret (separated by a colon) and encoded with [Base64](https://tools.ietf.org/html/rfc4648).
@@ -167,7 +167,7 @@ The purpose of this request is to begin the process of authenticating a user to 
 **Example request:**
 
 ```bash
-curl https://access-service.xy-company.com/api/oauth/authorize?response_type=token&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback \
+curl 'https://access-service.xy-company.com/api/oauth/authorize?response_type=token&client_id=exampleClientApplication&redirect_uri=https%3A%2F%2Fmy-application-url%2Fauthcallback' \
     -X GET
 ```
 

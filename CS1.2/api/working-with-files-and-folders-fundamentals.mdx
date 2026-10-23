@@ -69,7 +69,7 @@ Every item, regardless of whether it is a file or a folder has a *unique identif
 
 All [items](/CS1.2/api/working-with-files-and-folders-fundamentals#item) on the Cocoon Data Platform are managed and handled within the scope of a self-contained unit called an *organisation*.
 
-An organisation is *self-contained* meaning that [creating and manipulating](/CS1.2/api/working-with-files-and-folders-fundamentals) of items as well as [sharing](/CS1.2/api/sharing-items) them is handled solely within the scope of an organisation itself. Organisations provide the Cocoon Data Platform with *multitenancy* capabilities, whereby each organisation represents an individual 'tenant'.
+An organisation is *self-contained* meaning that the [creating and manipulating](/CS1.2/api/working-with-files-and-folders-fundamentals) of items as well as [sharing](/CS1.2/api/sharing-items) them is handled solely within the scope of an organisation itself. Organisations provide the Cocoon Data Platform with *multitenancy* capabilities, whereby each organisation represents an individual 'tenant'.
 
 Be aware, however, that a Cocoon Data user can:
 
@@ -317,7 +317,7 @@ curl 'https://content-service.xy-company.com/api/v1/objects/732860187958231040/c
 
 <Note>
 
-If the data being uploaded is larger than the upload *chunk size* permitted by the Cocoon Data Platform (whose default value is 10 [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)), then the data must be uploaded in multiple requests to this endpoint. Your client application must break up this data into chunks of this size, each of which must be uploaded in separate calls to this upload endpoint (above). See [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents) (for more information).
+If the data being uploaded is larger than the upload *chunk size* permitted by the Cocoon Data Platform (whose default value is 10 [mebibytes](http://physics.nist.gov/cuu/Units/binary.html)), then the data must be uploaded in multiple requests to this endpoint. Your client application must break up this data into chunks of this size, each of which must be uploaded in separate calls to this upload endpoint (above). See [Required parameters for multi-chunk uploads](/CS1.2/api/content-service-api-v1-objects-objectid-contents#content-service-api-v1-objects-objectid-contents-required-parameters-for-multi-chunk-uploads) (of [&lt;content-service&gt;/api/v1/objects/\{objectId\}/contents](/CS1.2/api/content-service-api-v1-objects-objectid-contents)) for more information.
 
 </Note>
 
@@ -399,7 +399,7 @@ To obtain this cryptographic key, make a `GET` method request to this API endpoi
 
 - [&lt;access-service&gt;/api/v1/objects/\{objectId\}/keys](/CS1.2/api/access-service-api-v1-objects-objectid-keys)
 
-where value of `{objectId}` in the URL path of the request is the ID of the file object whose data is to be decrypted locally.
+where the value of `{objectId}` in the URL path of the request is the ID of the file object whose data is to be decrypted locally.
 
 **Example request:**
 

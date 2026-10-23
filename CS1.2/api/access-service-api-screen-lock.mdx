@@ -10,15 +10,15 @@ https://access-service.xy-company.com/api/v1/screenLock
 
 ## Supported methods and overview <a id="access-service-api-screen-lock-supported-methods-and-overview" />
 
-- `POST` - [Sets the screen lock variable on the user to either true or false depending on the circumstance.]
+- `POST` - Sets the screen lock variable on the user to either true or false depending on the circumstance.
 
 ## Detailed description <a id="access-service-api-screen-lock-detailed-description" />
 
-This endpoint is used to determine if the user should have a temporary lock placed on their session without de authenticating them.
+This endpoint is used to determine if the user should have a temporary lock placed on their session without deauthenticating them.
 
 The implementation of the actual locking screen can use the sessionLock Boolean variable on the user entity to accomplish this. When hitting this endpoint if the sessionLock variable on the user is currently set to false you will not need to provide a password, and will just need to hit the endpoint to set the value True.
 
-In order to remove the screenLock you must provide the user’s password within an organization defined number of times or the account will be locked.
+In order to remove the screenLock you must provide the user’s password within an organisation-defined number of times or the account will be locked.
 
 ## Required headers <a id="access-service-api-screen-lock-required-headers" />
 
@@ -30,7 +30,7 @@ The appropriate access token as the `Bearer` token:
 
 The following required parameter must be sent in the **BODY** of a POST request:
 
-- **password** - Specifiy the password of the currently logged in user.
+- **password** - Specify the password of the currently logged in user.
 
 ## Returns <a id="access-service-api-screen-lock-returns" />
 
