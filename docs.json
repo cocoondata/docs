@@ -33,7 +33,7 @@
                 ]
               },
               {
-                "group": "Organisation Administrator's Guide for SafeShare CS1.0",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "CS1.2/admin-org/index",
                   "CS1.2/admin-org/accessing-organisation-administration",
@@ -58,7 +58,7 @@
                 ]
               },
               {
-                "group": "SafeShare Administrator's Guide for SafeShare CS1.0",
+                "group": "Platform administrator guide",
                 "pages": [
                   "CS1.2/admin-platform/index",
                   "CS1.2/admin-platform/accessing-platform-administration",
@@ -90,20 +90,7 @@
                 ]
               },
               {
-                "group": "Microsoft Add-ins for SafeShare CS1.2",
-                "pages": [
-                  "CS1.2/ms-addins/index",
-                  "CS1.2/ms-addins/microsoft-add-ins-overview",
-                  "CS1.2/ms-addins/using-the-ms-office-addin",
-                  "CS1.2/ms-addins/using-the-ms-outlook-addin",
-                  "CS1.2/ms-addins/getting-support",
-                  "CS1.2/ms-addins/important-notice",
-                  "CS1.2/ms-addins/microsoft-add-ins",
-                  "CS1.2/ms-addins/pages"
-                ]
-              },
-              {
-                "group": "SafeShare for Web CS1.0 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "CS1.2/user/index",
                   "CS1.2/user/signing-in",
@@ -118,21 +105,6 @@
                   "CS1.2/user/important-notice",
                   "CS1.2/user/pages"
                 ]
-              },
-              {
-                "group": "SafeShare for Windows 3.4 User's Guide",
-                "pages": [
-                  "CS1.2/windows/index",
-                  "CS1.2/windows/installing-and-upgrading-the-application",
-                  "CS1.2/windows/starting-the-application-and-signing-in",
-                  "CS1.2/windows/uploading-storing-and-sharing-content-securely",
-                  "CS1.2/windows/accessing-secure-content",
-                  "CS1.2/windows/managing-secure-content",
-                  "CS1.2/windows/managing-your-account",
-                  "CS1.2/windows/getting-support",
-                  "CS1.2/windows/important-notice",
-                  "CS1.2/windows/pages"
-                ]
               }
             ]
           },
@@ -141,7 +113,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Cocoon Data API 3.5 Documentation",
+                "group": "API reference",
                 "pages": [
                   "CS1.2/api/index",
                   "CS1.2/api/developers-guide",
@@ -305,7 +277,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Organisation Administrator's Guide for SafeShare CS1.0",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "CS1.0/admin-org/index",
                   "CS1.0/admin-org/accessing-organisation-administration",
@@ -328,7 +300,7 @@
                 ]
               },
               {
-                "group": "SafeShare Administrator's Guide for SafeShare CS1.0",
+                "group": "Platform administrator guide",
                 "pages": [
                   "CS1.0/admin-platform/index",
                   "CS1.0/admin-platform/accessing-platform-administration",
@@ -359,7 +331,7 @@
                 ]
               },
               {
-                "group": "SafeShare for Web CS1.0 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "CS1.0/user/index",
                   "CS1.0/user/signing-in",
@@ -377,7 +349,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.5",
@@ -387,7 +360,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.5/admin/index",
                   "3.5/admin/accessing-administration",
@@ -412,7 +385,7 @@
                 ]
               },
               {
-                "group": "Organisation Administrator's Guide for SafeShare 3.5",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.5/admin-org/index",
                   "3.5/admin-org/accessing-organisation-administration",
@@ -434,7 +407,7 @@
                 ]
               },
               {
-                "group": "SafeShare Administrator's Guide for SafeShare 3.5",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.5/admin-platform/index",
                   "3.5/admin-platform/accessing-platform-administration",
@@ -465,7 +438,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.5/compatweb/index",
                   "3.5/compatweb/accessing-secure-content",
@@ -480,7 +453,7 @@
                 ]
               },
               {
-                "group": "SafeShare for Web 3.5 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "3.5/user/index",
                   "3.5/user/signing-in",
@@ -496,7 +469,7 @@
                 ]
               },
               {
-                "group": "SafeShare for Windows 3.5 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.5/windows/index",
                   "3.5/windows/installing-and-upgrading-the-application",
@@ -517,7 +490,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 3.5 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.5/api/index",
                   "3.5/api/developers-guide",
@@ -670,7 +643,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.4",
@@ -680,7 +654,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.4/admin/index",
                   "3.4/admin/accessing-administration",
@@ -705,7 +679,7 @@
                 ]
               },
               {
-                "group": "Organization Administrator's Guide for Safe Share 3.4",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.4/admin-org/index",
                   "3.4/admin-org/accessing-organisation-administration",
@@ -726,7 +700,7 @@
                 ]
               },
               {
-                "group": "Safe Share Administrator's Guide for Safe Share 3.4",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.4/admin-platform/index",
                   "3.4/admin-platform/accessing-platform-administration",
@@ -756,7 +730,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.4/compatweb/index",
                   "3.4/compatweb/accessing-secure-content",
@@ -771,7 +745,7 @@
                 ]
               },
               {
-                "group": "Organisations-Administratorenanleitung f\u00fcr Safe Share 3.4",
+                "group": "Organisation administrator guide (Deutsch)",
                 "pages": [
                   "3.4/de/admin-org/index",
                   "3.4/de/admin-org/accessing-organisation-administration",
@@ -792,7 +766,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Administratorenanleitung f\u00fcr Safe Share 3.4",
+                "group": "Platform administrator guide (Deutsch)",
                 "pages": [
                   "3.4/de/admin-platform/index",
                   "3.4/de/admin-platform/accessing-platform-administration",
@@ -822,7 +796,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Web 3.4 Benutzeranleitung",
+                "group": "Web user guide (Deutsch)",
                 "pages": [
                   "3.4/de/user/index",
                   "3.4/de/user/signing-in",
@@ -838,7 +812,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Web 3.4 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "3.4/user/index",
                   "3.4/user/signing-in",
@@ -854,7 +828,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.4 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.4/windows/index",
                   "3.4/windows/installing-and-upgrading-the-application",
@@ -875,7 +849,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 3.4 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.4/api/index",
                   "3.4/api/developers-guide",
@@ -1028,7 +1002,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.3",
@@ -1038,7 +1013,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.3/admin/index",
                   "3.3/admin/accessing-administration",
@@ -1063,7 +1038,7 @@
                 ]
               },
               {
-                "group": "Organization Administrator's Guide for Safe Share 3.3",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.3/admin-org/index",
                   "3.3/admin-org/accessing-organisation-administration",
@@ -1084,7 +1059,7 @@
                 ]
               },
               {
-                "group": "Safe Share Administrator's Guide for Safe Share 3.3",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.3/admin-platform/index",
                   "3.3/admin-platform/accessing-platform-administration",
@@ -1114,7 +1089,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.3/compatweb/index",
                   "3.3/compatweb/accessing-secure-content",
@@ -1129,7 +1104,7 @@
                 ]
               },
               {
-                "group": "Organisations-Administratorenanleitung f\u00fcr Safe Share 3.3",
+                "group": "Organisation administrator guide (Deutsch)",
                 "pages": [
                   "3.3/de/admin-org/index",
                   "3.3/de/admin-org/accessing-organisation-administration",
@@ -1150,7 +1125,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Administratorenanleitung f\u00fcr Safe Share 3.3",
+                "group": "Platform administrator guide (Deutsch)",
                 "pages": [
                   "3.3/de/admin-platform/index",
                   "3.3/de/admin-platform/accessing-platform-administration",
@@ -1180,7 +1155,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Web 3.3 Benutzeranleitung",
+                "group": "Web user guide (Deutsch)",
                 "pages": [
                   "3.3/de/user/index",
                   "3.3/de/user/signing-in",
@@ -1196,7 +1171,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.3 Benutzeranleitung",
+                "group": "Windows user guide (Deutsch)",
                 "pages": [
                   "3.3/de/windows/index",
                   "3.3/de/windows/installing-and-upgrading-the-application",
@@ -1211,7 +1186,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Web 3.3 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "3.3/user/index",
                   "3.3/user/signing-in",
@@ -1227,7 +1202,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.3 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.3/windows/index",
                   "3.3/windows/installing-and-upgrading-the-application",
@@ -1248,7 +1223,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 3.3 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.3/api/index",
                   "3.3/api/developers-guide",
@@ -1398,7 +1373,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.2",
@@ -1408,7 +1384,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.2/admin/index",
                   "3.2/admin/accessing-administration",
@@ -1433,7 +1409,7 @@
                 ]
               },
               {
-                "group": "Organization Administrator's Guide for Safe Share 3.2",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.2/admin-org/index",
                   "3.2/admin-org/accessing-organisation-administration",
@@ -1454,7 +1430,7 @@
                 ]
               },
               {
-                "group": "Safe Share Administrator's Guide for Safe Share 3.2",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.2/admin-platform/index",
                   "3.2/admin-platform/accessing-platform-administration",
@@ -1484,7 +1460,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.2/compatweb/index",
                   "3.2/compatweb/accessing-secure-content",
@@ -1499,7 +1475,7 @@
                 ]
               },
               {
-                "group": "Organisations-Administratorenanleitung f\u00fcr Safe Share 3.2",
+                "group": "Organisation administrator guide (Deutsch)",
                 "pages": [
                   "3.2/de/admin-org/index",
                   "3.2/de/admin-org/accessing-organisation-administration",
@@ -1520,7 +1496,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Administratorenanleitung f\u00fcr Safe Share 3.2",
+                "group": "Platform administrator guide (Deutsch)",
                 "pages": [
                   "3.2/de/admin-platform/index",
                   "3.2/de/admin-platform/accessing-platform-administration",
@@ -1554,7 +1530,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Webanwendung 3.2 Benutzeranleitung",
+                "group": "Web user guide (Deutsch)",
                 "pages": [
                   "3.2/de/user/index",
                   "3.2/de/user/signing-in",
@@ -1569,7 +1545,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.2 Benutzeranleitung",
+                "group": "Windows user guide (Deutsch)",
                 "pages": [
                   "3.2/de/windows/index",
                   "3.2/de/windows/installing-and-upgrading-the-application",
@@ -1585,7 +1561,7 @@
                 ]
               },
               {
-                "group": "Safe Share web application 3.2 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "3.2/user/index",
                   "3.2/user/signing-in",
@@ -1600,7 +1576,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.2 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.2/windows/index",
                   "3.2/windows/installing-and-upgrading-the-application",
@@ -1622,7 +1598,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 3.2 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.2/api/index",
                   "3.2/api/getting-started-guide",
@@ -1762,7 +1738,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.1",
@@ -1772,7 +1749,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.1/admin/index",
                   "3.1/admin/accessing-administration",
@@ -1797,7 +1774,7 @@
                 ]
               },
               {
-                "group": "Organization Administrator's Guide for Safe Share 3.1",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.1/admin-org/index",
                   "3.1/admin-org/accessing-organisation-administration",
@@ -1816,7 +1793,7 @@
                 ]
               },
               {
-                "group": "Safe Share Administrator's Guide for Safe Share 3.1",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.1/admin-platform/index",
                   "3.1/admin-platform/accessing-platform-administration",
@@ -1845,7 +1822,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.1/compatweb/index",
                   "3.1/compatweb/accessing-secure-content",
@@ -1860,7 +1837,7 @@
                 ]
               },
               {
-                "group": "Organisations-Administratorenanleitung f\u00fcr Safe Share 3.1",
+                "group": "Organisation administrator guide (Deutsch)",
                 "pages": [
                   "3.1/de/admin-org/index",
                   "3.1/de/admin-org/accessing-organisation-administration",
@@ -1879,7 +1856,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Administratorenanleitung f\u00fcr Safe Share 3.1",
+                "group": "Platform administrator guide (Deutsch)",
                 "pages": [
                   "3.1/de/admin-platform/index",
                   "3.1/de/admin-platform/accessing-platform-administration",
@@ -1908,7 +1885,7 @@
                 ]
               },
               {
-                "group": "Safe Share-Webanwendung 3.1 Benutzeranleitung",
+                "group": "Web user guide (Deutsch)",
                 "pages": [
                   "3.1/de/user/index",
                   "3.1/de/user/signing-in",
@@ -1923,7 +1900,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.1 Benutzeranleitung",
+                "group": "Windows user guide (Deutsch)",
                 "pages": [
                   "3.1/de/windows/index",
                   "3.1/de/windows/installing-and-upgrading-the-application",
@@ -1939,7 +1916,7 @@
                 ]
               },
               {
-                "group": "Safe Share web application 3.1 User's Guide",
+                "group": "Web user guide",
                 "pages": [
                   "3.1/user/index",
                   "3.1/user/signing-in",
@@ -1954,7 +1931,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.1 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.1/windows/index",
                   "3.1/windows/installing-and-upgrading-the-application",
@@ -1976,7 +1953,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 2.16 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.1/api/index",
                   "3.1/api/access-service-api-oauth-token",
@@ -2099,7 +2076,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "3.0",
@@ -2109,7 +2087,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "3.0/admin/index",
                   "3.0/admin/accessing-administration",
@@ -2134,7 +2112,7 @@
                 ]
               },
               {
-                "group": "Covata Platform 3.0 Organization Administrator's Guide",
+                "group": "Organisation administrator guide",
                 "pages": [
                   "3.0/admin-org/index",
                   "3.0/admin-org/accessing-organisation-administration",
@@ -2153,7 +2131,7 @@
                 ]
               },
               {
-                "group": "Covata Platform 3.0 Safe Share Administrator's Guide",
+                "group": "Platform administrator guide",
                 "pages": [
                   "3.0/admin-platform/index",
                   "3.0/admin-platform/accessing-platform-administration",
@@ -2182,7 +2160,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "3.0/compatweb/index",
                   "3.0/compatweb/accessing-secure-content",
@@ -2197,7 +2175,7 @@
                 ]
               },
               {
-                "group": "Safe Share 3.0 User's Guide for the web application",
+                "group": "Web user guide",
                 "pages": [
                   "3.0/user/index",
                   "3.0/user/signing-in",
@@ -2212,7 +2190,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 3.0 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "3.0/windows/index",
                   "3.0/windows/installing-and-upgrading-the-application",
@@ -2234,7 +2212,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 2.16 Documentation",
+                "group": "API reference",
                 "pages": [
                   "3.0/api/index",
                   "3.0/api/access-service-api-oauth-token",
@@ -2357,7 +2335,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       },
       {
         "version": "2.16",
@@ -2367,7 +2346,7 @@
             "icon": "book-open",
             "groups": [
               {
-                "group": "Covata Platform 2.16 Administrator's Guide",
+                "group": "Administrator guide",
                 "pages": [
                   "2.16/admin/index",
                   "2.16/admin/accessing-administration",
@@ -2392,7 +2371,7 @@
                 ]
               },
               {
-                "group": "Safe Share Compatibility Mode for Web 2.16 User's Guide",
+                "group": "Compatibility mode user guide",
                 "pages": [
                   "2.16/compatweb/index",
                   "2.16/compatweb/accessing-secure-content",
@@ -2407,7 +2386,7 @@
                 ]
               },
               {
-                "group": "Covata-Plattform 2.16 Administratorenhandbuch",
+                "group": "Administrator guide (Deutsch)",
                 "pages": [
                   "2.16/de/admin/index",
                   "2.16/de/admin/accessing-administration",
@@ -2432,7 +2411,7 @@
                 ]
               },
               {
-                "group": "Safe Share 2.16 Benutzeranleitung f\u00fcr die Webanwendung",
+                "group": "Web user guide (Deutsch)",
                 "pages": [
                   "2.16/de/user/index",
                   "2.16/de/user/accessing-secure-content",
@@ -2448,7 +2427,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 2.16 Benutzeranleitung",
+                "group": "Windows user guide (Deutsch)",
                 "pages": [
                   "2.16/de/windows/index",
                   "2.16/de/windows/accessing-secure-content",
@@ -2464,7 +2443,7 @@
                 ]
               },
               {
-                "group": "Safe Share 2.16 User's Guide for the web application",
+                "group": "Web user guide",
                 "pages": [
                   "2.16/user/index",
                   "2.16/user/accessing-secure-content",
@@ -2480,7 +2459,7 @@
                 ]
               },
               {
-                "group": "Safe Share for Windows 2.16 User's Guide",
+                "group": "Windows user guide",
                 "pages": [
                   "2.16/windows/index",
                   "2.16/windows/accessing-secure-content",
@@ -2502,7 +2481,7 @@
             "icon": "code",
             "groups": [
               {
-                "group": "Covata API 2.16 Documentation",
+                "group": "API reference",
                 "pages": [
                   "2.16/api/index",
                   "2.16/api/access-service-api-oauth-token",
@@ -2625,7 +2604,8 @@
               }
             ]
           }
-        ]
+        ],
+        "tag": "Legacy"
       }
     ],
     "global": {
@@ -5023,103 +5003,103 @@
     },
     {
       "source": "/CS1.2/ms-addins/getting-support.html",
-      "destination": "/CS1.2/ms-addins/getting-support"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/getting-support.html",
-      "destination": "/CS1.2/ms-addins/getting-support"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/getting-support",
-      "destination": "/CS1.2/ms-addins/getting-support"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/important-notice.html",
-      "destination": "/CS1.2/ms-addins/important-notice"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/important-notice.html",
-      "destination": "/CS1.2/ms-addins/important-notice"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/important-notice",
-      "destination": "/CS1.2/ms-addins/important-notice"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/index.html",
-      "destination": "/CS1.2/ms-addins"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/index.html",
-      "destination": "/CS1.2/ms-addins"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/index",
-      "destination": "/CS1.2/ms-addins"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/microsoft-add-ins-overview.html",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins-overview"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/microsoft-add-ins-overview.html",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins-overview"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/microsoft-add-ins-overview",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins-overview"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/microsoft-add-ins.html",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/microsoft-add-ins.html",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/microsoft-add-ins",
-      "destination": "/CS1.2/ms-addins/microsoft-add-ins"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/pages.html",
-      "destination": "/CS1.2/ms-addins/pages"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/pages.html",
-      "destination": "/CS1.2/ms-addins/pages"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/pages",
-      "destination": "/CS1.2/ms-addins/pages"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/using-the-ms-office-addin.html",
-      "destination": "/CS1.2/ms-addins/using-the-ms-office-addin"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/using-the-ms-office-addin.html",
-      "destination": "/CS1.2/ms-addins/using-the-ms-office-addin"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/using-the-ms-office-addin",
-      "destination": "/CS1.2/ms-addins/using-the-ms-office-addin"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/ms-addins/using-the-ms-outlook-addin.html",
-      "destination": "/CS1.2/ms-addins/using-the-ms-outlook-addin"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/using-the-ms-outlook-addin.html",
-      "destination": "/CS1.2/ms-addins/using-the-ms-outlook-addin"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins/using-the-ms-outlook-addin",
-      "destination": "/CS1.2/ms-addins/using-the-ms-outlook-addin"
+      "destination": "/"
     },
     {
       "source": "/latest/ms-addins",
-      "destination": "/CS1.2/ms-addins"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/user/accessing-secure-content.html",
@@ -5271,127 +5251,127 @@
     },
     {
       "source": "/CS1.2/windows/accessing-secure-content.html",
-      "destination": "/CS1.2/windows/accessing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/accessing-secure-content.html",
-      "destination": "/CS1.2/windows/accessing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/accessing-secure-content",
-      "destination": "/CS1.2/windows/accessing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/getting-support.html",
-      "destination": "/CS1.2/windows/getting-support"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/getting-support.html",
-      "destination": "/CS1.2/windows/getting-support"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/getting-support",
-      "destination": "/CS1.2/windows/getting-support"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/important-notice.html",
-      "destination": "/CS1.2/windows/important-notice"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/important-notice.html",
-      "destination": "/CS1.2/windows/important-notice"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/important-notice",
-      "destination": "/CS1.2/windows/important-notice"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/index.html",
-      "destination": "/CS1.2/windows"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/index.html",
-      "destination": "/CS1.2/windows"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/index",
-      "destination": "/CS1.2/windows"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/installing-and-upgrading-the-application.html",
-      "destination": "/CS1.2/windows/installing-and-upgrading-the-application"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/installing-and-upgrading-the-application.html",
-      "destination": "/CS1.2/windows/installing-and-upgrading-the-application"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/installing-and-upgrading-the-application",
-      "destination": "/CS1.2/windows/installing-and-upgrading-the-application"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/managing-secure-content.html",
-      "destination": "/CS1.2/windows/managing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/managing-secure-content.html",
-      "destination": "/CS1.2/windows/managing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/managing-secure-content",
-      "destination": "/CS1.2/windows/managing-secure-content"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/managing-your-account.html",
-      "destination": "/CS1.2/windows/managing-your-account"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/managing-your-account.html",
-      "destination": "/CS1.2/windows/managing-your-account"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/managing-your-account",
-      "destination": "/CS1.2/windows/managing-your-account"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/pages.html",
-      "destination": "/CS1.2/windows/pages"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/pages.html",
-      "destination": "/CS1.2/windows/pages"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/pages",
-      "destination": "/CS1.2/windows/pages"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/starting-the-application-and-signing-in.html",
-      "destination": "/CS1.2/windows/starting-the-application-and-signing-in"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/starting-the-application-and-signing-in.html",
-      "destination": "/CS1.2/windows/starting-the-application-and-signing-in"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/starting-the-application-and-signing-in",
-      "destination": "/CS1.2/windows/starting-the-application-and-signing-in"
+      "destination": "/"
     },
     {
       "source": "/CS1.2/windows/uploading-storing-and-sharing-content-securely.html",
-      "destination": "/CS1.2/windows/uploading-storing-and-sharing-content-securely"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/uploading-storing-and-sharing-content-securely.html",
-      "destination": "/CS1.2/windows/uploading-storing-and-sharing-content-securely"
+      "destination": "/"
     },
     {
       "source": "/latest/windows/uploading-storing-and-sharing-content-securely",
-      "destination": "/CS1.2/windows/uploading-storing-and-sharing-content-securely"
+      "destination": "/"
     },
     {
       "source": "/latest/windows",
-      "destination": "/CS1.2/windows"
+      "destination": "/"
     },
     {
       "source": "/CS1.0/admin-org/accessing-organisation-administration.html",
@@ -12903,6 +12883,22 @@
     },
     {
       "source": "/index.html",
+      "destination": "/"
+    },
+    {
+      "source": "/CS1.2/windows/:slug*",
+      "destination": "/"
+    },
+    {
+      "source": "/CS1.2/windows",
+      "destination": "/"
+    },
+    {
+      "source": "/CS1.2/ms-addins/:slug*",
+      "destination": "/"
+    },
+    {
+      "source": "/CS1.2/ms-addins",
       "destination": "/"
     }
   ]
